@@ -900,9 +900,22 @@ a, button, input, select, textarea, label,
 .btn, .btn-teams, .btn-teams-item, .nav-item,
 .kanban-card, .card, .participant-card, .doc-card,
 .term-card, .workshop-card, .marco-item, .reuniao-card,
-.issue-card, .filtro-btn, .quick-nav a {
+.issue-card, .filtro-btn, .quick-nav a, .sidebar-overlay {
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
+}
+
+/* CRÍTICO para iOS Safari: cursor: pointer é necessário para onclick funcionar em divs */
+.sidebar-overlay,
+.issue-card,
+.reuniao-card,
+.kanban-card,
+.participant-card,
+.doc-card,
+.term-card,
+.workshop-card,
+.marco-item {
+    cursor: pointer;
 }
 
 /* Garante que cliques funcionem imediatamente */
