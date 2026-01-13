@@ -304,5 +304,61 @@ const Utils = {
     }
 };
 
+// =====================================================
+// MOBILE MENU FUNCTIONS
+// =====================================================
+
+// Toggle mobile menu
+function toggleMobileMenu() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+
+    if (sidebar) {
+        sidebar.classList.toggle('open');
+    }
+    if (overlay) {
+        overlay.classList.toggle('active');
+    }
+
+    // Prevenir scroll do body quando menu está aberto
+    document.body.style.overflow = sidebar?.classList.contains('open') ? 'hidden' : '';
+}
+
+// Fechar menu ao clicar em um link (mobile)
+function setupMobileNavLinks() {
+    const navLinks = document.querySelectorAll('.nav-item');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.querySelector('.sidebar-overlay');
+                sidebar?.classList.remove('open');
+                overlay?.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    });
+}
+
+// Fechar menu ao redimensionar para desktop
+function handleResize() {
+    if (window.innerWidth > 768) {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.querySelector('.sidebar-overlay');
+        sidebar?.classList.remove('open');
+        overlay?.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+// Inicializar eventos mobile
+document.addEventListener('DOMContentLoaded', () => {
+    setupMobileNavLinks();
+    window.addEventListener('resize', handleResize);
+});
+
+// Exportar funções mobile para uso global
+window.toggleMobileMenu = toggleMobileMenu;
+
 // Exportar para uso global
 window.Utils = Utils;

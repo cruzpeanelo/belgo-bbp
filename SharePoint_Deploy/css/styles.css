@@ -481,7 +481,69 @@ tr:hover {
     color: var(--belgo-cinza);
 }
 
-/* Responsivo */
+/* =====================================================
+   MOBILE HEADER - Visível apenas em dispositivos móveis
+   ===================================================== */
+.mobile-header {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: var(--belgo-degradê-azul);
+    color: white;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    z-index: 1001;
+    box-shadow: var(--shadow-md);
+}
+
+.mobile-header-logo {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.mobile-menu-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: var(--radius-sm);
+    transition: background 0.2s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-menu-btn:hover,
+.mobile-menu-btn:active {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Overlay para fechar menu */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* =====================================================
+   RESPONSIVO - Tablets (1024px)
+   ===================================================== */
 @media (max-width: 1024px) {
     .sidebar {
         width: 80px;
@@ -492,6 +554,16 @@ tr:hover {
         display: none;
     }
 
+    .sidebar-header {
+        padding: 20px 10px;
+        text-align: center;
+    }
+
+    .nav-item {
+        justify-content: center;
+        padding: 14px 10px;
+    }
+
     .main-content {
         margin-left: 80px;
     }
@@ -499,25 +571,515 @@ tr:hover {
     .kanban-board {
         grid-template-columns: 1fr;
     }
+
+    /* Grids inline */
+    .dashboard-grid,
+    [style*="grid-template-columns: 2fr 1fr"],
+    [style*="grid-template-columns: 1fr 1fr"] {
+        display: block !important;
+    }
+
+    .dashboard-grid > *,
+    [style*="grid-template-columns"] > * {
+        margin-bottom: 20px;
+    }
 }
 
+/* =====================================================
+   RESPONSIVO - Mobile (768px)
+   ===================================================== */
 @media (max-width: 768px) {
+    /* Mostrar header mobile */
+    .mobile-header {
+        display: flex;
+    }
+
+    /* Sidebar como drawer lateral */
     .sidebar {
+        width: 280px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .sidebar .nav-text,
+    .sidebar .sidebar-subtitle {
+        display: block;
+    }
+
+    .sidebar-header {
+        padding: 25px 20px;
+        text-align: left;
+    }
+
+    .nav-item {
+        justify-content: flex-start;
+        padding: 14px 25px;
+    }
+
+    /* Conteúdo principal */
+    .main-content {
+        margin-left: 0;
+        padding: 20px 15px;
+        padding-top: 80px; /* Espaço para mobile header */
+    }
+
+    /* Page header */
+    .page-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    .page-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .btn-teams {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Métricas */
+    .metrics-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .metric-card {
+        padding: 15px;
+        gap: 10px;
+    }
+
+    .metric-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .metric-info h3 {
+        font-size: 1.4rem;
+    }
+
+    .metric-info p {
+        font-size: 0.8rem;
+    }
+
+    /* Cards */
+    .card {
+        padding: 15px;
+        border-radius: var(--radius-md);
+    }
+
+    .card-title {
+        font-size: 1rem;
+    }
+
+    /* Filtros */
+    .filters {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .filter-group select,
+    .filter-group input {
+        width: 100%;
+        min-width: auto;
+        padding: 12px;
+        font-size: 16px; /* Previne zoom no iOS */
+    }
+
+    /* Tabelas responsivas */
+    .table-container {
+        margin: 0 -15px;
+        padding: 0 15px;
+    }
+
+    table {
+        font-size: 0.85rem;
+    }
+
+    th, td {
+        padding: 10px 8px;
+    }
+
+    /* Tabela empilhada para mobile */
+    .table-mobile-stack thead {
         display: none;
     }
 
+    .table-mobile-stack tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid #e5e7eb;
+        border-radius: var(--radius-md);
+        padding: 10px;
+    }
+
+    .table-mobile-stack td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid #f3f4f6;
+    }
+
+    .table-mobile-stack td:last-child {
+        border-bottom: none;
+    }
+
+    .table-mobile-stack td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--belgo-azul);
+        flex: 0 0 40%;
+    }
+
+    /* Botões touch-friendly */
+    .btn {
+        padding: 12px 20px;
+        min-height: 44px; /* Mínimo recomendado para touch */
+    }
+
+    /* Modal */
+    .modal {
+        width: 95%;
+        max-height: 85vh;
+        margin: 10px;
+    }
+
+    .modal-header,
+    .modal-body {
+        padding: 15px;
+    }
+
+    /* Timeline */
+    .timeline {
+        padding-left: 25px;
+    }
+
+    /* Toast */
+    .toast-container {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+    }
+
+    .toast {
+        max-width: 100%;
+    }
+
+    /* Badges maiores para touch */
+    .badge {
+        padding: 6px 14px;
+        font-size: 0.8rem;
+    }
+
+    /* Hide scrollbar indicator on mobile */
+    ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+}
+
+/* =====================================================
+   RESPONSIVO - Mobile Pequeno (480px)
+   ===================================================== */
+@media (max-width: 480px) {
     .main-content {
-        margin-left: 0;
+        padding: 15px 10px;
+        padding-top: 75px;
+    }
+
+    .page-title {
+        font-size: 1.3rem;
     }
 
     .metrics-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .metric-card {
+        padding: 12px;
+    }
+
+    .metric-info h3 {
+        font-size: 1.2rem;
+    }
+
+    .card {
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+
+    /* Kanban */
+    .kanban-column {
+        padding: 10px;
+    }
+
+    .kanban-card {
+        padding: 12px;
+    }
+
+    /* Filtros inline em mobile pequeno */
+    .active-filters {
+        gap: 6px;
+    }
+
+    .filter-pill {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+}
+
+/* =====================================================
+   iOS SAFE AREAS (Notch support)
+   ===================================================== */
+@supports (padding-top: env(safe-area-inset-top)) {
+    .mobile-header {
+        padding-top: env(safe-area-inset-top);
+        height: calc(60px + env(safe-area-inset-top));
+    }
+
+    .main-content {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .sidebar {
+        padding-top: env(safe-area-inset-top);
+    }
+
+    .toast-container {
+        bottom: calc(10px + env(safe-area-inset-bottom));
+    }
+}
+
+/* =====================================================
+   TOUCH IMPROVEMENTS
+   ===================================================== */
+@media (hover: none) and (pointer: coarse) {
+    /* Remove hover effects em touch devices */
+    .nav-item:hover {
+        background: transparent;
+    }
+
+    .nav-item:active {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .kanban-card:hover {
+        transform: none;
+    }
+
+    .kanban-card:active {
+        transform: scale(0.98);
+    }
+
+    .btn:hover {
+        transform: none;
+    }
+
+    .btn:active {
+        transform: scale(0.98);
+    }
+
+    /* Links e botões maiores */
+    a, button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* =====================================================
+   LANDSCAPE MODE (Mobile Horizontal)
+   ===================================================== */
+@media (max-width: 900px) and (orientation: landscape) {
+    .mobile-header {
+        height: 50px;
+    }
+
+    .main-content {
+        padding-top: 60px;
+    }
+
+    .metrics-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .metric-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+}
+
+/* =====================================================
+   PRINT STYLES
+   ===================================================== */
+@media print {
+    .sidebar,
+    .mobile-header,
+    .btn-teams,
+    .toast-container {
+        display: none !important;
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+        padding-top: 0 !important;
+    }
+
+    .card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #e5e7eb;
+    }
+}
+
+/* =====================================================
+   PAGE-SPECIFIC MOBILE STYLES
+   ===================================================== */
+
+/* Reuniões - Stats Header */
+@media (max-width: 768px) {
+    .reunioes-header {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+    }
+
+    .reuniao-stat {
+        padding: 15px !important;
+    }
+
+    .reuniao-stat-number {
+        font-size: 1.8rem !important;
+    }
+
+    .reuniao-stat-label {
+        font-size: 0.8rem !important;
     }
 }
 
 @media (max-width: 480px) {
-    .metrics-grid {
-        grid-template-columns: 1fr;
+    .reunioes-header {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Documentos - Card Grid */
+@media (max-width: 768px) {
+    .doc-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+
+    .doc-card {
+        padding: 15px !important;
+    }
+}
+
+/* Glossário - Term Grid */
+@media (max-width: 768px) {
+    .term-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    .term-card {
+        padding: 12px !important;
+    }
+}
+
+/* Timeline - Go Live Banner */
+@media (max-width: 768px) {
+    .go-live-banner {
+        padding: 20px !important;
+    }
+
+    .go-live-date {
+        font-size: 2rem !important;
+    }
+
+    .go-live-label {
+        font-size: 1rem !important;
+    }
+
+    .countdown-item {
+        min-width: 60px !important;
+    }
+
+    .countdown-number {
+        font-size: 1.5rem !important;
+    }
+}
+
+/* Processo Cards */
+@media (max-width: 768px) {
+    .processo-card {
+        padding: 15px !important;
+    }
+
+    .processo-header {
+        flex-direction: column !important;
+        text-align: center !important;
+    }
+
+    .processo-icon {
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 1.5rem !important;
+    }
+}
+
+/* Config - Section Grid */
+@media (max-width: 768px) {
+    .config-section {
+        padding: 15px !important;
+    }
+
+    .config-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Participantes - Cards */
+@media (max-width: 768px) {
+    .participante-card {
+        padding: 15px !important;
+    }
+
+    .participante-header {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 10px !important;
+    }
+}
+
+/* Cronograma - Workshop Timeline */
+@media (max-width: 768px) {
+    .workshops-timeline {
+        padding-left: 20px !important;
+    }
+
+    .workshop-card {
+        padding: 15px !important;
+    }
+
+    .workshop-date {
+        font-size: 0.9rem !important;
     }
 }
 

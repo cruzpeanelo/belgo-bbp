@@ -136,8 +136,19 @@
     </style>
 </head>
 <body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <span class="mobile-header-logo">BELGO GTM</span>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+            ☰
+        </button>
+    </header>
+
+    <!-- Overlay para fechar menu -->
+    <div class="sidebar-overlay" onclick="toggleMobileMenu()"></div>
+
     <div class="app-container">
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-logo">BELGO</div>
                 <div class="sidebar-subtitle">Cockpit GTM</div>
