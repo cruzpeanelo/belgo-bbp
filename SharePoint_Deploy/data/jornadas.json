@@ -1196,7 +1196,7 @@
   "projeto": {
     "nome": "GTM Vendas - Belgo Arames",
     "fase": "II - Testes e Validacao",
-    "goLive": "30/01/2026",
+    "goLive": "15/03/2026",
     "sistemas": [
       "Salesforce",
       "SAP ECC",

@@ -1,12 +1,12 @@
 {
   "metricas": {
-    "totalTestes": 115,
+    "totalTestes": 142,
     "testesExecutados": 0,
-    "testesPendentes": 115,
+    "testesPendentes": 142,
     "testesFalhados": 0,
     "progressoGeral": 0,
     "pontosCriticos": 9,
-    "workshopsConcluidos": 4,
+    "workshopsConcluidos": 5,
     "workshopsPendentes": 0
   },
   "statusPorCategoria": [
@@ -16,7 +16,10 @@
     { "id": "financeiro", "categoria": "Financeiro", "range": "CT 78-80", "total": 3, "ok": 0, "falhou": 0, "pendente": 3, "cor": "#198754" },
     { "id": "cotacao-ov", "categoria": "Cotacao e OV", "range": "CT 81-101", "total": 21, "ok": 0, "falhou": 0, "pendente": 21, "cor": "#0d6efd" },
     { "id": "conditions", "categoria": "Conditions SAP", "range": "CT 102-108", "total": 7, "ok": 0, "falhou": 0, "pendente": 7, "cor": "#e83e8c" },
-    { "id": "integracao", "categoria": "Integracao Salesforce - SAP", "range": "CT 109-115", "total": 7, "ok": 0, "falhou": 0, "pendente": 7, "cor": "#6f42c1" }
+    { "id": "integracao", "categoria": "Integracao Salesforce - SAP", "range": "CT 109-115", "total": 7, "ok": 0, "falhou": 0, "pendente": 7, "cor": "#6f42c1" },
+    { "id": "cadastro-cliente", "categoria": "Cadastro de Cliente", "range": "CT 116-125", "total": 17, "ok": 0, "falhou": 0, "pendente": 17, "cor": "#14b8a6" },
+    { "id": "hub-gestao-oc", "categoria": "Hub de Gestao OC", "range": "CT 126-130", "total": 5, "ok": 0, "falhou": 0, "pendente": 5, "cor": "#f97316" },
+    { "id": "fup-carteira", "categoria": "FUP de Carteira", "range": "CT 131-142", "total": 5, "ok": 0, "falhou": 0, "pendente": 5, "cor": "#8b5cf6" }
   ],
   "goLive": "2026-03-15",
   "stakeholders": [

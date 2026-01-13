@@ -3,7 +3,7 @@
     "nome": "GTM Vendas - Belgo Arames",
     "inicio": "2025-01-01",
     "goLiveFaseI": "2025-09-01",
-    "goLiveFaseII": "2026-01-30",
+    "goLiveFaseII": "2026-03-15",
     "faseAtual": "Fase II - Testes e Validação"
   },
   "workshops": [
@@ -61,6 +61,6 @@
     { "data": "2025-12-22", "titulo": "Fim Workshops AS IS/TO BE", "status": "Concluído" },
     { "data": "2026-01-13", "titulo": "Estruturacao BBP Completo", "status": "Concluído" },
     { "data": "2026-01-20", "titulo": "UAT - Testes de Aceitacao", "status": "Pendente" },
-    { "data": "2026-01-30", "titulo": "GO Live Fase II", "status": "Pendente" }
+    { "data": "2026-03-15", "titulo": "GO Live Fase II", "status": "Pendente" }
   ]
 }
