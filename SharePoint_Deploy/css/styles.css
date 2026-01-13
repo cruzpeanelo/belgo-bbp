@@ -894,6 +894,29 @@ tr:hover {
 /* =====================================================
    TOUCH IMPROVEMENTS
    ===================================================== */
+
+/* Remove 300ms tap delay em todos os elementos clicáveis */
+a, button, input, select, textarea, label,
+.btn, .btn-teams, .btn-teams-item, .nav-item,
+.kanban-card, .card, .participant-card, .doc-card,
+.term-card, .workshop-card, .marco-item, .reuniao-card,
+.issue-card, .filtro-btn, .quick-nav a {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Garante que cliques funcionem imediatamente */
+* {
+    -webkit-touch-callout: none;
+}
+
+/* Permite seleção de texto onde necessário */
+p, span, h1, h2, h3, h4, h5, h6, td, th, li, .term-desc {
+    -webkit-touch-callout: default;
+    -webkit-user-select: text;
+    user-select: text;
+}
+
 @media (hover: none) and (pointer: coarse) {
     /* Remove hover effects em touch devices */
     .nav-item:hover {
@@ -910,20 +933,59 @@ tr:hover {
 
     .kanban-card:active {
         transform: scale(0.98);
+        background: #f0f0f0;
     }
 
-    .btn:hover {
+    .btn:hover,
+    .btn-teams:hover,
+    .btn-teams-item:hover {
         transform: none;
     }
 
-    .btn:active {
-        transform: scale(0.98);
+    .btn:active,
+    .btn-teams:active,
+    .btn-teams-item:active {
+        transform: scale(0.95);
+        opacity: 0.8;
     }
 
-    /* Links e botões maiores */
+    /* Botões Teams item - tamanho mínimo para touch */
+    .btn-teams-item {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+
+    /* Cards clicáveis - feedback visual */
+    .participant-card:active,
+    .doc-card:active,
+    .term-card:active,
+    .workshop-card:active,
+    .marco-item:active,
+    .reuniao-card:active,
+    .issue-card:active {
+        transform: scale(0.98);
+        opacity: 0.9;
+    }
+
+    /* Links e botões maiores para touch */
     a, button {
         min-height: 44px;
         min-width: 44px;
+    }
+
+    /* Filtros e selects com área de toque maior */
+    select, input[type="text"], input[type="search"] {
+        min-height: 48px;
+        font-size: 16px !important; /* Previne zoom no iOS */
+    }
+
+    /* Badges com área de toque adequada */
+    .badge {
+        min-height: 32px;
+        display: inline-flex;
+        align-items: center;
     }
 }
 

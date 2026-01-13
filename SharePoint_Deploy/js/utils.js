@@ -305,6 +305,63 @@ const Utils = {
 };
 
 // =====================================================
+// MOBILE TOUCH IMPROVEMENTS
+// =====================================================
+
+// Detectar se é dispositivo touch
+const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+// Adicionar classe ao body para estilos específicos
+if (isTouchDevice) {
+    document.documentElement.classList.add('touch-device');
+}
+
+// FastClick - Remove 300ms delay em dispositivos touch
+// Converte touchend em click imediatamente
+function initFastClick() {
+    if (!isTouchDevice) return;
+
+    let touchStartY = 0;
+    let touchStartX = 0;
+
+    document.addEventListener('touchstart', function(e) {
+        touchStartY = e.touches[0].clientY;
+        touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    document.addEventListener('touchend', function(e) {
+        // Ignora se houve scroll (movimento > 10px)
+        if (!e.changedTouches || !e.changedTouches[0]) return;
+
+        const touchEndY = e.changedTouches[0].clientY;
+        const touchEndX = e.changedTouches[0].clientX;
+        const deltaY = Math.abs(touchEndY - touchStartY);
+        const deltaX = Math.abs(touchEndX - touchStartX);
+
+        if (deltaY > 10 || deltaX > 10) return; // Foi scroll, não click
+
+        const target = e.target;
+
+        // Verifica se é um elemento clicável
+        const clickable = target.closest('button, a, .btn, .btn-teams, .btn-teams-item, .nav-item, select, input');
+
+        if (clickable && clickable.onclick) {
+            // Previne o click atrasado do browser
+            e.preventDefault();
+            // Dispara o onclick imediatamente
+            clickable.click();
+        }
+    }, { passive: false });
+}
+
+// Inicializa FastClick quando DOM estiver pronto
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFastClick);
+} else {
+    initFastClick();
+}
+
+// =====================================================
 // MOBILE MENU FUNCTIONS
 // =====================================================
 
