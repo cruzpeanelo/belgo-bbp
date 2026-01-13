@@ -1,4 +1,8 @@
 {
+  "titulo": "Pontos Críticos - Projeto GTM Vendas Belgo",
+  "descricao": "Registro de issues, riscos e impedimentos identificados durante o projeto",
+  "dataAtualizacao": "2026-01-13",
+  "totalIssues": 12,
   "issues": [
     {
       "id": "PC-01",
@@ -22,8 +26,8 @@
       "severidade": "Crítica",
       "status": "Resolvido",
       "dataIdentificacao": "2025-12-04",
-      "dataResolucao": "2025-12-16",
-      "acaoTomada": "Workshops semanais de mapeamento AS IS - TO BE concluídos (4 sessões realizadas)",
+      "dataResolucao": "2025-12-22",
+      "acaoTomada": "Workshops semanais de mapeamento AS IS - TO BE concluídos (9 sessões realizadas)",
       "responsavel": "Leandro Cruz / Thalita Rhein",
       "fonteReuniao": "04/12/2025"
     },
@@ -53,18 +57,30 @@
     },
     {
       "id": "PC-05",
-      "titulo": "Bugs Críticos CT-11 e CT-14",
-      "descricao": "CT-11: Botão New WFPricing disponível para contas sem SAP. CT-14: Validação aceita descontos inválidos (negativos, >100%)",
+      "titulo": "Bug CT-11: Botão WFPricing disponível para contas sem SAP",
+      "descricao": "O botão 'New WFPricing' está disponível mesmo para contas que não possuem código SAP. Deveria estar bloqueado.",
       "categoria": "Desenvolvimento",
       "severidade": "Bloqueador",
       "status": "Pendente",
       "dataIdentificacao": "2025-12-10",
-      "acaoTomada": "Correção necessária antes do GO LIVE",
+      "acaoTomada": "Correção necessária antes do GO LIVE. Caso de teste CT-11.",
       "responsavel": "TI",
       "fonteReuniao": "Caderno de Testes"
     },
     {
       "id": "PC-06",
+      "titulo": "Bug CT-14: Validação aceita descontos inválidos",
+      "descricao": "O workflow foi criado mas valores abaixo de 0% (negativos) ou acima de 100% não exibem mensagem de erro correta. O botão 'criar' permite criação mesmo com desconto inválido.",
+      "categoria": "Desenvolvimento",
+      "severidade": "Bloqueador",
+      "status": "Pendente",
+      "dataIdentificacao": "2025-12-10",
+      "acaoTomada": "Correção necessária antes do GO LIVE. Caso de teste CT-14.",
+      "responsavel": "TI",
+      "fonteReuniao": "Caderno de Testes"
+    },
+    {
+      "id": "PC-07",
       "titulo": "Qualidade de Dados de Contato",
       "descricao": "Dados de contato incompletos ou incorretos impactam as funcionalidades de autoatendimento e comunicação automatizada",
       "categoria": "Dados",
@@ -76,7 +92,7 @@
       "fonteReuniao": "16/12/2025"
     },
     {
-      "id": "PC-07",
+      "id": "PC-08",
       "titulo": "Integração AMD pendente no Salesforce",
       "descricao": "AMD (Aços Maranhão Distribuição) não tem funcionalidades no Salesforce. Processo Cross Company não contemplado.",
       "categoria": "Integração",
@@ -88,7 +104,7 @@
       "fonteReuniao": "10/12/2025"
     },
     {
-      "id": "PC-08",
+      "id": "PC-09",
       "titulo": "Go Live reprogramado para março",
       "descricao": "Data original de Go Live (janeiro/fevereiro) foi reprogramada para 15/03/2026 para garantir qualidade dos testes",
       "categoria": "Cronograma",
@@ -98,12 +114,12 @@
       "dataResolucao": "2026-01-13",
       "acaoTomada": "Timeline ajustado com nova data de Go Live em 15/03/2026",
       "responsavel": "Leandro Cruz / Thalita Rhein",
-      "fonteReuniao": "Revisao BBP"
+      "fonteReuniao": "Revisão BBP"
     },
     {
-      "id": "PC-09",
+      "id": "PC-10",
       "titulo": "Impactos em controles SOX a avaliar",
-      "descricao": "Novo CRM precisa ser avaliado quanto aos controles SOX e possivel entrada no escopo de auditoria",
+      "descricao": "Novo CRM precisa ser avaliado quanto aos controles SOX e possível entrada no escopo de auditoria",
       "categoria": "Compliance",
       "severidade": "Alta",
       "status": "Pendente",
@@ -111,6 +127,37 @@
       "acaoTomada": "Maria Luiza Chaves (Controladoria) designada como key user para acompanhar",
       "responsavel": "Controladoria / TI",
       "fonteReuniao": "03/12/2025"
+    },
+    {
+      "id": "PC-11",
+      "titulo": "Higiene de dados de clusterização",
+      "descricao": "Clientes legados com atribuições incorretas de cluster precisam ser corrigidos antes da migração",
+      "categoria": "Dados",
+      "severidade": "Alta",
+      "status": "Em Andamento",
+      "dataIdentificacao": "2025-12-12",
+      "acaoTomada": "Reuniões de higiene de dados agendadas com DCPC e DCCI. Revisão completa do banco de dados de clientes.",
+      "responsavel": "Ciorlia / Rhein / Almeida",
+      "fonteReuniao": "12/12/2025"
+    },
+    {
+      "id": "PC-12",
+      "titulo": "Reestruturação comercial impacta sistema",
+      "descricao": "Nova estrutura com 4 macro setores (Alta Energia, Agricultura, Indústria, Construção Civil) requer ajustes em hierarquia, escritórios de vendas e workflow de aprovação",
+      "categoria": "Arquitetura",
+      "severidade": "Alta",
+      "status": "Em Andamento",
+      "dataIdentificacao": "2025-12-22",
+      "acaoTomada": "7 ações definidas para ajustes GTM: hierarquia comercial, escritórios de vendas, migração de clientes, workflow pricing, parceiro agrupador, regionais construção civil, padronização de nomenclaturas",
+      "responsavel": "Gimenes / Pereira / Ciorlia / Rhein",
+      "fonteReuniao": "22/12/2025"
     }
-  ]
+  ],
+  "resumo": {
+    "total": 12,
+    "resolvidos": 3,
+    "emAndamento": 3,
+    "pendentes": 6,
+    "bloqueadores": 2
+  }
 }

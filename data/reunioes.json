@@ -1,0 +1,140 @@
+{
+  "titulo": "Reuniões - Projeto GTM Vendas Belgo",
+  "descricao": "Registro de todas as reuniões do projeto com resumos e ações",
+  "dataAtualizacao": "2026-01-13",
+  "totalReunioes": 9,
+  "reunioes": [
+    {
+      "id": "R1",
+      "data": "2025-12-04",
+      "titulo": "Kickoff e Alinhamento de Key Users",
+      "duracao": "2h",
+      "tipo": "workshop",
+      "resumo": "Reunião inaugural dos workshops AS-IS/TO-BE. Apresentada a visão geral do projeto GTM/CRM para os key users. Comunicada a transição de liderança com saída de Dani Tamerão e licença maternidade de Audrey. Estabelecido compromisso de dedicação de 2 horas semanais por key user para atividades de testes. Identificado problema crítico: vários key users não sabiam que haviam sido designados para este papel.",
+      "participantes": ["Leandro Cruz", "Thalita Rhein", "Leandro Gimenez", "Vanessa Souza", "Bruno Machado", "Marcio Silva"],
+      "topicosAbordados": ["Visão geral projeto GTM/CRM", "Transição de liderança", "Papel e responsabilidades dos key users", "Cronograma de workshops"],
+      "decisoes": ["Todos os gerentes devem identificar formalmente seus key users", "Key users devem dedicar 2h semanais ao projeto"],
+      "problemas": ["Key users não sabiam que eram key users", "Usuários perguntando: O que preciso testar?"],
+      "jornadasRelacionadas": ["cadastro-cliente", "areas-vendas"]
+    },
+    {
+      "id": "R2",
+      "data": "2025-12-10",
+      "titulo": "Cadastro Cliente, Áreas de Vendas e Concorrentes",
+      "duracao": "2h",
+      "tipo": "workshop",
+      "resumo": "Workshop detalhado sobre processos de cadastro de cliente utilizando SINTEGRA para consulta de dados. Explicados os tipos de conta (PJ, PF, Parceiro Agrupador). Mapeadas as áreas de vendas e canais de distribuição (20-Industrial, 30-Distribuidores, 40-Varejo). Discutido o módulo de documentos fiscais e gestão de contatos. Francine Gayer levantou questão importante sobre sazonalidade dos dados de concorrentes. Zero dúvidas registradas sobre o processo de cadastro.",
+      "participantes": ["Leandro Cruz", "Thalita Rhein", "Leandro Gimenez", "Joao Endo", "Francine Gayer", "Bruno Machado", "Daniel Goncalves", "Jessica Vaz", "Renata Mello"],
+      "topicosAbordados": ["Cadastro de cliente via SINTEGRA", "Tipos de conta (PJ/PF/Agrupador)", "Áreas de vendas e canais", "Documentos fiscais", "Contatos", "Concorrentes", "ASCP (Crédito)"],
+      "decisoes": ["Normalização de concorrentes será feita pela TI", "Reunião específica com Edmundo sobre gestão de concorrentes"],
+      "problemas": ["Dados de concorrentes são sazonais e dinâmicos", "AMD não tem funcionalidades no Salesforce"],
+      "jornadasRelacionadas": ["cadastro-cliente", "areas-vendas", "documentos-fiscais", "contatos", "concorrentes", "financeiro"]
+    },
+    {
+      "id": "R3",
+      "data": "2025-12-12",
+      "titulo": "Regras de Clusterização e Apuração de Resultados",
+      "duracao": "53 min",
+      "tipo": "workshop",
+      "resumo": "Definição completa do modelo de clusterização de clientes. Estabelecidas 3 dimensões para classificação: setor do cliente, atratividade (baseada em volume potencial) e região geográfica. Definidos 4 clusters: Contas Corporativas, Contas Especiais, Contas Regionais e Contas Dispersas. Discutida a implementação do cálculo automático de cluster no CRM Salesforce e integração com relatórios BWA/Power BI. Identificada necessidade de higiene de dados para corrigir atribuições incorretas de clusters legados.",
+      "participantes": ["Maria Ciorlia", "Leandro Cruz", "Frederico Kinoshita", "Fernanda Monteiro", "Thalita Rhein", "Jefferson Pinheiro", "Marcelo Almeida", "Luis Riqueti"],
+      "topicosAbordados": ["Visão geral de clusterização", "3 dimensões de clusterização", "4 clusters de clientes", "Cálculo automático no CRM", "Custo de servir por cluster", "Integração com relatórios"],
+      "decisoes": ["Algoritmo de cluster será automático no CRM", "Higiene de dados de clientes necessária", "Reuniões de acompanhamento com DCPC e DCCI"],
+      "problemas": ["Atribuições manuais de cluster incorretas", "Necessidade de fonte de dados unificada para relatórios"],
+      "jornadasRelacionadas": ["cadastro-cliente", "hub-gestao", "workflow-pricing"]
+    },
+    {
+      "id": "R4",
+      "data": "2025-12-16",
+      "titulo": "Documentos Fiscais e Portal de Autoatendimento",
+      "duracao": "2h",
+      "tipo": "workshop",
+      "resumo": "Cobertura dos processos de documentos fiscais incluindo NF-e, XML, DANFE e boletos. Apresentadas as integrações com sistemas Daniel (certificados) e Spa (documentos). Destacada a criticidade de manter dados de contato atualizados para funcionamento do autoatendimento. Apresentadas funcionalidades do portal mobile. Identificada pendência crítica na integração do Portal Logístico com SAP, causando redundância de dados. Feedback positivo de Maria sobre didática das sessões.",
+      "participantes": ["Leandro Cruz", "Thalita Rhein", "Joao Endo", "Francine Gayer", "Vanessa Souza", "Bruno Machado", "Frank Silva"],
+      "topicosAbordados": ["Download documentos fiscais", "Integração Daniel/Spa", "Dados de contato", "Portal Autoatendimento", "App Mobile"],
+      "decisoes": ["Campanha de atualização de cadastros iniciada", "Follow-up sobre integração Portal Logístico-SAP"],
+      "problemas": ["Portal Logístico não integrado com SAP", "Dados de contato incompletos"],
+      "jornadasRelacionadas": ["documentos-fiscais", "autoatendimento", "contatos", "logistica"]
+    },
+    {
+      "id": "R5",
+      "data": "2025-12-17",
+      "titulo": "Relatórios GTM e Segment Report",
+      "duracao": "1h",
+      "tipo": "workshop",
+      "resumo": "Discussão focada em segmentação de dados de clientes para relatórios analíticos. Apresentada estrutura de hierarquia de dados para garantir consistência nos relatórios. Definidas responsabilidades de governança e ownership para manutenção das hierarquias. Demonstrada integração com Salesforce para visão unificada. Discutido impacto em relatórios financeiros de custo e receita.",
+      "participantes": ["Luis Riqueti", "Fabricio França", "Thalita Rhein", "Fernanda Monteiro"],
+      "topicosAbordados": ["Segmentação de dados", "Programa de fidelidade", "Hierarquia de relatórios", "Governança e ownership", "Integração Salesforce"],
+      "decisoes": ["Validar campo agregador de parceiros", "Definir descrição do campo cluster", "Estabelecer governança para hierarquias"],
+      "problemas": ["Necessidade de consistência entre CPV e segmentação"],
+      "jornadasRelacionadas": ["hub-gestao", "workflow-pricing", "cadastro-cliente"]
+    },
+    {
+      "id": "R6",
+      "data": "2025-12-22",
+      "titulo": "URGENTE - Revisão GTM e Nova Estrutura Comercial",
+      "duracao": "2h30",
+      "tipo": "estrategico",
+      "resumo": "Reunião estratégica urgente sobre reestruturação comercial. Apresentada nova estrutura organizacional com diretoria comercial e 4 macro setores: Alta Energia, Agricultura, Indústria e Construção Civil. Todos os 46 segmentos da empresa serão realocados dentro desses setores. Definidas mudanças na gestão regional (Ávila assume Sul, Leo gerencia Sudeste/Nordeste). Estruturada gestão de key accounts com 3 contas-chave para cada setor principal. Planejada migração de clientes para novos escritórios de vendas.",
+      "participantes": ["Leandro Gimenez", "Leandro Cruz", "Thalita Rhein", "Maria Ciorlia", "Luis Riqueti", "Jefferson Pinheiro", "Fabricio França"],
+      "topicosAbordados": ["Nova estrutura organizacional", "4 macro setores comerciais", "Gestão regional", "Key accounts", "Workflow de aprovação pricing", "Escritórios de vendas", "Migração de clientes"],
+      "decisoes": ["Finalizar hierarquia comercial no ECC", "Montar lista de escritórios de vendas", "Migrar clientes para nova estrutura", "Ajustar workflow pricing por níveis"],
+      "acoes": [
+        {"responsavel": "Gimenes/Ciorlia/Riqueti", "acao": "Finalizar hierarquia comercial no ECC"},
+        {"responsavel": "Gimenes/Rhein/Ciorlia", "acao": "Montar lista de escritórios de vendas"},
+        {"responsavel": "Pereira/Pinheiro/França", "acao": "Extrair base de clientes para migração"},
+        {"responsavel": "Pinheiro/Victoria/Pereira", "acao": "Ajustar workflow pricing por níveis"}
+      ],
+      "jornadasRelacionadas": ["hub-gestao", "workflow-pricing", "areas-vendas", "cadastro-cliente"]
+    },
+    {
+      "id": "R7",
+      "data": "2025-12-23",
+      "titulo": "Alinhamento Cadastro de Materiais e Hierarquias",
+      "duracao": "30 min",
+      "tipo": "tecnico",
+      "resumo": "Discussão técnica sobre hierarquia de grupo de mercadoria no SAP. Explicado que segmentos serão definidos pela hierarquia de grupo de mercadoria (atributo do material). GPS (Product Groups) será a base para segmentação, substituindo tabela de depara manual. Discutida precificação diferenciada por tipo de cliente (AMD, atacado, revenda, cooperativa). Clarificado que mudança afeta apenas relatórios, não o SAP diretamente. Destaque para atenção com organização de vendas entre Monlevade e outras unidades.",
+      "participantes": ["Thalita Rhein", "Luis Riqueti", "Carla Barbosa", "Fabiana Silva", "Fernanda Monteiro", "Hudson Silva", "Ronildo"],
+      "topicosAbordados": ["Hierarquia de grupo de mercadoria", "GPS como base de segmentação", "Precificação por segmento", "Clusterização", "Impacto em relatórios"],
+      "decisoes": ["Segmento será agrupamento de GP", "Precificação diferenciada por canal ficará para próximo ano", "Hudson avaliará aderência do cadastro de produtos"],
+      "problemas": ["GP pode ser diferente entre Monlevade e outras unidades"],
+      "jornadasRelacionadas": ["cadastro-cliente", "workflow-pricing"]
+    },
+    {
+      "id": "R8",
+      "data": "2025-12-29",
+      "titulo": "Construção Planilha DE/PARA para Migração",
+      "duracao": "50 min",
+      "tipo": "operacional",
+      "resumo": "Planejamento detalhado para migração de dados de clientes. Definido hard reboot da lista de clientes, removendo todos os agentes e reatribuindo. Estabelecida segmentação por ID e segmento para categorização correta. Definido processo de alocação de clientes para escritórios regionais baseado em histórico de compras. Criação de novo campo 'Segmentos de Produto' com 46 valores. Deadline crítico: não modificar estrutura de escritórios até finalização do segment report em 30/01.",
+      "participantes": ["Leandro Gimenez", "Thalita Rhein", "Marcelo Almeida", "Leandro Cruz", "Fabricio França"],
+      "topicosAbordados": ["Hard reboot de clientes", "Segmentação de clientes", "Alocação por regional", "46 segmentos de produto", "Listas suspensas dependentes", "EVC para clientes sem regional"],
+      "decisoes": ["Hard reboot em 1-2 meses", "Não criar escritórios até 30/01", "Campo segmentos de produto no próximo sprint", "EVC como escritório padrão para sem regional"],
+      "acoes": [
+        {"responsavel": "Gimenes", "acao": "Hard reboot da lista de clientes"},
+        {"responsavel": "Almeida", "acao": "Criar Service Requests para novos escritórios"},
+        {"responsavel": "Gimenes", "acao": "Finalizar segment report até 30/01"},
+        {"responsavel": "Victoria", "acao": "Criar campo segmentos de produto"}
+      ],
+      "jornadasRelacionadas": ["cadastro-cliente", "areas-vendas", "hub-gestao"]
+    },
+    {
+      "id": "R9",
+      "data": "2026-01-07",
+      "titulo": "Bot Einstein - Autoatendimento WhatsApp e Logística",
+      "duracao": "52 min",
+      "tipo": "produto",
+      "resumo": "Apresentação do chatbot WhatsApp MVP desenvolvido para autoatendimento. Sistema oferece conversa guiada para consultas de conta, status de pedidos e documentos fiscais. Autenticação feita por validação de email cadastrado no Salesforce. Quando chatbot não resolve, cria caso para Smart Center (transbordo inteligente). Canal unificado com número único de WhatsApp para todas as interações Belgo. Histórico completo de conversas armazenado no CRM. Orçamento de R$ 400.000 aprovado para 2026.",
+      "participantes": ["Fabricio França", "Ricardo Accioly", "Fabiana Silva", "Ronildo", "Jefferson Pinheiro", "Patricia Miranda", "Leandro Cruz", "Marcelo Almeida", "Gustavo Teixeira"],
+      "topicosAbordados": ["Chatbot WhatsApp MVP", "Autenticação de clientes", "Transbordo para Smart Center", "Canal unificado", "Integração Salesforce", "Orçamento 2026"],
+      "decisoes": ["Mapear e priorizar fluxos do chatbot", "Integrar Smart Center e SAC", "Planejamento de licenças Salesforce"],
+      "acoes": [
+        {"responsavel": "França/Accioly/Silva", "acao": "Mapeamento e priorização de fluxos"},
+        {"responsavel": "Miranda/Accioly", "acao": "Integração Smart Center e SAC"},
+        {"responsavel": "Ronildo/Silva/Victoria", "acao": "Testes e resolução de erros"},
+        {"responsavel": "Pereira/Pinheiro", "acao": "Planejamento de licenças Salesforce"}
+      ],
+      "jornadasRelacionadas": ["autoatendimento", "hub-gestao", "contatos"]
+    }
+  ]
+}

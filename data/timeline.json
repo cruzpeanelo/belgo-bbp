@@ -7,28 +7,32 @@
     {"nome": "Leandro Cruz", "papel": "Gerente de TI", "area": "TI"},
     {"nome": "Leandro Gimenez", "papel": "PO GTM", "area": "Comercial"},
     {"nome": "Ronildo", "papel": "PO Pricing", "area": "Pricing"},
-    {"nome": "Thalita Rhein", "papel": "Gerente Negocio GTM", "area": "Comercial/Marketing"}
+    {"nome": "Thalita Rhein", "papel": "Gerente de Negócio GTM", "area": "Comercial/Marketing"}
   ],
   "fases": [
     {
-      "nome": "Fase 1 - Discovery",
+      "nome": "Fase 1 - Discovery e Levantamento",
       "periodo": "Out-Nov 2025",
       "status": "concluido",
+      "descricao": "Levantamento inicial de requisitos, identificação de processos AS-IS e definição de escopo do projeto GTM Vendas.",
       "marcos": [
         {
           "data": "2025-10-01",
-          "evento": "Inicio do projeto GTM Vendas",
-          "tipo": "marco"
+          "evento": "Início do projeto GTM Vendas",
+          "tipo": "marco",
+          "descricao": "Kickoff oficial do projeto com definição de equipe e objetivos"
         },
         {
           "data": "2025-10-09",
           "evento": "Primeiros casos de teste FUP de Carteira",
-          "tipo": "documento"
+          "tipo": "documento",
+          "descricao": "Documentação inicial de casos de teste para acompanhamento de carteira"
         },
         {
           "data": "2025-11-04",
-          "evento": "Consolidacao de Investimentos 2026",
-          "tipo": "documento"
+          "evento": "Consolidação de Investimentos 2026",
+          "tipo": "documento",
+          "descricao": "Aprovação de orçamento de R$ 400.000 para continuidade do projeto"
         }
       ]
     },
@@ -36,116 +40,152 @@
       "nome": "Fase 2 - Workshops AS-IS/TO-BE",
       "periodo": "Dez 2025",
       "status": "concluido",
+      "descricao": "Sessões de mapeamento de processos atuais e definição de processos futuros com key users de todas as áreas.",
       "marcos": [
         {
           "data": "2025-12-03",
           "evento": "Workshop Financeiro/Controladoria",
           "tipo": "reuniao",
-          "participantes": ["Leandro Cruz", "Thalita Rhein", "Renato Araujo", "Ivano Araujo", "Fernanda Monteiro"],
-          "temas": ["Areas de credito", "Canais de venda", "ASCP", "FSCM", "Cluster", "Setor Industrial"]
+          "descricao": "Alinhamento sobre áreas de crédito, canais de venda, ASCP, FSCM e clusterização"
         },
         {
           "data": "2025-12-04",
-          "evento": "Kickoff Workshops - Cadastro/Areas",
+          "evento": "Kickoff Workshops - Cadastro/Áreas",
           "tipo": "reuniao",
-          "participantes": ["Leandro Cruz", "Thalita Rhein", "Leandro Gimenez", "Vanessa Souza", "Bruno Machado", "Marcio Silva"],
-          "temas": ["BBA", "CSP", "DBA", "ALPE", "Record Types", "BRO", "Key Users"]
-        },
-        {
-          "data": "2025-12-08",
-          "evento": "Documentacao Boot/Automacao",
-          "tipo": "documento"
+          "descricao": "Início formal dos workshops com apresentação de BBA, CSP, DBA, ALPE e Record Types"
         },
         {
           "data": "2025-12-10",
-          "evento": "Workshop Cadastro Cliente/Areas Venda",
+          "evento": "Workshop Cadastro Cliente/Áreas Venda",
           "tipo": "reuniao",
-          "participantes": ["Leandro Cruz", "Thalita Rhein", "Leandro Gimenez", "Joao Endo", "Francine Gayer", "Bruno Machado", "Daniel Goncalves", "Jessica Vaz", "Renata Mello"],
-          "temas": ["CNAE", "Canais", "Clusterizacao", "Contatos", "Logistica", "WhatsApp Bot", "Market Share", "Concorrentes"]
+          "descricao": "Detalhamento de CNAE, canais, clusterização, contatos, logística e concorrentes"
+        },
+        {
+          "data": "2025-12-12",
+          "evento": "Workshop Regras de Clusterização",
+          "tipo": "reuniao",
+          "descricao": "Definição de 4 clusters de clientes, dimensões de clusterização e integração com relatórios"
         },
         {
           "data": "2025-12-16",
           "evento": "Workshop Docs Fiscais/Autoatendimento",
           "tipo": "reuniao",
-          "participantes": ["Leandro Cruz", "Thalita Rhein", "Joao Endo", "Francine Gayer", "Vanessa Souza", "Bruno Machado", "Frank Silva"],
-          "temas": ["NF-e", "XML", "DANFE", "Boleto", "Consulta Partidas", "App Mobile", "Autoatendimento"]
+          "descricao": "Cobertura de NF-e, XML, DANFE, boleto, portal logístico e app mobile"
+        },
+        {
+          "data": "2025-12-17",
+          "evento": "Workshop Relatórios e Segment Report",
+          "tipo": "reuniao",
+          "descricao": "Hierarquia de dados, governança e integração Salesforce para relatórios"
+        },
+        {
+          "data": "2025-12-22",
+          "evento": "Revisão GTM Urgente - Nova Estrutura",
+          "tipo": "reuniao",
+          "descricao": "Reorganização comercial com 4 macro setores, nova hierarquia de escritórios e workflow pricing"
+        },
+        {
+          "data": "2025-12-23",
+          "evento": "Alinhamento Cadastro de Materiais",
+          "tipo": "reuniao",
+          "descricao": "Hierarquia de grupo de mercadoria, GPS, precificação por segmento"
+        },
+        {
+          "data": "2025-12-29",
+          "evento": "Construção Planilha DE/PARA",
+          "tipo": "reuniao",
+          "descricao": "Hard reboot de lista de clientes, segmentação, alocação por regional"
         }
       ]
     },
     {
-      "nome": "Fase 3 - Desenvolvimento/Testes",
-      "periodo": "Dez 2025 - Jan 2026",
+      "nome": "Fase 3 - Desenvolvimento e Testes Unitários",
+      "periodo": "Jan 2026",
       "status": "em_andamento",
+      "descricao": "Execução de testes unitários, correção de bugs identificados e validação de integrações.",
       "marcos": [
         {
-          "data": "2025-12-20",
-          "evento": "Inicio ciclo de testes HML",
-          "tipo": "marco"
+          "data": "2026-01-07",
+          "evento": "Workshop Bot Einstein e Logística",
+          "tipo": "reuniao",
+          "descricao": "Autoatendimento WhatsApp, chatbot MVP, integração Salesforce"
         },
         {
           "data": "2026-01-12",
           "evento": "Caderno de Testes GTM Vendas finalizado",
-          "tipo": "documento"
+          "tipo": "documento",
+          "descricao": "Consolidação de 115 casos de teste em 6 categorias"
         },
         {
           "data": "2026-01-13",
-          "evento": "Estruturacao BBP completo",
-          "tipo": "marco"
+          "evento": "Estruturação BBP completo",
+          "tipo": "marco",
+          "descricao": "Business Blueprint documentado com todas as jornadas e integrações"
         },
         {
           "data": "2026-01-31",
-          "evento": "Conclusao testes unitarios",
-          "tipo": "marco"
+          "evento": "Conclusão testes unitários",
+          "tipo": "marco",
+          "descricao": "Finalização da primeira rodada de testes unitários"
         }
       ]
     },
     {
-      "nome": "Fase 4 - UAT e Validacao",
+      "nome": "Fase 4 - UAT e Validação",
       "periodo": "Fev 2026",
       "status": "planejado",
+      "descricao": "Testes de aceitação do usuário com key users de todas as áreas, validação de cenários críticos.",
       "marcos": [
         {
           "data": "2026-02-03",
-          "evento": "Inicio UAT - Testes de aceitacao",
-          "tipo": "marco"
+          "evento": "Início UAT - Testes de Aceitação",
+          "tipo": "marco",
+          "descricao": "Início dos testes com usuários finais em ambiente de homologação"
         },
         {
           "data": "2026-02-14",
-          "evento": "Validacao cenarios criticos",
-          "tipo": "marco"
+          "evento": "Validação cenários críticos",
+          "tipo": "marco",
+          "descricao": "Foco em workflow pricing, integrações Salesforce-SAP e tributação"
         },
         {
           "data": "2026-02-28",
-          "evento": "Conclusao UAT e aprovacao negocio",
-          "tipo": "marco"
+          "evento": "Conclusão UAT e aprovação negócio",
+          "tipo": "marco",
+          "descricao": "Sign-off formal do negócio para prosseguir com Go Live"
         }
       ]
     },
     {
-      "nome": "Fase 5 - Treinamento e Preparacao GO LIVE",
+      "nome": "Fase 5 - Treinamento e Preparação GO LIVE",
       "periodo": "Mar 2026",
       "status": "planejado",
+      "descricao": "Treinamento de key users e usuários finais, preparação de ambiente de produção.",
       "marcos": [
         {
           "data": "2026-03-03",
-          "evento": "Inicio treinamento Key Users",
-          "tipo": "marco"
+          "evento": "Início treinamento Key Users",
+          "tipo": "marco",
+          "descricao": "Capacitação dos multiplicadores de conhecimento"
         },
         {
           "data": "2026-03-10",
-          "evento": "Treinamento usuarios finais",
-          "tipo": "marco"
+          "evento": "Treinamento usuários finais",
+          "tipo": "marco",
+          "descricao": "Treinamento da equipe comercial e operacional"
         },
         {
           "data": "2026-03-13",
-          "evento": "Freeze de codigo e preparacao ambiente",
-          "tipo": "marco"
+          "evento": "Freeze de código e preparação ambiente",
+          "tipo": "marco",
+          "descricao": "Congelamento de alterações e preparação final do ambiente de produção"
         },
         {
           "data": "2026-03-15",
-          "evento": "GO LIVE - Entrada em producao",
+          "evento": "GO LIVE - Entrada em Produção",
           "tipo": "go_live",
-          "criticidade": "alta"
+          "criticidade": "alta",
+          "descricao": "Lançamento oficial do sistema GTM Vendas em produção"
         }
       ]
     }
@@ -153,7 +193,7 @@
   "proximosPassos": [
     {
       "prioridade": 1,
-      "descricao": "Finalizar testes de integracao ASCP",
+      "descricao": "Finalizar testes de integração ASCP",
       "prazo": "2026-02-07"
     },
     {
@@ -163,8 +203,18 @@
     },
     {
       "prioridade": 3,
-      "descricao": "Treinar usuarios finais",
-      "prazo": "2026-03-10"
+      "descricao": "Concluir migração de clientes para nova estrutura",
+      "prazo": "2026-02-21"
+    },
+    {
+      "prioridade": 4,
+      "descricao": "Treinar key users",
+      "prazo": "2026-03-07"
+    },
+    {
+      "prioridade": 5,
+      "descricao": "Treinar usuários finais",
+      "prazo": "2026-03-12"
     }
   ]
 }
