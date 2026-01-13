@@ -124,6 +124,21 @@
             background: #dbeafe;
             color: #1e40af;
         }
+        .btn-teams-term {
+            background: #6264A7;
+            color: white;
+            border: none;
+            padding: 3px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            float: right;
+            transition: all 0.2s ease;
+        }
+        .btn-teams-term:hover {
+            background: #4f52a3;
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -438,6 +453,7 @@
         </main>
     </div>
 
+    <script src="../js/utils.js"></script>
     <script>
         function filterTerms() {
             const search = document.getElementById('searchTerm').value.toLowerCase();
@@ -447,6 +463,35 @@
                 const text = card.textContent.toLowerCase();
                 card.style.display = text.includes(search) ? 'block' : 'none';
             });
+        }
+
+        // Adicionar botões de Teams dinamicamente a cada termo
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.term-card').forEach((card, index) => {
+                const sigla = card.querySelector('.term-sigla')?.textContent?.replace(/CONFIRMADO/g, '').trim() || '';
+                const nome = card.querySelector('.term-nome')?.textContent || '';
+                const desc = card.querySelector('.term-desc')?.textContent || '';
+
+                const btn = document.createElement('button');
+                btn.className = 'btn-teams-term';
+                btn.innerHTML = '📤';
+                btn.onclick = function(e) {
+                    e.stopPropagation();
+                    compartilharTermo(sigla, nome, desc);
+                };
+                card.insertBefore(btn, card.firstChild);
+            });
+        });
+
+        // Compartilhar termo no Teams
+        function compartilharTermo(sigla, nome, desc) {
+            const card = Utils.formatTeamsCard('pagina', `📖 Glossário: ${sigla}`, [
+                { name: "Sigla", value: sigla },
+                { name: "Nome", value: nome },
+                { name: "Descrição", value: desc },
+                { name: "Fonte", value: "Cockpit GTM Belgo - Glossário" }
+            ]);
+            Utils.sendToTeams(card);
         }
     </script>
 </body>

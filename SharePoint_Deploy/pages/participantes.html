@@ -112,6 +112,21 @@
             color: #6b7280;
             margin-top: 5px;
         }
+        .btn-teams-item {
+            background: #6264A7;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            margin-left: auto;
+            transition: all 0.2s ease;
+        }
+        .btn-teams-item:hover {
+            background: #4f52a3;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -215,19 +230,8 @@
         </main>
     </div>
 
+    <script src="../js/utils.js"></script>
     <script>
-        async function loadParticipantes() {
-            try {
-                const response = await fetch('../data/participantes.json');
-                const data = await response.json();
-                renderStats(data);
-                renderKeyUsers(data.participantes);
-                renderTeam(data.equipeProjeto);
-            } catch (error) {
-                console.error('Erro ao carregar participantes:', error);
-            }
-        }
-
         function renderStats(data) {
             const container = document.getElementById('stats-row');
             const totalKeyUsers = data.participantes.length;
@@ -256,7 +260,7 @@
 
         function renderKeyUsers(participantes) {
             const container = document.getElementById('key-users-grid');
-            container.innerHTML = participantes.map(p => {
+            container.innerHTML = participantes.map((p, index) => {
                 const initials = p.nome.split(' ').map(n => n[0]).join('').substring(0, 2);
                 const expertiseTags = p.expertise.map(e => `<span class="expertise-tag">${e}</span>`).join('');
                 const meetingsCount = p.reunioesParticipou.length;
@@ -269,6 +273,7 @@
                                 <h3>${p.nome}</h3>
                                 <div class="participant-role">${p.papel}</div>
                             </div>
+                            <button class="btn-teams-item" onclick="compartilharParticipante('keyuser', ${index})">📤</button>
                         </div>
                         <span class="participant-area">${p.area}</span>
                         <div class="expertise-list">
@@ -284,7 +289,7 @@
 
         function renderTeam(team) {
             const container = document.getElementById('team-grid');
-            container.innerHTML = team.map(p => {
+            container.innerHTML = team.map((p, index) => {
                 const initials = p.papel;
 
                 return `
@@ -295,6 +300,7 @@
                                 <h3>${p.nome}</h3>
                                 <div class="participant-role">${p.papel}</div>
                             </div>
+                            <button class="btn-teams-item" onclick="compartilharParticipante('team', ${index})">📤</button>
                         </div>
                         <p style="margin-top: 10px; font-size: 0.9rem; color: #4b5563;">
                             ${p.responsabilidade}
@@ -302,6 +308,46 @@
                     </div>
                 `;
             }).join('');
+        }
+
+        let participantesData = null;
+
+        async function loadParticipantes() {
+            try {
+                const response = await fetch('../data/participantes.json');
+                participantesData = await response.json();
+                renderStats(participantesData);
+                renderKeyUsers(participantesData.participantes);
+                renderTeam(participantesData.equipeProjeto);
+            } catch (error) {
+                console.error('Erro ao carregar participantes:', error);
+            }
+        }
+
+        // Compartilhar participante no Teams
+        function compartilharParticipante(tipo, index) {
+            if (!participantesData) return;
+
+            let p;
+            if (tipo === 'keyuser') {
+                p = participantesData.participantes[index];
+                const card = Utils.formatTeamsCard('pagina', `👤 Key User: ${p.nome}`, [
+                    { name: "Nome", value: p.nome },
+                    { name: "Papel", value: p.papel },
+                    { name: "Área", value: p.area },
+                    { name: "Expertise", value: p.expertise.join(', ') },
+                    { name: "Reuniões", value: `${p.reunioesParticipou.length} participações` }
+                ]);
+                Utils.sendToTeams(card);
+            } else {
+                p = participantesData.equipeProjeto[index];
+                const card = Utils.formatTeamsCard('pagina', `👤 Equipe Projeto: ${p.nome}`, [
+                    { name: "Nome", value: p.nome },
+                    { name: "Papel", value: p.papel },
+                    { name: "Responsabilidade", value: p.responsabilidade }
+                ]);
+                Utils.sendToTeams(card);
+            }
         }
 
         loadParticipantes();

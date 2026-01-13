@@ -133,6 +133,21 @@
         .tag-mobile { background: #fce7f3; color: #9d174d; }
         .tag-fiscal { background: #fee2e2; color: #991b1b; }
         .tag-geral { background: #e5e7eb; color: #374151; }
+        .btn-teams-item {
+            background: #6264A7;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            margin-left: auto;
+            transition: all 0.2s ease;
+        }
+        .btn-teams-item:hover {
+            background: #4f52a3;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -246,6 +261,7 @@
         </div>
     </main>
 
+    <script src="../js/utils.js"></script>
     <script>
         const docs = [
             {id: "791093", title: "WF - Pricing", cat: "pricing", size: "564KB", tables: 1},
@@ -319,9 +335,23 @@
                     <div class="doc-meta">
                         <span>📊 ${doc.size}</span>
                         <span>📋 ${doc.tables} tabela(s)</span>
+                        <button class="btn-teams-item" onclick="compartilharDocumento('${doc.id}', '${doc.title.replace(/'/g, "\\'")}', '${getCategoryLabel(doc.cat)}')">
+                            📤
+                        </button>
                     </div>
                 </div>
             `).join('');
+        }
+
+        // Compartilhar documento no Microsoft Teams
+        function compartilharDocumento(id, titulo, categoria) {
+            const card = Utils.formatTeamsCard('pagina', `📄 Documento: ${titulo}`, [
+                { name: "ID", value: id },
+                { name: "Título", value: titulo },
+                { name: "Categoria", value: categoria },
+                { name: "Fonte", value: "Tester - Belgo Arames" }
+            ]);
+            Utils.sendToTeams(card);
         }
 
         function filterDocs() {

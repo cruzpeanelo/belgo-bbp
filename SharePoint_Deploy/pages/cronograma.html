@@ -133,6 +133,20 @@
             font-size: 0.85rem;
             opacity: 0.8;
         }
+        .btn-teams-item {
+            background: #6264A7;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+        }
+        .btn-teams-item:hover {
+            background: #4f52a3;
+            transform: scale(1.05);
+        }
         @media (max-width: 900px) {
             .timeline-line { left: 20px; }
             .workshop-card { width: 85%; margin-left: 50px !important; }
@@ -248,9 +262,12 @@
 
             renderWorkshops() {
                 const workshops = App.data.cronograma.workshops;
-                document.getElementById('workshops-container').innerHTML = workshops.map(w => `
+                document.getElementById('workshops-container').innerHTML = workshops.map((w, index) => `
                     <div class="workshop-card ${w.status === 'Concluído' ? 'completed' : 'pending'}">
-                        <div class="workshop-date">📅 ${Utils.formatDate(w.data)}${w.horario ? ` • ${w.horario}` : ''}</div>
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
+                            <div class="workshop-date">📅 ${Utils.formatDate(w.data)}${w.horario ? ` • ${w.horario}` : ''}</div>
+                            <button class="btn-teams-item" onclick="Cronograma.compartilharWorkshop(${index})">📤 Teams</button>
+                        </div>
                         <div class="workshop-title">${w.id} - ${w.titulo}</div>
                         <span class="badge ${Utils.getBadgeClass(w.status)}">${w.status}</span>
                         ${w.participantes ? `<span style="margin-left: 10px; color: #6b7280; font-size: 0.85rem;">👥 ${w.participantes} participantes</span>` : ''}
@@ -263,13 +280,39 @@
 
             renderMarcos() {
                 const marcos = App.data.cronograma.marcos;
-                document.getElementById('marcos-container').innerHTML = marcos.map(m => `
+                document.getElementById('marcos-container').innerHTML = marcos.map((m, index) => `
                     <div class="marco-item">
                         <div class="marco-date">${Utils.formatDate(m.data)}</div>
                         <div class="marco-title">${m.titulo}</div>
                         <span class="badge ${Utils.getBadgeClass(m.status)}">${m.status}</span>
+                        <button class="btn-teams-item" onclick="Cronograma.compartilharMarco(${index})">📤</button>
                     </div>
                 `).join('');
+            },
+
+            // Compartilhar workshop no Teams
+            compartilharWorkshop(index) {
+                const w = App.data.cronograma.workshops[index];
+                if (!w) return;
+                const card = Utils.formatTeamsCard('reuniao', `🗓️ Workshop: ${w.id} - ${w.titulo}`, [
+                    { name: "Data", value: Utils.formatDate(w.data) },
+                    { name: "Horário", value: w.horario },
+                    { name: "Status", value: w.status },
+                    { name: "Participantes", value: w.participantes ? `${w.participantes} pessoas` : 'N/A' },
+                    { name: "Foco", value: w.foco.join(', ') }
+                ]);
+                Utils.sendToTeams(card);
+            },
+
+            // Compartilhar marco no Teams
+            compartilharMarco(index) {
+                const m = App.data.cronograma.marcos[index];
+                if (!m) return;
+                const card = Utils.formatTeamsCard('reuniao', `🎯 Marco: ${m.titulo}`, [
+                    { name: "Data", value: Utils.formatDate(m.data) },
+                    { name: "Status", value: m.status }
+                ]);
+                Utils.sendToTeams(card);
             }
         };
 
