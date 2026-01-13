@@ -208,30 +208,21 @@ const Utils = {
     // Webhook URL do Teams
     teamsWebhookUrl: 'https://arcelormittal.webhook.office.com/webhookb2/d931a635-801d-4032-ae69-27f6ee2c88af@37cd273a-1cec-4aae-a297-41480ea54f8d/IncomingWebhook/6284fbb6970849d8b57350074fa5ebff/8dd31791-e6bc-444b-b6c5-e4b6d73f1e5b/V28WZxUnp0pMRDYdKBFpYYVN6kJcnybTAzf0u5KUh9tvg1',
 
-    // URL do canal do Teams (configurável na página de configurações)
-    // Formato: https://teams.microsoft.com/l/channel/CHANNEL_ID/CHANNEL_NAME?groupId=TEAM_ID
-    teamsChannelUrl: localStorage.getItem('teamsChannelUrl') || '',
+    // URL do canal do Teams - Workshops e Testes GTM
+    teamsChannelUrl: 'https://teams.microsoft.com/l/channel/19%3AxndnLok8wB0SnqnaZBVpwMHXuu12opEWgO9EUQ3vA2M1%40thread.tacv2/Workshops%20e%20Testes%20GTM?groupId=d931a635-801d-4032-ae69-27f6ee2c88af&tenantId=37cd273a-1cec-4aae-a297-41480ea54f8d&ngc=true&allowXTenantAccess=true',
 
-    // Abrir Teams no canal configurado (compatível com iOS Safari)
+    // Abrir Teams no canal (compatível com iOS Safari)
     openTeamsChannel() {
-        let url = this.teamsChannelUrl || localStorage.getItem('teamsChannelUrl');
-
-        if (!url) {
-            this.showToast('Configure a URL do canal nas Configurações para abrir o Teams automaticamente', 'warning');
-            return false;
-        }
-
         // iOS Safari bloqueia window.open() fora do contexto de gesto do usuário
         // Usar elemento <a> com click() é mais confiável em todos os browsers
         const link = document.createElement('a');
-        link.href = url;
+        link.href = this.teamsChannelUrl;
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
         link.style.display = 'none';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-
         return true;
     },
 
