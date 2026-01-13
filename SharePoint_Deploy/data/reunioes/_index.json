@@ -12,6 +12,7 @@
       "arquivo": "2025-12-03_financeiro-controladoria.json",
       "transcricao": "data/transcricoes/2025-12-03_financeiro-controladoria.txt",
       "destaque": "Alinhamento estrategico com Controladoria antes dos workshops",
+      "resumo": "Reuniao preparatoria com a Controladoria para alinhar expectativas do projeto GTM. Discutidos testes end-to-end, regras de clusterizacao de clientes, definicao de setor industrial para segmentacao, impacto no EBITDA e requisitos de compliance SOX. Definida a necessidade de envolvimento da Controladoria nas validacoes de relatorios financeiros e custo de servir.",
       "topicos": ["Testes End-to-End", "Cluster", "Setor Industrial", "EBITDA", "SOX"]
     },
     {
@@ -22,6 +23,7 @@
       "arquivo": "2025-12-04_kickoff.json",
       "transcricao": "data/transcricoes/2025-12-04_kickoff-workshops.txt",
       "destaque": "Definicao de key users e estrutura do projeto",
+      "resumo": "Kickoff oficial dos workshops GTM com apresentacao da equipe e definicao dos key users por area. Apresentada a estrutura do projeto com foco em Cadastro de Cliente, integracao com BRO e as 4 areas de credito (BBA, CSP, DBA, ALPE). Discutida a transicao de lideranca de Dani para Thalita e compromisso de 2h semanais dos key users. Definido cronograma de workshops ate o GO LIVE.",
       "topicos": ["Kickoff", "Cadastro Cliente", "BRO", "4 Areas de Credito"]
     },
     {
@@ -32,6 +34,7 @@
       "arquivo": "2025-12-10_cadastro-areas.json",
       "transcricao": "data/transcricoes/2025-12-10_cadastro-areas.txt",
       "destaque": "Restricoes Logisticas integradas e Market Share",
+      "resumo": "Workshop focado em cadastro de clientes, areas de vendas e gestao de concorrentes. Definidas as regras de contatos por tipo de cliente, integracao com restricoes logisticas do AMD, uso de WhatsApp para comunicacao. Discutida a problematica de market share e dados de concorrentes (sazonalidade apontada por Francine). Apresentados os canais de venda (20, 25, 30, 40) e suas caracteristicas.",
       "topicos": ["Contatos", "Logistica", "AMD", "WhatsApp", "Market Share", "Concorrentes"]
     },
     {
@@ -41,6 +44,7 @@
       "duracao": "53min 27s",
       "arquivo": "../transcricoes/2025-12-12_regras-clusterizacao.json",
       "destaque": "Definicao de dimensoes e algoritmo de clusterizacao",
+      "resumo": "Definicao do algoritmo de clusterizacao automatica de clientes. Estabelecidas as dimensoes para classificacao: volume, frequencia, potencial e mix de produtos. Discutida a integracao com SAP para captura de dados historicos. Identificada necessidade de higiene de dados antes da implementacao. Maria Ciorlia apresentou requisitos de segmentacao comercial.",
       "topicos": ["Clusterizacao", "Dimensoes", "Algoritmo", "Integracao", "Higiene de Dados"]
     },
     {
@@ -51,6 +55,7 @@
       "arquivo": "2025-12-16_autoatendimento.json",
       "transcricao": "data/transcricoes/2025-12-16_docs-fiscais-autoatendimento.txt",
       "destaque": "Consulta de partidas e workflow pricing",
+      "resumo": "Workshop sobre documentos fiscais e portal de autoatendimento. Detalhado o fluxo de download de NF-e, DANFE e XML via integracao com Spa (Daniel). Discutida consulta de partidas em aberto e boletos. Apresentado o workflow de pricing com niveis de aprovacao. Identificada pendencia critica: Portal Logistico nao integrado com SAP. Definida criticidade dos dados de contato para autoatendimento.",
       "topicos": ["Documentos Fiscais", "Autoatendimento", "Partidas", "Boletos", "Workflow Pricing"]
     },
     {
@@ -60,6 +65,7 @@
       "duracao": "~60min",
       "arquivo": "../transcricoes/2025-12-17_relatorios-segment-report.json",
       "destaque": "Segmentacao, fidelidade e governanca de dados",
+      "resumo": "Apresentacao dos relatorios atuais do GTM e definicao do Segment Report. Discutidas regras de segmentacao por canal, fidelidade de clientes e hierarquia de produtos. Luis Riqueti apresentou estrutura atual do BWA e Power BI. Definida governanca de dados com responsabilidades claras. Identificada necessidade de padronizacao de nomenclaturas entre sistemas.",
       "topicos": ["Segment Report", "Segmentacao", "Fidelidade", "Hierarquia", "Governanca"]
     },
     {
@@ -69,6 +75,7 @@
       "duracao": "~2h 30min",
       "arquivo": "../transcricoes/2025-12-22_urgente-revisao-gtm.json",
       "destaque": "Nova estrutura organizacional com 4 macro setores",
+      "resumo": "Reuniao de emergencia para redefinir estrutura comercial do GTM. Apresentada nova organizacao com 4 macro setores: Agro, Construcao Civil, Industria e Distribuicao. Definida gestao regional com escritorios de vendas e contas-chave. Ajustado workflow de aprovacao para nova hierarquia. Impacto significativo no cronograma - necessaria revisao de todas as jornadas AS-IS/TO-BE.",
       "topicos": ["Estrutura Organizacional", "Macro Setores", "Gestao Regional", "Contas-Chave", "Workflow"]
     },
     {
@@ -78,6 +85,7 @@
       "duracao": "29min 24s",
       "arquivo": "../transcricoes/2025-12-23_alinhamento-cadastro-materiais.json",
       "destaque": "Hierarquia de produtos e integracao SAP",
+      "resumo": "Alinhamento sobre cadastro de materiais e hierarquia de produtos SAP. Definida estrutura de GPS (Grupo de Produtos SAP) para precificacao. Discutida integracao de hierarquia com clusterizacao de clientes. Apresentados requisitos para relatorios de mix de produtos. Identificadas inconsistencias entre hierarquias SAP e Salesforce que precisam ser tratadas.",
       "topicos": ["Hierarquia", "GPS", "Precificacao", "Clustering", "Relatorios"]
     },
     {
@@ -87,6 +95,7 @@
       "duracao": "~50min",
       "arquivo": "../transcricoes/2025-12-29_planilha-depara.json",
       "destaque": "Mapeamento de clientes e escritorios regionais",
+      "resumo": "Construcao da planilha DE/PARA para migracao de clientes para nova estrutura. Mapeados escritorios regionais e seus agentes comerciais. Definidas regras de segmentacao para reclassificacao de carteira. Alinhado impacto no Segment Report e relatorios gerenciais. Identificados clientes que precisam de tratamento manual (contas especiais e key accounts).",
       "topicos": ["DE/PARA", "Segmentacao", "Escritorios", "Segment Report", "Agentes"]
     },
     {
@@ -96,6 +105,7 @@
       "duracao": "52min 13s",
       "arquivo": "../transcricoes/2026-01-07_bot-einstein-logistica.json",
       "destaque": "Chatbot WhatsApp e integracao Smart Center",
+      "resumo": "Alinhamento com GLOG sobre Bot Einstein para atendimento via WhatsApp. Definido MVP com consulta de status de pedido, tracking de entrega e segunda via de boleto. Discutida autenticacao de usuarios (CPF/CNPJ + codigo). Apresentado fluxo de transbordo para atendente humano no Smart Center. Integracao via Salesforce Service Cloud com Einstein Bots.",
       "topicos": ["Bot Einstein", "WhatsApp", "Autenticacao", "Transbordo", "Salesforce"]
     }
   ],

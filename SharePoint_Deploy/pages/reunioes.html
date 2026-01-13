@@ -541,6 +541,12 @@
                             ${ações.length > 0 ? `<span>⚡ ${ações.length} ações</span>` : ''}
                         </div>
 
+                        ${r.resumo ? `
+                        <div class="reuniao-resumo" style="margin: 12px 0; padding: 12px; background: #f0f9ff; border-left: 3px solid #0ea5e9; border-radius: 4px; font-size: 0.9rem; color: #0c4a6e; line-height: 1.5;">
+                            ${r.resumo}
+                        </div>
+                        ` : ''}
+
                         <div class="reuniao-tópicos">
                             ${tópicos.slice(0, 5).map(t => `<span class="topico-tag">${typeof t === 'string' ? t : t.titulo || t}</span>`).join('')}
                             ${tópicos.length > 5 ? `<span class="topico-tag">+${tópicos.length - 5}</span>` : ''}
