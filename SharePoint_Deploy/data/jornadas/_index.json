@@ -56,7 +56,7 @@
       "status": "Em Andamento"
     },
     {
-      "id": "áreas-vendas",
+      "id": "areas-vendas",
       "nome": "Áreas de Vendas",
       "icone": "🏢",
       "ordem": 2,
@@ -77,7 +77,7 @@
       "status": "Pendente"
     },
     {
-      "id": "logística",
+      "id": "logistica",
       "nome": "Portal Logístico",
       "icone": "🚚",
       "ordem": 5,
@@ -112,14 +112,14 @@
       "status": "Em Andamento"
     },
     {
-      "id": "cotação-ov",
+      "id": "cotacao-ov",
       "nome": "Cotação e Ordem de Vendas",
       "icone": "📋",
       "ordem": 10,
       "status": "Em Andamento"
     },
     {
-      "id": "hub-gestão",
+      "id": "hub-gestao",
       "nome": "Hub de Gestão OC",
       "icone": "⚙️",
       "ordem": 11,
