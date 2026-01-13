@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "id": "896930",
+    "arquivo": "896930 - Aba de Análise 8D.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\896930 - Aba de Análise 8D.docx",
+    "tamanho_bytes": 1409722,
+    "data_modificacao": "2025-11-28T15:36:14",
+    "extraido_em": "2026-01-13T11:31:15.213330",
+    "status": "extraido",
+    "total_paragrafos": 14,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "O registro 8D aparece apenas para ocorrências graves, a Reclamação é criada/atualizada corretamente mediante gravidade, o encerramento só ocorre após progresso completo, e ao definir ‘Procedente = Não’ o campo Análise não é obrigatório.”",
+      "Se a ocorrência não for grave, o sistema não deve exibir a opção ou seção relacionada ao 8D.",
+      "O registro do tipo 8D somente deve aparecer quando a ocorrência for classificada como Grave, só vai funcionar quando o registro grave estiver flegado:",
+      "A ocorrência só pode ser encerrada após o preenchimento completo do progresso.",
+      "O usuário pode inserir comentários ou detalhes sobre o reconhecimento no campo de texto disponível.",
+      "Na parte inferior, é exibido o Histórico de Alterações, onde constam todas as interações realizadas no registro, incluindo data, horário, autor e a ação executada.\nEssa área permite acompanhar a evolução do processo e validar se cada etapa, foi devidamente salva e registrada.",
+      "O botão “Salvar Análise” finaliza o preenchimento e grava as informações dessa etapa no registro.",
+      "D1 – Formar a Equipe:\nSeção destinada a registrar a equipe responsável por solucionar o problema. O usuário deve selecionar o Grupo envolvido no tratamento da ocorrência.",
+      "D2 – Descrever o Problema:\nÁrea onde deve ser detalhada a descrição do problema, permitindo documentar claramente o que será tratado.",
+      "A tela faz o bloqueio corretamente, exibindo mensagem de validação quando os campos da Análise 8D não estão preenchidos",
+      "Verificar: Se não for procedente não deveria preencher a análise ",
+      "A aba “Análise 8D” exibe o acompanhamento do processo aplicado exclusivamente às ocorrências classificadas como Graves.",
+      "No topo da seção, é apresentada uma barra de Progresso da Análise 8D, indicando o percentual concluído de todas as etapas obrigatórias.\nQuando o progresso atinge 100%, significa que todas as disciplinas do 8D foram preenchidas corretamente, permitindo o avanço e o encerramento do processo.",
+      "Essa visualização facilita o controle do usuário sobre o andamento da análise e garante que nenhum passo da metodologia fique pendente."
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n896930 - Aba de Análise 8D",
+          "Data de Criação\n28/11/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 14,
+    "total_tabelas": 1
+  }
+}

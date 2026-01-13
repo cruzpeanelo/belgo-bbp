@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "id": "908746",
+    "arquivo": "908746 - Criação do formulário de abertura de RC.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\908746 - Criação do formulário de abertura de RC.docx",
+    "tamanho_bytes": 1874632,
+    "data_modificacao": "2025-12-19T14:28:23",
+    "extraido_em": "2026-01-13T11:31:15.371357",
+    "status": "extraido",
+    "total_paragrafos": 9,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Existem dois caminhos para criação: o primeiro é pela própria Conta:",
+      "Ocorrência de cliente",
+      "- Registro de ocorrência",
+      "Belgo Flex",
+      "Os Campos Termo de pesquisa e Escritório de vendas já foram preenchidos automaticamente",
+      "Ordem de venda",
+      "Caminho direto pela ocorrência:",
+      "Belgo flex",
+      "O comportamento permanece o mesmo, porém, após salvar, o sistema altera o resultado e direciona diretamente para o registro."
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n908746 - Criação do formulário de abertura de RC",
+          "Data de Criação\n19/12/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 9,
+    "total_tabelas": 1
+  }
+}

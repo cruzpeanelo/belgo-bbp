@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "id": "898076",
+    "arquivo": "898076 - [Salesforce] Consistência de número de pedido para BOMBRIL via metadados.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\898076 - [Salesforce] Consistência de número de pedido para BOMBRIL via metadados.docx",
+    "tamanho_bytes": 369249,
+    "data_modificacao": "2025-11-27T15:16:45",
+    "extraido_em": "2026-01-13T11:31:15.236531",
+    "status": "extraido",
+    "total_paragrafos": 13,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Validar a regra de consistência aplicada ao campo OrderNumber__c (Nº do Pedido do Cliente) no objeto Order, garantindo que:",
+      "O campo aceite exclusivamente uma sequência numérica com 10 dígitos (nem mais, nem menos).",
+      "A validação seja acionada somente quando o valor for inserido manualmente em tela.",
+      "Caso o cliente pertença à lista definida no requisito anterior, o sistema apresente o aviso:\n\"Cliente informou restrição para nº de pedido. Ajustar para apenas números, 10 posições.\"",
+      "Preenchimento Manual do Campo",
+      "Ao preencher o campo Nº do Pedido com 10 dígitos numéricos, a tela aceita o valor normalmente e o usuário consegue prosseguir no fluxo.",
+      "Caso informado menos ou mais de 10 dígitos, o sistema apresenta a mensagem de erro:\n\"O campo Nº do Pedido deve ter 10 dígitos numéricos.\"",
+      "Tentativa com quantidade incorreta de dígitos apresenta a mensagem de erro conforme a regra.",
+      "Teste validado com sucesso:",
+      "Aceita apenas números",
+      "Obrigatoriamente 10 dígitos",
+      "Exibe alertas corretamente",
+      "Funciona somente para edição manual"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n898076 - [Salesforce] Consistência de número de pedido para BOMBRIL via metadados",
+          "Data de Criação\n27/11/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 13,
+    "total_tabelas": 1
+  }
+}

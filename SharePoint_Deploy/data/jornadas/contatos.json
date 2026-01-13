@@ -1,0 +1,441 @@
+{
+  "id": "contatos",
+  "nome": "Gestão de Contatos",
+  "icone": "📞",
+  "ordem": 4,
+  "asIs": {
+    "descricao": "Cadastro manual e fragmentado de contatos onde o vendedor coleta dados de clientes por diversos canais e digita manualmente no sistema, sem validação de duplicados ou formato, resultando em dados incompletos e desatualizados que impactam outras áreas.",
+    "passos": [
+      "Vendedor coleta dados de contato do cliente (telefone, email, nome)",
+      "Anota informações em papel ou planilha pessoal",
+      "Acessa Salesforce e navega até a conta do cliente",
+      "Digita dados de contato manualmente",
+      "Não há validação de formato de telefone ou email",
+      "Não há verificação de contatos duplicados",
+      "Contato é salvo mesmo com dados incompletos",
+      "Informações ficam desatualizadas ao longo do tempo",
+      "Diferentes vendedores cadastram o mesmo contato múltiplas vezes"
+    ],
+    "problemas": [
+      "Dados de contato incompletos (falta email ou telefone)",
+      "Contatos duplicados na base de dados",
+      "Informações desatualizadas (emails inválidos, telefones antigos)",
+      "Formato de telefone inconsistente (com/sem DDD, hífen, etc.)",
+      "Emails com erros de digitação",
+      "Sem histórico de interações com o contato",
+      "Impacto negativo no Autoatendimento - cliente não consegue acessar",
+      "Dificuldade de comunicação por email marketing",
+      "Sem validação de CPF/CNPJ do contato",
+      "Contatos órfãos - sem vínculo correto com a conta"
+    ],
+    "tempoMedio": "15 minutos"
+  },
+  "toBe": {
+    "descricao": "Gestão inteligente de contatos com auto-preenchimento, validação automática de formato, deduplicação por matching de email/telefone/nome, e histórico completo de interações. Dados de qualidade habilitam o funcionamento correto do Autoatendimento.",
+    "passos": [
+      "Vendedor acessa a conta do cliente no Salesforce",
+      "Clica em 'Novo Contato' ou sistema sugere contatos existentes",
+      "Sistema verifica se já existe contato com email/telefone similar",
+      "Se duplicado: exibe contato existente para vinculação",
+      "Se novo: vendedor preenche dados básicos",
+      "Sistema valida formato de email automaticamente",
+      "Sistema padroniza formato de telefone (com DDD)",
+      "Sistema valida CPF/CNPJ quando informado",
+      "Contato é salvo com dados completos e validados",
+      "Histórico de interações é mantido automaticamente"
+    ],
+    "beneficios": [
+      "Dados de contato sempre completos e validados",
+      "Eliminação de contatos duplicados",
+      "Formato padronizado de telefone e email",
+      "Histórico completo de interações com o contato",
+      "Habilitação correta do Autoatendimento",
+      "Comunicações por email chegam corretamente",
+      "Facilita campanhas de marketing",
+      "Contatos sempre atualizados",
+      "Vinculação correta com contas",
+      "Redução de retrabalho de cadastro"
+    ],
+    "tempoMedio": "2 minutos"
+  },
+  "areasImpactadas": [
+    "Comercial",
+    "Marketing",
+    "Atendimento",
+    "TI"
+  ],
+  "status": "Pendente",
+  "fonteReuniao": "16/12/2025",
+  "fontesReuniao": [
+    "16/12/2025 - Discussão sobre qualidade de dados de contato",
+    "10/12/2025 - Menção à criticidade para Autoatendimento"
+  ],
+  "fontesVerificadas": {
+    "reuniao16dez": [
+      "Criticidade dos dados de contato para funcionamento do Autoatendimento"
+    ],
+    "reuniao10dez": [
+      "Mencao a importancia de contatos corretos"
+    ],
+    "cadernoTestes": [
+      "Tester 901674 - Padronizacao de Celulares",
+      "Tester 881196 - Notificacao de Cadastro Pendente"
+    ]
+  },
+  "campos": [
+    {
+      "campo": "Nome Completo",
+      "descricao": "Nome completo do contato",
+      "preenchimento": "Manual",
+      "validacao": "Obrigatório",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Email",
+      "descricao": "Endereço de email do contato",
+      "preenchimento": "Manual",
+      "validacao": "Formato de email",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Telefone",
+      "descricao": "Telefone principal com DDD",
+      "preenchimento": "Manual",
+      "validacao": "Formato padronizado",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Celular",
+      "descricao": "Telefone celular com DDD",
+      "preenchimento": "Manual",
+      "validacao": "Formato padronizado",
+      "obrigatorio": false
+    },
+    {
+      "campo": "CPF/CNPJ",
+      "descricao": "Documento de identificação do contato",
+      "preenchimento": "Manual",
+      "validacao": "Algoritmo de validação",
+      "obrigatorio": false
+    },
+    {
+      "campo": "Cargo",
+      "descricao": "Cargo ou função do contato na empresa",
+      "preenchimento": "Manual",
+      "validacao": "-",
+      "obrigatorio": false
+    },
+    {
+      "campo": "Conta Vinculada",
+      "descricao": "Conta (cliente) à qual o contato está vinculado",
+      "preenchimento": "Seleção",
+      "validacao": "Obrigatório",
+      "obrigatorio": true
+    }
+  ],
+  "regrasNegocio": [
+    {
+      "regra": "Validação de Formato de Email",
+      "descricao": "O sistema valida automaticamente se o email informado está em formato válido (usuario@dominio.com)",
+      "mensagemErro": "Email informado não é válido"
+    },
+    {
+      "regra": "Padronização de Telefone",
+      "descricao": "O sistema padroniza automaticamente o formato do telefone para (XX) XXXXX-XXXX, incluindo DDD",
+      "documento": "901674"
+    },
+    {
+      "regra": "Deduplicação por Email",
+      "descricao": "O sistema verifica se já existe um contato com o mesmo email antes de permitir o cadastro"
+    },
+    {
+      "regra": "Deduplicação por Telefone",
+      "descricao": "O sistema verifica se já existe um contato com o mesmo telefone antes de permitir o cadastro"
+    },
+    {
+      "regra": "Matching por Nome",
+      "descricao": "O sistema sugere contatos similares quando detecta nomes parecidos na mesma conta"
+    },
+    {
+      "regra": "Validação de CPF",
+      "descricao": "Quando informado, o CPF é validado usando algoritmo padrão da Receita Federal"
+    },
+    {
+      "regra": "Contato Obrigatório para Autoatendimento",
+      "descricao": "Para habilitar o Autoatendimento do cliente, é necessário ter pelo menos um contato com email válido cadastrado",
+      "criticidade": "Alta"
+    }
+  ],
+  "sistemasTecnicos": [
+    "Salesforce"
+  ],
+  "integracoes": [
+    {
+      "origem": "Salesforce",
+      "destino": "Email Marketing",
+      "tipo": "API",
+      "descricao": "Sincronização de contatos para campanhas de marketing"
+    },
+    {
+      "origem": "Salesforce",
+      "destino": "Portal Autoatendimento",
+      "tipo": "Autenticação",
+      "descricao": "Contato com email válido pode acessar o portal de autoatendimento"
+    }
+  ],
+  "mensagensSistema": [
+    {
+      "tipo": "Erro",
+      "contexto": "Email Inválido",
+      "mensagem": "O email informado não é válido. Verifique o formato."
+    },
+    {
+      "tipo": "Erro",
+      "contexto": "Contato Duplicado",
+      "mensagem": "Já existe um contato com este email/telefone cadastrado."
+    },
+    {
+      "tipo": "Erro",
+      "contexto": "CPF Inválido",
+      "mensagem": "CPF informado não é válido."
+    },
+    {
+      "tipo": "Alerta",
+      "contexto": "Contato Obrigatório",
+      "mensagem": "É necessário informar pelo menos um contato para completar o cadastro."
+    }
+  ],
+  "detalhes": {
+    "criticidade": "PRÉ-REQUISITO para Autoatendimento",
+    "validacoes": [
+      "Formato de email",
+      "Formato de telefone",
+      "CPF/CNPJ"
+    ],
+    "deduplicacao": "Matching por email, telefone e nome",
+    "padronizacao": "Telefone padronizado para (XX) XXXXX-XXXX"
+  },
+  "regrasDeduplicacao": {
+    "descricao": "Regras de identificacao e prevencao de contatos duplicados",
+    "avisoVerificacao": "ATENCAO: Os algoritmos detalhados abaixo sao SUGESTOES TECNICAS, nao foram definidos nas reunioes. Precisam ser validados com a equipe de TI.",
+    "algoritmoMatching": {
+      "emailExato": {
+        "peso": 100,
+        "descricao": "Email identico (case insensitive) = duplicado certo",
+        "acao": "Bloqueia criacao e sugere contato existente"
+      },
+      "telefoneExato": {
+        "peso": 90,
+        "descricao": "Telefone identico (numeros apenas) = provavel duplicado",
+        "acao": "Alerta e sugere contato existente"
+      },
+      "nomeSimilar": {
+        "peso": 70,
+        "limiarSimilaridade": 0.85,
+        "algoritmo": "Levenshtein distance normalizado",
+        "descricao": "Nomes com >85% similaridade = possivel duplicado",
+        "acao": "Alerta com lista de contatos similares"
+      },
+      "combinacaoNomeTelefone": {
+        "peso": 95,
+        "descricao": "Mesmo nome + telefone parcial (ultimos 8 digitos)",
+        "acao": "Bloqueia e sugere revisao"
+      }
+    },
+    "tratamentoDuplicados": {
+      "modoAutomatico": {
+        "emailDuplicado": "Bloqueia criacao",
+        "telefoneDuplicado": "Permite com alerta",
+        "nomeSimilar": "Permite com sugestao"
+      },
+      "modoManual": {
+        "descricao": "Usuario pode forcar criacao mesmo com alerta de duplicidade",
+        "requerJustificativa": true
+      }
+    },
+    "processoBatch": {
+      "descricao": "Limpeza periodica de base existente",
+      "frequencia": "Semanal",
+      "acoes": [
+        "Identificar contatos duplicados na base",
+        "Gerar relatorio de duplicidades",
+        "Permitir merge de contatos duplicados"
+      ]
+    }
+  },
+  "validacaoFormatos": {
+    "telefone": {
+      "formatoPadrao": "(XX) XXXXX-XXXX ou (XX) XXXX-XXXX",
+      "dddObrigatorio": true,
+      "validacaoDDD": "Lista de DDDs validos do Brasil",
+      "limpeza": "Remove espacos, parenteses, hifen antes de armazenar",
+      "exibicao": "Formata ao exibir conforme padrao"
+    },
+    "email": {
+      "regex": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+      "validacaoDominio": "Alerta para dominios suspeitos ou invalidos",
+      "normalizacao": "Converte para lowercase"
+    },
+    "cpf": {
+      "algoritmo": "Digitos verificadores da Receita Federal",
+      "formatoPadrao": "XXX.XXX.XXX-XX",
+      "armazenamento": "Apenas numeros"
+    }
+  },
+  "pendencias": [
+    "Padronização de celulares e bases de contatos (documento 901674)",
+    "Definição de regras de matching para deduplicação",
+    "Validação de formato de telefone celular",
+    "Integração com ferramenta de email marketing"
+  ],
+  "prerequisitos": [
+    "Regras de validação configuradas no Salesforce",
+    "Processo de limpeza de base de contatos existente"
+  ],
+  "relacionamentos": {
+    "dependeDe": [
+      "cadastro-cliente"
+    ],
+    "habilitaPara": [
+      "autoatendimento",
+      "documentos-fiscais"
+    ],
+    "nota": "Qualidade dos dados de contato é crítica para funcionamento do Autoatendimento e envio de documentos fiscais"
+  },
+  "prerequisitoPara": [
+    "autoatendimento"
+  ],
+  "ciclosTeste": [
+    {
+      "documento": "901674",
+      "titulo": "Padronizacao de Bases de Contatos (Celulares)",
+      "status": "Pendente",
+      "data": "2025-12",
+      "descricao": "Testes de padronizacao de formato de telefone celular",
+      "cenarios": [
+        "Validacao de formato de celular com DDD",
+        "Padronizacao automatica de numeros existentes",
+        "Bloqueio de formatos invalidos"
+      ]
+    },
+    {
+      "documento": "881196",
+      "titulo": "Notificacao de Cadastro Pendente",
+      "status": "Pendente",
+      "data": "17-24/10/2025",
+      "descricao": "Sistema notifica sobre contatos com cadastro incompleto",
+      "cenarios": [
+        "Identificacao de contatos incompletos",
+        "Envio de notificacao automatica",
+        "Verificar destinatarios da notificacao"
+      ]
+    }
+  ],
+  "discussaoReunioes": {
+    "16dez2025": {
+      "apresentador": "Leandro da Cruz Pereira",
+      "timestamp": "1:18",
+      "contexto": "Discussao sobre importancia da qualidade dos dados de contato para o autoatendimento",
+      "citacaoCompleta": "A gente falou da parte de Contatos e a importancia de ter o dado bem certinho, justamente para voces, para que outras areas utilizem. E hoje a gente vai falar sobre autoatendimento tambem e o autoatendimento. Voces vao ver a importancia desse dado preenchido corretamente.",
+      "pontosChave": [
+        "Dados de contato corretos sao fundamentais para outras areas",
+        "Dado bem preenchido e critico para autoatendimento"
+      ],
+      "nota": "Esta citacao e da reuniao 16/12, onde Leandro recapitulou os temas anteriores"
+    }
+  },
+  "criticidadeAutoatendimento": {
+    "fonte": "Reunioes 10/12 e 16/12/2025",
+    "regra": "Para habilitar acesso ao portal de autoatendimento, cliente DEVE ter pelo menos um contato com email valido",
+    "impactoSeNaoTiver": [
+      "Cliente nao consegue fazer login no portal",
+      "Cliente fica dependente do vendedor para consultas",
+      "Funcionalidade de self-service fica indisponivel"
+    ],
+    "mensagemLeandro": "A importancia de ter o dado bem certinho, justamente para voces, para que outras areas utilizem"
+  },
+  "contextoReuniao": {
+    "projeto": "GTM (Go To Market) / CRM",
+    "lideranca": {
+      "business": "Thalita Merisio Rhein",
+      "tecnico": "Leandro da Cruz Pereira"
+    },
+    "timeline": {
+      "workshops": "04/12 a 22/12/2025",
+      "posWorkshop": "Responsabilidade passa para usuarios (Castro)",
+      "entregaveis": [
+        "Planilha de cenarios",
+        "Manual de orientacao"
+      ]
+    },
+    "participantes": [
+      {
+        "nome": "Leandro da Cruz Pereira",
+        "papel": "TI/Apresentador",
+        "contribuicao": "Enfatizou criticidade dos dados de contato"
+      },
+      {
+        "nome": "Thalita Merisio Rhein",
+        "papel": "Project Lead Business"
+      }
+    ]
+  },
+  "documentosRelacionados": [
+    {
+      "id": "862947",
+      "arquivo": "862947-AJUSTE DE LAYOUT E ORGANIZAÇÃO DA TELA DE CONTATOS.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\862947-AJUSTE_DE_LAYOUT_E_ORGANIZAÇÃO_DA_TELA_DE_CONTATOS.json"
+    },
+    {
+      "id": "862947",
+      "arquivo": "862947-AJUSTE DE LAYOUT E ORGANIZAÇÃO DA TELA DE CONTATOS.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\862947-AJUSTE_DE_LAYOUT_E_ORGANIZAÇÃO_DA_TELA_DE_CONTATOS.json"
+    },
+    {
+      "id": "862947",
+      "arquivo": "862947-AJUSTE DE LAYOUT E ORGANIZAÇÃO DA TELA DE CONTATOS.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\862947-AJUSTE_DE_LAYOUT_E_ORGANIZAÇÃO_DA_TELA_DE_CONTATOS.json"
+    },
+    {
+      "id": "891761",
+      "arquivo": "891761 – Criação de tarefas -atividades mediante Tipo de contato em cotação.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\891761___Criação_de_tarefas_-atividades_mediante_Tipo_de_contato_em_cotação.json"
+    },
+    {
+      "id": "901674",
+      "arquivo": "901674 - Testes - Padronização de bases de contatos (celulares).docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\901674_-_Testes_-_Padronização_de_bases_de_contatos__celulares_.json"
+    },
+    {
+      "id": "901674",
+      "arquivo": "901674 - Testes - Padronização de bases de contatos (celulares).docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\901674_-_Testes_-_Padronização_de_bases_de_contatos__celulares_.json"
+    },
+    {
+      "id": "901674",
+      "arquivo": "901674 - Testes - Padronização de bases de contatos (celulares).docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\901674_-_Testes_-_Padronização_de_bases_de_contatos__celulares_.json"
+    },
+    {
+      "id": "901674",
+      "arquivo": "901674 - Testes - Padronização de bases de contatos (celulares).docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\901674_-_Testes_-_Padronização_de_bases_de_contatos__celulares_.json"
+    }
+  ],
+  "totalDocumentos": 8,
+  "ultimaAtualizacao": "2026-01-13T11:36:26.094756",
+  "documentosGerais": [
+    {
+      "tipo": "Plano de Testes Exploratorios",
+      "id": "909100"
+    },
+    {
+      "tipo": "Boot/Automacao",
+      "id": "Boot"
+    },
+    {
+      "tipo": "App Guidance",
+      "id": "app guidance"
+    }
+  ]
+}

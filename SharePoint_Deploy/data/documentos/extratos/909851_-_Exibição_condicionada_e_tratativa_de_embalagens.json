@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "id": "909851",
+    "arquivo": "909851 - Exibição condicionada e tratativa de embalagens.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\909851 - Exibição condicionada e tratativa de embalagens.docx",
+    "tamanho_bytes": 455549,
+    "data_modificacao": "2026-01-07T18:49:49",
+    "extraido_em": "2026-01-13T11:31:15.684552",
+    "status": "extraido",
+    "total_paragrafos": 10,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Foram realizados testes com o meu usuário (com permissão) e com o usuário do Kaiky (sem permissão) para visualização de Shadow Items (produtos de embalagem).",
+      "Cenário com permissão:",
+      "O usuário visualiza o botão “Exibir materiais ocultos” na tela da Ordem.",
+      "Ao acionar o botão, os produtos de embalagem (Shadow Items) são exibidos corretamente na lista de produtos.",
+      "A geração do PDF ocorre com sucesso, respeitando a permissão do usuário.",
+      "PDF",
+      "Cenário sem permissão:",
+      "O botão “Exibir materiais ocultos” não é apresentado na tela.",
+      "Os produtos de embalagem (Shadow Items) permanecem ocultos.",
+      "A geração do PDF não é disponibilizada, respeitando a permissão do usuário."
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n909851 - Exibição condicionada e tratativa de embalagens",
+          "Data de Criação\n07.10.2026"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 10,
+    "total_tabelas": 1
+  }
+}

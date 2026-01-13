@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "id": "892940",
+    "arquivo": "892940 - Fluxo Ficha comercial - Adaptação YEDI e Interface síncrona.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\892940 - Fluxo Ficha comercial - Adaptação YEDI e Interface síncrona.docx",
+    "tamanho_bytes": 790269,
+    "data_modificacao": "2025-11-17T15:42:10",
+    "extraido_em": "2026-01-13T11:31:15.096168",
+    "status": "extraido",
+    "total_paragrafos": 11,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Teste criação de ordem de venda",
+      "- Conforme alinhado com o Samuel estou utilizando o link da conta que ele me encaminhou para a realização dos testes:",
+      "https://conectabelgo--hml.sandbox.my.salesforce.com/006Ha00000JjXWS",
+      "Criado botão ficha comercial:",
+      "Regra de negócio",
+      "Botão inserir selecionados, conforme abaixo:",
+      "Sincronizar:",
+      "- SAP vai validar",
+      "Botão editar",
+      "Criação de ordem de venda, validado com sucesso:",
+      "Teste concluído com sucesso"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n892940 - Fluxo Ficha comercial - Adaptação YEDI e Interface síncrona",
+          "Data de Criação\n17/11/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 11,
+    "total_tabelas": 1
+  }
+}

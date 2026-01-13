@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "id": "899139",
+    "arquivo": "899139 - Validação do Campo Termo de Pesquisa no Cadastro de Cliente.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\899139 - Validação do Campo Termo de Pesquisa no Cadastro de Cliente.docx",
+    "tamanho_bytes": 453350,
+    "data_modificacao": "2025-12-12T18:26:35",
+    "extraido_em": "2026-01-13T11:31:15.259433",
+    "status": "extraido",
+    "total_paragrafos": 11,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Validar que, ao cadastrar uma nova Conta (Pessoa Jurídica), o sistema verifica se já existe outro cliente com o mesmo Termo de Pesquisa, impedindo a criação em caso de duplicidade, conforme a regra solicitada.",
+      "Tentativa de cadastro com Termo de Pesquisa já existente.",
+      "Encontramos um obstáculo, já existe um cliente com o mesmo termo de pesquisa",
+      "O Salesforce exibiu a validação corretamente, bloqueando o cadastro",
+      "- Deve existir uma Conta cadastrada com o Termo de Pesquisa informado (ex.: AREZZO).",
+      "O cadastro foi concluído com sucesso e a Conta foi criada.",
+      "Após a criação da nova Conta, acessar o registro relacionado ao Termo de Pesquisa.",
+      "-  O Termo de Pesquisa foi registrado.",
+      "-  A Conta associada está correta.",
+      "-  As chaves de validação foram geradas.",
+      "Todos os cenários foram testados e a regra de validação do “Termo de Pesquisa” está funcionando conforme solicitado, impedindo duplicidades e permitindo cadastros válidos.\n"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n899139 - Validação do Campo \"Termo de Pesquisa\" no Cadastro de Cliente",
+          "Data de Criação\n12/12/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 11,
+    "total_tabelas": 1
+  }
+}

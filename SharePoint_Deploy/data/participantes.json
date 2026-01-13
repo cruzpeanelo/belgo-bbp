@@ -1,0 +1,165 @@
+{
+  "titulo": "Participantes - Projeto GTM Vendas Belgo",
+  "descricao": "Diretório de stakeholders, key users e participantes do projeto",
+  "dataAtualizacao": "2026-01-13",
+  "totalParticipantes": 15,
+  "equipeProjeto": [
+    {
+      "nome": "Leandro Cruz",
+      "nomeCompleto": "Leandro da Cruz Pereira",
+      "papel": "Gerente de TI",
+      "responsabilidade": "Coordenação técnica, integração de sistemas e gestão de equipe de TI",
+      "area": "TI",
+      "email": "leandro.cruz@belgo.com.br"
+    },
+    {
+      "nome": "Leandro Gimenez",
+      "nomeCompleto": "Leandro Augusto Gimenes",
+      "papel": "PO GTM",
+      "responsabilidade": "Product Owner do projeto GTM Vendas, definição de requisitos comerciais e priorização de backlog",
+      "area": "Comercial"
+    },
+    {
+      "nome": "Ronildo",
+      "nomeCompleto": "Ronildo Rodrigues De Souza",
+      "papel": "PO Pricing",
+      "responsabilidade": "Product Owner de Pricing, definição de regras de precificação e aprovação de descontos",
+      "area": "Pricing"
+    },
+    {
+      "nome": "Thalita Rhein",
+      "nomeCompleto": "Thalita Merisio Rhein",
+      "papel": "Gerente de Negócio GTM",
+      "responsabilidade": "Gestão do projeto pelo lado do negócio, definição de requisitos e validação de entregas",
+      "area": "Comercial/Marketing"
+    },
+    {
+      "nome": "Audrey",
+      "papel": "Analista de Negócio",
+      "responsabilidade": "Documentação e análise de requisitos",
+      "status": "Licença maternidade"
+    },
+    {
+      "nome": "Dani Tamerão",
+      "papel": "Analista de Negócio",
+      "responsabilidade": "Documentação e análise de requisitos",
+      "status": "Desligada do projeto"
+    }
+  ],
+  "keyUsers": [
+    {
+      "nome": "Vanessa Souza",
+      "papel": "Key User - Crédito",
+      "area": "Financeiro/Crédito",
+      "expertise": ["Áreas de crédito", "BBA", "CSP", "DBA", "ALPE", "Limites de crédito"],
+      "reunioesParticipou": ["04/12/2025", "16/12/2025"]
+    },
+    {
+      "nome": "Rafael",
+      "papel": "Key User - Cadastro",
+      "area": "Cadastro/Dados Mestres",
+      "expertise": ["Record Types", "Cadastro de clientes", "SINTEGRA"],
+      "reunioesParticipou": ["03/12/2025", "04/12/2025", "16/12/2025"]
+    },
+    {
+      "nome": "Talita",
+      "papel": "Key User - Fiscal",
+      "area": "Fiscal/Tributário",
+      "expertise": ["NF-e", "DANFE", "Documentos fiscais", "XML"],
+      "reunioesParticipou": ["04/12/2025", "16/12/2025"]
+    },
+    {
+      "nome": "Jefferson Pinheiro",
+      "papel": "Key User - Sistemas",
+      "area": "TI/Sistemas",
+      "expertise": ["Integrações", "ASCP", "Salesforce", "SAP ECC"],
+      "reunioesParticipou": ["04/12/2025", "12/12/2025", "22/12/2025"]
+    },
+    {
+      "nome": "Leonardo",
+      "papel": "Key User - Controladoria",
+      "area": "Financeiro/Controladoria",
+      "expertise": ["FSCM", "Controles financeiros", "Compliance SOX"],
+      "reunioesParticipou": ["03/12/2025"]
+    },
+    {
+      "nome": "Maria Ciorlia",
+      "papel": "Key User - Clusterização",
+      "area": "Comercial/Marketing",
+      "expertise": ["Clusterização de clientes", "Segmentação", "Relatórios"],
+      "reunioesParticipou": ["12/12/2025", "22/12/2025"]
+    },
+    {
+      "nome": "Luis Riqueti",
+      "papel": "Key User - Relatórios",
+      "area": "TI/BI",
+      "expertise": ["Power BI", "BWA", "Hierarquias de dados", "Segment Report"],
+      "reunioesParticipou": ["12/12/2025", "17/12/2025", "22/12/2025", "23/12/2025"]
+    },
+    {
+      "nome": "Fernanda Monteiro",
+      "papel": "Key User - Controladoria",
+      "area": "Financeiro/Controladoria",
+      "expertise": ["Relatórios financeiros", "CPV", "Custo de servir"],
+      "reunioesParticipou": ["12/12/2025", "17/12/2025", "23/12/2025"]
+    },
+    {
+      "nome": "Marcelo Almeida",
+      "papel": "Key User - Pedidos",
+      "area": "Comercial/Pedidos",
+      "expertise": ["Hub de gestão OC", "Pedidos", "Cotações"],
+      "reunioesParticipou": ["12/12/2025", "22/12/2025", "29/12/2025", "07/01/2026"]
+    },
+    {
+      "nome": "Fabiana Silva",
+      "papel": "Key User - Pricing",
+      "area": "Comercial/Pricing",
+      "expertise": ["Tabelas de preço", "Segmentação por canal", "Clusterização"],
+      "reunioesParticipou": ["23/12/2025", "07/01/2026"]
+    },
+    {
+      "nome": "Fabricio França",
+      "papel": "Key User - Projetos",
+      "area": "TI/Projetos",
+      "expertise": ["Gestão de projetos", "Chatbot WhatsApp", "Autoatendimento"],
+      "reunioesParticipou": ["17/12/2025", "22/12/2025", "29/12/2025", "07/01/2026"]
+    }
+  ],
+  "sistemas": {
+    "salesforce": {
+      "nome": "Salesforce",
+      "descricao": "CRM principal para gestão comercial, cotações, pedidos e workflow de pricing",
+      "siglasUsadas": ["Salesforce", "CRM"],
+      "observacao": "Usar sempre 'Salesforce' - não usar 'SF' ou 'SFDC'"
+    },
+    "sap": {
+      "nome": "SAP ECC",
+      "descricao": "ERP para gestão de pedidos, faturamento, materiais e finanças",
+      "siglasUsadas": ["SAP", "ECC", "SAP ECC"]
+    },
+    "ascp": {
+      "nome": "ASCP",
+      "descricao": "Sistema de gestão de crédito e limites",
+      "siglasUsadas": ["ASCP"],
+      "observacao": "Anteriormente referenciado como ACSAP - nome correto é ASCP"
+    },
+    "fscm": {
+      "nome": "FSCM",
+      "descricao": "Financial Supply Chain Management - gestão financeira da cadeia de suprimentos"
+    }
+  },
+  "areasCredito": {
+    "confirmado": ["BBA", "CSP", "DBA", "ALPE"],
+    "nomesAlternativos": {
+      "BBA": ["ABBA", "Belgo Business Arames"],
+      "DBA": ["ADBA"],
+      "CSP": ["Supplier", "Belgo Cash", "Cash Supplier"],
+      "ALPE": ["BTC", "ABPE"]
+    },
+    "observacao": "ALPE é o nome oficial - não usar 'Altair' pois não existe"
+  },
+  "matrizRACI": {
+    "descricao": "Matriz de responsabilidades por jornada",
+    "fonte": "GTM Vendas - Caderno de Testes.xlsx - Aba 'Matriz RACI'"
+  }
+}

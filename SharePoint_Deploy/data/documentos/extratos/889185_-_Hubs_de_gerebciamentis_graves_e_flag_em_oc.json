@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "id": "889185",
+    "arquivo": "889185 - Hubs de gerebciamentis graves e flag em oc.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\889185 - Hubs de gerebciamentis graves e flag em oc.docx",
+    "tamanho_bytes": 293015,
+    "data_modificacao": "2025-11-04T11:54:46",
+    "extraido_em": "2026-01-13T11:31:14.960955",
+    "status": "extraido",
+    "total_paragrafos": 2,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Acesso ao HUB de Gestão OCs\nAcesso realizado ao HUB de Gestão OCs através do iniciador de aplicativos.\nResultado: Funcionalidade operando normalmente.",
+      "Selecionados os motivos e realizado o salvamento com sucesso.\nResultado: Teste finalizado, funcionalidade operando conforme esperado."
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n889185 - Hubs de gerebciamentis graves e flag em oc",
+          "Data de Criação\n04/11/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 2,
+    "total_tabelas": 1
+  }
+}

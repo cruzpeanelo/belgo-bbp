@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "id": "888565",
+    "arquivo": "888565 - Guidance para apoio ao usuário.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\888565 - Guidance para apoio ao usuário.docx",
+    "tamanho_bytes": 745772,
+    "data_modificacao": "2025-11-05T09:20:26",
+    "extraido_em": "2026-01-13T11:31:14.935525",
+    "status": "extraido",
+    "total_paragrafos": 9,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "O cadastro de uma nova conta requer o preenchimento de dados essenciais, como nome (termo de pesquisa), CNPJ e tipo de conta. ",
+      "Criação de conta concluída:\n",
+      "Depois de criar a conta e ser redirecionado, clique no botão Sintegra na nova tela. Isso buscará as informações básicas do cliente, como endereço e inscrição estadual (se houver) e mostrará na aba Detalhes.\n",
+      "Após clicar no botão do Sintegra, você receberá uma mensagem de sucesso no canto superior da tela que a sincronização houve sucesso;",
+      "Após o término de integração, você receberá uma notificação no canto superior direito.",
+      "Após esse processo, você verá informações básicas da conta e para trazer mais informações a conta, clicamos no botão superior esquerdo “Enviar SAP”",
+      "Uma nova mensagem no topo da tela indicará que a conta está em sincronização com o SAP.",
+      "Na segunda Aba, após os Detalhes, temos os relatórios de visitas e temos a opção de criar um relatório: \n",
+      "Após clicar em “criar”, você verá essa tela com algumas informações que você poderá preencher de acordo com as necessidades, para realizar o processo, só clicar em salvar, após colocar informações necessárias:"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n888565 - Guidance para apoio ao usuário",
+          "Data de Criação\n04/11/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 9,
+    "total_tabelas": 1
+  }
+}

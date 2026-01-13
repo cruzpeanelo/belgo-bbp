@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "id": "878256",
+    "arquivo": "878256 FUP de Carteira (OrderTracking)to1.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\878256 FUP de Carteira (OrderTracking)to1.docx",
+    "tamanho_bytes": 289841,
+    "data_modificacao": "2025-10-10T09:43:40",
+    "extraido_em": "2026-01-13T11:31:14.839208",
+    "status": "extraido",
+    "total_paragrafos": 2,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Campo Role exibido corretamente com as opções “Administrativo” e “Gerente”. Seleção e gravação funcionando conforme esperado.",
+      "Os filtros que estavam previamente selecionados foram desmarcados sem inconsistências. A funcionalidade está operando conforme o esperado:"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\nAutoaplicação de Escritório e Equipe de Vendas em FUP de Carteira (OrderTracking)to",
+          "Data de Criação\n09/10/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 2,
+    "total_tabelas": 1
+  }
+}

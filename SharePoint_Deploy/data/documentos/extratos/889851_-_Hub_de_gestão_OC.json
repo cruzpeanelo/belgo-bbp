@@ -1,0 +1,54 @@
+{
+  "metadata": {
+    "id": "889851",
+    "arquivo": "889851 - Hub de gestão OC.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\889851 - Hub de gestão OC.docx",
+    "tamanho_bytes": 1732881,
+    "data_modificacao": "2025-11-10T18:34:53",
+    "extraido_em": "2026-01-13T11:31:14.986642",
+    "status": "extraido",
+    "total_paragrafos": 21,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Nova Aba \"Gerenciar Grupos Solucionadores\" (LWC)",
+      "Comercial",
+      "Perfil de Gestão e de Analista",
+      "Ao acessar a funcionalidade Gerenciar Grupos Solucionadores, são exibidos os grupos configurados (Comercial, Qualidade e Sistemas), juntamente com a quantidade de membros em cada grupo.\nO usuário com ambos os perfis (Analista e Gestão) consegue visualizar a lista de grupos e seus respectivos integrantes.",
+      "Os grupos são exibidos corretamente:",
+      "Ao clicar em “Novo Membro” dentro do grupo Comercial, o sistema exibe o modal “Adicionar Membro para Comercial”, onde é possível selecionar o usuário e sua função (Função e Permissão do Grupo de Negócios).",
+      "Após selecionar o usuário e salvar, o sistema adiciona o novo membro ao grupo e exibe a mensagem de confirmação “Sucesso – Novo membro adicionado ao grupo”.\nOs novos membros aparecem listados com nome, e-mail e função atribuída.",
+      "Processo repetido no grupo Qualidade, utilizando o botão “Novo Membro”. A tela exibe corretamente os membros já cadastrados e permite a adição de novos.",
+      "Os testes foram realizados com sucesso para ambos os perfis (Analista e Gestão).\nA funcionalidade Gerenciar Grupos Solucionadores apresentou comportamento conforme o esperado, permitindo a visualização, adição e confirmação de novos membros sem inconsistências.",
+      "Qualidade",
+      "Perfil de Gestor",
+      "Comercial",
+      "Com perfil Ghabriel, ",
+      "Qualidade",
+      "Perfil de Analista",
+      "- Ghabriel ",
+      "O perfil Analista possui acesso restrito somente à visualização dos grupos e seus membros, sem possibilidade de alteração.",
+      "Campo de busca funcionando perfeitamente — é possível realizar a chamada tanto pelo e-mail quanto pelo nome.",
+      "É possível excluir o usuário e a funcionalidade está operando corretamente.",
+      " Ao incluir um usuário, é exibida uma mensagem de erro informando que o usuário já existe.",
+      "Para excluir um grupo, é necessário remover primeiro os membros e, em seguida, realizar a exclusão do grupo."
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n889851 - Hub de gestão OC",
+          "Data de Criação\n10/11/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 21,
+    "total_tabelas": 1
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "metadata": {
+    "id": "854298",
+    "arquivo": "854298 -  Casos para atendimento de FUP de carteira.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\854298 -  Casos para atendimento de FUP de carteira.docx",
+    "tamanho_bytes": 649225,
+    "data_modificacao": "2025-10-10T12:30:37",
+    "extraido_em": "2026-01-13T11:31:14.739940",
+    "status": "extraido",
+    "total_paragrafos": 12,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Conta:",
+      "EDBP",
+      "Escritório de vendas com código SAP",
+      "Proprietário do caso",
+      "Indica o usuário vinculado à Conta.",
+      "Foi direcionado para fila",
+      "Valida que o caso foi direcionado corretamente para a Fila “Planejamento” conforme a configuração da regra.",
+      "Conta:",
+      "EBMB",
+      "Escritório de vendas com código SAP",
+      "Proprietário do caso",
+      "Indica o usuário vinculado à Conta."
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n854298 - [Salesforce] Casos para atendimento de FUP de carteira",
+          "Data de Criação\n09/10/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 12,
+    "total_tabelas": 1
+  }
+}

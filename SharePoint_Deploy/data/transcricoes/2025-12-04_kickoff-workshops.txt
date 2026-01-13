@@ -1,0 +1,714 @@
+GTM - Desenho AS-IS e TO-BE-20251204_140410-Meeting Recording
+December 4, 2025, 5:04PM
+1h 54m 26s
+
+Rhein, Thalita Merisio started transcription
+
+Rhein, Thalita Merisio   0:22
+Bom, vamos come�ar ent�o, por que a gente primeiro, obrigado por quem p�de participar? Eu sei que a agenda est� corrida para todo mundo, t�? Mas a gente deixou claro com os gerentes e diretores de voc�s, de todos n�s aqui, a import�ncia de estarmos juntos, de nos unirmos aqui como time, porque esse projeto.
+De go to marketing, go wire, CRM. Cada um est� chamando de uma de resende dessas letrinhas e no fundo faz tudo parte do mesmo projeto. Ele � um projeto da companhia, � um projeto de todos n�s e � por isso muito importante que todo mundo esteja embarcado nesse projeto.
+Ent�o quem t� desde o come�o participando? N�s tivemos algumas mudan�as a� a sa�da da Dani Tamer�o, a passada de bast�o pra Audrey e a Audrey passou o bast�o pra mim agora porque a Audrey est� para sair de Licen�a Maternidade. Ent�o eu me juntei aqui pedi ajuda do Leandro da Ti
+�, n�s temos como o cen�rio atual, t� o caderno de testes liberado pela TI, ou seja, ATI j� concluiu o desenvolvimento do sistema e liberou para n�s, como neg�cio, testarmos. S� que n�s, como neg�cio, n�o estamos completamente.
+preparados para fazer os testes. Por qu�? Porque quando eu fui falar com os usu�rios Chaves, alguns n�o sabiam que eram usu�rios Chaves. � isso agora foi declarado para todos os gerentes que � necess�rio que cada ger�ncia tenha os seus usu�rios Chaves definido.
+Ent�o isso vai � necessitar que esses usu�rios Chaves tenham horas semanais dedicadas para isso e a gente come�a com essa primeira dedica��o aqui de 2 horas para que todo mundo se Aline e a gente come�a a ficar na mesma.
+Pimenta porque muitos usu�rios questionam, mas o que eu tenho que testar? O que mudou no meu processo? O que vai mudar no meu processo? N�o sei, n�o participei, n�o tenho vis�o. Ent�o para poder responder todas essas perguntas �, a gente n�o tem outra forma de fazer isso se n�o desenhando.
+Ent�o o Leandro se juntou aqui a mim para que a gente, atrav�s desses workshops, que v�o ser semanais, recorrentes e em cada semana, a gente vai desbravar um Pilar do processo comercial como um todo, o processo de vender de castro, desde cadastrar um produtos at� expedir.
+� at� devolver. Ent�o a gente vai passar por todos esses processos que fazem parte do dia a dia. Por isso que est� todo mundo aqui, porque de alguma forma algu�m participa ou um pouquinho de um processo e depois muito de outro. E assim a gente vai come�ando a.
+Contar essa hist�ria do processo, Como Ele � hoje, que � OES is e como ele ser� no futuro, que � o to be, t�? Ent�o por isso que a gente est� se encontrando. Voc�s v�o receber agendas recorrentes, porque se voc�s est�o aqui, � porque os gerentes ou diretores de voc�s.
+Os pr� selecionaram, t�? Para que voc�s sejam usu�rios Chaves. A gente tem alguns aqui que j� est�o h� bastante tempo, que s�o os peos o Leandro Gimenes, o Bruno Nolasco, Aline n�o pode entrar, mas eles tamb�m continuam fazendo parte, continuam embarcados aqui com a gente, t�? Agora � hora de por todo mundo na mesma p�gina.
+Ent�o, o que a gente vai fazer hoje � mapear o processo de castro de clientes, entender os participantes, os pap�is no fluxo para voc�s validarem cada um aqui. Como � o hoje? Qual � o s isso? Como � o processo de coleta de dados de produtos pontes de devolu��es?
+E a�, na sequ�ncia, o Leandro vai � demonstrar o novo sistema, partindo daquilo que voc�s v�o contar, que � o dia a dia. Hoje ele vai come�ar a mostrar alguns focos, que s�o os impactos ali no cadastro, com o cen�rio que vem a.
+Para o futuro, que � o to BE, isso vai servir de insumo inicial para a gente come�ar o desenho do to b tamb�m, t� bom? Ent�o, como pr�ximos encontros aqui a gente vai seguir nessa prepara��o e vamos setorizando a� por cada etapa do processo, que depois eu vou dimensionar numa agenda mais visual e mostrar para todo mundo.
+Algu�m tem alguma d�vida? Podemos come�ar.
+Quem quer fazer algum coment�rio, n�o podendo?
+
+Gimenes, Leandro Augusto   4:31
+Thalita, s� fazendo alguns coment�rios. � mais uma vis�o macro de de neg�cios. Gente, o que mudou no nossa forma de trabalhar? No objetivo final, o resultad�o mesmo. N�s queremos que as notas fiscais, os materiais, os pedidos sejam faturados com pre�os e impostos corretos para os clientes.
+S� que hoje n�s temos um sistema de tabelas bem fixadas e pouco interativas no sistema que v�o puxar esses n�meros. Ent�o, hoje n�s temos, por exemplo, um imposto que ele � puxado como preenchimento anual do vendedor l� na ficha comercial. N�s temos uma tabela de Pre�o que � fixa e j� existe a mais de 30 anos, s� foi atualizado.
+Com esse novo sistema, isso passa a ser de � feito de forma integrada, ou seja, quando voc� vai colocar um pedido, os impostos v�o ser puxados automaticamente com base no cadastro do cliente. As tabelas de pre�os que antes era fixa, ela passa a ser muito vari�vel e elas vai come�ar a ser puxadas automaticamente conforme.
+Configura��es predeterminadas que n�s criamos que n�o existia, como por exemplo, o canal. Ent�o, o que est� mudando da forma de trabalhar de voc�s na parte pr�tica mesmo do dia a dia, voc�s n�o v�o ver quase diferen�a alguma, mas a forma como o sistema puxa esses dados vai ser muito mais seguro e integrado.
+E o que n�s queremos saber? Se essa porrada de automa��es que n�s fizemos, ela � consistente, se por acaso daqui 3 meses eu faturei um material e o cliente resolveu devolver porque tem um produtos de qualidade, o material vai entrar no nosso sistema ou vai travar tudo? Ou se na hora de fatorar o material e depois que puxou todos os tipos de informa��es?
+A nota fiscal est� coerente com o que � o cliente precisa. Ent�o o que n�s precisamos testar aqui nesse n�o que voc�s s�o usu�rios chaves, � se todos os processos da bel, desde a coloca��o do pedido, a cria��o do material, o registro, fornecimento, faturamento, transporte, retificado � documentos fiscais, todos eles est�o.
+Coerentes com o sistema atual, que vai mudar, vai ser automatizado agora. Ent�o n�s vamos saber se essa automa��o est� correta, porque se tiver um errinho b�sico l� no come�o do cadastro, gente n�o sai nota fiscal para o cliente. Ent�o se a gente subir essa vers�o final e tiver algum erro, a gente pode travar o faturamento da empresa por uma semana at� corrigir.
+Ou 34 dias, ou simplesmente vai chegar um momento que a gente talvez n�o consiga receber nenhuma embalagem na Belgo. A gente n�o tem como saber se com essas automa��es essas mudan�as e foram estruturais. Gente, por exemplo, o canal mudou para 100% dos clientes, ou seja, o que existia na em o que se falava em canal de clientes hoje n�o existe mais na Belgo, foi recriado 3 novos canais.
+E esses 3 canais impactam severamente em todas as informa��es do cliente, impostos, pre�os, entrada, sa�da de mercadoria, resultados e tudo mais. Ent�o, o que n�s queremos na parte pr�tica �, o sistema continua funcionando depois dos updates sendo feitos? Existe alguma falha no processo em algum estado? Em alguma?
+Alguns, uma rotina que voc�s fazem onde n�s n�o conseguimos identificar ainda e a gente precisa testar e validar isso � basicamente isso. Mas na pr�tica do dia a dia, voc�s n�o v� diferen�a na parte real, s� na forma como isso acontece. A magia por tr�s do processo nosso, acho que � um.
+Pequeno compilado do que � esperado que a gente fa�a.
+
+Pereira, Leandro Da Cruz   7:22
+de bola Leandro isso da� � o que a gente vai falar dentro do tibi n� mas para come�ar a nossa reuni�o aqui o ideal que a gente fale do as is n� ent�o voc�s a� t� na opera��o do dia a dia e eu imagino n� e com base uma s�rie de entrevistas que eu fiz como que funciona o fluxo de castro de clientes a� voc�s a�
+Que est� na ponta. O ideal � voc�s _irem falando se � isso mesmo, se o nosso entendimento de como � hoje, se realmente foi, se est� correto. Ent�o vamos imaginar uma determinada situa��o, um executivo de vendas, um vendedor que est� ali no dia a dia, lidando com os clientes, com prospe��o.
+Como que funciona? Ele identificou que tem o potencial de um cliente novo, de uma venda.
+A� o vendedor, ele vai l�, fala assim, beleza, eu preciso vender para esse cliente, mas antes de eu vender eu tenho que cadastrar esse cliente. E a� na Belgo, foi criado h� bastante tempo atr�s uma planilha em Excel, que essa planilha � como se fosse um pr�-cadastro. Ent�o essa planilha eu tenho uma s�rie de informa��es ali.
+Raz�o social, nome fantasia, algumas informa��es adicionais do cliente e essa planilha que est� em Excel. E acho que � legal voc�s ir contagem nesse ponto para ver se o assis realmente est� coerente com o que a gente fez mapeamento no passado. Essa planilha que ser� preenchida pelo time comercial.
+E uma vez preenchida essa planilha Excel, � enviado via teams ou via e-mail l� para a �rea do Marcio, l� para o smart Center. A� o Marcio recebe essas informa��es e uma vez que ele recebeu essas informa��es, ele entra l� dentro do PCC, dentro do SAP, n�o entrava dentro dos seus forcing.
+E a�, voc�s v�o pegar aqui no to be isso muda um pouquinho, entra l� dentro de uma transa��o aqui AXD 01. Ele vai me confirmando a�, t�, Marcio? Se eu estou falando besteira, entra dentro da XD 01, pega aqueles dados que est�o dentro do.
+
+Silva, Marcio Antonio Do Espirito Santo   9:08
+� hoje em dia a gente j� t� no BR, n�o usa mais a XD mais n�o.
+
+Pereira, Leandro Da Cruz   9:13
+Beleza, ent�o entra com esses dados no BROE. Uma vez que entrou dentro do BRO, ele preenche os dados automaticamente dentro da XD. Pode falar um pouquinho, Marcio de como � o processo hoje? Como que voc� recebe as informa��es, um pouco do seu fluxo?
+
+Silva, Marcio Antonio Do Espirito Santo   9:17
+F.
+Ent�o, com a implanta��o do desse Cadastro autom�tico, com.
+Quando passou a usar OBRO, ent�o todo todos t�m acesso a cadastrar. N�o precisa ser exclusivamente aqui com a gente n�o. Ent�o aqui pra gente caiu bastante AO cadastro. A� a pessoa entra com os dados na no BR o com CNPJ ou CPF.
+Pessoa for pessoa f�sica, o pr�prio BR vai fazer a consulta no na nos sites do governo para confirmar as informa��es e j� vai lan�ar o c�digo � a pessoa, a pessoa s� vai entrar com alguns dados de.
+Contactos e dados para identificar quem � o representante ou vendedor e o escrit�rio de vendas. Depois de sair que � cadastrado esse que � feito esse primeiro castro j� vai para a �rea de cr�dito, cria as �reas de cr�dito, assim que as �reas de cr�dito j� volta quando a pessoa recebe o retorno j� com o c�digo do cliente j� est�
+Tudo criado.
+
+Pereira, Leandro Da Cruz   10:26
+Marcio, eu tenho uma d�vida, eu sei que voc� levantou a m�o, Vanessa, mas � legal a gente ir de camposso a passo desse fluxo. Ent�o, assim, o vendedor entra dentro do BR, que � dentro do APCC, preenche as informa��es do BR, ele vai l�, busca essas informa��es dentro do Santos, sintegra, Sefaz, receita.
+
+Silva, Marcio Antonio Do Espirito Santo   10:35
+� isso?
+Exato, Suframa.
+
+Pereira, Leandro Da Cruz   10:42
+Consiste os dados fiscais, tribut�rios, Cadastro e gera um c�digo de clientes dentro da XD 01. E a� esse � o dado inicial do cliente, uma vez que esse dado inicial do cliente, como que a �rea financeira recebe essa informa��o para fazer a atribui��o de cr�dito?
+Porque sem o cr�dito, ele s� tem a op��o de comprar � vista. Como que esse fluxo Marcio hoje?
+
+Silva, Marcio Antonio Do Espirito Santo   11:05
+Depois que foi lan�ada a UFC FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM A
+
+Pereira, Leandro Da Cruz   11:09
+FM.
+Sim.
+
+Silva, Marcio Antonio Do Espirito Santo   11:20
+The new Assis.
+
+Pereira, Leandro Da Cruz   11:21
+Ent�o a gente tem tr�s �reas de cr�dito hoje, que � a C S P a da supplier, a gente tem a da Alb, a gente tem a DBA que � da distribui��o, e a Bba. O vendedor hoje, ele � que � a C S P
+
+Silva, Marcio Antonio Do Espirito Santo   11:27
+Machado.
+Tem a Belgo castro tamb�m.
+
+Souza, Vanessa Torres Xavier De   11:35
+�, s�o 4.
+
+Pereira, Leandro Da Cruz   11:37
+Isabelle Cash � a Center.
+
+Souza, Vanessa Torres Xavier De   11:38
+S�o 4 que a gente tem.
+
+Silva, Marcio Antonio Do Espirito Santo   11:39
+Est� a mesma dona.
+
+Pereira, Leandro Da Cruz   11:41
+Ent�o o vendedor hoje ele informa dentro do BRO essas 4 �reas de cr�dito para ser criada ou ele informa isso daqui para a �rea financeira?
+
+Silva, Marcio Antonio Do Espirito Santo   11:52
+Bom, no BR n�o tem espa�o, n�o. A Vanessa talvez pode explicar como que � feita essa escolha do da �rea de cr�dito do para cada cliente.
+
+Souza, Vanessa Torres Xavier De   12:02
+Antes de falar essa minha d�vida ainda era com rela��o ao Cadastro, n�o �? Eu vi que voc� falou assim que alguns processos s�o autom�ticos atrav�s do Roberto, mas com rela��o � sigla do cliente, como que � feita a determina��o de qual que vai ser a sigla do cliente?
+
+Silva, Marcio Antonio Do Espirito Santo   12:15
+Sim, a sigla. Se o cliente j� tem cadastro, algum CNPJ j� cadastrado, algum CNPJ raiz dele j� cadastrado, j� puxa autom�tico que j� est� cadastrado pra essa raiz. Quando ele n�o tem, a� o campo fica aberto pro pessoal colocar.
+
+Souza, Vanessa Torres Xavier De   12:33
+Quem Cadastro � vendas tamb�m, o mesmo pessoa que est� fazendo caro.
+
+Silva, Marcio Antonio Do Espirito Santo   12:35
+� na hora que est� fazendo o cadastro.
+
+Souza, Vanessa Torres Xavier De   12:38
+Entendi.
+
+Silva, Marcio Antonio Do Espirito Santo   12:38
+A�, o que � o que est� acontecendo? Eu at� j� tinha levantado esse assunto com o pessoal da do UTI, com a Kathleen, para ver se tem como barrar a cria��o primeiro de de termos de pesquisas que j� existem.
+Porque no BRUA passa, n�o aceita na no na igreja no SAP que bloqueia e tamb�m essas formas de castro que tem espa�o, � caracteres especiais. A gente tem que bolar um meio de Barros na no castro.
+
+Pereira, Leandro Da Cruz   13:06
+E isso no to be Marcio, a gente vai falar que dentro dos seus forces j� tem essa consist�ncia, t�? E esse � um ponto importante que na realidade, a hora que a gente entrar dentro do to be o fluxo de castro ao inv�s de nascer dentro do SAPCC pro ele obrigatoriamente ele tem que nascer dentro dos seus forces e eu vou mostrar o os porqu�s, t� que tem que nascer.
+
+Souza, Vanessa Torres Xavier De   13:07
+America.
+
+Silva, Marcio Antonio Do Espirito Santo   13:24
+Sim.
+
+Pereira, Leandro Da Cruz   13:26
+Dentro dos seus pontes.
+
+Silva, Marcio Antonio Do Espirito Santo   13:26
+N�o. Inclusive eu participei de alguns testes quando estava fazendo CRM, n�o �? O criando pelo CRM. S� que essa parte de pro de bloquear essa o tema de pesquisa ainda n�o estava valendo ainda n�o. E o pessoal estava implementando ainda.
+
+Souza, Vanessa Torres Xavier De   13:27
+Center.
+
+Pereira, Leandro Da Cruz   13:38
+Acho que foi recente, talvez um m�s atr�s, alguma coisa assim.
+
+Souza, Vanessa Torres Xavier De   13:39
+Tavares.
+
+Silva, Marcio Antonio Do Espirito Santo   13:40
+N�o, mas � que ainda continua aparecendo hoje mesmo o pessoal Felipe da do Financeiro tamb�m j� me passou alguns para poder corrigir aqui.
+
+Souza, Vanessa Torres Xavier De   13:40
+Hhh.
+Machado.
+
+Pereira, Leandro Da Cruz   13:47
+A gente avalia, t�? Ent�o assim, chegou s� para eu entender o fluxo certinho. Ent�o ou era ficha via e-mail, mas agora o pessoal est� acessando via BR.
+
+Silva, Marcio Antonio Do Espirito Santo   13:55
+� quando era ficha, era tudo manual. A gente fazia o castro, todo manual, preenchia nome, raz�o social, tudo manual. Agora n�o. Agora � s� quando vai no BR o � s� preenche s� os dados particulares de castro. � contato.
+
+Pereira, Leandro Da Cruz   14:09
+Beleza.
+
+Silva, Marcio Antonio Do Espirito Santo   14:11
+Estou de Vaz e a gente Vaz, por exemplo.
+
+Pereira, Leandro Da Cruz   14:13
+Perfeito, sem problema. �, vai l�, Thalita.
+
+Rhein, Thalita Merisio   14:16
+Na verdade, eu queria entender, Marcio, se tem algum crit�rio hoje, j� que todo mundo pode cadastrar, isso j� �, j� foi pr�-definido a partir desse lan�amento, que isso passa a ser uma atribui��o do vendedor ou da �rea comercial.
+
+Silva, Marcio Antonio Do Espirito Santo   14:25
+Hudson.
+
+Rhein, Thalita Merisio   14:33
+Ou n�o, eles optam em alguns casos o comercial cadastra e em outros casos eles mandam para voc�. E quando eles mandam para voc� e n�o cadastram, eles ainda continuam usando a ficha.
+
+Silva, Marcio Antonio Do Espirito Santo   14:38
+Evelyn.
+Continua para poder para facilitar para a gente aqui � pegar os dados para poder colocar que basicamente n�o antigamente um formul�rios em Excel pessoal preenchia tudo porque tudo era control c contractor v a e desde quando foi criado o BR o de uns 3 anos atr�s
+
+Rhein, Thalita Merisio   14:51
+Est�, mas n�o tem uma regra, ent�o qual � o crit�rio do porque?
+
+Silva, Marcio Antonio Do Espirito Santo   15:03
+23 anos atr�s a� parou, a gente s� coloca s� essas partes que s�o de contagem, essas partes particulares de castro.
+
+Pereira, Leandro Da Cruz   15:11
+Hoje a responsabilidade � do comercial iniciar o castro dentro do BR, certo?
+
+Silva, Marcio Antonio Do Espirito Santo   15:11
+Endo.
+Exatamente, exatamente.
+
+Pereira, Leandro Da Cruz   15:16
+E ele faz OE esse complemento de dados de Contagem, por exemplo, quem faz � o smart Center hoje ou � a �rea comercial, Marcio?
+
+Silva, Marcio Antonio Do Espirito Santo   15:23
+N�o, l� tem o campo que pode preencher tudo. Agora, se tiver que fazer alguma altera��o, a� passa para aqui, pessoal, para a gente atualizar.
+
+Pereira, Leandro Da Cruz   15:31
+E como que chega essas informa��es para voc�s atualizarem? � um e-mail, � um Teams ou tem uma solicita��o na willian smart? Como que funciona?
+
+Silva, Marcio Antonio Do Espirito Santo   15:34
+�, tem uma coisa.
+�, tem gente que manda de qualquer jeito, mas a gente tem a caixa nossa de da do castro de Cliente, mas o pessoal chama no e-mail ou no Teams. � coisas r�pida e a gente faz na hora e resolve.
+
+Pereira, Leandro Da Cruz   15:52
+N�o est� claro, ent�o hoje o vendedor n�o tem acesso AXD 02 para fazer altera��o no dado mestre de castro.
+
+Silva, Marcio Antonio Do Espirito Santo   15:56
+N�o pode, n�o pode ter. N�o era crit�rio que eles h� mais tempo j� falaram que n�o poderia por causa de alguns campos, que s�o santos de pessoal n�o pode, n�o pode ter acesso a alterar.
+
+Machado, Bruno Nolasco   16:03
+Yeah.
+Tem algumas coisas. Leandro, Marcio, que a gente identificou o seguinte, �s vezes o cliente queria que mudasse o endere�o e aquele endere�o n�o era o endere�o que estava na Pfaz, na CNPJ, sabe? Isso a� � uma quest�o sens�vel que a gente � sempre via que era risco e.
+
+Pereira, Leandro Da Cruz   16:08
+Theresa.
+
+Silva, Marcio Antonio Do Espirito Santo   16:17
+Um CNPJ.
+
+Machado, Bruno Nolasco   16:25
+A� era bom deixar n�o bloqueado isso, sabe?
+
+Pereira, Leandro Da Cruz   16:29
+N�o, tranquilo, porque sen�o rejeita a nota l� na frente. E uma d�vida, a gente.
+
+Machado, Bruno Nolasco   16:32
+� rejeita e no risco de algum erro de fator errado e n�o s� errado, at� de igual pedir alguma coisa a� que pode vir a dar problema l� na frente, sabe?
+
+Pereira, Leandro Da Cruz   16:35
+A Theresa.
+
+Silva, Marcio Antonio Do Espirito Santo   16:42
+Machado.
+
+Pereira, Leandro Da Cruz   16:43
+Eu vou explorar mais alguns pontes aqui. A gente tem, geralmente dentro de castro de clientes, a gente tem emissor da ordem, a gente tem recebedor da mercadoria e endere�o de cobran�a. Esses 3 tipos de castro, quando a gente vai trabalhar numa opera��o triangular, onde o emissor � diferente do recebedor,
+
+Silva, Marcio Antonio Do Espirito Santo   16:53
+Sim.
+
+Pereira, Leandro Da Cruz   17:01
+Quem que faz esse Cadastro, essa amarra��o hoje, Marcio?
+
+Silva, Marcio Antonio Do Espirito Santo   17:06
+No BR tem os campos, a gente pode escolher quais seriam o grupo Chaves de campos. Poderia colocar s� para emissor ou para recebedor ou tamb�m para Cobran�a. Agora a quest�o de se for nota triangular alguma coisa, a� j� � na OV que decide.
+
+Pereira, Leandro Da Cruz   17:24
+Sim, tranquilo, mas voc� hoje amarra o emissor ao recebedor ou voc� deixa totalmente separado.
+
+Silva, Marcio Antonio Do Espirito Santo   17:29
+N�o, o BR o pr�prio BR j� faz se a pessoa indicar como recebedor � s� o recebedor quando � recebedor em outro estado que n�o faz essa massa porque j� vai faturar direto para ele agora quando � emissor e recebedor no mesmo estado, a� o pro BR j� faz o castro j� vem pronto com.
+
+Pereira, Leandro Da Cruz   17:32
+So perfil.
+Yeah.
+
+Silva, Marcio Antonio Do Espirito Santo   17:46
+Com o c�digo do emissor e o c�digo do recebedor, tamb�m do cobran�a necess�ria.
+
+Pereira, Leandro Da Cruz   17:49
+T� ent�o assim, s� passando um pouquinho do fluxo ainda. Ent�o a gente tem o vendedor acesso OBRO faz os cadastros, voc� da �rea do smart Center, faz o complemento dos dados, se necess�rio dentro da XD 02. E a�?
+
+Silva, Marcio Antonio Do Espirito Santo   18:03
+� ou se tiver alguma algum erro no na consulta l� no Sefaz, por exemplo, a� vem aqui pra gente bater o martelo, voc� est� certo ou n�o?
+
+Pereira, Leandro Da Cruz   18:12
+Beleza, e a� OBRO, ele gera hoje um workflow autom�tico para a �rea financeira fazer a atribui��o das �reas de cr�dito ou n�o.
+
+Silva, Marcio Antonio Do Espirito Santo   18:12
+Est�.
+Aqui na Belgo n�o.
+
+Pereira, Leandro Da Cruz   18:25
+Ent�o, como que a Vanessa sabe quais s�o as �reas de cr�dito que precisa?
+
+Silva, Marcio Antonio Do Espirito Santo   18:27
+Pois �, a minha d�vida ficou nessa a�, quando depois que foi implantado OFFCM, como que ficou? Porque l� na celol OBRO workflow l� � enorme, acho que passa umas 5 ou 6 horas, se n�o me engano, que � o mesmo BR o nosso, s� que o nosso aqui centralizou mais n�s aqui em.
+
+Souza, Vanessa Torres Xavier De   18:30
+Alexandre.
+Ione.
+
+Silva, Marcio Antonio Do Espirito Santo   18:44
+Contagem clientes.
+
+Souza, Vanessa Torres Xavier De   18:46
+Pessoal, desculpa, eu at� me adiantei aqui. Eu at� compartilhei a tela para poder responder essa pergunta do Leandro com rela��o �s �reas de cr�dito. � o seguinte, todo o novo Cadastro de Cliente, quando ele � feito o Cadastro, ele j� abre com as 4 �reas de cr�dito existentes, s� que.
+Elas n�o est�o habilitadas. Ent�o, no momento que � feito o Cadastro e o vendedor � solicita o limite de cr�dito. Se for um limite de cr�dito para a �rea da BBA, que � um limite interno, no momento que o pessoal daqui do setor faz a an�lise, eles v�m, � nesse, nesse.
+Nesse campos aqui e habilita para qual a �rea de cr�dito que eles est�o fazendo o Cadastro. No nosso caso, aqui � a �rea BBA. A�, por exemplo, se � um Cliente que depois vai ter um cr�dito da alp, a gente vem e habilita ABPE. As mesmas coisas acontecem para a C S E P E A D B A e s� o da D B A Quem faz � o pessoal da pr�pria Rede, mas as demais aqui a gente tem que.
+Habilitar o Cliente novo, ele j� nasce com as 4 �reas, mas elas n�o est�o habilitadas, ent�o no momento que a gente for fazendo o cadastro do cr�dito, a gente vai habilitando essas �reas.
+
+Pereira, Leandro Da Cruz   19:52
+Vanessa, uma d�vida, como que voc� recebe essa solicita��o? Voc� recebe da do smart Center, voc� recebe isso daqui da �rea comercial, o cr�dito, o volume de cr�dito tem que ser atribu�do para cada uma dessas �reas. Como que voc� faz essa an�lise ou como que voc� recebe e como que voc� determina?
+
+Souza, Vanessa Torres Xavier De   20:06
+T� a solicita�.
+Aline avalia��o �, a solicita��o � recebida por e-mail pela pr�pria �rea de vendas. No momento em que o vendedor ele identifica a necessidade, eles preenchem uma ficha, que � um excelzinho tamb�m, que costuma ter campos b�sicos ali do c�digo, sigla do cliente e o valor que eles querem que habilite pra pra.
+Para esse cliente a�, existe hoje um e-mail aqui de uma caixa compartilhada, que � o cobran�a, ponto Limite. Os vendedores j� usam h� anos, ent�o eles direcionam essa solicita��o para essa caixa. Hoje, quem faz o atendimento � a an�lise de limite interna, que � o Felipe e o Arthur.
+E a� eles fazem a an�lise se esse Cliente vai ter compet�ncia para poder ter o valor que foi solicitado ou �s vezes n�o ter um valor reduzido e fazem a implementa��o desse cr�dito dentro da transa��o hoje nova que � o KM underline BP e retorna o e-mail mesmo informando.
+Fernando que esse limite foi habilitado ou o valor que foi aprovado ou recusado em caso de recusa, �s vezes a gente solicita documenta��es financeiras para poder tentar ter um embasamento maior na an�lise, mas a avalia��o � feita, � a solicita��o � feita hoje via e-mail.
+E a resposta tamb�m.
+
+Pereira, Leandro Da Cruz   21:21
+E o retorno tamb�m do cr�dito aprovado e liberado, voc� faz por e-mail tamb�m nessa mesma caixa.
+
+Souza, Vanessa Torres Xavier De   21:23
+Isso.
+Isso a�, hoje a gente tamb�m tem o on based, que � aonde eles fazem o registro das documenta��es que a gente que � baixado para poder fazer a an�lise de cr�dito, que � o Serasa, �s vezes alguma documenta��o financeira que � enviada por vendas do cliente, �s vezes DRE, balan�o e
+Tudo arquivado ali para poder ter um hist�rico de baseado em que informa��es que foi avaliado esse cr�dito do cliente.
+
+Pereira, Leandro Da Cruz   21:53
+Perfeito e ainda avan�ando um pouco no fluxo. E a� talvez eu esteja esquecendo de alguma �rea aqui, mas eu queria j� puxar um outro ponto, porque a� voc�s que s�o do comercial, voc�s me corrigem, se eu estiver errado, muitas vezes voc�s criam um cliente novo.
+Mas voc�s j� entram negociado. Ou seja, vamos supor que o pre�o do Arame ovalado para esse cliente novo vai ser y, n�o vai ser x, que � o pre�o de tabela que est� ali dentro. Sei que tem a ficha que acontece essa parametriza��o. Hoje voc�s conseguem.
+
+Souza, Vanessa Torres Xavier De   22:09
+There
+Faria Fernanda Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando
+Hudson Hudson Hudson.
+
+Pereira, Leandro Da Cruz   22:24
+Esse desconto dentro da condi��o Y, esse Pre�o negociado dentro da condi��o Y E D e Mas voc�s podem descrever como que funciona essa negocia��o de um Pre�o para um Cliente novo se voc�s do comercial real voc�s mesmos j� fazem antes de colocar essa ordem de venda.
+
+Souza, Vanessa Torres Xavier De   22:28
+Agora na contagem de Barros, abreu as 2 pontes de pontes.
+
+Pereira, Leandro Da Cruz   22:41
+Ou voc�s passam essa informa��o para uma outra �rea, algu�m pode comentar comigo?
+
+Gimenes, Leandro Augusto   22:46
+S�o 2 caminhos. O Leandro, quando voc� cadastra um cliente novo � porque voc� conseguiu vender nele. Essa � a regra, dificilmente. Mas acontece voc� cadastrar um cliente s� para adiantar um processo. Voc� tem Esperan�a de vender? Geralmente quando voc� castro, voc�.
+
+Pereira, Leandro Da Cruz   22:58
+Por isso que eu falei que voc� j� entra negociado, voc� j� entra vendido, digamos assim, com pre�o j� definido.
+
+Gimenes, Leandro Augusto   23:01
+Perfect.
+Ent�o voc� vai l�, negocia o pre�o e o prazo com o cliente. Ent�o o cliente vai ter o pre�o e o prazo de pagamento. A� voc� vai fazer essa burocracia do Excel de mandar para o Marcio o cadastro passar, pedir para o pessoal do da do financeiro na cobran�a de limite ou limite de cr�dito do cliente.
+Uma vez aprovado, voc� j� pode autorizar colocar a ficha do cliente. Qual que � a vers�o correta? � voc� ir l� na fun��o ZW SSD 145 e criar a ficha comercial do cliente do zero copiando e colando os itens e o comercial. E qual que � a vers�o que se usa na pr�tica?
+
+Pereira, Leandro Da Cruz   23:31
+Voc� � comercial mesmo?
+
+Rhein, Thalita Merisio   23:35
+Qual a transa��o? Leandro, desculpa.
+
+Gimenes, Leandro Augusto   23:37
+Z R S R S D 14544.
+
+Rhein, Thalita Merisio   23:40
+ZWSZ.
+GTM - Desenho AS-IS e TO-BE-20251204_140410-Meeting Recording
+December 4, 2025, 5:04PM
+1h 54m 26s
+
+Rhein, Thalita Merisio started transcription
+
+Rhein, Thalita Merisio   0:22
+Bom, vamos come�ar ent�o, por que a gente primeiro, obrigado por quem p�de participar? Eu sei que a agenda est� corrida para todo mundo, t�? Mas a gente deixou claro com os gerentes e diretores de voc�s, de todos n�s aqui, a import�ncia de estarmos juntos, de nos unirmos aqui como time, porque esse projeto.
+De go to marketing, go wire, CRM. Cada um est� chamando de uma de resende dessas letrinhas e no fundo faz tudo parte do mesmo projeto. Ele � um projeto da companhia, � um projeto de todos n�s e � por isso muito importante que todo mundo esteja embarcado nesse projeto.
+Ent�o quem t� desde o come�o participando? N�s tivemos algumas mudan�as a� a sa�da da Dani Tamer�o, a passada de bast�o pra Audrey e a Audrey passou o bast�o pra mim agora porque a Audrey est� para sair de Licen�a Maternidade. Ent�o eu me juntei aqui pedi ajuda do Leandro da Ti
+�, n�s temos como o cen�rio atual, t� o caderno de testes liberado pela TI, ou seja, ATI j� concluiu o desenvolvimento do sistema e liberou para n�s, como neg�cio, testarmos. S� que n�s, como neg�cio, n�o estamos completamente.
+preparados para fazer os testes. Por qu�? Porque quando eu fui falar com os usu�rios Chaves, alguns n�o sabiam que eram usu�rios Chaves. � isso agora foi declarado para todos os gerentes que � necess�rio que cada ger�ncia tenha os seus usu�rios Chaves definido.
+Ent�o isso vai � necessitar que esses usu�rios Chaves tenham horas semanais dedicadas para isso e a gente come�a com essa primeira dedica��o aqui de 2 horas para que todo mundo se Aline e a gente come�a a ficar na mesma.
+Pimenta porque muitos usu�rios questionam, mas o que eu tenho que testar? O que mudou no meu processo? O que vai mudar no meu processo? N�o sei, n�o participei, n�o tenho vis�o. Ent�o para poder responder todas essas perguntas �, a gente n�o tem outra forma de fazer isso se n�o desenhando.
+Ent�o o Leandro se juntou aqui a mim para que a gente, atrav�s desses workshops, que v�o ser semanais, recorrentes e em cada semana, a gente vai desbravar um Pilar do processo comercial como um todo, o processo de vender de castro, desde cadastrar um produtos at� expedir.
+� at� devolver. Ent�o a gente vai passar por todos esses processos que fazem parte do dia a dia. Por isso que est� todo mundo aqui, porque de alguma forma algu�m participa ou um pouquinho de um processo e depois muito de outro. E assim a gente vai come�ando a.
+Contar essa hist�ria do processo, Como Ele � hoje, que � OES is e como ele ser� no futuro, que � o to be, t�? Ent�o por isso que a gente est� se encontrando. Voc�s v�o receber agendas recorrentes, porque se voc�s est�o aqui, � porque os gerentes ou diretores de voc�s.
+Os pr� selecionaram, t�? Para que voc�s sejam usu�rios Chaves. A gente tem alguns aqui que j� est�o h� bastante tempo, que s�o os peos o Leandro Gimenes, o Bruno Nolasco, Aline n�o pode entrar, mas eles tamb�m continuam fazendo parte, continuam embarcados aqui com a gente, t�? Agora � hora de por todo mundo na mesma p�gina.
+Ent�o, o que a gente vai fazer hoje � mapear o processo de castro de clientes, entender os participantes, os pap�is no fluxo para voc�s validarem cada um aqui. Como � o hoje? Qual � o s isso? Como � o processo de coleta de dados de produtos pontes de devolu��es?
+E a�, na sequ�ncia, o Leandro vai � demonstrar o novo sistema, partindo daquilo que voc�s v�o contar, que � o dia a dia. Hoje ele vai come�ar a mostrar alguns focos, que s�o os impactos ali no cadastro, com o cen�rio que vem a.
+Para o futuro, que � o to BE, isso vai servir de insumo inicial para a gente come�ar o desenho do to b tamb�m, t� bom? Ent�o, como pr�ximos encontros aqui a gente vai seguir nessa prepara��o e vamos setorizando a� por cada etapa do processo, que depois eu vou dimensionar numa agenda mais visual e mostrar para todo mundo.
+Algu�m tem alguma d�vida? Podemos come�ar.
+Quem quer fazer algum coment�rio, n�o podendo?
+
+Gimenes, Leandro Augusto   4:31
+Thalita, s� fazendo alguns coment�rios. � mais uma vis�o macro de de neg�cios. Gente, o que mudou no nossa forma de trabalhar? No objetivo final, o resultad�o mesmo. N�s queremos que as notas fiscais, os materiais, os pedidos sejam faturados com pre�os e impostos corretos para os clientes.
+S� que hoje n�s temos um sistema de tabelas bem fixadas e pouco interativas no sistema que v�o puxar esses n�meros. Ent�o, hoje n�s temos, por exemplo, um imposto que ele � puxado como preenchimento anual do vendedor l� na ficha comercial. N�s temos uma tabela de Pre�o que � fixa e j� existe a mais de 30 anos, s� foi atualizado.
+Com esse novo sistema, isso passa a ser de � feito de forma integrada, ou seja, quando voc� vai colocar um pedido, os impostos v�o ser puxados automaticamente com base no cadastro do cliente. As tabelas de pre�os que antes era fixa, ela passa a ser muito vari�vel e elas vai come�ar a ser puxadas automaticamente conforme.
+Configura��es predeterminadas que n�s criamos que n�o existia, como por exemplo, o canal. Ent�o, o que est� mudando da forma de trabalhar de voc�s na parte pr�tica mesmo do dia a dia, voc�s n�o v�o ver quase diferen�a alguma, mas a forma como o sistema puxa esses dados vai ser muito mais seguro e integrado.
+E o que n�s queremos saber? Se essa porrada de automa��es que n�s fizemos, ela � consistente, se por acaso daqui 3 meses eu faturei um material e o cliente resolveu devolver porque tem um produtos de qualidade, o material vai entrar no nosso sistema ou vai travar tudo? Ou se na hora de fatorar o material e depois que puxou todos os tipos de informa��es?
+A nota fiscal est� coerente com o que � o cliente precisa. Ent�o o que n�s precisamos testar aqui nesse n�o que voc�s s�o usu�rios chaves, � se todos os processos da bel, desde a coloca��o do pedido, a cria��o do material, o registro, fornecimento, faturamento, transporte, retificado � documentos fiscais, todos eles est�o.
+Coerentes com o sistema atual, que vai mudar, vai ser automatizado agora. Ent�o n�s vamos saber se essa automa��o est� correta, porque se tiver um errinho b�sico l� no come�o do cadastro, gente n�o sai nota fiscal para o cliente. Ent�o se a gente subir essa vers�o final e tiver algum erro, a gente pode travar o faturamento da empresa por uma semana at� corrigir.
+Ou 34 dias, ou simplesmente vai chegar um momento que a gente talvez n�o consiga receber nenhuma embalagem na Belgo. A gente n�o tem como saber se com essas automa��es essas mudan�as e foram estruturais. Gente, por exemplo, o canal mudou para 100% dos clientes, ou seja, o que existia na em o que se falava em canal de clientes hoje n�o existe mais na Belgo, foi recriado 3 novos canais.
+E esses 3 canais impactam severamente em todas as informa��es do cliente, impostos, pre�os, entrada, sa�da de mercadoria, resultados e tudo mais. Ent�o, o que n�s queremos na parte pr�tica �, o sistema continua funcionando depois dos updates sendo feitos? Existe alguma falha no processo em algum estado? Em alguma?
+Alguns, uma rotina que voc�s fazem onde n�s n�o conseguimos identificar ainda e a gente precisa testar e validar isso � basicamente isso. Mas na pr�tica do dia a dia, voc�s n�o v� diferen�a na parte real, s� na forma como isso acontece. A magia por tr�s do processo nosso, acho que � um.
+Pequeno compilado do que � esperado que a gente fa�a.
+
+Pereira, Leandro Da Cruz   7:22
+de bola Leandro isso da� � o que a gente vai falar dentro do tibi n� mas para come�ar a nossa reuni�o aqui o ideal que a gente fale do as is n� ent�o voc�s a� t� na opera��o do dia a dia e eu imagino n� e com base uma s�rie de entrevistas que eu fiz como que funciona o fluxo de castro de clientes a� voc�s a�
+Que est� na ponta. O ideal � voc�s _irem falando se � isso mesmo, se o nosso entendimento de como � hoje, se realmente foi, se est� correto. Ent�o vamos imaginar uma determinada situa��o, um executivo de vendas, um vendedor que est� ali no dia a dia, lidando com os clientes, com prospe��o.
+Como que funciona? Ele identificou que tem o potencial de um cliente novo, de uma venda.
+A� o vendedor, ele vai l�, fala assim, beleza, eu preciso vender para esse cliente, mas antes de eu vender eu tenho que cadastrar esse cliente. E a� na Belgo, foi criado h� bastante tempo atr�s uma planilha em Excel, que essa planilha � como se fosse um pr�-cadastro. Ent�o essa planilha eu tenho uma s�rie de informa��es ali.
+Raz�o social, nome fantasia, algumas informa��es adicionais do cliente e essa planilha que est� em Excel. E acho que � legal voc�s ir contagem nesse ponto para ver se o assis realmente est� coerente com o que a gente fez mapeamento no passado. Essa planilha que ser� preenchida pelo time comercial.
+E uma vez preenchida essa planilha Excel, � enviado via teams ou via e-mail l� para a �rea do Marcio, l� para o smart Center. A� o Marcio recebe essas informa��es e uma vez que ele recebeu essas informa��es, ele entra l� dentro do PCC, dentro do SAP, n�o entrava dentro dos seus forcing.
+E a�, voc�s v�o pegar aqui no to be isso muda um pouquinho, entra l� dentro de uma transa��o aqui AXD 01. Ele vai me confirmando a�, t�, Marcio? Se eu estou falando besteira, entra dentro da XD 01, pega aqueles dados que est�o dentro do.
+
+Silva, Marcio Antonio Do Espirito Santo   9:08
+� hoje em dia a gente j� t� no BR, n�o usa mais a XD mais n�o.
+
+Pereira, Leandro Da Cruz   9:13
+Beleza, ent�o entra com esses dados no BROE. Uma vez que entrou dentro do BRO, ele preenche os dados automaticamente dentro da XD. Pode falar um pouquinho, Marcio de como � o processo hoje? Como que voc� recebe as informa��es, um pouco do seu fluxo?
+
+Silva, Marcio Antonio Do Espirito Santo   9:17
+F.
+Ent�o, com a implanta��o do desse Cadastro autom�tico, com.
+Quando passou a usar OBRO, ent�o todo todos t�m acesso a cadastrar. N�o precisa ser exclusivamente aqui com a gente n�o. Ent�o aqui pra gente caiu bastante AO cadastro. A� a pessoa entra com os dados na no BR o com CNPJ ou CPF.
+Pessoa for pessoa f�sica, o pr�prio BR vai fazer a consulta no na nos sites do governo para confirmar as informa��es e j� vai lan�ar o c�digo � a pessoa, a pessoa s� vai entrar com alguns dados de.
+Contactos e dados para identificar quem � o representante ou vendedor e o escrit�rio de vendas. Depois de sair que � cadastrado esse que � feito esse primeiro castro j� vai para a �rea de cr�dito, cria as �reas de cr�dito, assim que as �reas de cr�dito j� volta quando a pessoa recebe o retorno j� com o c�digo do cliente j� est�
+Tudo criado.
+
+Pereira, Leandro Da Cruz   10:26
+Marcio, eu tenho uma d�vida, eu sei que voc� levantou a m�o, Vanessa, mas � legal a gente ir de camposso a passo desse fluxo. Ent�o, assim, o vendedor entra dentro do BR, que � dentro do APCC, preenche as informa��es do BR, ele vai l�, busca essas informa��es dentro do Santos, sintegra, Sefaz, receita.
+
+Silva, Marcio Antonio Do Espirito Santo   10:35
+� isso?
+Exato, Suframa.
+
+Pereira, Leandro Da Cruz   10:42
+Consiste os dados fiscais, tribut�rios, Cadastro e gera um c�digo de clientes dentro da XD 01. E a� esse � o dado inicial do cliente, uma vez que esse dado inicial do cliente, como que a �rea financeira recebe essa informa��o para fazer a atribui��o de cr�dito?
+Porque sem o cr�dito, ele s� tem a op��o de comprar � vista. Como que esse fluxo Marcio hoje?
+
+Silva, Marcio Antonio Do Espirito Santo   11:05
+Depois que foi lan�ada a UFC FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM FM A
+
+Pereira, Leandro Da Cruz   11:09
+FM.
+Sim.
+
+Silva, Marcio Antonio Do Espirito Santo   11:20
+The new Assis.
+
+Pereira, Leandro Da Cruz   11:21
+Ent�o a gente tem tr�s �reas de cr�dito hoje, que � a C S P a da supplier, a gente tem a da Alb, a gente tem a DBA que � da distribui��o, e a Bba. O vendedor hoje, ele � que � a C S P
+
+Silva, Marcio Antonio Do Espirito Santo   11:27
+Machado.
+Tem a Belgo castro tamb�m.
+
+Souza, Vanessa Torres Xavier De   11:35
+�, s�o 4.
+
+Pereira, Leandro Da Cruz   11:37
+Isabelle Cash � a Center.
+
+Souza, Vanessa Torres Xavier De   11:38
+S�o 4 que a gente tem.
+
+Silva, Marcio Antonio Do Espirito Santo   11:39
+Est� a mesma dona.
+
+Pereira, Leandro Da Cruz   11:41
+Ent�o o vendedor hoje ele informa dentro do BRO essas 4 �reas de cr�dito para ser criada ou ele informa isso daqui para a �rea financeira?
+
+Silva, Marcio Antonio Do Espirito Santo   11:52
+Bom, no BR n�o tem espa�o, n�o. A Vanessa talvez pode explicar como que � feita essa escolha do da �rea de cr�dito do para cada cliente.
+
+Souza, Vanessa Torres Xavier De   12:02
+Antes de falar essa minha d�vida ainda era com rela��o ao Cadastro, n�o �? Eu vi que voc� falou assim que alguns processos s�o autom�ticos atrav�s do Roberto, mas com rela��o � sigla do cliente, como que � feita a determina��o de qual que vai ser a sigla do cliente?
+
+Silva, Marcio Antonio Do Espirito Santo   12:15
+Sim, a sigla. Se o cliente j� tem cadastro, algum CNPJ j� cadastrado, algum CNPJ raiz dele j� cadastrado, j� puxa autom�tico que j� est� cadastrado pra essa raiz. Quando ele n�o tem, a� o campo fica aberto pro pessoal colocar.
+
+Souza, Vanessa Torres Xavier De   12:33
+Quem Cadastro � vendas tamb�m, o mesmo pessoa que est� fazendo caro.
+
+Silva, Marcio Antonio Do Espirito Santo   12:35
+� na hora que est� fazendo o cadastro.
+
+Souza, Vanessa Torres Xavier De   12:38
+Entendi.
+
+Silva, Marcio Antonio Do Espirito Santo   12:38
+A�, o que � o que est� acontecendo? Eu at� j� tinha levantado esse assunto com o pessoal da do UTI, com a Kathleen, para ver se tem como barrar a cria��o primeiro de de termos de pesquisas que j� existem.
+Porque no BRUA passa, n�o aceita na no na igreja no SAP que bloqueia e tamb�m essas formas de castro que tem espa�o, � caracteres especiais. A gente tem que bolar um meio de Barros na no castro.
+
+Pereira, Leandro Da Cruz   13:06
+E isso no to be Marcio, a gente vai falar que dentro dos seus forces j� tem essa consist�ncia, t�? E esse � um ponto importante que na realidade, a hora que a gente entrar dentro do to be o fluxo de castro ao inv�s de nascer dentro do SAPCC pro ele obrigatoriamente ele tem que nascer dentro dos seus forces e eu vou mostrar o os porqu�s, t� que tem que nascer.
+
+Souza, Vanessa Torres Xavier De   13:07
+America.
+
+Silva, Marcio Antonio Do Espirito Santo   13:24
+Sim.
+
+Pereira, Leandro Da Cruz   13:26
+Dentro dos seus pontes.
+
+Silva, Marcio Antonio Do Espirito Santo   13:26
+N�o. Inclusive eu participei de alguns testes quando estava fazendo CRM, n�o �? O criando pelo CRM. S� que essa parte de pro de bloquear essa o tema de pesquisa ainda n�o estava valendo ainda n�o. E o pessoal estava implementando ainda.
+
+Souza, Vanessa Torres Xavier De   13:27
+Center.
+
+Pereira, Leandro Da Cruz   13:38
+Acho que foi recente, talvez um m�s atr�s, alguma coisa assim.
+
+Souza, Vanessa Torres Xavier De   13:39
+Tavares.
+
+Silva, Marcio Antonio Do Espirito Santo   13:40
+N�o, mas � que ainda continua aparecendo hoje mesmo o pessoal Felipe da do Financeiro tamb�m j� me passou alguns para poder corrigir aqui.
+
+Souza, Vanessa Torres Xavier De   13:40
+Hhh.
+Machado.
+
+Pereira, Leandro Da Cruz   13:47
+A gente avalia, t�? Ent�o assim, chegou s� para eu entender o fluxo certinho. Ent�o ou era ficha via e-mail, mas agora o pessoal est� acessando via BR.
+
+Silva, Marcio Antonio Do Espirito Santo   13:55
+� quando era ficha, era tudo manual. A gente fazia o castro, todo manual, preenchia nome, raz�o social, tudo manual. Agora n�o. Agora � s� quando vai no BR o � s� preenche s� os dados particulares de castro. � contato.
+
+Pereira, Leandro Da Cruz   14:09
+Beleza.
+
+Silva, Marcio Antonio Do Espirito Santo   14:11
+Estou de Vaz e a gente Vaz, por exemplo.
+
+Pereira, Leandro Da Cruz   14:13
+Perfeito, sem problema. �, vai l�, Thalita.
+
+Rhein, Thalita Merisio   14:16
+Na verdade, eu queria entender, Marcio, se tem algum crit�rio hoje, j� que todo mundo pode cadastrar, isso j� �, j� foi pr�-definido a partir desse lan�amento, que isso passa a ser uma atribui��o do vendedor ou da �rea comercial.
+
+Silva, Marcio Antonio Do Espirito Santo   14:25
+Hudson.
+
+Rhein, Thalita Merisio   14:33
+Ou n�o, eles optam em alguns casos o comercial cadastra e em outros casos eles mandam para voc�. E quando eles mandam para voc� e n�o cadastram, eles ainda continuam usando a ficha.
+
+Silva, Marcio Antonio Do Espirito Santo   14:38
+Evelyn.
+Continua para poder para facilitar para a gente aqui � pegar os dados para poder colocar que basicamente n�o antigamente um formul�rios em Excel pessoal preenchia tudo porque tudo era control c contractor v a e desde quando foi criado o BR o de uns 3 anos atr�s
+
+Rhein, Thalita Merisio   14:51
+Est�, mas n�o tem uma regra, ent�o qual � o crit�rio do porque?
+
+Silva, Marcio Antonio Do Espirito Santo   15:03
+23 anos atr�s a� parou, a gente s� coloca s� essas partes que s�o de contagem, essas partes particulares de castro.
+
+Pereira, Leandro Da Cruz   15:11
+Hoje a responsabilidade � do comercial iniciar o castro dentro do BR, certo?
+
+Silva, Marcio Antonio Do Espirito Santo   15:11
+Endo.
+Exatamente, exatamente.
+
+Pereira, Leandro Da Cruz   15:16
+E ele faz OE esse complemento de dados de Contagem, por exemplo, quem faz � o smart Center hoje ou � a �rea comercial, Marcio?
+
+Silva, Marcio Antonio Do Espirito Santo   15:23
+N�o, l� tem o campo que pode preencher tudo. Agora, se tiver que fazer alguma altera��o, a� passa para aqui, pessoal, para a gente atualizar.
+
+Pereira, Leandro Da Cruz   15:31
+E como que chega essas informa��es para voc�s atualizarem? � um e-mail, � um Teams ou tem uma solicita��o na willian smart? Como que funciona?
+
+Silva, Marcio Antonio Do Espirito Santo   15:34
+�, tem uma coisa.
+�, tem gente que manda de qualquer jeito, mas a gente tem a caixa nossa de da do castro de Cliente, mas o pessoal chama no e-mail ou no Teams. � coisas r�pida e a gente faz na hora e resolve.
+
+Pereira, Leandro Da Cruz   15:52
+N�o est� claro, ent�o hoje o vendedor n�o tem acesso AXD 02 para fazer altera��o no dado mestre de castro.
+
+Silva, Marcio Antonio Do Espirito Santo   15:56
+N�o pode, n�o pode ter. N�o era crit�rio que eles h� mais tempo j� falaram que n�o poderia por causa de alguns campos, que s�o santos de pessoal n�o pode, n�o pode ter acesso a alterar.
+
+Machado, Bruno Nolasco   16:03
+Yeah.
+Tem algumas coisas. Leandro, Marcio, que a gente identificou o seguinte, �s vezes o cliente queria que mudasse o endere�o e aquele endere�o n�o era o endere�o que estava na Pfaz, na CNPJ, sabe? Isso a� � uma quest�o sens�vel que a gente � sempre via que era risco e.
+
+Pereira, Leandro Da Cruz   16:08
+Theresa.
+
+Silva, Marcio Antonio Do Espirito Santo   16:17
+Um CNPJ.
+
+Machado, Bruno Nolasco   16:25
+A� era bom deixar n�o bloqueado isso, sabe?
+
+Pereira, Leandro Da Cruz   16:29
+N�o, tranquilo, porque sen�o rejeita a nota l� na frente. E uma d�vida, a gente.
+
+Machado, Bruno Nolasco   16:32
+� rejeita e no risco de algum erro de fator errado e n�o s� errado, at� de igual pedir alguma coisa a� que pode vir a dar problema l� na frente, sabe?
+
+Pereira, Leandro Da Cruz   16:35
+A Theresa.
+
+Silva, Marcio Antonio Do Espirito Santo   16:42
+Machado.
+
+Pereira, Leandro Da Cruz   16:43
+Eu vou explorar mais alguns pontes aqui. A gente tem, geralmente dentro de castro de clientes, a gente tem emissor da ordem, a gente tem recebedor da mercadoria e endere�o de cobran�a. Esses 3 tipos de castro, quando a gente vai trabalhar numa opera��o triangular, onde o emissor � diferente do recebedor,
+
+Silva, Marcio Antonio Do Espirito Santo   16:53
+Sim.
+
+Pereira, Leandro Da Cruz   17:01
+Quem que faz esse Cadastro, essa amarra��o hoje, Marcio?
+
+Silva, Marcio Antonio Do Espirito Santo   17:06
+No BR tem os campos, a gente pode escolher quais seriam o grupo Chaves de campos. Poderia colocar s� para emissor ou para recebedor ou tamb�m para Cobran�a. Agora a quest�o de se for nota triangular alguma coisa, a� j� � na OV que decide.
+
+Pereira, Leandro Da Cruz   17:24
+Sim, tranquilo, mas voc� hoje amarra o emissor ao recebedor ou voc� deixa totalmente separado.
+
+Silva, Marcio Antonio Do Espirito Santo   17:29
+N�o, o BR o pr�prio BR j� faz se a pessoa indicar como recebedor � s� o recebedor quando � recebedor em outro estado que n�o faz essa massa porque j� vai faturar direto para ele agora quando � emissor e recebedor no mesmo estado, a� o pro BR j� faz o castro j� vem pronto com.
+
+Pereira, Leandro Da Cruz   17:32
+So perfil.
+Yeah.
+
+Silva, Marcio Antonio Do Espirito Santo   17:46
+Com o c�digo do emissor e o c�digo do recebedor, tamb�m do cobran�a necess�ria.
+
+Pereira, Leandro Da Cruz   17:49
+T� ent�o assim, s� passando um pouquinho do fluxo ainda. Ent�o a gente tem o vendedor acesso OBRO faz os cadastros, voc� da �rea do smart Center, faz o complemento dos dados, se necess�rio dentro da XD 02. E a�?
+
+Silva, Marcio Antonio Do Espirito Santo   18:03
+� ou se tiver alguma algum erro no na consulta l� no Sefaz, por exemplo, a� vem aqui pra gente bater o martelo, voc� est� certo ou n�o?
+
+Pereira, Leandro Da Cruz   18:12
+Beleza, e a� OBRO, ele gera hoje um workflow autom�tico para a �rea financeira fazer a atribui��o das �reas de cr�dito ou n�o.
+
+Silva, Marcio Antonio Do Espirito Santo   18:12
+Est�.
+Aqui na Belgo n�o.
+
+Pereira, Leandro Da Cruz   18:25
+Ent�o, como que a Vanessa sabe quais s�o as �reas de cr�dito que precisa?
+
+Silva, Marcio Antonio Do Espirito Santo   18:27
+Pois �, a minha d�vida ficou nessa a�, quando depois que foi implantado OFFCM, como que ficou? Porque l� na celol OBRO workflow l� � enorme, acho que passa umas 5 ou 6 horas, se n�o me engano, que � o mesmo BR o nosso, s� que o nosso aqui centralizou mais n�s aqui em.
+
+Souza, Vanessa Torres Xavier De   18:30
+Alexandre.
+Ione.
+
+Silva, Marcio Antonio Do Espirito Santo   18:44
+Contagem clientes.
+
+Souza, Vanessa Torres Xavier De   18:46
+Pessoal, desculpa, eu at� me adiantei aqui. Eu at� compartilhei a tela para poder responder essa pergunta do Leandro com rela��o �s �reas de cr�dito. � o seguinte, todo o novo Cadastro de Cliente, quando ele � feito o Cadastro, ele j� abre com as 4 �reas de cr�dito existentes, s� que.
+Elas n�o est�o habilitadas. Ent�o, no momento que � feito o Cadastro e o vendedor � solicita o limite de cr�dito. Se for um limite de cr�dito para a �rea da BBA, que � um limite interno, no momento que o pessoal daqui do setor faz a an�lise, eles v�m, � nesse, nesse.
+Nesse campos aqui e habilita para qual a �rea de cr�dito que eles est�o fazendo o Cadastro. No nosso caso, aqui � a �rea BBA. A�, por exemplo, se � um Cliente que depois vai ter um cr�dito da alp, a gente vem e habilita ABPE. As mesmas coisas acontecem para a C S E P E A D B A e s� o da D B A Quem faz � o pessoal da pr�pria Rede, mas as demais aqui a gente tem que.
+Habilitar o Cliente novo, ele j� nasce com as 4 �reas, mas elas n�o est�o habilitadas, ent�o no momento que a gente for fazendo o cadastro do cr�dito, a gente vai habilitando essas �reas.
+
+Pereira, Leandro Da Cruz   19:52
+Vanessa, uma d�vida, como que voc� recebe essa solicita��o? Voc� recebe da do smart Center, voc� recebe isso daqui da �rea comercial, o cr�dito, o volume de cr�dito tem que ser atribu�do para cada uma dessas �reas. Como que voc� faz essa an�lise ou como que voc� recebe e como que voc� determina?
+
+Souza, Vanessa Torres Xavier De   20:06
+T� a solicita�.
+Aline avalia��o �, a solicita��o � recebida por e-mail pela pr�pria �rea de vendas. No momento em que o vendedor ele identifica a necessidade, eles preenchem uma ficha, que � um excelzinho tamb�m, que costuma ter campos b�sicos ali do c�digo, sigla do cliente e o valor que eles querem que habilite pra pra.
+Para esse cliente a�, existe hoje um e-mail aqui de uma caixa compartilhada, que � o cobran�a, ponto Limite. Os vendedores j� usam h� anos, ent�o eles direcionam essa solicita��o para essa caixa. Hoje, quem faz o atendimento � a an�lise de limite interna, que � o Felipe e o Arthur.
+E a� eles fazem a an�lise se esse Cliente vai ter compet�ncia para poder ter o valor que foi solicitado ou �s vezes n�o ter um valor reduzido e fazem a implementa��o desse cr�dito dentro da transa��o hoje nova que � o KM underline BP e retorna o e-mail mesmo informando.
+Fernando que esse limite foi habilitado ou o valor que foi aprovado ou recusado em caso de recusa, �s vezes a gente solicita documenta��es financeiras para poder tentar ter um embasamento maior na an�lise, mas a avalia��o � feita, � a solicita��o � feita hoje via e-mail.
+E a resposta tamb�m.
+
+Pereira, Leandro Da Cruz   21:21
+E o retorno tamb�m do cr�dito aprovado e liberado, voc� faz por e-mail tamb�m nessa mesma caixa.
+
+Souza, Vanessa Torres Xavier De   21:23
+Isso.
+Isso a�, hoje a gente tamb�m tem o on based, que � aonde eles fazem o registro das documenta��es que a gente que � baixado para poder fazer a an�lise de cr�dito, que � o Serasa, �s vezes alguma documenta��o financeira que � enviada por vendas do cliente, �s vezes DRE, balan�o e
+Tudo arquivado ali para poder ter um hist�rico de baseado em que informa��es que foi avaliado esse cr�dito do cliente.
+
+Pereira, Leandro Da Cruz   21:53
+Perfeito e ainda avan�ando um pouco no fluxo. E a� talvez eu esteja esquecendo de alguma �rea aqui, mas eu queria j� puxar um outro ponto, porque a� voc�s que s�o do comercial, voc�s me corrigem, se eu estiver errado, muitas vezes voc�s criam um cliente novo.
+Mas voc�s j� entram negociado. Ou seja, vamos supor que o pre�o do Arame ovalado para esse cliente novo vai ser y, n�o vai ser x, que � o pre�o de tabela que est� ali dentro. Sei que tem a ficha que acontece essa parametriza��o. Hoje voc�s conseguem.
+
+Souza, Vanessa Torres Xavier De   22:09
+There
+Faria Fernanda Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando
+Hudson Hudson Hudson.
+
+Pereira, Leandro Da Cruz   22:24
+Esse desconto dentro da condi��o Y, esse Pre�o negociado dentro da condi��o Y E D e Mas voc�s podem descrever como que funciona essa negocia��o de um Pre�o para um Cliente novo se voc�s do comercial real voc�s mesmos j� fazem antes de colocar essa ordem de venda.
+
+Souza, Vanessa Torres Xavier De   22:28
+Agora na contagem de Barros, abreu as 2 pontes de pontes.
+
+Pereira, Leandro Da Cruz   22:41
+Ou voc�s passam essa informa��o para uma outra �rea, algu�m pode comentar comigo?
+
+Gimenes, Leandro Augusto   22:46
+S�o 2 caminhos. O Leandro, quando voc� cadastra um cliente novo � porque voc� conseguiu vender nele. Essa � a regra, dificilmente. Mas acontece voc� cadastrar um cliente s� para adiantar um processo. Voc� tem Esperan�a de vender? Geralmente quando voc� castro, voc�.
+
+Pereira, Leandro Da Cruz   22:58
+Por isso que eu falei que voc� j� entra negociado, voc� j� entra vendido, digamos assim, com pre�o j� definido.
+
+Gimenes, Leandro Augusto   23:01
+Perfect.
+Ent�o voc� vai l�, negocia o pre�o e o prazo com o cliente. Ent�o o cliente vai ter o pre�o e o prazo de pagamento. A� voc� vai fazer essa burocracia do Excel de mandar para o Marcio o cadastro passar, pedir para o pessoal do da do financeiro na cobran�a de limite ou limite de cr�dito do cliente.
+Uma vez aprovado, voc� j� pode autorizar colocar a ficha do cliente. Qual que � a vers�o correta? � voc� ir l� na fun��o ZW SSD 145 e criar a ficha comercial do cliente do zero copiando e colando os itens e o comercial. E qual que � a vers�o que se usa na pr�tica?
+
+Pereira, Leandro Da Cruz   23:31
+Voc� � comercial mesmo?
+
+Rhein, Thalita Merisio   23:35
+Qual a transa��o? Leandro, desculpa.
+
+Gimenes, Leandro Augusto   23:37
+Z R S R S D 14544.
+
+Rhein, Thalita Merisio   23:40
+ZWSZ.

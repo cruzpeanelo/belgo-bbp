@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "id": null,
+    "arquivo": "Teste.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\Teste.docx",
+    "tamanho_bytes": 506204,
+    "data_modificacao": "2025-10-06T12:38:34",
+    "extraido_em": "2026-01-13T11:31:16.189231",
+    "status": "extraido",
+    "total_paragrafos": 4,
+    "total_tabelas": 0
+  },
+  "conteudo": {
+    "paragrafos": [
+      "- Conta ",
+      "- Escritório de vendas",
+      "Neste cenário não aparece o botão por causa do escritório de venda",
+      "Neste cenário quando o cliente não tem ficha de crédito ABPE"
+    ],
+    "tabelas": [],
+    "total_paragrafos": 4,
+    "total_tabelas": 0
+  }
+}

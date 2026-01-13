@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "id": null,
+    "arquivo": "Requisito do negocio ajustes bot - Wili.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\Requisito do negocio ajustes bot - Wili.docx",
+    "tamanho_bytes": 666059,
+    "data_modificacao": "2025-12-12T10:11:08",
+    "extraido_em": "2026-01-13T11:31:15.970919",
+    "status": "extraido",
+    "total_paragrafos": 13,
+    "total_tabelas": 0
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Saudação:\n- Olá, tudo bem com você? Sou a Bel, Assistente virtual da Belgo Arames e estarei aqui ao seu lado durante toda jornada. \n- Para Iniciarmos, qual é seu nome?\n- {Nome do contato}, você já é cliente Belgo Arames?",
+      "\n- Quick Replay   Sim / Ainda não",
+      "\n-Para melhor atendê-lo poderia me informar seu CNPJ? (Apenas os números)\nExemplo: xxxxxxxx0001xx",
+      "\n-CNPJ localizado com sucesso.\nAgora, por segurança, me envie um e-mail de contato com a Belgo Arames para receber um código de validação.",
+      "\n- {Nome do contato}, O E-mail foi validado com sucesso, Obrigado!\n-Estou enviando um código de verificação para confirmar sua identidade.\nO código foi enviado para o contato selecionado, assim que recebê-lo, digite aqui para continuar.\n-Código validado com sucesso.",
+      "- {Nome do contato}, aqui estão algumas opções que podem ser úteis, selecione o tipo de relatório que deseja consultar:\n",
+      "Selecione a forma que seja consultar:\n*Todos os botões automáticos de quick replay",
+      "\nOrdem de venda\nNúmero do pedido\nNota fiscal\nPeríodo \n- {Nome do contato}, entendi, por favor informe o número de {Opção selecionada} \n",
+      "-Estamos processando sua solicitação isso pode levar alguns instantes.",
+      "Consulta concluída com sucesso, aqui este seu relatório.\nBotão quick replay",
+      "Personalizar com a quantidade de estrelas que cada nota representa: \n* Se possível automatizar a escolha da nota sem necessidade de escrever e enviar a nota",
+      "\n*Se a nota menor que 4 criar um registro \n\n\n\n",
+      "Abertura de caso dentro do Salesforce para solicitação de cliente\n-Enviamos a sua solicitação, para especialistas responsáveis, em até 72h horas você receberá o retorno.\nProtocolo: xxxxxxx\n\nvalidar se tem atendimento humano ou se necessário criar caso \n"
+    ],
+    "tabelas": [],
+    "total_paragrafos": 13,
+    "total_tabelas": 0
+  }
+}

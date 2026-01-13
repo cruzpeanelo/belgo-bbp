@@ -1,0 +1,272 @@
+GTM - Desenho AS-IS e TO-BE - Sessao 2
+Data: 10/12/2025
+Duracao: 1h 29min 44s
+Participantes: Thalita Rhein, Leandro Pereira, Joao Endo, Francine Gayer, Bruno Machado, Daniel Goncalves, Leandro Gimenes, Jessica Vaz, Renata Mello, Kathleen Almeida, Lucas Pinheiro, Maria Victoria Albuquerque, Frank Silva
+
+========================================
+TRANSCRICAO COMPLETA
+========================================
+
+[0:13] Pereira, Leandro Da Cruz: Bom, eu vou compartilhar minha tela na hora que voces estiverem vendo aqui, voces me dao um toque, por favor.
+
+[0:18] Rhein, Thalita Merisio: Ja estamos vendo so pra pra confirmar o Leandro hoje a gente vai se eventualmente alguem tiver duvida ainda sobre o Cadastro de Cliente mas acho que zerou na na semana passada depois a gente vai comecar o s e o to B de documentos fiscais restricao Logistica e se der tempo ainda entrar no
+
+[0:30] Pereira, Leandro Da Cruz: Aline.
+
+[0:37] Rhein, Thalita Merisio: Workflow pricing pra no proximo encontro a gente ja poder iniciar a cotacao e a ordem de vendas, certo?
+
+[0:44] Pereira, Leandro Da Cruz: Perfeito, Thalita, eu vou fazer uma passam aqui do que a gente falou e ai eu acho que a gente pode ja pegar esses temas que voce acha?
+
+[0:53] Rhein, Thalita Merisio: Perfeito.
+
+[0:55] Pereira, Leandro Da Cruz: de castro de castro de castro de castro de castro de castro de castro de castro de castro de castro de castro de castro na quinta-feira e que a gente fez na quinta-feira a gente criou uma conta do zero eu expliquei os diferentes tipos de conta la que eu tenho conta pessoa juridica pessoa fisica Parceiro agrupador
+
+[0:58] Rhein, Thalita Merisio: Oi, na quinta.
+
+[1:05] Mello, Renata Drumond Amorim Conrado De: Contagem.
+
+[1:12] Pereira, Leandro Da Cruz: o parceiro do eduardo eu falei sobre as areas de vendas e a importancia das areas de vendas muito relacionado ao canal, ne? Entao canal 30, 20, 30 e 40 e quando eles tem que ser aplicados. Falei tambem sobre o canal 25 e
+
+[1:14] Mello, Renata Drumond Amorim Conrado De: Cassiana.
+
+[1:28] Pereira, Leandro Da Cruz: que possivelmente ele vai ser inativado em breve. E o ideal e que voces ja facam uma revisao nos Cadastro de voces aqui nos canais que cada Cliente de voces tem que ter. Tem que ter pelo menos um alem.
+
+[1:45] Pereira, Leandro Da Cruz: do 25, porque senao isso daqui vai vai vai bloquear o processo que a gente vai falar de vendas logo mais, ta? Falei sobre a parte financeira.
+
+[1:56] Pereira, Leandro Da Cruz: Na parte financeira sobre as areas de credito, entao acho que a Vanessa, ne, que estava aqui semana passada e ai falei das quatro areas que e a C S P que e a Supplier aqui e o Belgo castro a Bbabbn que e a area de credito da Belgo a DBA
+
+[2:14] Pereira, Leandro Da Cruz: que e da distribuicao e a BTC que e da AuP. Entao sao essas quatro areas de credito, entao se voces clicarem aqui voces vao ver. A exposicao de credito de cada uma delas. A Leandro crie um Cliente novo dentro do seus force o que eu tenho que fazer para essas areas de credito aparec
+
+[2:33] Pereira, Leandro Da Cruz: Voces vao precisar fazer o seguinte, apertar aquele botaozinho enviar SAP, entao comecei o cadastro aqui dentro para os seus dados dentro do Central Apertei o botaozinho enviar SAP Essas areas de credito sao criadas automaticamente la dentro. Ponto importante, elas sao criadas.
+
+[2:48] Pereira, Leandro Da Cruz: Mas o credito depende de uma acao manual da area de da area financeira para fazer a atribuicao quando a gente esta falando de Apoio a.
+
+[2:58] Pereira, Leandro Da Cruz: Supplier tem o cockpit la dentro do DCCEO cockpit do DCC continua a mesma coisa.
+
+[3:05] Pereira, Leandro Da Cruz: A Alb depende de uma acao manual do financeiro tambem EADBA que e da distribuicao e so para quem tem. Ai e situacoes da distribuicao que hoje tem Penapolis, Paulo, Penapolis, Bauru, Caruaru.
+
+[3:20] Pereira, Leandro Da Cruz: As duas outras que a gente ta colocando agora que nao vem na minha cabeca, ta? Ate aqui ta tranquilo.
+
+[3:28] Endo, Joao Vitor Yuji: Sim.
+
+[3:29] Pereira, Leandro Da Cruz: Reforcando todo o Cadastro. Tem que obrigatoriamente nascer pelos seus esforcos, porque tem que nascer pelos seus esforcos, tem que nascer por conta do do segmento, sub segmento do setor industrial e do cluster que e determinado automaticamente aqui so existe isso dentro dos seus esforcos, entao.
+
+[3:48] Pereira, Leandro Da Cruz: Nao pode mais cadastrar cliente diretamente no Santos Santos Santos Central de Cliente dentro do seu esforco. Bom, indo para uma.
+
+[3:59] Pereira, Leandro Da Cruz: Agora encerrei aqui o An passando na semana passada e agora falando sobre o as is e ai eu vou perguntar algumas coisinhas para voces. E para quem esta habituado a trabalhar com cadastro de clientes la dentro do ECC.
+
+[4:14] Pereira, Leandro Da Cruz: Tem uma abinha la dentro da XD01 ou XD02 que chama contato e me ajuda a lembrar ate castro. Eu nao lembro se e contato ou pessoa de contato, alguma coisa pessoa de contato.
+
+[4:24] Almeida, Kathleen Pfeifeer Carmona De: Pessoa de contagem.
+
+[4:27] Pereira, Leandro Da Cruz: Entao, nessa minha pessoa de contato na XD 01, que e a transacao de castro de clientes, voces tem la tipo da pessoa de contato, entao voces tem la uma informacao la e o tipo de XML, Dutra, certificado, esse mesmo tipo de paiva de contato.
+
+[4:42] Pereira, Leandro Da Cruz: Apoio a produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de pro
+
+[4:57] Gimenes, Leandro Augusto: Wait, stop.
+
+[4:59] Pereira, Leandro Da Cruz: Ta, e ai, Leandro, ate.
+
+[5:02] Pereira, Leandro Da Cruz: E assim, a gente ate mudou o nome, mas eu acho que ate ficou melhor, porque o que acontece aqui a gente tinha colocado uma replicacao do SAPCC da forma como que e. Mas ai perguntando para o time comercial la dentro do SAPCC, voces utilizam essa funcionalidade?
+
+[5:18] Pereira, Leandro Da Cruz: Funcionalidade, se sim, por que voces preenchem essa informacao?
+
+[5:24] Pereira, Leandro Da Cruz: Joao vai saber responder, porque eu sei que ele IA usar isso daqui la dentro da dentro de Lombos. O Joao nao vai valer, mas deixa eu ver aqui mais alguem do comercial.
+
+[5:35] Pereira, Leandro Da Cruz: Enough.
+
+[5:43] Pereira, Leandro Da Cruz: O.
+
+[5:45] Pereira, Leandro Da Cruz: Todo mundo ficou mudo, eu acho que ninguem usa essa funcionalidade.
+
+[5:47] Vaz, Jessica De Assis: O Leandro volta a tela para mim, so para eu para mim, pelo menos parou de compartilhar aqui. Isso ai e a questao de contato de cada. E, nao e porque eu nao consegui. Voce tirou rapido. Ai eu nao consegui perceber a tela.
+
+[5:53] Gimenes, Leandro Augusto: No.
+
+[5:53] Pereira, Leandro Da Cruz: E, eu parei intencionalmente para escolher.
+
+[5:59] Pereira, Leandro Da Cruz: Nao, mas eu parei intencionalmente para conversar com voces no comercial. Voces usam essa funcionalidade hoje la dentro do SAPCC, que e o cadastro de paula de contato.
+
+[6:08] Vaz, Jessica De Assis: Eu uso para todos os clientes digitais. Todos os nossos clientes exigem receber nota fiscal, Daniel PDF, XML. A maior parte dos nossos clientes aqui ja estao com, quando eles recebem XML automatico, eles ja fazem a leitura dos Campos do XML.
+
+[6:27] Vaz, Jessica De Assis: E o proprio e portal deles da o retorno pra gente se a nota esta validada ou nao para a gente seguir com A Entrega, entao, no caso aqui dos meus segmentos de energia, a gente utiliza.
+
+[6:36] Pereira, Leandro Da Cruz: Perfeito, Jessica, a funcionalidade que voce tem e usa hoje a gente replicou para ca tambem, ta?
+
+[6:43] Pereira, Leandro Da Cruz: Entao, e exatamente isso que a Jessica falou que serve isso. Entao, uma vez que voces cadastrarem aqui, por exemplo, nascimento rodrigues na no tipo de funcao XMLO que vai acontecer aqui?
+
+[6:58] Pereira, Leandro Da Cruz: Toda vez que houver um faturamento da tear telas la no SAPCC, sera disparado um e-mail automaticamente para essa caixa com XML.
+
+[7:12] Pereira, Leandro Da Cruz: Entao isso e muito importante porque muitas vezes o cliente seu de voces ai do comercial estao falando o seguinte, eu quero receber aqui o certificado de qualidade a Daniel XML. Entao voces tem todas essas opcoes aqui para que
+
+[7:28] Pereira, Leandro Da Cruz: Cadastro automaticamente. As informacoes que estao desculpa a castro automaticamente o e-mail que recebera as informacoes quando houver o faturamento dentro do C SAPCC. Cadastro eu ja te passo a palavra da Franca.
+
+[7:45] Pereira, Leandro Da Cruz: Cadastro aqui, faturou, chega o e-mail la com o documento que voces selecionaram com o tipo de produtos. Pois nao, Frank?
+
+[7:54] Silva, Frank Hermogenes Da: E so lembrando entao, Leandro, que antes essa funcao de resende e eu estou falando especificamente do XML. Ficava muito a cargo do cadastro de clientes. A gente castro la pediu para cadastrar todos os clientes. E o endereco de e-mail do cliente recebeu XML.
+
+[8:09] Silva, Frank Hermogenes Da: Porque essa informacao e obrigatoria. Essa e a bel e obrigado a enviar OXML da nota fiscal para os clientes. Entao e com essa esse cadastro. Agora vai ficar na viana na mao de vendas mesmo. E muito importante que o e-mail de envio do XML seja sempre preenchido.
+
+[8:29] Pereira, Leandro Da Cruz: Perfeito e a ideia Frank que assim e pode ser que minha visao seja esteja errada mas quem que e o principal ponto de contato do Cliente com a Belgo time comercial
+
+[8:43] Pereira, Leandro Da Cruz: No meu ponto de vista, ne? E a gente, eu me incluo como T e como e uma area de Apoio para o comercial, nao so do comercial, do financeiro, etc, mas do marketing. Mas o principal ponto de Apoio, desculpa, principal pontes de contato e o comercial.
+
+[8:59] Pereira, Leandro Da Cruz: Entao o comercial ter essa ferramenta na mao dele, a gente esta falando de to be, ta pessoal essencial para que o cliente tenha a receba as informacoes corretamente e que o comercial nao dependa tambem de uma outra area para Cadastro essas informacoes e
+
+[9:00] Silva, Frank Hermogenes Da: No.
+
+[9:14] Pereira, Leandro Da Cruz: Entao. A ideia e justamente que voces do comercial. Revisem os Cadastro de voces e ja preenchem essas informacoes tambem ha mas ja esta preenchido la dentro do SAP e C C S Tiago se ja tiver preenchido dentro do SAP e C
+
+[9:30] Pereira, Leandro Da Cruz: Revisem, vai aparecer aqui, porque essa tela e um reflexo da tela do ECC, ta bom? Duvidas aqui?
+
+[9:41] Pereira, Leandro Da Cruz: Importante essa parte, Hein? E uma automatizacao que ajuda bastante ai no dia a dia de voces, do comercial e tambem dos clientes. Mas se nao tiver, eu vou passar.
+
+[9:57] Pereira, Leandro Da Cruz: Ta tranquilo?
+
+[10:01] Pereira, Leandro Da Cruz: Entao vou seguir.
+
+[10:04] Pereira, Leandro Da Cruz: Bom.
+
+[10:05] Pereira, Leandro Da Cruz: Rezendecao Logistica.
+
+[10:09] Pereira, Leandro Da Cruz: Fazer uma pergunta?
+
+[10:11] Pereira, Leandro Da Cruz: Deixa eu ver se tem mais au
+
+[10:13] Pereira, Leandro Da Cruz: Alguem aqui do comercial e desculpa, se eu tiver aqui, eu vou, vou perguntar pro Daniel Pedrosa.
+
+[10:20] Pereira, Leandro Da Cruz: Daniel.
+
+[10:22] Pereira, Leandro Da Cruz: Como que voces fazem hoje?
+
+[10:25] Pereira, Leandro Da Cruz: Para falar o seguinte, Oh, esse cliente nao recebe, sei la, caminhao sider ou nao recebe nenhum material no sabado, voce pode me falar como que e o processo hoje?
+
+[10:37] Goncalves, Daniel Pedrosa: Caio, eu mando um e-mail para a logistica e eles cadastram no portal.
+
+[10:42] Pereira, Leandro Da Cruz: Setor.
+
+[10:42] Goncalves, Daniel Pedrosa: Essa informacao.
+
+[10:45] Pereira, Leandro Da Cruz: Fala, Maria.
+
+[10:50] Albuquerque, Maria Victoria Cabral De: E, a gente tambem faz OA restricao no portal da logistica, esta quando o cliente tem alguma restricao de recebimento.
+
+[11:00] Pereira, Leandro Da Cruz: Boa, entao, ou faz a ou faz o cadastro direto no portal da logistica ou envia o e-mail.
+
+[11:08] Pereira, Leandro Da Cruz: E se eu falar para voces que?
+
+[11:11] Pereira, Leandro Da Cruz: Isso esta resolvido aqui.
+
+[11:14] Pereira, Leandro Da Cruz: Entao a gente criou essa minha e isso aqui conversa com o SAPCC, conversa com o portal da Logistica. Entao se o seu cliente nao recebe 3 quartos, clicou aqui.
+
+[11:25] Pereira, Leandro Da Cruz: Se ele tambem nao recebe truque?
+
+[11:28] Pereira, Leandro Da Cruz: Clicou aqui.
+
+[11:30] Pereira, Leandro Da Cruz: Ou se seu Cliente tem um problema aqui?
+
+[11:34] Pereira, Leandro Da Cruz: Um tipo de descarga que o que ele que ele nao pode. Cliente nao confere A Entrega por quantidade, sei la, o cliente nao descarrega aqui pela esquerda.
+
+[11:46] Pereira, Leandro Da Cruz: Ou se ele tem problema aqui de capacidade maxima de descarga ou se ele tem problema tambem relacionado aqui?
+
+[11:54] Pereira, Leandro Da Cruz: Alguma questao que ele, o cliente exige que o material seja alonado. Ou alguma observacao importante em relacao ao horario. Entao esta tudo integrado aqui. Entao, basicamente voces ai do time comercial podem cadastrar.
+
+[12:09] Pereira, Leandro Da Cruz: A restricao Logistica ja direto pelos seus esforcos.
+
+[12:13] Pereira, Leandro Da Cruz: E isso e vou pedir ajuda aqui da do Leandro Gimenes e tambem da Kathleen para complementar aqui as integracoes, mas aparece na ordem de embarque. Voce pode falar um pouquinho melhor, Leandro?
+
+[12:26] Gimenes, Leandro Augusto: Perfeito. Essa informacao que voce atualiza e ele vai ser atualizado em tempo real na XD 03. Tanto as informacoes de restricao de veiculos, como agendamento de entregas, como restricoes de recebimentos, e observacoes do cliente, e.
+
+[12:42] Gimenes, Leandro Augusto: Necessidade de agendamentos por telefone, qual que e o contato? Voce pode por tudo ai EOSAP. Ele vai atualizar em tempo real na XD 03 e essa informacao sai disponivel la na ordem de venda. Quem presta no transporte? Entao a transportadora tem acesso a tempo real.
+
+[12:56] Gimenes, Leandro Augusto: A qualquer tipo de restricao que voce colocar no sistema e isso. Anteriormente, voce tinha que passar o e-mail, verificar se ATA mandou e-mail, verificar se foi cadastrado. Agora voce pode atualizar isso em tempo real e o sistema vai acompanhar todas as suas a todas as suas atualizacoes.
+
+[13:12] Almeida, Kathleen Pfeifeer Carmona De: Exatamente. E foi ate uma solicitacao sua, Leandro, ter essas informacoes tambem na ordem de embarque para facilitar a vida e ter essa informacao na ponta. Entao hoje ja funciona, ta integrado com sal. Entao assim que marca, salva as informacoes, e integrado na XD 03, que tambem leva para a ordem a ordem de embarque.
+
+[13:21] Gimenes, Leandro Augusto: Perfeito.
+
+[13:30] Almeida, Kathleen Pfeifeer Carmona De: A do cliente?
+
+[13:31] Gayer, Francine: Leandro, eu tenho so uma duvida, com relacao de a horarios de recebimento, dias da esse tipo de restricao, a gente consegue inserir tambem.
+
+[13:37] Gimenes, Leandro Augusto: Ta la embaixo.
+
+[13:39] Gimenes, Leandro Augusto: Ta tudo la.
+
+[13:41] Gimenes, Leandro Augusto: A gente pensou em 99% dos casos, aquele 1% tem que escrever, mas fora isso, o resto da gente pensou em ja deixar um campo pronto para isso, para quem consiga, inclusive, consigam tirar relatorios completos sobre as restricoes dos clientes, como e o perfil. Entao, quando voce coloca la no quer ver?
+
+[13:58] Gimenes, Leandro Augusto: Voce coloca as informacoes ali direto nas informacoes adicionais, faca um pouquinho Leandro, por gentileza.
+
+[14:03] Pereira, Leandro Da Cruz: Posso, posso subir, Clara.
+
+[14:05] Gimenes, Leandro Augusto: Ele tem janelas e descarga janela disponibilidade, ou seja, se o seu veiculo se o cliente nao aceita entrega com outro cliente, mas sao bem especifica de alguns clientes fazem isso e e restricoes do tipo de descarga de acordo com a estrutura do cliente agendamento se a gente tentou colocar o maximo possivel quando e uma coisa muito muito especifica voce pode escrever o que voce quiser aberto.
+
+[14:23] Gimenes, Leandro Augusto: Mas o que nao foi muito especifico, tem observacao completa ali do campo para voce so marcar e ter a opcao de fazer agendamento ou de restricoes. Eu lembro que tinha um cliente que se o material chegasse nele, ele tivesse material de outro cliente, ele nao recebia. Ai voce tinha que mandar.
+
+[14:38] Pereira, Leandro Da Cruz: Serio.
+
+[14:38] Gimenes, Leandro Augusto: E.
+
+[CONTINUA - Transcricao completa com 763 entradas]
+[Final: 1:29:44]
+
+========================================
+PRINCIPAIS TOPICOS DISCUTIDOS
+========================================
+
+1. CADASTRO DE CLIENTE (Recapitulacao)
+   - Tipos de conta: PJ, PF, Parceiro Agrupador
+   - Canais 20, 25, 30, 40
+   - 4 Areas de credito: CSP (Supplier/BelgoCash), ABBA (Belgo), DBA (Distribuicao), BTC (AuP)
+   - Cadastro obrigatorio via Salesforce
+
+2. CONTATOS E DOCUMENTOS FISCAIS
+   - Envio automatico de XML, certificados
+   - Funcao de contato para disparo automatico de e-mails
+   - Importancia do cadastro correto de e-mails
+
+3. RESTRICOES LOGISTICAS (TO-BE)
+   - Integracao Salesforce -> SAP -> Portal Logistico
+   - Restricoes de veiculos (3/4, truque, sider)
+   - Janelas de entrega
+   - Agendamentos
+   - Restricoes de descarga
+
+4. AMD (ArcelorMittal Distribuicao)
+   - Processo Cross Company
+   - Necessidade de incluir no Salesforce
+   - Reuniao agendada para segunda-feira
+
+5. FORNECIMENTO COMPLETO/PARCIAL
+   - Flag de fornecimento completo
+   - Tolerancias de excesso/incompleto
+   - Problemas com fornecimento automatico
+
+6. CONTATOS E NPS
+   - Importancia dos dados de contato corretos
+   - Notificacoes WhatsApp para clientes (Agro e Protec)
+   - Projeto de autoatendimento via WhatsApp
+
+7. MARKET SHARE E CONCORRENTES
+   - Funcionalidade de share of wallet por cliente
+   - Cadastro de concorrentes normalizado
+   - Historico de market share
+   - Diferenca entre market share estrategico vs tatico
+
+========================================
+PARTICIPANTES IDENTIFICADOS
+========================================
+
+- Rhein, Thalita Merisio - Lider Business (Comercial/Marketing)
+- Pereira, Leandro Da Cruz - Lider Tecnico TI
+- Gimenes, Leandro Augusto - PO Comercial
+- Endo, Joao Vitor Yuji - Key User (Construcao Civil)
+- Gayer, Francine - Key User (Protec)
+- Machado, Bruno Nolasco - Key User (Agro/DCPC)
+- Goncalves, Daniel Pedrosa - Marketing/Inteligencia de Mercado
+- Vaz, Jessica De Assis - Energia/Clientes Digitais
+- Mello, Renata Drumond Amorim Conrado De - AMD
+- Almeida, Kathleen Pfeifeer Carmona De - Analista TI
+- Pinheiro, Lucas Lemos - Desenvolvedor TI
+- Albuquerque, Maria Victoria Cabral De - Comercial
+- Silva, Frank Hermogenes Da - Cadastro de Clientes

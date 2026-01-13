@@ -1,0 +1,39 @@
+{
+  "metadata": {
+    "id": "902162",
+    "arquivo": "902162 - Separação de RecordTypes - Ocorrência de Clientes e Belgo Flex.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\902162 - Separação de RecordTypes - Ocorrência de Clientes e Belgo Flex.docx",
+    "tamanho_bytes": 345135,
+    "data_modificacao": "2025-12-11T18:00:08",
+    "extraido_em": "2026-01-13T11:31:15.305259",
+    "status": "extraido",
+    "total_paragrafos": 6,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Criação de ocorrência de cliente: ",
+      "- Criação de Registro",
+      "Ao clicar no botão criar, irá mostrar a criação de formulário referente a criação de ocorrência:",
+      "Criação de ocorrência de cliente: ",
+      "- Belgo Flex",
+      "Ao clicar no botão Criar, irá mostrar a criação de abertura referente a Belgo flex:"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n902162 - Separação de RecordTypes: Ocorrência de Clientes e Belgo Flex",
+          "Data de Criação\n11/12/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 6,
+    "total_tabelas": 1
+  }
+}

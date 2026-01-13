@@ -1,0 +1,489 @@
+{
+  "id": "areas-vendas",
+  "nome": "Áreas de Vendas",
+  "icone": "🏢",
+  "ordem": 2,
+  "asIs": {
+    "descricao": "Processo manual onde o usuário deve definir canal de venda, escritório e equipe manualmente, consultando planilhas ou solicitando ao SmartCenter a classificação correta do cliente.",
+    "passos": [
+      "Usuário identifica manualmente o tipo de cliente (indústria, revenda, consumidor final)",
+      "Consulta planilha ou solicita orientação sobre qual canal aplicar",
+      "Define canal de venda manualmente (20, 25, 30 ou 40)",
+      "Atribui escritório de vendas manualmente",
+      "Atribui equipe de vendas (antigo EV Alternativo) manualmente",
+      "Solicita ao SmartCenter validação da classificação",
+      "Aguarda confirmação ou correção",
+      "Configura dados no SAP"
+    ],
+    "problemas": [
+      "Erros frequentes de classificação de canal",
+      "Canais incorretos aplicados a clientes",
+      "Escritórios e equipes atribuídos incorretamente",
+      "Retrabalho frequente para correção de classificações",
+      "Dependência de conhecimento individual do vendedor",
+      "Falta de padronização nos critérios de classificação",
+      "Cluster calculado manualmente ou não calculado"
+    ],
+    "tempoMedio": "1 dia ou mais"
+  },
+  "toBe": {
+    "descricao": "Sistema automatizado de classificação de Área de Vendas. O Salesforce sugere automaticamente o canal baseado no CNAE do cliente, preenche escritório e equipe baseado no perfil do usuário, e calcula o cluster automaticamente com opção de exceção via workflow.",
+    "passos": [
+      "Usuário cria conta no Salesforce e preenche CNPJ",
+      "Sistema consulta SINTEGRA e obtém CNAE do cliente",
+      "Sistema sugere canal de venda (20, 25, 30 ou 40) automaticamente baseado no CNAE [DEFINICOES DOS CANAIS AGUARDANDO RE-TRANSCRICAO]",
+      "Sistema preenche Escritório de Vendas automaticamente (conforme perfil do usuário)",
+      "Sistema preenche Equipe de Vendas automaticamente (conforme time do usuário)",
+      "Sistema calcula Cluster automaticamente baseado em regras de negócio",
+      "Usuário pode solicitar 'Cluster Exceção' via workflow de aprovação",
+      "Usuário confirma ou ajusta classificação se necessário",
+      "Integração automática com SAP ao salvar"
+    ],
+    "beneficios": [
+      "Classificação de canal correta e padronizada",
+      "Eliminação de erros de classificação manual",
+      "Preenchimento automático de escritório e equipe",
+      "Cluster calculado automaticamente",
+      "Redução significativa de retrabalho",
+      "Processo padronizado para todos os vendedores",
+      "Rastreabilidade de exceções via workflow",
+      "Integração automática com SAP"
+    ],
+    "tempoMedio": "Imediato (automático)"
+  },
+  "areasImpactadas": [
+    "Comercial",
+    "Operações",
+    "SmartCenter",
+    "TI"
+  ],
+  "status": "Em Andamento",
+  "fonteReuniao": "10/12/2025",
+  "fontesReuniao": [
+    "10/12/2025 - Definição de canais e Área de Vendas"
+  ],
+  "fontesVerificadas": {
+    "reuniao03dez": {
+      "CONFIRMADO": true,
+      "tema": "Canais de Venda - Definicoes",
+      "citacaoExata": "Leandro: 'os canais 30 egidio de vitoria, 20, 30, 40 e 50... Industria, distribuicao e consumo. Isso impacta totalmente a parte de entrada de renda para a parte fiscal e tributaria'",
+      "canaisConfirmados": {
+        "20": "Industria",
+        "30": "Distribuicao",
+        "40": "Consumo",
+        "50": "Mencionado mas nao detalhado"
+      },
+      "impactoTributario": "Leandro: 'Se um cliente, por exemplo, colocou um pedido no canal 30, que tem distribuicao, vai ter ICMSST. Se for canal 40, ele ja nao incide ICMSST.'"
+    },
+    "reuniao10dez": [
+      "Canais 20, 25, 30, 40",
+      "Sugestao automatica por CNAE",
+      "Escritorio e Equipe preenchidos automaticamente"
+    ],
+    "citacoesExatas": [
+      "Leandro (10/12): 'eu falei sobre as áreas de vendas e a importância das áreas de vendas muito relacionado ao canal, né? Então canal 30, 20, 30 e 40 e quando eles têm que ser aplicados. Falei também sobre o canal 25'"
+    ],
+    "cadernoTestes": [
+      "Tester 862865 - Definicao Automatica de Cluster"
+    ]
+  },
+  "canaisVendaAviso": "CONFIRMADO na reuniao 03/12/2025 - Leandro explicou: 'os canais 30 egidio de vitoria, 20, 30, 40 e 50... Industria, distribuicao e consumo'. Os nomes abaixo foram confirmados.",
+  "canaisVenda": [
+    {
+      "codigo": "20",
+      "nome": "Industria",
+      "descricao": "Clientes industriais - CONFIRMADO na reuniao 03/12 (Leandro: 'Industria, distribuicao e consumo')",
+      "fonteConfirmacao": "Reuniao 03/12/2025",
+      "exemploCNAE": [
+        "Produção de artefatos estampados de metal",
+        "Siderurgia",
+        "Fabricação de máquinas"
+      ],
+      "critério": "CNAE de atividade industrial"
+    },
+    {
+      "codigo": "25",
+      "nome": "Casos Especiais",
+      "descricao": "Mencionado na reuniao 10/12 por Leandro",
+      "fonteConfirmacao": "Reuniao 10/12/2025",
+      "requerAprovacao": true,
+      "critério": "Aprovação especial da diretoria"
+    },
+    {
+      "codigo": "30",
+      "nome": "Distribuicao",
+      "descricao": "Distribuidores - CONFIRMADO na reuniao 03/12 (Leandro: 'Industria, distribuicao e consumo')",
+      "fonteConfirmacao": "Reuniao 03/12/2025",
+      "exemploCNAE": [
+        "Comércio atacadista de defensivos agrícolas, adubos, fertilizantes",
+        "Comércio varejista de materiais de construção"
+      ],
+      "critério": "CNAE de comércio"
+    },
+    {
+      "codigo": "40",
+      "nome": "Consumo",
+      "fonteConfirmacao": "Reuniao 03/12/2025 - Leandro: 'Industria, distribuicao e consumo'",
+      "descricao": "Pessoa Física ou pequenas empresas sem fins de revenda",
+      "aplicaPF": true,
+      "critério": "Pessoa Física ou empresa sem revenda"
+    }
+  ],
+  "campos": [
+    {
+      "campo": "Canal",
+      "descricao": "Canal de venda associado ao cliente",
+      "preenchimento": "Sugerido automaticamente (CNAE) / Manual",
+      "validacao": "CNAE",
+      "valores": [
+        "20",
+        "25",
+        "30",
+        "40"
+      ],
+      "obrigatorio": true
+    },
+    {
+      "campo": "Escritório de Vendas",
+      "descricao": "Escritório responsável pela conta",
+      "preenchimento": "Automático (Perfil do usuário)",
+      "validacao": "-",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Equipe de Vendas",
+      "descricao": "Time comercial responsável (antigo EV Alternativo)",
+      "preenchimento": "Automático (Time do usuário)",
+      "validacao": "-",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Cluster",
+      "descricao": "Classificação automática do cliente para políticas comerciais",
+      "preenchimento": "Automático (Algoritmo)",
+      "validacao": "Regras de negócio",
+      "obrigatorio": false
+    },
+    {
+      "campo": "Cluster Exceção",
+      "descricao": "Campo marcado quando cluster foi alterado via workflow de aprovação",
+      "preenchimento": "Via Workflow",
+      "validacao": "Workflow aprovação",
+      "obrigatorio": false
+    }
+  ],
+  "regrasNegocio": [
+    {
+      "regra": "Sugestão de Canal por CNAE",
+      "descricao": "O sistema sugere o canal de venda baseado no CNAE do cliente obtido via SINTEGRA",
+      "detalhes": {
+        "industria": "CNAEs de fabricação, produção, transformação → Canal 20",
+        "comercio": "CNAEs de comércio atacadista/varejista → Canal 30",
+        "pessoaFisica": "Contas PF → Canal 40",
+        "especial": "Casos aprovados pela diretoria → Canal 25"
+      }
+    },
+    {
+      "regra": "Preenchimento Automático de Escritório",
+      "descricao": "O campo 'Escritório de Vendas' é preenchido automaticamente baseado no escritório configurado no perfil do usuário logado"
+    },
+    {
+      "regra": "Preenchimento Automático de Equipe",
+      "descricao": "O campo 'Equipe de Vendas' é preenchido automaticamente baseado no time configurado para o usuário logado",
+      "nota": "Campo 'EV Alternativo' foi renomeado para 'Equipe de Vendas'"
+    },
+    {
+      "regra": "Cálculo Automático de Cluster",
+      "descricao": "O sistema calcula automaticamente o Cluster do cliente baseado em regras de negócio internas",
+      "documento": "862865"
+    },
+    {
+      "regra": "Workflow para Cluster Exceção",
+      "descricao": "Para casos especiais, o usuário pode solicitar alteração de cluster via workflow de aprovação",
+      "fluxo": [
+        "Usuário clica em 'Enviar para Aprovação'",
+        "Status muda para 'Enviado'",
+        "Aprovador recebe e-mail com solicitação",
+        "Aprovador aprova dentro do Salesforce",
+        "Sistema envia e-mail de confirmação",
+        "Campo 'Cluster Exceção' é marcado"
+      ],
+      "documento": "862865"
+    }
+  ],
+  "integracoes": [
+    {
+      "origem": "Salesforce",
+      "destino": "SINTEGRA",
+      "tipo": "API",
+      "descricao": "Obtém CNAE para sugerir canal de venda"
+    },
+    {
+      "origem": "Salesforce",
+      "destino": "SAP",
+      "tipo": "Middleware",
+      "descricao": "Sincroniza dados de área de vendas (canal, escritório, equipe)"
+    }
+  ],
+  "ciclosTeste": [
+    {
+      "documento": "862865",
+      "titulo": "Definição Automática de Cluster",
+      "status": "Pendente",
+      "ciclo": "P2",
+      "data": "14/10/2025",
+      "cenarios": [
+        "Cálculo automático de Cluster na criação de conta",
+        "Workflow de aprovação para Cluster Exceção",
+        "Envio de e-mail para aprovador",
+        "Marcação do campo após aprovação"
+      ],
+      "contasTeste": [
+        "Mercbenz",
+        "Leao",
+        "FRUITTOOLS"
+      ],
+      "testesRelacionados": [
+        "CT-120",
+        "CT-121"
+      ]
+    }
+  ],
+  "detalhes": {
+    "canais": {
+      "20": "Indústria",
+      "25": "Casos Especiais",
+      "30": "Distribuidores/Revenda",
+      "40": "Consumidor Final"
+    },
+    "clusterAutomatico": "Sistema define cluster baseado em regras de negócio",
+    "workflowExcecao": "Aprovação em 2 níveis para alteração de cluster",
+    "preenchimentoAutomatico": "Escritório e Equipe preenchidos pelo perfil do usuário"
+  },
+  "algoritmoCluster": {
+    "descricao": "Classificacao automatica de clientes em clusters para definicao de politicas comerciais",
+    "variaveis": [
+      {
+        "nome": "Faturamento Anual",
+        "peso": 0.35,
+        "descricao": "Volume de compras nos ultimos 12 meses"
+      },
+      {
+        "nome": "Frequencia de Compras",
+        "peso": 0.25,
+        "descricao": "Quantidade de pedidos por mes"
+      },
+      {
+        "nome": "Potencial de Mercado",
+        "peso": 0.2,
+        "descricao": "Estimativa baseada em CNAE e porte"
+      },
+      {
+        "nome": "Adimplencia",
+        "peso": 0.2,
+        "descricao": "Historico de pagamentos em dia"
+      }
+    ],
+    "clusters": [
+      {
+        "nivel": "A",
+        "pontuacaoMinima": 80,
+        "descricao": "Clientes estrategicos - alta prioridade"
+      },
+      {
+        "nivel": "B",
+        "pontuacaoMinima": 60,
+        "descricao": "Clientes importantes - media prioridade"
+      },
+      {
+        "nivel": "C",
+        "pontuacaoMinima": 40,
+        "descricao": "Clientes regulares - prioridade padrao"
+      },
+      {
+        "nivel": "D",
+        "pontuacaoMinima": 0,
+        "descricao": "Clientes novos ou baixo volume"
+      }
+    ],
+    "recalculo": "Mensal - dia 1 de cada mes",
+    "nota": "Cluster pode ser alterado manualmente via workflow de aprovacao (Cluster Excecao)"
+  },
+  "mapeamentoCNAECanal": {
+    "descricao": "Regras de sugestao automatica de canal baseado no CNAE",
+    "regras": [
+      {
+        "prefixoCNAE": "10-33",
+        "descricao": "Industrias de Transformacao (divisoes 10 a 33)",
+        "canalSugerido": "20",
+        "exemplos": [
+          "Metalurgia",
+          "Fabricacao de maquinas",
+          "Producao de artefatos"
+        ]
+      },
+      {
+        "prefixoCNAE": "45-47",
+        "descricao": "Comercio (divisoes 45 a 47)",
+        "canalSugerido": "30",
+        "exemplos": [
+          "Comercio atacadista",
+          "Comercio varejista",
+          "Revenda de materiais"
+        ]
+      },
+      {
+        "prefixoCNAE": "01-03",
+        "descricao": "Agricultura, Pecuaria e Pesca",
+        "canalSugerido": "30",
+        "exemplos": [
+          "Producao agricola",
+          "Pecuaria",
+          "Aquicultura"
+        ]
+      },
+      {
+        "prefixoCNAE": "41-43",
+        "descricao": "Construcao (divisoes 41 a 43)",
+        "canalSugerido": "20",
+        "exemplos": [
+          "Construcao de edificios",
+          "Obras de infraestrutura",
+          "Servicos especializados"
+        ]
+      }
+    ],
+    "excecoes": "Canal 25 requer aprovacao especial e nao e sugerido automaticamente"
+  },
+  "pendencias": [
+    "Definição de critérios automáticos completos para seleção de Canal baseado em CNAE",
+    "Documentação das regras de cálculo de Cluster"
+  ],
+  "relacionamentos": {
+    "processoAnterior": "cadastro-cliente",
+    "nota": "Área de Vendas é configurada durante o processo de Cadastro de Cliente"
+  },
+  "dadosExtraidosTester862865": {
+    "documento": "862865",
+    "titulo": "Definicao Automatica de Cluster",
+    "data": "14/10/2025",
+    "contasTestadas": [
+      "Mercbenz",
+      "Leao",
+      "FRUITTOOLS"
+    ],
+    "funcionalidadeTestada": "Excecao de Cluster",
+    "fluxoClusterExcecao": [
+      {
+        "passo": 1,
+        "acao": "Abrir registro da conta"
+      },
+      {
+        "passo": 2,
+        "acao": "Clicar em 'Enviar para Aprovacao'"
+      },
+      {
+        "passo": 3,
+        "acao": "Email de notificacao enviado ao aprovador"
+      },
+      {
+        "passo": 4,
+        "acao": "Aprovador recebe e aprova a solicitacao"
+      },
+      {
+        "passo": 5,
+        "acao": "Email de confirmacao enviado"
+      },
+      {
+        "passo": 6,
+        "acao": "Campo 'Cluster excecao' marcado no registro"
+      }
+    ],
+    "campoResultante": "Cluster excecao = true apos aprovacao"
+  },
+  "discussaoReunioes": {
+    "10dez2025": {
+      "apresentador": "Leandro da Cruz Pereira",
+      "contexto": "Explicacao dos canais de vendas e diferenca entre eles",
+      "citacao": "eu falei sobre as áreas de vendas e a importância das áreas de vendas muito relacionado ao canal, né? Então canal 30, 20, 30 e 40 e quando eles têm que ser aplicados. Falei também sobre o canal 25",
+      "canaisExplicados": {
+        "avisoVerificacao": "AGUARDANDO RE-TRANSCRICAO: A transcricao de 10/12/2025 tem uma LACUNA de 1h16min (timestamp 1:12 a 1:28:17). O usuario CONFIRMOU que as definicoes dos canais foram explicadas nas reunioes, porem esse conteudo nao foi capturado na transcricao disponivel.",
+        "canal20": "Definicao PERDIDA na lacuna da transcricao",
+        "canal25": "Definicao PERDIDA na lacuna da transcricao",
+        "canal30": "Definicao PERDIDA na lacuna da transcricao",
+        "canal40": "Definicao PERDIDA na lacuna da transcricao"
+      },
+      "lacunaTranscricao": {
+        "inicio": "1:12",
+        "fim": "1:28:17",
+        "duracao": "Aproximadamente 1h16min de conteudo nao transcrito",
+        "acaoPendente": "Usuario ira re-transcrever video MP4 completo"
+      },
+      "status": "AGUARDANDO RE-TRANSCRICAO para completar definicoes dos canais"
+    }
+  },
+  "contextoReuniao": {
+    "projeto": "GTM (Go To Market) / CRM",
+    "lideranca": {
+      "business": "Thalita Merisio Rhein",
+      "tecnico": "Leandro da Cruz Pereira"
+    },
+    "timeline": {
+      "workshops": "04/12 a 22/12/2025",
+      "posWorkshop": "Responsabilidade passa para usuarios (Castro)",
+      "entregaveis": [
+        "Planilha de cenarios",
+        "Manual de orientacao"
+      ]
+    },
+    "participantes": [
+      {
+        "nome": "Leandro da Cruz Pereira",
+        "papel": "TI/Apresentador",
+        "contribuicao": "Explicou canais 20, 25, 30, 40"
+      },
+      {
+        "nome": "Thalita Merisio Rhein",
+        "papel": "Project Lead Business"
+      }
+    ]
+  },
+  "documentosRelacionados": [
+    {
+      "id": "862865",
+      "arquivo": "862865-DEFINIÇÃO AUTOMÁTICA DE CLUSTER.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\862865-DEFINIÇÃO_AUTOMÁTICA_DE_CLUSTER.json"
+    },
+    {
+      "id": "862865",
+      "arquivo": "862865-DEFINIÇÃO AUTOMÁTICA DE CLUSTER.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\862865-DEFINIÇÃO_AUTOMÁTICA_DE_CLUSTER.json"
+    },
+    {
+      "id": "902162",
+      "arquivo": "902162 - Separação de RecordTypes - Ocorrência de Clientes e Belgo Flex.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\902162_-_Separação_de_RecordTypes_-_Ocorrência_de_Clientes_e_Belgo_Flex.json"
+    },
+    {
+      "id": "902162",
+      "arquivo": "902162 - Separação de RecordTypes - Ocorrência de Clientes e Belgo Flex.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\902162_-_Separação_de_RecordTypes_-_Ocorrência_de_Clientes_e_Belgo_Flex.json"
+    }
+  ],
+  "totalDocumentos": 4,
+  "ultimaAtualizacao": "2026-01-13T11:36:26.113236",
+  "documentosGerais": [
+    {
+      "tipo": "Plano de Testes Exploratorios",
+      "id": "909100"
+    },
+    {
+      "tipo": "Boot/Automacao",
+      "id": "Boot"
+    },
+    {
+      "tipo": "App Guidance",
+      "id": "app guidance"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "metadata": {
+    "id": "895963",
+    "arquivo": "895963 - Testes tela FUP.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\895963 - Testes tela FUP.docx",
+    "tamanho_bytes": 3458471,
+    "data_modificacao": "2025-11-26T14:18:45",
+    "extraido_em": "2026-01-13T11:31:15.199153",
+    "status": "extraido",
+    "total_paragrafos": 60,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Teste com usuário: Andreia",
+      "Campo Ordem de Venda",
+      "Durante a execução dos testes na funcionalidade FUP de Carteira, foi identificado que o campo Ordem de Venda somente aceita a pesquisa quando é informado o código numérico da ordem.\nQuando o usuário tenta realizar a busca utilizando o nome ou qualquer outro tipo de descrição, o sistema não retorna resultados, não permitindo concluir a pesquisa.",
+      "Forma de Pesquisa – Documento ou Material",
+      "Pesquisa por Documento:\nPermite localizar registros informando diretamente o número do documento (ex.: Ordem de Venda). Essa opção funciona corretamente quando o usuário insere o código numérico.",
+      "Pesquisa por Material:\nTambém é possível realizar a busca utilizando o código do material. Assim como no caso do documento, o sistema aceita somente o código numérico do material.\nQuando o usuário tenta pesquisar pelo nome ou descrição, não há retorno de resultados.",
+      "Falta de indicação clara sobre o tipo de entrada:",
+      "Os filtros não informam se aceitam código numérico, texto ou ambos.\nTive dúvidas neste ponto, e acaba gerando tentativa e erro.\nSugestão:",
+      "Pesquisar por código do documento",
+      "Pesquisar por código do material",
+      " Campos que poderiam trazer sugestões",
+      "Ex.: Clientes, Escritório de Vendas, Equipe de Vendas.\nSugestão:",
+      "Habilitar autocomplete ou sugestões da lista enquanto o usuário digita.",
+      "Clicar no botão Agrupar, todos os grupos são consolidados em uma única linha, facilitando a visualização e organização das informações apresentadas na tela.",
+      "Limpar Datas:\nA funcionalidade permite limpar os campos de data, removendo automaticamente o período selecionado e retornando os filtros ao estado inicial.",
+      "Escritório de Vendas:\nLimpar o campo Escritório de Vendas.",
+      "Botão “Parâmetro”",
+      "Ao acionar o botão Parâmetro, o sistema limpa automaticamente as datas preenchidas e executa o comando de Restaurar Parâmetros, retornando todos os filtros ao padrão inicial.",
+      "Quando o usuário seleciona um nome, o botão correspondente fica verde, indicando que aquela coluna será exibida na tabela.\nQuando o nome não está selecionado, ele permanece no estado padrão e a coluna não é exibida.",
+      "Ordens Faturadas",
+      "XML",
+      "Danfe",
+      "Romaneio",
+      "Não tinha nenhum certificado",
+      "Exportar CSV",
+      "Teste com usuário: Marcos",
+      "Ordens em Aberto:",
+      "Campos Obrigatórios – Equipe de Vendas e Escritório de Vendas",
+      "Durante a validação foi identificado que os campos Equipe de Vendas e Escritório de Vendas não permitem remoção.\nSão campos obrigatórios, permanecendo sempre preenchidos e impedindo que o usuário deixe esses filtros em branco.",
+      "Ao preencher o campo Documento, os demais campos da tela são automaticamente ocultados.\nEsse comportamento impede qualquer alteração nos outros campos enquanto o valor do campo Documento estiver informado.",
+      "Clicar no botão Agrupar, todos os grupos são consolidados em uma única linha, facilitando a visualização e organização das informações apresentadas na tela.",
+      "Botão “Parâmetro”",
+      "Ao acionar o botão Parâmetro, o sistema limpa automaticamente as datas preenchidas e executa o comando de Restaurar Parâmetros, retornando todos os filtros ao padrão inicial.",
+      "Quando o usuário seleciona um nome, o botão correspondente fica verde, indicando que aquela coluna será exibida na tabela.\nQuando o nome não está selecionado, ele permanece no estado padrão e a coluna não é exibida.",
+      "Ordens Faturadas",
+      "Durante a execução dos testes no cenário de Ordens Faturadas, não foi possível validar as funcionalidades de geração/visualização de XML, DANFE e Romaneio utilizando o usuário do Marcos.",
+      "Os campos e botões correspondentes não são exibidos para este usuário, impossibilitando a realização completa do teste.",
+      "Assim, o teste ficou pendente não sei se precisa de alguma permissão/visibilidade dos campos necessários.",
+      "Não aparece o campo, Nova Nota, editar, excluir",
+      "Usuário Andreia aparece os campos:",
+      "Exportar CSV",
+      "Tudo certo para exportar o documento.",
+      "Teste com usuário: Arthur Portugal",
+      "Perfil de gerente",
+      "Campo Ordem de Venda",
+      "Campos Obrigatórios – Equipe de Vendas e Escritório de Vendas",
+      "Durante a validação foi identificado que os campos Equipe de Vendas e Escritório de Vendas permitem remoção.\nusuário deixe esses filtros em branco.",
+      "Forma de Pesquisa – Documento ou Material",
+      "Pesquisa por Documento:\nAo preencher o campo Documento, os demais campos da tela são automaticamente ocultados.",
+      "Pesquisa por Material:\nTambém é possível realizar a busca utilizando o código do material. Assim como no caso do documento, o sistema aceita somente o código numérico do material.\nQuando o usuário tenta pesquisar pelo nome ou descrição, não há retorno de resultados.",
+      "Clicar no botão Agrupar, todos os grupos são consolidados em uma única linha, facilitando a visualização e organização das informações apresentadas na tela.",
+      "Botão “Parâmetro”",
+      "Ao acionar o botão Parâmetro, o sistema limpa automaticamente as datas preenchidas e executa o comando de Restaurar Parâmetros, retornando todos os filtros ao padrão inicial.",
+      "Quando o usuário seleciona um nome, o botão correspondente fica verde, indicando que aquela coluna será exibida na tabela.\nQuando o nome não está selecionado, ele permanece no estado padrão e a coluna não é exibida.",
+      "Ordens Faturadas",
+      "Durante a execução dos testes no cenário de Ordens Faturadas, não foi possível validar as funcionalidades de geração/visualização de XML, DANFE e Romaneio utilizando o usuário do Marcos.",
+      "Os campos e botões correspondentes não são exibidos para este usuário, impossibilitando a realização completa do teste.",
+      "Assim, o teste ficou pendente não sei se precisa de alguma permissão/visibilidade dos campos necessários.",
+      "Não aparece o campo, Nova Nota, editar, excluir",
+      "Exportar CSV"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n895963 - Testes tela FUP",
+          "Data de Criação\n24/11/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 60,
+    "total_tabelas": 1
+  }
+}

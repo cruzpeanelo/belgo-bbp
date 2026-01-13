@@ -1,0 +1,113 @@
+{
+  "id": "2025-12-03_financeiro-controladoria",
+  "data": "2025-12-03",
+  "titulo": "GTM - Alinhamento de Proximas Etapas Financeiro/Controladoria",
+  "duracao": "57min",
+  "tipo": "Alinhamento Estrategico",
+  "status": "Concluido",
+  "transcricaoPath": "data/transcricoes/2025-12-03_financeiro-controladoria.txt",
+  "resumo": "Reuniao de alinhamento entre areas de negocio (Comercial, Financeiro, Controladoria) para explicar o projeto GTM/Go Wire, definir responsabilidades e preparar para testes integrados. Thalita assumiu como gerente do projeto apos saida de Dani Tamerao e ferias de Audrey.",
+  "participantes": [
+    {"nome": "Thalita Rhein", "papel": "Gerente Negocio GTM", "area": "Comercial/Marketing"},
+    {"nome": "Leandro Cruz", "papel": "Gerente de TI", "area": "TI"},
+    {"nome": "Renato Araujo", "papel": "Gerente", "area": "Controladoria"},
+    {"nome": "Ivano Araujo", "papel": "Gerente", "area": "Financeiro"},
+    {"nome": "Fernanda Monteiro", "papel": "Gerente", "area": "Controladoria"},
+    {"nome": "Claudio Oliveira", "papel": "Gerente", "area": "Fiscal"}
+  ],
+  "topicosAbordados": [
+    "Contexto do projeto GTM/Go Wire/CRM",
+    "Transicao de lideranca (Dani Tamerao -> Audrey -> Thalita)",
+    "Testes integrados end-to-end pendentes",
+    "Cadastro de clientes via Salesforce integrado com SAP/BRO",
+    "4 Areas de credito (CSP-BelgoCash, ABBA, ADBA-Distribuicao, ALPE)",
+    "Canais de venda 20, 30, 40, 50",
+    "Cluster e Setor Industrial - virada de segmento produto para cliente",
+    "Impacto na Controladoria (EBITDA, Segment Report)",
+    "Integracao Dow Jones para compliance/due diligence",
+    "Workshops AS-IS/TO-BE com key users"
+  ],
+  "sistemasDiscutidos": [
+    {"sistema": "Salesforce", "descricao": "CRM central integrado com SAP"},
+    {"sistema": "SAP ECC", "descricao": "Sistema legado, regras de bloqueio"},
+    {"sistema": "BRO", "descricao": "Business Role Objects - cadastro automatizado"},
+    {"sistema": "Dow Jones", "descricao": "Due diligence/compliance"},
+    {"sistema": "Segment Report", "descricao": "Relatorios de margem e EBITDA"}
+  ],
+  "citacoesChave": [
+    {
+      "autor": "Rhein, Thalita Merisio",
+      "timestamp": "0:10",
+      "texto": "Bom, voltando aqui, entao e, eu preferi chamar todos voces para colocar todo mundo na mesma pagina, pedir ajuda do Leandro da TI. E, ele esta desde o comeco. Eu acabei de chegar aqui como gerente do projeto do lado do negocio.",
+      "contexto": "Abertura da reuniao - contexto da transicao"
+    },
+    {
+      "autor": "Rhein, Thalita Merisio",
+      "timestamp": "1:54",
+      "texto": "Teste e end to end de ponta a ponta. Ate vou compartilhar uma tela aqui para ficar mais claro isso para voces, mas a gente nao esta preparado como um negocio para fazer isso.",
+      "contexto": "Identificacao de gap nos testes"
+    },
+    {
+      "autor": "Rhein, Thalita Merisio",
+      "timestamp": "3:04",
+      "texto": "Esse projeto ele nao e so da TI, esse projeto nao e so do comercial. Esse projeto da Belgo como um todo e quando a gente fala de que esse projeto de todo mundo e porque ele vai mudar, como eu falei o processo.",
+      "contexto": "Projeto e de toda a empresa"
+    },
+    {
+      "autor": "Pereira, Leandro Da Cruz",
+      "timestamp": "6:59",
+      "texto": "Primeiro ponto que muda bastante e a parte de cadastro de clientes. Em termos de papeis e responsabilidades, anteriormente o vendedor passava uma ficha la pro Smart Center e o Smart Center cadastrava o cliente dentro do SAP. E esse processo a gente mudou.",
+      "contexto": "Mudanca no processo de cadastro"
+    },
+    {
+      "autor": "Pereira, Leandro Da Cruz",
+      "timestamp": "9:51",
+      "texto": "Outro ponto importante sobre essa questao, o novo conceito, area de vendas. Entao voces vao ver la os canais 30, 20, 30, 40 e 50. Que sao os novos canais. Industria, distribuicao e consumo.",
+      "contexto": "Novos canais de venda"
+    },
+    {
+      "autor": "Pereira, Leandro Da Cruz",
+      "timestamp": "11:56",
+      "texto": "Porque esse cluster aqui e a virada de segmento de produto para segmento de clientes. Entao voce tem o cluster que sao as contas corporativas, tem outros clusters aqui.",
+      "contexto": "Virada estrategica do GTM"
+    },
+    {
+      "autor": "Araujo, Renato Fernandes De",
+      "timestamp": "15:37",
+      "texto": "So para a gente ver se pode ter algum impacto, ta? Mas pelo menos voce seja conhecido antes mesmo da gente mandar isso para a producao. Entao e importante ter essa visao, principalmente que a gente esta encerrando o ano interial.",
+      "contexto": "Preocupacao com impacto em controles"
+    },
+    {
+      "autor": "Rhein, Thalita Merisio",
+      "timestamp": "19:57",
+      "texto": "A gente vai desenhar partindo desse relato deles, o AS IS. E ai, complementar ao que o Leandro tem conhecimento, dominio ai de como a ferramenta esta sendo estruturada, a gente vai desenhar o TO BE.",
+      "contexto": "Metodologia dos workshops"
+    }
+  ],
+  "problemasIdentificados": [
+    "Negocio nao preparado para testes end-to-end",
+    "Key users nao sabiam que eram key users",
+    "Transicoes de lideranca geraram gaps de comunicacao",
+    "Impactos em controles SOX precisam ser avaliados",
+    "Integracao Dow Jones precisa ser revista (fluxo via BRO)"
+  ],
+  "decisoesTomadas": [
+    "Workshops semanais de 2h para mapear AS-IS/TO-BE",
+    "Maria Luiza Chaves (Controladoria) adicionada como key user",
+    "Comprometimento minimo de carga horaria semanal dedicada",
+    "Reuniao especifica para avaliar impactos em controles SOX",
+    "Meta de go-live: Fevereiro-Marco 2026 (antes do SAP for)"
+  ],
+  "jornadasRelacionadas": [
+    "cadastro-cliente",
+    "financeiro",
+    "areas-vendas",
+    "workflow-pricing"
+  ],
+  "proximosPassos": [
+    "Workshop dia seguinte (04/12) - 2h com usuarios",
+    "Mais 2 janelas de 2h na semana seguinte",
+    "Total de 6h para investigacao AS-IS/TO-BE",
+    "Apresentacao do fluxograma para aprovacao"
+  ]
+}

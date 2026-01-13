@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "id": null,
+    "arquivo": "Teste - CNAE.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\Teste - CNAE.docx",
+    "tamanho_bytes": 885098,
+    "data_modificacao": "2025-10-07T17:39:12",
+    "extraido_em": "2026-01-13T11:31:16.018576",
+    "status": "extraido",
+    "total_paragrafos": 7,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Ajustes na Tela de Contas",
+      "Remoção de Botões",
+      "Acesse Contas no Salesforce.",
+      "Observe a tela principal (parte superior e lista de botões).",
+      "- Os botões “Descobrir Empresas”, “Importar” e “Atribuir Rótulo” não devem aparecer.",
+      "Botão “Criar Contas” – Validação de duplicidade",
+      "Confirmar que o sistema bloqueia criação de contas duplicadas"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\nAJUSTE DE LAYOUT E ORGANIZAÇÃO DA TELA DE CONTAS - MENU PRINCIPAL",
+          "Data de Criação\n07/10/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 7,
+    "total_tabelas": 1
+  }
+}

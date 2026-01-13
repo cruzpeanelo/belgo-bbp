@@ -1,0 +1,166 @@
+{
+  "titulo": "Integracoes - Projeto GTM Vendas",
+  "descricao": "Mapeamento de integracoes entre sistemas para o projeto GTM",
+  "dataAtualizacao": "2026-01-13",
+  "sistemas": [
+    {
+      "id": "salesforce",
+      "nome": "Salesforce CRM",
+      "tipo": "CRM",
+      "ambiente": {
+        "producao": "belgoarames.my.salesforce.com",
+        "homologacao": "belgoarames--hml.sandbox.my.salesforce.com"
+      },
+      "modulos": ["Sales Cloud", "Service Cloud", "Einstein Bot"],
+      "status": "ativo"
+    },
+    {
+      "id": "sap-ecc",
+      "nome": "SAP ECC",
+      "tipo": "ERP",
+      "descricao": "Sistema ERP para gestão de pedidos, estoque e financeiro",
+      "modulos": ["SD (Sales & Distribution)", "MM", "FI"],
+      "status": "ativo"
+    },
+    {
+      "id": "ascp",
+      "nome": "ASCP - Advanced Supply Chain Planning",
+      "tipo": "Middleware",
+      "descricao": "Middleware para integração de credito entre Salesforce e SAP",
+      "funcionalidades": [
+        "Sincronização de areas de credito",
+        "Consulta de limites",
+        "Bloqueio/desbloqueio de clientes"
+      ],
+      "status": "ativo"
+    },
+    {
+      "id": "fscm",
+      "nome": "FSCM - Financial Supply Chain Management",
+      "tipo": "Financeiro",
+      "descricao": "Modulo SAP para gestão da cadeia financeira",
+      "funcionalidades": [
+        "Gestao de credito",
+        "Controle de recebimentos",
+        "Bloqueio de vendas"
+      ],
+      "status": "ativo"
+    },
+    {
+      "id": "alpe",
+      "nome": "ALPE (Sistema Crédito)",
+      "tipo": "Área de Crédito",
+      "descricao": "Área de crédito Aços Longos PE - gerenciada via ASCP",
+      "areaCredito": "ALPE/BTC",
+      "status": "ativo",
+      "observacao": "Não usar 'Altair' - nome correto é ALPE"
+    },
+    {
+      "id": "sintegra",
+      "nome": "SINTEGRA",
+      "tipo": "Consulta Externa",
+      "descricao": "Servico de consulta de situacao cadastral de CNPJ",
+      "funcionalidades": [
+        "Validacao de CNPJ",
+        "Consulta de situacao cadastral",
+        "Auto-preenchimento de dados"
+      ],
+      "status": "ativo"
+    },
+    {
+      "id": "whatsapp",
+      "nome": "WhatsApp Business API",
+      "tipo": "Canal de Comunicacao",
+      "descricao": "Canal de autoatendimento via WhatsApp",
+      "funcionalidades": [
+        "Einstein Bot",
+        "Consulta de pedidos",
+        "Documentos fiscais",
+        "Transbordo para Smart Center"
+      ],
+      "orcamento2026": "400.000 BRL",
+      "status": "ativo",
+      "fontesReuniao": ["2026-01-07_bot-einstein-logistica.json"]
+    }
+  ],
+  "fluxosIntegração": [
+    {
+      "id": "cadastro-cliente",
+      "nome": "Cadastro de Cliente",
+      "origem": "salesforce",
+      "destino": "sap-ecc",
+      "tipo": "sincrono",
+      "descricao": "Replicacao de dados mestres de cliente",
+      "campos": ["CNPJ", "Razao Social", "Endereco", "Canal", "Area Credito"],
+      "validacoes": [
+        "CNPJ valido via SINTEGRA",
+        "Campos obrigatorios preenchidos",
+        "Canal e Area Credito definidos"
+      ]
+    },
+    {
+      "id": "credito-consulta",
+      "nome": "Consulta de Credito",
+      "origem": "salesforce",
+      "destino": "ascp",
+      "tipo": "sincrono",
+      "descricao": "Consulta de limite de credito disponivel",
+      "retorno": ["Limite disponivel", "Status bloqueio", "Area credito"]
+    },
+    {
+      "id": "pedido-integração",
+      "nome": "Integração de Pedido",
+      "origem": "salesforce",
+      "destino": "sap-ecc",
+      "tipo": "assincrono",
+      "descricao": "Envio de cotacao/pedido para SAP",
+      "campos": ["Numero pedido", "Cliente", "Itens", "Precos"],
+      "camposRetorno": ["Integration Status", "External ID", "Numero SAP"]
+    },
+    {
+      "id": "ficha-comercial",
+      "nome": "Ficha Comercial - YEDI",
+      "origem": "salesforce",
+      "destino": "sap-ecc",
+      "tipo": "sincrono",
+      "descricao": "Interface sincrona para auto-preenchimento de ficha comercial",
+      "status": "em_teste",
+      "fontesReuniao": ["2025-12-23_alinhamento-cadastro-materiais.json"]
+    }
+  ],
+  "apis": [
+    {
+      "nome": "REST API - Salesforce",
+      "tipo": "REST",
+      "autenticacao": "OAuth 2.0",
+      "endpoints": {
+        "account": "/services/data/v58.0/sobjects/Account",
+        "opportunity": "/services/data/v58.0/sobjects/Opportunity"
+      }
+    },
+    {
+      "nome": "SAP RFC",
+      "tipo": "RFC",
+      "descricao": "Remote Function Calls para SAP",
+      "funcoes": ["BAPI_CUSTOMER_GETDETAIL", "BAPI_SALESORDER_CREATEFROMDAT2"]
+    }
+  ],
+  "statusIntegracoes": {
+    "producao": {
+      "salesforce_sap": "ativo",
+      "salesforce_ascp": "ativo",
+      "salesforce_whatsapp": "ativo",
+      "sintegra": "ativo"
+    },
+    "homologacao": {
+      "salesforce_sap": "em_teste",
+      "salesforce_ascp": "ativo",
+      "ficha_comercial_yedi": "em_teste"
+    }
+  },
+  "observacoes": [
+    "Integração Ficha Comercial YEDI em fase de testes GTM",
+    "Bot WhatsApp com orcamento aprovado de 400k para 2026",
+    "ASCP e ponto central para consultas de credito"
+  ]
+}

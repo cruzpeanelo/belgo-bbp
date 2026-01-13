@@ -1,0 +1,223 @@
+// =====================================================
+// BELGO GTM - CORE DA APLICAÇÃO
+// =====================================================
+
+const App = {
+    data: {
+        dashboard: null,
+        testes: null,
+        jornadas: null,          // Índice de processos (_index.json)
+        jornadasCache: {},       // Cache de processos carregados
+        cronograma: null,
+        pontosCriticos: null
+    },
+
+    // Detectar caminho base (raiz ou subpasta)
+    getBasePath() {
+        const path = window.location.pathname;
+        if (path.includes('/pages/')) {
+            return '../';
+        }
+        return './';
+    },
+
+    // Inicializar aplicação
+    async init() {
+        console.log('Iniciando Cockpit GTM Belgo...');
+        await this.loadAllData();
+        this.setupNavigation();
+        console.log('Cockpit inicializado com sucesso!');
+    },
+
+    // Carregar todos os dados
+    async loadAllData() {
+        const base = this.getBasePath();
+        try {
+            const [dashboard, testes, jornadasIndex, cronograma, pontosCriticos] = await Promise.all([
+                this.fetchJSON(base + 'data/dashboard.json'),
+                this.fetchJSON(base + 'data/testes.json'),
+                this.fetchJSON(base + 'data/jornadas/_index.json'),
+                this.fetchJSON(base + 'data/cronograma.json'),
+                this.fetchJSON(base + 'data/pontos-criticos.json')
+            ]);
+
+            this.data.dashboard = dashboard;
+            this.data.testes = testes;
+            this.data.jornadas = jornadasIndex;
+            this.data.cronograma = cronograma;
+            this.data.pontosCriticos = pontosCriticos;
+
+            // Restaurar status salvos no localStorage
+            this.restoreSavedStatuses();
+
+            console.log('Dados carregados:', this.data);
+        } catch (error) {
+            console.error('Erro ao carregar dados:', error);
+        }
+    },
+
+    // Restaurar status de testes salvos no localStorage
+    restoreSavedStatuses() {
+        if (!this.data.testes) return;
+
+        let restored = 0;
+        this.data.testes.categorias.forEach(cat => {
+            cat.casos.forEach(caso => {
+                const saved = Utils.loadFromStorage('testes_' + caso.id);
+                if (saved && saved.status) {
+                    caso.status = saved.status;
+                    caso.dataExecucao = saved.data;
+                    restored++;
+                }
+            });
+        });
+
+        if (restored > 0) {
+            console.log(`Restaurados ${restored} status de testes do localStorage`);
+            this.recalculateMetrics();
+        }
+    },
+
+    // Carregar um processo específico (com cache)
+    async loadProcesso(id) {
+        // Verificar cache
+        if (this.data.jornadasCache[id]) {
+            return this.data.jornadasCache[id];
+        }
+
+        const base = this.getBasePath();
+        const processo = await this.fetchJSON(base + `data/jornadas/${id}.json`);
+
+        if (processo) {
+            this.data.jornadasCache[id] = processo;
+        }
+
+        return processo;
+    },
+
+    // Carregar todos os processos
+    async loadAllProcessos() {
+        if (!this.data.jornadas || !this.data.jornadas.processos) {
+            return [];
+        }
+
+        const promises = this.data.jornadas.processos.map(p => this.loadProcesso(p.id));
+        return await Promise.all(promises);
+    },
+
+    // Fetch JSON com tratamento de erro
+    async fetchJSON(url) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            return await response.json();
+        } catch (error) {
+            console.warn(`Erro ao carregar ${url}:`, error);
+            return null;
+        }
+    },
+
+    // Configurar navegação
+    setupNavigation() {
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+    },
+
+    // Atualizar status de um teste
+    updateTestStatus(testId, newStatus) {
+        if (!this.data.testes) return false;
+
+        for (const cat of this.data.testes.categorias) {
+            const test = cat.casos.find(c => c.id === testId);
+            if (test) {
+                test.status = newStatus;
+                test.dataExecucao = new Date().toISOString();
+                Utils.saveToStorage('testes_' + testId, { status: newStatus, data: test.dataExecucao });
+                this.recalculateMetrics();
+                return true;
+            }
+        }
+        return false;
+    },
+
+    // Recalcular métricas
+    recalculateMetrics() {
+        if (!this.data.testes || !this.data.dashboard) return;
+
+        let executados = 0, pendentes = 0, falhados = 0;
+
+        this.data.testes.categorias.forEach(cat => {
+            let catOk = 0, catFalhou = 0, catPendente = 0;
+
+            cat.casos.forEach(caso => {
+                if (caso.status === 'Concluído') { executados++; catOk++; }
+                else if (caso.status === 'Falhou') { falhados++; catFalhou++; }
+                else { pendentes++; catPendente++; }
+            });
+
+            // Atualizar categoria no dashboard
+            const dashCat = this.data.dashboard.statusPorCategoria.find(c => c.id === cat.id);
+            if (dashCat) {
+                dashCat.ok = catOk;
+                dashCat.falhou = catFalhou;
+                dashCat.pendente = catPendente;
+            }
+        });
+
+        this.data.dashboard.metricas.testesExecutados = executados;
+        this.data.dashboard.metricas.testesFalhados = falhados;
+        this.data.dashboard.metricas.testesPendentes = pendentes;
+        this.data.dashboard.metricas.progressoGeral = Utils.calcPercent(executados, this.data.dashboard.metricas.totalTestes);
+    },
+
+    // Filtrar testes
+    filterTests(filters = {}) {
+        if (!this.data.testes) return [];
+
+        let results = [];
+        this.data.testes.categorias.forEach(cat => {
+            let casos = cat.casos;
+
+            // Filtro por IDs especificos (usado na linkagem Jornadas -> Testes)
+            if (filters.ids && filters.ids.length > 0) {
+                casos = casos.filter(c => filters.ids.includes(c.id));
+            }
+
+            if (filters.categoria && filters.categoria !== 'all' && cat.id !== filters.categoria) {
+                return;
+            }
+
+            if (filters.status && filters.status !== 'all') {
+                casos = casos.filter(c => c.status === filters.status);
+            }
+
+            if (filters.busca) {
+                const termo = filters.busca.toLowerCase();
+                casos = casos.filter(c =>
+                    c.id.toLowerCase().includes(termo) ||
+                    c.nome.toLowerCase().includes(termo)
+                );
+            }
+
+            results = results.concat(casos.map(c => ({ ...c, categoria: cat.nome })));
+        });
+
+        return results;
+    },
+
+    // Obter estatísticas
+    getStats() {
+        if (!this.data.dashboard) return null;
+        return this.data.dashboard.metricas;
+    }
+};
+
+// Inicializar quando DOM estiver pronto
+document.addEventListener('DOMContentLoaded', () => App.init());
+
+// Exportar para uso global
+window.App = App;

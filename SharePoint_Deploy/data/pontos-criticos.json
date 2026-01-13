@@ -1,0 +1,116 @@
+{
+  "issues": [
+    {
+      "id": "PC-01",
+      "titulo": "Key Users não identificados formalmente",
+      "descricao": "Alguns usuários-chave designados não sabiam que eram key users, chegando despreparados para as responsabilidades de teste",
+      "categoria": "Pessoas",
+      "severidade": "Alta",
+      "status": "Resolvido",
+      "dataIdentificacao": "2025-12-04",
+      "dataResolucao": "2025-12-04",
+      "acaoTomada": "Declarado requisito para todos os gerentes identificarem formalmente key users com 2h semanais dedicadas",
+      "responsavel": "Thalita Rhein",
+      "fonteReuniao": "04/12/2025",
+      "impacto": "Atraso na fase de testes"
+    },
+    {
+      "id": "PC-02",
+      "titulo": "Gap de conhecimento AS IS / TO BE",
+      "descricao": "O que tenho que testar? O que muda no meu processo? Não sei, não participei, não tenho visão.",
+      "categoria": "Conhecimento",
+      "severidade": "Crítica",
+      "status": "Resolvido",
+      "dataIdentificacao": "2025-12-04",
+      "dataResolucao": "2025-12-16",
+      "acaoTomada": "Workshops semanais de mapeamento AS IS - TO BE concluídos (4 sessões realizadas)",
+      "responsavel": "Leandro Cruz / Thalita Rhein",
+      "fonteReuniao": "04/12/2025"
+    },
+    {
+      "id": "PC-03",
+      "titulo": "Gestão de Dados de Concorrentes",
+      "descricao": "Informações de concorrentes são sazonais e dinâmicas. Dificuldade em vincular projetos perdidos a concorrentes específicos.",
+      "categoria": "Dados",
+      "severidade": "Média",
+      "status": "Pendente",
+      "dataIdentificacao": "2025-12-10",
+      "acaoTomada": "Discussão agendada com Edmundo. Normalização de concorrentes pela TI.",
+      "responsavel": "Leandro Cruz",
+      "fonteReuniao": "10/12/2025"
+    },
+    {
+      "id": "PC-04",
+      "titulo": "Integração Portal Logístico pendente",
+      "descricao": "Portal logístico atualmente não integrado com SAP, causando redundância de dados entre sistemas",
+      "categoria": "Integração",
+      "severidade": "Alta",
+      "status": "Pendente",
+      "dataIdentificacao": "2025-12-16",
+      "acaoTomada": "Reunião de follow-up agendada para verificar integração SAP - Portal Logístico",
+      "responsavel": "TI",
+      "fonteReuniao": "16/12/2025"
+    },
+    {
+      "id": "PC-05",
+      "titulo": "Bugs Críticos CT-11 e CT-14",
+      "descricao": "CT-11: Botão New WFPricing disponível para contas sem SAP. CT-14: Validação aceita descontos inválidos (negativos, >100%)",
+      "categoria": "Desenvolvimento",
+      "severidade": "Bloqueador",
+      "status": "Pendente",
+      "dataIdentificacao": "2025-12-10",
+      "acaoTomada": "Correção necessária antes do GO LIVE",
+      "responsavel": "TI",
+      "fonteReuniao": "Caderno de Testes"
+    },
+    {
+      "id": "PC-06",
+      "titulo": "Qualidade de Dados de Contato",
+      "descricao": "Dados de contato incompletos ou incorretos impactam as funcionalidades de autoatendimento e comunicação automatizada",
+      "categoria": "Dados",
+      "severidade": "Alta",
+      "status": "Em Andamento",
+      "dataIdentificacao": "2025-12-16",
+      "acaoTomada": "Campanha de atualização de cadastros iniciada",
+      "responsavel": "Comercial",
+      "fonteReuniao": "16/12/2025"
+    },
+    {
+      "id": "PC-07",
+      "titulo": "Integração AMD pendente no Salesforce",
+      "descricao": "AMD (Aços Maranhão Distribuição) não tem funcionalidades no Salesforce. Processo Cross Company não contemplado.",
+      "categoria": "Integração",
+      "severidade": "Média",
+      "status": "Pendente",
+      "dataIdentificacao": "2025-12-10",
+      "acaoTomada": "Reunião específica agendada com Renata Mello e Victoria para tratar AMD",
+      "responsavel": "TI / Comercial",
+      "fonteReuniao": "10/12/2025"
+    },
+    {
+      "id": "PC-08",
+      "titulo": "Go Live reprogramado para março",
+      "descricao": "Data original de Go Live (janeiro/fevereiro) foi reprogramada para 15/03/2026 para garantir qualidade dos testes",
+      "categoria": "Cronograma",
+      "severidade": "Média",
+      "status": "Resolvido",
+      "dataIdentificacao": "2026-01-13",
+      "dataResolucao": "2026-01-13",
+      "acaoTomada": "Timeline ajustado com nova data de Go Live em 15/03/2026",
+      "responsavel": "Leandro Cruz / Thalita Rhein",
+      "fonteReuniao": "Revisao BBP"
+    },
+    {
+      "id": "PC-09",
+      "titulo": "Impactos em controles SOX a avaliar",
+      "descricao": "Novo CRM precisa ser avaliado quanto aos controles SOX e possivel entrada no escopo de auditoria",
+      "categoria": "Compliance",
+      "severidade": "Alta",
+      "status": "Pendente",
+      "dataIdentificacao": "2025-12-03",
+      "acaoTomada": "Maria Luiza Chaves (Controladoria) designada como key user para acompanhar",
+      "responsavel": "Controladoria / TI",
+      "fonteReuniao": "03/12/2025"
+    }
+  ]
+}

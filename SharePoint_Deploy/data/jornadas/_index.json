@@ -1,0 +1,139 @@
+{
+  "projeto": {
+    "nome": "GTM Vendas - Belgo Arames",
+    "fase": "II - Testes e Validacao",
+    "goLive": "30/01/2026",
+    "sistemas": [
+      "Salesforce",
+      "SAP ECC",
+      "SINTEGRA",
+      "FSCM",
+      "Portal Logistico",
+      "SEFAZ",
+      "Daniel (certificados)",
+      "Spa (documentos)",
+      "Share (concorrentes)"
+    ],
+    "canais": {
+      "20": "A verificar",
+      "30": "A verificar",
+      "40": "A verificar",
+      "25": "A verificar",
+      "nota": "Canais mencionados na reuniao 10/12, mas criterios nao detalhados"
+    },
+    "equipe": {
+      "gerenteNegocio": "Thalita Merisio Rhein",
+      "ti": "Leandro da Cruz Pereira",
+      "transicao": "Dani Tamerao saiu, Audrey em licenca maternidade"
+    },
+    "areasCredito": {
+      "confirmado": [
+        "BBA",
+        "CSP",
+        "DBA",
+        "ALPE"
+      ],
+      "nomesAlternativos": {
+        "BBA": ["ABBA"],
+        "DBA": ["ADBA"],
+        "CSP": ["Supplier", "Belgo Cash"],
+        "ALPE": ["BTC", "ABPE", "Altair"]
+      },
+      "nota": "4 areas de credito confirmadas via triple check (reunioes 03/12, 04/12, 10/12, 16/12)"
+    },
+    "timeline": {
+      "workshops": "04/12 a 22/12/2025",
+      "posWorkshop": "Responsabilidade passa para usuarios",
+      "goLive": "30/01/2026"
+    }
+  },
+  "processos": [
+    {
+      "id": "cadastro-cliente",
+      "nome": "Cadastro de Cliente",
+      "icone": "👤",
+      "ordem": 1,
+      "status": "Em Andamento"
+    },
+    {
+      "id": "areas-vendas",
+      "nome": "Áreas de Vendas",
+      "icone": "🏢",
+      "ordem": 2,
+      "status": "Em Andamento"
+    },
+    {
+      "id": "documentos-fiscais",
+      "nome": "Documentos Fiscais",
+      "icone": "📄",
+      "ordem": 3,
+      "status": "Em Andamento"
+    },
+    {
+      "id": "contatos",
+      "nome": "Gestão de Contatos",
+      "icone": "📞",
+      "ordem": 4,
+      "status": "Pendente"
+    },
+    {
+      "id": "logistica",
+      "nome": "Portal Logístico",
+      "icone": "🚚",
+      "ordem": 5,
+      "status": "Pendente"
+    },
+    {
+      "id": "financeiro",
+      "nome": "Financeiro/Crédito",
+      "icone": "💰",
+      "ordem": 6,
+      "status": "Em Andamento"
+    },
+    {
+      "id": "concorrentes",
+      "nome": "Rastreamento de Concorrentes",
+      "icone": "🎯",
+      "ordem": 7,
+      "status": "Pendente"
+    },
+    {
+      "id": "autoatendimento",
+      "nome": "Autoatendimento",
+      "icone": "🖥️",
+      "ordem": 8,
+      "status": "Futuro"
+    },
+    {
+      "id": "workflow-pricing",
+      "nome": "Workflow Pricing",
+      "icone": "💲",
+      "ordem": 9,
+      "status": "Em Andamento"
+    },
+    {
+      "id": "cotacao-ov",
+      "nome": "Cotacao e Ordem de Vendas",
+      "icone": "📋",
+      "ordem": 10,
+      "status": "Em Andamento"
+    },
+    {
+      "id": "hub-gestao",
+      "nome": "Hub de Gestao OC",
+      "icone": "⚙️",
+      "ordem": 11,
+      "status": "Em Andamento"
+    }
+  ],
+  "ultimaAtualizacao": "2026-01-13T11:36:26.126028",
+  "totalDocumentos": 69,
+  "totalPlanilhas": 6,
+  "arquivosConfig": [
+    "data/config/areas-credito.json",
+    "data/config/canais.json",
+    "data/glossario.json",
+    "data/timeline.json",
+    "data/participantes.json"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "id": null,
+    "arquivo": "Teste - Boot.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\Teste - Boot.docx",
+    "tamanho_bytes": 2475611,
+    "data_modificacao": "2025-12-02T17:57:54",
+    "extraido_em": "2026-01-13T11:31:16.008605",
+    "status": "extraido",
+    "total_paragrafos": 7,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "CNPJ 52.021.873.000.184 ",
+      "Ordem Faturada: 200151742",
+      "CNPJ 52.021.873.000.184 ",
+      "Ordem em aberto: 201175525",
+      "CNPJ 52.021.873.000.184 ",
+      "Nota Fiscal: 001691314",
+      "Percebi que na nota fiscal, o Boot não perguntou este campo:"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\nBoot",
+          "Data de Criação\n02/12/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 7,
+    "total_tabelas": 1
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "id": "881237",
+    "arquivo": "881237 - [Salesforce] Remover restrição de carácteres em nome de Parceiro Agrupador.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\881237 - [Salesforce] Remover restrição de carácteres em nome de Parceiro Agrupador.docx",
+    "tamanho_bytes": 453316,
+    "data_modificacao": "2025-10-14T15:30:25",
+    "extraido_em": "2026-01-13T11:31:14.907654",
+    "status": "extraido",
+    "total_paragrafos": 1,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Testes realizados com nomes de até 10 e com menos caracteres. Campo funcionando conforme esperado."
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\nIn-app guidance para apoio ao usuário na navegação",
+          "Data de Criação\n14/10/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 1,
+    "total_tabelas": 1
+  }
+}

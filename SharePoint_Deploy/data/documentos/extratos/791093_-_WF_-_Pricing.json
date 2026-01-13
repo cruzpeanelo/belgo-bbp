@@ -1,0 +1,37 @@
+{
+  "metadata": {
+    "id": "791093",
+    "arquivo": "791093 - WF - Pricing.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\791093 - WF - Pricing.docx",
+    "tamanho_bytes": 564335,
+    "data_modificacao": "2025-10-28T17:00:08",
+    "extraido_em": "2026-01-13T11:31:14.706637",
+    "status": "extraido",
+    "total_paragrafos": 4,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Conta MOAGEIRA \nConsulta da conta MOAGEIRA, exibindo o Escritório de Vendas Alternativo como DIAP – DBA Penápolis 2.",
+      "Configuração do Workflow Pricing para a conta MOAGEIRA, com o escritório DIAP – DBA Penápolis 2 e vigência de 28/10/2025 a 04/11/2025.",
+      "Desconto de 10% para o grupo de mercadoria Cabos de Aço (BA), vinculada à unidade UNRIO – Ropes 1. Após o preenchimento, foi acionado o botão Criar.",
+      "Confirmação de que a solicitação de Workflow foi enviada com sucesso para aprovação."
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n791093 - WF - Pricing",
+          "Data de Criação\n28/10/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 4,
+    "total_tabelas": 1
+  }
+}

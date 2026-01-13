@@ -1,0 +1,151 @@
+{
+  "reuniao": {
+    "titulo": "Bot Einstein Planejamento & Logística",
+    "data": "2026-01-07",
+    "duracao": "52:13",
+    "tipo": "Meeting Recording",
+    "fonte": "SharePoint/Stream",
+    "tamanho": "409 MB",
+    "resumo": "Reunião sobre o Bot Einstein para autoatendimento via WhatsApp. Apresentação do MVP com consulta de conta, status de pedidos e documentos fiscais. Discussão sobre autenticação de clientes, transbordo para Smart Center, timeline e orçamento (400k para 2026)."
+  },
+  "participantes": [
+    "Franca, Fabricio",
+    "Accioly, Ricardo",
+    "Silva, Fabiana Oliveira",
+    "Sousa, Ronildo Rodrigues De",
+    "Pinheiro, Jefferson",
+    "Miranda, Patricia",
+    "Pereira, Leandro da Cruz",
+    "Almeida, Marcelo",
+    "Teixeira, Gustavo",
+    "Vitoria (mencionado)"
+  ],
+  "topicos": [
+    "Visao geral do projeto GTM e solucoes",
+    "Autoatendimento WhatsApp",
+    "Timeline e orcamento do projeto",
+    "Autenticacao de clientes",
+    "Transbordo e criacao de casos",
+    "Canal unificado de comunicacao",
+    "Integracao Salesforce",
+    "Proximos passos"
+  ],
+  "capitulos": [
+    {
+      "timestamp": "0:36",
+      "titulo": "Visao Geral do Projeto",
+      "descricao": "Equipe GTM atende comercial, marketing e planejamento. Duas solucoes: relatorio Power BI + autoatendimento WhatsApp"
+    },
+    {
+      "timestamp": "1:57",
+      "titulo": "Autoatendimento WhatsApp",
+      "descricao": "Conversa guiada para informacoes de conta, criado como MVP"
+    },
+    {
+      "timestamp": "3:38",
+      "titulo": "Timeline e Orcamento",
+      "descricao": "Projeto iniciou em outubro, entregue em dezembro. 400.000 BRL aprovados para 2026"
+    },
+    {
+      "timestamp": "11:16",
+      "titulo": "Autenticacao de Clientes",
+      "descricao": "Validacao por email para seguranca"
+    },
+    {
+      "timestamp": "19:24",
+      "titulo": "Transbordo e Criacao de Casos",
+      "descricao": "Casos para consultas nao resolvidas tratados pelo Smart Center"
+    },
+    {
+      "timestamp": "23:59",
+      "titulo": "Canal Unificado de Comunicacao",
+      "descricao": "Numero unico de WhatsApp para todas as interacoes"
+    },
+    {
+      "timestamp": "36:56",
+      "titulo": "Integracao Salesforce",
+      "descricao": "Todas as interacoes armazenadas no Salesforce"
+    },
+    {
+      "timestamp": "50:45",
+      "titulo": "Proximos Passos",
+      "descricao": "Agendar reuniao para revisar prioridades"
+    }
+  ],
+  "acoes": [
+    {
+      "acao": "Mapeamento e Priorizacao de Fluxos do Chatbot WhatsApp",
+      "timestamp": "50:45",
+      "responsaveis": ["Franca", "Accioly", "Silva", "Sousa", "Pinheiro", "Miranda", "Pereira", "Almeida"],
+      "prazo": "A definir"
+    },
+    {
+      "acao": "Integracao Smart Center e SAC",
+      "timestamp": "50:54",
+      "responsaveis": ["Miranda", "Accioly", "Silva", "Pereira"],
+      "prazo": "A definir"
+    },
+    {
+      "acao": "Testes e Resolucao de Erros",
+      "timestamp": "51:50",
+      "responsaveis": ["Sousa", "Silva", "Vitoria"],
+      "prazo": "A definir"
+    },
+    {
+      "acao": "Planejamento de Licencas Salesforce",
+      "timestamp": "29:09",
+      "responsaveis": ["Pereira", "Pinheiro", "Teixeira", "Silva"],
+      "prazo": "A definir"
+    },
+    {
+      "acao": "Experiencia e Comunicacao do Chatbot",
+      "timestamp": "41:46",
+      "responsaveis": ["Silva", "Accioly", "Sousa", "Franca"],
+      "prazo": "A definir"
+    }
+  ],
+  "pontosPrincipais": [
+    {
+      "topico": "Solucoes GTM",
+      "descricao": "Duas entregas principais: relatorio Power BI para analise e chatbot WhatsApp para autoatendimento",
+      "impacto": "Atendimento comercial, marketing e planejamento"
+    },
+    {
+      "topico": "Chatbot WhatsApp MVP",
+      "descricao": "Conversa guiada para consultas de conta, status de pedidos, documentos fiscais",
+      "impacto": "Reducao de carga no Smart Center"
+    },
+    {
+      "topico": "Orcamento 2026",
+      "descricao": "400.000 BRL aprovados para continuidade do projeto",
+      "impacto": "Expansao de funcionalidades planejada"
+    },
+    {
+      "topico": "Seguranca - Autenticacao",
+      "descricao": "Validacao via email cadastrado no Salesforce",
+      "impacto": "Protecao de dados sensiveis do cliente"
+    },
+    {
+      "topico": "Transbordo Inteligente",
+      "descricao": "Quando chatbot nao resolve, cria caso para Smart Center",
+      "impacto": "Atendimento continuo sem perda de contexto"
+    },
+    {
+      "topico": "Canal Unificado",
+      "descricao": "Numero unico de WhatsApp para todas as interacoes Belgo",
+      "impacto": "Experiencia simplificada para o cliente"
+    },
+    {
+      "topico": "Integracao Salesforce",
+      "descricao": "Historico completo de conversas armazenado no CRM",
+      "impacto": "Visibilidade 360 do cliente"
+    }
+  ],
+  "jornadasRelacionadas": [
+    "autoatendimento",
+    "hub-gestao",
+    "contatos"
+  ],
+  "statusExtracao": "Completo via Copilot - resumo estruturado com topicos e acoes",
+  "ultimaAtualizacao": "2026-01-13"
+}

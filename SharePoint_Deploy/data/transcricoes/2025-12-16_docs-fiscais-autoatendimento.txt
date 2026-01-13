@@ -1,0 +1,1457 @@
+GTM - Desenho AS-IS e TO-BE-20251216_090348-Meeting Recording
+December 16, 2025, 12:03PM
+1h 35m 57s
+
+Rhein, Thalita Merisio started transcription
+
+Rhein, Thalita Merisio   0:05
+Vai fechar o áudio e a câmera de todo mundo para vocês darem um aceite?
+Bom, hoje o objetivo é a gente, eu vou por aqui as pautas, falar dos downloads de documentos fiscais, autoatendimento e começar o workflow pricing.
+
+Pereira, Leandro Da Cruz   0:35
+Beleza, vou compartilhar minha tela aqui, a hora que vocês estiverem vendo, vocês me falam, está?
+
+Rhein, Thalita Merisio   0:41
+Já estamos no vento.
+
+Pereira, Leandro Da Cruz   0:43
+Bom, como de castro, eu sempre dou uma passada geraldo que a gente já viu, só para a gente relembrar algumas coisinhas. A gente fez o Cadastro do Cliente, a gente passou, é fez ele automático lá chama naquele botãozinho do sintegra. A gente passou pelas áreas de vendas, explicamos ali os canais. Diferença entre o 2030 e 40.
+Falando sobre os documentos fiscais, que basicamente aqui ele tem aquele processo automatizado lá de araujo, quando faz faturamento de emissão de XML, Daniel, certificado de produtos se tiver também para o cliente de forma automática dentro do Spa
+A gente falou da parte de Contatos e a importância de ter o dado bem certinho, justamente para vocês, para que outras áreas utilizem. E hoje a gente vai falar sobre autoatendimento também e o autoatendimento. Vocês vão ver a importância desse dado preenchido corretamente.
+A gente falou sobre a parte de logística, aí ficou uma pendência depois para a gente fazer uma próxima reunião aqui e verificar lá aquela integração com o portal logístico, uma vez que a gente já integra com o SAP, tem que verificar essa questão do portal Logística, integrar com o SAP também para evitar e redundância.
+Dos dados.
+A gente falou brevemente aqui sobre sobre a aba financeira, brevemente porque eu falei sobre a ficha de crédito e na ficha de crédito aqui eu falei sobre as 4 áreas de crédito, que é o acsap e basicamente aqui a gente tem a Supplier, que é representada pela.
+Pelo Belgo Cash, ABBA que é a área de crédito da tabel, ADBA que é da distribuição, EABPE que é da que é do Altair, tá? Então isso daqui basicamente foi o que a gente falou aí nas últimas duas últimas reuniões. Alguma dúvida até aqui?
+Tranquilo.
+Ainda continuando agora com algumas novidades, a gente tem um botãozinho também que são as partidas, tá? Então o que vocês vão ver? Vocês vão ver dois botõezinhos. Quando vocês consultarem essas partidas daqui da esquerda, vocês vão consultar as partidas do Cliente dentro da Belgo. Quando vocês clicarem nesse botãozinho aqui,
+a gente vai consultar as partidas do Bel Cash. Mas antes de eu mostrar a funcionalidade para vocês, eu vou fazer uma pergunta, deixa eu ver quem que pode me ajudar com isso daqui. Olha, geralmente eu escolho a Francine, mas eu vou perguntar para o João agora.
+João, como que você faz para emitir uma segunda via de boleto hoje?
+
+Endo, Joao Vitor Yuji   3:12
+Você diz, seja interno ou supplier.
+
+Pereira, Leandro Da Cruz   3:17
+Da Belgo mesmo.
+
+Endo, Joao Vitor Yuji   3:18
+Se for da Belgo pelo SAP, tem uma transação lá, faz por lá.
+
+Pereira, Leandro Da Cruz   3:24
+Entendi o XM.
+
+Endo, Joao Vitor Yuji   3:25
+E a Belgo cash pelo portal.
+
+Pereira, Leandro Da Cruz   3:27
+E um XML, como que você faz?
+
+Endo, Joao Vitor Yuji   3:30
+Tavares pelo SAP.
+
+Pereira, Leandro Da Cruz   3:32
+Então centraliza tudo dentro do SAP mesmo. Então é basicamente, você acessa lá. Eu não lembro a transação no SAP que faz a emissão de boleto, mas acessa o SAP, traz as informações, faz o download do boleto e envia isso aí para o seu cliente, certo?
+
+Endo, Joao Vitor Yuji   3:36
+Mhm.
+Exatamente.
+
+Pereira, Leandro Da Cruz   3:47
+Stop e.
+Além do João, por exemplo, você, Francine, como que você faz? É o mesmo procedimento?
+
+Gayer, Francine   4:01
+Leandro, tá me ouvindo?
+
+Pereira, Leandro Da Cruz   4:03
+Augusto Center.
+
+Gayer, Francine   4:05
+Oi, bom dia. Sim, é o mesmo o mesmo procedimento.
+
+Pereira, Leandro Da Cruz   4:06
+Buzelli.
+Então todo mundo imagina aqui que da área Comercial e também de Outras Entradas acessa o s apelar para fazer a extração das informações de boleto.
+Bom, na versão do GTM, o que a gente desenvolveu aqui dentro? A gente tem um botãozinho que chama consulta de partidas. E esse botãozinho aqui, ele é bem bacana, porque você além Tem algumas funcionalidades adicionais do SAP porque a gente consegue fazer alguns filtros e a gente trouxe tudo no mesmo lugar.
+Então, quando vocês olharem aqui, eu consigo ver as duplicatas em atraso, clicar aqui o que tem de vencido para esse mês. Esses créditos disponíveis aqui ainda tem um ajuste para a gente fazer que eu tava testando aqui junto com a galera que sabe aquele Cliente que.
+Que a gente fez um CRB, que é um abatimentos na conta, e ele não usou esse valor. Vocês vão conseguir ver através desses créditos disponíveis aqui dentro também. Porém, além do boleto, a gente colocou tudo na mesma tela.
+A consulta a extração do boleto XML, DANF e certificado de qualidade. O que a gente tem que fazer para estreia as informações? Basicamente, vocês vão clicar na linha que vocês querem ou selecionar todas aqui, clicando no botãozinho de castro.
+e da Luis
+Que o sistema está fazendo nesse momento em tempo real, ele está acessando o seu APCC, extraindo as informações de boleto e a hora que eu fechar aqui tem uma abinha aqui do meu lado direito, que é da Lanza.
+Já aparece aqui, deixa eu ver se vai aparecer.
+Desculpa.
+
+Almeida, Kathleen Pfeifeer Carmona De   5:53
+Leandro, desculpe, só te é vê se essa nota é se foi emitida no mei de QAS, é?
+
+Pereira, Leandro Da Cruz   5:53
+Deixa eu pegar um outro cliente aqui, pessoal?
+É porque.
+É possivelmente esse dado.
+Possivelmente não foi. Eu vou fazer aqui a saída e vou pegar até a ar 3 que eu sei que ela foi, tá pessoal? Um minutinho, desculpa, tá?
+A pior que eu tenho certeza que foi.
+Hudson.
+Isis.
+Esta aqui vou pegar a construtora teste que ele vai fazer o mesmo procedimento que vai funcionar. Então só repetindo aqui junto com vocês, consultas de partidas.
+Vou fazer. Olha, esse aqui também não tem. Você tem algum cliente fácil? Piquerotti.
+
+Almeida, Kathleen Pfeifeer Carmona De   6:42
+Até a 3 é até a 3. Ela tem esse daí que você fez de teste aí não tem emissão, ainda não está achando aí não.
+
+Pereira, Leandro Da Cruz   6:50
+Se você conseguir pegar aqui para mim, deixa eu ver aqui a Tulio.
+
+Almeida, Kathleen Pfeifeer Carmona De   6:53
+Deus, deixa eu pegar aqui pra você.
+Campata deve ter também.
+
+Pereira, Leandro Da Cruz   6:56
+Center beatriz.
+Isis take
+Center Pereira.
+
+Almeida, Kathleen Pfeifeer Carmona De   7:07
+Aí você pega um que tem 341 e 341 ar isso esse daí vai funcionar. Tá vendo esse que tem 341 ar? Quer dizer que ele tem boleto emitido, tá? Pode pegar qualquer um desses que vai funcionar.
+
+Pereira, Leandro Da Cruz   7:20
+Beleza, então vou clicar aqui no download. Eu já passo a palavra, tá, Vanessa? Um segundinho aqui.
+
+Almeida, Kathleen Pfeifeer Carmona De   7:21
+Boleto.
+
+Pereira, Leandro Da Cruz   7:27
+Vou para minha aba de download.
+Pinto aqui.
+Aqui, cliquei aqui, baixar arquivo.
+Cheguei aqui na minha telinha.
+Boleto vai estar aqui.
+Simples e bem objetivo. Então, na telinha financeira vocês vão conseguir fazer todos os procedimentos certificado. Lembrando que o certificado só chega por e-mail, tá? XML, Dutra e boleto, pois não Vanessa?
+
+Souza, Vanessa Torres Xavier De   8:04
+Bom dia pessoal. Leandro, é a minha dúvida sobre aquela aba lá que você mostrou dos créditos. É os créditos disponíveis ali. Só vão apresentar os créditos que não estiverem vinculados a uma nota ou vão apresentar todos.
+
+Pereira, Leandro Da Cruz   8:05
+Bom dia.
+Aline.
+Olha, você pode me ajudar nessa castro?
+
+Almeida, Kathleen Pfeifeer Carmona De   8:22
+Sim, vai aparecer todos os créditos. Está Vanessa igual você vê no Santo mesmo. Então documentos com é vinculados, que tem ordem de vendas, tudo aparece ali, é igual você vê no Santo, está? Não é só créditos vinculados a uma nota, não.
+
+Souza, Vanessa Torres Xavier De   8:27
+Mello.
+Tá.
+
+Almeida, Kathleen Pfeifeer Carmona De   8:37
+Vai ser tudo a ficha de crédito do cliente mesmo, porque é.
+
+Souza, Vanessa Torres Xavier De   8:40
+Não é? Não é só o crédito vinculado, é a minha. A minha dúvida é pelo seguinte, por exemplo, vendas vai utilizar a aba ali de créditos disponíveis. Então eles vão verificar em todos os créditos que estão em aberto na posição do cliente, independente se eles estão vinculados a uma nota fiscal como abatimentos.
+
+Almeida, Kathleen Pfeifeer Carmona De   8:49
+Mello.
+Isso exato.
+
+Souza, Vanessa Torres Xavier De   8:56
+e para quando quando ele entrar naquela aba lá do dos boletos dos títulos ele vai ver o título com o valor total e o valor já com abatimentos também E aí ele tem que saber que mesmo ele vendo crédito ali na água de créditos disponíveis ele pode já está vinculado a uma nota seria isso
+
+Almeida, Kathleen Pfeifeer Carmona De   9:16
+Isso é igual você vê na essa cara que você tá vendo aí, FMBL 5 n. Então lá aí tem todas as partidas, as parcelas de vencimento. Exemplo, a nota física tá vendo que ela tá rece do um i tá se repetindo porque ela tem 2 itens.
+
+Souza, Vanessa Torres Xavier De   9:17
+Isis mhm.
+Mello Mello Mello.
+Alexandre.
+
+Pereira, Leandro Da Cruz   9:27
+Apoio.
+
+Souza, Vanessa Torres Xavier De   9:28
+Isis Isis Isis Isis.
+
+Almeida, Kathleen Pfeifeer Carmona De   9:31
+Tem prazo de validade, então tudo que você vê na FBL 50 para facilitar está sendo mostrado aí nessa consulta de partida para o vendedor, tá, Vanessa?
+
+Souza, Vanessa Torres Xavier De   9:40
+Aí um exemplo, essa primeira linha aí que está com o valor 127000 e ele valor ajustado, abatimentos concedido, então se essa nota tivesse um abatimentos, o valor dela com o valor ajustado estaria aparecendo aí.
+
+Machado, Bruno Nolasco   9:41
+Então.
+
+Almeida, Kathleen Pfeifeer Carmona De   9:52
+Exatamente isso mesmo, tá bom? Nada.
+
+Souza, Vanessa Torres Xavier De   9:53
+Entendi, entendi, obrigada.
+
+Machado, Bruno Nolasco   9:55
+O só desculpa aí, João, mas só na em cima do que a Vanessa perguntou o seguinte, e se tiver um crédito, como que ele vai aparecer aí? Porque?
+
+Almeida, Kathleen Pfeifeer Carmona De   10:05
+Ele também vai aparecer. A gente até vai colocar isso. Tá vendo aquele botãozinho de crédito disponíveis? A gente tá mexendo nele pra pra filtrar só os créditos. Aí não vai aparecer número de nota fiscal.
+
+Machado, Bruno Nolasco   10:12
+Entendi.
+É por causa disso, é nesse sentido.
+
+Almeida, Kathleen Pfeifeer Carmona De   10:18
+Isso é uhum.
+
+Pereira, Leandro Da Cruz   10:18
+É esse ajustezinho que eu falei um pouquinho mais cedo, porque ele está trazendo tudo aqui, mas a ideia era que a gente clicar aqui, só apareça o que tem crédito disponível mesmo para não gerar nenhuma confusão para vocês, tá?
+
+Machado, Bruno Nolasco   10:24
+Costa.
+Service in
+
+Rhein, Thalita Merisio   10:31
+João também está com a mão.
+
+Pereira, Leandro Da Cruz   10:31
+João.
+
+Endo, Joao Vitor Yuji   10:33
+2 coisas só é bom. É bom que ele resume bastante. Até várias transações de uma só. Tem como exportar que às vezes o cliente pede quais todas as notas fiscais que tem aí?
+
+Pereira, Leandro Da Cruz   10:42
+Vamos cortar?
+Botãozinho Spurtle.
+Relatório Financeiro.
+Aparecido aqui para vocês, olha tudo.
+
+Endo, Joao Vitor Yuji   10:54
+Bacana.
+
+Pereira, Leandro Da Cruz   10:56
+Então tem essa opção também de você copiar a tabela, tá vendo? Clicou aqui? Deixa eu abrir aqui uma outra aba, tá? Para facilitar para vocês verem.
+Vaz clicar aqui na edição.
+Okay.
+Central v.
+O.
+
+Endo, Joao Vitor Yuji   11:17
+Boa. E ele aparece também as compensadas ou é só em aberto em atraso?
+
+Pereira, Leandro Da Cruz   11:18
+Facilita bastante.
+Vou mostrar os filtros para vocês, tá? Então a gente tem esse botãozinho aqui, então tem o status.
+Partidas em aberto, compensadas e todas as partidas. E vocês também conseguem fazer o filtro aqui pela data inicial e data final para facilitar também e por data aqui também, data de emissão e data de vencimento.
+É uma. A ideia foi justamente a gente facilitar, pegar várias informações que estavam em diferentes lugares dentro do SAP e trazer tudo dentro do mesmo lugar para vocês. Então vocês vão conseguir baixar, extrair as informações, filtrar e trabalhar com essa tela já direto. Aí vocês vão perguntar, a gente vai mostrar mais para frente também.
+Lá dentro do arames, que é o aplicativo que a gente está fazendo para o celular de vocês, tanto para Android quanto para iOS, vai ter isso também? Vai ter. Então assim, imagina que vocês estão dentro de uma reunião. Precisa estrear aquela informação. Vocês vão conseguir fazer isso direto pelo celular, sem necessidade de.
+Abrir o notebook, pois não Vanessa?
+
+Souza, Vanessa Torres Xavier De   12:20
+Nas partidas compensadas, é possível ver data de pagamento e valor que foi pago.
+
+Pereira, Leandro Da Cruz   12:26
+Deixa eu abrir aqui que sinceramente eu não lembro, tá? Vou fazer um filtro aqui pelas compensadas, que é a data de início da compensação.
+E tá afim, você tá falando lá na lá no relatório?
+
+Almeida, Kathleen Pfeifeer Carmona De   12:37
+HKS.
+
+Souza, Vanessa Torres Xavier De   12:41
+Isso.
+
+Pereira, Leandro Da Cruz   12:41
+Para de baixo, não é? Eu não lembro, está? Deixa eu ver aqui.
+
+Souza, Vanessa Torres Xavier De   12:47
+Que é essa normalmente é a principal informação que vendas quer ver a data do pagamento, às vezes se o valor foi pago no valor atualizado ou só no valor principal da nota.
+
+Pereira, Leandro Da Cruz   12:58
+Deixa eu tentar fazer um filtro maior aqui da interior.
+
+Almeida, Kathleen Pfeifeer Carmona De   13:01
+É muda da a data inicial ali, talvez Leandro do vencimento lá em cima da de dezembro.
+
+Souza, Vanessa Torres Xavier De   13:02
+Isis Isis Isis Isis Isis Isis Isis Isis Isis Is
+
+Pereira, Leandro Da Cruz   13:03
+Michelle.
+Mello.
+
+Souza, Vanessa Torres Xavier De   13:05
+Isis.
+
+Pereira, Leandro Da Cruz   13:08
+Boa.
+Deixa eu colocar aqui?
+Um de dezembro é que ele tem uma limitação aqui em relação ao período que não pode ser maior do que o 365 qualquer produtos.
+
+Almeida, Kathleen Pfeifeer Carmona De   13:19
+É, coloca, coloca até fevereiro desse ano, que aí vai puxar as partidas do ambiente produtivo.
+
+Pereira, Leandro Da Cruz   13:27
+Beleza.
+Pegar aqui 3.
+Machado.
+Deixa eu pegar aqui também em fevereiro.
+
+Almeida, Kathleen Pfeifeer Carmona De   13:34
+Machado.
+
+Pereira, Leandro Da Cruz   13:44
+aqui se ele vai extrair para gente
+Só lembrando, esta aqui é uma tela inicial que a gente fez e a hora que vocês começarem a utilizar melhorias vão aparecer, tá? Então, se não tiver essa informação aqui, é no relatório, pode ser que aí vocês conversem. Eu não sei se o Lemos de menezes daqui junto com a gente, mas ou o Bruno mesmo, vocês colocaram essa lista aí de ajuste pra gente no.
+No sprint do GTM está para a gente trabalhar.
+Quadros, se você conseguir consultar isso daí, é só para, porque que está demorando um pouquinho. Aí você pega a tela, tá? Aí você mostra para baixo, aí você puxa a minha tela aqui, tá só para a gente novo, trouxe aqui.
+
+Almeida, Kathleen Pfeifeer Carmona De   14:14
+Está eu consulto aqui e eu mostro a Vanessa uhum.
+Beleza.
+Gomes.
+
+Pereira, Leandro Da Cruz   14:23
+Bom, Vanessa, que a gente tem de informação, data do documento e a data do vencimento. Deixa eu ver aqui o valor ajustado.
+Data do Dutra número do documento, mas você tinha perguntado sobre a data de compensação?
+
+Souza, Vanessa Torres Xavier De   14:39
+Data do pagamento e o valor pago, porque não pode ser que efetivamente o valor pago seja diferente, caso o cliente tenha sido pago, pago o título em atraso. Aí as informações normalmente são pagou com juros ou não. Por isso que eu perguntei valor final do pagamento e a data do pagamento.
+
+Pereira, Leandro Da Cruz   14:55
+Entendi, é pelo jeito, a gente não tem essa coluna aqui não, mas eu acho que se tem dentro do CC essa informação, é possível a gente colocar, tá? Então anota esse ponto de melhoria justamente para que quando vocês forem testarem, a gente já colocar aí nos print de desenvolvimento do GTM.
+
+Souza, Vanessa Torres Xavier De   14:56
+Mello.
+
+Almeida, Kathleen Pfeifeer Carmona De   15:01
+Nathalia.
+
+Pereira, Leandro Da Cruz   15:11
+Se for algo comum para todo mundo, tá? Lembrando que toda priorização é feita por vocês. Então, a ideia é que todas as histórias, que é a forma como a gente trabalha aqui, sejam priorizadas com o objetivo de atender o maior número de produtos possíveis, tá?
+
+Souza, Vanessa Torres Xavier De   15:22
+Yeah.
+
+Pereira, Leandro Da Cruz   15:29
+Aí se realmente for uma demanda comum para todo mundo, a gente coloca aqui sem nenhum problema.
+
+Souza, Vanessa Torres Xavier De   15:29
+Obrigada, gente.
+Jardim Oliveira.
+
+Machado, Bruno Nolasco   15:34
+O Leandro, na verdade, essa aí é a seguinte, para a gente do negócio, a gente nunca tinha pensado nisso, mas é importante porque do financeiro isso.
+Isso importa depois, sabe? É uma questão que é levantado pelo Financeiro e que a gente nunca tinha tentado, mas é importante isso acho para todo mundo porque Vanessa, Vanessa tem que saber o dia que o cliente pagou e quanto que ele pagou, porque existe até uma outra possibilidade, Vanessa, de ele pagar.
+
+Pereira, Leandro Da Cruz   15:53
+Beleza.
+
+Mello, Renata Drumond Amorim Conrado De   15:56
+Apoio a pegar caro.
+
+Souza, Vanessa Torres Xavier De   15:59
+Yes.
+
+Machado, Bruno Nolasco   16:02
+Via depósito e não pagar os juros, sabe? E aí?
+
+Souza, Vanessa Torres Xavier De   16:04
+Isso é só para gente ficar. Desculpa Bruno te interromper. É o que acontece. As situações que obrigada a situações aqui que acontecem, por exemplo, gerou uma nota de de araujo do cliente referente ao juros por atraso. Essa nota de de araujo do automaticamente todo o início do mês.
+
+Machado, Bruno Nolasco   16:09
+É, pode, não pode falar, não olha eu tinha internado.
+
+Souza, Vanessa Torres Xavier De   16:24
+Apoio e ele faz apuração do mês anterior. Aí nosso aqui do financeiro cobramos os vendedores para verificar com clientes essa nota ela vai ser paga ou se ela vai ser cancelada. O maior questionamento é, qual foi a nota paga em atraso é que gerou esse juros?
+
+Mello, Renata Drumond Amorim Conrado De   16:34
+America de nascimento.
+
+Souza, Vanessa Torres Xavier De   16:41
+E aí eles vão poder consultar qual que foi a data do pagamento e o valor que foi pago pela nota. Porque igual Bruno falou, se o cliente vai lá e paga com o boleto atualizado, OK, não vai gerar juros. Mas ele faz um pagamento via depósito, o juros não é recebido e gera uma nota de débito referente àquele juros que não foi pago, então.
+
+Machado, Bruno Nolasco   16:42
+Mello.
+
+Souza, Vanessa Torres Xavier De   17:00
+Eu acho que isso é pra mim. Eu acho que no entendimento do da utilização ali para vendas, as principais informações de consultar partidas compensadas é ver data de pagamento e valor pago, que eu acho que vão ser as 2 informações que eles vão mais querer visualizar caso eles utilizem essa opção de partidas compensadas.
+
+Pereira, Leandro Da Cruz   17:19
+Beleza, excelente.
+Bom, deixa eu fazer mais uma pergunta nessa tela aqui eu perguntei sobre o boleto e como que vocês fazem a extração da segunda via de nota fiscal, que é o danfe?
+
+Machado, Bruno Nolasco   17:31
+O Leandro, só uma informação importante. É o seguinte, todo mundo falou muito bonitinho aí que entra no Santos e tal e tudo que eu acho que assim aqui está selecionado um grupo seleto, tá? Mas a Vanessa deve ter ficado caladinha aí pinicando para falar.
+
+Mello, Renata Drumond Amorim Conrado De   17:37
+Michelle.
+
+Pereira, Leandro Da Cruz   17:42
+Machado.
+
+Souza, Vanessa Torres Xavier De   17:45
+Hellen.
+
+Machado, Bruno Nolasco   17:47
+Porque a maioria manda o famoso e-mail lá para o financeiro pedindo para mandar o boleto ou o cliente entra em direto em contato com o financeiro pedindo boleto, tá? Então eu acho que tem um grande fluxo disso. Vanessa, hoje ainda.
+
+Souza, Vanessa Torres Xavier De   17:48
+Hudson Hudson.
+Sim.
+
+Mello, Renata Drumond Amorim Conrado De   17:54
+Alexandre.
+
+Souza, Vanessa Torres Xavier De   18:03
+Demais, para vocês terem noção, a gente tem é a gente tem estagiários que ficam, que é função deles. Ele, quase que do dia todo é ficar atendendo as caixas compartilhadas e tem 1 o volume imenso o dia todo de sousa de boletos.
+
+Endo, Joao Vitor Yuji   18:05
+É raro, mas acontece muito.
+
+Mello, Renata Drumond Amorim Conrado De   18:05
+Para você?
+
+Machado, Bruno Nolasco   18:07
+É.
+
+Souza, Vanessa Torres Xavier De   18:20
+Através da nossa caixa, então é uma ótima opção. É mesmo eu sabendo que existe essa transação, é igual o Bruninho falou, é um grupo muito pequeno de vendedores que utilizam essas transações para poder tirar cópia de nota XML, boleto, porque normalmente todas as solicitações é.
+Chegou aqui para a gente via e-mail e eu acho que vai ser o facilitador mesmo eles terem essa função no nesse aplicativo.
+
+Mello, Renata Drumond Amorim Conrado De   18:39
+Service.
+
+Machado, Bruno Nolasco   18:42
+É EIG.
+
+Pereira, Leandro Da Cruz   18:42
+O.
+
+Machado, Bruno Nolasco   18:45
+É.
+Aí geralmente o cliente liga e geralmente o cliente, quando a gente cobra o cliente assim, você está com boleto em aberto, aí o cliente fala assim, não estou não. Aí ele fala assim, então me envia a nota fiscal, OXMLEO boleto.
+
+Pereira, Leandro Da Cruz   18:47
+Mas só para super Pompeu.
+
+Souza, Vanessa Torres Xavier De   19:00
+E o boné?
+
+Machado, Bruno Nolasco   19:02
+Pra porque aí às vezes houve um erro lá, porque ele não deu entrada na nota faula, no XML, nem no boleto. Tem que ter certeza de tudo. E aí às vezes acontece até do dele querer, eu quero o comprovante de entrega assinado que eu recebi esse material mesmo, sabe? Então tem.
+
+Mello, Renata Drumond Amorim Conrado De   19:03
+Como se olhar vendas e você?
+Você quer?
+
+Pereira, Leandro Da Cruz   19:06
+Hudson.
+
+Machado, Bruno Nolasco   19:21
+Às vezes chego até nesse nível, sabe?
+
+Pereira, Leandro Da Cruz   19:23
+Bom, essa funcionalidade que eu mostrei para vocês aqui, eu estou mostrando dentro do ambiente de teste, mas ela já está em produção, tá? Eu sei que a gente está num processo de mudança de forma de trabalho. E aí, assim que a gente entrar em produção com o GTM total, que deve acontecer em fevereiro, março, que a gente está planejando.
+
+Souza, Vanessa Torres Xavier De   19:24
+Mello.
+
+Machado, Bruno Nolasco   19:31
+Sim.
+
+Mello, Renata Drumond Amorim Conrado De   19:37
+Você também?
+
+Pereira, Leandro Da Cruz   19:44
+Eu acho que a gente tem que se reunir, principalmente para essa mudança cultural, porque chega hoje um monte de e-mail lá dentro da caixa do Financeiro, chega, mas acho que com o passar do tempo, a ideia é que as pessoas tenham já a liberdade e a facilidade de acessar aqui dentro e eu até.
+Entendo quando elas falam o seguinte, mas tem dentro do SAP, no SAP é só chegar lá e acessar, é então, mas o SAP é difícil, pô, tem que ter decorar um Monte de transação, aqueles códigos que são complicados aqui. A ideia é que vocês tenham isso tudo fácil de direto no Salesforce. E outra, vai ter no aplicativo também.
+Então, aplicativo no celular ali, com 23 cliques ali, vocês já conseguem extrair a informação. Então é otimização, automatização que vai fazer todo mundo ganhar tempo e o estagiário ou a estagiária que trabalha hoje permaneça fazendo a extração dessas informações podem.
+Ele pode ou ela pode fazer outro tipo de trabalho do que ficar extraindo esse tipo de informações aí para as áreas de Apoio?
+Bom, eu imagino que.
+
+Machado, Bruno Nolasco   20:42
+É o Leandro, até algumas pessoas até já sentissem que eu fico olhando às vezes, enquanto o plantão lá já estão utilizando algumas dessas funções. O certificado que eu já senti de que até algumas vezes até junto com o Bruno lá até já tirei essa dúvida lá, que é o certificado. A gente sempre fala que vai por e-mail.
+
+Pereira, Leandro Da Cruz   21:01
+Isso é, eu vou passar por cada um deles aqui.
+
+Machado, Bruno Nolasco   21:01
+Então aí que aí o pessoal é que aí eles ficaram com dúvida nisso, mas é, alguns já começaram a usar, mas tem que reforçar isso mesmo.
+
+Pereira, Leandro Da Cruz   21:11
+Bom, então XML danf certificado basicamente certificado não, mas XML danf cai para sua caixa hoje também, Vanessa, esse tipo de extração.
+
+Souza, Vanessa Torres Xavier De   21:22
+Sim, é normalmente XML. Quem envia é o fiscal. Agora, a cópia da nota fiscal é o é aqui na cobrança que envia.
+
+Pereira, Leandro Da Cruz   21:32
+O Frank, você tá aí com a gente?
+
+Silva, Frank Hermogenes Da   21:36
+Sim, estou.
+
+Pereira, Leandro Da Cruz   21:38
+OPA, conta um pouquinho de como é a rotina pessoal do jeito que o pessoal aciona por uma caixa, como que funciona hoje a solicitação de XML?
+
+Silva, Frank Hermogenes Da   21:48
+Não é? Hoje assim tem acontecido muito pouco, porque a maioria dos clientes a gente cadastrou lá o e-mail de recebimento do Center. No início era maior, mas é normalmente a solicitação é por e-mail. Eles mandam e-mail solicitando XML ou o Danf.
+
+Mello, Renata Drumond Amorim Conrado De   21:53
+Comercial maiane de vendas de jesus na morais.
+Isso aí a gente vai ficar.
+
+Silva, Frank Hermogenes Da   22:05
+É, mas não tem sido tão frequente como era no passado, não. Essa solicitação é só por e-mail.
+
+Pereira, Leandro Da Cruz   22:09
+Não, beleza.
+É, a ideia, de novo, acho que para sua área também, assim como eu falei para a área da Vanessa, né? Entradas em produção, justamente a gente fazer um programa, uma campanha, alguma coisa bem direcionada para que as pessoas extraiam isso direto e evite mandar esse tipo de e-mail que ali com poucos cliques ela consegue
+
+Mello, Renata Drumond Amorim Conrado De   22:17
+Thais.
+Apoio.
+
+Pereira, Leandro Da Cruz   22:33
+Fazer também, tá? Só vou fazer uma simulação clicando aqui no XML, então basicamente vocês clicam aqui no XML mesmo procedimento, clicar, baixar, ele vai cair na área de download. Dance, mesma coisa, tá? Então vou clicar aqui.
+Caixa.
+Certificado é aquilo que o Bruno falou. Certificado, ele é o único, que é diferente. Ele é um e-mail automático que a hora que eu clicar aqui, é lógico que no ambiente de teste nosso aqui da ati não vai funcionar, mas a hora que eu clicar aqui, ele vai pegar aquele e-mail.
+Que está dentro aqui dos contagem.
+Que deve ter um certificado aqui, desculpa, documentos fiscais aqui.
+Que nesse caso aqui não tem, mas se eu tivesse o certificado aqui, deixa eu pegar aqui um exemplo. Se eu tivesse um e-mail cadastrado com certificado, ele enviaria automaticamente esse certificado aqui eu clicasse ali no botãozinho de baixar, tá? Vamos entrar aqui só na aba de download, só para dar uma olhadinha.
+Como que ficou? Tá vendo aqui? O Danf tá aqui, vou abrir.
+Vou baixar.
+E hora que eu clicar aqui eu já tenho aqui a segunda via do documento de a fiscal.
+Gostaram? Faz sentido essa funcionalidade para vocês?
+
+Gayer, Francine   23:47
+It.
+Leandro, muito. Só fiquei com uma dúvida, é possível fazer seleções múltiplas ali a hora que você está colocando que você vai querer?
+
+Pereira, Leandro Da Cruz   23:54
+Pois não?
+Tá, vou abrir aqui para vocês, tá? Deixa eu voltar aqui.
+Deixa eu voltar aqui em Antonio.
+Santos segundinho aqui.
+Partidas.
+Que a tambada tem registro para caramba, por isso que demora um pouquinho, então, mas você pode selecionar vários aqui de uma vez, tá vendo?
+
+Gayer, Francine   24:33
+Beleza, mas digo da dos ali boleto, XML, danf, eu consigo fazer várias seleções para colocar tudo uma vez só. Legal isso, ótimo.
+
+Pereira, Leandro Da Cruz   24:34
+Só Pinto em Fernando.
+Pode sim.
+Pimenta selecionar os 3, tá aí por baixar, ele vai fazer o procedimento para os 3.
+
+Gayer, Francine   24:47
+Perfeito.
+
+Pereira, Leandro Da Cruz   24:49
+Dúvidas aqui.
+Simples.
+Bom, vamos para outra telinha agora, antes de a gente entrar no autoatendimento, a gente construiu aqui dentro do goare um follow up. Então a gente tem um relatório dentro do SAP CC, que é o 161 e 185. Se não me falha a memória, tá?
+Que é o relatório de carteira e o relatório de pedidos em aberto, e que esses relatórios são utilizados basicamente pelo por vocês da área comercial, mas também muito pela área de planejamento ali para falar, olha quanto que esse pedido vai ser entregue, quanto que ele está confirmado ou não?
+Se já foi entregue para o cliente, mas a gente trouxe uma visão mais otimizada aqui. Se vocês acessarem, então clicar nesse hamburguinho, tá aqui do lado e vocês vão ver aqui, follow-up de carteira.
+Esse follow-up de carteira da rocha beleza.
+
+Pinheiro, Lucas Lemos   25:39
+É o é o é o outro talento, é o de castro.
+
+Pereira, Leandro Da Cruz   25:44
+So back.
+E nesse botãozinho aqui falou, falou de carteira, a gente tem literalmente esses 2 relatórios, tá vendo o 06 e 185.
+Mas uma carinha um pouquinho diferente e talvez um pouco mais fácil do que a gente tem dentro do ECCEO bacana que ele já traz uma série de informações na tela, ele vai pegar o perfil de vocês, já vai colocar o código da equipe de vendas, o código do escritório de vendas.
+Tudo automático. Então vou colocar aqui, por exemplo, relatório de carteira, deixa eu pegar aqui um período maior só para evitar que não tenha registros, tá?
+Vou aqui consultar.
+Deixa eu pegar aqui período diferente.
+Se ele vai trazer algum lado para mim aqui?
+Para processar.
+Bom, ele trouxe alguns registros aqui para dar uma olhadinha, mas antes de eu explorar esses registros, eu queria que vocês do comercial me falassem, como que vocês consultam a carteira hoje? Vamos supor, o cliente ligou para vocês, falaram o seguinte, quando que esse pedido vai ser entregue? Qual que é o processo hoje?
+Como que vocês fazem?
+
+Endo, Joao Vitor Yuji   27:07
+De algumas formas, tem o tem o Paulo Paulo do Paulo de e o também o Santos é os 2 que eu utilizo.
+
+Pereira, Leandro Da Cruz   27:17
+Entendi e.
+
+Endo, Joao Vitor Yuji   27:19
+Aí gera a carteira, vê o pedido, se está fornecido, não está com transporte, não está. Se o transporte está com placa, não está. Deu aceite, não deu aceite, tem horário, não tem. E assim vai, deve ter mais precisão.
+
+Pereira, Leandro Da Cruz   27:32
+O João, mas você vai atrás das informações, acessa o Santo ou Power BI para buscar esses dados. Você não aciona a área de planejamento. Eu estou entendendo nesse momento.
+
+Endo, Joao Vitor Yuji   27:41
+Não, mas muitos, muitos paiva meus fazem.
+
+Pereira, Leandro Da Cruz   27:46
+Tá você, Francine, como que como que você faz?
+
+Gayer, Francine   27:52
+Normalmente eu entro também no ar de produtos para ver AO posicionamento. Eu entro no BI perdão e aí eu entro no SAP para fazer um confere, porque eu já tive divergência de algumas informações que estavam no BIE não estavam no SAP. E aí eu entro lá para fazer um confere mesmo, mas hoje.
+
+Pereira, Leandro Da Cruz   27:59
+Mello.
+
+Gayer, Francine   28:09
+Atualmente, eu estou achando mais rápido e mais confiável entrar direto no SAP. Aí eu consulto lá, eu tiro um relatório da minha carteira e aí entro por OV ou por item para ver se o item está em transferência, se já está no CL, se está o mesmo processo do João para ver se já está com transporte organizado.
+E aí eu vou fazendo as intermediações aqui, quando preciso, com logística e tudo mais.
+
+Pereira, Leandro Da Cruz   28:35
+É, eu acho que a gente está na o Bruno pegando aí as até a sua fala assim num grupo seleto, porque muitas vezes eu escuto lá da área de planejamento falando o seguinte, não, a aqui a gente é acionado, extrai as informações, passa isso daqui para dentro do comercial.
+
+Machado, Bruno Nolasco   28:42
+Shi.
+Marcelo.
+
+Pereira, Leandro Da Cruz   28:51
+Então estou imaginando aqui que o João e a Francine realmente talvez sejam exceções e.
+
+Gayer, Francine   28:57
+Não sei se é o João adotou esse essa conduta, mas assim, por necessidade, porque sempre foi assim dentro do segmento dele, mas, por exemplo, para nós aqui a gente tem a célula que atende AO nosso segmento do protec.
+Mas como às vezes os retornos da célula demoram muito, aí a gente tem que se virar por conta aqui, no meu caso, é esse.
+
+Endo, Joao Vitor Yuji   29:16
+Mello.
+Mesma coisa aqui no na construção civil tem 2 pessoas centralizadas que buscam todas essas informações, enquanto a pessoa tá na rua, enfim. Mas eu prefiro também fazer por conta, ter Independência e o CRM vai ajudar bastante nisso.
+
+Gayer, Francine   29:20
+AI eu prefiro é.
+Exato.
+Por agilidade.
+
+Pereira, Leandro Da Cruz   29:34
+E esse é o ponto, sabe? Eu tenho conversado bastante lá com Adriano e ele fala, e a gente está numa campanha de trazer essas informações para vocês do comercial, justamente para que fala, olha, você não precisa assim, é lógico que se tiver algum problema, alguma divergência de data, e isso é inevitável, realmente acionar a área de planejamento.
+Mas para uma consulta simples, uma consulta ali que vocês possam ali extrair a informação rápida, olhar ali ou confirmar um dado para o cliente. A gente desenvolveu essa tela justamente para isso, para vocês olharem a carteira de vocês aqui através do 61 ou até mesmo extrair os dados aqui de ordens faturadas, que é 185. Aí vocês podem.
+pensar o seguinte, pô, mas se eu acessar o Salesforce aqui o conecta, o dado vai ser idêntico do que está dentro do SAP? Sim. Esse dado ele não é um dado que está dentro do Salesforce. A gente está buscando essa informação em tempo real dentro dos relatórios oficiais da empresa da Belgo.
+E trazendo essa informação aqui para vocês, então a informação que está aqui é 100% confiável com um dado que está dentro do SAP CC. Não estou falando que o dado do SAP CC possa ter algum problema, tá? Algum ajuste, digamos assim, mas o dado que vocês forem acessar aqui em tempo real.
+É o mesmo dado que está dentro do SAP CC. E por que eu falo isso? Porque às vezes dentro do Power BI, você pode ter algum delay, você pode ter algum erro ali para levar essa informação lá dentro do relatório, mas os relatórios que a área de planejamento utiliza como fonte de informação de
+Pede como verdade para passar para vocês, eles estão aqui para vocês consultarem também em tempo real, pois não João.
+
+Endo, Joao Vitor Yuji   31:15
+É como a Francine falou, no Bi muitas vezes tem divergência. Então realmente eu prefiro no Bi só consultar de castro o número e volume mas e no fino do fino ali só no SAP mesmo. Aí eu
+Questão é, tem como configurar as colunas, as informações que você puxa ou é predefinido já e não tem como alterar, que no ZAP tem não é como fazer esse layout nosso próprio.
+
+Pereira, Leandro Da Cruz   31:38
+Eu vou mendes.
+Eu vou, eu vou mostrar para vocês aqui, deixa eu acessar aqui de novo, só para que está cortando um pouquinho a tela.
+Wallace.
+
+Machado, Bruno Nolasco   31:52
+Fez aquela aquela solicitação com a gente, então está ótimo.
+
+Pereira, Leandro Da Cruz   31:55
+É, eu vou explicar justamente isso.
+Vou explicar isso daqui, tá?
+É, tá cortando um pouquinho aqui, infelizmente. Deixa eu ver, deixa eu fechar um pouquinho aqui.
+Wallace game.
+
+Pinheiro, Lucas Lemos   32:09
+Eu posso. Eu posso até mostrar na sequência aqui, Leandro, a outra versão que a gente tá desenvolvendo que já é uma evolução dessa daí.
+
+Pereira, Leandro Da Cruz   32:14
+Yeah.
+Quer pegar essa tela aí que aí fica mais fácil, pode pegar.
+
+Pinheiro, Lucas Lemos   32:17
+Posso uhum, deixa eu colocar aqui.
+
+Pereira, Leandro Da Cruz   32:20
+Porque no SAP tem uma funcionalidade que permite você gravar ali uma variant que a gente chama, que é uma personalização das principais colunas. Isso a gente não tinha dentro dos seus forces num primeiro momento, que é justamente isso que a gente está desenvolvendo. O Bruno, para que cada.
+Usuário, cada é cada pessoa ali do comercial ou quem for mais utilizar essa tela consiga gerar essa versão personalizada com as colunas que mais utiliza. Vai lá, Lucas, por favor.
+
+Machado, Bruno Nolasco   32:47
+É isso aí, pessoal, o João, isso aí é essa aí é quase uma cópia da 61. Você deve. Então assim, aí você vai poder criar como se fosse uma variante celular da 61, sabe? Então aí do adequado o jeito que você.
+Preferi usar. E aí você cria ela para ficar do jeito que você gosta de usar e tudo sabe? Então estão fazendo isso para você de castro e salva. E aí todas as vezes que você entrar já vai estar do seu jeitinho lá.
+
+Pereira, Leandro Da Cruz   33:17
+O Lucas pode tocar aí, pode apresentar essa parte dessa tela e aproveita o smart Center lá o alto tem OA criação de casos.
+
+Pinheiro, Lucas Lemos   33:18
+Isis a primeira aviação que eu
+Come o.
+Vamos lá. Essa versão que o Leandro mostrou aí, pessoal, é a primeira versão. Então é quando essa iniciativa surgiu lá com o planejamento. A gente foi construindo ali em conjunto do planejamento e do comercial também. Só que conforme o comercial, principalmente os pills, começaram a.
+Olharam o que a gente tinha em tela, foram surgindo apontamentos. Então surgiu uma demanda para poder fazer uma revitalização dessa tela. Então, o que vocês estão vendo aqui é um protótipo, tá? É um protótipo do que vai ser a versão 2 que a gente vai colocar ainda é nesse em janeiro ali, provavelmente.
+E vocês observem que aqui a gente tem algumas questões mais voltadas à usabilidade. Então algumas lógicas, elas permanecem. Então eu tenho, por exemplo, o auto preenchimento aqui do meu escritório de vendas. Se eu for um gestor, por exemplo, já vai trazer todas as minhas equipes de vendas. Se for só eu mesmo, o vendedor vai aparecer a minha equipe de vendas aqui.
+Os campos de busca eles permanecem aqui embaixo. Eu tenho a minha tabela de retorno consultando a mesma fonte de dados que o que o Leandro acabou de demonstrar. E aqui a gente, junto com o comercial, a gente elaborou alguns filtros rápidos. Então, sem vocês precisarem clicar em muitos lugares, aqui vocês vão ter.
+Filtros para mostrar ao vendas ao vendas aceitas no mês. Isso vai refinando aqui a tela o resultado baseado naquela primeira consulta que você fez. E aí, respondendo a pergunta do João, eu consigo salvar, que é um preset de colunas e alternar. Vocês observem que eu estou trocando aqui. Aí no fundo ele vai mudar.
+Montando, está vendo? Ele remove a coluna. Eu posso alterar a ordem aqui e ele reflete aqui no fundo. Então assim é a variante que vocês conhecem. Aí vai ficar armazenada aqui no cache do seu navegador. Sempre que você acessar aqui, isso já vai estar predeterminado e tanto para consulta da carteira em aberto quanto para carteira faturada.
+A gente replica a mesma lógica, Renata está com a mão levantada.
+
+Mello, Renata Drumond Amorim Conrado De   35:22
+E você terminou?
+
+Pinheiro, Lucas Lemos   35:23
+Não participante em algum outro assunto? Se quiser, eu posso.
+
+Mello, Renata Drumond Amorim Conrado De   35:26
+Não é dentro mesmo, é o Leandro está rindo, já sabe, Leandro, fala Leandro.
+
+Pinheiro, Lucas Lemos   35:28
+Pois João.
+
+Pereira, Leandro Da Cruz   35:33
+Mas você vai falar assim, vai aparecer o cross company aí?
+
+Machado, Bruno Nolasco   35:34
+Eu também já sei, eu também já sei.
+
+Pinheiro, Lucas Lemos   35:36
+Costal
+
+Mello, Renata Drumond Amorim Conrado De   35:37
+O Leandro, pô, assim fica sem canagem, pô, deixa eu falar as coisas.
+
+Pereira, Leandro Da Cruz   35:41
+Sim, eu estou rindo. Eu estou rindo porque você vai perguntar isso daí, é?
+
+Mello, Renata Drumond Amorim Conrado De   35:43
+Contagem.
+É agora eu fiquei vermelho, sem graça, poxa, eu já estou tão previsível assim.
+
+Pereira, Leandro Da Cruz   35:49
+Hhh.
+Não é por isso, porque esse cross company, ele é um processo diferenciado mesmo, e realmente quando a gente olha para o para o processo comercial que a gente desenvolveu, os ajustes que a gente fez aqui dentro do sistema.
+
+Mello, Renata Drumond Amorim Conrado De   36:04
+Shi
+
+Pereira, Leandro Da Cruz   36:09
+Eu confesso que o cross company ele.
+
+Mello, Renata Drumond Amorim Conrado De   36:12
+Eu tenho outra pergunta.
+
+Pereira, Leandro Da Cruz   36:13
+Vitor.
+Ele é diferenciado, melhor, melhor dizendo.
+
+Mello, Renata Drumond Amorim Conrado De   36:17
+E.
+É eu como a gente aí na 61. Eu não está pequenininho aqui que eu estou no notebook, mas eu posso. Tipo assim, eu não preciso de filtrar um cliente específico, eu posso filtrar a minha carteira, não é?
+
+Pereira, Leandro Da Cruz   36:33
+Pode sim.
+
+Pinheiro, Lucas Lemos   36:33
+Same.
+
+Mello, Renata Drumond Amorim Conrado De   36:34
+Aí esse vendedor, esse, por exemplo, o João, ele vai ver os pedidos dele todos, menos os pedidos que ele tem com AMD, é isso mesmo?
+
+Pereira, Leandro Da Cruz   36:47
+O castro deixa eu só deixa eu confirmar dentro da 61 e dentro da 85 tem pedido de castro company lá.
+
+Almeida, Kathleen Pfeifeer Carmona De   36:54
+Na 61 tem. Só que a gente não está enviando hoje ele para os seus sócios, mas na meijon tem grossicon tem pedidos, porque a gente está falando ordem de vendas, tem pedidos.
+
+Machado, Bruno Nolasco   36:56
+Bem.
+E nada.
+
+Pereira, Leandro Da Cruz   37:01
+Emanuelle isa
+
+Machado, Bruno Nolasco   37:03
+É e na oito e na e todas tem.
+
+Mello, Renata Drumond Amorim Conrado De   37:06
+Só que são é não tira simultâneo. Eu acho que você tem que ir no meio a um, você tem que marcar as 2 coisinhas lá embaixo, é?
+
+Almeida, Kathleen Pfeifeer Carmona De   37:07
+Deixa.
+É isso lá é assim, ordem de vendas, pedido, você tem que pegar aí hoje no seu sócio, como a gente está tratando vendas, é pré selecionado ordem de vendas. Se a gente for fazer cross contagem, a gente tem que revisar, está Leandro.
+
+Mello, Renata Drumond Amorim Conrado De   37:16
+Isso você tem que pegar.
+É.
+É, eu fiquei preocupada. É porque, por exemplo, às vezes assim eu estou usando o João como exemplo, mesmo porque eu pensei, foi nele, no exemplo real hoje, tipo assim, João, você vai olhar lá sua carteira e vai falar assim, cadê meu pedido de cordoalha? Deixa eu pegar, não está aqui.
+
+Pereira, Leandro Da Cruz   37:27
+Service.
+
+Almeida, Kathleen Pfeifeer Carmona De   37:27
+Porque são flags diferentes.
+
+Mello, Renata Drumond Amorim Conrado De   37:42
+Meu Deus, cancelou, meu Deus, Renata, que aconteceu? Eu não sei o que. Então assim, eu acho que a gente tem que deixar isso claro realmente que por enquanto não está, porque é para alguns vendedores realmente essa carteira é expressiva, é importante. Então é, eles vão sentir falta de ver isso daí. E aí, se não acontecer, vai ter que voltar ao SAP para ver se.
+Esse barato aí também.
+
+Pereira, Leandro Da Cruz   38:04
+Vamos avaliar isso daqui que acho que a gente tenta trazer essas informações a se a estrutura for a mesma a mesma.
+
+Almeida, Kathleen Pfeifeer Carmona De   38:04
+É.
+Neto.
+A gente pode devolver a estrutura, é a mesma, só que a gente tem que é. A gente precisa devolver. A gente teria que incluir algumas informações. Exemplo, a coluna a gente está hoje devolvendo ordem de vendas. A gente tem que devolver também o número do pedido.
+Tem que acrescentar algumas informações que são diferentes entre cross company e ordem de vendas.
+
+Pereira, Leandro Da Cruz   38:28
+Porque assim, eu acho que não só o caso do João, mas com a evolução aí ou a expansão da rede, por mais que a gente está tirando para algumas unidades o cross company, ele é muito forte ainda dentro da Belgo. Então acho que para todos os segmentos isso talvez seja uma funcionalidade que ajude.
+Então, tanto extrai os pedidos de clientes. É com exceção da AMD e AMD ali também dentro de uma mesma tela. Eu acho que acho que dá sim. Vamos trabalhar nessa nesse ajuste e facilita para todos. Agora não, já te passo a palavra para Francine.
+
+Almeida, Kathleen Pfeifeer Carmona De   39:01
+Ficou feliz, Renata?
+
+Mello, Renata Drumond Amorim Conrado De   39:03
+Eu fiquei e olha e olha que meus dias na AMD estão contagem, Hein? E eu ainda estou. É meu filho ainda, Hein? Meu coração ainda é meu coração, ainda é meus filhotes.
+
+Pereira, Leandro Da Cruz   39:05
+Hhh.
+Those haven's annoying.
+Mhm.
+Francine, já vou te passar a palavra, mas eu acho que mais do que uma funcionalidade que a gente está desenvolvendo em conjunto com vocês aqui é uma mudança de cultura mesmo, sabe que a Belgo precisa passar? Porque não adianta a gente colocar esse filtro, colocar o AMD ali dentro, colocar uma série de outras informações ou criar a Variant se o processo não mudar.
+E isso é uma coisa que, digamos, as Diretoria precisam se alinhar em relação a isso. Qual que é o papel e responsabilidade de castro de castro e porque hoje a área de Planejamento ela tem como atividade a extração dessas informações ou a resposta para vocês.
+Em relação à carteira, mas aí eu coloco para vocês mesmos é refletirem do comercial, principalmente, que está aqui dentro do time com a gente hoje.
+Será que a extração ou a busca dessa informação vocês mesmo não podem fazer direto no sistema?
+Uma coisa para vocês pensarem, uma vez que o dado está aí, que é a mesma base do planejamento.
+Será que não tem? Não teríamos essa opção de ou vocês não teriam essa opção de extrair esse dado? Lembrando que esse mesmo relatório que está aqui é o relatório que vai estar dentro do celular também, tá? Então no futuro aí. Espero que ainda no mês de dezembro ou no comecinho de janeiro a gente mostre.
+O aplicativo funcionando para vocês, o arames, mas de novo, essa funcionalidade vai estar ali. Então a ideia é trazer velocidade para vocês. Mas a gente precisa pensar no na forma de trabalho. Realmente a gente um sistema mais parrudo, com mais informações e velocidade do jeito que vocês estão vendo aqui.
+Será que o processo tem que continuar igual? Será que a área de planejamento ainda tem que receber um e-mail ali para estrear essas informações? Então é só esse ponto aí que eu gostaria que vocês pensassem, principalmente o comercial, se realmente não é possível a gente mudar o processo para otimizar o trabalho de vocês mesmo em área de planejamento, tá?
+Bom, a carteira a gente implementou não somente na carteira, mas em outros lugares. Aí eu vou pedir ajuda do Lucas agora para ele mostrar um processo que a gente criou chamado caso de atendimento, quando a carteira tem algum problema.
+Porque pode ter problema. Então vamos imaginar o seguinte, vocês não concordam ali o número ou com a data de confirmação que tem dentro da que está aparecendo ali dentro da 61 e o e o sim?
+Que vocês fazem hoje, vocês enviam um e-mail lá para a área de planejamento ou chamam a eles direto pelo Teams.
+E eles vão lá e fazer, eles vão responder vocês a dúvida que vocês possam ter, tá? A gente estruturou esse processo.
+Porque a área de planejamento talvez não tinha todas as informações ali ou demorava ou vocês tinham a sensação de demora, de resposta. Mas a gente criou como se fosse um ticket, tá? Então, já direto pelo sistema, vocês vão conseguir abrir um ticket, vai cair.
+Para a célula de atendimento correta lá dentro da área de planejamento. E a pessoa dentro da área de planejamento vai conseguir responder vocês e interagir com vocês já direto pelo sistema também. Aí vocês falam, mas por que a gente não sai do Teams ou do e-mail e coloca isso via sistema?
+Para a gente ter dado estruturado para a área de planejamento e para a área comercial também, saber quantos erros a gente teve na carteira, quantos ajustes foram necessários, porque se a gente deixa tudo via Teams ou via e-mail, a gente não consegue melhorar o processo ou melhorar os pontos que a Belgo precisa realmente.
+Trabalhar. Então o que o Lucas vai demonstrar já é isso, tá? Mas deixa eu passar a palavra aqui para Francine, que ela está com a mãozinha levantada lá e eu acabei demorando um pouquinho. Vai lá, Francine.
+
+Gayer, Francine   43:04
+Então, tranquilo. Isso antecipou minha pergunta, porque era exatamente sobre isso que eu queria. É comentar que alguém alimenta o sistema. Não adianta um Turbilhão aí de informações se a informação não for confiável e não for redonda, porque a gente se baseia nisso.
+É para acompanhar os processos, para dar retorno para os clientes. E eu falo aqui, pelo menos no meu segmento é, já teve, é recorrente, tá? É casos de você olhar ali até se você puder voltar a tua tela, compartilhar a tua tela, tem uns.
+
+Pereira, Leandro Da Cruz   43:33
+Vou pedir para o Lucas compartilhar aqui e ele demonstrar, tá?
+
+Gayer, Francine   43:34
+Tá, tem alguns itens ali que ao ver é, não é postergada, é aceita dentro do mês. O v postergada, isso mesmo, é esses itens aqui para nós, ele, esses 2, essas 2 lacunas, essas 2 janelas, elas são com base na data de a seite que sai lá no sistema, lá no SAP para nós.
+
+Pereira, Leandro Da Cruz   43:54
+Exatamente.
+
+Gayer, Francine   43:54
+Aqui do Protec, eu não sei se é quem alimenta o sistema, como é que funciona, mas sempre tem inconsistência nas datas de aceite, tá? Vou dar um exemplo. Isso acontece com frequência. Tem material no estoque, não tem demanda, tá no estoque livre e o aceite do sistema joga para daqui 4 meses.
+Isso eu já até é o que você falou. A gente registra isso, formaliza via e-mail, chama via Teams para registrar, mas não tem um acompanhamento. Então, quando eu preciso compilar, é essas demandas ou essas inconsistências que tem no sistema? A gente tem que mandar por e-mail. Olha, eu sinalizei 34 casos aqui que aconteceu isso.
+De não ter consistência na informação é das Datas de aceite. É até mesmo para consulta de estoque, tá? Mas é sempre a pessoa que alimenta o sistema que às vezes não atualiza, não sei, mas é bastante recorrente pelo menos no nosso caso aqui, principalmente com relação a Datas de aceite.
+Que eu acho que esse é o ponto de partida para essas análises todas aí.
+
+Pereira, Leandro Da Cruz   44:51
+Mas vamos parar e pensar no.
+
+Mello, Renata Drumond Amorim Conrado De   44:52
+Não é expulsividade sua não, viu Francine? Todo mundo.
+
+Gayer, Francine   44:54
+É, então eu não vou me sentir especial, está, é?
+
+Pereira, Leandro Da Cruz   44:55
+Bite.
+
+Machado, Bruno Nolasco   44:56
+Hhh.
+
+Mello, Renata Drumond Amorim Conrado De   44:56
+Não, você não é especial pra isso, tá? Sinto te dizer.
+
+Pereira, Leandro Da Cruz   44:57
+Martins de Martins de Martins de Martins de Martins de Martins de M
+
+Machado, Bruno Nolasco   44:57
+Okay.
+
+Pereira, Leandro Da Cruz   45:00
+Mas vamos olhar o processo.
+
+Machado, Bruno Nolasco   45:00
+Se registrar um v 700 hoje, ele tá caindo para maio, abril, maio do ano que vem e ele já está fornecido.
+
+Gayer, Francine   45:07
+Pois é, eu tive um caso essa semana também. Bruninho para junho de 2026 e assim dá. Dá para ser feito atendimento em janeiro. Eu também nem entendi.
+
+Pereira, Leandro Da Cruz   45:07
+Mas vamos olhar.
+Claro.
+Mas pronto.
+Mas vamos olhar o processo, a gente tem MG s, que é o estoque, é material que não precisa ali de ordem de produtos de produtos em to.
+
+Gayer, Francine   45:27
+É isso, eu estou falando de Mota Santos material Mota Santos que é teoricamente bater no chão.
+
+Pereira, Leandro Da Cruz   45:27
+Como a gente fez?
+É, mas dentro do MGSE, dentro do MG ainda. A gente tem um colega aí chamado bope também tem dentro do MG também. Mas imagina o seguinte, que fica rodando uma espécie de motor de priorização?
+De confirmação de ordem de vendas, com base em vários critérios que a Belgo definiu. E aí esses critérios, eles confirmam, desconfirmam, leva a ordem mais para frente, mais para trás. Aí eu não sei todas as regras, porém.
+
+Gayer, Francine   45:59
+Aí tem isso também. Foi bom você ter falado, já tive alves aqui que foram sendo mudadas as Datas, dava um aceito, você passava a informação para o cliente e daqui a pouco você vai olhar lá, não jogou para daqui 2 meses, depois para de novo, sabe? Acho que teve umas 4 vezes numa mesma alves.
+
+Pereira, Leandro Da Cruz   46:14
+Mas quando acontece isso, vocês conversar, acho que vocês ficam muitas vezes vendidos, porque o cliente já gera, já tem aquela expectativa daquela data e aquilo muda e fica uma situação desconfortável. Parece a gente na TI. Quando a gente fala que vai entregar um projeto na sexta-feira e a gente entrega depois de 1 mês, a gente fica desconfortável também.
+E tem n razões para que isso tenha acontecido, às vezes porque deu um problema técnico mesmo, às vezes que a gente não entendeu o requisito. Imagino que vocês da área Comercial passam por isso também. Porém, interessante a gente registrar isso.
+Tanto para vocês da área Comercial quanto para a área de planejamento também, porque somente com dado estruturado a gente vai conseguir melhorar o que precisa ser melhorado dentro da belga. Então, se é um problema ali de priorização de determinados clientes que deveriam ser priorizados, aquelas ordens estão indo lá para.
+Lá para frente, pô, registra ali uma divergência que você não concorda com aquilo ali, que é a área de planejamento que vai olhar. E uma vez que a gente tem esse dado, é possível a gente conversar lá com a área do Riqueti e falar o seguinte, o Riqueti desenvolve um Painel para eu analisar aqui.
+Na minha Diretoria, todos os chamados com problema de confirmação de data de OV, para eu trabalhar em cima desse dado ou com problema aqui de Xpto, não sei. Tem vários motivos que a gente pode pensar em relação a isso daqui, mas é uma forma de vocês.
+Teriam dado na Palma da mão ali para vocês conseguirem melhorar processos que estão ao redor ali dentro do Comercial, que apoiam Comercial. Eu vou pedir para o já te passo a palavra, tá João? Eu vou pedir para o Lucas demonstrar a funcionalidade.
+Quanto é fácil vocês abrirem um chamado e esse chamado caírem cair lá para a área de planejamento? Você pode mostrar, Lucas, por favor?
+
+Pinheiro, Lucas Lemos   48:04
+Vamos lá, eu vou usar a tear aqui como exemplo. E a tela tá no escritório da gcca. Então parte da explicação que o Leandro deu aí é que existe uma inteligência aqui, algoritmica que vai rotear esse atendimento para A Fila adequada. E A Fila é responsabilidade do smart Center. Essas filas já estão já estão pré configuradas.
+Então vocês não precisa, não vão precisar de campos. Mas para quem que vai isso daqui? Quem que vai atender na prática? Eu vou vir aqui na minha conta, na TA, vou vir aqui no relacionado e vou ter aqui os casos, vou ter os casos, vou abrir um novo caso, meu seu sócio está em inglês, mas.
+De vocês vai estar normal e tem esse novo tipo de caso aqui, que é o Atendimento Smart Center. Vou clicar em próxima aqui e é um formulário super simples. Eu vou informar aqui qual que é o motivo, se é um atraso, se é um problema de entrega, se é uma postergação, se é algum outro motivo.
+Se tiver algum contato associado, às vezes é uma reclamação associada a um processo do cliente. Posso informar aqui também ele puxa isso direto da conta. É se eu tiver alguma OV específica aqui também, eu posso informar qual que é o número dessa OV. Posso indicar aqui uma prioridade também, às vezes é uma.
+Uma situação mais crítica. E aqui eu tenho algumas outras informações que são mais acessórias, não preciso preencher. Aqui embaixo eu dou os detalhes, falha é divergência.
+
+Pereira, Leandro Da Cruz   49:18
+Comercial.
+
+Pinheiro, Lucas Lemos   49:25
+Martins de data e aqui eu tenho um campo de texto longo que eu posso dar mais detalhes se eu precisar, clique em salvar.
+Ele vai gerar esse caso aqui pra mim. Eu já tenho o número do caso. Se eu precisar procurar alguém no planejamento ali no smart Center diretamente. O mais interessante é que ele isso daqui pra uma fila chamada corporativos de CCAA. É A Fila que vai tratar especificamente esse tipo de caso.
+De contas e o critório de GGRC. Então, todos os todos os critérios, todos os escritórios que estão parametrizados aqui dentro do CRM tem essa lógica de atribuição a filas. Automaticamente estão escritórios do da rede, os escritórios corporativos, as regionais.
+Todos estão configurados de acordo com o que a gente entendeu ali, com o planejamento, e eles já estão aptos a acompanhar essas solicitações direto no CRME, fazer interações com você, com vocês direto no CRM também. Então tem uma função bem legal aqui dentro dos seus forces.
+Que funciona como se fosse uma rede social que permite que eu marque pessoas aqui dentro, se eu precisar de algum esclarecimento. Então, por exemplo, eu vou marcar o Leandro aqui. Ele vai receber um pinguezinho lá no sininho dele, nos seus forces e falar, eu não entendi esse caso, não entendi suas a sua solicitação.
+E você consegue fazer um follow-up desse caso. E tudo isso fica, gera um Lastro dentro do seu esforce. Então, por exemplo, a gente sabe que os e-mails que a gente troca depois de um tempo, eles são eliminados. A caixa é esvaziada e a gente perde aquele histórico aqui no seu esforce não vai ter esse risco, porque todos os casos eles ficam vinculados a um cliente necessariamente.
+E todo o histórico daquele Atendimento, daquele caso ou de vários casos vão ficar amarrados dentro daquela conta. Então não tem prejuízo de informação. Então acho que é uma funcionalidade que eu não sei se o planejamento já disseminou aí com vocês, mas que está pronto, que está em produção.
+Para ser atendido. E aí até já passo pro João dentro dessa nova versão do follow up de carteira, logicamente a gente já vai colocar aqui um botãozinho para que vocês abram esses tipos de casos direto no follow up que faz muito sentido em vez de eu que.
+Ter que ir lá no Cliente, por exemplo, que também é super fácil, conforme eu mostrei, mas se eu tiver essa opção dentro do follow-up, já salva alguns cliques ali. Eu não preciso ir no Cliente. Eu já estou nessa telinha aqui, eu clico aqui e ele vai me exibir o mesmo layout, aquela aquela mesma inteligência de roteamento de casos também vai funcionar.
+
+Pereira, Leandro Da Cruz   51:46
+Para lá, João.
+
+Endo, Joao Vitor Yuji   51:49
+É uma pergunta simples, só é quando você for gerar carteira, é só da sua base ou vai ser de todo mundo? Você vai ter acesso? Tem alguma trava?
+
+Pereira, Leandro Da Cruz   51:58
+Pode responder, Lucas?
+
+Pinheiro, Lucas Lemos   51:58
+Tem.
+Tenho tem algumas travas, tá, João? É primeiro, se você for gestor, se você é responsável ali por uma regional, por um escritório, você vai ver de toda sua, todos os seus vendedores. Então você vai ver aqui, deixa eu mostrar na tela, você observe aqui que o campo de escritório de vendas ele tá bloqueado. Eu não consigo remover esses filtros por quê?
+Porque eu estou vinculado aqui, via de regra, ao escritório de Preço e ao escritório do GCCI, de contas corporativas da indústria. Eu não consigo mexer no escritório, mas se eu for um gestor, eu consigo, por exemplo, pegar de um vendedor x ou y ou de todo mundo. Ele já vai pré-preencher aqui para mim.
+Mas se eu quiser limpar aqui, eu não preciso filtrar, mas existe essa trava, você vai ver só as suas, a sua carteira ou o seu gestor vai ver de todos os vendedores de baixa dele.
+
+Pereira, Leandro Da Cruz   52:46
+Ou mesmo por Diretoria Diretoria a gente vai tudo para baixo
+
+Pinheiro, Lucas Lemos   52:47
+Exatamente.
+Isso aí tem uma hierarquia de acesso.
+
+Endo, Joao Vitor Yuji   52:52
+Entendi, não bacana, porque tem representantes, tudo mais e corre o risco aí.
+
+Pinheiro, Lucas Lemos   52:56
+Isso é a mesma lógica que se aplica.
+
+Pereira, Leandro Da Cruz   53:00
+Vá lá, Renata.
+
+Mello, Renata Drumond Amorim Conrado De   53:03
+a voltando aquela esse negócio adorei tá esse solicitar atendimento Smart Center você mandou para o Leandro Leandro recebeu E aí ele tem um tempo vai ter uma verificação como é que vai ser vai ficar apitando na cabeça dele
+
+Pinheiro, Lucas Lemos   53:16
+Isis Isis Isis Isis?
+Isso é mais questão de processo. O que acontece, o Smart Center lá, eles podem definir os SLAS deles, que é o tempo que eles têm para tanto para receber um caso, para eles darem um aceite no caso, que é o ticket, quanto para tratar um caso. Então isso é determinado ali por eles internamente.
+Esses acionamentos paralelos, o intermediários, ele não tem uma regra definida. Então, por exemplo, se o Leandro abriu um caso para mim do smart Center, está faltando informação, não foi suficiente. Eu poderia fechar esse caso como improcedente. Inclusive é uma prática que a Teixeira, em algumas instâncias, adota também.
+Se você abre um ticket, um incidente, um problema, e a informação que você deu não é suficiente e você não respondeu em tempo hábil para poder tratar aquele caso, para não prejudicar os meus indicadores, por exemplo, eu vou ter um caso ali que está estourando. SLA, eu vou ter que fechar esse caso.
+Se você não responder, mas você é notificada tanto por e-mail quanto por pelos seus esforços.
+
+Pereira, Leandro Da Cruz   54:15
+Sobre OSLA, eu imagino que no futuro a belgo a área de planejamento deva ter mais dados para ter maturidade ali para conseguir definir os SLASE. Imagino também que os SLAS vão ser definidos ali com base no cluster.
+
+Pinheiro, Lucas Lemos   54:26
+Sim.
+
+Pereira, Leandro Da Cruz   54:30
+Então imagina o seguinte, eu tenho uma conta corporativa de um cluster ferrado aí. Então o SLA desse tipo de conta vai ser talvez diferente de uma conta, sei lá, de um cliente pulverizado. Não sei exatamente qual que vai ser a regra que vai ser ali dentro, mas eles vão começar a sentir.
+A ideia é que o planejamento implemente isso daí com a subida do GTM ou talvez antes, tá? É isso daí. O Adriano e o Thiago estão definindo certinho como que vai funcionar. Mas a ideia é que eles comecem colocar isso para a comercial e a comercial junto.
+Com a área de planejamento, comecem ali definindo, definir os SLAS para atendimentos de castro dos chamados que vocês abrirem. Ponto importante que a gente às vezes a gente para e pensa, pô, o teams é mais fácil, eu mando ali via e-mail e aí eu jogo lá para outra área e a outra área responde.
+Mas quando a gente precisa melhorar os processos e ter dado ali para conseguir chegar numa reunião e falar o seguinte, pô, tive tantos problemas com isso daqui, pode ter certeza, Teams e-mail não ajuda. Ele só atrapalha porque vocês vão gastar um baita tempo ali para ficar extraindo essas informações e chegar lá, por exemplo,
+Alexandre de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos e
+A história é outra, porque vocês?
+Argumentos suficientes ali para conseguir justificar e mostrar o que está acontecendo ali, que a área comercial, por exemplo, não concorda. E o contrário também é válido, porque às vezes a gente centraliza na área de planejamento. Ali é os problemas, mas.
+Quando a gente tem uma alteração de data, não necessariamente o problema está dentro do planejamento. Pode ter sido um atraso na produção, na compra ou aquisição de um insumo, um problema, um problema de qualidade, uma priorização de um cliente que foi.
+Definido pela Belgo, então a para a área de planejamento também vai ser muito bom isso daí, justamente porque eles vão conseguir ter argumentos para justificar é essas alterações que tanto o comercial coloca como um problema recorrente dentro da Belgo.
+E não é só o exemplo do Bruno ou você, Francine que comentou isso daqui ou João. Eu já escutei de muitas pessoas da área Comercial esse tipo de situação de alteração de data, tá? E de problemas com clientes relacionados a isso daí.
+Dutra.
+Não gostaram, vão usar.
+Falaram que sim, vamos ver aí, Thalita, hora que a gente chegar na reunião junto com os diretores lá, a gente vai falar Adriano Randolpho pessoal aqui da do grupo aqui do dos workshops, aqui da de castro de clientes, falou que já vai usar essa funcionalidade e a gente consegue alterar esse processo.
+
+Gayer, Francine   57:06
+Ser Deus.
+
+Rhein, Thalita Merisio   57:25
+Boa.
+
+Pereira, Leandro Da Cruz   57:26
+Bom é, eu vou pedir para o Lucas de novo dar um apoio em uma na demonstração de um processo que ele está fresquinho, está em teste ainda para vocês, tá? Que é o autoatendimento, porque.
+A ideia é que o Comercial vocês tenham mais tempo para fazer as atividades de vocês, que é o quê? Vender, tá na rua, prospetando o cliente, atendendo o cliente, entendendo as necessidades deles. E aí a gente colocou um processo que.
+Tá lá na Diretoria do Adriano, mas vai desdobrar para a Diretoria Comercial que vai permitir o cliente é consultar a sua carteira através do WhatsApp.
+E no futuro, a gente pretende não somente que ele consulte a carteira dele, tá? É isso aí. Eu estou falando para dando já um spoiler de 2026, que ele busque as informações de crédito, boleto, XML, danfe, ou seja, o que a gente colocou para o comercial.
+A gente vai disponibilizar também para o cliente via WhatsApp, então vou pedir ajuda do Lucas aí de novo. Lucas, você consegue demonstrar funcionalidade na perspetiva do cliente e na perspetiva do planejamento?
+
+Pinheiro, Lucas Lemos   58:39
+Cassiana vamos lá.
+
+Pereira, Leandro Da Cruz   58:40
+Hello.
+
+Pinheiro, Lucas Lemos   58:42
+Bom, pessoal, isso que eu vou simular aqui é um atendimento iniciado pelo cliente. A gente tem chamado internamente isso aqui de autoatendimento, então a gente tem um bot que consome, que tá instalado dentro dos seus forces, que consome essas mesmas Fontes de verdade que vocês viram aqui a 061 e a 185.
+Só que dessa vez o foco é o cliente. Então a gente o bot, ele entrega para o cliente um dado que ele solicita via atendimento no WhatsApp. E aqui eu tenho 3 cenários. Vou tentar demonstrar esses 3 cenários para vocês, que é o cliente. Ele consegue concluir o autoatendimento.
+Por conta própria. Então ele entrou aqui no WhatsApp, pediu para o bote, eu quero a minha carteira em aberto da data tal ou da nota fiscal tal ou da é ou da ordem de compra tal. Esse é o primeiro cenário. Eu tenho um segundo cenário que esse cliente.
+Ele não conseguiu tirar a carteira ou ele precisa tirar alguma dúvida? Ele abre um caso e a mesma inteligência que a gente mostrou para vocês aqui, que tem a abertura de caso que vai para A Fila do smart Center, também a se aplica aqui. E eu tenho um terceiro caso que permite que esse cliente ele interage diretamente com uma pessoa, uma.
+P a uma posição de atendimento dentro dos seus force que está ali para atender essas dúvidas, esse tipo de dúvida de poxa, minha carteira está com problema, eu tentei tirar um arquivo aqui, não consegui o que acontece, então a pessoa, ela vai estar é numa posição de atendimento dentro dos seus force, ela vai conseguir prestar.
+Suporte em tempo real para o cliente. Então vou demonstrar esses fluxos aqui para vocês. Estou aqui no número de teste do Suporte SAC Belgo. Eu vou fazer uma primeira interação aqui, vou fazer um olá.
+E aqui eu estou no WhatsApp, está ambiente real mesmo. Deixa eu responder aqui. Ela fez a minha a saudação. Eu vou falar meu nome.
+Ela já assimilou meu nome e aqui eu tenho. Eu tenho outros desdobramentos que acontecem aqui, que são meio que intermediários, tá? Se eu falar que eu sim, sou um cliente, aí a gente vai seguir o caminho feliz aqui, daqueles outros cenários que eu descrevi pra vocês. Se eu ainda não for um cliente, isso daqui acaba se tornando uma fonte de leads que vai.
+Vai alimentar o próprio conecta. Então aqui já tem uma outra forma de castro leite. O cliente, por um acaso, achou esse número aqui, recebeu uma indicação, já consigo capturar esse leite. Esse leite vai para todas as regras de atribuição de leite que a gente já tem hoje. É no ambiente produtivo, tá?
+Então vou eu vou sinalizar aqui que eu sou um Cliente.
+
+Pereira, Leandro Da Cruz   1:01:11
+Só um parênteses, tá nesse momento aqui, acho que a Thalita deve ficar feliz.
+
+Rhein, Thalita Merisio   1:01:16
+Eu estou feliz, mas também estou preocupada que Peter já estava guardando minha dúvida aqui.
+
+Pinheiro, Lucas Lemos   1:01:21
+É do é do smart Center, é do smart Center. Mas vamos lá, é aqui, ele pede pra eu iniciar um processo de validação, tá? É nesse nesse fluxo aqui a gente só atende nesse momento. OCNPJ está então.
+
+Pereira, Leandro Da Cruz   1:01:22
+Mas a gente, a gente vai chegar lá.
+
+Pinheiro, Lucas Lemos   1:01:36
+É o que o cliente vai ter que fazer aqui. Ele vai ter que passar OCNPJ. Então eu reservei aqui um CNPJ da TA. Vou mandar aqui OCNPJ.
+Ele vai consultar os seus esforços para ver se o CNPJ está cadastrado. Ele falou que CNPJ localizado com sucesso e aqui ele faz um processo de verificação de identidade, porque não basta a pessoa entrar aqui, falar ao CNPJE, enfim, extrair toda a carteira aqui de um cliente, enfim.
+Se passar por algum outra, por algum outro Cliente, o que ele faz aqui aí para mostrar para vocês como que essa consulta funciona dentro da tear, os contagem que o Comercial tem responsabilidade de manter é, eles vão estar armazenados aqui e aqui eles vão ter uma utilidade ainda maior.
+Por quê? O cliente? Ele vai interagir com o autoatendimento e ele vai falar o e-mail dele aqui. Então vocês observem que o meu e-mail ele está cadastrado aqui. Então eu sou uma pessoa apta a fazer esse tipo de resende alexandra também o cleisson, o Snack, aqui a Andre, a Kathleen.
+Todas as pessoas do cliente tear podem solicitar a carteira da TAE. Como que ele vai confirmar de fato que eu tenho acesso a esse e-mail, que eu sou essa pessoa? Eu vou passar o meu e-mail aqui para ele, Lucas.
+Transportes Belgo com ponto BR e ele vai me enviar um código que tem um tempo na de respiração um tokenzinho ali que é enviado para o meu e-mail. Eu vou só confirmar qual que é esse código olha, ele está enviando o código código foi enviado, eu volto, eu vou aqui no meu e-mail vocês observem, acabei de receber o código.
+Toquinho de 6 de jesus, vou copiar esse código.
+Vou vir aqui no WhatsApp.
+Pronto, ele fez a validação da minha identidade. Agora sim, eu tenho acesso aqui às funcionalidades plenas desse bot. Eu posso consultar tanto as ordens em aberto quanto as ordens faturadas. Aí de novo a gente fala da 061 e da 185 para não ficar muito maçante. Aqui eu vou passar na ordens em aberto e depois eu faço na simulação dos outros fluxos com vocês.
+Eu tenho é a abertura de caso e tenho transbordo para atendimento humano na Para que eu estava exemplificando, tá? É dentro da consulta de carteira, você pode escolher consultar por ordem de vendas, nota fiscal, ordem de compra, o que é o número do pedido do cliente ou um período personalizado.
+Eu vou constar aqui por um período.
+E aí ele me dá 2 possibilidades predeterminadas aqui. Eu posso consultar os últimos 30 dias, os últimos 90 dias ou eu posso informar um período personalizado. Eu vou informar um período personalizado e eu deixei guardado. Aqui tem um do 10 e o 31 do 10. Vamos colocar aqui.
+No formato dia, mesa, ano, um do 10.
+É a minha data inicial, ele vai me pedir a data fim.
+31 do NES.
+Ele vai começar a processar a minha solicitação. Ele começa a fazer a consulta lá em tempo real ao Santo também, passando sempre por pelos severo Santos. Então o Santos fosse é, ele faz essa camada de segurança.
+E aí ele concluiu a minha solicitação, tá vendo? Ele gerou aqui pra mim um link, e esse link ele tá dessa forma aqui, porque é um ambiente de teste, tá, pessoal? A gente é vai tratar esse link, essa solução ainda não tá em produção, como o Leandro falou e tá fresquinha. A gente acabou de demonstrar pro pro planejamento, a gente tá trazendo aqui pra vocês também.
+Eu clico para baixar esse arquivo, ele vai trazer para mim aqui um Excel.
+Deixa eu converter. Ele gerou aqui pra mim o Excel e essa esse estado que vocês estão vendo aqui dessas informações é o mesmo estado que o vendedor tem a visão quando ele exporta essa carteira lá no follow up que o Leandro estava demonstrando. Mas em conversas lá com o planejamento, eles já falaram que.
+Essa quantidade de informações aqui para o cliente não faz sentido. Então é questão de refinar e a gente vai tirar colunas aqui. Isso aqui é de praxe, mas eu trouxe a informação em aberto aqui do tear. Eu tive uma verificação de identidade para evitar fraude. Consegui extrair isso daqui sem.
+Interagir com o humano e foi uma consulta bem rápida, tudo no WhatsApp ali, nesse caso aqui eu estou fazendo um computador, mas o cliente vai estar ali no celular super rápido. Ele vai conseguir extrair alguma dúvida aqui nesse ponto.
+
+Endo, Joao Vitor Yuji   1:05:57
+Eu achei bem bacana é e ele vai criar um histórico para ele não ter que ficar toda vez colocando CNPJ, verificando e-mail, enfim.
+
+Pinheiro, Lucas Lemos   1:06:06
+A gente não consegue gerar esse histórico, João, porque eu posso. Eu tenho que iniciar uma verificação a cada interação, porque se não eu posso incorrer num processo de fraude. Claro que assim, com o passar do tempo, a gente vai criando maturidade na solução. Mas hoje, por exemplo, eu tenho que verificar a cada interação.
+
+Endo, Joao Vitor Yuji   1:06:13
+Mhm.
+Sim.
+
+Pinheiro, Lucas Lemos   1:06:23
+Porque nada impede que, por exemplo, esse número de celular, ele possa ter sofrido uma portabilidade, agora ser de uma outra pessoa. Então eu não posso confiar 100% naquela interação. Eu tenho que fazer essa verificação de identidade.
+
+Endo, Joao Vitor Yuji   1:06:35
+Entendi.
+
+Pereira, Leandro Da Cruz   1:06:36
+Tiago conta pela pela de jesus eu falo.
+
+Endo, Joao Vitor Yuji   1:06:38
+Contagem.
+E.
+E tem como assim, se for meu cliente, eu consigo assumir e ler o histórico da conversa. Ou é privado ou alguma coisa assim. E daí às vezes é chato o cliente só porventura dê errado a consulta dele ou ele quer questionar uma coisa. Ele tem que explicar tudo de novo para mim e tudo mais.
+Pensando nessa ótica.
+
+Pinheiro, Lucas Lemos   1:06:59
+Então aí que tá, a gente tem o transbordo para atendimento humano, que pega o histórico da interação com o bot. Então, por exemplo, se eu tive algum descaminho ali com o bot, o bot não entendeu a solicitação, isso vai ficar gera, vai ficar armazenado ali na conversa, na interação com o cliente e a pessoa que for fazer esse primeiro combate, digamos assim, o primeiro Atendimento ali.
+Naquela posição de atendimento humano, ela vai conseguir verificar esse histórico. Então, se vendas supor, se você fosse um atendente do smart Center, você conseguiria fazer esse primeiro combate e dentro desse processo de atendimento humano eu posso escalar isso. Então, por exemplo, o atendente do n um ali que a gente chama, que é essa pessoa que faz o primeiro combate, ela não conseguiu ainda.
+Entendeu? O cliente não conseguiu responder. Eu posso escalar para um supervisor, para um gerente ou para o executivo de contas, não é? Eu estou pensando aqui num processo mais à frente.
+
+Pereira, Leandro Da Cruz   1:07:49
+E hoje o transbordo está acontecendo somente para a área de planejamento, porque esse processo nasceu lá porque em uma das reuniões junto com Adriano, que ele relatou, eu atendo tanto a área comercial quanto eu atendo o cliente. Então a área de planejamento pensou o seguinte, não, então.
+
+Pinheiro, Lucas Lemos   1:07:54
+Isso.
+
+Pereira, Leandro Da Cruz   1:08:05
+Eu se eu conseguir otimizar o trabalho ali de do atendimento para o cliente, assim como é a para a parte do comercial, vai ser muito bom para mim, mas muitas vezes eu não consigo resolver o problema do cliente ali com uma mensagem do jeito que a gente colocou ali dentro. E aí o Lucas vai demonstrar agora.
+Por exemplo, o cliente falando que não resolveu o problema e aí do outro lado vai ter alguém é e com as mesmas regras, tá de célula de atendimento, atendendo o cliente diretamente pelo WhatsApp.
+E a Thalita deve estar pensando, pô, mas e o saque lá na frente?
+
+Rhein, Thalita Merisio   1:08:40
+Então já mandei um Monte de dúvida para vocês, para a gente falar depois que é uma reunião à parte.
+
+Pereira, Leandro Da Cruz   1:08:44
+E o SAC lá na frente, ele, a minha ideia, acho que do time aqui que trabalha junto comigo, é a gente integrar o SAC e um contato único também. Então imagina o SAC buscando uma informação da área de crédito de da de danfe?
+Ou qualquer outro problema dentro da empresa. A gente vai fazer os roteamentos para as áreas devidas. Nesse caso de carteira, o roteamento do problema está acontecendo lá para a área de planejamento. Mas olha o potencial dessa ferramenta para a gente colocar isso daqui para todas as áreas da empresa e automatizar o máximo possível de informação que às vezes o cliente.
+Pedem para vocês. O boleto é um caso clássico. O cliente fala, pô, não recebi o boleto. Imagina o cliente já acessando o WhatsApp pegando o boleto por ali? É possível fazer isso totalmente.
+
+Rhein, Thalita Merisio   1:09:29
+Peter.
+É, eu vejo esse potencial porque hoje, no SAC, o que a gente identificou o diagnóstico que a gente tem do canal oficial da Belgo, que é o zero 800, é que quem entra em contato no zero 800 é quem ainda quer comprar da gente e não quem compra.
+Porque hoje quem compra, ele está muito viciado a ir buscar orientação no vendedor. E não é esse o caminho ideal. Nesse não deve ser o caminho certo. O caminho certo deve ser o cliente poder ter uma retaguarda para obter informações sobre o pedido e deixar com o vendedor somente questões relacionadas.
+Quero comprar de novo, hoje o caminho está invertido.
+
+Pereira, Leandro Da Cruz   1:10:08
+É, tem clientes e clientes, imagino, tem cliente que vai preferir um. Eu vou me pegar como exemplo. Eu assim, se eu puder não falar com um com humano para mim e resolver, por exemplo, via WhatsApp, ali para mim é melhor. Esse é meu perfil de cliente, mas tem perfil de cliente que gosta de pegar o celular ali, WhatsApp e falar com o vendedor, eu acho que.
+A belga, ela tem que disponibilizar canais e formas de atendimento diferentes para diferentes tipos de clientes. Mas, pô, o boleto tá ali, o cara quer ligar para o vendedor, vai ligar, entendeu? Mas e o cliente que não quer? É essa é a nossa ideia no futuro, assim como o cliente que quer pegar a carteira direto aqui.
+
+Endo, Joao Vitor Yuji   1:10:27
+É isso mesmo?
+
+Pereira, Leandro Da Cruz   1:10:43
+Agora, um ponto importante, a gente está tirando informação de dentro de casa e levando informação para fora. E tem uma responsabilidade nisso. Então imagina o seguinte, a hora que a gente colocar essa funcionalidade em produção junto
+Com a área de planejamento e vocês do comercial, o cliente vai ter o dado da carteira dele. O que eu quero dizer com isso daqui? Assim como vocês podem ter talvez um desconforto em alguma mudança. E aí vocês da área comercial, lógico.
+Vocês tem o traquejo, o molejo da coisa ali para reverter uma situação é complicada com o cliente, mas o cliente vai ter esse dado. Esse é o ponto importante. Ele vai poder extrair esse dado.
+Então, junto com a área de planejamento, eu sugiro que vocês conversem bastante em relação à estratégia, para quais clientes vai ser divulgado? Aí vocês decidem entre vocês, mas olha lá, Lucas, estou te atrapalhando aqui a demonstrar o transbordo.
+Anderson bala aí.
+
+Pinheiro, Lucas Lemos   1:11:47
+É, imagina, imagina, é, eu vou simular aqui agora um processo que dá um erro. Então eu estou consultando aqui de novo. Eu acabei de terminar a minha consulta e eu já vou iniciar uma nova consulta aqui e eu vim pelas ordens faturadas e aí eu vou colocar aqui que eu quero consultar pela.
+Nota fiscal, por exemplo.
+Eu vou passar um número de nota fiscal inválida aqui.
+Colocar qualquer coisa aqui.
+Ele pediu pra eu informar o número da nota, eu informei um número qualquer.
+Ele vai tentar processar essa solicitação, ele não vai encontrar nada, então deixa ele me retornar aqui.
+Ele tá pensando bastante, mas se ele achar essa nota aí?
+
+Pereira, Leandro Da Cruz   1:12:47
+É que ele deve estar pesquisando a base inteira também.
+
+Pinheiro, Lucas Lemos   1:12:50
+Se ele achar essa nota aí, a gente.
+
+Pereira, Leandro Da Cruz   1:12:53
+Mas se quiser abrir outro canal aqui, sei lá, por qualquer outro motivo aqui para evitar atrasar.
+
+Pinheiro, Lucas Lemos   1:12:55
+Michelle.
+Deixa eu dar um, deixa eu dar um stop nele aqui.
+Reiniciar me.
+
+Pereira, Leandro Da Cruz   1:13:03
+E o Transportes?
+
+Pinheiro, Lucas Lemos   1:13:05
+O Pacheco.
+
+Pereira, Leandro Da Cruz   1:13:05
+O transbordo é legal porque é em tempo real.
+Então assim, o cliente, ele não vai sentir que está falando com uma máquina, sei lá, com uma inteligência artificial. Então é justamente isso aí que eu acho que faz diferença quando o cliente tem um problema, porque se você só colocar
+Árvore de conversa e o cliente fica naquela naquele loop eterno, o cliente fica desgastado, o cliente fica irritado, mas quando tem um transbordo e do outro lado tem alguém para atender. E aí a gente precisa analisar justamente o volume de atendimento que isso.
+Pode gerar?
+Se está adequado ou não está adequado pelo tamanho do time hoje, aí a gente pode ir ajustando um parâmetro ou outro, porque o transbordo o cliente, por experiência e por dados de mercado, ele espera no máximo 2 a 3 minutos passando disso daí.
+Cliente não gosta de esperar muito mais do que isso, não.
+Deixa o Lucas demonstrar aí.
+
+Pinheiro, Lucas Lemos   1:14:09
+Pegar meu código que eu iniciei a interação de novo, deixa eu aqui.
+
+Pereira, Leandro Da Cruz   1:14:15
+Mas, por enquanto, vocês estão gostando da funcionalidade, estão achando que tem valor, pode ser utilizada. Qual que é a opinião de vocês?
+
+Gayer, Francine   1:14:25
+Sim, essa ferramenta é necessária. Leandro, eu falo por mim aqui que a maior parte do tempo que eu acho que o objetivo é esse, liberar o pessoal da área de vendas para vender a maior parte do tempo. Assim, da nossa equipe e de outros também agentes de vendas, com quem eu converso, a reclamação é que a gente despende muito tempo.
+Do nosso tempo que deveria estar na função de vendas, é administrando informações para passar para o cliente, é agilizando processos internos, o que eu não acho que não é efetivo para a função que a gente está exercendo.
+
+Rhein, Thalita Merisio   1:15:00
+É, e eu nem sou da área de vendas, mas a minha visão de que isso a maior contagem também disso, além dessa facilidade que a Francine falou, é a gente poder medir quantos usuários hoje estão entrando em contato, quais são os motivos que quantos clientes estão entrando em contato.
+Para falar de assuntos relacionados à compra, hoje a gente não tem uma medição disso, porque fica tudo no na informalidade, muita transação por WhatsApp direto com o vendedor, muito e-mail, muita ligação e a gente não tem como medir, como diagnosticar onde está?
+Tendo problemas, a gente só tem como ser reativo depois, quando o cliente responde um C SAT falando dos problemas que ele teve na jornada com a gente.
+
+Gayer, Francine   1:15:44
+E é um dado empírico, Thalita, assim, termômetro aqui somos nós. Contagem é, não tem como você medir isso hoje.
+
+Rhein, Thalita Merisio   1:15:48
+Sim.
+Então aí você levanta uma questão, mas assim, parece que é só que ela é isolada, mas na verdade ela deve ser geral, não é? A gente só não está tendo perceção disso.
+
+Gayer, Francine   1:16:02
+E pode ser, Thalita, não sei, posso estar falando besteira, mas acho que não. Que pode ter uma certa resistência por parte de alguns clientes de contagem da ferramenta ali, uma inteligência artificial para obter informação. Mas uma vez que eu acho que o cliente obtém essa informação de forma ágil e
+Seja uma informação consistente, eu acho que isso aí vai ser uma aderência, sim, em simples esforço. Móveis que às vezes a gente não consegue dar o retorno para o cliente em tempo real aqui. Está viajando, às vezes a gente mesmo não consegue ter informação ali em tempo real para passar, o cliente espera às vezes no outro dia. E aí, nesse caso, eu estou entendendo.
+A informação vai ser imediata, não é? Ele preenche ali e já tem informação na mão. Não vejo como não ser benéfico.
+
+Pereira, Leandro Da Cruz   1:16:45
+É na hora.
+
+Rhein, Thalita Merisio   1:16:45
+Sim, é uhum.
+
+Pereira, Leandro Da Cruz   1:16:47
+Apoio.
+Fala, Lucas, fala com atendente, aí você está com um problema, você é um cliente, não resolveu seu problema e manda bala aí.
+
+Pinheiro, Lucas Lemos   1:16:54
+Isso eu fiz aqui um fluxo inválido, então eu pesquisei por um período de hoje, não tem nenhuma ordem aberta hoje. E aí o bot me retornou aqui, o que eu quero fazer? Eu quero realizar uma outra consulta, eu posso fazer, eu quero registrar uma solicitação, que é aquele caso que a gente deu exemplo aqui ou não, eu quero.
+
+Pereira, Leandro Da Cruz   1:17:11
+Só um ponto do caso, Lucas, quero só reforçar o negócio do caso. Assim como vocês da Comercial vão abrir um caso para a área de Planejamento, o Cliente vai poder abrir um caso para a área de Planejamento. Da mesma forma, o Cliente não precisa saber para qual fila vai, porque as regras que a gente colocou dentro para o time.
+
+Pinheiro, Lucas Lemos   1:17:11
+Falar com a atendente, sim.
+
+Pereira, Leandro Da Cruz   1:17:30
+Comercial são as mesmas regras na visão Cliente, então Cliente a gente já sabe quem ele é, então vai abrir um caso, um ticket lá para a área de planejamento. Aí vocês vão falar o seguinte, mas eu vou conseguir enxergar esse ticket? Sim, vocês são o dono da conta, vocês do Comercial, então se aquela conta está associada a você.
+Você vai saber o que está acontecendo com aquela conta na visão 360, inclusive os tickets que foram abertos pelos seus clientes diretamente pelo canal do WhatsApp. Para vocês não ficarem vendas, imagina o seguinte, numa reunião com o cliente, o cliente falou, pô, abri um ticket lá e ninguém respondeu.
+Vocês vão ter acesso a essa informação, então isso ajuda bastante.
+Para Lucas.
+
+Pinheiro, Lucas Lemos   1:18:10
+É isso aí, bom, aqui eu falei que eu quero falar com o atendente. Ele me perguntou 2 vezes aqui porque eu estava offline com uma posição da pa e ela tem que estar online pro WhatsApp fazer o transbordo pro humano. Então ele já apareceu aqui pra mim. Vocês veem que eu estou no conecta Belgo aqui no ambiente de serviço, que é o console de serviço.
+Então agora eu estou assumindo o papel aqui de um atendente do smart Center. Eu vou aceitar esse atendimento? Está em meu nome, tem aqui o meu número, falou que está a origem é no WhatsApp. Eu vou aceitar esse atendimento e ele já vai abrir aqui dentro do próprio histórico aqui. Eu vou conseguir ver tudo que o cliente.
+Tentou fazer aqui, às vezes não deu certo. O atendente como n um, ele vai conseguir verificar todo esse histórico. E aí ele já pode abordar aqui. Olá, sou o atendente Lucas, como posso te ajudar hoje?
+E aí, se eu voltar aqui no WhatsApp, vocês observem aqui eu estou fazendo um atendimento 100% humano a partir desse momento. E eu tive que digitar isso daqui manual. O atendente, ele vai ter talvez aqui uma série de macros, que são esses quick test aqui. Eu não tenho nenhum nesse momento.
+Mas se ele digitar aqui, por exemplo, um barra, olá, já vai carregar uma mensagem aqui automática, com o nome dele, assim que ele precise digitar sempre a mesma coisa. Assim, eu estou falando ajuste fino, estou falando ajuste de usabilidade, mas eu tenho uma série de possibilidades aqui dentro. E aí o cliente vai.
+Responder aqui, bom dia.
+E toda essa interação vai ficando registrada aqui dentro dos seus sócios, dentro do mesmo ambiente. Então eu estou fazendo uma interação aqui via WhatsApp e aí acho que respondendo novamente Aline parte da pergunta do João, se o atendente do n um aqui não foi suficiente para dar vazão nesse atendimento.
+Eu tenho a possibilidade aqui a de fazer um Rezende que eu estou escalando esse Atendimento para o próximo nível. A gente ainda não tem isso daqui, porque de novo, a solução. Ela está em teste. A gente acabou de demonstrar lá para o planejamento, mas tem muitas possibilidades aqui. Eu posso, por exemplo, se o cliente tentou interagir com um humano.
+Mas está fora do horário de plantão. Ele pegou um horário super alternativo ali, não tem ninguém disponível para atender. O cliente não vai ficar desassistido. Isso vai gerar também um caso com aquelas mesmas premissas que a gente já comentou aqui e depois vai ter esse roteamento e vai ter o atendimento ativo do cliente. Então, o.
+O atendente ali na APA chegou no dia seguinte, horário Comercial, horário de Atendimento, plantão. Ele observou aquele caso, ele pega aquele caso e inicia um atendimento ativo ali com o cliente. Então tudo isso fica armazenado aqui dentro dos seus esforços, vinculado ao cliente.
+Vinculada aquela conta, então nada se perde. Então a gente demonstrou aqui pra vocês dentro do autoatendimento, o fluxo que o cliente não conseguiu ser autoatendido, então ele transbordou aqui por um atendimento humano que tá funcional. E tem esse caso do caso que a gente abre um caso e tem esse roteamento inteligente aí baseado nas egidio.
+Diga, Francine.
+
+Gayer, Francine   1:21:03
+É rapidinho aqui, só uma dúvida, eu acho que vai aí de a pergunta do João, se o cliente é iniciou o atendimento aí pelo pelo IAE, aí ele vai procurar esse transbordo aí para o atendimento pessoal.
+Não é aí se ele for buscar o recurso vendedor, a gente vai ter acesso, vai ter essa visão que você está tendo desse histórico de conversas que ele fez por esse canal ou não.
+
+Pinheiro, Lucas Lemos   1:21:30
+É hoje vocês não tem. Esse é esse é o ponto. Hoje é o estado do planejamento. O planejamento é o responsável por esse canal. O planejamento que faz o atendimento do início ao fim. É o que eu indiquei aqui que existe a possibilidade de vocês serem incluídos dentro desse fluxo.
+De escala, então o smart Center é o n um e depois do n 2 eu tenho o supervisor diga.
+
+Pereira, Leandro Da Cruz   1:21:50
+O Lucas, desculpa, eu acho que a pergunta dela é uma outra linha, nem na parte de atender, tá? Mas eu digo, por exemplo, a gente pegar o pegar o histórico, a gente pode criar um. Acho que ele está criando o caso no final do atendimento.
+
+Pinheiro, Lucas Lemos   1:21:57
+Mas eu histórico, sim.
+Sim.
+Sim.
+
+Gayer, Francine   1:22:05
+É até minha dúvida, oi, perdão.
+
+Pereira, Leandro Da Cruz   1:22:05
+Ele cria um, ele cria um caso para você enxergar o histórico do que aconteceu com o seu cliente, tá? Tanto o caso que ele criou quanto o que o smart Center também passou para o seu cliente. Era essa a sua pergunta?
+
+Gayer, Francine   1:22:11
+Mello.
+Mas nesse caso é sim. Mas nesse caso, por exemplo, assim, qual que é a orientação para o comercial? Aí o cliente veio nos procurar, falar, eu entrei em contato com aquele WhatsApp lá do SAC da belgo e não tive retorno ou não entendi, não fiquei satisfeito. Aí ele veio no vendas.
+Qual que é a orientação para nós? É buscar o smart também, que só eles vão ter acesso à conversa. Não é para retomar esse atendimento ou a gente continua?
+
+Pereira, Leandro Da Cruz   1:22:34
+Olha.
+A gente está falando a gente, a gente tem, a gente tem uma mudança de processo muito grande dentro da pelve com a implementação dessas funcionalidades, porque são coisas que não existem hoje. Eu acho que a gente vai precisar conversar e alinhar esses pontos.
+O acesso à informação, o comercial vai ter. Então vai ter esse caso ali dentro da conta do cliente de vocês. Vão conseguir saber tudo o que o smart Center falou. O smart Center falou certo, falou errado ou não deveria ter feito assim, deveria ter feito assado. Eu acho que vai caber. Vão aparecer novas reuniões.
+Com base nesses dados que o sistema está gerando para vocês. Então vocês vão falar o seguinte, eu gostaria que vocês fizessem de tal forma ou não faça isso ou faça aquilo. Então vai ser algo novo, sabe? Francine, eu não sei. Eu não tenho todas as respostas para isso ainda, mas o que eu posso te garantir que você vai.
+O comercial vai ter acesso às informações do cliente dele dentro dos casos. Agora tá aí para vocês fazerem um atendimento.
+E eu já vi empresas que trabalham dessa forma, vamos supor que o que vocês entram no fluxo de atendimento ali e.
+Eu não sei se é o melhor caminho, sabe? Escalar e vocês abrirem ali o notebook. E isso tem que ser pelo notebook mesmo, tá? Esse tipo de funcionalidade você não vai conseguir responder pelo WhatsApp ali no seu WhatsApp e já responder o WhatsApp do cliente sem.
+Com as ferramentas que a gente tem aqui dentro. Então, abrir o notebook, às vezes vocês estão em reunião, vocês estão viajando e aí o cliente vai ficar esperando, foi escalado e acho que talvez a experiência não é muito boa. Eu não sei se é o melhor caminho, sabe?
+Transbordar para vocês, mas eu acho que vocês, como responsáveis pelos clientes, sim, analisar os dados e definir em aí melhorias de produtos entre diversas áreas.
+
+Gayer, Francine   1:24:32
+É o que você falou, a gente vai ter que construir isso juntos aí, conforme a experiência aí for acontecendo. Mas eu digo só um caso hipotético do cliente entrar primeiro em contato com esse Suporte SAC e aí, de repente, chamar o vendas no WhatsApp particular para tentar dar sequência ou enfim, por qualquer outro motivo. É só para a gente.
+
+Pereira, Leandro Da Cruz   1:24:49
+Não, eles não vão, eles não vão conseguir.
+
+Gayer, Francine   1:24:51
+Saber se a gente rebate de novo para o joga a bola de novo, aí para o smart, fala, o cliente me chamou aqui, você pode dar uma atenção lá e tal. Ou a gente faz a continuidade ali do atendimento, que eu acho que não é efetivo, que eu acho que foge um pouco da proposta do trabalho aqui.
+
+Pereira, Leandro Da Cruz   1:25:05
+Porque assim a gente poderia tecnicamente aqui falar, se não conseguiu resolver aqui, sei lá, encaminhar o seu número de telefone ou um link do seu WhatsApp para o cliente apertar direto e receber.
+O.
+E a melhor, tá, mas antes e definir qual que é o caminho ideal. Lembrando, isso aqui tá.
+Fresquinho, tá novo ainda, tá nascimento, mas como a gente tá falando de castro de clientes e autoatendimento, a gente mostrou o follow-up, mostrou os dados de clientes e aqui eu quero reforçar isso de forma imediata para vocês, a revisão.
+
+Gayer, Francine   1:25:27
+Em construção tranquilo.
+
+Pereira, Leandro Da Cruz   1:25:43
+Dos dados de contato dos clientes de vocês, porque nada disso vai funcionar se vocês não tiverem com os dados de e-mail, telefone, tudo certinho lá dentro dos seus esforços. Cliente de vocês vai ter uma experiência muito ruim se ele tentar entrar em contato por esse canal e se for divulgado.
+E ele fala assim, meu e-mail não está cadastrado na base, ele não vai receber o código de verificação. Então já de forma é de antemão assim, já façam essa revisão dos seus clientes, dos dados dos seus clientes, porque.
+Uma coisa eu tenho certeza, essa funcionalidade em breve vai estar em produção. Eu não sei talvez antes ou um pouquinho depois, mas vai estar ali junto com a entrada do GTM. Mas vale a pena vocês já fazerem esse tipo de revisão. Gostaram? Dúvidas?
+
+Pinheiro, Lucas Lemos   1:26:35
+Acho que só pra só pra fechar, só antes da Renata falar, não só pra fechar aqui. Em relação ao atendimento, esse atendimento ele é concluído, ele gera aqui uma pesquisa de satisfação para o cliente também. Então, dependendo da avaliação dele aqui, se for menor que 4, por exemplo.
+
+Pereira, Leandro Da Cruz   1:26:36
+Fala Renata.
+Desculpa.
+
+Pinheiro, Lucas Lemos   1:26:52
+É uma avaliação ali, de produtos e ele já cai ali num processo de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de produtos de pro
+Onde que o processo falhou ou se teve alguma deficiência ali na informação que foi entregue para o cliente? Então tem várias possibilidades. E de novo, isso aqui está em construção, então tem bastante oportunidade de refinar.
+Renata.
+
+Mello, Renata Drumond Amorim Conrado De   1:27:29
+Leandro, diga para perguntar.
+
+Pereira, Leandro Da Cruz   1:27:32
+Não vai lá, manda bala, Renato.
+
+Mello, Renata Drumond Amorim Conrado De   1:27:35
+Esse negócio bonito aí, os as 80 e tantas unidades vai ter acesso.
+
+Pereira, Leandro Da Cruz   1:27:43
+Eu não sei qual que vai ser a estratégia do planejamento do Comercial, tá? Eu não sei se vocês vão fazer um rollout por segmento de Cliente, por região, então eu acho que vocês podem levantar a bola.
+
+Mello, Renata Drumond Amorim Conrado De   1:27:43
+Com cliente?
+
+Pereira, Leandro Da Cruz   1:27:59
+Já para os gerentes e diretores de vocês, para vocês começarem esse alinhamento, lembrando, isso está em validação lá pela área, pela área de planejamento, já vai cair para vocês, para área comercial.
+
+Mello, Renata Drumond Amorim Conrado De   1:28:14
+O.
+
+Pereira, Leandro Da Cruz   1:28:14
+E em conjunto, vocês definir em a estratégia.
+
+Mello, Renata Drumond Amorim Conrado De   1:28:16
+Mas ele consegue ler os clientes que começam com um.
+
+Pereira, Leandro Da Cruz   1:28:21
+Não tem limitação, começa com U.
+
+Mello, Renata Drumond Amorim Conrado De   1:28:23
+Tem não é um número 1 que é diferente os clientes da rede com os clientes do da Jardim de vendas normal.
+
+Pereira, Leandro Da Cruz   1:28:27
+Jessica.
+Você está falando de AMD, especificamente dos clientes lá?
+
+Mello, Renata Drumond Amorim Conrado De   1:28:35
+É uhum.
+
+Pereira, Leandro Da Cruz   1:28:37
+*****, para isso funcionar?
+O Kathleen lembra AMD é a mesma área de vendas.
+
+Almeida, Kathleen Pfeifeer Carmona De   1:28:45
+se ela tiver área de vendas são diferentes mas se ela tiver expandida para WBB a gente a gente tem visão né Belgo tem visão Belgo mais grupo de contas são diferentes que começa com conta um a gente precisa analisar porque grupo de contas quatro é diferente o que tem na Salão então esses clientes tem grupo de contas diferentes mas estão expandido para
+
+Mello, Renata Drumond Amorim Conrado De   1:28:52
+Tá sim.
+
+Almeida, Kathleen Pfeifeer Carmona De   1:29:04
+Para a área Belgo, área de vendas Belgo.
+
+Pereira, Leandro Da Cruz   1:29:06
+E eles já estão dentro dos seus forces, esses clientes dela.
+
+Almeida, Kathleen Pfeifeer Carmona De   1:29:10
+Não é esse ponto que eles acho que até a vi teve uma conversa vi ontem sobre isso. É esse é o ponto. Eles querem enxergar esses clientes, esses clientes dentro dos seus forços, entendeu? Aí o ponto aí é WBBA, canal antigo 25.
+
+Rhein, Thalita Merisio   1:29:17
+Sim.
+
+Pereira, Leandro Da Cruz   1:29:22
+Beleza.
+
+Franca, Victoria Emanuelle Bitencourth   1:29:22
+A gente conversou ontem, não é?
+
+Almeida, Kathleen Pfeifeer Carmona De   1:29:28
+95.
+
+Pereira, Leandro Da Cruz   1:29:28
+Bom, e tem a questão da carteira também, que é o que a gente falou antes, porque isso só vai funcionar. É para as ordens de vendas que a gente considerou ali dentro, para o cross company também. Renata, a gente tem que fazer o ajuste no relatório, vai fazer aquele ajuste no relatório lá naquele follow up e vai funcionar naturalmente para os clientes também.
+Aí, cross company tá que você tiver, mas.
+
+Franca, Victoria Emanuelle Bitencourth   1:29:52
+Vocês, Leandro, uma reunião e a gente pega, hoje entrar com vocês uma reunião e a gente pega os requisitos para escrever as histórias, para entrar na próxima Storel, se possível.
+
+Pereira, Leandro Da Cruz   1:29:53
+Desculpa.
+Bom, é ponto importante realmente o ponto de contato de vocês aqui, apesar de eu estar falando o Lucas e a Kat aqui é a Vitória. Ela é a product manager de vocês, então ela é o principal ponto de contato em relação às necessidades aí.
+É junto com os produtos de henrique o Bruno, Aline e Leandro Gimenes, tá? Olha, é, queria o feedback de vocês, tá? Em relação ao que vocês viram até agora, eu tinha planejado hoje ainda a gente falar sobre o workflow pricing, mas não vai dar tempo.
+E aí, para a gente montar uma linha de raciocínio, eu vou precisar de pelo menos aí 1 hora, 1 hora e pouquinho para mostrar o processo de paula a ponta. E eu sei que ainda tem 26 minutos de reunião, mas não vale a pena a gente começar um processo que eu vou parar no meio, tá?
+E aí a gente vai ter perda de fluxo, mas gostaria de um feedback em relação ao que vocês viram, suas as expectativas de vocês, se faz sentido, se não faz sentido, vocês podem passar essa.
+Esse feedback para o time aqui do GTM.
+Vala, João.
+
+Endo, Joao Vitor Yuji   1:31:14
+Tudo que foi apresentado aqui foi muito bom, acho que vai ajudar bastante o time de vendas aí ter mais acho que poder e.
+Independência não é de outras áreas. Eu digo assim, daí só voltando um pouco do que o Lucas falou nessa última ferramenta, o código de verificação é só por e-mail ou ele pode optar por SMS, WhatsApp ou.
+
+Pinheiro, Lucas Lemos   1:31:38
+É hoje é só por só por e-mail, tá, João? É, e só foi uma decisão técnica nossa, tá? Não é um impeditivo, é uma decisão de segurança mesmo, porque a gente entende que o SMS é mais vulnerável que o e-mail. Então eu posso ter um risco ali de mandar.
+
+Endo, Joao Vitor Yuji   1:31:41
+Tá bom?
+
+Pinheiro, Lucas Lemos   1:31:54
+Às vezes para um número pessoal e o funcionário às vezes nem está mais na empresa, então, para evitar esse tipo de risco é, a gente assume que todos os e-mails que estão cadastrados ali são corporativos e a gente só dispara esse essa chave para o e-mail corporativo.
+
+Pereira, Leandro Da Cruz   1:32:08
+Sua pergunta já deve estar relacionada com longos, porque longos enviam SMSE e-mail e essa mudança na estratégia foi de foi até o Lucas e a Kathleen que pensaram, falou, pô, hoje tem muita portabilidade de número.
+
+Endo, Joao Vitor Yuji   1:32:08
+Perfeito.
+Mhm.
+
+Pereira, Leandro Da Cruz   1:32:24
+Corporativo com as saídas das pessoas. Então ele identificou a ele e a Kathleen identificaram esse risco de segurança e partiram aí pela pelo e-mail que realmente é mais seguro. E quando uma pessoa desligada, aquele e-mail já não recebe mais nada. Então a gente está garantindo que.
+A informação da Belgo não vá, não chegue em mãos erradas, tá? Então é uma decisão realmente de segurança.
+
+Endo, Joao Vitor Yuji   1:32:50
+Perfeito.
+
+Pereira, Leandro Da Cruz   1:32:53
+Olá Maria Luiza.
+
+Chaves, Maria Luiza Gomes   1:32:54
+É, primeiramente, queria agradecer. Todas essas sessões tem sido muito didáticas. Eu entrei na belgo há 4 meses, então aprendi muita coisa também. É de outros processos daqui. E aí eu queria só perguntar, vão ter mais sessões? Porque eu queria saber se a gente vai falar um pouco mais sobre tabela de preços.
+Mais especificamente.
+
+Pereira, Leandro Da Cruz   1:33:16
+Sessão de Preço seria hoje está, mas a gente começaria a falar de o pricing, cotação e ordem de vendas, mas não vai dar tempo.
+
+Rhein, Thalita Merisio   1:33:25
+A gente tem mais 2 encontros, é Maria Luiza, é a gente.
+
+Chaves, Maria Luiza Gomes   1:33:28
+Não, beleza, não. Então a gente vai comentar sobre nos próximos.
+
+Rhein, Thalita Merisio   1:33:33
+Isso o próximo encontro vai ser ainda essa semana. Deixa eu confirmar aqui na amanhã, na verdade, amanhã, das 4 às 5:30.
+
+Chaves, Maria Luiza Gomes   1:33:34
+Perfeito.
+
+Rhein, Thalita Merisio   1:33:43
+E depois a gente tem uma outra agenda na segunda-feira, das 2 às 4.
+
+Chaves, Maria Luiza Gomes   1:33:44
+Mello.
+Combinado? Então, muito obrigada, viu?
+
+Pereira, Leandro Da Cruz   1:33:51
+Isso.
+Bom, pessoal, acho que era isso que a gente gostaria de mostrar. Não foi tudo. Faltou workflow Price fica para amanhã.
+Obrigado pelo tempo de vocês, pelas contagem. E não se esqueçam, tá, que tudo que a gente está falando aqui, vocês precisam revisar os cenários de teste de vocês, tá que é aquela famosa planilhinha lá que a Thalita sempre fala?
+No processo de paula a ponta, inclusive vocês podem iniciar discussões sobre processos novos, que inclusive não tá naquela planilha, tá? Aí vocês podem levantar a mão lá junto com a área de produtos e o auto atendimento, como que vai funcionar isso daqui? Qual que é o papel e responsabilidade de castro dentro desses processos?
+Porque tá chegando e aí é melhor a gente já alinhar esses pontos que estão pendentes antes da entrada de produtos e para evitar desconforto para os clientes e para vocês também aí da área Comercial e de Apoio.
+
+Rhein, Thalita Merisio   1:34:48
+É só pra dar gancho nessa fala do Leandro. Para quem não sabe de que planilha ele está falando, eu vou disparar até amanhã para vocês todos que participaram desses encontros, para todos os convocados, a essa planilha que o Leandro está citando e um guia de orientação para como vocês
+Vegam eu.
+O que vocês têm que acrescentar, que são esses pontos que o Leandro está trazendo e eu vou dar também uma sugestão de janela, que assim que a gente acabar esses workshops, no dia 22, a próxima fase fica na mão de castro de vocês, usuários, de fazer justamente essa revisão dos cenários. Alguns já estarão propostos lá. E é isso que eu vou estar ali.
+Entradas nesse nesse manual da planilha, para que vocês se preparem para os testes. Então tem aí uma etapa que vai ficar na mão de castro, tá de revisão.
+
+Pereira, Leandro Da Cruz   1:35:43
+Bom, acho que é isso. Muito obrigado. Vamos trabalhar a todos. Qualquer dúvida é a gente está à disposição. Valeu, tchau, tchau, tchau, gente.
+
+Rhein, Thalita Merisio   1:35:44
+É isso. Obrigada, gente. Boa semana.
+Tchau, tchau.
+
+Pinheiro, Lucas Lemos   1:35:50
+Valeu pessoal, tchau, tchau, tchau tchau pessoal.
+
+Gayer, Francine   1:35:50
+Cada um abraço.
+
+Pereira, Leandro Da Cruz   1:35:51
+Hello, Jessica.
+
+Rhein, Thalita Merisio stopped transcription

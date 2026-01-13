@@ -1,0 +1,268 @@
+{
+  "metadata": {
+    "arquivo": "Testes - FUP DE CARTEIRA.xlsx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\Testes - FUP DE CARTEIRA.xlsx",
+    "tamanho_bytes": 10733,
+    "data_modificacao": "2025-10-13T10:33:42",
+    "extraido_em": "2026-01-13T11:33:16.002740",
+    "status": "extraido",
+    "total_sheets": 1,
+    "sheets": [
+      {
+        "nome": "Planilha1",
+        "linhas": 34,
+        "colunas": 5
+      }
+    ]
+  },
+  "conteudo": {
+    "sheets": [
+      {
+        "nome": "Planilha1",
+        "linhas": 34,
+        "colunas": 5,
+        "dados": [
+          [
+            "Regional",
+            "Fila",
+            "Api name queue",
+            "",
+            "Corrigir "
+          ],
+          [
+            "EBMB",
+            "Contrução Civil",
+            "EBMB_CC",
+            "",
+            ""
+          ],
+          [
+            "EBCC",
+            "Contrução Civil - Outros",
+            "CC_Outros",
+            "",
+            ""
+          ],
+          [
+            "EBCO",
+            "Contrução Civil - Outros",
+            "",
+            "",
+            ""
+          ],
+          [
+            "EBMG",
+            "Contrução Civil - Outros",
+            "",
+            "",
+            ""
+          ],
+          [
+            "EBNE",
+            "Contrução Civil - Outros",
+            "",
+            "",
+            ""
+          ],
+          [
+            "EBRJ",
+            "Contrução Civil - Outros",
+            "",
+            "",
+            ""
+          ],
+          [
+            "EBSC",
+            "Contrução Civil - Outros",
+            "",
+            "",
+            ""
+          ],
+          [
+            "EBSP",
+            "Contrução Civil - Outros",
+            "",
+            "",
+            ""
+          ],
+          [
+            "EDBB",
+            "Contrução Civil - Outros",
+            "",
+            "OK",
+            ""
+          ],
+          [
+            "EDBP",
+            "Contrução Civil - Outros",
+            "",
+            "OK",
+            ""
+          ],
+          [
+            "EVSP",
+            "Contrução Civil - Outros",
+            "",
+            "",
+            ""
+          ],
+          [
+            "UNCC",
+            "Contrução Civil - UNCC",
+            "UNCC_CC",
+            "OK",
+            ""
+          ],
+          [
+            "UNCO",
+            "Contrução Civil - UNCO",
+            "UNCO_CC",
+            "OK",
+            ""
+          ],
+          [
+            "UNN",
+            "Contrução Civil - UNN",
+            "UNN_CC",
+            "OK",
+            ""
+          ],
+          [
+            "UNNE",
+            "Contrução Civil - UNNE",
+            "UNNE_CC",
+            "OK",
+            ""
+          ],
+          [
+            "UNRJ",
+            "Contrução Civil - UNRJ",
+            "UNRJ_CC",
+            "OK",
+            ""
+          ],
+          [
+            "UNSC",
+            "Contrução Civil - UNSC",
+            "UNSC_CC",
+            "OK",
+            ""
+          ],
+          [
+            "UNSP",
+            "Contrução Civil - UNSP",
+            "UNSP_CC",
+            "OK",
+            ""
+          ],
+          [
+            "GCCA",
+            "Corporativos - GCCA",
+            "GCCA_Corp",
+            "OK",
+            ""
+          ],
+          [
+            "GCCI",
+            "Corporativos - GCCI",
+            "GCCI_Corp",
+            "OK",
+            ""
+          ],
+          [
+            "GEOT",
+            "Especiais - GEOT",
+            "GEOT_Espec",
+            "OK",
+            ""
+          ],
+          [
+            "GMIN",
+            "Especiais - GMIN",
+            "GMIN_Espec",
+            "OK",
+            ""
+          ],
+          [
+            "GSIC",
+            "Especiais - GSIC",
+            "GSIC_Espec",
+            "OK",
+            ""
+          ],
+          [
+            "GVES",
+            "Especiais- GVES",
+            "GVES_Espec",
+            "Ok",
+            ""
+          ],
+          [
+            "EVC",
+            "Outros",
+            "Outros_FUP",
+            "",
+            ""
+          ],
+          [
+            "GLJV",
+            "Outros",
+            "",
+            "",
+            ""
+          ],
+          [
+            "GVAI",
+            "Outros",
+            "",
+            "",
+            ""
+          ],
+          [
+            "GRSC",
+            "Regional - GRSC",
+            "GRSC_Reg",
+            "OK",
+            ""
+          ],
+          [
+            "GRCN",
+            "Rergional - GRCN",
+            "GRCN_Reg",
+            "OK",
+            ""
+          ],
+          [
+            "GRNE",
+            "Rergional - GRNE",
+            "GRNE_Reg",
+            "OK",
+            ""
+          ],
+          [
+            "GRSI",
+            "Rergional - GRSI",
+            "GRSI_Reg",
+            "OK",
+            ""
+          ],
+          [
+            "GRSS",
+            "Rergional - GRSS",
+            "GRSS_Reg",
+            "OK",
+            ""
+          ],
+          [
+            "GRSU",
+            "Rergional - GRSU",
+            "GRSU_Reg",
+            "OK",
+            ""
+          ]
+        ]
+      }
+    ],
+    "total_sheets": 1
+  }
+}

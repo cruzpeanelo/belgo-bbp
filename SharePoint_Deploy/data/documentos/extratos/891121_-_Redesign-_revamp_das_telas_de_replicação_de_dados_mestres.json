@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "id": "891121",
+    "arquivo": "891121 - Redesign- revamp das telas de replicação de dados mestres.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\891121 - Redesign- revamp das telas de replicação de dados mestres.docx",
+    "tamanho_bytes": 1250806,
+    "data_modificacao": "2025-11-11T16:36:44",
+    "extraido_em": "2026-01-13T11:31:15.035834",
+    "status": "extraido",
+    "total_paragrafos": 7,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Buscar e integrar cliente SAP no Salesforce.",
+      "Tela “HUB de Gestão OCs” com log de integração concluída com sucesso e registro encontrado na query exportada.",
+      "Log com mensagem “Integração realizada com sucesso” e produto listado na consulta.",
+      "Tela de processamento em massa com estatísticas de sucesso e log sem erros.",
+      "15 registros Processados com sucesso",
+      "Log com mensagem “Integração realizada com sucesso” e produto listado na consulta.",
+      "Foram carregados somente dois, pois os outros já existiam na Org"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n891121 - [Salesforce] Redesign/revamp das telas de replicação de dados mestres",
+          "Data de Criação\n11/11/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 7,
+    "total_tabelas": 1
+  }
+}

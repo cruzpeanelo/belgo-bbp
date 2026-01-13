@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossário - Cockpit GTM Belgo</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .glossary-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .category-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .category-icon {
+            font-size: 1.8rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f3f4f6;
+            border-radius: 10px;
+        }
+        .category-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+        .term-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        .term-card {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 15px;
+            border-left: 4px solid #3b82f6;
+            transition: transform 0.2s;
+        }
+        .term-card:hover {
+            transform: translateX(5px);
+            background: #f0f7ff;
+        }
+        .term-sigla {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #1e40af;
+            margin-bottom: 5px;
+        }
+        .term-nome {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+        .term-desc {
+            font-size: 0.85rem;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+        .term-alt {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        .search-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+        .status-confirmed {
+            display: inline-block;
+            background: #d1fae5;
+            color: #065f46;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            margin-left: 8px;
+        }
+        .quick-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .quick-nav a {
+            padding: 8px 16px;
+            background: #f3f4f6;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+        .quick-nav a:hover {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">BELGO</div>
+                <div class="sidebar-subtitle">Cockpit GTM</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="../index.html" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="testes.html" class="nav-item">
+                    <span class="nav-icon">✅</span>
+                    <span class="nav-text">Testes</span>
+                </a>
+                <a href="jornadas.html" class="nav-item">
+                    <span class="nav-icon">🔄</span>
+                    <span class="nav-text">Jornadas AS IS/TO BE</span>
+                </a>
+                <a href="documentos.html" class="nav-item">
+                    <span class="nav-icon">📄</span>
+                    <span class="nav-text">Documentos</span>
+                </a>
+                <a href="reunioes.html" class="nav-item">
+                    <span class="nav-icon">📝</span>
+                    <span class="nav-text">Reuniões</span>
+                </a>
+                <a href="timeline.html" class="nav-item">
+                    <span class="nav-icon">📅</span>
+                    <span class="nav-text">Timeline</span>
+                </a>
+                <a href="cronograma.html" class="nav-item">
+                    <span class="nav-icon">🗓️</span>
+                    <span class="nav-text">Cronograma</span>
+                </a>
+                <a href="glossario.html" class="nav-item active">
+                    <span class="nav-icon">📖</span>
+                    <span class="nav-text">Glossário</span>
+                </a>
+                <a href="participantes.html" class="nav-item">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-text">Participantes</span>
+                </a>
+                <a href="config.html" class="nav-item">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-text">Configurações</span>
+                </a>
+                <a href="pontos-criticos.html" class="nav-item">
+                    <span class="nav-icon">⚠️</span>
+                    <span class="nav-text">Pontos Críticos</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <div class="page-header-text">
+                    <h1 class="page-title">Glossário</h1>
+                    <p class="page-subtitle">Dicionário de siglas, termos e conceitos do projeto GTM Vendas Belgo</p>
+                </div>
+                <button class="btn-teams" onclick="Utils.discussOnTeams('glossario', 'Glossário', this)">
+                    📤 Discutir no Teams
+                </button>
+            </div>
+        <div class="glossary-container">
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchTerm" placeholder="Buscar termo ou sigla..." onkeyup="filterTerms()">
+            </div>
+
+            <div class="quick-nav">
+                <a href="#sistemas">Sistemas</a>
+                <a href="#credito">Áreas de Crédito</a>
+                <a href="#canais">Canais</a>
+                <a href="#processos">Processos</a>
+                <a href="#projeto">Projeto</a>
+                <a href="#documentos">Documentos</a>
+            </div>
+
+            <!-- Sistemas -->
+            <div class="category-section" id="sistemas">
+                <div class="category-header">
+                    <div class="category-icon">💻</div>
+                    <div class="category-title">Sistemas e Plataformas</div>
+                </div>
+                <div class="term-grid">
+                    <div class="term-card">
+                        <div class="term-sigla">ASCP</div>
+                        <div class="term-nome">Advanced Supply Chain Planning</div>
+                        <div class="term-desc">Módulo SAP para gestão de áreas de crédito. Integração principal para limites.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">FSCM</div>
+                        <div class="term-nome">Financial Supply Chain Management</div>
+                        <div class="term-desc">Solucao SAP para gestão financeira da cadeia de suprimentos.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">BRO</div>
+                        <div class="term-nome">Business Role Objects</div>
+                        <div class="term-desc">Sistema legado de cadastro de clientes. Sendo substituido pelo novo modelo Salesforce.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">SINTEGRA</div>
+                        <div class="term-nome">Sistema Integrado de Informacoes</div>
+                        <div class="term-desc">Base de dados fiscais estaduais para validação de dados cadastrais.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">ALPE</div>
+                        <div class="term-nome">Aços Longos PE</div>
+                        <div class="term-desc">Área de crédito Aços Longos Pernambuco. Não usar "Altair".</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">GTM</div>
+                        <div class="term-nome">Go-To-Market</div>
+                        <div class="term-desc">Estrategia de entrada no mercado. Projeto GTM Vendas - Salesforce.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">SF / SFDC</div>
+                        <div class="term-nome">Salesforce</div>
+                        <div class="term-desc">Plataforma CRM - Sistema central do projeto.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Áreas de Crédito -->
+            <div class="category-section" id="credito">
+                <div class="category-header">
+                    <div class="category-icon">💳</div>
+                    <div class="category-title">Áreas de Crédito (4 Confirmadas)</div>
+                </div>
+                <div class="term-grid">
+                    <div class="term-card">
+                        <div class="term-sigla">BBA <span class="status-confirmed">CONFIRMADO</span></div>
+                        <div class="term-nome">Limite Interno Belgo</div>
+                        <div class="term-desc">Area de credito interna para concessao de limites internos.</div>
+                        <div class="term-alt">Fonte: Vanessa (04/12/2025)</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">CSP <span class="status-confirmed">CONFIRMADO</span></div>
+                        <div class="term-nome">Supply / Belgo Cash</div>
+                        <div class="term-desc">Area de credito para operacoes de supply chain e Belgo Cash.</div>
+                        <div class="term-alt">Fonte: Leandro (03/12/2025)</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">DBA / ADBA <span class="status-confirmed">CONFIRMADO</span></div>
+                        <div class="term-nome">Distribuicao</div>
+                        <div class="term-desc">Area de credito para canal de distribuicao. Relacionado ao Canal 30.</div>
+                        <div class="term-alt">Fonte: Reuniões 03/12 e 04/12/2025</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">ALPE / BTC / ABPE <span class="status-confirmed">CONFIRMADO</span></div>
+                        <div class="term-nome">Aços Longos PE</div>
+                        <div class="term-desc">Área de crédito Aços Longos Pernambuco. Não usar "Altair".</div>
+                        <div class="term-alt">Fonte: Reuniões 03/12 e 04/12/2025</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Canais -->
+            <div class="category-section" id="canais">
+                <div class="category-header">
+                    <div class="category-icon">📦</div>
+                    <div class="category-title">Canais de Venda</div>
+                </div>
+                <div class="term-grid">
+                    <div class="term-card">
+                        <div class="term-sigla">Canal 20 <span class="status-confirmed">CONFIRMADO</span></div>
+                        <div class="term-nome">Industria</div>
+                        <div class="term-desc">Canal para vendas industriais. Tipo de cliente: PJ Industrial.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">Canal 25</div>
+                        <div class="term-nome">Casos Especiais</div>
+                        <div class="term-desc">Canal para casos especiais e excecoes.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">Canal 30 <span class="status-confirmed">CONFIRMADO</span></div>
+                        <div class="term-nome">Distribuicao</div>
+                        <div class="term-desc">Canal para distribuidores. Area de credito relacionada: DBA/ADBA.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">Canal 40 <span class="status-confirmed">CONFIRMADO</span></div>
+                        <div class="term-nome">Consumo</div>
+                        <div class="term-desc">Canal para consumo/varejo. Tipo de cliente: Consumidor/Varejo.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Processos -->
+            <div class="category-section" id="processos">
+                <div class="category-header">
+                    <div class="category-icon">⚙️</div>
+                    <div class="category-title">Processos e Funcionalidades</div>
+                </div>
+                <div class="term-grid">
+                    <div class="term-card">
+                        <div class="term-sigla">FUP</div>
+                        <div class="term-nome">Follow-Up</div>
+                        <div class="term-desc">Acompanhamento de carteira de clientes. Jornada FUP de Carteira.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">OC</div>
+                        <div class="term-nome">Ordem de Compra</div>
+                        <div class="term-desc">Pedido de venda. Hub de Gestão de OC.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">WF</div>
+                        <div class="term-nome">Workflow</div>
+                        <div class="term-desc">Fluxo de trabalho automatizado. Ex: Workflow Pricing.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">CNAE</div>
+                        <div class="term-nome">Classificação Nacional de Atividades Econômicas</div>
+                        <div class="term-desc">Código de atividade empresarial. Define canal e tratamento fiscal.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">CT</div>
+                        <div class="term-nome">Caso de Teste</div>
+                        <div class="term-desc">Cenario de teste no caderno de testes. Ex: CT-01, CT-02.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projeto -->
+            <div class="category-section" id="projeto">
+                <div class="category-header">
+                    <div class="category-icon">📋</div>
+                    <div class="category-title">Termos do Projeto</div>
+                </div>
+                <div class="term-grid">
+                    <div class="term-card">
+                        <div class="term-sigla">BBP</div>
+                        <div class="term-nome">Business Blueprint</div>
+                        <div class="term-desc">Documentação de processos de negócio.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">HML</div>
+                        <div class="term-nome">Homologação</div>
+                        <div class="term-desc">Ambiente de testes de homologação.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">PRD</div>
+                        <div class="term-nome">Produção</div>
+                        <div class="term-desc">Ambiente de produção.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">AS-IS</div>
+                        <div class="term-nome">Estado Atual</div>
+                        <div class="term-desc">Situação atual antes da implementação.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">TO-BE</div>
+                        <div class="term-nome">Estado Futuro</div>
+                        <div class="term-desc">Situação desejada após implementação.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">GO Live</div>
+                        <div class="term-nome">Entrada em Produção</div>
+                        <div class="term-desc">Data de entrada em produção: 15/03/2026.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">UAT</div>
+                        <div class="term-nome">User Acceptance Test</div>
+                        <div class="term-desc">Testes de aceitação do usuário.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Documentos -->
+            <div class="category-section" id="documentos">
+                <div class="category-header">
+                    <div class="category-icon">📄</div>
+                    <div class="category-title">Documentos Fiscais</div>
+                </div>
+                <div class="term-grid">
+                    <div class="term-card">
+                        <div class="term-sigla">NF</div>
+                        <div class="term-nome">Nota Fiscal</div>
+                        <div class="term-desc">Documento fiscal de venda.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">DANFE</div>
+                        <div class="term-nome">Documento Auxiliar da NF-e</div>
+                        <div class="term-desc">Representacao impressa da NF-e.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">NF-e</div>
+                        <div class="term-nome">Nota Fiscal Eletronica</div>
+                        <div class="term-desc">Nota fiscal em formato eletronico.</div>
+                    </div>
+                    <div class="term-card">
+                        <div class="term-sigla">XML</div>
+                        <div class="term-nome">Extensible Markup Language</div>
+                        <div class="term-desc">Formato de arquivo da NF-e.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </main>
+    </div>
+
+    <script>
+        function filterTerms() {
+            const search = document.getElementById('searchTerm').value.toLowerCase();
+            const cards = document.querySelectorAll('.term-card');
+
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(search) ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>

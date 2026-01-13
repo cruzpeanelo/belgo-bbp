@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "id": "862865",
+    "arquivo": "862865-DEFINIÇÃO AUTOMÁTICA DE CLUSTER.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\862865-DEFINIÇÃO AUTOMÁTICA DE CLUSTER.docx",
+    "tamanho_bytes": 2598691,
+    "data_modificacao": "2025-10-16T17:04:36",
+    "extraido_em": "2026-01-13T11:31:14.770776",
+    "status": "extraido",
+    "total_paragrafos": 9,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Teste – Conta Mercbenz\n\n",
+      "Teste – Conta Leao",
+      "Teste – FRUITTOOLS",
+      "Processo da alteração do Cluster exceção:",
+      "Após abrir o registro, clicar no botão enviar para aprovação:",
+      "\n\n\nEnviado",
+      "A Aprovador irá receber o e-mail e aprovar :\n\n",
+      "Depois da aprovação, e-mail recebido:",
+      "\n\n\n\nDepois do processo aprovado o campo Cluster exceção ficará marcado"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n862865-DEFINIÇÃO AUTOMÁTICA DE CLUSTER",
+          "Data de Criação\n14/10/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 9,
+    "total_tabelas": 1
+  }
+}

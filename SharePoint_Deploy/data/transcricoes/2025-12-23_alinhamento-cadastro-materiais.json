@@ -1,0 +1,272 @@
+{
+  "reuniao": {
+    "titulo": "Alinhamento Cadastro de Materiais",
+    "data": "2025-12-23",
+    "duracao": "29:24",
+    "tipo": "Meeting Transcript",
+    "fonte": "SharePoint/Stream",
+    "resumo": "Reunião de alinhamento sobre hierarquia de grupo de mercadoria SAP e estrutura de produtos. Discussão sobre GPS (Product Groups), segmentação de produtos para precificação, clusterização e integração com SAP ECC."
+  },
+  "participantes": [
+    "Rhein, Thalita Merisio",
+    "Riqueti, Luis Eustaquio",
+    "Barbosa, Carla Venancio",
+    "Silva, Fabiana Oliveira",
+    "Monteiro, Fernanda Chaves",
+    "Silva, Hudson Jose Aparecido Da",
+    "Souza, Ronildo Rodrigues De"
+  ],
+  "topicos": [
+    "Hierarquia de grupo de mercadoria",
+    "Segmentação de produtos",
+    "GPS (Product Groups)",
+    "Precificação por segmento",
+    "Clusterização",
+    "Integração SAP ECC",
+    "Relatórios e estrutura de dados"
+  ],
+  "capitulos": [
+    "Discussão sobre Estrutura de Produtos e Atualizações de Produção",
+    "Discussão sobre Estruturas de Relatórios e Segmentos de Produtos",
+    "Discussão sobre Segmentação e Precificação no Processo de Reunião",
+    "Discussão sobre Hierarquias e Planejamento de Produtos"
+  ],
+  "transcricao": [
+    {
+      "timestamp": "0:07",
+      "speaker": "Rhein, Thalita Merisio",
+      "text": "Pronto, agora estamos gravando requete, você puder voltar a compartilhar a tela."
+    },
+    {
+      "timestamp": "0:13",
+      "speaker": "Riqueti, Luis Eustaquio",
+      "text": "OK."
+    },
+    {
+      "timestamp": "0:16",
+      "speaker": "Riqueti, Luis Eustaquio",
+      "text": "Então, vamos lá que eu estava falando que a hierarquia de a que o segmento vai ser definido por uma hierarquia de grupo de mercadoria. Esse grupo de mercadoria, ele é cadastrado juntamente com uma. Ele é um atributo do material."
+    },
+    {
+      "timestamp": "0:34",
+      "speaker": "Riqueti, Luis Eustaquio",
+      "text": "Então todo o material tem no seu castro e o grupo de mercadoria, tá? Então a gente vai utilizar ele. Como que a gente vai ver essa estrutura? A estrutura que tá aqui, ela não tá alterada por vocês viram o e-mail e das modificações que teve na estrutura de do comercial que vai influenciar na aqui."
+    },
+    {
+      "timestamp": "0:53",
+      "speaker": "Riqueti, Luis Eustaquio",
+      "text": "Por causa de produtos, você falando aqui de produtos, tá, gente? Então, quando a gente entrou nessa hierarquia, lá no SAPCC, em cima do grupo de mercadoria, o que a gente tinha feito aqui anteriormente, a gente tinha definido."
+    },
+    {
+      "timestamp": "1:08",
+      "speaker": "Riqueti, Luis Eustaquio",
+      "text": "As diretorias, igual é hoje na naquela mesma estrutura que a gente tem para definir o segmento, os segmentos lá, mas só de uma forma mais automatizada. Então a gente colocou cada diretoria, cada macro segmento, macro segmento detalhado, segmento e dentro."
+    },
+    {
+      "timestamp": "1:26",
+      "speaker": "Barbosa, Carla Venancio",
+      "text": "Sim."
+    },
+    {
+      "timestamp": "1:27",
+      "speaker": "Riqueti, Luis Eustaquio",
+      "text": "Da dele, quem definia esse segmento? Os GPS."
+    },
+    {
+      "timestamp": "1:32",
+      "speaker": "Riqueti, Luis Eustaquio",
+      "text": "Então, na verdade, esse o segmento, ele passa a ser um agrupamento de gp, não mais uma tabela de depara que tinha no sapo ECC, que tem uma tabela do sapo ECC que vocês ficam colocando ela lá."
+    },
+    {
+      "timestamp": "1:49",
+      "speaker": "Riqueti, Luis Eustaquio",
+      "text": "Então a gente só agruparia aqui e estaria automatizada. Esse GP não faz parte mais de auto peças. Ele mudou para mola mecânica. Se a gente pega ele e joga aqui para dentro todo o histórico dele nos relatórios, vai junto para esse novo local."
+    },
+    {
+      "timestamp": "12:45",
+      "speaker": "Souza, Ronildo Rodrigues De",
+      "text": "E porque o Riqueti, a segmentação da belga, ela envolve tantos outros, tem tantas ramificações que fica difícil, na minha opinião, essa manutenção talvez em outra tabela, entendeu?"
+    },
+    {
+      "timestamp": "13:01",
+      "speaker": "Souza, Ronildo Rodrigues De",
+      "text": "Igual o Hudson comentou lá no início, a segmentação da belga, ela é um ela é em conjunta com o planejamento central e com o marketing, porque essa segmentação ela tem que andar 100%, porque ela é a base do preço."
+    },
+    {
+      "timestamp": "13:14",
+      "speaker": "Souza, Ronildo Rodrigues De",
+      "text": "Então, quando a gente vai passar um aumento do preço, é baseado nessa segmentação no grupo de mercadoria que está vinculado ao segmento. Então, se em algum momento isso for mudar, aí muda tudo. Então isso aí realmente para mim é uma dúvida, se isso vai mudar a segmentação oficial, entendeu?"
+    },
+    {
+      "timestamp": "13:56",
+      "speaker": "Riqueti, Luis Eustaquio",
+      "text": "É, não mudou nada, cara, não tem nada. Mudou. Só falou assim, vamos deixar de usar uma tabela ZE que pode morrer com s for Hanna e trazer isso para hierarquia, que é o jeito oficial de se utilizar uma hierarquia. É somente isso."
+    },
+    {
+      "timestamp": "14:11",
+      "speaker": "Riqueti, Luis Eustaquio",
+      "text": "Não tem assim. Vamos fazer isso aqui. É está modernizando o processo, entendeu? Com o processo stander da SAP."
+    },
+    {
+      "timestamp": "14:19",
+      "speaker": "Silva, Fabiana Oliveira",
+      "text": "Riqueti, deixa eu tentar. Eu acho que vocês 2 estão falando de coisas diferentes e tentando colocar no mesmo. A gente usa muitos termos que se eles estão se colidindo. Quando a gente fala segmentação, é o que o Ronildo tá falando, por exemplo."
+    },
+    {
+      "timestamp": "14:38",
+      "speaker": "Silva, Fabiana Oliveira",
+      "text": "A minha câmera está desligada. Se eu tiver não tiver expressando o que você quer dizer. Quando você fala segmentação, você está falando lá do agro, da construção civil, da indústria e o riquete. Quando ele está falando isso, ele está falando, por exemplo, é que o agro, ele vai continuar do mesmo jeito."
+    },
+    {
+      "timestamp": "14:54",
+      "speaker": "Silva, Fabiana Oliveira",
+      "text": "Mas ao invés da gente ter uma única tabela de precificação para todo mundo que compra, independente da finalidade, elas vão ter várias tabelas. Então, por exemplo, eu vou ter é uma tabela para vou falar do Z 700, eu vou ter uma tabela de Z 700."
+    },
+    {
+      "timestamp": "15:10",
+      "speaker": "Silva, Fabiana Oliveira",
+      "text": "Para revenda eu vou ter uma tabela dizer 700 para AMD, eu vou ter uma tabela dizer 700 para cooperativa. E aí são essas segmentações onde a gente fala o nome de AMD atacado revenda."
+    },
+    {
+      "timestamp": "15:26",
+      "speaker": "Silva, Fabiana Oliveira",
+      "text": "Essas segmentações que eu acho que é nesse sentido que o Riqueti está querendo demonstrar que vão ser diferentes, mas o agro segmento lá, vamos dizer, vai continuar sendo o mesmo agro, mas a gente vai ter essa diferenciação na precificação quando a gente olha para dentro do agro."
+    },
+    {
+      "timestamp": "15:44",
+      "speaker": "Silva, Fabiana Oliveira",
+      "text": "Então a gente vai ter é AMD atacado, com valores de Preço de castro diferente. Isso Ronildo vai ser lá no ano que vem, quando a gente tiver a possibilidade de ter a nova pricing, com a segmentação diferenciada, com a clusterização já funcionando."
+    },
+    {
+      "timestamp": "16:02",
+      "speaker": "Silva, Fabiana Oliveira",
+      "text": "Onde a gente vai poder colocar isso? Onde a gente vai poder colocar, inclusive percentuais de descontos diferentes para cada cluster. Então isso não é algo de imediato, não. Isso não é algo que vai acontecer em janeiro, por exemplo. Não tem nada a ver com essa mudança de estrutura."
+    },
+    {
+      "timestamp": "16:02",
+      "speaker": "Rhein, Thalita Merisio",
+      "text": "É isso que eu ia falar, clusterização, é?"
+    },
+    {
+      "timestamp": "16:22",
+      "speaker": "Silva, Fabiana Oliveira",
+      "text": "Comercial que aconteceu. Mas é algo que deve acontecer no próximo ano, sim, porque é o que a Melo entende e que precisa ser feito. Você precificar conforme a utilização que o cliente vai ter. Então é, eu não vou ter a mesma tabela."
+    },
+    {
+      "timestamp": "16:38",
+      "speaker": "Silva, Fabiana Oliveira",
+      "text": "Para um cliente que é AMD, que é o nosso parceiro, ou um atacado que vai revender para revenda, que mesma tabela que eu vou fazer para um consumidor final, alguma coisa nesse sentido, é olhar para o cliente com o perfil que ele tem, olhando para fora, para precificar com base no que ele precisa."
+    },
+    {
+      "timestamp": "16:57",
+      "speaker": "Silva, Fabiana Oliveira",
+      "text": "Precisa, entendeu? Então é essa mudança que vai acontecer, mas não é nada que vai acontecer sem que o sistema esteja parametrizado para receber isso. Eu acho que eu não sei se eu consegui ajudar na discussão que vocês estavam aí, mas eu, no meu entendimento, vocês dois estavam falando de coisas diferentes."
+    },
+    {
+      "timestamp": "17:16",
+      "speaker": "Silva, Fabiana Oliveira",
+      "text": "Tá, é. Mas isso não tem data ainda para falar em janeiro, não fevereiro não. A gente ainda tem muito, muita coisa para passar aí. Enquanto esses testes do GTM, Thalita não saírem e a gente não aprovar todas as mudanças que precisam."
+    },
+    {
+      "timestamp": "17:31",
+      "speaker": "Silva, Fabiana Oliveira",
+      "text": "E o sistema não tiver parametrizado, a gente não vai começar a fazer essas modificações de precificação do sistema."
+    },
+    {
+      "timestamp": "17:37",
+      "speaker": "Riqueti, Luis Eustaquio",
+      "text": "É, e outra coisa, Fabiana, na verdade, eu estou falando em termos de relatório, de relatório, não se muda nada, só muda. Vai continuar vendo segmento do mesmo jeito, Marcos segmento do mesmo jeito, tudo na mesma agregação. A única diferença que tem é."
+    },
+    {
+      "timestamp": "17:54",
+      "speaker": "Riqueti, Luis Eustaquio",
+      "text": "A gente não vai usar hoje, nos relatórios, uma tabela que tem 2000000 de registros para achar um segmento. A gente vai usar essa hierarquia que tem só o segmento e agregação deles. É basicamente é isso que vai."
+    },
+    {
+      "timestamp": "18:10",
+      "speaker": "Riqueti, Luis Eustaquio",
+      "text": "Automatizar todo o nosso processo. Assim, ir lá na frente igual você tá entrando. Quando for entrar é isso. Vamos deixar de utilizar mais um processo manual que tem, mais uma coisa manual que tem e por uma coisa standard que já está ali fácil de utilizar."
+    },
+    {
+      "timestamp": "18:33",
+      "speaker": "Rhein, Thalita Merisio",
+      "text": "É isso, gente, ficou alguma dúvida ainda de algum lado?"
+    },
+    {
+      "timestamp": "18:39",
+      "speaker": "Monteiro, Fernanda Chaves",
+      "text": "Não, eu acho que está claro que agora é só para relatório, Riqueti e que não afetaria o SAP, é."
+    },
+    {
+      "timestamp": "18:51",
+      "speaker": "Monteiro, Fernanda Chaves",
+      "text": "O Hudson aí como planejamento tem é recursos para fazer uma avaliação a ser importante Hudson pensar aí como avaliar é aderência do cadastro de produtos com essa hierarquia que o Ricardo está desenvolvendo pra gente."
+    },
+    {
+      "timestamp": "19:18",
+      "speaker": "Monteiro, Fernanda Chaves",
+      "text": "Garantir que não tem diferença entre SAP e os relatórios que a gente está fazendo e a gente buscar sempre que tiver alguma coisa, alguma integração de produtos virando na empresa o oficial mesmo."
+    },
+    {
+      "timestamp": "19:48",
+      "speaker": "Silva, Hudson Jose Aparecido Da",
+      "text": "Acho que só um ponto de atenção, Ricardo, acho que talvez usando OGP, é olhar a organização de vendas."
+    },
+    {
+      "timestamp": "19:58",
+      "speaker": "Silva, Hudson Jose Aparecido Da",
+      "text": "Porque pode ser que tem um GP que em Monlevade usa, que ele é diferente daqui."
+    },
+    {
+      "timestamp": "20:08",
+      "speaker": "Riqueti, Luis Eustaquio",
+      "text": "É esse é um grande problema, hein?"
+    }
+  ],
+  "pontosPrincipais": [
+    {
+      "topico": "Hierarquia de Grupo de Mercadoria",
+      "descricao": "Segmento será definido por hierarquia de grupo de mercadoria, que é atributo do material no SAP",
+      "impacto": "Automatização do processo de segmentação"
+    },
+    {
+      "topico": "GPS como base de Segmentação",
+      "descricao": "Segmento passa a ser agrupamento de GP, não mais tabela de depara do SAP ECC",
+      "impacto": "Eliminação de tabela ZE manual"
+    },
+    {
+      "topico": "Precificação por Segmento",
+      "descricao": "Tabelas de preço diferenciadas por tipo de cliente: AMD, atacado, revenda, cooperativa",
+      "impacto": "Pricing diferenciada por canal"
+    },
+    {
+      "topico": "Clusterização",
+      "descricao": "Percentuais de descontos diferentes para cada cluster",
+      "impacto": "Não será implementado em janeiro - aguarda testes GTM"
+    },
+    {
+      "topico": "Relatórios",
+      "descricao": "Mudança apenas em relatórios, não afeta SAP diretamente",
+      "impacto": "Substituição de tabela com 2M registros por hierarquia simplificada"
+    },
+    {
+      "topico": "Organização de Vendas",
+      "descricao": "Atenção para GP que pode ser diferente entre Monlevade e outras unidades",
+      "impacto": "Validação de aderência necessária"
+    }
+  ],
+  "acoes": [
+    {
+      "responsavel": "Hudson (Planejamento)",
+      "acao": "Avaliar aderência do cadastro de produtos com a nova hierarquia",
+      "prazo": "A definir"
+    },
+    {
+      "responsavel": "Equipe",
+      "acao": "Garantir consistência entre SAP e relatórios",
+      "prazo": "Contínuo"
+    }
+  ],
+  "statusExtracao": "Parcial - lacunas entre 2min e 12min devido a virtualização do painel",
+  "ultimaAtualizacao": "2026-01-13"
+}

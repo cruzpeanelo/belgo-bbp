@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "id": "891847",
+    "arquivo": "891847 - Testes - Criação de formulário de abertura de RC.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\891847 - Testes - Criação de formulário de abertura de RC.docx",
+    "tamanho_bytes": 691936,
+    "data_modificacao": "2025-11-14T18:05:36",
+    "extraido_em": "2026-01-13T11:31:15.051369",
+    "status": "extraido",
+    "total_paragrafos": 5,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "HUB de Gestão de OCs — Existem dois caminhos para criação: o primeiro é pela própria Conta:",
+      "Consulta pela Nota fiscal:",
+      "Trouxe o Fleg no campo- Reclamação Grave",
+      "Tela do HUB de Gestão de OCs utilizada para validação da criação da Ocorrência, exibindo mensagem de sucesso, alertas relacionados à NF e os campos de Detalhes e Informações do Incidente",
+      "A segunda opção de criação é diretamente pela própria OC:"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n891847 - Testes - Criação de formulário de abertura de RC",
+          "Data de Criação\n14/11/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 5,
+    "total_tabelas": 1
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "id": null,
+    "arquivo": "app guidance (1) - Belgo.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\app guidance (1) - Belgo.docx",
+    "tamanho_bytes": 3955529,
+    "data_modificacao": "2025-10-02T10:30:05",
+    "extraido_em": "2026-01-13T11:31:15.729823",
+    "status": "extraido",
+    "total_paragrafos": 24,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "O cadastro de uma nova conta requer o preenchimento de dados essenciais, como nome (termo de pesquisa), CNPJ e tipo de conta. Como exemplo, a conta pode ser do tipo 'emissor da ordem'\n\nDepois de criar a conta e ser redirecionado, clique no botão Sintegra na nova tela. Isso buscará as informações básicas do cliente, como endereço e inscrição estadual (se houver) e mostrará na aba Detalhes.\n\n\nApós clicar no botão do Sintegra, você receberá uma mensagem de sucesso no canto superior da tela que a sincronização houve sucesso; \n\n\n\nApós o término de integração, você receberá uma notificação no canto superior direito. ",
+      "\n\nApós esse processo, você verá informações básicas da conta e para trazer mais informações a conta, clicamos no botão superior esquerdo “Enviar SAP”\n",
+      "Uma nova mensagem no topo da tela indicará que a conta está em sincronização com o SAP.",
+      "\nNa segunda Aba, após os Detalhes, temos os relatório de visitas e temos a opção de criar um relatório: \n\n\n\nApós clicar em “criar”, você verá essa tela com algumas informações que você poderá preencher de acordo com as necessidades, para realizar o processo, só clicar em salvar, após colocar informações necessárias: \n\n",
+      "Na terceira aba, 'Financeiro', ao selecionar a opção 'Partidas' serão exibidas as informações da consulta. Esta aba também contém a seção 'Ficha de Crédito'.\n\n \n",
+      "Ao consultar ficha de crédito, conseguimos ver algumas informações sobre o cliente: \n\n",
+      "Clique em Contatos e depois em Criar para adicionar um novo contato",
+      "Escolha a opção Contato e clique em Avançar",
+      "Preencha os campos obrigatórios (Nome completo, Termo de pesquisa, Email).",
+      "Clique em Salvar ou Salvar e criar.",
+      "Confira os dados preenchidos do contato cadastrado",
+      "O novo contato já aparece vinculado à conta",
+      "Acesse a aba Logística para incluir restrições ",
+      "Marque os tipos de veículos que não são aceitos para entrega",
+      "Após preencher os campos de logística, clique em Salvar.\nA mensagem de sucesso confirma o registro.",
+      "Acesse o sistema e ir em Go Wire.",
+      "No menu superior, selecione a opção FUP de Carteira para iniciar a consulta.",
+      "Selecionar Ordens em Aberto:",
+      "Informar datas:",
+      "Consulta e aparece a mensagem de Sucesso:",
+      "Rolar o mouse para cima, no canto esquerdo aperta em filtro :",
+      "Filtro, abre a lateral esquerda:",
+      "Ir em Ordens Faturadas:",
+      "Preencher os campos datas e consultar:"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\nIn-app guidance para apoio ao usuário na navegação",
+          "Data de Criação\n02/10/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 24,
+    "total_tabelas": 1
+  }
+}

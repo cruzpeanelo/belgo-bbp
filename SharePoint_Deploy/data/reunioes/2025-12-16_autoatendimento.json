@@ -1,0 +1,144 @@
+{
+  "id": "2025-12-16_autoatendimento",
+  "data": "2025-12-16",
+  "titulo": "GTM - Desenho AS-IS e TO-BE - Documentos Fiscais e Autoatendimento",
+  "duracao": "1h 35min 57s",
+  "tipo": "Workshop AS-IS/TO-BE",
+  "status": "Concluido",
+  "transcricaoPath": "data/transcricoes/2025-12-16_docs-fiscais-autoatendimento.txt",
+  "resumo": "Terceira sessao de workshops focada em download de documentos fiscais, autoatendimento e inicio do workflow pricing. Recapitulacao das 4 areas de credito e demonstracao de consulta de partidas.",
+  "participantes": [
+    {"nome": "Thalita Rhein", "papel": "Gerente Negocio GTM", "area": "Comercial/Marketing"},
+    {"nome": "Leandro Cruz", "papel": "Gerente de TI", "area": "TI"},
+    {"nome": "Joao Endo", "papel": "Key User", "area": "Construcao Civil"},
+    {"nome": "Francine Gayer", "papel": "Key User", "area": "Protec"},
+    {"nome": "Vanessa Souza", "papel": "Analista", "area": "Financeiro/Credito"},
+    {"nome": "Bruno Machado", "papel": "Key User", "area": "Agro/DCPC"},
+    {"nome": "Frank Silva", "papel": "Key User", "area": "Fiscal/Cadastro"},
+    {"nome": "Kathleen Almeida", "papel": "Analista TI", "area": "TI"}
+  ],
+  "topicosAbordados": [
+    "Recapitulacao: Cadastro, Areas de Vendas, Canais 20/30/40",
+    "Download de documentos fiscais (XML, Certificados)",
+    "4 areas de credito detalhadas (CSP/BelgoCash, ABBA, ADBA, ALPE)",
+    "Consulta de partidas Belgo e BelgoCash",
+    "Emissao de segunda via de boleto",
+    "Autoatendimento",
+    "Integracao Portal Logistico (pendente)",
+    "Workflow Pricing (inicio)"
+  ],
+  "sistemasDiscutidos": [
+    {"sistema": "SAP", "descricao": "Transacoes para boleto e XML"},
+    {"sistema": "Spa", "descricao": "Sistema de documentos fiscais automatizado"},
+    {"sistema": "Portal BelgoCash", "descricao": "Portal para partidas supplier"},
+    {"sistema": "Portal Logistico", "descricao": "Pendente integracao para evitar redundancia"}
+  ],
+  "areasCredito": {
+    "fonte": "Timestamp 1:52 - 2:10",
+    "detalhamento": [
+      {"sigla": "CSP", "nome": "Supplier", "representacao": "Belgo Cash"},
+      {"sigla": "ABBA", "nome": "Area de credito Belgo", "representacao": "Tabel"},
+      {"sigla": "ADBA", "nome": "Distribuicao", "representacao": "Penapolis, Bauru, Caruaru"},
+      {"sigla": "ALPE", "nome": "Area Credito ALPE", "representacao": "Acos Longos PE"}
+    ]
+  },
+  "citacoesChave": [
+    {
+      "autor": "Rhein, Thalita Merisio",
+      "timestamp": "0:23",
+      "texto": "Bom, hoje o objetivo e a gente falar dos downloads de documentos fiscais, autoatendimento e comecar o workflow pricing.",
+      "contexto": "Pauta da reuniao"
+    },
+    {
+      "autor": "Pereira, Leandro Da Cruz",
+      "timestamp": "0:43",
+      "texto": "Como de costume, eu sempre dou uma passada geral do que a gente ja viu, so para a gente relembrar algumas coisinhas. A gente fez o Cadastro do Cliente, a gente passou, e fez ele automatico la chama naquele botaozinho do sintegra.",
+      "contexto": "Recapitulacao das sessoes anteriores"
+    },
+    {
+      "autor": "Pereira, Leandro Da Cruz",
+      "timestamp": "1:01",
+      "texto": "Falando sobre os documentos fiscais, que basicamente aqui ele tem aquele processo automatizado la de araujo, quando faz faturamento de emissao de XML, Daniel, certificado de produtos se tiver tambem para o cliente de forma automatica dentro do Spa.",
+      "contexto": "Sistema de documentos fiscais"
+    },
+    {
+      "autor": "Pereira, Leandro Da Cruz",
+      "timestamp": "1:18",
+      "texto": "A gente falou da parte de Contatos e a importancia de ter o dado bem certinho, justamente para voces, para que outras areas utilizem. E hoje a gente vai falar sobre autoatendimento tambem e o autoatendimento. Voces vao ver a importancia desse dado preenchido corretamente.",
+      "contexto": "Criticidade dos dados de contato para autoatendimento"
+    },
+    {
+      "autor": "Pereira, Leandro Da Cruz",
+      "timestamp": "1:33",
+      "texto": "A gente falou sobre a parte de logistica, ai ficou uma pendencia depois para a gente fazer uma proxima reuniao aqui e verificar la aquela integracao com o portal logistico, uma vez que a gente ja integra com o SAP, tem que verificar essa questao do portal Logistica, integrar com o SAP tambem para evitar e redundancia dos dados.",
+      "contexto": "Pendencia Portal Logistico identificada"
+    },
+    {
+      "autor": "Pereira, Leandro Da Cruz",
+      "timestamp": "1:52",
+      "texto": "A gente falou brevemente aqui sobre a aba financeira, brevemente porque eu falei sobre a ficha de credito e na ficha de credito aqui eu falei sobre as 4 areas de credito, que e o ASCP e basicamente aqui a gente tem a Supplier.",
+      "contexto": "Introducao das 4 areas de credito",
+      "notaEdicao": "Transcricao original dizia 'acsap' - corrigido para ASCP"
+    },
+    {
+      "autor": "Pereira, Leandro Da Cruz",
+      "timestamp": "2:10",
+      "texto": "Pelo Belgo Cash, ABBA que e a area de credito da tabel, ADBA que e da distribuicao, EABPE que e da ALPE. Entao isso daqui basicamente foi o que a gente falou ai nas ultimas duas ultimas reunioes.",
+      "contexto": "Detalhamento completo das 4 areas de credito",
+      "notaEdicao": "Transcricao original dizia 'Altair' - corrigido para ALPE"
+    },
+    {
+      "autor": "Pereira, Leandro Da Cruz",
+      "timestamp": "2:30",
+      "texto": "Ainda continuando agora com algumas novidades, a gente tem um botaozinho tambem que sao as partidas. Voces vao ver dois botaozinhos. Quando voces consultarem essas partidas daqui da esquerda, voces vao consultar as partidas do Cliente dentro da Belgo. Quando voces clicarem nesse botaozinho aqui, a gente vai consultar as partidas do Bel Cash.",
+      "contexto": "Funcionalidade de consulta de partidas"
+    },
+    {
+      "autor": "Pereira, Leandro Da Cruz",
+      "timestamp": "3:06",
+      "texto": "Joao, como que voce faz para emitir uma segunda via de boleto hoje?",
+      "contexto": "Mapeamento AS-IS de emissao de boleto"
+    },
+    {
+      "autor": "Endo, Joao Vitor Yuji",
+      "timestamp": "3:18",
+      "texto": "Se for da Belgo pelo SAP, tem uma transacao la, faz por la.",
+      "contexto": "Processo atual via SAP"
+    },
+    {
+      "autor": "Endo, Joao Vitor Yuji",
+      "timestamp": "3:25",
+      "texto": "E a Belgo cash pelo portal.",
+      "contexto": "Processo atual BelgoCash via portal"
+    },
+    {
+      "autor": "Pereira, Leandro Da Cruz",
+      "timestamp": "4:10",
+      "texto": "Entao todo mundo imagina aqui que da area Comercial e tambem de Outras Entradas acessa o SAP para fazer a extracao das informacoes de boleto.",
+      "contexto": "Confirmacao do fluxo AS-IS"
+    }
+  ],
+  "problemasIdentificados": [
+    "Integracao Portal Logistico pendente para evitar redundancia",
+    "Dados de contato mal preenchidos impactam autoatendimento",
+    "Processo manual de emissao de boleto via SAP"
+  ],
+  "decisoesTomadas": [
+    "Agendar reuniao especifica para Portal Logistico",
+    "Reforcar importancia de dados de contato corretos"
+  ],
+  "jornadasRelacionadas": [
+    "documentos-fiscais",
+    "autoatendimento",
+    "financeiro",
+    "logistica",
+    "workflow-pricing"
+  ],
+  "feedbackParticipantes": [
+    {
+      "autor": "Maria Luiza Gomes Chaves",
+      "texto": "Primeiramente, queria agradecer. Todas essas sessoes tem sido muito didaticas. Eu entrei na Belgo ha 4 meses, entao aprendi muita coisa tambem de outros processos daqui.",
+      "contexto": "Feedback positivo de nova funcionaria"
+    }
+  ]
+}

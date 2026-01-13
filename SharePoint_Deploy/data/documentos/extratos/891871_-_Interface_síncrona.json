@@ -1,0 +1,49 @@
+{
+  "metadata": {
+    "id": "891871",
+    "arquivo": "891871 - Interface síncrona.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\891871 - Interface síncrona.docx",
+    "tamanho_bytes": 830920,
+    "data_modificacao": "2025-12-18T14:21:41",
+    "extraido_em": "2026-01-13T11:31:15.075160",
+    "status": "extraido",
+    "total_paragrafos": 16,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "O processo inicia com a escolha do tipo de atendimento. Deve-se selecionar a opção \"Ocorrência de Cliente\" e clicar em \"Próximo\".",
+      "Busca e seleção de documentos fiscais. ",
+      "NF: 001728763",
+      "Interface de cadastro da ocorrência. Após selecionar a NF-e ou Ordem de Venda, o sistema exige o preenchimento de campos obrigatórios (*), como:",
+      "Termo de Pesquisa: Identificação do cliente (ex: CONTA TEST).",
+      "Natureza/Categoria: Classificação do problema (ex: Qualidade / Reclamação com NFe).",
+      "Motivo: Detalhamento específico (ex: Erro na Quantidade/Peso do Produto).",
+      " Clicar em Salvar\t",
+      "Sucesso (Verde): Confirma a criação do registro #202500025.",
+      "Atenção (Amarelo): Alerta de que a NF-e selecionada já foi relacionada em ocorrências anteriores (ex: 202500008, 202500010, etc.), servindo como trava de segurança para evitar duplicidade de processos.",
+      "Tela final do registro consolidado. Aqui é possível visualizar os campos Centro de Expedição, Escritório de Vendas e Equipe: ",
+      " CPI",
+      "Ocorrência de cliente:",
+      "Informamos a nota fiscal e o Centro Expedidor:",
+      "O sistema retorna com a informação referente a nota fiscal que informamos: ",
+      "Sem informar o Centro expedidor que não seja referente a nota fiscal o sistema retorna: Dados não encontrados"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n891871 - Interface síncrona",
+          "Data de Criação\n17/12/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 16,
+    "total_tabelas": 1
+  }
+}

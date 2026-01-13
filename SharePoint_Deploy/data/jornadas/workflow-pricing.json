@@ -1,0 +1,622 @@
+{
+  "id": "workflow-pricing",
+  "nome": "Workflow Pricing",
+  "icone": "💲",
+  "ordem": 9,
+  "asIs": {
+    "descricao": "Processo de concessao de descontos sem controle centralizado onde vendedores negociam descontos diretamente com clientes, solicitam aprovacao informalmente por email ou telefone, e aplicam manualmente no pedido. Sem vigencia definida, sem rastreabilidade e sem integracao com SAP.",
+    "passos": [
+      "Vendedor negocia desconto especial com cliente",
+      "Solicita aprovacao ao gerente por email ou telefone",
+      "Gerente avalia de forma informal (sem padrao)",
+      "Se aprovado: vendedor anota desconto em planilha",
+      "Ao criar pedido, aplica desconto manualmente",
+      "Desconto nao tem vigencia definida",
+      "Sem registro centralizado de descontos concedidos",
+      "Dificil auditar descontos aplicados",
+      "Margens podem ser corroidas sem controle"
+    ],
+    "problemas": [
+      "Sem controle centralizado de descontos",
+      "Aprovacoes informais sem rastreabilidade",
+      "Descontos sem vigencia definida",
+      "Margens corroidas sem visibilidade",
+      "Impossibilidade de auditar descontos",
+      "Sem padronizacao de niveis de aprovacao",
+      "Vendedor pode esquecer desconto negociado",
+      "Cliente pode reivindicar desconto expirado",
+      "Sem integracao com politica de precos do SAP"
+    ],
+    "tempoMedio": "Variavel"
+  },
+  "toBe": {
+    "descricao": "Workflow estruturado de aprovacao de descontos no Salesforce com integracao ao SAP via condition YDCF. Vendedor navega hierarquia de materiais (6 niveis), define percentual de desconto e vigencia, submete para aprovacao em 2 niveis (Time Pricing e Gerente), e apos aprovacao o desconto e criado automaticamente no SAP.",
+    "passos": [
+      "Vendedor acessa Pricing no Salesforce",
+      "Seleciona cliente para aplicar desconto",
+      "Navega hierarquia de materiais (6 niveis)",
+      "Nivel 1: Unidades",
+      "Nivel 2: Macro Segmentos",
+      "Nivel 3: Macro Detalhado",
+      "Nivel 4: Segmento",
+      "Nivel 5: Grupo Mercadoria",
+      "Nivel 6: Material (SKU especifico)",
+      "Define percentual de desconto",
+      "Define periodo de vigencia (data inicio e fim)",
+      "Submete solicitacao para aprovacao",
+      "Nivel 1: Time Pricing avalia e aprova/rejeita",
+      "Nivel 2: Gerente do Escritorio aprova/rejeita",
+      "Se aprovado: sistema cria condition YDCF no SAP",
+      "Desconto aplicado automaticamente em pedidos no periodo de vigencia"
+    ],
+    "beneficios": [
+      "Controle total de descontos concedidos",
+      "Rastreabilidade completa de aprovacoes",
+      "Workflow estruturado em 2 niveis",
+      "Vigencia automatica com data inicio e fim",
+      "Integracao automatica com SAP (YDCF)",
+      "Desconto aplicado automaticamente nos pedidos",
+      "Historico completo de descontos por cliente",
+      "Auditoria facilitada",
+      "Protecao de margens",
+      "Visibilidade de descontos vigentes"
+    ],
+    "tempoMedio": "1-2 dias (dependendo de aprovacoes)"
+  },
+  "areasImpactadas": [
+    "Comercial",
+    "Marketing",
+    "Pricing",
+    "TI",
+    "Financeiro"
+  ],
+  "status": "Em Andamento",
+  "fonteReuniao": "Caderno de Testes + Tester TI",
+  "fontesReuniao": [
+    "Caderno de Testes - CT-01 a CT-19 (casos detalhados)",
+    "Tester TI 791093 - Cabos de Aco (28/10/2025)",
+    "Tester TI 880788 - Agro Lisos (20/10/2025)"
+  ],
+  "fontesVerificadas": {
+    "cadernoTestes": [
+      "CT-01 a CT-19 - Workflow Pricing completo"
+    ],
+    "testerTI": [
+      "791093",
+      "880788",
+      "889092",
+      "900139"
+    ],
+    "reunioes": "NAO COBERTO - Reuniao 16/12 adiou para 17/12 (sem transcricao)"
+  },
+  "alertaFonte": "IMPORTANTE: Workflow Pricing NAO foi discutido na reuniao 16/12/2025. Foi adiado para 17/12 conforme transcricao: 'Faltou workflow Price fica para amanha'. Nao existe transcricao de 17/12.",
+  "hierarquiaMateriais": [
+    {
+      "nivel": 1,
+      "nome": "Unidades",
+      "descricao": "Unidade de negocio (ex: Belgo Arames)",
+      "exemplo": "Belgo Arames"
+    },
+    {
+      "nivel": 2,
+      "nome": "Macro Segmentos",
+      "descricao": "Grande segmentacao de mercado",
+      "exemplo": "Agronegocio, Construcao Civil"
+    },
+    {
+      "nivel": 3,
+      "nome": "Macro Detalhado",
+      "descricao": "Detalhamento do macro segmento",
+      "exemplo": "Cercas, Telas"
+    },
+    {
+      "nivel": 4,
+      "nome": "Segmento",
+      "descricao": "Segmento especifico de produto",
+      "exemplo": "Arame Farpado"
+    },
+    {
+      "nivel": 5,
+      "nome": "Grupo Mercadoria",
+      "descricao": "Agrupamento de materiais similares",
+      "exemplo": "Arames Galvanizados"
+    },
+    {
+      "nivel": 6,
+      "nome": "Material",
+      "descricao": "SKU especifico do produto",
+      "exemplo": "Arame Farpado 500m Belgo"
+    }
+  ],
+  "fluxoAprovacao": [
+    {
+      "nivel": 1,
+      "aprovador": "Time Pricing",
+      "descricao": "Equipe de pricing avalia politica comercial e impacto na margem",
+      "prazoSLA": "24 horas"
+    },
+    {
+      "nivel": 2,
+      "aprovador": "Gerente do Escritorio",
+      "descricao": "Gerente comercial avalia estrategia de cliente",
+      "prazoSLA": "24 horas"
+    }
+  ],
+  "campos": [
+    {
+      "campo": "Cliente",
+      "descricao": "Conta do cliente que recebera o desconto",
+      "preenchimento": "Selecao",
+      "validacao": "Obrigatorio",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Nivel Hierarquia",
+      "descricao": "Nivel da hierarquia de materiais selecionado",
+      "preenchimento": "Selecao",
+      "validacao": "Obrigatorio",
+      "obrigatorio": true,
+      "valores": [
+        "Unidade",
+        "Macro Segmento",
+        "Macro Detalhado",
+        "Segmento",
+        "Grupo Mercadoria",
+        "Material"
+      ]
+    },
+    {
+      "campo": "Item Selecionado",
+      "descricao": "Item especifico da hierarquia",
+      "preenchimento": "Selecao",
+      "validacao": "Obrigatorio",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Percentual Desconto",
+      "descricao": "Percentual de desconto a ser aplicado",
+      "preenchimento": "Manual",
+      "validacao": "Numerico (0-100%)",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Data Inicio Vigencia",
+      "descricao": "Data de inicio da vigencia do desconto",
+      "preenchimento": "Manual",
+      "validacao": "Data >= hoje",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Data Fim Vigencia",
+      "descricao": "Data de termino da vigencia do desconto",
+      "preenchimento": "Manual",
+      "validacao": "Data > Data Inicio",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Justificativa",
+      "descricao": "Motivo da solicitacao de desconto",
+      "preenchimento": "Manual",
+      "validacao": "-",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Status",
+      "descricao": "Status atual da solicitacao",
+      "preenchimento": "Automatico",
+      "validacao": "-",
+      "obrigatorio": true,
+      "valores": [
+        "Rascunho",
+        "Pendente Aprovacao N1",
+        "Pendente Aprovacao N2",
+        "Aprovado",
+        "Rejeitado",
+        "Expirado"
+      ]
+    },
+    {
+      "campo": "Codigo YDCF",
+      "descricao": "Codigo da condition criada no SAP",
+      "preenchimento": "Automatico (SAP)",
+      "validacao": "-",
+      "obrigatorio": false
+    }
+  ],
+  "regrasNegocio": [
+    {
+      "regra": "Navegacao Hierarquica",
+      "descricao": "Usuario navega pelos 6 niveis de hierarquia de materiais para selecionar o escopo do desconto",
+      "nota": "Desconto no nivel mais alto afeta todos os materiais abaixo"
+    },
+    {
+      "regra": "Aprovacao em 2 Niveis",
+      "descricao": "Toda solicitacao passa por aprovacao do Time Pricing (N1) e do Gerente do Escritorio (N2)"
+    },
+    {
+      "regra": "Vigencia Obrigatoria",
+      "descricao": "Toda solicitacao deve ter data de inicio e fim de vigencia definidas"
+    },
+    {
+      "regra": "Criacao Automatica de YDCF",
+      "descricao": "Apos aprovacao final, sistema cria automaticamente a condition YDCF no SAP com os parametros definidos",
+      "conditionSAP": "YDCF - Desconto de Cliente"
+    },
+    {
+      "regra": "Aplicacao Automatica em Pedidos",
+      "descricao": "Desconto aprovado e aplicado automaticamente em todos os pedidos do cliente dentro da vigencia"
+    },
+    {
+      "regra": "Expiracao Automatica",
+      "descricao": "Ao atingir a data fim de vigencia, o desconto e desativado automaticamente"
+    },
+    {
+      "regra": "Notificacao de Aprovadores",
+      "descricao": "Aprovadores recebem email quando ha solicitacao pendente de aprovacao"
+    }
+  ],
+  "sistemasTecnicos": [
+    "Salesforce",
+    "SAP ECC"
+  ],
+  "integracoes": [
+    {
+      "origem": "Salesforce",
+      "destino": "SAP",
+      "tipo": "Middleware",
+      "descricao": "Criacao de condition YDCF apos aprovacao"
+    },
+    {
+      "origem": "SAP",
+      "destino": "Salesforce",
+      "tipo": "Middleware",
+      "descricao": "Retorno do codigo YDCF criado"
+    }
+  ],
+  "mensagensSistema": [
+    {
+      "tipo": "Sucesso",
+      "contexto": "Solicitacao Enviada",
+      "mensagem": "Solicitacao de desconto enviada para aprovacao"
+    },
+    {
+      "tipo": "Sucesso",
+      "contexto": "Aprovacao N1",
+      "mensagem": "Solicitacao aprovada pelo Time Pricing. Aguardando aprovacao do Gerente."
+    },
+    {
+      "tipo": "Sucesso",
+      "contexto": "Aprovacao Final",
+      "mensagem": "Desconto aprovado e criado no SAP. Codigo YDCF: {codigo}"
+    },
+    {
+      "tipo": "Erro",
+      "contexto": "Rejeitado",
+      "mensagem": "Solicitacao de desconto rejeitada. Motivo: {motivo}"
+    },
+    {
+      "tipo": "Alerta",
+      "contexto": "Vigencia Expirando",
+      "mensagem": "Desconto para cliente {cliente} expira em {dias} dias"
+    },
+    {
+      "tipo": "Info",
+      "contexto": "Pendente Aprovacao",
+      "mensagem": "Voce tem {n} solicitacoes de desconto pendentes de aprovacao"
+    }
+  ],
+  "ciclosTeste": [
+    {
+      "documento": "Caderno de Testes - WF Pricing",
+      "titulo": "Workflow Pricing - Ciclo Completo",
+      "status": "Em Andamento",
+      "data": "2026-01-12",
+      "descricao": "19 casos de teste cobrindo todo o fluxo de Workflow Pricing",
+      "estatisticas": {
+        "total": 19,
+        "concluidos": 14,
+        "pendentes": 3,
+        "falhou": 2,
+        "percentualConclusao": "73.7%"
+      },
+      "cenarios": [
+        "Criacao de WF Pricing para material especifico (CT-01)",
+        "Vigencia individual por linha (CT-02)",
+        "Validacao de canal (CT-03)",
+        "Consulta de historico (CT-04)",
+        "Input manual de desconto % (CT-05)",
+        "WF para grupo de mercadoria (CT-06)",
+        "Aprovacao Time Pricing (CT-07)",
+        "Aprovacao Gerente (CT-08)",
+        "Rejeicao de WF (CT-09)",
+        "Multiplos materiais (CT-10)",
+        "Conta sem codigo SAP (CT-11) - FALHOU",
+        "Criacao YDCF no SAP (CT-12)",
+        "Segmento de Produto (CT-13)",
+        "Desconto invalido (CT-14) - FALHOU",
+        "Vigencia retroativa (CT-15)",
+        "Canal especifico (CT-16)",
+        "Notificacao email (CT-17)",
+        "Navegacao hierarquia (CT-18)",
+        "Aprovador alternativo (CT-19)"
+      ],
+      "testesRelacionados": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    }
+  ],
+  "problemasCriticos": [
+    {
+      "caso": "CT-11",
+      "titulo": "Conta sem codigo SAP permite criar WF",
+      "descricao": "Mesmo utilizando uma conta sem Codigo SAP (nao integrada), o botao 'New WFPricing' permaneceu disponivel e permitiu o acesso a tela de criacao, o que nao deveria ocorrer.",
+      "impacto": "Alto",
+      "status": "Aguardando Correcao",
+      "responsavel": "Time Comercial"
+    },
+    {
+      "caso": "CT-14",
+      "titulo": "Validacao de desconto invalido nao funciona corretamente",
+      "descricao": "O workflow foi criado mesmo com desconto negativo. O botao 'criar' e bloqueado com erros, mas quando insere desconto valido, permite criacao mesmo com existencia de desconto negativo. Problema ocorre tambem para valores acima de 100%.",
+      "impacto": "Alto",
+      "status": "Aguardando Correcao",
+      "responsavel": "Time Comercial"
+    }
+  ],
+  "detalhes": {
+    "hierarquiaMateriais": [
+      "Unidades",
+      "Macro Segmentos",
+      "Macro Detalhado",
+      "Segmento",
+      "Grupo Mercadoria",
+      "Material"
+    ],
+    "conditionSAP": "YDCF - Desconto de Cliente",
+    "fluxoAprovacao": [
+      "Time Pricing",
+      "Gerente Escritorio"
+    ],
+    "vigencia": "Obrigatoria com data inicio e fim"
+  },
+  "pendencias": [
+    "Mapeamento completo da hierarquia de materiais",
+    "Definicao de limites de desconto por nivel de aprovacao",
+    "Configuracao de notificacoes para aprovadores",
+    "Testes de integracao com SAP (YDCF)"
+  ],
+  "prerequisitos": [
+    "Hierarquia de materiais carregada no Salesforce",
+    "Workflow de aprovacao configurado",
+    "Integracao SAP para criacao de YDCF testada",
+    "Perfis de aprovadores definidos"
+  ],
+  "relacionamentos": {
+    "dependeDe": [
+      "cadastro-cliente"
+    ],
+    "habilitaPara": [
+      "cotacao-ov"
+    ],
+    "nota": "Descontos aprovados via workflow sao aplicados automaticamente nas cotacoes e pedidos"
+  },
+  "documentosTeste": [
+    "791093 - WF Pricing (28/10/2025)",
+    "880788 - P5 Testes (20/10/2025)",
+    "889092 - WF Pricing Ciclo Adicional",
+    "900139 - Validacao de Aprovadores"
+  ],
+  "dadosExtraidosTester": {
+    "791093": {
+      "data": "28/10/2025",
+      "titulo": "WF - Pricing",
+      "clienteTeste": "MOAGEIRA",
+      "escritorio": "DIAP - DBA Penapolis 2",
+      "cenarioTestado": "Configuracao de workflow pricing com desconto de 10% para Cabos de Aco (BA)",
+      "grupo": "UNRIO - Ropes 1",
+      "periodo": "28/10/2025 a 04/11/2025",
+      "resultadoEsperado": "Workflow submetido para aprovacao"
+    },
+    "880788": {
+      "data": "20/10/2025",
+      "titulo": "P5 - Testes WF Pricing",
+      "clienteTeste": "MOAGEIRA",
+      "cenarioTestado": "Validacao de propagacao de desconto WF -> SAP -> Salesforce",
+      "detalhes": {
+        "descontoCriado": "24%",
+        "grupoComodidade": "Agro Lisos (3G)",
+        "campoValidado": "YDCF (Desc. Fixo Cliente)",
+        "validacaoSAP": "Desconto de 24% visivel na YDCF",
+        "validacaoSalesforce": "Desconto de 24% carrega corretamente na cotacao",
+        "resultadoFinal": "Cotacao salva com desconto de 24% mantido"
+      },
+      "fluxoValidado": "WF Pricing -> SAP (YDCF) -> Salesforce Cotacao"
+    },
+    "889092": {
+      "data": "03/11/2025",
+      "titulo": "Testes ajustes WF - Pricing",
+      "clienteTeste": "MOAGEIRA",
+      "escritorio": "DIAP - DBA Penapolis 2",
+      "cenarioTestado": "Configuracao de multiplos descontos no mesmo workflow",
+      "descontos": [
+        {
+          "grupo": "Cabos de Aco (BA)",
+          "desconto": "10%",
+          "unidade": "UNRIO - Ropes 1"
+        },
+        {
+          "grupo": "Outro grupo",
+          "desconto": "10%",
+          "unidade": "-"
+        }
+      ],
+      "periodo": "03/11/2025 a 05/12/2025"
+    }
+  },
+  "campoYDCF": {
+    "nome": "YDCF",
+    "descricao": "Desc. Fixo Cliente (Desconto Fixo por Cliente)",
+    "origem": "SAP",
+    "preenchimento": "Via Workflow Pricing",
+    "propagacao": {
+      "etapa1": "Workflow Pricing criado no Salesforce",
+      "etapa2": "Aprovado e sincronizado com SAP",
+      "etapa3": "SAP registra na tabela YDCF",
+      "etapa4": "Salesforce consulta YDCF ao criar cotacao",
+      "etapa5": "Desconto aplicado automaticamente na cotacao"
+    },
+    "validacaoTester": "Documento 880788 validou propagacao end-to-end"
+  },
+  "contextoReuniao": {
+    "projeto": "GTM (Go To Market) / CRM",
+    "lideranca": {
+      "business": "Thalita Merisio Rhein",
+      "tecnico": "Leandro da Cruz Pereira"
+    },
+    "timeline": {
+      "workshops": "04/12 a 22/12/2025",
+      "posWorkshop": "Responsabilidade passa para usuarios (Castro)",
+      "entregaveis": [
+        "Planilha de cenarios",
+        "Manual de orientacao"
+      ]
+    },
+    "participantes": [
+      {
+        "nome": "Leandro da Cruz Pereira",
+        "papel": "TI/Apresentador"
+      },
+      {
+        "nome": "Thalita Merisio Rhein",
+        "papel": "Project Lead Business"
+      },
+      {
+        "nome": "Maria Luiza Gomes Chaves",
+        "papel": "Key User",
+        "contribuicao": "Perguntou sobre tabela de precos"
+      }
+    ],
+    "discussaoWorkflowPricing": {
+      "fonte": "Reuniao 16/12/2025",
+      "status": "Nao foi discutido em detalhe por falta de tempo",
+      "citacao": "Faltou workflow Pricing fica para amanha",
+      "proximaDiscussao": "Agendada para 17/12/2025"
+    }
+  },
+  "documentosRelacionados": [
+    {
+      "id": "791093",
+      "arquivo": "791093 - WF - Pricing.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\791093_-_WF_-_Pricing.json"
+    },
+    {
+      "id": "791093",
+      "arquivo": "791093 - WF - Pricing.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\791093_-_WF_-_Pricing.json"
+    },
+    {
+      "id": "791093",
+      "arquivo": "791093 - WF - Pricing.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\791093_-_WF_-_Pricing.json"
+    },
+    {
+      "id": "791093",
+      "arquivo": "791093 - WF - Pricing.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\791093_-_WF_-_Pricing.json"
+    },
+    {
+      "id": "880788",
+      "arquivo": "880788 - P5 – Testes WF Pricing.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\880788_-_P5___Testes_WF_Pricing.json"
+    },
+    {
+      "id": "880788",
+      "arquivo": "880788 - P5 – Testes WF Pricing.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\880788_-_P5___Testes_WF_Pricing.json"
+    },
+    {
+      "id": "880788",
+      "arquivo": "880788 - P5 – Testes WF Pricing.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\880788_-_P5___Testes_WF_Pricing.json"
+    },
+    {
+      "id": "880788",
+      "arquivo": "880788 - P5 – Testes WF Pricing.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\880788_-_P5___Testes_WF_Pricing.json"
+    },
+    {
+      "id": "889092",
+      "arquivo": "889092 - Testes ajustes WF - Pricing.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\889092_-_Testes_ajustes_WF_-_Pricing.json"
+    },
+    {
+      "id": "889092",
+      "arquivo": "889092 - Testes ajustes WF - Pricing.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\889092_-_Testes_ajustes_WF_-_Pricing.json"
+    },
+    {
+      "id": "889092",
+      "arquivo": "889092 - Testes ajustes WF - Pricing.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\889092_-_Testes_ajustes_WF_-_Pricing.json"
+    },
+    {
+      "id": "889092",
+      "arquivo": "889092 - Testes ajustes WF - Pricing.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\889092_-_Testes_ajustes_WF_-_Pricing.json"
+    },
+    {
+      "id": "890272",
+      "arquivo": "890272 - Testes ajustes WF da Pricing.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\890272_-_Testes_ajustes_WF_da_Pricing.json"
+    },
+    {
+      "id": "890272",
+      "arquivo": "890272 - Testes ajustes WF da Pricing.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\890272_-_Testes_ajustes_WF_da_Pricing.json"
+    },
+    {
+      "id": "890272",
+      "arquivo": "890272 - Testes ajustes WF da Pricing.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\890272_-_Testes_ajustes_WF_da_Pricing.json"
+    },
+    {
+      "id": "890272",
+      "arquivo": "890272 - Testes ajustes WF da Pricing.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\890272_-_Testes_ajustes_WF_da_Pricing.json"
+    }
+  ],
+  "totalDocumentos": 16,
+  "ultimaAtualizacao": "2026-01-13T11:36:26.079058",
+  "documentosGerais": [
+    {
+      "tipo": "Plano de Testes Exploratorios",
+      "id": "909100"
+    },
+    {
+      "tipo": "Boot/Automacao",
+      "id": "Boot"
+    },
+    {
+      "tipo": "App Guidance",
+      "id": "app guidance"
+    }
+  ]
+}

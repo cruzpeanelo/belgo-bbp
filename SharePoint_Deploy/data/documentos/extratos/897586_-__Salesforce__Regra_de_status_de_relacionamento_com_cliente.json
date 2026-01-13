@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "id": "897586",
+    "arquivo": "897586 - [Salesforce] Regra de status de relacionamento com cliente.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\897586 - [Salesforce] Regra de status de relacionamento com cliente.docx",
+    "tamanho_bytes": 249026,
+    "data_modificacao": "2025-12-01T15:13:22",
+    "extraido_em": "2026-01-13T11:31:15.224444",
+    "status": "extraido",
+    "total_paragrafos": 9,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Validação da Regra – Operação Assistida",
+      "Samuel e eu acessamos o registro do cliente e identificamos os pedidos relacionados ao processo.",
+      "Validamos os pedidos, incluindo pedidos com status Cancelado.",
+      "A execução dos testes foi realizada em operação assistida com o desenvolvedor Samuel. Durante a validação, todos os comportamentos esperados foram confirmados, atendendo integralmente às regras previstas.",
+      "Conforme solicitado pelo usuário, foi validado que:",
+      "Caso o cliente tenha comprado há menos de 30 dias, o status permanece como \"Ativo com compra\".",
+      "Para os demais cenários, os status seguem corretamente os intervalos de ≥ 30, 60, 90, 120 e 365 dias, incluindo a validação do último caso referente aos 365 dias, que também apresentou o comportamento esperado.",
+      "Para registros com proprietário e parceiro, o agrupador do pedido do cliente está sendo atualizado conforme o escopo.",
+      "Teste validado:"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n897586 - Regra de status de relacionamento com cliente",
+          "Data de Criação\n28/11/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 9,
+    "total_tabelas": 1
+  }
+}

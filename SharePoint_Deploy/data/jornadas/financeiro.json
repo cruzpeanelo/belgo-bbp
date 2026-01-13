@@ -1,0 +1,719 @@
+{
+  "id": "financeiro",
+  "nome": "Financeiro/Credito",
+  "icone": "💰",
+  "ordem": 6,
+  "asIs": {
+    "descricao": "Processo de analise de credito manual e fragmentado onde o analista consulta diversas fontes de informacao, preenche ficha de credito em Excel ou papel, e envia por email para aprovacao. Sem visibilidade do status e sem integracao com sistemas de bureau de credito.",
+    "passos": [
+      "Vendedor solicita analise de credito para novo cliente ou aumento de limite",
+      "Analista recebe solicitacao por email ou telefone",
+      "Consulta manualmente bureaus de credito (Serasa, SPC)",
+      "Verifica historico de pagamentos no SAP",
+      "Preenche ficha de credito em Excel com dados coletados",
+      "Calcula limite de credito manualmente baseado em politica interna",
+      "Envia ficha para aprovacao do gestor por email",
+      "Aguarda retorno do gestor (pode levar dias)",
+      "Se aprovado, configura limite no SAP manualmente",
+      "Comunica vendedor sobre resultado por email"
+    ],
+    "problemas": [
+      "Processo lento - 2 a 3 dias para conclusao",
+      "Sem visibilidade do status da analise",
+      "Consultas manuais a bureaus de credito",
+      "Ficha de credito em formato nao padronizado",
+      "Risco de erros no calculo do limite",
+      "Aprovacoes dispersas por email sem rastreabilidade",
+      "Historico de credito fragmentado",
+      "Dificuldade de auditoria",
+      "Sem alertas de vencimento ou reavaliacao",
+      "Dependencia de conhecimento individual do analista"
+    ],
+    "tempoMedio": "2-3 dias"
+  },
+  "toBe": {
+    "descricao": "Gestao de credito integrada com FSCM (Financial Supply Chain Management) do SAP. Analise automatizada com consulta a bureaus de credito, calculo automatico de limite baseado em scoring, workflow de aprovacao digital em 3 niveis, e ficha de credito centralizada no Salesforce.",
+    "passos": [
+      "Vendedor acessa conta do cliente no Salesforce",
+      "Clica em 'Solicitar Analise de Credito'",
+      "Sistema consulta automaticamente bureaus de credito",
+      "Sistema recupera historico de pagamentos do SAP via FSCM",
+      "Scoring de credito calculado automaticamente",
+      "Limite sugerido baseado em regras de negocio",
+      "Ficha de credito gerada automaticamente no Salesforce",
+      "Workflow de aprovacao acionado conforme alcada",
+      "Nivel 1: Analista de Credito",
+      "Nivel 2: Gestor de Credito",
+      "Nivel 3: Diretoria (para limites acima do teto)",
+      "Aprovador recebe notificacao e aprova no Salesforce",
+      "Limite sincronizado automaticamente com SAP",
+      "Vendedor notificado do resultado"
+    ],
+    "beneficios": [
+      "Analise em tempo real (horas ao inves de dias)",
+      "Visibilidade total do status da solicitacao",
+      "Consulta automatica a bureaus de credito",
+      "Scoring padronizado e auditavel",
+      "Workflow de aprovacao rastreavel",
+      "Ficha de credito centralizada",
+      "Historico completo de analises",
+      "Auditoria facilitada",
+      "Alertas automaticos de reavaliacao",
+      "Processo auditavel e em conformidade"
+    ],
+    "tempoMedio": "Horas"
+  },
+  "areasImpactadas": [
+    "Financeiro",
+    "Comercial",
+    "Credito",
+    "TI"
+  ],
+  "status": "Em Andamento",
+  "fonteReuniao": "16/12/2025 + Caderno de Testes",
+  "fontesReuniao": [
+    "16/12/2025 - Mencao a ficha de credito e areas de credito",
+    "Caderno de Testes - CT-64 a CT-68, CT-78 a CT-80"
+  ],
+  "fontesVerificadas": {
+    "reuniao03dez": {
+      "CONFIRMADO": true,
+      "tema": "Alinhamento Financeiro/Controladoria",
+      "participantes": [
+        "Thalita Rhein",
+        "Leandro Pereira",
+        "Renato Araujo",
+        "Ivano Oliveira",
+        "Fernanda Monteiro",
+        "Claudio Oliveira"
+      ],
+      "areasCredito": {
+        "ABBA_CSP": "Supply - Belgo Cash (CONFIRMADO por Leandro: 'uma das areas de credito aqui e a csp, que e do da supplier, que e do Belgo Cash')",
+        "ADBA": "Distribuicao (CONFIRMADO por Leandro: 'da ADBA tambem, que e da distribuicao')",
+        "ALPE": "Mencionada por Ivano: 'como e que fica a questao do Belgo Cash e da alp'"
+      },
+      "citacoesExatas": [
+        "Leandro: 'A gente tem as 3 areas de credito, que e ABBACSP, que e da supply e da ADBA tambem, que e da distribuicao'",
+        "Ivano: 'como e que fica a questao do Belgo Cash e da alp esta mapeado nesse processo'",
+        "Leandro: 'Na realidade ta mapeado o Belgo Cash... uma das areas de credito aqui e a csp'"
+      ],
+      "blockeioCredito": "Bloqueio acontece no ECC, Salesforce apenas visualiza (CONFIRMADO)"
+    },
+    "reuniao04dez": "NOTA: 04/12 foi reuniao de KICKOFF - nao houve discussao especifica de Financeiro",
+    "reuniao16dez": [
+      "Ficha de credito",
+      "4 areas de credito (ASCP) - recapitulacao"
+    ],
+    "citacaoExata16dez": "Leandro: 'A gente falou brevemente aqui sobre sobre a aba financeira, brevemente porque eu falei sobre a ficha de credito e na ficha de credito aqui eu falei sobre as 4 areas de credito, que e o ASCP'",
+    "cadernoTestes": [
+      "CT-64 a CT-68 - Setup Credito",
+      "CT-78 a CT-80 - Validacoes de Credito"
+    ],
+    "areasCredito": "ABBA/CSP (Supply/Belgo Cash), ADBA (Distribuicao), ALPE - CONFIRMADOS na reuniao 03/12"
+  },
+  "areasCredito": [
+    {
+      "codigo": "BBA",
+      "nome": "BBA - Limite Interno",
+      "descricao": "Area de credito interna - CONFIRMADO em 04/12 (Vanessa: 'Se for um limite de credito para a area da BBA, que e um limite interno')",
+      "fonteConfirmacao": "Reuniao 04/12/2025 - Vanessa"
+    },
+    {
+      "codigo": "CSP",
+      "nome": "CSP - Supply (Belgo Cash)",
+      "descricao": "Area de credito Supply - CONFIRMADO em 03/12 e 04/12 (Leandro: 'a CSP a da supplier')",
+      "fonteConfirmacao": "Reunioes 03/12 e 04/12/2025"
+    },
+    {
+      "codigo": "DBA",
+      "nome": "DBA - Distribuicao",
+      "descricao": "Area de credito para distribuicao - CONFIRMADO em 04/12 (Leandro: 'a DBA que e da distribuicao'). Gerenciado pela propria Rede.",
+      "fonteConfirmacao": "Reuniao 04/12/2025 - Leandro Pereira"
+    },
+    {
+      "codigo": "ALPE",
+      "nome": "ALPE",
+      "descricao": "Area de credito ALPE - CONFIRMADO em 04/12 (Leandro: 'a gente tem a da Alp')",
+      "fonteConfirmacao": "Reuniao 04/12/2025 - Leandro Pereira"
+    }
+  ],
+  "areasCredito_nota": "TOTAL: 4 areas confirmadas por Vanessa (04/12): 'Sao 4 que a gente tem'. Cliente novo ja nasce com as 4 areas, mas nao habilitadas. A DBA e gerenciada pelo pessoal da propria Rede.",
+  "campos": [
+    {
+      "campo": "Cliente",
+      "descricao": "Conta do cliente no Salesforce",
+      "preenchimento": "Automatico",
+      "validacao": "Obrigatorio",
+      "obrigatorio": true
+    },
+    {
+      "campo": "CNPJ/CPF",
+      "descricao": "Documento do cliente",
+      "preenchimento": "Automatico (Conta)",
+      "validacao": "Obrigatorio",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Area de Credito",
+      "descricao": "Area responsavel pela analise",
+      "preenchimento": "Automatico/Manual",
+      "validacao": "ABBA, ADBA, Belgo Cash, ALPE",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Limite Solicitado",
+      "descricao": "Valor do limite de credito solicitado",
+      "preenchimento": "Manual",
+      "validacao": "Numerico positivo",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Limite Atual",
+      "descricao": "Limite de credito vigente do cliente",
+      "preenchimento": "Automatico (SAP)",
+      "validacao": "-",
+      "obrigatorio": false
+    },
+    {
+      "campo": "Limite Sugerido",
+      "descricao": "Limite calculado pelo sistema baseado em scoring",
+      "preenchimento": "Automatico (FSCM)",
+      "validacao": "-",
+      "obrigatorio": false
+    },
+    {
+      "campo": "Score de Credito",
+      "descricao": "Pontuacao de risco do cliente",
+      "preenchimento": "Automatico (Bureau)",
+      "validacao": "-",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Partidas Abertas",
+      "descricao": "Valor total de partidas em aberto do cliente",
+      "preenchimento": "Automatico (SAP)",
+      "validacao": "-",
+      "obrigatorio": false
+    },
+    {
+      "campo": "Dias em Atraso",
+      "descricao": "Maior quantidade de dias em atraso do cliente",
+      "preenchimento": "Automatico (SAP)",
+      "validacao": "-",
+      "obrigatorio": false
+    },
+    {
+      "campo": "Status Analise",
+      "descricao": "Status atual da solicitacao de credito",
+      "preenchimento": "Automatico",
+      "validacao": "-",
+      "obrigatorio": true,
+      "valores": [
+        "Pendente",
+        "Em Analise",
+        "Aguardando Aprovacao",
+        "Aprovado",
+        "Reprovado"
+      ]
+    },
+    {
+      "campo": "Justificativa",
+      "descricao": "Motivo da solicitacao ou observacoes",
+      "preenchimento": "Manual",
+      "validacao": "-",
+      "obrigatorio": false
+    }
+  ],
+  "regrasNegocio": [
+    {
+      "regra": "Consulta Automatica a Bureaus",
+      "descricao": "O sistema consulta automaticamente Serasa e SPC para obter score de credito e pendencias financeiras"
+    },
+    {
+      "regra": "Calculo Automatico de Limite via FSCM",
+      "descricao": "O SAP FSCM calcula o limite sugerido baseado em faturamento, historico de pagamentos e score de credito"
+    },
+    {
+      "regra": "Workflow de Aprovacao em 3 Niveis",
+      "descricao": "Aprovacao segue hierarquia: Analista -> Gestor -> Diretoria, conforme valor do limite solicitado",
+      "alcadas": {
+        "nivel1": {
+          "aprovador": "Analista de Credito",
+          "limiteAte": 50000
+        },
+        "nivel2": {
+          "aprovador": "Gestor de Credito",
+          "limiteAte": 200000
+        },
+        "nivel3": {
+          "aprovador": "Diretoria",
+          "limiteAcima": 200000
+        }
+      }
+    },
+    {
+      "regra": "Sincronizacao de Limite com SAP",
+      "descricao": "Apos aprovacao, o limite e sincronizado automaticamente com o SAP"
+    },
+    {
+      "regra": "Reavaliacao Periodica",
+      "descricao": "Sistema gera alerta automatico para reavaliacao de limite a cada 12 meses"
+    },
+    {
+      "regra": "Bloqueio por Inadimplencia",
+      "descricao": "Cliente com mais de 30 dias de atraso tem limite bloqueado automaticamente"
+    }
+  ],
+  "sistemasTecnicos": [
+    "Salesforce",
+    "SAP FSCM",
+    "SAP ECC",
+    "Bureaus de Credito (Serasa, SPC)"
+  ],
+  "processosAdicionaisReunioes": {
+    "consultaPartidas": {
+      "fonte": "Reuniao 16/12/2025",
+      "descricao": "Funcionalidade de consulta de partidas Belgo e BelgoCash direto no Salesforce",
+      "citacao": "Leandro: 'Voces vao ver dois botaozinhos. Quando voces consultarem essas partidas daqui da esquerda, voces vao consultar as partidas do Cliente dentro da Belgo. Quando voces clicarem nesse botaozinho aqui, a gente vai consultar as partidas do Bel Cash.'",
+      "botoes": ["Partidas Belgo", "Partidas BelgoCash"]
+    },
+    "segundaViaBoleto": {
+      "fonte": "Reuniao 16/12/2025",
+      "descricao": "Emissao de segunda via de boleto pelo Salesforce",
+      "asIs": "Joao Endo: 'Se for da Belgo pelo SAP, tem uma transacao la... E a Belgo cash pelo portal.'",
+      "toBe": "Emissao integrada via Salesforce sem necessidade de acessar SAP ou portal separado"
+    }
+  },
+  "integracoes": [
+    {
+      "origem": "Salesforce",
+      "destino": "SAP FSCM",
+      "tipo": "API",
+      "descricao": "Consulta de limite atual, partidas abertas e historico de pagamentos"
+    },
+    {
+      "origem": "Salesforce",
+      "destino": "Bureaus de Credito",
+      "tipo": "API",
+      "descricao": "Consulta de score e pendencias financeiras"
+    },
+    {
+      "origem": "Salesforce",
+      "destino": "SAP ECC",
+      "tipo": "Middleware",
+      "descricao": "Atualizacao de limite de credito apos aprovacao"
+    },
+    {
+      "origem": "SAP FSCM",
+      "destino": "Salesforce",
+      "tipo": "API",
+      "descricao": "Retorno de calculo de limite sugerido"
+    }
+  ],
+  "mensagensSistema": [
+    {
+      "tipo": "Sucesso",
+      "contexto": "Credito Aprovado",
+      "mensagem": "Limite de credito aprovado e sincronizado com SAP"
+    },
+    {
+      "tipo": "Alerta",
+      "contexto": "Score Baixo",
+      "mensagem": "Score de credito abaixo do minimo. Analise manual necessaria."
+    },
+    {
+      "tipo": "Erro",
+      "contexto": "Consulta Bureau Falhou",
+      "mensagem": "Nao foi possivel consultar o bureau de credito. Tente novamente."
+    },
+    {
+      "tipo": "Erro",
+      "contexto": "Credito Reprovado",
+      "mensagem": "Solicitacao de credito reprovada. Motivo: {motivo}"
+    },
+    {
+      "tipo": "Info",
+      "contexto": "Aguardando Aprovacao",
+      "mensagem": "Solicitacao enviada para aprovacao do {aprovador}"
+    },
+    {
+      "tipo": "Alerta",
+      "contexto": "Reavaliacao Necessaria",
+      "mensagem": "Limite de credito do cliente necessita reavaliacao (vencido ha {dias} dias)"
+    }
+  ],
+  "abasInterface": [
+    {
+      "aba": "Financeiro",
+      "descricao": "Aba na tela de Conta que exibe informacoes financeiras",
+      "campos": [
+        "Limite de Credito",
+        "Partidas Abertas",
+        "Ficha de Credito",
+        "Historico de Analises"
+      ]
+    }
+  ],
+  "detalhes": {
+    "areasCredito": [
+      "ABBA",
+      "ADBA",
+      "Belgo Cash",
+      "ALPE"
+    ],
+    "fscm": "Financial Supply Chain Management - modulo SAP para gestao financeira",
+    "workflow": "Analista -> Gestor -> Diretoria",
+    "scoring": "Calculo automatico baseado em bureaus + historico SAP"
+  },
+  "modeloScoring": {
+    "avisoVerificacao": "ATENCAO: Este modelo de scoring e uma SUGESTAO TECNICA, nao foi definido nas reunioes. A reuniao mencionou apenas 'ficha de credito' e 'ASCP' brevemente. Os pesos, formulas e faixas abaixo precisam ser validados com a equipe de Credito.",
+    "descricao": "Modelo de scoring de credito para calculo automatico de limite",
+    "formula": "Score = (ScoreBureau * 0.30) + (HistoricoPagamentos * 0.25) + (FaturamentoMedio * 0.25) + (TempoRelacionamento * 0.10) + (SetorRisco * 0.10)",
+    "componentes": [
+      {
+        "nome": "ScoreBureau",
+        "peso": 0.3,
+        "fonte": "Serasa/SPC",
+        "faixa": "0-1000",
+        "normalizacao": "Score / 10 = pontos (0-100)"
+      },
+      {
+        "nome": "HistoricoPagamentos",
+        "peso": 0.25,
+        "fonte": "SAP ECC",
+        "calculo": "100 - (DiasAtrasoMedio * 2)",
+        "minimo": 0,
+        "maximo": 100
+      },
+      {
+        "nome": "FaturamentoMedio",
+        "peso": 0.25,
+        "fonte": "SAP ECC",
+        "faixas": [
+          {
+            "de": 0,
+            "ate": 50000,
+            "pontos": 20
+          },
+          {
+            "de": 50001,
+            "ate": 200000,
+            "pontos": 40
+          },
+          {
+            "de": 200001,
+            "ate": 500000,
+            "pontos": 60
+          },
+          {
+            "de": 500001,
+            "ate": 1000000,
+            "pontos": 80
+          },
+          {
+            "de": 1000001,
+            "ate": null,
+            "pontos": 100
+          }
+        ]
+      },
+      {
+        "nome": "TempoRelacionamento",
+        "peso": 0.1,
+        "fonte": "Salesforce",
+        "calculo": "Anos * 10 (max 100)"
+      },
+      {
+        "nome": "SetorRisco",
+        "peso": 0.1,
+        "fonte": "Tabela de Setores",
+        "classificacao": {
+          "baixo": 100,
+          "medio": 60,
+          "alto": 30
+        }
+      }
+    ],
+    "classificacaoRisco": [
+      {
+        "faixa": "80-100",
+        "risco": "Muito Baixo",
+        "cor": "Verde",
+        "recomendacao": "Aprovacao automatica"
+      },
+      {
+        "faixa": "60-79",
+        "risco": "Baixo",
+        "cor": "Verde Claro",
+        "recomendacao": "Aprovacao com analise rapida"
+      },
+      {
+        "faixa": "40-59",
+        "risco": "Medio",
+        "cor": "Amarelo",
+        "recomendacao": "Analise detalhada necessaria"
+      },
+      {
+        "faixa": "20-39",
+        "risco": "Alto",
+        "cor": "Laranja",
+        "recomendacao": "Aprovacao com garantias"
+      },
+      {
+        "faixa": "0-19",
+        "risco": "Muito Alto",
+        "cor": "Vermelho",
+        "recomendacao": "Nao recomendado"
+      }
+    ],
+    "calculoLimite": {
+      "formula": "LimiteSugerido = FaturamentoAnual * FatorRisco * FatorSetor",
+      "fatoresRisco": [
+        {
+          "scoreMin": 80,
+          "fator": 0.5
+        },
+        {
+          "scoreMin": 60,
+          "fator": 0.35
+        },
+        {
+          "scoreMin": 40,
+          "fator": 0.2
+        },
+        {
+          "scoreMin": 20,
+          "fator": 0.1
+        },
+        {
+          "scoreMin": 0,
+          "fator": 0.05
+        }
+      ],
+      "limiteMaximo": "R$ 5.000.000,00",
+      "limiteMinimo": "R$ 10.000,00"
+    }
+  },
+  "alcadasAprovacao": {
+    "descricao": "Niveis de aprovacao por valor de limite solicitado",
+    "niveis": [
+      {
+        "nivel": 1,
+        "nome": "Analista de Credito",
+        "limiteAte": 50000,
+        "tempoSLA": "4 horas",
+        "perfil": "Credit_Analyst",
+        "podeReprovar": true,
+        "podeAprovarParcial": true
+      },
+      {
+        "nivel": 2,
+        "nome": "Gestor de Credito",
+        "limiteAte": 200000,
+        "tempoSLA": "8 horas",
+        "perfil": "Credit_Manager",
+        "podeReprovar": true,
+        "podeAprovarParcial": true,
+        "podeEscalar": true
+      },
+      {
+        "nivel": 3,
+        "nome": "Diretoria Financeira",
+        "limiteAcima": 200000,
+        "tempoSLA": "24 horas",
+        "perfil": "Finance_Director",
+        "podeReprovar": true,
+        "aprovacaoFinal": true
+      }
+    ],
+    "regrasEscalacao": [
+      "Solicitacao sem resposta em 2x SLA escala automaticamente",
+      "Score abaixo de 40 sempre requer nivel 2 ou superior",
+      "Cliente novo sempre requer nivel 2 para limites > R$ 20.000"
+    ],
+    "notificacoes": {
+      "novaSolicitacao": "Email + Notificacao Salesforce",
+      "proximoVencimentoSLA": "30 minutos antes",
+      "solicitacaoEscalada": "Email urgente + SMS (se configurado)"
+    }
+  },
+  "pendencias": [
+    "Integracao com bureaus de credito (Serasa, SPC)",
+    "Definicao de alcadas de aprovacao por valor",
+    "Configuracao de regras de scoring no FSCM",
+    "Template de ficha de credito no Salesforce"
+  ],
+  "prerequisitos": [
+    "SAP FSCM configurado e operacional",
+    "Contrato com bureaus de credito para consulta via API",
+    "Workflow de aprovacao configurado no Salesforce",
+    "Perfis de aprovadores definidos"
+  ],
+  "relacionamentos": {
+    "dependeDe": [
+      "cadastro-cliente"
+    ],
+    "habilitaPara": [
+      "cotacao-ov"
+    ],
+    "nota": "Limite de credito e pre-requisito para criacao de pedidos de venda"
+  },
+  "ciclosTeste": [
+    {
+      "documento": "Caderno de Testes - Financeiro",
+      "titulo": "Financeiro e Credito - Validacoes",
+      "status": "Pendente",
+      "data": "2026-01-12",
+      "descricao": "3 casos de teste para validacao de regras de credito",
+      "estatisticas": {
+        "total": 3,
+        "concluidos": 0,
+        "pendentes": 3,
+        "falhou": 0,
+        "percentualConclusao": "0%"
+      },
+      "cenarios": [
+        "Bloqueio automatico OV sem credito (CT-78)",
+        "Mensagem alerta credito na cotacao (CT-79)",
+        "Consulta OV criada e dados (CT-80)"
+      ],
+      "testesRelacionados": [
+        78,
+        79,
+        80
+      ]
+    },
+    {
+      "documento": "Caderno de Testes - Setup Credito",
+      "titulo": "Setup - Configuracao de Credito",
+      "status": "Pendente",
+      "data": "2026-01-12",
+      "descricao": "Casos de teste de setup relacionados a credito (CT-64 a CT-68)",
+      "estatisticas": {
+        "total": 5,
+        "concluidos": 0,
+        "pendentes": 5,
+        "falhou": 0,
+        "percentualConclusao": "0%"
+      },
+      "cenarios": [
+        "Cadastro limite credito FSCM (CT-64)",
+        "Cliente com credito bloqueado (CT-65)",
+        "Cliente com credito liberado (CT-66)",
+        "Condicoes de pagamento (CT-67)",
+        "Listagem materiais/clientes (CT-68)"
+      ],
+      "testesRelacionados": [
+        64,
+        65,
+        66,
+        67,
+        68
+      ]
+    }
+  ],
+  "alertas": [
+    {
+      "tipo": "Info",
+      "titulo": "Regras de Credito em Producao",
+      "descricao": "IMPORTANTE: Regras de credito ja estao em producao. Validar areas de credito: ABBA, ADBA, Belgo Cash e ALPE.",
+      "impacto": "Medio"
+    }
+  ],
+  "discussaoReunioes": {
+    "16dez2025": {
+      "apresentador": "Leandro da Cruz Pereira",
+      "timestamp": "1:52",
+      "contexto": "Recapitulacao do tema Financeiro durante revisao geral dos topicos",
+      "citacaoOriginal": "A gente falou brevemente aqui sobre sobre a aba financeira, brevemente porque eu falei sobre a ficha de credito e na ficha de credito aqui eu falei sobre as 4 areas de credito, que e o ASCP",
+      "sistemaMencionado": {
+        "nome": "ASCP",
+        "nota": "Apenas o nome foi mencionado, sem detalhamento tecnico"
+      },
+      "profundidade": "BREVEMENTE - Leandro usou a palavra 'brevemente' duas vezes, indicando que nao houve aprofundamento",
+      "areasCredito": "Mencionou 4 areas de credito, mas nao especificou quais (ABBA, ADBA, Belgo Cash, ALPE vem de outras fontes)"
+    }
+  },
+  "sistemaACSSAP": {
+    "nome": "ASCP",
+    "fonte": "Reuniao 16/12/2025 - Leandro (recapitulacao)",
+    "citacaoOriginal": "...as 4 areas de credito, que e o ASCP",
+    "descricao": "Sistema mencionado na reuniao relacionado a areas de credito",
+    "nota": "ATENCAO: O significado 'Advanced Credit SAP' e as areas especificas (ABBA, ADBA, Belgo Cash, ALPE) NAO foram mencionados na reuniao. Precisam ser verificados com a equipe de Credito/TI.",
+    "areasVerificar": [
+      "ABBA",
+      "ADBA",
+      "Belgo Cash",
+      "ALPE"
+    ]
+  },
+  "contextoReuniao": {
+    "projeto": "GTM (Go To Market) / CRM",
+    "lideranca": {
+      "business": "Thalita Merisio Rhein",
+      "tecnico": "Leandro da Cruz Pereira"
+    },
+    "timeline": {
+      "workshops": "04/12 a 22/12/2025",
+      "posWorkshop": "Responsabilidade passa para usuarios (Castro)",
+      "entregaveis": [
+        "Planilha de cenarios",
+        "Manual de orientacao"
+      ]
+    },
+    "participantes": [
+      {
+        "nome": "Leandro da Cruz Pereira",
+        "papel": "TI/Apresentador",
+        "contribuicao": "Explicou sistema ASCP e areas de credito"
+      },
+      {
+        "nome": "Thalita Merisio Rhein",
+        "papel": "Project Lead Business"
+      }
+    ]
+  },
+  "documentosRelacionados": [
+    {
+      "id": "886690",
+      "arquivo": "886690 - AJUSTE DE LAYOUT E ORGANIZAÇÃO DA TELA DE CONTAS – ABA “FINANCEIRO” - Copy.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\886690_-_AJUSTE_DE_LAYOUT_E_ORGANIZAÇÃO_DA_TELA_DE_CONTAS___ABA__FINANCEIRO__-_Copy.json"
+    },
+    {
+      "id": "886690",
+      "arquivo": "886690 - AJUSTE DE LAYOUT E ORGANIZAÇÃO DA TELA DE CONTAS – ABA “FINANCEIRO” - Copy.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\886690_-_AJUSTE_DE_LAYOUT_E_ORGANIZAÇÃO_DA_TELA_DE_CONTAS___ABA__FINANCEIRO__-_Copy.json"
+    },
+    {
+      "id": "899138",
+      "arquivo": "899138 - Envio e recebimento de aprovadores de Limbo.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\899138_-_Envio_e_recebimento_de_aprovadores_de_Limbo.json"
+    },
+    {
+      "id": "899138",
+      "arquivo": "899138 - Envio e recebimento de aprovadores de Limbo.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\899138_-_Envio_e_recebimento_de_aprovadores_de_Limbo.json"
+    },
+    {
+      "id": "909851",
+      "arquivo": "909851- Envio e recebimento de aprovadores de Limbo.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\909851-_Envio_e_recebimento_de_aprovadores_de_Limbo.json"
+    }
+  ],
+  "totalDocumentos": 5,
+  "ultimaAtualizacao": "2026-01-13T11:36:26.110039",
+  "documentosGerais": [
+    {
+      "tipo": "Plano de Testes Exploratorios",
+      "id": "909100"
+    },
+    {
+      "tipo": "Boot/Automacao",
+      "id": "Boot"
+    },
+    {
+      "tipo": "App Guidance",
+      "id": "app guidance"
+    }
+  ]
+}
