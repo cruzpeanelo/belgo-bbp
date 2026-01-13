@@ -208,8 +208,46 @@ const Utils = {
     // Webhook URL do Teams
     teamsWebhookUrl: 'https://arcelormittal.webhook.office.com/webhookb2/d931a635-801d-4032-ae69-27f6ee2c88af@37cd273a-1cec-4aae-a297-41480ea54f8d/IncomingWebhook/6284fbb6970849d8b57350074fa5ebff/8dd31791-e6bc-444b-b6c5-e4b6d73f1e5b/V28WZxUnp0pMRDYdKBFpYYVN6kJcnybTAzf0u5KUh9tvg1',
 
-    // Enviar mensagem para o Teams
-    async sendToTeams(card) {
+    // URL do canal do Teams (configurável na página de configurações)
+    // Formato: https://teams.microsoft.com/l/channel/CHANNEL_ID/CHANNEL_NAME?groupId=TEAM_ID
+    teamsChannelUrl: localStorage.getItem('teamsChannelUrl') || '',
+
+    // Abrir Teams no canal configurado
+    openTeamsChannel() {
+        let url = this.teamsChannelUrl || localStorage.getItem('teamsChannelUrl');
+
+        if (!url) {
+            // Se não há URL configurada, tenta abrir o Teams genericamente
+            this.showToast('Configure a URL do canal nas Configurações para abrir o Teams automaticamente', 'warning');
+            return false;
+        }
+
+        // Converter URL web para protocolo msteams:// para abrir o app
+        // Formato web: https://teams.microsoft.com/l/channel/...
+        // Formato app: msteams://teams.microsoft.com/l/channel/...
+        const appUrl = url.replace('https://', 'msteams://');
+
+        // Tentar abrir no app primeiro, depois fallback para web
+        const appWindow = window.open(appUrl, '_blank');
+
+        // Se não conseguiu abrir o app (popup bloqueado ou app não instalado), abre na web
+        setTimeout(() => {
+            if (!appWindow || appWindow.closed) {
+                window.open(url, '_blank');
+            }
+        }, 500);
+
+        return true;
+    },
+
+    // Salvar URL do canal do Teams
+    setTeamsChannelUrl(url) {
+        this.teamsChannelUrl = url;
+        localStorage.setItem('teamsChannelUrl', url);
+    },
+
+    // Enviar mensagem para o Teams e abrir o canal
+    async sendToTeams(card, openChannel = true) {
         try {
             this.showLoading('Enviando para Teams...');
 
@@ -224,6 +262,14 @@ const Utils = {
             this.hideLoading();
             // Com no-cors, não recebemos status, mas a mensagem é enviada
             this.showToast('Mensagem enviada para o Teams!', 'success');
+
+            // Abrir o Teams no canal após enviar (com pequeno delay para a mensagem chegar)
+            if (openChannel) {
+                setTimeout(() => {
+                    this.openTeamsChannel();
+                }, 800);
+            }
+
             return true;
         } catch (error) {
             this.hideLoading();
