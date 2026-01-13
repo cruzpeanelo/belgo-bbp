@@ -110,11 +110,11 @@ const Dashboard = {
             <div style="padding: 12px; border-left: 4px solid ${this.getSeverityColor(issue.severidade)};
                         background: #f9fafb; margin-bottom: 10px; border-radius: 0 8px 8px 0;">
                 <div style="display: flex; justify-content: space-between; align-items: start;">
-                    <strong style="font-size: 0.9rem;">${issue.id}: ${issue.titulo}</strong>
+                    <strong style="font-size: 0.9rem;">${issue.id}: ${issue.título}</strong>
                     <span class="badge ${Utils.getBadgeClass(issue.severidade)}">${issue.severidade}</span>
                 </div>
                 <p style="font-size: 0.8rem; color: #6b7280; margin-top: 5px;">
-                    ${issue.descricao.substring(0, 80)}...
+                    ${(issue.descrição || '').substring(0, 80)}...
                 </p>
             </div>
         `).join('') || '<p style="color: #6b7280;">Nenhum ponto crítico pendente</p>';
@@ -130,7 +130,7 @@ const Dashboard = {
             <div class="timeline-item ${w.status === 'Concluído' ? 'completed' : 'pending'}">
                 <div style="display: flex; justify-content: space-between; align-items: start;">
                     <div>
-                        <strong>${w.titulo}</strong>
+                        <strong>${w.título}</strong>
                         <p style="font-size: 0.85rem; color: #6b7280; margin-top: 3px;">
                             ${Utils.formatDate(w.data)}
                         </p>

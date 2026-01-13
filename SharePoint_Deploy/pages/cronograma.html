@@ -268,7 +268,7 @@
                             <div class="workshop-date">📅 ${Utils.formatDate(w.data)}${w.horario ? ` • ${w.horario}` : ''}</div>
                             <button class="btn-teams-item" onclick="Cronograma.compartilharWorkshop(${index})">📤 Teams</button>
                         </div>
-                        <div class="workshop-title">${w.id} - ${w.titulo}</div>
+                        <div class="workshop-title">${w.id} - ${w.título}</div>
                         <span class="badge ${Utils.getBadgeClass(w.status)}">${w.status}</span>
                         ${w.participantes ? `<span style="margin-left: 10px; color: #6b7280; font-size: 0.85rem;">👥 ${w.participantes} participantes</span>` : ''}
                         <div class="workshop-focus">
@@ -283,7 +283,7 @@
                 document.getElementById('marcos-container').innerHTML = marcos.map((m, index) => `
                     <div class="marco-item">
                         <div class="marco-date">${Utils.formatDate(m.data)}</div>
-                        <div class="marco-title">${m.titulo}</div>
+                        <div class="marco-title">${m.título}</div>
                         <span class="badge ${Utils.getBadgeClass(m.status)}">${m.status}</span>
                         <button class="btn-teams-item" onclick="Cronograma.compartilharMarco(${index})">📤</button>
                     </div>
@@ -294,7 +294,7 @@
             compartilharWorkshop(index) {
                 const w = App.data.cronograma.workshops[index];
                 if (!w) return;
-                const card = Utils.formatTeamsCard('reuniao', `🗓️ Workshop: ${w.id} - ${w.titulo}`, [
+                const card = Utils.formatTeamsCard('reuniao', `🗓️ Workshop: ${w.id} - ${w.título}`, [
                     { name: "Data", value: Utils.formatDate(w.data) },
                     { name: "Horário", value: w.horario },
                     { name: "Status", value: w.status },
@@ -308,7 +308,7 @@
             compartilharMarco(index) {
                 const m = App.data.cronograma.marcos[index];
                 if (!m) return;
-                const card = Utils.formatTeamsCard('reuniao', `🎯 Marco: ${m.titulo}`, [
+                const card = Utils.formatTeamsCard('reuniao', `🎯 Marco: ${m.título}`, [
                     { name: "Data", value: Utils.formatDate(m.data) },
                     { name: "Status", value: m.status }
                 ]);

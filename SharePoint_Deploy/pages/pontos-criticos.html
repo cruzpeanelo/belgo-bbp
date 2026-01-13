@@ -288,7 +288,7 @@
                 return issues.map(i => `
                     <div class="issue-card ${i.severidade.toLowerCase()}" onclick="PontosCriticos.verDetalhe('${i.id}')">
                         <div class="issue-id">${i.id}</div>
-                        <div class="issue-title">${i.titulo}</div>
+                        <div class="issue-title">${i.título}</div>
                         <div class="issue-meta">
                             <span class="issue-categoria">${i.categoria}</span>
                             <span class="badge ${Utils.getBadgeClass(i.severidade)}">${i.severidade}</span>
@@ -303,7 +303,7 @@
                 const issue = App.data.pontosCriticos.issues.find(i => i.id === id);
                 if (!issue) return;
 
-                document.getElementById('modal-issue-titulo').textContent = `${issue.id}: ${issue.titulo}`;
+                document.getElementById('modal-issue-titulo').textContent = `${issue.id}: ${issue.título}`;
                 document.getElementById('modal-issue-body').innerHTML = `
                     <div style="margin-bottom: 20px;">
                         <span class="badge ${Utils.getBadgeClass(issue.severidade)}">${issue.severidade}</span>
@@ -311,14 +311,14 @@
                         <span class="issue-categoria" style="margin-left: 10px;">${issue.categoria}</span>
                     </div>
                     <h4 style="color: #003B4A; margin-bottom: 10px;">Descrição</h4>
-                    <p style="background: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 20px;">${issue.descricao}</p>
+                    <p style="background: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 20px;">${issue.descrição}</p>
                     <h4 style="color: #003B4A; margin-bottom: 10px;">Ação Tomada</h4>
-                    <p style="background: #dbeafe; padding: 15px; border-radius: 8px; margin-bottom: 20px;">${issue.acaoTomada || 'Nenhuma ação definida'}</p>
+                    <p style="background: #dbeafe; padding: 15px; border-radius: 8px; margin-bottom: 20px;">${issue.açãoTomada || 'Nenhuma ação definida'}</p>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                        <div><strong>Responsável:</strong> ${issue.responsavel || '-'}</div>
-                        <div><strong>Data Identificação:</strong> ${Utils.formatDate(issue.dataIdentificacao)}</div>
-                        <div><strong>Fonte:</strong> ${issue.fonteReuniao || '-'}</div>
-                        ${issue.dataResolucao ? `<div><strong>Data Resolução:</strong> ${Utils.formatDate(issue.dataResolucao)}</div>` : ''}
+                        <div><strong>Responsável:</strong> ${issue.responsável || '-'}</div>
+                        <div><strong>Data Identificação:</strong> ${Utils.formatDate(issue.dataIdentificação)}</div>
+                        <div><strong>Fonte:</strong> ${issue.fonteReunião || '-'}</div>
+                        ${issue.dataResolução ? `<div><strong>Data Resolução:</strong> ${Utils.formatDate(issue.dataResolução)}</div>` : ''}
                     </div>
                     <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #e5e7eb;">
                         <button class="btn" style="background: #6264A7; color: white; padding: 10px 20px;" onclick="PontosCriticos.compartilharTeams('${issue.id}')">
@@ -341,13 +341,13 @@
                     return;
                 }
 
-                const card = Utils.formatTeamsCard('ponto-critico', `⚠️ ${issue.id}: ${issue.titulo}`, [
+                const card = Utils.formatTeamsCard('ponto-critico', `⚠️ ${issue.id}: ${issue.título}`, [
                     { name: "Severidade", value: issue.severidade },
                     { name: "Status", value: issue.status },
                     { name: "Categoria", value: issue.categoria },
-                    { name: "Descrição", value: issue.descricao },
-                    { name: "Ação Tomada", value: issue.acaoTomada },
-                    { name: "Responsável", value: issue.responsavel }
+                    { name: "Descrição", value: issue.descrição },
+                    { name: "Ação Tomada", value: issue.açãoTomada },
+                    { name: "Responsável", value: issue.responsável }
                 ]);
 
                 Utils.sendToTeams(card);
