@@ -1,11 +1,12 @@
 {
   "reuniao": {
-    "titulo": "Novas Regras de Clusterizacao e Apuracao de Resultados GTM",
+    "titulo": "Novas Regras de Clusterização e Apuração de Resultados GTM",
     "data": "2025-12-12",
     "duracao": "53:27",
     "tipo": "Meeting Recording",
     "fonte": "SharePoint/Stream",
-    "tamanho": "413 MB"
+    "tamanho": "413 MB",
+    "resumo": "Reunião para definição das novas regras de clusterização de clientes (Corporativas, Especiais, Regionais, Dispersas) e seu impacto na apuração de resultados GTM. Discussão sobre dimensões de clusterização, custo de servir e integração com sistemas de relatórios."
   },
   "participantes": [
     "Ciorlia, Maria L",

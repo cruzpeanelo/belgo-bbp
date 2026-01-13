@@ -129,7 +129,8 @@
     "salesforce": {
       "nome": "Salesforce",
       "descricao": "CRM principal para gestão comercial, cotações, pedidos e workflow de pricing",
-      "siglasUsadas": ["Salesforce", "SFDC", "SF", "CRM"]
+      "siglasUsadas": ["Salesforce", "CRM"],
+      "observacao": "Usar sempre 'Salesforce' - não usar 'SF' ou 'SFDC'"
     },
     "sap": {
       "nome": "SAP ECC",

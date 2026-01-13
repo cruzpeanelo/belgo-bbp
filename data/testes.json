@@ -1592,7 +1592,7 @@
             "4. Acessar VK13 no SAP",
             "5. Comparar valores"
           ],
-          "resultadoEsperado": "Preco SFDC = Preco SAP (VK13). Valores identicos.",
+          "resultadoEsperado": "Preco Salesforce = Preco SAP (VK13). Valores identicos.",
           "resultadoObtido": "",
           "dataExecucao": null,
           "executor": "",
@@ -1959,8 +1959,8 @@
         },
         {
           "id": "CT-107",
-          "nome": "Criar OV no SFDC e verificar aplicacao das novas conditions",
-          "sistema": "SF+SAP",
+          "nome": "Criar OV no Salesforce e verificar aplicacao das novas conditions",
+          "sistema": "Salesforce+SAP",
           "prioridade": "Alta",
           "status": "Pendente",
           "passos": [

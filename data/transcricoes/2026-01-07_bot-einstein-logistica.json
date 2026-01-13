@@ -1,11 +1,12 @@
 {
   "reuniao": {
-    "titulo": "Bot Einstein Planejamento & Logistica",
+    "titulo": "Bot Einstein Planejamento & Logística",
     "data": "2026-01-07",
     "duracao": "52:13",
     "tipo": "Meeting Recording",
     "fonte": "SharePoint/Stream",
-    "tamanho": "409 MB"
+    "tamanho": "409 MB",
+    "resumo": "Reunião sobre o Bot Einstein para autoatendimento via WhatsApp. Apresentação do MVP com consulta de conta, status de pedidos e documentos fiscais. Discussão sobre autenticação de clientes, transbordo para Smart Center, timeline e orçamento (400k para 2026)."
   },
   "participantes": [
     "Franca, Fabricio",

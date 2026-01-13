@@ -47,9 +47,34 @@ const App = {
             this.data.cronograma = cronograma;
             this.data.pontosCriticos = pontosCriticos;
 
+            // Restaurar status salvos no localStorage
+            this.restoreSavedStatuses();
+
             console.log('Dados carregados:', this.data);
         } catch (error) {
             console.error('Erro ao carregar dados:', error);
+        }
+    },
+
+    // Restaurar status de testes salvos no localStorage
+    restoreSavedStatuses() {
+        if (!this.data.testes) return;
+
+        let restored = 0;
+        this.data.testes.categorias.forEach(cat => {
+            cat.casos.forEach(caso => {
+                const saved = Utils.loadFromStorage('testes_' + caso.id);
+                if (saved && saved.status) {
+                    caso.status = saved.status;
+                    caso.dataExecucao = saved.data;
+                    restored++;
+                }
+            });
+        });
+
+        if (restored > 0) {
+            console.log(`Restaurados ${restored} status de testes do localStorage`);
+            this.recalculateMetrics();
         }
     },
 

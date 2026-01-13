@@ -18,17 +18,17 @@
       "id": "sap-ecc",
       "nome": "SAP ECC",
       "tipo": "ERP",
-      "descricao": "Sistema ERP para gestao de pedidos, estoque e financeiro",
+      "descricao": "Sistema ERP para gestão de pedidos, estoque e financeiro",
       "modulos": ["SD (Sales & Distribution)", "MM", "FI"],
       "status": "ativo"
     },
     {
-      "id": "acsap",
-      "nome": "ACSAP - Advanced Credit SAP",
+      "id": "ascp",
+      "nome": "ASCP - Advanced Supply Chain Planning",
       "tipo": "Middleware",
-      "descricao": "Middleware para integracao de credito entre Salesforce e SAP",
+      "descricao": "Middleware para integração de credito entre Salesforce e SAP",
       "funcionalidades": [
-        "Sincronizacao de areas de credito",
+        "Sincronização de areas de credito",
         "Consulta de limites",
         "Bloqueio/desbloqueio de clientes"
       ],
@@ -38,7 +38,7 @@
       "id": "fscm",
       "nome": "FSCM - Financial Supply Chain Management",
       "tipo": "Financeiro",
-      "descricao": "Modulo SAP para gestao da cadeia financeira",
+      "descricao": "Modulo SAP para gestão da cadeia financeira",
       "funcionalidades": [
         "Gestao de credito",
         "Controle de recebimentos",
@@ -47,12 +47,13 @@
       "status": "ativo"
     },
     {
-      "id": "altair",
-      "nome": "Altair",
-      "tipo": "Sistema Legado",
-      "descricao": "Sistema para operacoes especificas (AuP)",
+      "id": "alpe",
+      "nome": "ALPE (Sistema Crédito)",
+      "tipo": "Área de Crédito",
+      "descricao": "Área de crédito Aços Longos PE - gerenciada via ASCP",
       "areaCredito": "ALPE/BTC",
-      "status": "ativo"
+      "status": "ativo",
+      "observacao": "Não usar 'Altair' - nome correto é ALPE"
     },
     {
       "id": "sintegra",
@@ -82,7 +83,7 @@
       "fontesReuniao": ["2026-01-07_bot-einstein-logistica.json"]
     }
   ],
-  "fluxosIntegracao": [
+  "fluxosIntegração": [
     {
       "id": "cadastro-cliente",
       "nome": "Cadastro de Cliente",
@@ -101,14 +102,14 @@
       "id": "credito-consulta",
       "nome": "Consulta de Credito",
       "origem": "salesforce",
-      "destino": "acsap",
+      "destino": "ascp",
       "tipo": "sincrono",
       "descricao": "Consulta de limite de credito disponivel",
       "retorno": ["Limite disponivel", "Status bloqueio", "Area credito"]
     },
     {
-      "id": "pedido-integracao",
-      "nome": "Integracao de Pedido",
+      "id": "pedido-integração",
+      "nome": "Integração de Pedido",
       "origem": "salesforce",
       "destino": "sap-ecc",
       "tipo": "assincrono",
@@ -147,19 +148,19 @@
   "statusIntegracoes": {
     "producao": {
       "salesforce_sap": "ativo",
-      "salesforce_acsap": "ativo",
+      "salesforce_ascp": "ativo",
       "salesforce_whatsapp": "ativo",
       "sintegra": "ativo"
     },
     "homologacao": {
       "salesforce_sap": "em_teste",
-      "salesforce_acsap": "ativo",
+      "salesforce_ascp": "ativo",
       "ficha_comercial_yedi": "em_teste"
     }
   },
   "observacoes": [
-    "Integracao Ficha Comercial YEDI em fase de testes GTM",
+    "Integração Ficha Comercial YEDI em fase de testes GTM",
     "Bot WhatsApp com orcamento aprovado de 400k para 2026",
-    "ACSAP e ponto central para consultas de credito"
+    "ASCP e ponto central para consultas de credito"
   ]
 }

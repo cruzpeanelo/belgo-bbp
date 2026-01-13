@@ -75,7 +75,7 @@
       "tamanho": 10,
       "obrigatorio": true,
       "descricao": "Codigo do cliente no SAP ECC",
-      "integracao": "ACSAP"
+      "integracao": "ASCP"
     },
     {
       "apiName": "Cluster__c",
@@ -132,6 +132,6 @@
   "observacoes": [
     "Record Types confirmados via documentos Tester e reunioes",
     "Campos de Cluster e Segmento sao calculados automaticamente",
-    "Integracao com SAP via ACSAP para sincronizacao"
+    "Integracao com SAP via ASCP para sincronizacao"
   ]
 }

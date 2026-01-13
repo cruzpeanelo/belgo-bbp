@@ -26,7 +26,7 @@
           "citacao": "a BBA é a interna"
         }
       ],
-      "integracoes": ["ACSAP", "FSCM"],
+      "integracoes": ["ASCP", "FSCM"],
       "status": "confirmado"
     },
     {
@@ -46,7 +46,7 @@
           "citacao": "se for o da supplier vai para a area da CSP"
         }
       ],
-      "integracoes": ["ACSAP", "FSCM"],
+      "integracoes": ["ASCP", "FSCM"],
       "status": "confirmado"
     },
     {
@@ -67,34 +67,34 @@
         }
       ],
       "canalRelacionado": "30",
-      "integracoes": ["ACSAP", "FSCM"],
+      "integracoes": ["ASCP", "FSCM"],
       "status": "confirmado"
     },
     {
       "codigo": "ALPE",
-      "nome": "Alpe/BTC/ABPE - AuP (Altair)",
-      "nomesAlternativos": ["BTC", "ABPE", "Altair"],
-      "descricao": "Area de credito relacionada ao sistema Altair para operacoes especificas",
+      "nome": "ALPE - Aços Longos PE",
+      "nomesAlternativos": ["BTC", "ABPE"],
+      "descricao": "Área de crédito Aços Longos Pernambuco (não usar 'Altair')",
       "citacoesExatas": [
         {
           "fonte": "Reuniao 03/12/2025",
           "participante": "Leandro",
-          "citacao": "Alpe, ABPE essas coisas... e do Altair"
+          "citacao": "ALPE, ABPE essas coisas... é o ALPE"
         },
         {
           "fonte": "Reuniao 04/12/2025",
           "participante": "Participante",
-          "citacao": "BTC que e para o AuP, o Altair"
+          "citacao": "BTC que é para a área ALPE"
         }
       ],
-      "sistemaRelacionado": "Altair",
-      "integracoes": ["ACSAP", "Altair"],
+      "sistemaRelacionado": "ASCP",
+      "integracoes": ["ASCP", "FSCM"],
       "status": "confirmado"
     }
   ],
   "observacoes": [
     "Variacoes de nomenclatura (DBA vs ADBA, BTC vs ABPE vs ALPE) referem-se as mesmas areas",
     "Todas as 4 areas foram confirmadas em pelo menos 2 reunioes diferentes",
-    "Integracao principal via ACSAP (Advanced Credit SAP)"
+    "Integração principal via ASCP (Advanced Supply Chain Planning)"
   ]
 }

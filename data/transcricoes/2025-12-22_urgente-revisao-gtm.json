@@ -1,11 +1,12 @@
 {
   "reuniao": {
-    "titulo": "URGENTE! Revisao dos ajustes GTM",
+    "titulo": "URGENTE! Revisão dos ajustes GTM",
     "data": "2025-12-22",
     "duracao": "~2:30h",
     "tipo": "Meeting Recording",
     "fonte": "SharePoint/Stream",
-    "tamanho": "1.17 GB"
+    "tamanho": "1.17 GB",
+    "resumo": "Reunião urgente para definição da nova estrutura organizacional comercial com 4 macro setores (Alta Energia, Agricultura, Indústria, Construção Civil). Discussão sobre mudanças de gestão regional, alocação de Key Accounts, ajustes em workflow de aprovação e gestão de dados de clientes."
   },
   "participantes": [
     "Gimenes, Leandro Augusto",

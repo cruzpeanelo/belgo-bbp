@@ -612,18 +612,39 @@
       "fonteReuniao": "10/12/2025",
       "detalhes": {
         "canais": {
-          "20": "Industria",
-          "30": "Distribuidores/Revenda",
-          "40": "Consumidor Final",
-          "25": "Casos Especiais"
+          "20": {
+            "nome": "Indústria",
+            "descricao": "Canal de vendas industriais",
+            "clientes": "Fábricas, manufaturas, indústrias em geral"
+          },
+          "25": {
+            "nome": "Casos Especiais",
+            "descricao": "Exceções e casos especiais que não se enquadram nos demais canais"
+          },
+          "30": {
+            "nome": "Distribuição",
+            "descricao": "Canal de distribuidores e revendas",
+            "areaCredito": "DBA/ADBA"
+          },
+          "40": {
+            "nome": "Consumo/Varejo",
+            "descricao": "Canal de varejo e consumidor final"
+          }
         },
-        "clusterAutomatico": "Sistema define cluster baseado em regras de negocio",
-        "workflowExcecao": "Aprovacao em 2 niveis"
+        "clusters": {
+          "Corporativas": "Grandes contas com volume alto",
+          "Especiais": "Contas com tratamento diferenciado",
+          "Regionais": "Contas de atuação regional",
+          "Dispersas": "Contas menores e dispersas"
+        },
+        "clusterAutomatico": "Sistema define cluster baseado em faturamento, potencial e frequência de compra",
+        "workflowExcecao": "Aprovação em 2 níveis para alteração manual de cluster"
       },
       "regrasNegocio": [
         "Canal definido pelo CNAE",
         "Cluster calculado por algoritmo",
-        "Excecoes via workflow"
+        "Exceções via workflow de 2 níveis",
+        "Segmento de Produto (46 valores possíveis)"
       ]
     },
     {
@@ -819,19 +840,49 @@
       "status": "Em Andamento",
       "fonteReuniao": "04/12/2025",
       "detalhes": {
-        "areasCredito": [
-          "BBA",
-          "DBA",
-          "CSP",
-          "ALPE"
-        ],
-        "fscm": "Financial Supply Chain Management",
+        "areasCredito": {
+          "BBA": {
+            "nome": "Limite Interno Belgo",
+            "descricao": "Área de crédito interna da Belgo para concessão de limites",
+            "integracao": "ASCP"
+          },
+          "CSP": {
+            "nome": "Supply/Belgo Cash",
+            "descricao": "Área de crédito para operações de supply chain e Belgo Cash",
+            "integracao": "ASCP"
+          },
+          "DBA": {
+            "nome": "Distribuição",
+            "alternativo": "ADBA",
+            "descricao": "Área de crédito para canal de distribuição - gerenciada pela própria Rede",
+            "canalRelacionado": "30",
+            "integracao": "ASCP"
+          },
+          "ALPE": {
+            "nome": "Aços Longos PE",
+            "alternativo": "BTC/ABPE",
+            "descricao": "Área de crédito Aços Longos Pernambuco",
+            "observacao": "Não usar 'Altair' - nome correto é ALPE",
+            "integracao": "ASCP"
+          }
+        },
+        "fscm": {
+          "nome": "Financial Supply Chain Management",
+          "descricao": "Módulo SAP para gestão da cadeia financeira",
+          "funcionalidades": ["Gestão de crédito", "Controle de recebíveis", "Bloqueio de vendas"]
+        },
+        "ascp": {
+          "nome": "Advanced Supply Chain Planning",
+          "descricao": "Middleware para integração de crédito entre Salesforce e SAP",
+          "funcionalidades": ["Sincronização de áreas de crédito", "Consulta de limites", "Bloqueio/desbloqueio de clientes"]
+        },
         "workflow": "Analista -> Gestor -> Diretoria"
       },
       "sistemasTecnicos": [
         "Salesforce",
         "SAP FSCM",
-        "Bureaus de Credito"
+        "ASCP",
+        "Bureaus de Crédito"
       ]
     },
     {
@@ -881,50 +932,70 @@
       "icone": "🖥️",
       "ordem": 8,
       "asIs": {
-        "descricao": "Inexistente",
+        "descricao": "Inexistente - Cliente depende totalmente do vendedor ou Smart Center para qualquer consulta",
         "passos": [
-          "Cliente liga para vendedor",
-          "Vendedor consulta sistemas",
-          "Retorna informação por telefone/email"
+          "Cliente liga para vendedor ou Smart Center",
+          "Vendedor consulta múltiplos sistemas manualmente",
+          "Retorna informação por telefone ou email",
+          "Cliente aguarda resposta sem previsão"
         ],
         "problemas": [
-          "Dependência do vendedor",
-          "Demora no atendimento",
-          "Sem autonomia do cliente"
+          "Dependência total do vendedor para qualquer informação",
+          "Demora no atendimento (horas ou dias)",
+          "Sem autonomia do cliente",
+          "Smart Center sobrecarregado com consultas simples",
+          "Horário limitado de atendimento"
         ],
         "tempoMedio": "Horas/Dias"
       },
       "toBe": {
-        "descricao": "Portal self-service",
+        "descricao": "Portal self-service e Bot Einstein via WhatsApp para atendimento 24/7",
         "passos": [
-          "Cliente acessa portal",
-          "Consulta pedidos/notas",
-          "Acompanha entregas",
-          "Solicita 2ª via de documentos"
+          "Cliente acessa portal web ou WhatsApp",
+          "Bot Einstein faz autenticação via CNPJ/CPF",
+          "Cliente consulta status de pedidos em tempo real",
+          "Download de documentos fiscais (XML, DANFE, Certificados)",
+          "Rastreamento de entregas",
+          "Solicitação de 2ª via de boletos",
+          "Transbordo automático para Smart Center se necessário"
         ],
         "beneficios": [
-          "Autonomia do cliente",
-          "Atendimento 24/7",
-          "Redução de chamados"
+          "Autonomia total do cliente",
+          "Atendimento 24/7 via WhatsApp",
+          "Redução de chamados ao Smart Center",
+          "Consultas instantâneas",
+          "Integração com Salesforce Service Cloud"
         ],
         "tempoMedio": "Imediato"
       },
       "areasImpactadas": [
         "Comercial",
         "Atendimento",
-        "TI"
+        "TI",
+        "Smart Center"
       ],
-      "status": "Futuro",
+      "status": "Em Desenvolvimento",
       "fonteReuniao": "16/12/2025",
+      "fontesReuniao": [
+        "16/12/2025 - Documentos Fiscais e Autoatendimento",
+        "07/01/2026 - Bot Einstein Planejamento e Logística"
+      ],
       "detalhes": {
         "prerequisito": "Depende de dados de contato corretos",
         "funcionalidades": [
           "Status pedidos",
           "Download XML/DANFE",
           "Rastreamento",
-          "2a via",
-          "Certificados"
-        ]
+          "2ª via boleto",
+          "Certificados",
+          "Bot WhatsApp com Einstein"
+        ],
+        "botEinstein": {
+          "canais": ["WhatsApp", "Portal Web"],
+          "funcionalidades": ["Consulta conta", "Status pedidos", "Documentos fiscais", "Transbordo Smart Center"],
+          "orcamento2026": "400.000 BRL",
+          "status": "MVP em desenvolvimento"
+        }
       },
       "prerequisitos": [
         "contatos"
@@ -1155,7 +1226,7 @@
       "BBA": "ABBA (legado)",
       "DBA": "ADBA",
       "CSP": "Supplier, Belgo Cash",
-      "ALPE": "BTC, ABPE, Altair"
+      "ALPE": "BTC, ABPE (não usar Altair)"
     }
   }
 }

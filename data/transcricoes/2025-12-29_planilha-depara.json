@@ -1,11 +1,12 @@
 {
   "reuniao": {
-    "titulo": "Construcao da planilha DE/PARA",
+    "titulo": "Construção da planilha DE/PARA",
     "data": "2025-12-29",
     "duracao": "~50min",
     "tipo": "Meeting Recording",
     "fonte": "SharePoint/Stream",
-    "tamanho": "382 MB"
+    "tamanho": "382 MB",
+    "resumo": "Reunião para construção da planilha DE/PARA de migração de clientes. Discussão sobre Hard Reboot da lista de clientes, segmentação por regional, criação de novos escritórios de vendas, segmento de produto (46 valores) e atribuição de agentes de vendas."
   },
   "participantes": [
     "Gimenes, Leandro Augusto",
