@@ -4,7 +4,7 @@
     "arquivo": "876268 -  CNAE.docx",
     "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\876268 -  CNAE.docx",
     "tamanho_bytes": 1093544,
-    "data_modificacao": "2025-10-21T17:44:16",
+    "data_modificação": "2025-10-21T17:44:16",
     "extraido_em": "2026-01-13T11:31:14.822885",
     "status": "extraido",
     "total_paragrafos": 10,
@@ -13,15 +13,15 @@
   "conteudo": {
     "paragrafos": [
       "Conta criada: ADUBOSREAL",
-      "Após a validação via Sintegra, o sistema preenche automaticamente o campo de CNAE do cliente, exibindo a descrição:\n“Comércio atacadista de defensivos agrícolas, adubos, fertilizantes e corretivos.”",
+      "Após a validação via Sintegra, o sistema preenche automáticamente o campo de CNAE do cliente, exibindo a descrição:\n“Comércio atacadista de defensivos agrícolas, adubos, fertilizantes e corretivos.”",
       "Conta criada: SANTA RITA",
-      "Após a validação via Sintegra, o sistema preenche automaticamente o campo de CNAE do cliente, exibindo a descrição:\n“PRODUÇÃO DE ARTEFATOS ESTAMPADOS DE METAL.”",
+      "Após a validação via Sintegra, o sistema preenche automáticamente o campo de CNAE do cliente, exibindo a descrição:\n“PRODUÇÃO DE ARTEFATOS ESTAMPADOS DE METAL.”",
       "Conta Criada: PERAM",
-      "Após a validação via Sintegra, o sistema preenche automaticamente o campo de CNAE do cliente, exibindo a descrição: \n“CNAE Principal.”",
+      "Após a validação via Sintegra, o sistema preenche automáticamente o campo de CNAE do cliente, exibindo a descrição: \n“CNAE Principal.”",
       "Conta: DIVINO ANT",
-      "Após a validação via Sintegra, o sistema preenche automaticamente o campo de CNAE do cliente, exibindo a descrição: \n“.”",
+      "Após a validação via Sintegra, o sistema preenche automáticamente o campo de CNAE do cliente, exibindo a descrição: \n“.”",
       "Conta: VALDIR FLOR",
-      "Após a validação via Sintegra, o sistema preenche automaticamente o campo de CNAE do cliente, exibindo a descrição: \n“.”"
+      "Após a validação via Sintegra, o sistema preenche automáticamente o campo de CNAE do cliente, exibindo a descrição: \n“.”"
     ],
     "tabelas": [
       [

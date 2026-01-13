@@ -1,7 +1,7 @@
 {
   "projeto": {
     "nome": "GTM Vendas - Belgo Arames",
-    "inicio": "2025-01-01",
+    "início": "2025-01-01",
     "goLiveFaseI": "2025-09-01",
     "goLiveFaseII": "2026-03-15",
     "faseAtual": "Fase II - Testes e Validação"
@@ -10,17 +10,17 @@
     {
       "id": "W1",
       "data": "2025-12-04",
-      "titulo": "Kickoff e Alinhamento",
-      "foco": ["Visao geral do projeto GTM/CRM", "Transicao lideranca (Dani->Thalita, Audrey em licenca)", "Importancia da participacao - projeto de todos", "Compromisso 2h semanais para key users"],
+      "título": "Kickoff e Alinhamento",
+      "foco": ["Visão geral do projeto GTM/CRM", "Transição liderança (Dani->Thalita, Audrey em licença)", "Importancia da participação - projeto de todos", "Compromisso 2h semanais para key users"],
       "status": "Concluído",
       "participantes": 15,
-      "problemasIdentificados": ["Key users nao sabiam que eram key users", "Usuarios perguntando: O que preciso testar?"]
+      "problemasIdentificados": ["Key users não sabiam que eram key users", "Usuários perguntando: O que preciso testar?"]
     },
     {
       "id": "W2",
       "data": "2025-12-10",
-      "titulo": "Cadastro, Areas de Vendas e Concorrentes",
-      "foco": ["Cadastro de cliente (SINTEGRA)", "Tipos de conta (PJ/PF/Agrupador)", "Areas de vendas e Canais", "Documentos fiscais", "Contatos", "Concorrentes (discussao Francine - sazonalidade)", "Financeiro/Credito (ASCP)"],
+      "título": "Cadastro, Áreas de Vendas e Concorrentes",
+      "foco": ["Cadastro de cliente (SINTEGRA)", "Tipos de conta (PJ/PF/Agrupador)", "Áreas de vendas e Canais", "Documentos fiscais", "Contatos", "Concorrentes (discussão Francine - sazonalidade)", "Financeiro/Crédito (ASCP)"],
       "status": "Concluído",
       "participantes": 12,
       "destaques": ["Zero duvidas sobre cadastro", "Francine levantou questao de concorrentes sazonais"]
@@ -28,8 +28,8 @@
     {
       "id": "W3",
       "data": "2025-12-16",
-      "titulo": "Documentos Fiscais e Autoatendimento",
-      "foco": ["Download documentos fiscais (Daniel/Spa)", "Criticidade dados de contato", "Portal Autoatendimento", "Pendencia Portal Logistico identificada"],
+      "título": "Documentos Fiscais e Autoatendimento",
+      "foco": ["Download documentos fiscais (Daniel/Spa)", "Criticidade dados de contato", "Portal Autoatendimento", "Pendência Portal Logístico identificada"],
       "status": "Concluído",
       "participantes": 10,
       "feedbackMaria": "Sessoes muito didaticas - aprendi muita coisa de outros processos"
@@ -38,29 +38,29 @@
       "id": "W4",
       "data": "2025-12-17",
       "horario": "16:00-17:30",
-      "titulo": "Workflow Pricing",
+      "título": "Workflow Pricing",
       "foco": ["Fluxo de aprovação", "Níveis de desconto", "Início cotação"],
       "status": "Concluído",
       "participantes": ["Rodrigo", "Leandro", "Thalita"],
-      "destaques": ["Definido 4 niveis de aprovacao", "Regras de desconto confirmadas"]
+      "destaques": ["Definido 4 niveis de aprovação", "Regras de desconto confirmadas"]
     },
     {
       "id": "W5",
       "data": "2025-12-22",
       "horario": "14:00-16:00",
-      "titulo": "Revisão GTM e Ajustes Finais",
+      "título": "Revisão GTM e Ajustes Finais",
       "foco": ["Nova estrutura organizacional", "4 macro setores", "Ajustes de hierarquia", "Escritorios de vendas"],
       "status": "Concluído",
       "participantes": ["Leandro", "Thalita", "Gimenes", "Ciorlia", "Riqueti"],
-      "destaques": ["Reorganizacao comercial em 4 macro setores", "7 acoes definidas para ajustes GTM"]
+      "destaques": ["Reorganização comercial em 4 macro setores", "7 ações definidas para ajustes GTM"]
     }
   ],
   "marcos": [
-    { "data": "2025-01-15", "titulo": "Kickoff Projeto", "status": "Concluído" },
-    { "data": "2025-09-01", "titulo": "GO Live Fase I", "status": "Concluído" },
-    { "data": "2025-12-22", "titulo": "Fim Workshops AS IS/TO BE", "status": "Concluído" },
-    { "data": "2026-01-13", "titulo": "Estruturacao BBP Completo", "status": "Concluído" },
-    { "data": "2026-01-20", "titulo": "UAT - Testes de Aceitacao", "status": "Pendente" },
-    { "data": "2026-03-15", "titulo": "GO Live Fase II", "status": "Pendente" }
+    { "data": "2025-01-15", "título": "Kickoff Projeto", "status": "Concluído" },
+    { "data": "2025-09-01", "título": "GO Live Fase I", "status": "Concluído" },
+    { "data": "2025-12-22", "título": "Fim Workshops AS IS/TO BE", "status": "Concluído" },
+    { "data": "2026-01-13", "título": "Estruturação BBP Completo", "status": "Concluído" },
+    { "data": "2026-01-20", "título": "UAT - Testes de Aceitação", "status": "Pendente" },
+    { "data": "2026-03-15", "título": "GO Live Fase II", "status": "Pendente" }
   ]
 }

@@ -4,66 +4,66 @@
   "icone": "💲",
   "ordem": 9,
   "asIs": {
-    "descricao": "Processo de concessao de descontos sem controle centralizado onde vendedores negociam descontos diretamente com clientes, solicitam aprovacao informalmente por email ou telefone, e aplicam manualmente no pedido. Sem vigencia definida, sem rastreabilidade e sem integracao com SAP.",
+    "descrição": "Processo de concessão de descontos sem controle centralizado onde vendedores negociam descontos diretamente com clientes, solicitam aprovação informalmente por email ou telefone, e aplicam manualmente no pedido. Sem vigencia definida, sem rastreabilidade e sem integração com SAP.",
     "passos": [
       "Vendedor negocia desconto especial com cliente",
-      "Solicita aprovacao ao gerente por email ou telefone",
-      "Gerente avalia de forma informal (sem padrao)",
+      "Solicita aprovação ao gerente por email ou telefone",
+      "Gerente avalia de forma informal (sem padrão)",
       "Se aprovado: vendedor anota desconto em planilha",
       "Ao criar pedido, aplica desconto manualmente",
-      "Desconto nao tem vigencia definida",
+      "Desconto não tem vigencia definida",
       "Sem registro centralizado de descontos concedidos",
       "Dificil auditar descontos aplicados",
       "Margens podem ser corroidas sem controle"
     ],
     "problemas": [
       "Sem controle centralizado de descontos",
-      "Aprovacoes informais sem rastreabilidade",
+      "Aprovações informais sem rastreabilidade",
       "Descontos sem vigencia definida",
       "Margens corroidas sem visibilidade",
       "Impossibilidade de auditar descontos",
-      "Sem padronizacao de niveis de aprovacao",
+      "Sem padronização de niveis de aprovação",
       "Vendedor pode esquecer desconto negociado",
       "Cliente pode reivindicar desconto expirado",
-      "Sem integracao com politica de precos do SAP"
+      "Sem integração com politica de preços do SAP"
     ],
     "tempoMedio": "Variavel"
   },
   "toBe": {
-    "descricao": "Workflow estruturado de aprovacao de descontos no Salesforce com integracao ao SAP via condition YDCF. Vendedor navega hierarquia de materiais (6 niveis), define percentual de desconto e vigencia, submete para aprovacao em 2 niveis (Time Pricing e Gerente), e apos aprovacao o desconto e criado automaticamente no SAP.",
+    "descrição": "Workflow estruturado de aprovação de descontos no Salesforce com integração ao SAP via condition YDCF. Vendedor navega hierarquia de materiais (6 niveis), define percentual de desconto e vigencia, submete para aprovação em 2 niveis (Time Pricing e Gerente), e apos aprovação o desconto e criado automáticamente no SAP.",
     "passos": [
       "Vendedor acessa Pricing no Salesforce",
       "Seleciona cliente para aplicar desconto",
       "Navega hierarquia de materiais (6 niveis)",
-      "Nivel 1: Unidades",
-      "Nivel 2: Macro Segmentos",
-      "Nivel 3: Macro Detalhado",
-      "Nivel 4: Segmento",
-      "Nivel 5: Grupo Mercadoria",
-      "Nivel 6: Material (SKU especifico)",
+      "Nível 1: Unidades",
+      "Nível 2: Macro Segmentos",
+      "Nível 3: Macro Detalhado",
+      "Nível 4: Segmento",
+      "Nível 5: Grupo Mercadoria",
+      "Nível 6: Material (SKU específico)",
       "Define percentual de desconto",
-      "Define periodo de vigencia (data inicio e fim)",
-      "Submete solicitacao para aprovacao",
-      "Nivel 1: Time Pricing avalia e aprova/rejeita",
-      "Nivel 2: Gerente do Escritorio aprova/rejeita",
+      "Define período de vigencia (data início e fim)",
+      "Submete solicitação para aprovação",
+      "Nível 1: Time Pricing avalia e aprova/rejeita",
+      "Nível 2: Gerente do Escritorio aprova/rejeita",
       "Se aprovado: sistema cria condition YDCF no SAP",
-      "Desconto aplicado automaticamente em pedidos no periodo de vigencia"
+      "Desconto aplicado automáticamente em pedidos no período de vigencia"
     ],
     "beneficios": [
       "Controle total de descontos concedidos",
-      "Rastreabilidade completa de aprovacoes",
+      "Rastreabilidade completa de aprovações",
       "Workflow estruturado em 2 niveis",
-      "Vigencia automatica com data inicio e fim",
-      "Integracao automatica com SAP (YDCF)",
-      "Desconto aplicado automaticamente nos pedidos",
-      "Historico completo de descontos por cliente",
-      "Auditoria facilitada",
-      "Protecao de margens",
+      "Vigencia automática com data início e fim",
+      "Integração automática com SAP (YDCF)",
+      "Desconto aplicado automáticamente nos pedidos",
+      "Histórico completo de descontos por cliente",
+      "Auditoria fácilitada",
+      "Proteção de margens",
       "Visibilidade de descontos vigentes"
     ],
-    "tempoMedio": "1-2 dias (dependendo de aprovacoes)"
+    "tempoMedio": "1-2 dias (dependendo de aprovações)"
   },
-  "areasImpactadas": [
+  "áreasImpactadas": [
     "Comercial",
     "Marketing",
     "Pricing",
@@ -71,8 +71,8 @@
     "Financeiro"
   ],
   "status": "Em Andamento",
-  "fonteReuniao": "Caderno de Testes + Tester TI",
-  "fontesReuniao": [
+  "fonteReunião": "Caderno de Testes + Tester TI",
+  "fontesReunião": [
     "Caderno de Testes - CT-01 a CT-19 (casos detalhados)",
     "Tester TI 791093 - Cabos de Aco (28/10/2025)",
     "Tester TI 880788 - Agro Lisos (20/10/2025)"
@@ -87,75 +87,75 @@
       "889092",
       "900139"
     ],
-    "reunioes": "NAO COBERTO - Reuniao 16/12 adiou para 17/12 (sem transcricao)"
+    "reuniões": "NAO COBERTO - Reunião 16/12 adiou para 17/12 (sem transcrição)"
   },
-  "alertaFonte": "IMPORTANTE: Workflow Pricing NAO foi discutido na reuniao 16/12/2025. Foi adiado para 17/12 conforme transcricao: 'Faltou workflow Price fica para amanha'. Nao existe transcricao de 17/12.",
+  "alertaFonte": "IMPORTANTE: Workflow Pricing NAO foi discutido na reunião 16/12/2025. Foi adiado para 17/12 conforme transcrição: 'Faltou workflow Price fica para amanha'. Não existe transcrição de 17/12.",
   "hierarquiaMateriais": [
     {
-      "nivel": 1,
+      "nível": 1,
       "nome": "Unidades",
-      "descricao": "Unidade de negocio (ex: Belgo Arames)",
+      "descrição": "Unidade de negócio (ex: Belgo Arames)",
       "exemplo": "Belgo Arames"
     },
     {
-      "nivel": 2,
+      "nível": 2,
       "nome": "Macro Segmentos",
-      "descricao": "Grande segmentacao de mercado",
-      "exemplo": "Agronegocio, Construcao Civil"
+      "descrição": "Grande segmentação de mercado",
+      "exemplo": "Agronegócio, Construção Civil"
     },
     {
-      "nivel": 3,
+      "nível": 3,
       "nome": "Macro Detalhado",
-      "descricao": "Detalhamento do macro segmento",
+      "descrição": "Detalhamento do macro segmento",
       "exemplo": "Cercas, Telas"
     },
     {
-      "nivel": 4,
+      "nível": 4,
       "nome": "Segmento",
-      "descricao": "Segmento especifico de produto",
+      "descrição": "Segmento específico de produto",
       "exemplo": "Arame Farpado"
     },
     {
-      "nivel": 5,
+      "nível": 5,
       "nome": "Grupo Mercadoria",
-      "descricao": "Agrupamento de materiais similares",
+      "descrição": "Agrupamento de materiais similares",
       "exemplo": "Arames Galvanizados"
     },
     {
-      "nivel": 6,
+      "nível": 6,
       "nome": "Material",
-      "descricao": "SKU especifico do produto",
+      "descrição": "SKU específico do produto",
       "exemplo": "Arame Farpado 500m Belgo"
     }
   ],
-  "fluxoAprovacao": [
+  "fluxoAprovação": [
     {
-      "nivel": 1,
+      "nível": 1,
       "aprovador": "Time Pricing",
-      "descricao": "Equipe de pricing avalia politica comercial e impacto na margem",
+      "descrição": "Equipe de pricing avalia politica comercial e impacto na margem",
       "prazoSLA": "24 horas"
     },
     {
-      "nivel": 2,
+      "nível": 2,
       "aprovador": "Gerente do Escritorio",
-      "descricao": "Gerente comercial avalia estrategia de cliente",
+      "descrição": "Gerente comercial avalia estrategia de cliente",
       "prazoSLA": "24 horas"
     }
   ],
   "campos": [
     {
       "campo": "Cliente",
-      "descricao": "Conta do cliente que recebera o desconto",
-      "preenchimento": "Selecao",
-      "validacao": "Obrigatorio",
-      "obrigatorio": true
+      "descrição": "Conta do cliente que recebera o desconto",
+      "preenchimento": "Seleção",
+      "validação": "Obrigatório",
+      "obrigatório": true
     },
     {
-      "campo": "Nivel Hierarquia",
-      "descricao": "Nivel da hierarquia de materiais selecionado",
-      "preenchimento": "Selecao",
-      "validacao": "Obrigatorio",
-      "obrigatorio": true,
+      "campo": "Nível Hierarquia",
+      "descrição": "Nível da hierarquia de materiais selecionado",
+      "preenchimento": "Seleção",
+      "validação": "Obrigatório",
+      "obrigatório": true,
       "valores": [
         "Unidade",
         "Macro Segmento",
@@ -167,132 +167,132 @@
     },
     {
       "campo": "Item Selecionado",
-      "descricao": "Item especifico da hierarquia",
-      "preenchimento": "Selecao",
-      "validacao": "Obrigatorio",
-      "obrigatorio": true
+      "descrição": "Item específico da hierarquia",
+      "preenchimento": "Seleção",
+      "validação": "Obrigatório",
+      "obrigatório": true
     },
     {
       "campo": "Percentual Desconto",
-      "descricao": "Percentual de desconto a ser aplicado",
+      "descrição": "Percentual de desconto a ser aplicado",
       "preenchimento": "Manual",
-      "validacao": "Numerico (0-100%)",
-      "obrigatorio": true
+      "validação": "Numerico (0-100%)",
+      "obrigatório": true
     },
     {
-      "campo": "Data Inicio Vigencia",
-      "descricao": "Data de inicio da vigencia do desconto",
+      "campo": "Data Início Vigencia",
+      "descrição": "Data de início da vigencia do desconto",
       "preenchimento": "Manual",
-      "validacao": "Data >= hoje",
-      "obrigatorio": true
+      "validação": "Data >= hoje",
+      "obrigatório": true
     },
     {
       "campo": "Data Fim Vigencia",
-      "descricao": "Data de termino da vigencia do desconto",
+      "descrição": "Data de termino da vigencia do desconto",
       "preenchimento": "Manual",
-      "validacao": "Data > Data Inicio",
-      "obrigatorio": true
+      "validação": "Data > Data Início",
+      "obrigatório": true
     },
     {
       "campo": "Justificativa",
-      "descricao": "Motivo da solicitacao de desconto",
+      "descrição": "Motivo da solicitação de desconto",
       "preenchimento": "Manual",
-      "validacao": "-",
-      "obrigatorio": true
+      "validação": "-",
+      "obrigatório": true
     },
     {
       "campo": "Status",
-      "descricao": "Status atual da solicitacao",
-      "preenchimento": "Automatico",
-      "validacao": "-",
-      "obrigatorio": true,
+      "descrição": "Status atual da solicitação",
+      "preenchimento": "Automático",
+      "validação": "-",
+      "obrigatório": true,
       "valores": [
         "Rascunho",
-        "Pendente Aprovacao N1",
-        "Pendente Aprovacao N2",
+        "Pendente Aprovação N1",
+        "Pendente Aprovação N2",
         "Aprovado",
         "Rejeitado",
         "Expirado"
       ]
     },
     {
-      "campo": "Codigo YDCF",
-      "descricao": "Codigo da condition criada no SAP",
-      "preenchimento": "Automatico (SAP)",
-      "validacao": "-",
-      "obrigatorio": false
+      "campo": "Código YDCF",
+      "descrição": "Código da condition criada no SAP",
+      "preenchimento": "Automático (SAP)",
+      "validação": "-",
+      "obrigatório": false
     }
   ],
-  "regrasNegocio": [
+  "regrasNegócio": [
     {
-      "regra": "Navegacao Hierarquica",
-      "descricao": "Usuario navega pelos 6 niveis de hierarquia de materiais para selecionar o escopo do desconto",
-      "nota": "Desconto no nivel mais alto afeta todos os materiais abaixo"
+      "regra": "Navegação Hierarquica",
+      "descrição": "Usuário navega pelos 6 niveis de hierarquia de materiais para selecionar o escopo do desconto",
+      "nota": "Desconto no nível mais alto afeta todos os materiais abaixo"
     },
     {
-      "regra": "Aprovacao em 2 Niveis",
-      "descricao": "Toda solicitacao passa por aprovacao do Time Pricing (N1) e do Gerente do Escritorio (N2)"
+      "regra": "Aprovação em 2 Niveis",
+      "descrição": "Toda solicitação passa por aprovação do Time Pricing (N1) e do Gerente do Escritorio (N2)"
     },
     {
       "regra": "Vigencia Obrigatoria",
-      "descricao": "Toda solicitacao deve ter data de inicio e fim de vigencia definidas"
+      "descrição": "Toda solicitação deve ter data de início e fim de vigencia definidas"
     },
     {
-      "regra": "Criacao Automatica de YDCF",
-      "descricao": "Apos aprovacao final, sistema cria automaticamente a condition YDCF no SAP com os parametros definidos",
+      "regra": "Criação Automática de YDCF",
+      "descrição": "Apos aprovação final, sistema cria automáticamente a condition YDCF no SAP com os parametros definidos",
       "conditionSAP": "YDCF - Desconto de Cliente"
     },
     {
-      "regra": "Aplicacao Automatica em Pedidos",
-      "descricao": "Desconto aprovado e aplicado automaticamente em todos os pedidos do cliente dentro da vigencia"
+      "regra": "Aplicação Automática em Pedidos",
+      "descrição": "Desconto aprovado e aplicado automáticamente em todos os pedidos do cliente dentro da vigencia"
     },
     {
-      "regra": "Expiracao Automatica",
-      "descricao": "Ao atingir a data fim de vigencia, o desconto e desativado automaticamente"
+      "regra": "Expiração Automática",
+      "descrição": "Ao atingir a data fim de vigencia, o desconto e desativado automáticamente"
     },
     {
-      "regra": "Notificacao de Aprovadores",
-      "descricao": "Aprovadores recebem email quando ha solicitacao pendente de aprovacao"
+      "regra": "Notificação de Aprovadores",
+      "descrição": "Aprovadores recebem email quando ha solicitação pendente de aprovação"
     }
   ],
-  "sistemasTecnicos": [
+  "sistemasTécnicos": [
     "Salesforce",
     "SAP ECC"
   ],
-  "integracoes": [
+  "integrações": [
     {
       "origem": "Salesforce",
       "destino": "SAP",
       "tipo": "Middleware",
-      "descricao": "Criacao de condition YDCF apos aprovacao"
+      "descrição": "Criação de condition YDCF apos aprovação"
     },
     {
       "origem": "SAP",
       "destino": "Salesforce",
       "tipo": "Middleware",
-      "descricao": "Retorno do codigo YDCF criado"
+      "descrição": "Retorno do código YDCF criado"
     }
   ],
   "mensagensSistema": [
     {
       "tipo": "Sucesso",
-      "contexto": "Solicitacao Enviada",
-      "mensagem": "Solicitacao de desconto enviada para aprovacao"
+      "contexto": "Solicitação Enviada",
+      "mensagem": "Solicitação de desconto enviada para aprovação"
     },
     {
       "tipo": "Sucesso",
-      "contexto": "Aprovacao N1",
-      "mensagem": "Solicitacao aprovada pelo Time Pricing. Aguardando aprovacao do Gerente."
+      "contexto": "Aprovação N1",
+      "mensagem": "Solicitação aprovada pelo Time Pricing. Aguardando aprovação do Gerente."
     },
     {
       "tipo": "Sucesso",
-      "contexto": "Aprovacao Final",
-      "mensagem": "Desconto aprovado e criado no SAP. Codigo YDCF: {codigo}"
+      "contexto": "Aprovação Final",
+      "mensagem": "Desconto aprovado e criado no SAP. Código YDCF: {código}"
     },
     {
       "tipo": "Erro",
       "contexto": "Rejeitado",
-      "mensagem": "Solicitacao de desconto rejeitada. Motivo: {motivo}"
+      "mensagem": "Solicitação de desconto rejeitada. Motivo: {motivo}"
     },
     {
       "tipo": "Alerta",
@@ -301,17 +301,17 @@
     },
     {
       "tipo": "Info",
-      "contexto": "Pendente Aprovacao",
-      "mensagem": "Voce tem {n} solicitacoes de desconto pendentes de aprovacao"
+      "contexto": "Pendente Aprovação",
+      "mensagem": "Voce tem {n} solicitações de desconto pendentes de aprovação"
     }
   ],
   "ciclosTeste": [
     {
       "documento": "Caderno de Testes - WF Pricing",
-      "titulo": "Workflow Pricing - Ciclo Completo",
+      "título": "Workflow Pricing - Ciclo Completo",
       "status": "Em Andamento",
       "data": "2026-01-12",
-      "descricao": "19 casos de teste cobrindo todo o fluxo de Workflow Pricing",
+      "descrição": "19 casos de teste cobrindo todo o fluxo de Workflow Pricing",
       "estatisticas": {
         "total": 19,
         "concluidos": 14,
@@ -320,24 +320,24 @@
         "percentualConclusao": "73.7%"
       },
       "cenarios": [
-        "Criacao de WF Pricing para material especifico (CT-01)",
+        "Criação de WF Pricing para material específico (CT-01)",
         "Vigencia individual por linha (CT-02)",
-        "Validacao de canal (CT-03)",
-        "Consulta de historico (CT-04)",
+        "Validação de canal (CT-03)",
+        "Consulta de histórico (CT-04)",
         "Input manual de desconto % (CT-05)",
         "WF para grupo de mercadoria (CT-06)",
-        "Aprovacao Time Pricing (CT-07)",
-        "Aprovacao Gerente (CT-08)",
-        "Rejeicao de WF (CT-09)",
+        "Aprovação Time Pricing (CT-07)",
+        "Aprovação Gerente (CT-08)",
+        "Rejeição de WF (CT-09)",
         "Multiplos materiais (CT-10)",
-        "Conta sem codigo SAP (CT-11) - FALHOU",
-        "Criacao YDCF no SAP (CT-12)",
+        "Conta sem código SAP (CT-11) - FALHOU",
+        "Criação YDCF no SAP (CT-12)",
         "Segmento de Produto (CT-13)",
-        "Desconto invalido (CT-14) - FALHOU",
+        "Desconto inválido (CT-14) - FALHOU",
         "Vigencia retroativa (CT-15)",
-        "Canal especifico (CT-16)",
-        "Notificacao email (CT-17)",
-        "Navegacao hierarquia (CT-18)",
+        "Canal específico (CT-16)",
+        "Notificação email (CT-17)",
+        "Navegação hierarquia (CT-18)",
         "Aprovador alternativo (CT-19)"
       ],
       "testesRelacionados": [
@@ -366,19 +366,19 @@
   "problemasCriticos": [
     {
       "caso": "CT-11",
-      "titulo": "Conta sem codigo SAP permite criar WF",
-      "descricao": "Mesmo utilizando uma conta sem Codigo SAP (nao integrada), o botao 'New WFPricing' permaneceu disponivel e permitiu o acesso a tela de criacao, o que nao deveria ocorrer.",
+      "título": "Conta sem código SAP permite criar WF",
+      "descrição": "Mesmo utilizando uma conta sem Código SAP (não integrada), o botao 'New WFPricing' permaneceu disponível e permitiu o acesso a tela de criação, o que não deveria ocorrer.",
       "impacto": "Alto",
-      "status": "Aguardando Correcao",
-      "responsavel": "Time Comercial"
+      "status": "Aguardando Correção",
+      "responsável": "Time Comercial"
     },
     {
       "caso": "CT-14",
-      "titulo": "Validacao de desconto invalido nao funciona corretamente",
-      "descricao": "O workflow foi criado mesmo com desconto negativo. O botao 'criar' e bloqueado com erros, mas quando insere desconto valido, permite criacao mesmo com existencia de desconto negativo. Problema ocorre tambem para valores acima de 100%.",
+      "título": "Validação de desconto inválido não funciona corretamente",
+      "descrição": "O workflow foi criado mesmo com desconto negativo. O botao 'criar' e bloqueado com erros, mas quando insere desconto válido, permite criação mesmo com existencia de desconto negativo. Problema ocorre tambem para valores acima de 100%.",
       "impacto": "Alto",
-      "status": "Aguardando Correcao",
-      "responsavel": "Time Comercial"
+      "status": "Aguardando Correção",
+      "responsável": "Time Comercial"
     }
   ],
   "detalhes": {
@@ -391,22 +391,22 @@
       "Material"
     ],
     "conditionSAP": "YDCF - Desconto de Cliente",
-    "fluxoAprovacao": [
+    "fluxoAprovação": [
       "Time Pricing",
       "Gerente Escritorio"
     ],
-    "vigencia": "Obrigatoria com data inicio e fim"
+    "vigencia": "Obrigatoria com data início e fim"
   },
-  "pendencias": [
+  "pendências": [
     "Mapeamento completo da hierarquia de materiais",
-    "Definicao de limites de desconto por nivel de aprovacao",
-    "Configuracao de notificacoes para aprovadores",
-    "Testes de integracao com SAP (YDCF)"
+    "Definição de limites de desconto por nível de aprovação",
+    "Configuração de notificações para aprovadores",
+    "Testes de integração com SAP (YDCF)"
   ],
   "prerequisitos": [
     "Hierarquia de materiais carregada no Salesforce",
-    "Workflow de aprovacao configurado",
-    "Integracao SAP para criacao de YDCF testada",
+    "Workflow de aprovação configurado",
+    "Integração SAP para criação de YDCF testada",
     "Perfis de aprovadores definidos"
   ],
   "relacionamentos": {
@@ -414,48 +414,48 @@
       "cadastro-cliente"
     ],
     "habilitaPara": [
-      "cotacao-ov"
+      "cotação-ov"
     ],
-    "nota": "Descontos aprovados via workflow sao aplicados automaticamente nas cotacoes e pedidos"
+    "nota": "Descontos aprovados via workflow sao aplicados automáticamente nas cotações e pedidos"
   },
   "documentosTeste": [
     "791093 - WF Pricing (28/10/2025)",
     "880788 - P5 Testes (20/10/2025)",
     "889092 - WF Pricing Ciclo Adicional",
-    "900139 - Validacao de Aprovadores"
+    "900139 - Validação de Aprovadores"
   ],
   "dadosExtraidosTester": {
     "791093": {
       "data": "28/10/2025",
-      "titulo": "WF - Pricing",
+      "título": "WF - Pricing",
       "clienteTeste": "MOAGEIRA",
       "escritorio": "DIAP - DBA Penapolis 2",
-      "cenarioTestado": "Configuracao de workflow pricing com desconto de 10% para Cabos de Aco (BA)",
+      "cenarioTestado": "Configuração de workflow pricing com desconto de 10% para Cabos de Aco (BA)",
       "grupo": "UNRIO - Ropes 1",
-      "periodo": "28/10/2025 a 04/11/2025",
-      "resultadoEsperado": "Workflow submetido para aprovacao"
+      "período": "28/10/2025 a 04/11/2025",
+      "resultadoEsperado": "Workflow submetido para aprovação"
     },
     "880788": {
       "data": "20/10/2025",
-      "titulo": "P5 - Testes WF Pricing",
+      "título": "P5 - Testes WF Pricing",
       "clienteTeste": "MOAGEIRA",
-      "cenarioTestado": "Validacao de propagacao de desconto WF -> SAP -> Salesforce",
+      "cenarioTestado": "Validação de propagação de desconto WF -> SAP -> Salesforce",
       "detalhes": {
         "descontoCriado": "24%",
         "grupoComodidade": "Agro Lisos (3G)",
         "campoValidado": "YDCF (Desc. Fixo Cliente)",
-        "validacaoSAP": "Desconto de 24% visivel na YDCF",
-        "validacaoSalesforce": "Desconto de 24% carrega corretamente na cotacao",
-        "resultadoFinal": "Cotacao salva com desconto de 24% mantido"
+        "validaçãoSAP": "Desconto de 24% visível na YDCF",
+        "validaçãoSalesforce": "Desconto de 24% carrega corretamente na cotação",
+        "resultadoFinal": "Cotação salva com desconto de 24% mantido"
       },
-      "fluxoValidado": "WF Pricing -> SAP (YDCF) -> Salesforce Cotacao"
+      "fluxoValidado": "WF Pricing -> SAP (YDCF) -> Salesforce Cotação"
     },
     "889092": {
       "data": "03/11/2025",
-      "titulo": "Testes ajustes WF - Pricing",
+      "título": "Testes ajustes WF - Pricing",
       "clienteTeste": "MOAGEIRA",
       "escritorio": "DIAP - DBA Penapolis 2",
-      "cenarioTestado": "Configuracao de multiplos descontos no mesmo workflow",
+      "cenarioTestado": "Configuração de multiplos descontos no mesmo workflow",
       "descontos": [
         {
           "grupo": "Cabos de Aco (BA)",
@@ -468,35 +468,35 @@
           "unidade": "-"
         }
       ],
-      "periodo": "03/11/2025 a 05/12/2025"
+      "período": "03/11/2025 a 05/12/2025"
     }
   },
   "campoYDCF": {
     "nome": "YDCF",
-    "descricao": "Desc. Fixo Cliente (Desconto Fixo por Cliente)",
+    "descrição": "Desc. Fixo Cliente (Desconto Fixo por Cliente)",
     "origem": "SAP",
     "preenchimento": "Via Workflow Pricing",
-    "propagacao": {
+    "propagação": {
       "etapa1": "Workflow Pricing criado no Salesforce",
       "etapa2": "Aprovado e sincronizado com SAP",
       "etapa3": "SAP registra na tabela YDCF",
-      "etapa4": "Salesforce consulta YDCF ao criar cotacao",
-      "etapa5": "Desconto aplicado automaticamente na cotacao"
+      "etapa4": "Salesforce consulta YDCF ao criar cotação",
+      "etapa5": "Desconto aplicado automáticamente na cotação"
     },
-    "validacaoTester": "Documento 880788 validou propagacao end-to-end"
+    "validaçãoTester": "Documento 880788 válidou propagação end-to-end"
   },
-  "contextoReuniao": {
+  "contextoReunião": {
     "projeto": "GTM (Go To Market) / CRM",
-    "lideranca": {
+    "liderança": {
       "business": "Thalita Merisio Rhein",
-      "tecnico": "Leandro da Cruz Pereira"
+      "técnico": "Leandro da Cruz Pereira"
     },
     "timeline": {
       "workshops": "04/12 a 22/12/2025",
-      "posWorkshop": "Responsabilidade passa para usuarios (Castro)",
+      "posWorkshop": "Responsabilidade passa para usuários (Castro)",
       "entregaveis": [
         "Planilha de cenarios",
-        "Manual de orientacao"
+        "Manual de orientação"
       ]
     },
     "participantes": [
@@ -511,14 +511,14 @@
       {
         "nome": "Maria Luiza Gomes Chaves",
         "papel": "Key User",
-        "contribuicao": "Perguntou sobre tabela de precos"
+        "contribuição": "Perguntou sobre tabela de preços"
       }
     ],
-    "discussaoWorkflowPricing": {
-      "fonte": "Reuniao 16/12/2025",
-      "status": "Nao foi discutido em detalhe por falta de tempo",
-      "citacao": "Faltou workflow Pricing fica para amanha",
-      "proximaDiscussao": "Agendada para 17/12/2025"
+    "discussãoWorkflowPricing": {
+      "fonte": "Reunião 16/12/2025",
+      "status": "Não foi discutido em detalhe por falta de tempo",
+      "citação": "Faltou workflow Pricing fica para amanha",
+      "próximaDiscussão": "Agendada para 17/12/2025"
     }
   },
   "documentosRelacionados": [
@@ -604,14 +604,14 @@
     }
   ],
   "totalDocumentos": 16,
-  "ultimaAtualizacao": "2026-01-13T11:36:26.079058",
+  "últimaAtualização": "2026-01-13T11:36:26.079058",
   "documentosGerais": [
     {
       "tipo": "Plano de Testes Exploratorios",
       "id": "909100"
     },
     {
-      "tipo": "Boot/Automacao",
+      "tipo": "Boot/Automação",
       "id": "Boot"
     },
     {

@@ -14,11 +14,11 @@
     { "id": "tributario", "categoria": "Tributario", "range": "CT 20-55", "total": 36, "ok": 0, "falhou": 0, "pendente": 36, "cor": "#f59e0b" },
     { "id": "setup", "categoria": "Setup/Cadastro", "range": "CT 56-77", "total": 22, "ok": 0, "falhou": 0, "pendente": 22, "cor": "#10b981" },
     { "id": "financeiro", "categoria": "Financeiro", "range": "CT 78-80", "total": 3, "ok": 0, "falhou": 0, "pendente": 3, "cor": "#198754" },
-    { "id": "cotacao-ov", "categoria": "Cotacao e OV", "range": "CT 81-101", "total": 21, "ok": 0, "falhou": 0, "pendente": 21, "cor": "#0d6efd" },
+    { "id": "cotação-ov", "categoria": "Cotação e OV", "range": "CT 81-101", "total": 21, "ok": 0, "falhou": 0, "pendente": 21, "cor": "#0d6efd" },
     { "id": "conditions", "categoria": "Conditions SAP", "range": "CT 102-108", "total": 7, "ok": 0, "falhou": 0, "pendente": 7, "cor": "#e83e8c" },
-    { "id": "integracao", "categoria": "Integracao Salesforce - SAP", "range": "CT 109-115", "total": 7, "ok": 0, "falhou": 0, "pendente": 7, "cor": "#6f42c1" },
+    { "id": "integração", "categoria": "Integração Salesforce - SAP", "range": "CT 109-115", "total": 7, "ok": 0, "falhou": 0, "pendente": 7, "cor": "#6f42c1" },
     { "id": "cadastro-cliente", "categoria": "Cadastro de Cliente", "range": "CT 116-125", "total": 17, "ok": 0, "falhou": 0, "pendente": 17, "cor": "#14b8a6" },
-    { "id": "hub-gestao-oc", "categoria": "Hub de Gestao OC", "range": "CT 126-130", "total": 5, "ok": 0, "falhou": 0, "pendente": 5, "cor": "#f97316" },
+    { "id": "hub-gestão-oc", "categoria": "Hub de Gestão OC", "range": "CT 126-130", "total": 5, "ok": 0, "falhou": 0, "pendente": 5, "cor": "#f97316" },
     { "id": "fup-carteira", "categoria": "FUP de Carteira", "range": "CT 131-142", "total": 5, "ok": 0, "falhou": 0, "pendente": 5, "cor": "#8b5cf6" }
   ],
   "goLive": "2026-03-15",
@@ -26,7 +26,7 @@
     {"nome": "Leandro Cruz", "papel": "Gerente de TI"},
     {"nome": "Leandro Gimenez", "papel": "PO GTM"},
     {"nome": "Ronildo", "papel": "PO Pricing"},
-    {"nome": "Thalita Rhein", "papel": "Gerente Negocio GTM"}
+    {"nome": "Thalita Rhein", "papel": "Gerente Negócio GTM"}
   ],
-  "ultimaAtualizacao": "2026-01-13T18:00:00"
+  "últimaAtualização": "2026-01-13T18:00:00"
 }

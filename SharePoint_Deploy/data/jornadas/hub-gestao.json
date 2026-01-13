@@ -1,25 +1,25 @@
 {
-  "id": "hub-gestao",
-  "nome": "Hub de Gestao OC",
+  "id": "hub-gestão",
+  "nome": "Hub de Gestão OC",
   "icone": "⚙️",
   "ordem": 11,
   "asIs": {
-    "descricao": "Gestao descentralizada de grupos de ocorrencias de clientes onde solicitacoes de inclusao ou exclusao de membros sao feitas por email para TI, que configura manualmente no sistema. Sem visibilidade de quem pertence a cada grupo, sem self-service, e logs de alteracoes dispersos dificultando auditorias.",
+    "descrição": "Gestão descentralizada de grupos de ocorrencias de clientes onde solicitações de inclusao ou exclusão de membros sao feitas por email para TI, que configura manualmente no sistema. Sem visibilidade de quem pertence a cada grupo, sem self-service, e logs de alterações dispersos dificultando auditorias.",
     "passos": [
       "Gestor identifica necessidade de adicionar/remover membro de grupo",
-      "Envia email para TI solicitando alteracao",
-      "TI recebe e-mail e acessa configuracoes do Salesforce",
-      "Realiza configuracao manual de membros no grupo",
-      "Responde email confirmando alteracao",
-      "Sem registro centralizado de quem fez a solicitacao",
-      "Historico de alteracoes disperso em logs do sistema"
+      "Envia email para TI solicitando alteração",
+      "TI recebe e-mail e acessa configurações do Salesforce",
+      "Realiza configuração manual de membros no grupo",
+      "Responde email confirmando alteração",
+      "Sem registro centralizado de quem fez a solicitação",
+      "Histórico de alterações disperso em logs do sistema"
     ],
     "problemas": [
       "Processo manual e dependente de TI",
       "Sem self-service para gestores",
-      "Dificil auditar alteracoes em grupos",
+      "Dificil auditar alterações em grupos",
       "Logs dispersos em diferentes locais",
-      "Demora no atendimento de solicitacoes",
+      "Demora no atendimento de solicitações",
       "Sem visibilidade de membros atuais de cada grupo",
       "Risco de grupos desatualizados",
       "Sobrecarga de TI com tarefas operacionais"
@@ -27,175 +27,175 @@
     "tempoMedio": "Dias"
   },
   "toBe": {
-    "descricao": "Hub centralizado de gestao de grupos de Ocorrencias de Clientes (OC) implementado como Lightning Web Component (LWC) no Salesforce. Permite que gestores faca manutencao de grupos em self-service, com busca por email/nome, adicao/remocao de membros, e logs centralizados de todas as alteracoes.",
+    "descrição": "Hub centralizado de gestão de grupos de Ocorrencias de Clientes (OC) implementado como Lightning Web Component (LWC) no Salesforce. Permite que gestores faca manutenção de grupos em self-service, com busca por email/nome, adição/remocao de membros, e logs centralizados de todas as alterações.",
     "passos": [
-      "Gestor acessa o Hub de Gestao OC no Salesforce",
-      "Visualiza lista de grupos disponiveis para gestao",
+      "Gestor acessa o Hub de Gestão OC no Salesforce",
+      "Visualiza lista de grupos disponiveis para gestão",
       "Seleciona grupo desejado (Comercial, Qualidade, Sistemas, etc)",
       "Visualiza membros atuais do grupo",
-      "Busca usuario por email ou nome para adicionar",
+      "Busca usuário por email ou nome para adicionar",
       "Adiciona ou remove membros com um clique",
-      "Sistema registra automaticamente a alteracao com data/hora/usuario",
-      "Gestor visualiza historico de alteracoes do grupo",
-      "Notificacoes enviadas aos membros afetados"
+      "Sistema registra automáticamente a alteração com data/hora/usuário",
+      "Gestor visualiza histórico de alterações do grupo",
+      "Notificações enviadas aos membros afetados"
     ],
     "beneficios": [
       "Self-service completo sem depender de TI",
       "Visibilidade de todos os membros de cada grupo",
       "Controle de perfis e acessos centralizado",
-      "Logs centralizados de todas as alteracoes",
-      "Auditoria facilitada com historico completo",
-      "Reducao de carga operacional de TI",
-      "Agilidade nas alteracoes de grupo",
-      "Notificacoes automaticas de inclusao/exclusao",
+      "Logs centralizados de todas as alterações",
+      "Auditoria fácilitada com histórico completo",
+      "Redução de carga operacional de TI",
+      "Ágilidade nas alterações de grupo",
+      "Notificações automáticas de inclusao/exclusão",
       "Interface moderna via LWC"
     ],
     "tempoMedio": "Minutos"
   },
-  "areasImpactadas": [
+  "áreasImpactadas": [
     "TI",
     "Comercial",
     "Qualidade",
     "Atendimento",
-    "Todas as areas com grupos de OC"
+    "Todas as áreas com grupos de OC"
   ],
   "status": "Em Andamento",
-  "fonteReuniao": "Documentos de teste",
-  "fontesReuniao": [
-    "889851 - Hub de gestao OC (Dez/2025)",
-    "891121 - Redesign/revamp das telas de replicacao de dados mestres"
+  "fonteReunião": "Documentos de teste",
+  "fontesReunião": [
+    "889851 - Hub de gestão OC (Dez/2025)",
+    "891121 - Redesign/revamp das telas de replicação de dados mestres"
   ],
   "fontesVerificadas": {
-    "reunioes": "NAO DISCUTIDO nas reunioes de 04/12, 10/12 ou 16/12",
+    "reuniões": "NAO DISCUTIDO nas reuniões de 04/12, 10/12 ou 16/12",
     "testerTI": [
-      "889851 - Hub de Gestao OC",
+      "889851 - Hub de Gestão OC",
       "891121 - Redesign Telas Dados Mestres"
     ],
-    "nota": "Informacoes baseadas exclusivamente nos documentos do Tester TI"
+    "nota": "Informações baseadas exclusivamente nos documentos do Tester TI"
   },
   "grupos": [
     {
       "nome": "Comercial",
-      "descricao": "Grupo de ocorrencias para area comercial",
+      "descrição": "Grupo de ocorrencias para área comercial",
       "gestores": "Gerentes comerciais"
     },
     {
       "nome": "Qualidade",
-      "descricao": "Grupo de ocorrencias para area de qualidade",
+      "descrição": "Grupo de ocorrencias para área de qualidade",
       "gestores": "Gerentes de qualidade"
     },
     {
       "nome": "Sistemas",
-      "descricao": "Grupo de ocorrencias para area de sistemas/TI",
+      "descrição": "Grupo de ocorrencias para área de sistemas/TI",
       "gestores": "Lideres de TI"
     }
   ],
   "campos": [
     {
       "campo": "Grupo",
-      "descricao": "Nome do grupo de OC",
-      "preenchimento": "Selecao",
-      "validacao": "Obrigatorio",
-      "obrigatorio": true
+      "descrição": "Nome do grupo de OC",
+      "preenchimento": "Seleção",
+      "validação": "Obrigatório",
+      "obrigatório": true
     },
     {
       "campo": "Membro",
-      "descricao": "Usuario membro do grupo",
+      "descrição": "Usuário membro do grupo",
       "preenchimento": "Busca por email/nome",
-      "validacao": "Usuario ativo no Salesforce",
-      "obrigatorio": true
+      "validação": "Usuário ativo no Salesforce",
+      "obrigatório": true
     },
     {
       "campo": "Data Inclusao",
-      "descricao": "Data em que membro foi adicionado",
-      "preenchimento": "Automatico",
-      "validacao": "-",
-      "obrigatorio": true
+      "descrição": "Data em que membro foi adicionado",
+      "preenchimento": "Automático",
+      "validação": "-",
+      "obrigatório": true
     },
     {
       "campo": "Incluido Por",
-      "descricao": "Usuario que adicionou o membro",
-      "preenchimento": "Automatico",
-      "validacao": "-",
-      "obrigatorio": true
+      "descrição": "Usuário que adicionou o membro",
+      "preenchimento": "Automático",
+      "validação": "-",
+      "obrigatório": true
     },
     {
       "campo": "Status",
-      "descricao": "Status do membro no grupo",
-      "preenchimento": "Automatico",
-      "validacao": "-",
-      "obrigatorio": true,
+      "descrição": "Status do membro no grupo",
+      "preenchimento": "Automático",
+      "validação": "-",
+      "obrigatório": true,
       "valores": [
         "Ativo",
         "Inativo"
       ]
     }
   ],
-  "regrasNegocio": [
+  "regrasNegócio": [
     {
       "regra": "Acesso por Perfil",
-      "descricao": "Apenas usuarios com perfil de gestor podem adicionar/remover membros de grupos"
+      "descrição": "Apenas usuários com perfil de gestor podem adicionar/remover membros de grupos"
     },
     {
       "regra": "Busca por Email ou Nome",
-      "descricao": "Sistema permite buscar usuarios por email completo ou parte do nome"
+      "descrição": "Sistema permite buscar usuários por email completo ou parte do nome"
     },
     {
-      "regra": "Log de Alteracoes",
-      "descricao": "Todas as alteracoes (adicao, remocao) sao registradas com data/hora e usuario responsavel"
+      "regra": "Log de Alterações",
+      "descrição": "Todas as alterações (adição, remocao) sao registradas com data/hora e usuário responsável"
     },
     {
-      "regra": "Notificacao de Membros",
-      "descricao": "Ao ser adicionado ou removido de um grupo, membro recebe notificacao por email"
+      "regra": "Notificação de Membros",
+      "descrição": "Ao ser adicionado ou removido de um grupo, membro recebe notificação por email"
     },
     {
-      "regra": "Prevencao de Duplicidade",
-      "descricao": "Sistema nao permite adicionar o mesmo usuario duas vezes ao mesmo grupo"
+      "regra": "Prevenção de Duplicidade",
+      "descrição": "Sistema não permite adicionar o mesmo usuário duas vezes ao mesmo grupo"
     }
   ],
-  "sistemasTecnicos": [
+  "sistemasTécnicos": [
     "Salesforce",
     "Lightning Web Component (LWC)"
   ],
-  "integracoes": [
+  "integrações": [
     {
-      "origem": "LWC Hub Gestao",
+      "origem": "LWC Hub Gestão",
       "destino": "Salesforce Groups",
       "tipo": "Apex",
-      "descricao": "Gerenciamento de membros via classes Apex"
+      "descrição": "Gerênciamento de membros via classes Apex"
     },
     {
-      "origem": "Hub Gestao",
+      "origem": "Hub Gestão",
       "destino": "Email",
       "tipo": "Workflow",
-      "descricao": "Notificacoes automaticas para membros"
+      "descrição": "Notificações automáticas para membros"
     }
   ],
   "mensagensSistema": [
     {
       "tipo": "Sucesso",
       "contexto": "Membro Adicionado",
-      "mensagem": "Usuario {nome} adicionado ao grupo {grupo} com sucesso"
+      "mensagem": "Usuário {nome} adicionado ao grupo {grupo} com sucesso"
     },
     {
       "tipo": "Sucesso",
       "contexto": "Membro Removido",
-      "mensagem": "Usuario {nome} removido do grupo {grupo}"
+      "mensagem": "Usuário {nome} removido do grupo {grupo}"
     },
     {
       "tipo": "Erro",
-      "contexto": "Usuario Duplicado",
-      "mensagem": "Usuario ja pertence a este grupo"
+      "contexto": "Usuário Duplicado",
+      "mensagem": "Usuário ja pertence a este grupo"
     },
     {
       "tipo": "Erro",
-      "contexto": "Usuario Nao Encontrado",
-      "mensagem": "Nenhum usuario encontrado com os criterios informados"
+      "contexto": "Usuário Não Encontrado",
+      "mensagem": "Nenhum usuário encontrado com os critérios informados"
     },
     {
       "tipo": "Alerta",
-      "contexto": "Sem Permissao",
-      "mensagem": "Voce nao tem permissao para gerenciar este grupo"
+      "contexto": "Sem Permissão",
+      "mensagem": "Voce não tem permissão para gerênciar este grupo"
     }
   ],
   "detalhes": {
@@ -206,17 +206,17 @@
       "Sistemas"
     ],
     "funcionalidades": [
-      "Visualizacao de membros",
+      "Visualização de membros",
       "Busca por email/nome",
-      "Adicao/remocao de membros",
-      "Historico de alteracoes",
-      "Notificacoes automaticas"
+      "Adição/remocao de membros",
+      "Histórico de alterações",
+      "Notificações automáticas"
     ]
   },
   "contextoGruposOC": {
-    "avisoVerificacao": "ATENCAO: Os detalhes abaixo (SLAs, tiposOC, membrosEsperados, etc.) sao SUGESTOES TECNICAS, nao estao no documento Tester 889851. Precisam ser validados com a equipe responsavel.",
-    "descricao": "Ocorrencias de Cliente (OC) sao casos/tickets abertos por clientes ou internamente",
-    "objetivoGrupos": "Permitir roteamento automatico e distribuicao de trabalho por especialidade",
+    "avisoVerificação": "ATENCAO: Os detalhes abaixo (SLAs, tiposOC, membrosEsperados, etc.) sao SUGESTOES TECNICAS, não estao no documento Tester 889851. Precisam ser validados com a equipe responsável.",
+    "descrição": "Ocorrencias de Cliente (OC) sao casos/tickets abertos por clientes ou internamente",
+    "objetivoGrupos": "Permitir roteamento automático e distribuição de trabalho por especialidade",
     "gruposConfirmados": [
       "Comercial",
       "Qualidade",
@@ -227,10 +227,10 @@
       {
         "nome": "Comercial",
         "apiName": "Comercial_OC_Queue",
-        "descricao": "Ocorrencias relacionadas a vendas, precos, condicoes comerciais",
+        "descrição": "Ocorrencias relacionadas a vendas, preços, condições comerciais",
         "tiposOC": [
-          "Reclamacao de preco",
-          "Solicitacao de desconto",
+          "Reclamação de preço",
+          "Solicitação de desconto",
           "Duvida sobre produto",
           "Atraso de pedido"
         ],
@@ -244,12 +244,12 @@
       {
         "nome": "Qualidade",
         "apiName": "Qualidade_OC_Queue",
-        "descricao": "Ocorrencias relacionadas a qualidade de produtos e reclamacoes tecnicas",
+        "descrição": "Ocorrencias relacionadas a qualidade de produtos e reclamações tecnicas",
         "tiposOC": [
           "Defeito de produto",
-          "Nao conformidade",
-          "Solicitacao de certificado",
-          "Analise tecnica"
+          "Não conformidade",
+          "Solicitação de certificado",
+          "Análise tecnica"
         ],
         "gestores": [
           "Gerente de Qualidade",
@@ -261,24 +261,24 @@
       {
         "nome": "Sistemas",
         "apiName": "Sistemas_OC_Queue",
-        "descricao": "Ocorrencias relacionadas a problemas de sistemas e integracao",
+        "descrição": "Ocorrencias relacionadas a problemas de sistemas e integração",
         "tiposOC": [
           "Erro no portal",
           "Problema de acesso",
           "Bug no sistema",
-          "Solicitacao de melhoria"
+          "Solicitação de melhoria"
         ],
         "gestores": [
           "Coordenador de TI",
-          "Lider Tecnico Salesforce"
+          "Lider Técnico Salesforce"
         ],
         "membrosEsperados": 5,
         "sla": "2 horas para indisponibilidade, 8 horas para demais"
       },
       {
-        "nome": "Logistica",
-        "apiName": "Logistica_OC_Queue",
-        "descricao": "Ocorrencias relacionadas a entregas e transporte",
+        "nome": "Logística",
+        "apiName": "Logística_OC_Queue",
+        "descrição": "Ocorrencias relacionadas a entregas e transporte",
         "tiposOC": [
           "Atraso de entrega",
           "Entrega incorreta",
@@ -286,7 +286,7 @@
           "Rastreamento"
         ],
         "gestores": [
-          "Coordenador de Logistica"
+          "Coordenador de Logística"
         ],
         "membrosEsperados": 6,
         "sla": "8 horas para casos urgentes"
@@ -294,11 +294,11 @@
       {
         "nome": "Financeiro",
         "apiName": "Financeiro_OC_Queue",
-        "descricao": "Ocorrencias relacionadas a credito, cobranca e pagamentos",
+        "descrição": "Ocorrencias relacionadas a crédito, cobrança e pagamentos",
         "tiposOC": [
           "Divergencia de boleto",
-          "Solicitacao de prazo",
-          "Renegociacao",
+          "Solicitação de prazo",
+          "Renegociação",
           "2a via de NF"
         ],
         "gestores": [
@@ -308,16 +308,16 @@
         "sla": "24 horas"
       }
     ],
-    "roteamentoAutomatico": {
-      "descricao": "Cases sao roteados automaticamente baseado no tipo de OC",
+    "roteamentoAutomático": {
+      "descrição": "Cases sao roteados automáticamente baseado no tipo de OC",
       "regras": [
         {
-          "tipoCase": "Reclamacao_Produto",
+          "tipoCase": "Reclamação_Produto",
           "grupo": "Qualidade"
         },
         {
           "tipoCase": "Problema_Entrega",
-          "grupo": "Logistica"
+          "grupo": "Logística"
         },
         {
           "tipoCase": "Duvida_Comercial",
@@ -328,17 +328,17 @@
           "grupo": "Sistemas"
         },
         {
-          "tipoCase": "Financeiro_Cobranca",
+          "tipoCase": "Financeiro_Cobrança",
           "grupo": "Financeiro"
         }
       ],
-      "fallback": "Comercial (quando tipo nao identificado)"
+      "fallback": "Comercial (quando tipo não identificado)"
     },
-    "hierarquiaAprovacao": {
-      "descricao": "Gestores de grupo podem aprovar acoes dentro do Case",
+    "hierarquiaAprovação": {
+      "descrição": "Gestores de grupo podem aprovar ações dentro do Case",
       "niveis": [
         {
-          "nivel": 1,
+          "nível": 1,
           "papel": "Membro",
           "pode": [
             "Responder",
@@ -347,42 +347,42 @@
           ]
         },
         {
-          "nivel": 2,
+          "nível": 2,
           "papel": "Gestor",
           "pode": [
-            "Aprovar resolucao",
+            "Aprovar resolução",
             "Transferir grupo",
             "Fechar caso"
           ]
         },
         {
-          "nivel": 3,
+          "nível": 3,
           "papel": "Super Gestor",
           "pode": [
             "Criar novos grupos",
-            "Gerenciar todos os grupos"
+            "Gerênciar todos os grupos"
           ]
         }
       ]
     },
     "metricas": {
-      "descricao": "KPIs monitorados para cada grupo",
+      "descrição": "KPIs monitorados para cada grupo",
       "indicadores": [
         "Tempo medio de primeira resposta",
-        "Tempo medio de resolucao",
-        "Volume de OCs por periodo",
+        "Tempo medio de resolução",
+        "Volume de OCs por período",
         "Taxa de reincidencia",
         "NPS do atendimento"
       ]
     }
   },
   "interfaceLWC": {
-    "avisoVerificacao": "ATENCAO: Os nomes de componentes (hubGestaoOCList, hubGestaoOCDetail, hubGestaoOCHistory) e detalhes de permissoes (OC_Group_Manager, OC_Super_Admin) sao SUGESTOES TECNICAS. O Tester 889851 confirmou apenas a existencia da funcionalidade, nao os nomes tecnicos internos.",
-    "descricao": "Especificacao da interface Lightning Web Component",
+    "avisoVerificação": "ATENCAO: Os nomes de componentes (hubGestãoOCList, hubGestãoOCDetail, hubGestãoOCHistory) e detalhes de permissoes (OC_Group_Manager, OC_Super_Admin) sao SUGESTOES TECNICAS. O Tester 889851 confirmou apenas a existencia da funcionalidade, não os nomes técnicos internos.",
+    "descrição": "Específicação da interface Lightning Web Component",
     "telas": [
       {
         "nome": "Lista de Grupos",
-        "componente": "hubGestaoOCList",
+        "componente": "hubGestãoOCList",
         "funcionalidades": [
           "Exibir grupos disponiveis",
           "Contador de membros",
@@ -391,86 +391,86 @@
       },
       {
         "nome": "Detalhe do Grupo",
-        "componente": "hubGestaoOCDetail",
+        "componente": "hubGestãoOCDetail",
         "funcionalidades": [
           "Lista de membros",
-          "Busca de usuarios",
+          "Busca de usuários",
           "Botoes adicionar/remover"
         ]
       },
       {
-        "nome": "Historico",
-        "componente": "hubGestaoOCHistory",
+        "nome": "Histórico",
+        "componente": "hubGestãoOCHistory",
         "funcionalidades": [
-          "Log de alteracoes",
+          "Log de alterações",
           "Filtro por data",
-          "Exportacao CSV"
+          "Exportação CSV"
         ]
       }
     ],
     "permissoes": {
-      "visualizar": "Todos usuarios autenticados",
-      "gerenciar": "Apenas usuarios com perfil 'OC_Group_Manager'",
-      "superGestor": "Apenas usuarios com perfil 'OC_Super_Admin'"
+      "visualizar": "Todos usuários autenticados",
+      "gerênciar": "Apenas usuários com perfil 'OC_Group_Manager'",
+      "superGestor": "Apenas usuários com perfil 'OC_Super_Admin'"
     }
   },
   "ciclosTeste": [
     {
       "documento": "889851",
-      "titulo": "Hub de Gestao OC",
+      "título": "Hub de Gestão OC",
       "status": "Pendente",
       "data": "2025-12",
-      "descricao": "Testes do componente LWC de gestao de grupos de OC",
+      "descrição": "Testes do componente LWC de gestão de grupos de OC",
       "cenarios": [
-        "Visualizacao de grupos disponiveis",
-        "Adicao de membro por busca de email",
-        "Adicao de membro por busca de nome",
+        "Visualização de grupos disponiveis",
+        "Adição de membro por busca de email",
+        "Adição de membro por busca de nome",
         "Remocao de membro existente",
-        "Tentativa de adicao duplicada",
-        "Visualizacao de logs de alteracoes",
-        "Validacao de permissoes de gestor"
+        "Tentativa de adição duplicada",
+        "Visualização de logs de alterações",
+        "Validação de permissoes de gestor"
       ]
     },
     {
       "documento": "891121",
-      "titulo": "Redesign das Telas de Replicacao de Dados Mestres",
+      "título": "Redesign das Telas de Replicação de Dados Mestres",
       "status": "Pendente",
       "data": "2025-12",
-      "descricao": "Revamp de interface relacionada a gestao de dados mestres",
+      "descrição": "Revamp de interface relacionada a gestão de dados mestres",
       "cenarios": [
         "Novo layout das telas de dados mestres",
-        "Navegacao entre telas de replicacao",
-        "Validacao de campos obrigatorios",
-        "Sincronizacao de dados entre sistemas"
+        "Navegação entre telas de replicação",
+        "Validação de campos obrigatórios",
+        "Sincronização de dados entre sistemas"
       ]
     }
   ],
-  "pendencias": [
-    "Definicao de perfis com permissao de gestao",
-    "Configuracao de notificacoes por email",
-    "Testes de integracao com grupos existentes",
-    "Documentacao de usuario final"
+  "pendências": [
+    "Definição de perfis com permissão de gestão",
+    "Configuração de notificações por email",
+    "Testes de integração com grupos existentes",
+    "Documentação de usuário final"
   ],
   "prerequisitos": [
-    "LWC Hub Gestao desenvolvido e implantado",
+    "LWC Hub Gestão desenvolvido e implantado",
     "Grupos de OC configurados no Salesforce",
     "Perfis de gestores definidos",
-    "Usuarios ativos no sistema"
+    "Usuários ativos no sistema"
   ],
   "relacionamentos": {
     "relacionadoCom": [
       "cadastro-cliente"
     ],
-    "nota": "Hub de Gestao OC permite gerenciar grupos que recebem ocorrencias de clientes"
+    "nota": "Hub de Gestão OC permite gerênciar grupos que recebem ocorrencias de clientes"
   },
   "dadosExtraidosTester889851": {
     "documento": "889851",
-    "titulo": "Hub de gestao OC",
+    "título": "Hub de gestão OC",
     "data": "10/11/2025",
-    "funcionalidadeTestada": "Gerenciamento de membros de grupos de solucao (LWC)",
+    "funcionalidadeTestada": "Gerênciamento de membros de grupos de solução (LWC)",
     "perfisTestados": {
-      "gestaoAnalista": {
-        "perfil": "Gestao e Analista (Comercial)",
+      "gestãoAnalista": {
+        "perfil": "Gestão e Analista (Comercial)",
         "permissoes": [
           "Ver grupos",
           "Ver membros",
@@ -478,7 +478,7 @@
         ],
         "fluxoTestado": [
           "Visualizar grupos com contagem de membros",
-          "Visualizar membros com nomes, emails e funcoes",
+          "Visualizar membros com nomes, emails e funções",
           "Adicionar novo membro via botao 'Novo Membro'",
           "Receber mensagem 'Sucesso - Novo membro adicionado ao grupo'"
         ]
@@ -492,33 +492,33 @@
       "analistaRestrito": {
         "perfil": "Analista (Restrito)",
         "permissoes": [
-          "Visualizacao apenas",
+          "Visualização apenas",
           "Busca funciona"
         ],
-        "restricoes": [
-          "Nao pode modificar",
-          "Nao pode adicionar"
+        "restrições": [
+          "Não pode modificar",
+          "Não pode adicionar"
         ],
         "camposVisiveis": [
           "Grupos",
           "Membros",
           "E-mail",
-          "Funcao e Permissao do Grupo de Negocios"
+          "Função e Permissão do Grupo de Negócios"
         ]
       }
     },
-    "validacoesTestadas": {
+    "validaçõesTestadas": {
       "duplicidade": {
-        "cenario": "Tentar adicionar usuario ja existente no grupo",
-        "mensagem": "usuario ja existe",
+        "cenario": "Tentar adicionar usuário ja existente no grupo",
+        "mensagem": "usuário ja existe",
         "resultado": "Bloqueado"
       },
       "delecaoGrupo": {
         "regra": "Para deletar grupo, deve remover todos membros primeiro",
-        "validacao": "Sistema bloqueia delecao de grupo com membros"
+        "validação": "Sistema bloqueia delecao de grupo com membros"
       },
-      "buscaUsuario": {
-        "criterios": [
+      "buscaUsuário": {
+        "critérios": [
           "Por email",
           "Por nome"
         ],
@@ -531,18 +531,18 @@
       "Sistemas"
     ]
   },
-  "contextoReuniao": {
+  "contextoReunião": {
     "projeto": "GTM (Go To Market) / CRM",
-    "lideranca": {
+    "liderança": {
       "business": "Thalita Merisio Rhein",
-      "tecnico": "Leandro da Cruz Pereira"
+      "técnico": "Leandro da Cruz Pereira"
     },
     "timeline": {
       "workshops": "04/12 a 22/12/2025",
-      "posWorkshop": "Responsabilidade passa para usuarios (Castro)",
+      "posWorkshop": "Responsabilidade passa para usuários (Castro)",
       "entregaveis": [
         "Planilha de cenarios",
-        "Manual de orientacao"
+        "Manual de orientação"
       ]
     },
     "participantes": [
@@ -555,7 +555,7 @@
         "papel": "Project Lead Business"
       }
     ],
-    "nota": "Hub de Gestao OC nao foi discutido diretamente nas reunioes de 04/12, 10/12 ou 16/12. Informacoes baseadas exclusivamente nos documentos do Tester TI."
+    "nota": "Hub de Gestão OC não foi discutido diretamente nas reuniões de 04/12, 10/12 ou 16/12. Informações baseadas exclusivamente nos documentos do Tester TI."
   },
   "documentosRelacionados": [
     {
@@ -785,23 +785,23 @@
     },
     {
       "id": "900139",
-      "arquivo": "900139 - Gerenciamento de aprovadores e atribuição filtrada.docx",
-      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\900139_-_Gerenciamento_de_aprovadores_e_atribuição_filtrada.json"
+      "arquivo": "900139 - Gerênciamento de aprovadores e atribuição filtrada.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\900139_-_Gerênciamento_de_aprovadores_e_atribuição_filtrada.json"
     },
     {
       "id": "900139",
-      "arquivo": "900139 - Gerenciamento de aprovadores e atribuição filtrada.docx",
-      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\900139_-_Gerenciamento_de_aprovadores_e_atribuição_filtrada.json"
+      "arquivo": "900139 - Gerênciamento de aprovadores e atribuição filtrada.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\900139_-_Gerênciamento_de_aprovadores_e_atribuição_filtrada.json"
     },
     {
       "id": "900139",
-      "arquivo": "900139 - Gerenciamento de aprovadores e atribuição filtrada.docx",
-      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\900139_-_Gerenciamento_de_aprovadores_e_atribuição_filtrada.json"
+      "arquivo": "900139 - Gerênciamento de aprovadores e atribuição filtrada.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\900139_-_Gerênciamento_de_aprovadores_e_atribuição_filtrada.json"
     },
     {
       "id": "900139",
-      "arquivo": "900139 - Gerenciamento de aprovadores e atribuição filtrada.docx",
-      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\900139_-_Gerenciamento_de_aprovadores_e_atribuição_filtrada.json"
+      "arquivo": "900139 - Gerênciamento de aprovadores e atribuição filtrada.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\900139_-_Gerênciamento_de_aprovadores_e_atribuição_filtrada.json"
     },
     {
       "id": "901674",
@@ -910,8 +910,8 @@
     },
     {
       "id": null,
-      "arquivo": "Requisito do negocio ajustes bot - Wili.docx",
-      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\Requisito_do_negocio_ajustes_bot_-_Wili.json"
+      "arquivo": "Requisito do negócio ajustes bot - Wili.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\Requisito_do_negócio_ajustes_bot_-_Wili.json"
     },
     {
       "id": null,
@@ -955,14 +955,14 @@
     }
   ],
   "totalDocumentos": 79,
-  "ultimaAtualizacao": "2026-01-13T11:36:26.088715",
+  "últimaAtualização": "2026-01-13T11:36:26.088715",
   "documentosGerais": [
     {
       "tipo": "Plano de Testes Exploratorios",
       "id": "909100"
     },
     {
-      "tipo": "Boot/Automacao",
+      "tipo": "Boot/Automação",
       "id": "Boot"
     },
     {

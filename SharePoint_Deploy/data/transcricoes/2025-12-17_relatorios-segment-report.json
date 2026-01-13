@@ -1,8 +1,8 @@
 {
-  "reuniao": {
-    "titulo": "GTM Relatórios e Segment Report",
+  "reunião": {
+    "título": "GTM Relatórios e Segment Report",
     "data": "2025-12-17",
-    "duracao": "~60min",
+    "duração": "~60min",
     "tipo": "Meeting Recording",
     "fonte": "SharePoint/Stream",
     "resumo": "Reunião sobre segmentação de dados de cliente, programa de fidelidade, hierarquia de dados para relatórios e governança. Discussão sobre ownership de dados, integração com Salesforce e impacto em relatórios de custo e receita."
@@ -17,116 +17,116 @@
     "Adriano (mencionado)",
     "Tiago (mencionado)"
   ],
-  "topicos": [
-    "Segmentacao de dados de cliente",
+  "tópicos": [
+    "Segmentação de dados de cliente",
     "Programa de fidelidade",
-    "Hierarquia de dados e relatorios",
+    "Hierarquia de dados e relatórios",
     "Governanca e ownership",
-    "Integracao com Salesforce",
-    "Impacto em relatorios de custo e receita",
-    "Proximos passos e itens de acao"
+    "Integração com Salesforce",
+    "Impacto em relatórios de custo e receita",
+    "Próximos passos e itens de ação"
   ],
   "capitulos": [
     {
       "timestamp": "1:08",
-      "titulo": "Segmentacao de Dados de Cliente",
-      "descricao": "Riqueti e Franca discutem segmentacao de dados de clientes"
+      "título": "Segmentação de Dados de Cliente",
+      "descrição": "Riqueti e Franca discutem segmentação de dados de clientes"
     },
     {
       "timestamp": "5:12",
-      "titulo": "Programa de Fidelidade",
-      "descricao": "Riqueti e Santo discutem programa de fidelidade"
+      "título": "Programa de Fidelidade",
+      "descrição": "Riqueti e Santo discutem programa de fidelidade"
     },
     {
       "timestamp": "9:41",
-      "titulo": "Hierarquia de Dados e Relatorios",
-      "descricao": "Riqueti apresenta estrutura de hierarquia para relatorios"
+      "título": "Hierarquia de Dados e Relatórios",
+      "descrição": "Riqueti apresenta estrutura de hierarquia para relatórios"
     },
     {
       "timestamp": "23:56",
-      "titulo": "Impacto em Relatorios de Custo e Receita",
-      "descricao": "Monteiro discute impacto das mudancas em relatorios financeiros"
+      "título": "Impacto em Relatórios de Custo e Receita",
+      "descrição": "Monteiro discute impacto das mudanças em relatórios financeiros"
     },
     {
       "timestamp": "31:23",
-      "titulo": "Integracao com Salesforce",
-      "descricao": "Riqueti apresenta integracao com Salesforce"
+      "título": "Integração com Salesforce",
+      "descrição": "Riqueti apresenta integração com Salesforce"
     },
     {
       "timestamp": "46:19",
-      "titulo": "Governanca e Ownership",
-      "descricao": "Riqueti e Rhein discutem governanca e responsabilidades"
+      "título": "Governanca e Ownership",
+      "descrição": "Riqueti e Rhein discutem governanca e responsabilidades"
     },
     {
       "timestamp": "52:39",
-      "titulo": "Proximos Passos e Itens de Acao",
-      "descricao": "Riqueti apresenta proximos passos"
+      "título": "Próximos Passos e Itens de Ação",
+      "descrição": "Riqueti apresenta próximos passos"
     }
   ],
-  "acoes": [
+  "ações": [
     {
-      "acao": "Validacao do Campo Agregador de Parceiros",
+      "ação": "Validação do Campo Agregador de Parceiros",
       "timestamp": "36:26",
-      "descricao": "Validar campo de agregador de parceiros no sistema",
+      "descrição": "Validar campo de agregador de parceiros no sistema",
       "responsaveis": ["Riqueti"],
       "prazo": "A definir"
     },
     {
-      "acao": "Descricao do Campo Cluster",
+      "ação": "Descrição do Campo Cluster",
       "timestamp": "39:23",
-      "descricao": "Definir descricao e valores do campo de cluster",
+      "descrição": "Definir descrição e valores do campo de cluster",
       "responsaveis": ["Riqueti"],
       "prazo": "A definir"
     },
     {
-      "acao": "Definicao de Governanca para Hierarquias",
+      "ação": "Definição de Governanca para Hierarquias",
       "timestamp": "52:23",
-      "descricao": "Estabelecer governanca e ownership das hierarquias de dados",
+      "descrição": "Estabelecer governanca e ownership das hierarquias de dados",
       "responsaveis": ["Riqueti", "Rhein", "Ciorlia"],
       "prazo": "A definir"
     },
     {
-      "acao": "Consistencia de CPV e Segmento",
+      "ação": "Consistencia de CPV e Segmento",
       "timestamp": "59:34",
-      "descricao": "Garantir consistencia entre CPV e segmentacao",
+      "descrição": "Garantir consistencia entre CPV e segmentação",
       "responsaveis": ["Riqueti", "Adriano", "Tiago"],
       "prazo": "A definir"
     },
     {
-      "acao": "Reuniao com Equipe de Planejamento",
+      "ação": "Reunião com Equipe de Planejamento",
       "timestamp": "1:00:08",
-      "descricao": "Agendar reuniao com time de planejamento para alinhamento",
+      "descrição": "Agendar reunião com time de planejamento para alinhamento",
       "responsaveis": ["Riqueti", "Rhein", "Ciorlia"],
       "prazo": "A definir"
     }
   ],
   "pontosPrincipais": [
     {
-      "topico": "Segment Report",
-      "descricao": "Relatorio de segmentacao de clientes para analise comercial",
-      "impacto": "Base para decisoes de pricing e alocacao"
+      "tópico": "Segment Report",
+      "descrição": "Relatório de segmentação de clientes para análise comercial",
+      "impacto": "Base para decisoes de pricing e alocação"
     },
     {
-      "topico": "Hierarquia de Dados",
-      "descricao": "Estrutura hierarquica para relatorios consistentes",
-      "impacto": "Padronizacao de relatorios"
+      "tópico": "Hierarquia de Dados",
+      "descrição": "Estrutura hierarquica para relatórios consistentes",
+      "impacto": "Padronização de relatórios"
     },
     {
-      "topico": "Governanca",
-      "descricao": "Definicao de ownership e responsabilidades para hierarquias",
-      "impacto": "Clareza em manutencao de dados"
+      "tópico": "Governanca",
+      "descrição": "Definição de ownership e responsabilidades para hierarquias",
+      "impacto": "Clareza em manutenção de dados"
     },
     {
-      "topico": "Integracao Salesforce",
-      "descricao": "Integracao de hierarquias com Salesforce CRM",
-      "impacto": "Visao unificada de dados"
+      "tópico": "Integração Salesforce",
+      "descrição": "Integração de hierarquias com Salesforce CRM",
+      "impacto": "Visão unificada de dados"
     }
   ],
   "jornadasRelacionadas": [
-    "hub-gestao",
+    "hub-gestão",
     "workflow-pricing",
     "cadastro-cliente"
   ],
-  "statusExtracao": "Completo via Copilot - Key Topics e Action Items",
-  "ultimaAtualizacao": "2026-01-13"
+  "statusExtração": "Completo via Copilot - Key Topics e Action Items",
+  "últimaAtualização": "2026-01-13"
 }

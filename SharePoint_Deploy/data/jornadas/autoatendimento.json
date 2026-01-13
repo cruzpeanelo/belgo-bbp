@@ -4,20 +4,20 @@
   "icone": "🖥️",
   "ordem": 8,
   "asIs": {
-    "descricao": "Atualmente o cliente nao possui nenhum canal de autoatendimento digital. Para qualquer consulta sobre pedidos, notas fiscais, rastreamento ou documentos, o cliente precisa ligar ou enviar email para o vendedor, que por sua vez consulta os sistemas internos e retorna a informacao.",
+    "descrição": "Atualmente o cliente não possui nenhum canal de autoatendimento digital. Para qualquer consulta sobre pedidos, notas fiscais, rastreamento ou documentos, o cliente precisa ligar ou enviar email para o vendedor, que por sua vez consulta os sistemas internos e retorna a informação.",
     "passos": [
-      "Cliente precisa de informacao (status pedido, NF, rastreamento)",
+      "Cliente precisa de informação (status pedido, NF, rastreamento)",
       "Liga para o vendedor ou envia email/WhatsApp",
-      "Vendedor recebe solicitacao",
-      "Vendedor acessa SAP ou outros sistemas para buscar informacao",
-      "Vendedor compila informacoes solicitadas",
+      "Vendedor recebe solicitação",
+      "Vendedor acessa SAP ou outros sistemas para buscar informação",
+      "Vendedor compila informações solicitadas",
       "Retorna ao cliente por telefone ou email",
       "Se cliente precisa de 2a via de documento, vendedor solicita ao fiscal",
       "Fiscal gera documento e envia ao vendedor",
       "Vendedor encaminha ao cliente"
     ],
     "problemas": [
-      "Dependencia total do vendedor para qualquer consulta",
+      "Dependência total do vendedor para qualquer consulta",
       "Demora no atendimento (horas ou dias)",
       "Cliente sem autonomia para consultas basicas",
       "Vendedor gasta tempo com atividades operacionais",
@@ -30,197 +30,197 @@
     "tempoMedio": "Horas/Dias"
   },
   "toBe": {
-    "descricao": "Portal de Autoatendimento onde o cliente tem acesso autonomo 24/7 a todas as informacoes relevantes: status de pedidos, notas fiscais (XML e DANFE), rastreamento de entregas, 2a via de documentos e certificados de qualidade. Libera o vendedor para atividades comerciais.",
+    "descrição": "Portal de Autoatendimento onde o cliente tem acesso autonomo 24/7 a todas as informações relevantes: status de pedidos, notas fiscais (XML e DANFE), rastreamento de entregas, 2a via de documentos e certificados de qualidade. Libera o vendedor para atividades comerciais.",
     "passos": [
       "Cliente acessa Portal de Autoatendimento",
       "Realiza login com email cadastrado",
       "Visualiza dashboard com resumo de pedidos e entregas",
       "Consulta status detalhado de pedidos em andamento",
-      "Acessa historico de notas fiscais",
+      "Acessa histórico de notas fiscais",
       "Faz download de XML e DANFE",
       "Acompanha rastreamento de entregas em tempo real",
       "Solicita 2a via de documentos com um clique",
       "Acessa certificados de qualidade dos produtos",
-      "Recebe notificacoes de eventos importantes"
+      "Recebe notificações de eventos importantes"
     ],
     "beneficios": [
       "Autonomia total do cliente - 24 horas por dia",
       "Atendimento imediato sem depender de pessoas",
-      "Reducao drastica de chamados ao vendedor",
+      "Redução drastica de chamados ao vendedor",
       "Vendedor focado em atividades comerciais",
       "Documentos sempre disponiveis para download",
       "Rastreamento em tempo real",
-      "Historico completo de transacoes",
-      "Satisfacao do cliente aumentada",
-      "Reducao de carga operacional",
-      "Notificacoes proativas sobre pedidos"
+      "Histórico completo de transações",
+      "Satisfação do cliente aumentada",
+      "Redução de carga operacional",
+      "Notificações proativas sobre pedidos"
     ],
     "tempoMedio": "Imediato (self-service)"
   },
-  "areasImpactadas": [
+  "áreasImpactadas": [
     "Comercial",
     "Atendimento",
     "TI",
     "Fiscal",
-    "Logistica"
+    "Logística"
   ],
   "status": "Futuro",
-  "fonteReuniao": "16/12/2025",
-  "fontesReuniao": [
-    "16/12/2025 - Discussao sobre Portal de Autoatendimento",
+  "fonteReunião": "16/12/2025",
+  "fontesReunião": [
+    "16/12/2025 - Discussão sobre Portal de Autoatendimento",
     "16/12/2025 - Criticidade dos dados de contato para acesso",
-    "10/12/2025 - Mencao a necessidade de self-service"
+    "10/12/2025 - Menção a necessidade de self-service"
   ],
   "fontesVerificadas": {
-    "reuniao16dez": [
+    "reunião16dez": [
       "Portal de Autoatendimento",
-      "Dependencia de dados de contato corretos"
+      "Dependência de dados de contato corretos"
     ],
-    "reuniao10dez": [
+    "reunião10dez": [
       "Necessidade de canal self-service para cliente"
     ],
     "cadernoTestes": "Nenhum - funcionalidade em status 'Futuro'",
-    "nota": "Funcionalidade ainda nao implementada, testes serao definidos posteriormente"
+    "nota": "Funcionalidade ainda não implementada, testes serao definidos posteriormente"
   },
   "funcionalidades": [
     {
-      "funcionalidade": "Notificacoes WhatsApp",
-      "descricao": "Cliente recebe notificacoes automaticas via WhatsApp sobre status de pedidos e notas fiscais",
-      "detalhes": "Integrado com WhatsApp Bot - confirmado na reuniao 10/12",
-      "fonteReuniao": "10/12/2025 - Bruno Machado: 'Todas as vezes que registra um pedido, um AOV para o cliente, ele ta recebendo no WhatsApp dele que ta cadastrado ai'"
+      "funcionalidade": "Notificações WhatsApp",
+      "descrição": "Cliente recebe notificações automáticas via WhatsApp sobre status de pedidos e notas fiscais",
+      "detalhes": "Integrado com WhatsApp Bot - confirmado na reunião 10/12",
+      "fonteReunião": "10/12/2025 - Bruno Machado: 'Todas as vezes que registra um pedido, um AOV para o cliente, ele ta recebendo no WhatsApp dele que ta cadastrado ai'"
     },
     {
       "funcionalidade": "Status de Pedidos",
-      "descricao": "Consulta de status de todos os pedidos em andamento",
+      "descrição": "Consulta de status de todos os pedidos em andamento",
       "detalhes": "Lista de pedidos com filtros por data, status, valor"
     },
     {
       "funcionalidade": "Download de XML/DANFE",
-      "descricao": "Download de arquivos XML e DANFE das notas fiscais",
-      "detalhes": "Disponivel imediatamente apos faturamento"
+      "descrição": "Download de arquivos XML e DANFE das notas fiscais",
+      "detalhes": "Disponível imediatamente apos faturamento"
     },
     {
       "funcionalidade": "Rastreamento de Entregas",
-      "descricao": "Acompanhamento em tempo real do status de entrega",
-      "detalhes": "Integrado com Portal Logistico"
+      "descrição": "Acompanhamento em tempo real do status de entrega",
+      "detalhes": "Integrado com Portal Logístico"
     },
     {
       "funcionalidade": "2a Via de Documentos",
-      "descricao": "Solicitacao e download de 2a via de documentos",
+      "descrição": "Solicitação e download de 2a via de documentos",
       "detalhes": "Self-service sem necessidade de contato"
     },
     {
       "funcionalidade": "Certificados de Qualidade",
-      "descricao": "Acesso a certificados de qualidade dos produtos",
-      "detalhes": "Vinculados automaticamente as notas fiscais"
+      "descrição": "Acesso a certificados de qualidade dos produtos",
+      "detalhes": "Vinculados automáticamente as notas fiscais"
     },
     {
-      "funcionalidade": "Historico de Compras",
-      "descricao": "Visualizacao do historico completo de transacoes",
-      "detalhes": "Filtros por periodo, produto, valor"
+      "funcionalidade": "Histórico de Compras",
+      "descrição": "Visualização do histórico completo de transações",
+      "detalhes": "Filtros por período, produto, valor"
     },
     {
-      "funcionalidade": "Notificacoes",
-      "descricao": "Alertas sobre eventos relevantes",
+      "funcionalidade": "Notificações",
+      "descrição": "Alertas sobre eventos relevantes",
       "detalhes": "Email/SMS sobre faturamento, despacho, entrega"
     }
   ],
   "campos": [
     {
       "campo": "Email de Acesso",
-      "descricao": "Email do contato para login no portal",
+      "descrição": "Email do contato para login no portal",
       "preenchimento": "Cadastro de Contatos",
-      "validacao": "Email valido",
-      "obrigatorio": true
+      "validação": "Email válido",
+      "obrigatório": true
     },
     {
       "campo": "Senha",
-      "descricao": "Senha de acesso ao portal",
-      "preenchimento": "Definido pelo usuario",
-      "validacao": "Politica de senha",
-      "obrigatorio": true
+      "descrição": "Senha de acesso ao portal",
+      "preenchimento": "Definido pelo usuário",
+      "validação": "Politica de senha",
+      "obrigatório": true
     },
     {
       "campo": "Conta Vinculada",
-      "descricao": "Cliente(s) vinculado(s) ao acesso",
-      "preenchimento": "Automatico (Cadastro)",
-      "validacao": "-",
-      "obrigatorio": true
+      "descrição": "Cliente(s) vinculado(s) ao acesso",
+      "preenchimento": "Automático (Cadastro)",
+      "validação": "-",
+      "obrigatório": true
     },
     {
       "campo": "Perfil de Acesso",
-      "descricao": "Nivel de acesso no portal",
-      "preenchimento": "Automatico",
-      "validacao": "-",
-      "obrigatorio": true,
+      "descrição": "Nível de acesso no portal",
+      "preenchimento": "Automático",
+      "validação": "-",
+      "obrigatório": true,
       "valores": [
-        "Visualizacao",
+        "Visualização",
         "Download",
         "Administrador"
       ]
     }
   ],
-  "regrasNegocioAviso": "ATENCAO: As regras abaixo sao INFERENCIAS LOGICAS baseadas na conexao mencionada entre 'dados de contato corretos' e 'autoatendimento' na reuniao 16/12. Os detalhes especificos (login por email, validacao, etc.) NAO foram explicitamente definidos. Precisam ser confirmados com TI.",
-  "regrasNegocio": [
+  "regrasNegócioAviso": "ATENCAO: As regras abaixo sao INFERENCIAS LOGICAS baseadas na conexao mencionada entre 'dados de contato corretos' e 'autoatendimento' na reunião 16/12. Os detalhes específicos (login por email, validação, etc.) NAO foram explicitamente definidos. Precisam ser confirmados com TI.",
+  "regrasNegócio": [
     {
-      "regra": "Contato com Email Valido Obrigatorio",
-      "descricao": "Para habilitar acesso ao portal, o cliente precisa ter pelo menos um contato com email valido cadastrado",
+      "regra": "Contato com Email Válido Obrigatório",
+      "descrição": "Para habilitar acesso ao portal, o cliente precisa ter pelo menos um contato com email válido cadastrado",
       "criticidade": "Alta",
-      "dependencia": "Gestao de Contatos",
-      "fonteVerificacao": "INFERENCIA - reuniao mencionou importancia de 'dado bem certinho' para autoatendimento, mas nao especificou email como requisito"
+      "dependência": "Gestão de Contatos",
+      "fonteVerificação": "INFERENCIA - reunião mencionou importancia de 'dado bem certinho' para autoatendimento, mas não específicou email como requisito"
     },
     {
-      "regra": "Autenticacao via Email Cadastrado",
-      "descricao": "O login no portal e feito com o email do contato cadastrado no Salesforce"
+      "regra": "Autenticação via Email Cadastrado",
+      "descrição": "O login no portal e feito com o email do contato cadastrado no Salesforce"
     },
     {
       "regra": "Visibilidade por Conta",
-      "descricao": "Usuario visualiza apenas informacoes da(s) conta(s) a qual esta vinculado como contato"
+      "descrição": "Usuário visualiza apenas informações da(s) conta(s) a qual esta vinculado como contato"
     },
     {
       "regra": "Disponibilidade Imediata de Documentos",
-      "descricao": "XML e DANFE ficam disponiveis no portal imediatamente apos faturamento (integracao com SAP ECC)"
+      "descrição": "XML e DANFE ficam disponiveis no portal imediatamente apos faturamento (integração com SAP ECC)"
     },
     {
-      "regra": "Notificacoes Automaticas",
-      "descricao": "Sistema envia notificacoes por email quando: pedido e faturado, mercadoria sai para entrega, entrega e realizada"
+      "regra": "Notificações Automáticas",
+      "descrição": "Sistema envia notificações por email quando: pedido e faturado, mercadoria sai para entrega, entrega e realizada"
     },
     {
-      "regra": "Historico Disponivel",
-      "descricao": "Cliente tem acesso ao historico dos ultimos 24 meses de transacoes"
+      "regra": "Histórico Disponível",
+      "descrição": "Cliente tem acesso ao histórico dos últimos 24 meses de transações"
     }
   ],
-  "sistemasTecnicos": [
+  "sistemasTécnicos": [
     "Portal de Autoatendimento",
     "Salesforce",
     "SAP ECC",
     "SAP ECC",
-    "Portal Logistico"
+    "Portal Logístico"
   ],
-  "integracoes": [
+  "integrações": [
     {
       "origem": "Salesforce",
       "destino": "Portal Autoatendimento",
       "tipo": "API",
-      "descricao": "Autenticacao e dados de contato/conta"
+      "descrição": "Autenticação e dados de contato/conta"
     },
     {
       "origem": "SAP ECC",
       "destino": "Portal Autoatendimento",
       "tipo": "API",
-      "descricao": "Disponibilizacao de XML, DANFE e certificados"
+      "descrição": "Disponibilização de XML, DANFE e certificados"
     },
     {
       "origem": "SAP",
       "destino": "Portal Autoatendimento",
       "tipo": "API",
-      "descricao": "Status de pedidos e historico de compras"
+      "descrição": "Status de pedidos e histórico de compras"
     },
     {
-      "origem": "Portal Logistico",
+      "origem": "Portal Logístico",
       "destino": "Portal Autoatendimento",
       "tipo": "API",
-      "descricao": "Status de rastreamento de entregas"
+      "descrição": "Status de rastreamento de entregas"
     }
   ],
   "mensagensSistema": [
@@ -231,28 +231,28 @@
     },
     {
       "tipo": "Erro",
-      "contexto": "Login Invalido",
-      "mensagem": "Email ou senha invalidos. Tente novamente."
+      "contexto": "Login Inválido",
+      "mensagem": "Email ou senha inválidos. Tente novamente."
     },
     {
       "tipo": "Erro",
-      "contexto": "Acesso Nao Habilitado",
-      "mensagem": "Seu acesso ao portal ainda nao foi habilitado. Entre em contato com seu vendedor."
+      "contexto": "Acesso Não Habilitado",
+      "mensagem": "Seu acesso ao portal ainda não foi habilitado. Entre em contato com seu vendedor."
     },
     {
       "tipo": "Info",
-      "contexto": "Documento Disponivel",
-      "mensagem": "Novo documento disponivel para download: NF-e {numero}"
+      "contexto": "Documento Disponível",
+      "mensagem": "Novo documento disponível para download: NF-e {número}"
     },
     {
       "tipo": "Info",
       "contexto": "Pedido em Transito",
-      "mensagem": "Seu pedido {numero} saiu para entrega"
+      "mensagem": "Seu pedido {número} saiu para entrega"
     },
     {
       "tipo": "Sucesso",
       "contexto": "Entrega Realizada",
-      "mensagem": "Seu pedido {numero} foi entregue com sucesso"
+      "mensagem": "Seu pedido {número} foi entregue com sucesso"
     }
   ],
   "detalhes": {
@@ -265,11 +265,11 @@
       "Certificados de qualidade"
     ],
     "disponibilidade": "24/7",
-    "autenticacao": "Email cadastrado no Salesforce"
+    "autenticação": "Email cadastrado no Salesforce"
   },
-  "especificacaoPlataforma": {
-    "avisoVerificacao": "ATENCAO: Os detalhes tecnicos abaixo sao SUGESTOES, nao foram definidos nas reunioes. Precisam ser validados com a equipe de TI.",
-    "descricao": "Portal de Autoatendimento para clientes Belgo Arames",
+  "específicaçãoPlataforma": {
+    "avisoVerificação": "ATENCAO: Os detalhes técnicos abaixo sao SUGESTOES, não foram definidos nas reuniões. Precisam ser validados com a equipe de TI.",
+    "descrição": "Portal de Autoatendimento para clientes Belgo Arames",
     "tecnologia": {
       "framework": "Salesforce Experience Cloud (Community)",
       "template": "Customer Service (Napili)",
@@ -277,31 +277,31 @@
       "responsivo": true,
       "acessoMobile": "Navegador mobile otimizado"
     },
-    "autenticacao": {
-      "metodo": "Salesforce External Identity",
+    "autenticação": {
+      "método": "Salesforce External Identity",
       "login": "Email cadastrado como contato",
       "primeiroAcesso": {
         "fluxo": [
-          "Usuario recebe email de convite",
-          "Clica no link de ativacao",
+          "Usuário recebe email de convite",
+          "Clica no link de ativação",
           "Define senha seguindo politica",
           "Aceita termos de uso",
           "Acesso liberado"
         ],
         "validadeLink": "72 horas"
       },
-      "recuperacaoSenha": {
-        "metodo": "Email de recuperacao",
-        "tempoExpiracao": "1 hora"
+      "recuperaçãoSenha": {
+        "método": "Email de recuperação",
+        "tempoExpiração": "1 hora"
       },
       "politicaSenha": {
-        "minimoCaracteres": 8,
+        "mínimoCaracteres": 8,
         "requerMaiuscula": true,
         "requerMinuscula": true,
-        "requerNumero": true,
+        "requerNúmero": true,
         "requerEspecial": true,
-        "historico": "Ultimas 5 senhas nao podem ser reutilizadas",
-        "expiracao": "90 dias"
+        "histórico": "Últimas 5 senhas não podem ser reutilizadas",
+        "expiração": "90 dias"
       },
       "sessao": {
         "timeout": "30 minutos de inatividade",
@@ -311,7 +311,7 @@
     "perfisAcesso": [
       {
         "perfil": "Visualizador",
-        "descricao": "Apenas visualiza informacoes",
+        "descrição": "Apenas visualiza informações",
         "permissoes": [
           "Ver pedidos",
           "Ver NFs",
@@ -320,7 +320,7 @@
       },
       {
         "perfil": "Download",
-        "descricao": "Pode baixar documentos",
+        "descrição": "Pode baixar documentos",
         "permissoes": [
           "Visualizador",
           "Download XML",
@@ -330,18 +330,18 @@
       },
       {
         "perfil": "Administrador",
-        "descricao": "Administrador do cliente",
+        "descrição": "Administrador do cliente",
         "permissoes": [
           "Download",
-          "Convidar usuarios",
-          "Gerenciar acessos da conta"
+          "Convidar usuários",
+          "Gerênciar acessos da conta"
         ]
       }
     ],
     "arquitetura": {
       "frontEnd": "Experience Cloud + LWC customizados",
       "backEnd": "Salesforce Apex + APIs REST",
-      "integracoes": [
+      "integrações": [
         {
           "sistema": "SAP ECC",
           "tipo": "REST API",
@@ -352,7 +352,7 @@
           ]
         },
         {
-          "sistema": "Portal Logistico",
+          "sistema": "Portal Logístico",
           "tipo": "REST API",
           "dados": [
             "Rastreamento",
@@ -375,98 +375,98 @@
     },
     "disponibilidade": {
       "sla": "99.5%",
-      "janelaManutencao": "Domingos 02:00 - 06:00",
+      "janelaManutenção": "Domingos 02:00 - 06:00",
       "monitoramento": "Salesforce Trust + alertas internos"
     },
     "suporte": {
-      "nivelum": "FAQ e base de conhecimento",
-      "nivelumdois": "Chat com vendedor (horario comercial)",
+      "nívelum": "FAQ e base de conhecimento",
+      "nívelumdois": "Chat com vendedor (horario comercial)",
       "horarioAtendimento": "Segunda a Sexta, 08:00 - 18:00"
     }
   },
-  "pendencias": [
-    "Definicao de interface/UX do portal",
-    "Integracao com sistema SAP ECC para documentos",
-    "Integracao com Portal Logistico para rastreamento",
-    "Definicao de politica de senha",
-    "Processo de primeiro acesso/ativacao",
-    "Configuracao de notificacoes"
+  "pendências": [
+    "Definição de interface/UX do portal",
+    "Integração com sistema SAP ECC para documentos",
+    "Integração com Portal Logístico para rastreamento",
+    "Definição de politica de senha",
+    "Processo de primeiro acesso/ativação",
+    "Configuração de notificações"
   ],
   "prerequisitos": [
-    "Gestao de Contatos implementada e operacional",
+    "Gestão de Contatos implementada e operacional",
     "Dados de email validados e atualizados",
-    "Integracao SAP ECC funcionando para documentos fiscais",
-    "Portal Logistico integrado para rastreamento"
+    "Integração SAP ECC funcionando para documentos fiscais",
+    "Portal Logístico integrado para rastreamento"
   ],
   "relacionamentos": {
     "dependeDe": [
       "contatos",
       "documentos-fiscais",
-      "logistica"
+      "logística"
     ],
-    "nota": "Qualidade dos dados de contato e CRITICA para funcionamento do Autoatendimento. Cliente sem email valido nao consegue acessar o portal."
+    "nota": "Qualidade dos dados de contato e CRITICA para funcionamento do Autoatendimento. Cliente sem email válido não consegue acessar o portal."
   },
-  "discussaoReunioes": {
+  "discussãoReuniões": {
     "10dez2025": {
       "apresentador": "Leandro da Cruz Pereira",
-      "contexto": "Mencao inicial a necessidade de canal self-service para cliente",
+      "contexto": "Menção inicial a necessidade de canal self-service para cliente",
       "pontosChave": [
         "Cliente precisa de autonomia para consultas basicas",
-        "Dependencia de vendedor para informacoes simples e problema",
+        "Dependência de vendedor para informações simples e problema",
         "Self-service e objetivo do projeto"
       ]
     },
     "16dez2025": {
       "apresentador": "Leandro da Cruz Pereira",
-      "contexto": "Discussao detalhada sobre Portal de Autoatendimento",
-      "citacao": "E hoje a gente vai falar sobre autoatendimento tambem e o autoatendimento. Voces vao ver a importancia desse dado preenchido corretamente.",
-      "dependenciaCritica": {
-        "requisito": "Email valido no cadastro de contatos",
-        "regra": "Cliente SEM email valido NAO consegue acessar o portal",
+      "contexto": "Discussão detalhada sobre Portal de Autoatendimento",
+      "citação": "E hoje a gente vai falar sobre autoatendimento tambem e o autoatendimento. Voces vao ver a importancia desse dado preenchido corretamente.",
+      "dependênciaCritica": {
+        "requisito": "Email válido no cadastro de contatos",
+        "regra": "Cliente SEM email válido NAO consegue acessar o portal",
         "impacto": "Bloqueio total da funcionalidade de self-service"
       },
       "vinculoContatos": {
-        "explicacao": "Portal de Autoatendimento valida acesso usando email do contato",
-        "fluxo": "Login com email -> Validacao no Salesforce -> Acesso ao portal",
+        "explicação": "Portal de Autoatendimento valida acesso usando email do contato",
+        "fluxo": "Login com email -> Validação no Salesforce -> Acesso ao portal",
         "seFalhar": "Cliente fica dependente do vendedor para TODAS as consultas"
       }
     }
   },
-  "dependenciaCriticaEmail": {
-    "fonte": "Reuniao 16/12/2025 - Leandro",
-    "regra": "Para habilitar acesso ao portal de autoatendimento, cliente DEVE ter pelo menos um contato com email valido cadastrado",
-    "citacao": "Voces vao ver a importancia desse dado preenchido corretamente",
+  "dependênciaCriticaEmail": {
+    "fonte": "Reunião 16/12/2025 - Leandro",
+    "regra": "Para habilitar acesso ao portal de autoatendimento, cliente DEVE ter pelo menos um contato com email válido cadastrado",
+    "citação": "Voces vao ver a importancia desse dado preenchido corretamente",
     "consequencias": [
-      "Sem email valido: cliente nao faz login",
-      "Sem email valido: cliente nao recebe notificacoes",
-      "Sem email valido: funcionalidade completamente bloqueada",
-      "Com email invalido: emails retornam, cliente nao acessa"
+      "Sem email válido: cliente não faz login",
+      "Sem email válido: cliente não recebe notificações",
+      "Sem email válido: funcionalidade completamente bloqueada",
+      "Com email inválido: emails retornam, cliente não acessa"
     ],
     "preRequisitos": [
-      "Gestao de Contatos implementada",
-      "Validacao de email funcionando",
-      "Processo de ativacao de usuario configurado"
+      "Gestão de Contatos implementada",
+      "Validação de email funcionando",
+      "Processo de ativação de usuário configurado"
     ]
   },
-  "contextoReuniao": {
+  "contextoReunião": {
     "projeto": "GTM (Go To Market) / CRM",
-    "lideranca": {
+    "liderança": {
       "business": "Thalita Merisio Rhein",
-      "tecnico": "Leandro da Cruz Pereira"
+      "técnico": "Leandro da Cruz Pereira"
     },
     "timeline": {
       "workshops": "04/12 a 22/12/2025",
-      "posWorkshop": "Responsabilidade passa para usuarios (Castro)",
+      "posWorkshop": "Responsabilidade passa para usuários (Castro)",
       "entregaveis": [
         "Planilha de cenarios",
-        "Manual de orientacao"
+        "Manual de orientação"
       ]
     },
     "participantes": [
       {
         "nome": "Leandro da Cruz Pereira",
         "papel": "TI/Apresentador",
-        "contribuicao": "Explicou criticidade de contatos para autoatendimento"
+        "contribuição": "Explicou criticidade de contatos para autoatendimento"
       },
       {
         "nome": "Thalita Merisio Rhein",
@@ -475,12 +475,12 @@
       {
         "nome": "Maria Luiza Gomes Chaves",
         "papel": "Key User",
-        "contribuicao": "Perguntou sobre proximas sessoes e tabela de precos"
+        "contribuição": "Perguntou sobre próximas sessoes e tabela de preços"
       }
     ],
     "feedback": {
       "autor": "Maria Luiza Gomes Chaves",
-      "citacao": "Primeiramente, queria agradecer. Todas essas sessoes tem sido muito didaticas. Eu entrei na Belgo ha 4 meses, entao aprendi muita coisa tambem de outros processos daqui.",
+      "citação": "Primeiramente, queria agradecer. Todas essas sessoes tem sido muito didaticas. Eu entrei na Belgo ha 4 meses, entao aprendi muita coisa tambem de outros processos daqui.",
       "contexto": "Nova funcionaria (4 meses) expressando valor dos workshops"
     }
   },
@@ -542,14 +542,14 @@
     }
   ],
   "totalDocumentos": 11,
-  "ultimaAtualizacao": "2026-01-13T11:36:26.098836",
+  "últimaAtualização": "2026-01-13T11:36:26.098836",
   "documentosGerais": [
     {
       "tipo": "Plano de Testes Exploratorios",
       "id": "909100"
     },
     {
-      "tipo": "Boot/Automacao",
+      "tipo": "Boot/Automação",
       "id": "Boot"
     },
     {

@@ -1,105 +1,105 @@
 {
-  "id": "logistica",
-  "nome": "Portal Logistico",
+  "id": "logística",
+  "nome": "Portal Logístico",
   "icone": "🚚",
   "ordem": 5,
   "asIs": {
-    "descricao": "Portal logistico opera de forma separada do SAP, exigindo que operadores digitem dados em ambos os sistemas. Informacoes de rastreamento, status de entrega e dados de transporte sao gerenciados em sistemas paralelos sem sincronizacao automatica.",
+    "descrição": "Portal logístico opera de forma separada do SAP, exigindo que operadores digitem dados em ambos os sistemas. Informações de rastreamento, status de entrega e dados de transporte sao gerênciados em sistemas paralelos sem sincronização automática.",
     "passos": [
-      "Operador recebe informacao de despacho do SAP",
-      "Acessa o Portal Logistico separadamente",
+      "Operador recebe informação de despacho do SAP",
+      "Acessa o Portal Logístico separadamente",
       "Digita manualmente dados da entrega no portal",
       "Transportadora atualiza status no portal",
       "Operador confere dados entre portal e SAP",
-      "Replica informacoes manualmente para SAP quando necessario",
+      "Replica informações manualmente para SAP quando necessário",
       "Cliente liga para vendedor para saber status",
-      "Vendedor consulta portal e retorna informacao"
+      "Vendedor consulta portal e retorna informação"
     ],
     "problemas": [
       "Redundancia de dados entre sistemas",
-      "Inconsistencias entre Portal Logistico e SAP",
+      "Inconsistencias entre Portal Logístico e SAP",
       "Retrabalho constante para manter sistemas sincronizados",
       "Cliente sem visibilidade autonoma do status de entrega",
-      "Erros de digitacao ao replicar informacoes",
-      "Atraso na atualizacao de status",
-      "Dependencia de operador para consultas basicas",
+      "Erros de digitação ao replicar informações",
+      "Atraso na atualização de status",
+      "Dependência de operador para consultas basicas",
       "Dificuldade de rastreabilidade end-to-end"
     ],
     "tempoMedio": "Variavel (depende da complexidade)"
   },
   "toBe": {
-    "descricao": "Integracao completa entre Portal Logistico e SAP com sincronizacao automatica bidirecional. Status de entrega atualizado em tempo real e visivel tanto para operadores quanto para clientes atraves do Portal de Autoatendimento.",
+    "descrição": "Integração completa entre Portal Logístico e SAP com sincronização automática bidirecional. Status de entrega atualizado em tempo real e visível tanto para operadores quanto para clientes atraves do Portal de Autoatendimento.",
     "passos": [
-      "Pedido faturado no SAP gera registro automatico no Portal Logistico",
-      "Dados de transporte sincronizados automaticamente",
+      "Pedido faturado no SAP gera registro automático no Portal Logístico",
+      "Dados de transporte sincronizados automáticamente",
       "Transportadora atualiza status no portal",
-      "Status refletido automaticamente no SAP",
+      "Status refletido automáticamente no SAP",
       "Cliente consulta status pelo Portal de Autoatendimento",
-      "Notificacoes automaticas de eventos relevantes",
-      "Historico completo de movimentacao disponivel",
+      "Notificações automáticas de eventos relevantes",
+      "Histórico completo de movimentação disponível",
       "Comprovante de entrega digitalizado e vinculado"
     ],
     "beneficios": [
-      "Eliminacao de redundancia de dados",
+      "Eliminação de redundancia de dados",
       "Dados consistentes entre todos os sistemas",
       "Processo otimizado sem retrabalho",
       "Cliente com visibilidade autonoma 24/7",
       "Rastreabilidade completa da entrega",
-      "Reducao de chamados ao vendedor",
-      "Notificacoes proativas de eventos",
-      "Historico auditavel de entregas"
+      "Redução de chamados ao vendedor",
+      "Notificações proativas de eventos",
+      "Histórico auditavel de entregas"
     ],
-    "tempoMedio": "Automatico (segundos)"
+    "tempoMedio": "Automático (segundos)"
   },
-  "areasImpactadas": [
-    "Logistica",
+  "áreasImpactadas": [
+    "Logística",
     "TI",
     "Comercial",
     "Atendimento"
   ],
   "status": "Pendente",
-  "fonteReuniao": "16/12/2025",
-  "fontesReuniao": [
-    "16/12/2025 - Mencao a integracao com Portal Logistico",
-    "10/12/2025 - Discussao sobre redundancia de dados"
+  "fonteReunião": "16/12/2025",
+  "fontesReunião": [
+    "16/12/2025 - Menção a integração com Portal Logístico",
+    "10/12/2025 - Discussão sobre redundancia de dados"
   ],
   "fontesVerificadas": {
-    "reuniao16dez": [
-      "Integracao pendente com Portal Logistico",
+    "reunião16dez": [
+      "Integração pendente com Portal Logístico",
       "Evitar redundancia de dados"
     ],
-    "citacaoExata": "Leandro (1:32:xx): 'A gente falou sobre a parte de logistica, ai ficou uma pendencia depois para a gente fazer uma proxima reuniao aqui e verificar la aquela integracao com o portal logistico, uma vez que a gente ja integra com o SAP, tem que verificar essa questao do portal Logistica, integrar com o SAP tambem para evitar e redundancia.'",
-    "cadernoTestes": "Nenhum caso de teste especifico para logistica no caderno atual",
-    "status": "Integracao pendente de definicao"
+    "citaçãoExata": "Leandro (1:32:xx): 'A gente falou sobre a parte de logística, ai ficou uma pendência depois para a gente fazer uma próxima reunião aqui e verificar la aquela integração com o portal logístico, uma vez que a gente ja integra com o SAP, tem que verificar essa questao do portal Logística, integrar com o SAP tambem para evitar e redundancia.'",
+    "cadernoTestes": "Nenhum caso de teste específico para logística no caderno atual",
+    "status": "Integração pendente de definição"
   },
   "campos": [
     {
-      "campo": "Numero do Pedido",
-      "descricao": "Numero do pedido de venda no SAP",
-      "preenchimento": "Automatico (SAP)",
-      "validacao": "Obrigatorio",
-      "obrigatorio": true
+      "campo": "Número do Pedido",
+      "descrição": "Número do pedido de venda no SAP",
+      "preenchimento": "Automático (SAP)",
+      "validação": "Obrigatório",
+      "obrigatório": true
     },
     {
-      "campo": "Numero NF-e",
-      "descricao": "Numero da nota fiscal de saida",
-      "preenchimento": "Automatico (SAP)",
-      "validacao": "Obrigatorio",
-      "obrigatorio": true
+      "campo": "Número NF-e",
+      "descrição": "Número da nota fiscal de saida",
+      "preenchimento": "Automático (SAP)",
+      "validação": "Obrigatório",
+      "obrigatório": true
     },
     {
       "campo": "Transportadora",
-      "descricao": "Empresa responsavel pelo transporte",
-      "preenchimento": "Automatico (SAP)",
-      "validacao": "-",
-      "obrigatorio": true
+      "descrição": "Empresa responsável pelo transporte",
+      "preenchimento": "Automático (SAP)",
+      "validação": "-",
+      "obrigatório": true
     },
     {
       "campo": "Status Entrega",
-      "descricao": "Status atual da entrega",
-      "preenchimento": "Automatico (Portal)",
-      "validacao": "-",
-      "obrigatorio": true,
+      "descrição": "Status atual da entrega",
+      "preenchimento": "Automático (Portal)",
+      "validação": "-",
+      "obrigatório": true,
       "valores": [
         "Aguardando Coleta",
         "Em Transito",
@@ -110,86 +110,86 @@
       ]
     },
     {
-      "campo": "Data Previsao",
-      "descricao": "Data prevista para entrega",
-      "preenchimento": "Automatico",
-      "validacao": "-",
-      "obrigatorio": true
+      "campo": "Data Previsão",
+      "descrição": "Data prevista para entrega",
+      "preenchimento": "Automático",
+      "validação": "-",
+      "obrigatório": true
     },
     {
       "campo": "Data Entrega Efetiva",
-      "descricao": "Data real da entrega",
-      "preenchimento": "Automatico (Portal)",
-      "validacao": "-",
-      "obrigatorio": false
+      "descrição": "Data real da entrega",
+      "preenchimento": "Automático (Portal)",
+      "validação": "-",
+      "obrigatório": false
     },
     {
-      "campo": "Codigo Rastreamento",
-      "descricao": "Codigo para rastreamento na transportadora",
-      "preenchimento": "Automatico",
-      "validacao": "-",
-      "obrigatorio": false
+      "campo": "Código Rastreamento",
+      "descrição": "Código para rastreamento na transportadora",
+      "preenchimento": "Automático",
+      "validação": "-",
+      "obrigatório": false
     },
     {
       "campo": "Comprovante Entrega",
-      "descricao": "Documento de comprovacao da entrega",
+      "descrição": "Documento de comprovação da entrega",
       "preenchimento": "Upload (Transportadora)",
-      "validacao": "-",
-      "obrigatorio": false
+      "validação": "-",
+      "obrigatório": false
     }
   ],
-  "regrasNegocio": [
+  "regrasNegócio": [
     {
-      "regra": "Sincronizacao Automatica SAP-Portal",
-      "descricao": "Ao criar remessa no SAP, os dados sao enviados automaticamente para o Portal Logistico"
+      "regra": "Sincronização Automática SAP-Portal",
+      "descrição": "Ao criar remessa no SAP, os dados sao enviados automáticamente para o Portal Logístico"
     },
     {
-      "regra": "Atualizacao de Status em Tempo Real",
-      "descricao": "Quando a transportadora atualiza o status no portal, a informacao e refletida automaticamente no SAP e no Portal de Autoatendimento"
+      "regra": "Atualização de Status em Tempo Real",
+      "descrição": "Quando a transportadora atualiza o status no portal, a informação e refletida automáticamente no SAP e no Portal de Autoatendimento"
     },
     {
-      "regra": "Notificacao de Eventos",
-      "descricao": "Cliente recebe notificacao automatica quando pedido sai para entrega e quando e entregue"
+      "regra": "Notificação de Eventos",
+      "descrição": "Cliente recebe notificação automática quando pedido sai para entrega e quando e entregue"
     },
     {
-      "regra": "Vinculacao de Comprovante",
-      "descricao": "O comprovante de entrega digitalizado e vinculado automaticamente ao pedido e disponibilizado no Portal de Autoatendimento"
+      "regra": "Vinculação de Comprovante",
+      "descrição": "O comprovante de entrega digitalizado e vinculado automáticamente ao pedido e disponibilizado no Portal de Autoatendimento"
     },
     {
       "regra": "Calculo de SLA",
-      "descricao": "Sistema calcula automaticamente o cumprimento do prazo de entrega comparando data prevista com data efetiva"
+      "descrição": "Sistema calcula automáticamente o cumprimento do prazo de entrega comparando data prevista com data efetiva"
     }
   ],
-  "sistemasTecnicos": [
-    "Portal Logistico",
+  "sistemasTécnicos": [
+    "Portal Logístico",
     "SAP ECC",
     "Salesforce",
     "Portal de Autoatendimento"
   ],
-  "integracoes": [
+  "integrações": [
     {
       "origem": "SAP",
-      "destino": "Portal Logistico",
+      "destino": "Portal Logístico",
       "tipo": "API",
-      "descricao": "Envio de dados de remessa e transporte"
+      "descrição": "Envio de dados de remessa e transporte"
     },
     {
-      "origem": "Portal Logistico",
+      "origem": "Portal Logístico",
       "destino": "SAP",
       "tipo": "API",
-      "descricao": "Retorno de status de entrega e comprovantes"
+      "descrição": "Retorno de status de entrega e comprovantes"
     },
     {
-      "origem": "Portal Logistico",
+      "origem": "Portal Logístico",
       "destino": "Portal Autoatendimento",
       "tipo": "API",
-      "descricao": "Disponibilizacao de status para consulta do cliente"
+      "descrição": "Disponibilização de status para consulta do cliente"
     },
     {
       "origem": "Transportadora",
-      "destino": "Portal Logistico",
+      "destino": "Portal Logístico",
       "tipo": "EDI/API",
-      "descricao": "Atualizacao de status de rastreamento"
+      "descrição": "Atualização de status de rastreamento"
     }
   ],
   "mensagensSistema": [
@@ -205,60 +205,60 @@
     },
     {
       "tipo": "Erro",
-      "contexto": "Sincronizacao Falhou",
-      "mensagem": "Falha na sincronizacao com Portal Logistico. Tente novamente."
+      "contexto": "Sincronização Falhou",
+      "mensagem": "Falha na sincronização com Portal Logístico. Tente novamente."
     },
     {
       "tipo": "Info",
       "contexto": "Em Transito",
-      "mensagem": "Seu pedido esta em transito. Previsao de entrega: {data}"
+      "mensagem": "Seu pedido esta em transito. Previsão de entrega: {data}"
     }
   ],
   "detalhes": {
-    "integracao": "Sincronizacao bidirecional SAP <-> Portal Logistico",
-    "rastreamento": "Codigo de rastreamento disponivel para cliente",
-    "comprovantes": "Digitalizacao e vinculacao automatica",
+    "integração": "Sincronização bidirecional SAP <-> Portal Logístico",
+    "rastreamento": "Código de rastreamento disponível para cliente",
+    "comprovantes": "Digitalização e vinculação automática",
     "visibilidade": "Status em tempo real via Portal de Autoatendimento"
   },
-  "statusIntegracao": {
-    "situacao": "PENDENTE DEFINICAO",
-    "fonte": "Reuniao 16/12/2025 - Leandro",
-    "descricao": "Integracao com Portal Logistico identificada como pendencia. Reuniao futura necessaria para definir especificacoes tecnicas.",
-    "nota": "Detalhes de API, endpoints, mapeamento de status e SLAs serao definidos em reuniao especifica com equipe do Portal Logistico"
+  "statusIntegração": {
+    "situação": "PENDENTE DEFINICAO",
+    "fonte": "Reunião 16/12/2025 - Leandro",
+    "descrição": "Integração com Portal Logístico identificada como pendência. Reunião futura necessaria para definir específicações tecnicas.",
+    "nota": "Detalhes de API, endpoints, mapeamento de status e SLAs serao definidos em reunião específica com equipe do Portal Logístico"
   },
   "alertaCritico": {
     "tipo": "BLOQUEANTE",
-    "mensagem": "ATENCAO: Integracao com Portal Logistico NAO DEFINIDA. Agendar reuniao com fornecedor para especificar API, endpoints e autenticacao. Sem isso, jornada nao pode ser implementada.",
-    "acaoNecessaria": "Reuniao tecnica com equipe do Portal Logistico",
-    "responsavel": "TI + Logistica",
+    "mensagem": "ATENCAO: Integração com Portal Logístico NAO DEFINIDA. Agendar reunião com fornecedor para específicar API, endpoints e autenticação. Sem isso, jornada não pode ser implementada.",
+    "açãoNecessaria": "Reunião tecnica com equipe do Portal Logístico",
+    "responsável": "TI + Logística",
     "prazoSugerido": "1 semana"
   },
-  "pendencias": [
-    "Definicao da integracao bidirecional SAP-Portal Logistico",
+  "pendências": [
+    "Definição da integração bidirecional SAP-Portal Logístico",
     "Mapeamento de status entre sistemas",
-    "Definicao de regras de notificacao automatica",
-    "Integracao com principais transportadoras"
+    "Definição de regras de notificação automática",
+    "Integração com principais transportadoras"
   ],
   "prerequisitos": [
-    "API do Portal Logistico disponivel e documentada",
-    "Middleware SAP configurado para comunicacao",
+    "API do Portal Logístico disponível e documentada",
+    "Middleware SAP configurado para comunicação",
     "Portal de Autoatendimento operacional"
   ],
   "ciclosTeste": [
     {
       "documento": "Pendente",
-      "titulo": "Testes de Integracao Portal Logistico",
+      "título": "Testes de Integração Portal Logístico",
       "status": "A Definir",
       "data": "-",
-      "descricao": "Testes de integracao entre SAP e Portal Logistico ainda nao definidos",
+      "descrição": "Testes de integração entre SAP e Portal Logístico ainda não definidos",
       "cenarios": [
-        "Sincronizacao automatica de remessa SAP -> Portal",
-        "Atualizacao de status pelo transportador",
-        "Notificacao automatica ao cliente",
-        "Vinculacao de comprovante de entrega",
+        "Sincronização automática de remessa SAP -> Portal",
+        "Atualização de status pelo transportador",
+        "Notificação automática ao cliente",
+        "Vinculação de comprovante de entrega",
         "Rastreamento em tempo real"
       ],
-      "nota": "Casos de teste serao definidos apos especificacao tecnica da integracao"
+      "nota": "Casos de teste serao definidos apos específicação tecnica da integração"
     }
   ],
   "relacionamentos": {
@@ -268,43 +268,43 @@
     "habilitaPara": [
       "autoatendimento"
     ],
-    "nota": "Integracao pendente de definicao para evitar redundancia de dados entre Portal Logistico e demais sistemas"
+    "nota": "Integração pendente de definição para evitar redundancia de dados entre Portal Logístico e demais sistemas"
   },
-  "discussaoReunioes": {
+  "discussãoReuniões": {
     "16dez2025": {
       "apresentador": "Leandro da Cruz Pereira",
       "timestamp": "1:33",
-      "contexto": "Recapitulacao dos temas discutidos e identificacao de pendencia critica",
-      "citacao": "A gente falou sobre a parte de logistica, ai ficou uma pendencia depois para a gente fazer uma proxima reuniao aqui e verificar la aquela integracao com o portal logistico, uma vez que a gente ja integra com o SAP, tem que verificar essa questao do portal Logistica, integrar com o SAP tambem para evitar e redundancia dos dados.",
+      "contexto": "Recapitulação dos temas discutidos e identificação de pendência critica",
+      "citação": "A gente falou sobre a parte de logística, ai ficou uma pendência depois para a gente fazer uma próxima reunião aqui e verificar la aquela integração com o portal logístico, uma vez que a gente ja integra com o SAP, tem que verificar essa questao do portal Logística, integrar com o SAP tambem para evitar e redundancia dos dados.",
       "problemasIdentificados": [
-        "Portal Logistico opera separado do SAP",
-        "Integracao atual com SAP ja existe",
-        "Portal Logistico NAO integrado ainda",
+        "Portal Logístico opera separado do SAP",
+        "Integração atual com SAP ja existe",
+        "Portal Logístico NAO integrado ainda",
         "Risco de redundancia de dados entre os dois sistemas"
       ],
-      "acaoDefinida": "Agendar proxima reuniao para verificar integracao com portal logistico",
-      "statusAcao": "Pendente"
+      "açãoDefinida": "Agendar próxima reunião para verificar integração com portal logístico",
+      "statusAção": "Pendente"
     }
   },
-  "contextoReuniao": {
+  "contextoReunião": {
     "projeto": "GTM (Go To Market) / CRM",
-    "lideranca": {
+    "liderança": {
       "business": "Thalita Merisio Rhein",
-      "tecnico": "Leandro da Cruz Pereira"
+      "técnico": "Leandro da Cruz Pereira"
     },
     "timeline": {
       "workshops": "04/12 a 22/12/2025",
-      "posWorkshop": "Responsabilidade passa para usuarios (Castro)",
+      "posWorkshop": "Responsabilidade passa para usuários (Castro)",
       "entregaveis": [
         "Planilha de cenarios",
-        "Manual de orientacao"
+        "Manual de orientação"
       ]
     },
     "participantes": [
       {
         "nome": "Leandro da Cruz Pereira",
         "papel": "TI/Apresentador",
-        "contribuicao": "Identificou pendencia de integracao"
+        "contribuição": "Identificou pendência de integração"
       },
       {
         "nome": "Thalita Merisio Rhein",
@@ -314,14 +314,14 @@
   },
   "documentosRelacionados": [],
   "totalDocumentos": 0,
-  "ultimaAtualizacao": "2026-01-13T11:36:26.120936",
+  "últimaAtualização": "2026-01-13T11:36:26.120936",
   "documentosGerais": [
     {
       "tipo": "Plano de Testes Exploratorios",
       "id": "909100"
     },
     {
-      "tipo": "Boot/Automacao",
+      "tipo": "Boot/Automação",
       "id": "Boot"
     },
     {

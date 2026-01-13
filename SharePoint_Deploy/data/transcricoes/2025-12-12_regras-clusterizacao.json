@@ -1,8 +1,8 @@
 {
-  "reuniao": {
-    "titulo": "Novas Regras de Clusterização e Apuração de Resultados GTM",
+  "reunião": {
+    "título": "Novas Regras de Clusterização e Apuração de Resultados GTM",
     "data": "2025-12-12",
-    "duracao": "53:27",
+    "duração": "53:27",
     "tipo": "Meeting Recording",
     "fonte": "SharePoint/Stream",
     "tamanho": "413 MB",
@@ -26,153 +26,153 @@
     "Fabi (mencionado)",
     "Ronildo (mencionado)"
   ],
-  "topicos": [
-    "Visao geral de clusterizacao de clientes",
-    "Dimensoes de clusterizacao",
+  "tópicos": [
+    "Visão geral de clusterização de clientes",
+    "Dimensoes de clusterização",
     "Clusters de clientes",
-    "Implementacao no sistema",
+    "Implementação no sistema",
     "Desafios em dados de clientes",
     "Custo de servir clientes",
-    "Integracao com sistemas de relatorios",
-    "Proximos passos"
+    "Integração com sistemas de relatórios",
+    "Próximos passos"
   ],
   "capitulos": [
     {
       "timestamp": "0:17",
-      "titulo": "Visao Geral de Clusterizacao de Clientes",
-      "descricao": "Ciorlia apresenta visao geral do processo de clusterizacao, enfatizando tres dimensoes principais: setor do cliente, atratividade e regiao"
+      "título": "Visão Geral de Clusterização de Clientes",
+      "descrição": "Ciorlia apresenta visão geral do processo de clusterização, enfatizando tres dimensoes principais: setor do cliente, atratividade e região"
     },
     {
       "timestamp": "3:03",
-      "titulo": "Dimensoes de Clusterizacao",
-      "descricao": "Detalhamento das tres dimensoes: setor do cliente, atratividade baseada em volume potencial, e regiao"
+      "título": "Dimensoes de Clusterização",
+      "descrição": "Detalhamento das tres dimensoes: setor do cliente, atratividade baseada em volume potencial, e região"
     },
     {
       "timestamp": "5:47",
-      "titulo": "Clusters de Clientes",
-      "descricao": "Descricao dos quatro clusters principais: contas corporativas, contas especiais, contas regionais e contas dispersas"
+      "título": "Clusters de Clientes",
+      "descrição": "Descrição dos quatro clusters principais: contas corporativas, contas especiais, contas regionais e contas dispersas"
     },
     {
       "timestamp": "10:36",
-      "titulo": "Implementacao no Sistema",
-      "descricao": "Sistema de cadastro de clientes agora inclui informacoes de segmentos e clusters com determinacao automatica"
+      "título": "Implementação no Sistema",
+      "descrição": "Sistema de cadastro de clientes agora inclui informações de segmentos e clusters com determinação automática"
     },
     {
       "timestamp": "11:28",
-      "titulo": "Desafios em Dados de Clientes",
-      "descricao": "Discussao sobre desafios na manutencao de dados precisos, incluindo atribuicoes manuais de cluster"
+      "título": "Desafios em Dados de Clientes",
+      "descrição": "Discussão sobre desafios na manutenção de dados precisos, incluindo atribuições manuais de cluster"
     },
     {
       "timestamp": "13:14",
-      "titulo": "Custo de Servir Clientes",
-      "descricao": "Importancia de entender o custo de servir diferentes clusters, rastreando descontos e despesas de viagem"
+      "título": "Custo de Servir Clientes",
+      "descrição": "Importancia de entender o custo de servir diferentes clusters, rastreando descontos e despesas de viagem"
     },
     {
       "timestamp": "18:23",
-      "titulo": "Integracao com Sistemas de Relatorios",
-      "descricao": "Integracao de dados de clusterizacao com sistemas de relatorios, necessidade de fontes de dados consistentes"
+      "título": "Integração com Sistemas de Relatórios",
+      "descrição": "Integração de dados de clusterização com sistemas de relatórios, necessidade de fontes de dados consistentes"
     },
     {
       "timestamp": "29:38",
-      "titulo": "Proximos Passos",
-      "descricao": "Testes adicionais do algoritmo de clusterizacao e esforcos de limpeza de dados"
+      "título": "Próximos Passos",
+      "descrição": "Testes adicionais do algoritmo de clusterização e esforcos de limpeza de dados"
     }
   ],
-  "acoes": [
+  "ações": [
     {
-      "acao": "Integracao de Dados de Cluster em Relatorios",
+      "ação": "Integração de Dados de Cluster em Relatórios",
       "timestamp": "15:34",
-      "descricao": "Revisar e confirmar se campos de cluster, segmento, subsegmento e setor industrial estao disponiveis nos relatorios BWA/Power BI",
+      "descrição": "Revisar e confirmar se campos de cluster, segmento, subsegmento e setor industrial estao disponiveis nos relatórios BWA/Power BI",
       "responsaveis": ["Kinoshita", "Pereira", "Riqueti"],
       "prazo": "A definir"
     },
     {
-      "acao": "Teste e Validacao do Algoritmo de Cluster",
+      "ação": "Teste e Validação do Algoritmo de Cluster",
       "timestamp": "29:25",
-      "descricao": "Testar o calculo automatico de cluster no sistema CRM para garantir alinhamento com a metodologia definida",
+      "descrição": "Testar o calculo automático de cluster no sistema CRM para garantir alinhamento com a métodologia definida",
       "responsaveis": ["Ciorlia", "Pinheiro", "Kaiky", "Thalita"],
       "prazo": "A definir"
     },
     {
-      "acao": "Limpeza de Dados de Clientes",
+      "ação": "Limpeza de Dados de Clientes",
       "timestamp": "30:57",
-      "descricao": "Conduzir revisao completa e limpeza do banco de dados de clientes para corrigir atribuicoes de cluster incorretas",
+      "descrição": "Conduzir revisão completa e limpeza do banco de dados de clientes para corrigir atribuições de cluster incorretas",
       "responsaveis": ["Ciorlia", "Rhein", "Almeida", "Aline", "Victoria"],
       "prazo": "A definir"
     },
     {
-      "acao": "Reunioes de Higiene de Dados de Cluster",
+      "ação": "Reuniões de Higiene de Dados de Cluster",
       "timestamp": "32:14",
-      "descricao": "Reagendar reunioes com areas DCPC e DCCI para avancar processo de higiene de dados de cluster",
+      "descrição": "Reagendar reuniões com áreas DCPC e DCCI para avancar processo de higiene de dados de cluster",
       "responsaveis": ["Rhein", "Aline", "Victoria"],
       "prazo": "A definir"
     },
     {
-      "acao": "Documentacao de Mudancas de Processo",
+      "ação": "Documentação de Mudanças de Processo",
       "timestamp": "26:38",
-      "descricao": "Completar documentacao comparando processos anteriores e novos pos-implementacao GTM",
+      "descrição": "Completar documentação comparando processos anteriores e novos pos-implementação GTM",
       "responsaveis": ["Pereira", "TEI team", "Lucas", "Riqueti", "Victoria"],
       "prazo": "A definir"
     },
     {
-      "acao": "Revisao de Metodologia de Alocacao de Despesas",
+      "ação": "Revisão de Métodologia de Alocação de Despesas",
       "timestamp": "38:52",
-      "descricao": "Organizar reuniao para revisar criterios de alocacao de despesas (SG&A e custos de viagem) para clusters",
+      "descrição": "Organizar reunião para revisar critérios de alocação de despesas (SG&A e custos de viagem) para clusters",
       "responsaveis": ["Pereira", "Kinoshita", "Ciorlia", "Monteiro", "Kathleen", "Lucas"],
       "prazo": "A definir"
     },
     {
-      "acao": "Fonte de Dados Unificada para Relatorios",
+      "ação": "Fonte de Dados Unificada para Relatórios",
       "timestamp": "27:11",
-      "descricao": "Coordenar entre todas as areas para alinhar em uma unica fonte de dados para Power BI e outros relatorios",
+      "descrição": "Coordenar entre todas as áreas para alinhar em uma unica fonte de dados para Power BI e outros relatórios",
       "responsaveis": ["Pereira", "Monteiro", "Rhein", "Riqueti", "Marketing", "TI"],
       "prazo": "A definir"
     },
     {
-      "acao": "Reuniao de Acompanhamento sobre Cluster e Integracao de Relatorios",
+      "ação": "Reunião de Acompanhamento sobre Cluster e Integração de Relatórios",
       "timestamp": "17:44",
-      "descricao": "Realizar reuniao com Controladoria e stakeholders para alinhar integracao de dados de cluster",
+      "descrição": "Realizar reunião com Controladoria e stakeholders para alinhar integração de dados de cluster",
       "responsaveis": ["Rhein", "Controladoria", "Riqueti", "Leandro", "Rogerio", "Fabi", "Ronildo"],
-      "prazo": "Proxima quarta-feira"
+      "prazo": "Próxima quarta-feira"
     }
   ],
   "pontosPrincipais": [
     {
-      "topico": "Quatro Clusters de Clientes",
-      "descricao": "Contas corporativas, especiais, regionais e dispersas - cada uma com abordagem de servico diferente",
-      "impacto": "Segmentacao estrategica de atendimento"
+      "tópico": "Quatro Clusters de Clientes",
+      "descrição": "Contas corporativas, especiais, regionais e dispersas - cada uma com abordagem de serviço diferente",
+      "impacto": "Segmentação estratégica de atendimento"
     },
     {
-      "topico": "Tres Dimensoes de Clusterizacao",
-      "descricao": "Setor do cliente, atratividade (volume potencial) e regiao geografica",
-      "impacto": "Base para determinacao automatica de cluster"
+      "tópico": "Tres Dimensoes de Clusterização",
+      "descrição": "Setor do cliente, atratividade (volume potencial) e região geografica",
+      "impacto": "Base para determinação automática de cluster"
     },
     {
-      "topico": "Calculo Automatico de Cluster",
-      "descricao": "Sistema CRM determina cluster automaticamente baseado em segmentos",
-      "impacto": "Reducao de atribuicoes manuais incorretas"
+      "tópico": "Calculo Automático de Cluster",
+      "descrição": "Sistema CRM determina cluster automáticamente baseado em segmentos",
+      "impacto": "Redução de atribuições manuais incorretas"
     },
     {
-      "topico": "Custo de Servir",
-      "descricao": "Necessidade de rastrear custos (descontos, viagens) por cluster",
+      "tópico": "Custo de Servir",
+      "descrição": "Necessidade de rastrear custos (descontos, viagens) por cluster",
       "impacto": "Rentabilidade por cluster"
     },
     {
-      "topico": "Integracao BWA/Power BI",
-      "descricao": "Garantir campos de cluster disponiveis em relatorios",
-      "impacto": "Visibilidade para gestao"
+      "tópico": "Integração BWA/Power BI",
+      "descrição": "Garantir campos de cluster disponiveis em relatórios",
+      "impacto": "Visibilidade para gestão"
     },
     {
-      "topico": "Higiene de Dados",
-      "descricao": "Limpeza de dados de clientes legados com clusters incorretos",
-      "impacto": "Qualidade de dados para analises"
+      "tópico": "Higiene de Dados",
+      "descrição": "Limpeza de dados de clientes legados com clusters incorretos",
+      "impacto": "Qualidade de dados para análises"
     }
   ],
   "jornadasRelacionadas": [
     "cadastro-cliente",
-    "hub-gestao",
+    "hub-gestão",
     "workflow-pricing"
   ],
-  "statusExtracao": "Completo via Copilot - Key Topics e Action Items",
-  "ultimaAtualizacao": "2026-01-13"
+  "statusExtração": "Completo via Copilot - Key Topics e Action Items",
+  "últimaAtualização": "2026-01-13"
 }

@@ -1,14 +1,14 @@
 {
   "projeto": {
     "nome": "GTM Vendas - Belgo Arames",
-    "fase": "II - Testes e Validacao",
+    "fase": "II - Testes e Validação",
     "goLive": "15/03/2026",
     "sistemas": [
       "Salesforce",
       "SAP ECC",
       "SINTEGRA",
       "FSCM",
-      "Portal Logistico",
+      "Portal Logístico",
       "SEFAZ",
       "Daniel (certificados)",
       "Spa (documentos)",
@@ -19,14 +19,14 @@
       "30": "A verificar",
       "40": "A verificar",
       "25": "A verificar",
-      "nota": "Canais mencionados na reuniao 10/12, mas criterios nao detalhados"
+      "nota": "Canais mencionados na reunião 10/12, mas critérios não detalhados"
     },
     "equipe": {
-      "gerenteNegocio": "Thalita Merisio Rhein",
+      "gerenteNegócio": "Thalita Merisio Rhein",
       "ti": "Leandro da Cruz Pereira",
-      "transicao": "Dani Tamerao saiu, Audrey em licenca maternidade"
+      "transição": "Dani Tamerao saiu, Audrey em licença maternidade"
     },
-    "areasCredito": {
+    "áreasCrédito": {
       "confirmado": [
         "BBA",
         "CSP",
@@ -39,11 +39,11 @@
         "CSP": ["Supplier", "Belgo Cash"],
         "ALPE": ["BTC", "ABPE"]
       },
-      "nota": "4 areas de credito confirmadas via triple check (reunioes 03/12, 04/12, 10/12, 16/12)"
+      "nota": "4 áreas de crédito confirmadas via triple check (reuniões 03/12, 04/12, 10/12, 16/12)"
     },
     "timeline": {
       "workshops": "04/12 a 22/12/2025",
-      "posWorkshop": "Responsabilidade passa para usuarios",
+      "posWorkshop": "Responsabilidade passa para usuários",
       "goLive": "15/03/2026"
     }
   },
@@ -56,7 +56,7 @@
       "status": "Em Andamento"
     },
     {
-      "id": "areas-vendas",
+      "id": "áreas-vendas",
       "nome": "Áreas de Vendas",
       "icone": "🏢",
       "ordem": 2,
@@ -77,7 +77,7 @@
       "status": "Pendente"
     },
     {
-      "id": "logistica",
+      "id": "logística",
       "nome": "Portal Logístico",
       "icone": "🚚",
       "ordem": 5,
@@ -112,25 +112,25 @@
       "status": "Em Andamento"
     },
     {
-      "id": "cotacao-ov",
-      "nome": "Cotacao e Ordem de Vendas",
+      "id": "cotação-ov",
+      "nome": "Cotação e Ordem de Vendas",
       "icone": "📋",
       "ordem": 10,
       "status": "Em Andamento"
     },
     {
-      "id": "hub-gestao",
-      "nome": "Hub de Gestao OC",
+      "id": "hub-gestão",
+      "nome": "Hub de Gestão OC",
       "icone": "⚙️",
       "ordem": 11,
       "status": "Em Andamento"
     }
   ],
-  "ultimaAtualizacao": "2026-01-13T11:36:26.126028",
+  "últimaAtualização": "2026-01-13T11:36:26.126028",
   "totalDocumentos": 69,
   "totalPlanilhas": 6,
   "arquivosConfig": [
-    "data/config/areas-credito.json",
+    "data/config/áreas-crédito.json",
     "data/config/canais.json",
     "data/glossario.json",
     "data/timeline.json",

@@ -1,112 +1,112 @@
 {
   "id": "2025-12-04_kickoff",
   "data": "2025-12-04",
-  "titulo": "GTM - Desenho AS-IS e TO-BE - Kickoff Workshops",
-  "duracao": "1h 54min 26s",
+  "título": "GTM - Desenho AS-IS e TO-BE - Kickoff Workshops",
+  "duração": "1h 54min 26s",
   "tipo": "Workshop AS-IS/TO-BE",
   "status": "Concluido",
-  "transcricaoPath": "data/transcricoes/2025-12-04_kickoff-workshops.txt",
-  "resumo": "Primeira reuniao de workshops para alinhamento do projeto GTM. Definicao de key users, explicacao do cenario atual (caderno de testes liberado pela TI) e necessidade de preparacao do negocio para testes.",
+  "transcriçãoPath": "data/transcricoes/2025-12-04_kickoff-workshops.txt",
+  "resumo": "Primeira reunião de workshops para alinhamento do projeto GTM. Definição de key users, explicação do cenario atual (caderno de testes liberado pela TI) e necessidade de preparação do negócio para testes.",
   "participantes": [
-    {"nome": "Thalita Rhein", "papel": "Gerente Negocio GTM", "area": "Comercial/Marketing"},
+    {"nome": "Thalita Rhein", "papel": "Gerente Negócio GTM", "area": "Comercial/Marketing"},
     {"nome": "Leandro Cruz", "papel": "Gerente de TI", "area": "TI"},
     {"nome": "Leandro Gimenez", "papel": "PO GTM", "area": "Comercial"},
-    {"nome": "Marcio Silva", "papel": "Operacao", "area": "Smart Center"},
-    {"nome": "Vanessa Souza", "papel": "Analista", "area": "Financeiro/Credito"},
+    {"nome": "Marcio Silva", "papel": "Operação", "area": "Smart Center"},
+    {"nome": "Vanessa Souza", "papel": "Analista", "area": "Financeiro/Crédito"},
     {"nome": "Bruno Machado", "papel": "Key User", "area": "Agro/DCPC"}
   ],
-  "topicosAbordados": [
+  "tópicosAbordados": [
     "Contexto do projeto GTM/CRM",
-    "Transicao de lideranca (Dani -> Audrey -> Thalita)",
+    "Transição de liderança (Dani -> Audrey -> Thalita)",
     "Cadastro de cliente via BRO",
-    "4 areas de credito (CSP, ALPE, DBA, BBA)",
-    "Fluxo de validacao SINTEGRA/Sefaz/Receita",
+    "4 áreas de crédito (CSP, ALPE, DBA, BBA)",
+    "Fluxo de validação SINTEGRA/Sefaz/Receita",
     "Ficha comercial ZW SSD 145"
   ],
   "sistemasDiscutidos": [
-    {"sistema": "BRO", "descricao": "Business Role Objects - cadastro automatizado de clientes"},
-    {"sistema": "XD01/XD02", "descricao": "Transacoes SAP para cadastro de cliente"},
-    {"sistema": "SINTEGRA", "descricao": "Validacao de dados fiscais"},
-    {"sistema": "Sefaz", "descricao": "Secretaria da Fazenda"},
-    {"sistema": "Suframa", "descricao": "Validacao Zona Franca"},
-    {"sistema": "ZW SSD 145", "descricao": "Ficha comercial no SAP"},
-    {"sistema": "KM_BP", "descricao": "Transacao de credito"},
-    {"sistema": "OnBase", "descricao": "Arquivo de documentos"}
+    {"sistema": "BRO", "descrição": "Business Role Objects - cadastro automatizado de clientes"},
+    {"sistema": "XD01/XD02", "descrição": "Transações SAP para cadastro de cliente"},
+    {"sistema": "SINTEGRA", "descrição": "Validação de dados fiscais"},
+    {"sistema": "Sefaz", "descrição": "Secretaria da Fazenda"},
+    {"sistema": "Suframa", "descrição": "Validação Zona Franca"},
+    {"sistema": "ZW SSD 145", "descrição": "Ficha comercial no SAP"},
+    {"sistema": "KM_BP", "descrição": "Transação de crédito"},
+    {"sistema": "OnBase", "descrição": "Arquivo de documentos"}
   ],
-  "citacoesChave": [
+  "citaçõesChave": [
     {
       "autor": "Rhein, Thalita Merisio",
       "timestamp": "0:22",
       "texto": "Esse projeto de go to marketing, go wire, CRM. Cada um esta chamando de uma dessas letrinhas e no fundo faz tudo parte do mesmo projeto. Ele e um projeto da companhia, e um projeto de todos nos.",
-      "contexto": "Abertura explicando unificacao do projeto"
+      "contexto": "Abertura explicando unificação do projeto"
     },
     {
       "autor": "Rhein, Thalita Merisio",
       "timestamp": "1:31",
-      "texto": "Quando eu fui falar com os usuarios Chaves, alguns nao sabiam que eram usuarios Chaves.",
-      "contexto": "Problema identificado - falta de comunicacao"
+      "texto": "Quando eu fui falar com os usuários Chaves, alguns não sabiam que eram usuários Chaves.",
+      "contexto": "Problema identificado - falta de comunicação"
     },
     {
       "autor": "Gimenes, Leandro Augusto",
       "timestamp": "5:22",
-      "texto": "O canal mudou para 100% dos clientes, ou seja, o que existia em canal de clientes hoje nao existe mais na Belgo, foi recriado 3 novos canais.",
-      "contexto": "Impacto estrutural da mudanca de canais"
+      "texto": "O canal mudou para 100% dos clientes, ou seja, o que existia em canal de clientes hoje não existe mais na Belgo, foi recriado 3 novos canais.",
+      "contexto": "Impacto estrutural da mudança de canais"
     },
     {
       "autor": "Silva, Marcio Antonio Do Espirito Santo",
       "timestamp": "9:08",
-      "texto": "Hoje em dia a gente ja ta no BR, nao usa mais a XD mais nao.",
+      "texto": "Hoje em dia a gente ja ta no BR, não usa mais a XD mais não.",
       "contexto": "Evolucao do processo de cadastro"
     },
     {
       "autor": "Pereira, Leandro Da Cruz",
       "timestamp": "9:13",
-      "texto": "Beleza, entao entra com esses dados no BRO. Uma vez que entrou dentro do BRO, ele preenche os dados automaticamente dentro da XD.",
-      "contexto": "Explicacao do fluxo BRO -> SAP"
+      "texto": "Beleza, entao entra com esses dados no BRO. Uma vez que entrou dentro do BRO, ele preenche os dados automáticamente dentro da XD.",
+      "contexto": "Explicação do fluxo BRO -> SAP"
     },
     {
       "autor": "Pereira, Leandro Da Cruz",
       "timestamp": "11:21",
-      "texto": "Entao a gente tem tres areas de credito hoje, que e a CSP a da supplier, a gente tem a da Alb, a gente tem a DBA que e da distribuicao, e a BBA.",
-      "contexto": "Definicao das 4 areas de credito"
+      "texto": "Entao a gente tem tres áreas de crédito hoje, que e a CSP a da supplier, a gente tem a da Alb, a gente tem a DBA que e da distribuição, e a BBA.",
+      "contexto": "Definição das 4 áreas de crédito"
     },
     {
       "autor": "Souza, Vanessa Torres Xavier De",
       "timestamp": "11:35",
       "texto": "Sao 4 que a gente tem.",
-      "contexto": "Confirmacao das 4 areas"
+      "contexto": "Confirmação das 4 áreas"
     },
     {
       "autor": "Souza, Vanessa Torres Xavier De",
       "timestamp": "18:46",
-      "texto": "Todo o novo Cadastro de Cliente, quando ele e feito o Cadastro, ele ja abre com as 4 areas de credito existentes, so que elas nao estao habilitadas.",
-      "contexto": "Processo de habilitacao de credito"
+      "texto": "Todo o novo Cadastro de Cliente, quando ele e feito o Cadastro, ele ja abre com as 4 áreas de crédito existentes, so que elas não estao habilitadas.",
+      "contexto": "Processo de habilitação de crédito"
     },
     {
       "autor": "Gimenes, Leandro Augusto",
       "timestamp": "23:37",
       "texto": "Z W S S D 145. E criar a ficha comercial do cliente do zero.",
-      "contexto": "Transacao SAP para ficha comercial"
+      "contexto": "Transação SAP para ficha comercial"
     }
   ],
   "problemasIdentificados": [
-    "Key users nao sabiam que eram key users",
-    "Usuarios perguntando 'O que eu preciso testar?'",
-    "Usuarios perguntando 'O que mudou no meu processo?'",
+    "Key users não sabiam que eram key users",
+    "Usuários perguntando 'O que eu preciso testar?'",
+    "Usuários perguntando 'O que mudou no meu processo?'",
     "Siglas duplicadas no BRO passam mas SAP bloqueia",
     "Caracteres especiais no cadastro"
   ],
   "decisoesTomadas": [
     "Workshops semanais de 2h para key users",
     "Responsabilidade do comercial iniciar cadastro no BRO",
-    "Smart Center faz complemento de dados se necessario"
+    "Smart Center faz complemento de dados se necessário"
   ],
   "jornadasRelacionadas": [
     "cadastro-cliente",
     "financeiro",
-    "areas-vendas"
+    "áreas-vendas"
   ],
-  "proximosPassos": [
+  "próximosPassos": [
     "Desenhar fluxo AS-IS completo",
     "Apresentar TO-BE com Salesforce",
     "Revisar cadastros de canais"

@@ -1,80 +1,80 @@
 {
-  "titulo": "Glossário - Projeto Belgo BBP",
-  "descricao": "Dicionário de siglas, termos e conceitos do projeto",
-  "dataAtualizacao": "2026-01-13",
+  "título": "Glossário - Projeto Belgo BBP",
+  "descrição": "Dicionário de siglas, termos e conceitos do projeto",
+  "dataAtualização": "2026-01-13",
   "totalTermos": 45,
   "categorias": {
     "sistemas": [
       {
         "sigla": "ASCP",
         "nome": "Advanced Supply Chain Planning",
-        "descricao": "Modulo SAP para gestão de áreas de crédito",
+        "descrição": "Modulo SAP para gestão de áreas de crédito",
         "contexto": "Integração principal para limites de crédito"
       },
       {
         "sigla": "FSCM",
         "nome": "Financial Supply Chain Management",
-        "descricao": "Solucao SAP para gestão financeira da cadeia de suprimentos",
+        "descrição": "Solução SAP para gestão financeira da cadeia de suprimentos",
         "contexto": "Integrado com áreas de crédito"
       },
       {
         "sigla": "BRO",
         "nome": "Business Role Objects",
-        "descricao": "Sistema legado de cadastro de clientes",
+        "descrição": "Sistema legado de cadastro de clientes",
         "contexto": "Sendo substituído pelo novo modelo Salesforce"
       },
       {
         "sigla": "SINTEGRA",
         "nome": "Sistema Integrado de Informações sobre Operações Interestaduais",
-        "descricao": "Base de dados fiscais estaduais",
+        "descrição": "Base de dados fiscais estaduais",
         "contexto": "Integração para validação de dados cadastrais"
       },
       {
         "sigla": "ALPE",
         "nome": "Área Crédito Aços Longos PE",
-        "descricao": "Sistema e área de crédito para Aços Longos",
+        "descrição": "Sistema e área de crédito para Aços Longos",
         "contexto": "Uma das 4 áreas de crédito do projeto"
       },
       {
         "sigla": "GTM",
         "nome": "Go-To-Market",
-        "descricao": "Estrategia de entrada no mercado",
+        "descrição": "Estrategia de entrada no mercado",
         "contexto": "Projeto GTM Vendas - Salesforce"
       },
       {
         "sigla": "Salesforce",
         "alternativas": ["SFDC", "SF"],
         "nome": "Salesforce CRM",
-        "descricao": "Plataforma CRM central do projeto",
+        "descrição": "Plataforma CRM central do projeto",
         "contexto": "Sistema central do projeto - SEMPRE usar 'Salesforce' (não SF ou SFDC)"
       }
     ],
-    "areasCredito": [
+    "áreasCrédito": [
       {
         "sigla": "BBA",
         "alternativo": "ABBA",
         "nome": "Limite Interno Belgo",
-        "descricao": "Area de credito interna",
+        "descrição": "Área de crédito interna",
         "status": "confirmado"
       },
       {
         "sigla": "CSP",
         "nome": "Supply/Belgo Cash",
-        "descricao": "Area de credito supplier",
+        "descrição": "Área de crédito supplier",
         "status": "confirmado"
       },
       {
         "sigla": "DBA",
         "nome": "Distribuição",
         "alternativo": "ADBA",
-        "descricao": "Area de credito distribuidor - gerenciada pela própria Rede",
+        "descrição": "Área de crédito distribuidor - gerênciada pela própria Rede",
         "status": "confirmado"
       },
       {
         "sigla": "ALPE",
         "nome": "Aços Longos PE",
         "alternativo": "ABPE",
-        "descricao": "Area de credito Aços Longos Pernambuco",
+        "descrição": "Área de crédito Aços Longos Pernambuco",
         "status": "confirmado",
         "nota": "Não usar 'Altair' - usar sempre ALPE"
       }
@@ -83,70 +83,70 @@
       {
         "sigla": "Canal 20",
         "nome": "Industria",
-        "descricao": "Canal de vendas industriais"
+        "descrição": "Canal de vendas industriais"
       },
       {
         "sigla": "Canal 25",
         "nome": "Casos Especiais",
-        "descricao": "Exceções e casos especiais"
+        "descrição": "Exceções e casos especiais"
       },
       {
         "sigla": "Canal 30",
         "nome": "Distribuição",
-        "descricao": "Canal de distribuidores"
+        "descrição": "Canal de distribuidores"
       },
       {
         "sigla": "Canal 40",
         "nome": "Consumo",
-        "descricao": "Canal de varejo/consumo"
+        "descrição": "Canal de varejo/consumo"
       }
     ],
     "tiposRegistro": [
       {
         "sigla": "PJ",
         "nome": "Pessoa Juridica",
-        "descricao": "Cliente empresa"
+        "descrição": "Cliente empresa"
       },
       {
         "sigla": "PF",
         "nome": "Pessoa Fisica",
-        "descricao": "Cliente individual"
+        "descrição": "Cliente individual"
       },
       {
         "sigla": "Agrupador",
         "nome": "Conta Agrupadora",
-        "descricao": "Conta que agrupa outras contas (matriz/filiais)"
+        "descrição": "Conta que agrupa outras contas (matriz/filiais)"
       }
     ],
     "processos": [
       {
         "sigla": "FUP",
         "nome": "Follow-Up",
-        "descricao": "Acompanhamento de carteira de clientes",
+        "descrição": "Acompanhamento de carteira de clientes",
         "contexto": "Jornada FUP de Carteira"
       },
       {
         "sigla": "OC",
         "nome": "Ordem de Compra",
-        "descricao": "Pedido de venda",
+        "descrição": "Pedido de venda",
         "contexto": "Hub de Gestão de OC"
       },
       {
         "sigla": "WF",
         "nome": "Workflow",
-        "descricao": "Fluxo de trabalho automatizado",
+        "descrição": "Fluxo de trabalho automatizado",
         "contexto": "Workflow Pricing"
       },
       {
         "sigla": "CNAE",
         "nome": "Classificação Nacional de Atividades Econômicas",
-        "descricao": "Código de atividade empresarial",
+        "descrição": "Código de atividade empresarial",
         "contexto": "Define canal e tratamento fiscal"
       },
       {
         "sigla": "CT",
         "nome": "Caso de Teste",
-        "descricao": "Cenario de teste no caderno de testes",
+        "descrição": "Cenario de teste no caderno de testes",
         "contexto": "CT-01, CT-02, etc."
       }
     ],
@@ -154,77 +154,77 @@
       {
         "sigla": "BBP",
         "nome": "Business Blueprint",
-        "descricao": "Documentacao de processos de negocio"
+        "descrição": "Documentação de processos de negócio"
       },
       {
         "sigla": "HML",
-        "nome": "Homologacao",
-        "descricao": "Ambiente de testes de homologacao"
+        "nome": "Homologação",
+        "descrição": "Ambiente de testes de homologação"
       },
       {
         "sigla": "PRD",
-        "nome": "Producao",
-        "descricao": "Ambiente de producao"
+        "nome": "Produção",
+        "descrição": "Ambiente de produção"
       },
       {
         "sigla": "AS-IS",
         "nome": "Estado Atual",
-        "descricao": "Situacao atual antes da implementacao"
+        "descrição": "Situação atual antes da implementação"
       },
       {
         "sigla": "TO-BE",
         "nome": "Estado Futuro",
-        "descricao": "Situacao desejada apos implementacao"
+        "descrição": "Situação desejada apos implementação"
       },
       {
         "sigla": "GO Live",
         "nome": "Go Live",
-        "descricao": "Data de entrada em producao",
+        "descrição": "Data de entrada em produção",
         "data": "15/03/2026"
       },
       {
         "sigla": "UAT",
         "nome": "User Acceptance Test",
-        "descricao": "Testes de aceitacao do usuario"
+        "descrição": "Testes de aceitação do usuário"
       }
     ],
     "documentos": [
       {
         "sigla": "NF",
         "nome": "Nota Fiscal",
-        "descricao": "Documento fiscal de venda"
+        "descrição": "Documento fiscal de venda"
       },
       {
         "sigla": "DANFE",
         "nome": "Documento Auxiliar da NF-e",
-        "descricao": "Representacao impressa da NF-e"
+        "descrição": "Representação impressa da NF-e"
       },
       {
         "sigla": "NF-e",
         "nome": "Nota Fiscal Eletronica",
-        "descricao": "Nota fiscal em formato eletronico"
+        "descrição": "Nota fiscal em formato eletronico"
       },
       {
         "sigla": "XML",
         "nome": "Extensible Markup Language",
-        "descricao": "Formato de arquivo da NF-e"
+        "descrição": "Formato de arquivo da NF-e"
       }
     ],
     "participantes": [
       {
         "sigla": "KU",
         "nome": "Key User",
-        "descricao": "Usuario-chave do negocio"
+        "descrição": "Usuário-chave do negócio"
       },
       {
         "sigla": "PO",
         "nome": "Product Owner",
-        "descricao": "Dono do produto"
+        "descrição": "Dono do produto"
       },
       {
         "sigla": "DTI",
         "nome": "Diretoria de TI",
-        "descricao": "Area de tecnologia da informacao"
+        "descrição": "Área de tecnologia da informação"
       }
     ],
     "stakeholdersProjeto": [
@@ -245,12 +245,12 @@
       },
       {
         "nome": "Thalita Rhein",
-        "papel": "Gerente Negocio GTM",
+        "papel": "Gerente Negócio GTM",
         "area": "Comercial/Marketing"
       }
     ]
   },
-  "nomenclaturasPadrao": {
+  "nomenclaturasPadrão": {
     "naoUsar": ["ACSAP", "Altair", "SF", "SFDC"],
     "usar": ["ASCP", "ALPE", "Salesforce", "Salesforce"]
   }

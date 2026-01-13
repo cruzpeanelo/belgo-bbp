@@ -1,23 +1,23 @@
 {
-  "titulo": "Timeline - Projeto GTM Vendas Belgo",
-  "descricao": "Linha do tempo com marcos principais do projeto",
-  "dataAtualizacao": "2026-01-13",
+  "título": "Timeline - Projeto GTM Vendas Belgo",
+  "descrição": "Linha do tempo com marcos principais do projeto",
+  "dataAtualização": "2026-01-13",
   "goLive": "2026-03-15",
   "stakeholders": [
     {"nome": "Leandro Cruz", "papel": "Gerente de TI", "area": "TI"},
     {"nome": "Leandro Gimenez", "papel": "PO GTM", "area": "Comercial"},
     {"nome": "Ronildo", "papel": "PO Pricing", "area": "Pricing"},
-    {"nome": "Thalita Rhein", "papel": "Gerente Negocio GTM", "area": "Comercial/Marketing"}
+    {"nome": "Thalita Rhein", "papel": "Gerente Negócio GTM", "area": "Comercial/Marketing"}
   ],
   "fases": [
     {
       "nome": "Fase 1 - Discovery",
-      "periodo": "Out-Nov 2025",
+      "período": "Out-Nov 2025",
       "status": "concluido",
       "marcos": [
         {
           "data": "2025-10-01",
-          "evento": "Inicio do projeto GTM Vendas",
+          "evento": "Início do projeto GTM Vendas",
           "tipo": "marco"
         },
         {
@@ -27,46 +27,46 @@
         },
         {
           "data": "2025-11-04",
-          "evento": "Consolidacao de Investimentos 2026",
+          "evento": "Consolidação de Investimentos 2026",
           "tipo": "documento"
         }
       ]
     },
     {
       "nome": "Fase 2 - Workshops AS-IS/TO-BE",
-      "periodo": "Dez 2025",
+      "período": "Dez 2025",
       "status": "concluido",
       "marcos": [
         {
           "data": "2025-12-03",
           "evento": "Workshop Financeiro/Controladoria",
-          "tipo": "reuniao",
+          "tipo": "reunião",
           "participantes": ["Leandro Cruz", "Thalita Rhein", "Renato Araujo", "Ivano Araujo", "Fernanda Monteiro"],
-          "temas": ["Areas de credito", "Canais de venda", "ASCP", "FSCM", "Cluster", "Setor Industrial"]
+          "temas": ["Áreas de crédito", "Canais de venda", "ASCP", "FSCM", "Cluster", "Setor Industrial"]
         },
         {
           "data": "2025-12-04",
-          "evento": "Kickoff Workshops - Cadastro/Areas",
-          "tipo": "reuniao",
+          "evento": "Kickoff Workshops - Cadastro/Áreas",
+          "tipo": "reunião",
           "participantes": ["Leandro Cruz", "Thalita Rhein", "Leandro Gimenez", "Vanessa Souza", "Bruno Machado", "Marcio Silva"],
           "temas": ["BBA", "CSP", "DBA", "ALPE", "Record Types", "BRO", "Key Users"]
         },
         {
           "data": "2025-12-08",
-          "evento": "Documentacao Boot/Automacao",
+          "evento": "Documentação Boot/Automação",
           "tipo": "documento"
         },
         {
           "data": "2025-12-10",
-          "evento": "Workshop Cadastro Cliente/Areas Venda",
-          "tipo": "reuniao",
+          "evento": "Workshop Cadastro Cliente/Áreas Venda",
+          "tipo": "reunião",
           "participantes": ["Leandro Cruz", "Thalita Rhein", "Leandro Gimenez", "Joao Endo", "Francine Gayer", "Bruno Machado", "Daniel Goncalves", "Jessica Vaz", "Renata Mello"],
-          "temas": ["CNAE", "Canais", "Clusterizacao", "Contatos", "Logistica", "WhatsApp Bot", "Market Share", "Concorrentes"]
+          "temas": ["CNAE", "Canais", "Clusterização", "Contatos", "Logística", "WhatsApp Bot", "Market Share", "Concorrentes"]
         },
         {
           "data": "2025-12-16",
           "evento": "Workshop Docs Fiscais/Autoatendimento",
-          "tipo": "reuniao",
+          "tipo": "reunião",
           "participantes": ["Leandro Cruz", "Thalita Rhein", "Joao Endo", "Francine Gayer", "Vanessa Souza", "Bruno Machado", "Frank Silva"],
           "temas": ["NF-e", "XML", "DANFE", "Boleto", "Consulta Partidas", "App Mobile", "Autoatendimento"]
         }
@@ -74,12 +74,12 @@
     },
     {
       "nome": "Fase 3 - Desenvolvimento/Testes",
-      "periodo": "Dez 2025 - Jan 2026",
+      "período": "Dez 2025 - Jan 2026",
       "status": "em_andamento",
       "marcos": [
         {
           "data": "2025-12-20",
-          "evento": "Inicio ciclo de testes HML",
+          "evento": "Início ciclo de testes HML",
           "tipo": "marco"
         },
         {
@@ -89,7 +89,7 @@
         },
         {
           "data": "2026-01-13",
-          "evento": "Estruturacao BBP completo",
+          "evento": "Estruturação BBP completo",
           "tipo": "marco"
         },
         {
@@ -100,70 +100,70 @@
       ]
     },
     {
-      "nome": "Fase 4 - UAT e Validacao",
-      "periodo": "Fev 2026",
+      "nome": "Fase 4 - UAT e Validação",
+      "período": "Fev 2026",
       "status": "planejado",
       "marcos": [
         {
           "data": "2026-02-03",
-          "evento": "Inicio UAT - Testes de aceitacao",
+          "evento": "Início UAT - Testes de aceitação",
           "tipo": "marco"
         },
         {
           "data": "2026-02-14",
-          "evento": "Validacao cenarios criticos",
+          "evento": "Validação cenarios criticos",
           "tipo": "marco"
         },
         {
           "data": "2026-02-28",
-          "evento": "Conclusao UAT e aprovacao negocio",
+          "evento": "Conclusao UAT e aprovação negócio",
           "tipo": "marco"
         }
       ]
     },
     {
-      "nome": "Fase 5 - Treinamento e Preparacao GO LIVE",
-      "periodo": "Mar 2026",
+      "nome": "Fase 5 - Treinamento e Preparação GO LIVE",
+      "período": "Mar 2026",
       "status": "planejado",
       "marcos": [
         {
           "data": "2026-03-03",
-          "evento": "Inicio treinamento Key Users",
+          "evento": "Início treinamento Key Users",
           "tipo": "marco"
         },
         {
           "data": "2026-03-10",
-          "evento": "Treinamento usuarios finais",
+          "evento": "Treinamento usuários finais",
           "tipo": "marco"
         },
         {
           "data": "2026-03-13",
-          "evento": "Freeze de codigo e preparacao ambiente",
+          "evento": "Freeze de código e preparação ambiente",
           "tipo": "marco"
         },
         {
           "data": "2026-03-15",
-          "evento": "GO LIVE - Entrada em producao",
+          "evento": "GO LIVE - Entrada em produção",
           "tipo": "go_live",
           "criticidade": "alta"
         }
       ]
     }
   ],
-  "proximosPassos": [
+  "próximosPassos": [
     {
       "prioridade": 1,
-      "descricao": "Finalizar testes de integracao ASCP",
+      "descrição": "Finalizar testes de integração ASCP",
       "prazo": "2026-02-07"
     },
     {
       "prioridade": 2,
-      "descricao": "Validar fluxos de workflow pricing",
+      "descrição": "Validar fluxos de workflow pricing",
       "prazo": "2026-02-14"
     },
     {
       "prioridade": 3,
-      "descricao": "Treinar usuarios finais",
+      "descrição": "Treinar usuários finais",
       "prazo": "2026-03-10"
     }
   ]
