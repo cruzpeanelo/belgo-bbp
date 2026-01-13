@@ -234,9 +234,10 @@
     <script>
         function renderStats(data) {
             const container = document.getElementById('stats-row');
-            const totalKeyUsers = data.participantes.length;
+            const keyUsers = data.participantes || data.keyUsers || [];
+            const totalKeyUsers = keyUsers.length;
             const totalTeam = data.equipeProjeto.length;
-            const totalAreas = [...new Set(data.participantes.map(p => p.area))].length;
+            const totalAreas = [...new Set(keyUsers.map(p => p.area).filter(a => a))].length;
 
             container.innerHTML = `
                 <div class="stat-card">
@@ -316,6 +317,8 @@
             try {
                 const response = await fetch('../data/participantes.json');
                 participantesData = await response.json();
+                // Normalizar nome do campo (pode ser participantes ou keyUsers)
+                participantesData.participantes = participantesData.participantes || participantesData.keyUsers || [];
                 renderStats(participantesData);
                 renderKeyUsers(participantesData.participantes);
                 renderTeam(participantesData.equipeProjeto);
