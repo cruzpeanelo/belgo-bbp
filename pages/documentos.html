@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentos - Cockpit GTM Belgo</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .doc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        .doc-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .doc-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+        .doc-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        .doc-icon {
+            font-size: 1.5rem;
+            min-width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #dbeafe;
+            border-radius: 8px;
+        }
+        .doc-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #1f2937;
+            line-height: 1.4;
+        }
+        .doc-id {
+            display: inline-block;
+            background: #e5e7eb;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-top: 5px;
+        }
+        .doc-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #e5e7eb;
+        }
+        .doc-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .filters {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .filter-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .filter-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+        .filter-select {
+            padding: 10px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            background: white;
+            font-size: 0.9rem;
+        }
+        .stats-bar {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .stat-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        .category-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+        .tag-pricing { background: #fef3c7; color: #92400e; }
+        .tag-cadastro { background: #dbeafe; color: #1e40af; }
+        .tag-hub { background: #d1fae5; color: #065f46; }
+        .tag-mobile { background: #fce7f3; color: #9d174d; }
+        .tag-fiscal { background: #fee2e2; color: #991b1b; }
+        .tag-geral { background: #e5e7eb; color: #374151; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">BELGO</div>
+                <div class="sidebar-subtitle">Cockpit GTM</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="../index.html" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="testes.html" class="nav-item">
+                    <span class="nav-icon">✅</span>
+                    <span class="nav-text">Testes</span>
+                </a>
+                <a href="jornadas.html" class="nav-item">
+                    <span class="nav-icon">🔄</span>
+                    <span class="nav-text">Jornadas AS IS/TO BE</span>
+                </a>
+                <a href="documentos.html" class="nav-item active">
+                    <span class="nav-icon">📄</span>
+                    <span class="nav-text">Documentos</span>
+                </a>
+                <a href="reunioes.html" class="nav-item">
+                    <span class="nav-icon">📝</span>
+                    <span class="nav-text">Reuniões</span>
+                </a>
+                <a href="timeline.html" class="nav-item">
+                    <span class="nav-icon">📅</span>
+                    <span class="nav-text">Timeline</span>
+                </a>
+                <a href="cronograma.html" class="nav-item">
+                    <span class="nav-icon">🗓️</span>
+                    <span class="nav-text">Cronograma</span>
+                </a>
+                <a href="glossario.html" class="nav-item">
+                    <span class="nav-icon">📖</span>
+                    <span class="nav-text">Glossário</span>
+                </a>
+                <a href="participantes.html" class="nav-item">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-text">Participantes</span>
+                </a>
+                <a href="config.html" class="nav-item">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-text">Configurações</span>
+                </a>
+                <a href="pontos-criticos.html" class="nav-item">
+                    <span class="nav-icon">⚠️</span>
+                    <span class="nav-text">Pontos Críticos</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <div class="page-header-text">
+                    <h1 class="page-title">Documentos Tester</h1>
+                    <p class="page-subtitle">Biblioteca de 69 documentos extraidos do Tester - Belgo Arames</p>
+                </div>
+                <button class="btn-teams" onclick="Utils.discussOnTeams('documentos', 'Documentos Tester', this)">
+                    📤 Discutir no Teams
+                </button>
+            </div>
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number">69</div>
+                <div class="stat-label">Documentos DOCX</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">6</div>
+                <div class="stat-label">Planilhas XLSX</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">11</div>
+                <div class="stat-label">Jornadas Vinculadas</div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <div class="filter-row">
+                <input type="text" class="filter-input" id="searchInput" placeholder="Buscar documentos..." onkeyup="filterDocs()">
+                <select class="filter-select" id="categoryFilter" onchange="filterDocs()">
+                    <option value="">Todas as Categorias</option>
+                    <option value="pricing">Workflow Pricing</option>
+                    <option value="cadastro">Cadastro</option>
+                    <option value="hub">Hub Gestao</option>
+                    <option value="mobile">Mobile/App</option>
+                    <option value="boot">Boot/Automacao</option>
+                    <option value="fiscal">Fiscal</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="doc-grid" id="docGrid">
+            <!-- Documentos serao carregados via JS -->
+        </div>
+    </main>
+
+    <script>
+        const docs = [
+            {id: "791093", title: "WF - Pricing", cat: "pricing", size: "564KB", tables: 1},
+            {id: "880788", title: "P5 - Testes WF Pricing", cat: "pricing", size: "1.6MB", tables: 1},
+            {id: "889092", title: "Testes ajustes WF - Pricing", cat: "pricing", size: "721KB", tables: 1},
+            {id: "890272", title: "Testes ajustes WF da Pricing", cat: "pricing", size: "785KB", tables: 1},
+            {id: "876268", title: "CNAE", cat: "cadastro", size: "1.1MB", tables: 1},
+            {id: "899139", title: "Validacao Campo Termo de Pesquisa", cat: "cadastro", size: "453KB", tables: 1},
+            {id: "881237", title: "Remover restricao de caracteres", cat: "cadastro", size: "453KB", tables: 1},
+            {id: "891871", title: "Interface sincrona", cat: "cadastro", size: "830KB", tables: 1},
+            {id: "892940", title: "Fluxo Ficha comercial - YEDI", cat: "cadastro", size: "790KB", tables: 1},
+            {id: "895163", title: "Automatizacao Segmento e Subsegmento", cat: "cadastro", size: "409KB", tables: 1},
+            {id: "862865", title: "DEFINICAO AUTOMATICA DE CLUSTER", cat: "cadastro", size: "2.5MB", tables: 1},
+            {id: "889851", title: "Hub de gestao OC", cat: "hub", size: "1.7MB", tables: 1},
+            {id: "889185", title: "Hubs gerenciamento graves e flag", cat: "hub", size: "293KB", tables: 1},
+            {id: "900139", title: "Gerenciamento de aprovadores", cat: "hub", size: "1.8MB", tables: 1},
+            {id: "891863", title: "Notificacao OC Grave Diamante", cat: "hub", size: "674KB", tables: 1},
+            {id: "895852", title: "[Mobile] Termos e Aceite", cat: "mobile", size: "1MB", tables: 1},
+            {id: "888565", title: "Guidance para apoio ao usuario", cat: "mobile", size: "745KB", tables: 1},
+            {id: "862947", title: "Ajuste Layout Tela de Contatos", cat: "cadastro", size: "264KB", tables: 1},
+            {id: "901674", title: "Padronizacao bases contatos", cat: "cadastro", size: "774KB", tables: 1},
+            {id: "909100", title: "Plano de Testes Exploratorios", cat: "geral", size: "9.3MB", tables: 1},
+            {id: "Boot", title: "Boot - Documentacao Automacao", cat: "boot", size: "8.8MB", tables: 1},
+            {id: "895963", title: "Testes tela FUP", cat: "hub", size: "3.4MB", tables: 1},
+            {id: "904332", title: "Formulario abertura Belgo Flex", cat: "cadastro", size: "1.1MB", tables: 1},
+            {id: "908746", title: "Formulario abertura de RC", cat: "cadastro", size: "1.8MB", tables: 1},
+            {id: "897586", title: "Regra status relacionamento cliente", cat: "cadastro", size: "249KB", tables: 1},
+            {id: "902162", title: "Separacao RecordTypes", cat: "cadastro", size: "345KB", tables: 1},
+            {id: "891761", title: "Criacao tarefas por Tipo contato", cat: "hub", size: "331KB", tables: 1},
+            {id: "896930", title: "Aba de Analise 8D", cat: "hub", size: "1.4MB", tables: 1}
+        ];
+
+        function getCategoryClass(cat) {
+            const classes = {
+                'pricing': 'tag-pricing',
+                'cadastro': 'tag-cadastro',
+                'hub': 'tag-hub',
+                'mobile': 'tag-mobile',
+                'boot': 'tag-geral',
+                'fiscal': 'tag-fiscal',
+                'geral': 'tag-geral'
+            };
+            return classes[cat] || 'tag-geral';
+        }
+
+        function getCategoryLabel(cat) {
+            const labels = {
+                'pricing': 'Workflow Pricing',
+                'cadastro': 'Cadastro',
+                'hub': 'Hub Gestao',
+                'mobile': 'Mobile/App',
+                'boot': 'Boot/Automacao',
+                'fiscal': 'Fiscal',
+                'geral': 'Geral'
+            };
+            return labels[cat] || 'Geral';
+        }
+
+        function renderDocs(filtered) {
+            const grid = document.getElementById('docGrid');
+            grid.innerHTML = filtered.map(doc => `
+                <div class="doc-card" data-cat="${doc.cat}">
+                    <div class="doc-header">
+                        <div class="doc-icon">📄</div>
+                        <div>
+                            <div class="doc-title">${doc.title}</div>
+                            <span class="doc-id">#${doc.id}</span>
+                        </div>
+                    </div>
+                    <span class="category-tag ${getCategoryClass(doc.cat)}">${getCategoryLabel(doc.cat)}</span>
+                    <div class="doc-meta">
+                        <span>📊 ${doc.size}</span>
+                        <span>📋 ${doc.tables} tabela(s)</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterDocs() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const cat = document.getElementById('categoryFilter').value;
+
+            const filtered = docs.filter(doc => {
+                const matchSearch = doc.title.toLowerCase().includes(search) || doc.id.toLowerCase().includes(search);
+                const matchCat = !cat || doc.cat === cat;
+                return matchSearch && matchCat;
+            });
+
+            renderDocs(filtered);
+        }
+
+        // Inicial
+        renderDocs(docs);
+    </script>
+        </main>
+    </div>
+</body>
+</html>

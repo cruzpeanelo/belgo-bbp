@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronograma - Cockpit GTM Belgo</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .timeline-container {
+            position: relative;
+            padding: 20px 0;
+        }
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #003B4A, #00A799);
+            transform: translateX(-50%);
+        }
+        .workshop-card {
+            position: relative;
+            width: 45%;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .workshop-card:nth-child(odd) {
+            margin-left: 5%;
+        }
+        .workshop-card:nth-child(even) {
+            margin-left: 50%;
+        }
+        .workshop-card::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: #003B4A;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .workshop-card:nth-child(odd)::before {
+            right: -35px;
+        }
+        .workshop-card:nth-child(even)::before {
+            left: -35px;
+        }
+        .workshop-card.completed { border-left: 4px solid #10b981; }
+        .workshop-card.completed::before { background: #10b981; }
+        .workshop-card.pending { border-left: 4px solid #f59e0b; }
+        .workshop-card.pending::before { background: #f59e0b; }
+        .workshop-date {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #f3f4f6;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #003B4A;
+            margin-bottom: 15px;
+        }
+        .workshop-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #003B4A;
+            margin-bottom: 10px;
+        }
+        .workshop-focus {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        .focus-tag {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+        .marcos-section {
+            margin-top: 40px;
+        }
+        .marco-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        .marco-date {
+            font-weight: 700;
+            color: #003B4A;
+            min-width: 100px;
+        }
+        .marco-title {
+            flex: 1;
+        }
+        .projeto-info {
+            background: linear-gradient(135deg, #003B4A 0%, #006277 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        .projeto-info h2 {
+            margin-bottom: 15px;
+        }
+        .projeto-stats {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .projeto-stat {
+            text-align: center;
+        }
+        .projeto-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .projeto-stat-label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+        @media (max-width: 900px) {
+            .timeline-line { left: 20px; }
+            .workshop-card { width: 85%; margin-left: 50px !important; }
+            .workshop-card::before { left: -35px !important; right: auto !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">BELGO</div>
+                <div class="sidebar-subtitle">Cockpit GTM</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="../index.html" class="nav-item"><span class="nav-icon">📊</span><span class="nav-text">Dashboard</span></a>
+                <a href="testes.html" class="nav-item"><span class="nav-icon">✅</span><span class="nav-text">Testes</span></a>
+                <a href="jornadas.html" class="nav-item"><span class="nav-icon">🔄</span><span class="nav-text">Jornadas AS IS/TO BE</span></a>
+                <a href="documentos.html" class="nav-item"><span class="nav-icon">📄</span><span class="nav-text">Documentos</span></a>
+                <a href="reunioes.html" class="nav-item"><span class="nav-icon">📝</span><span class="nav-text">Reuniões</span></a>
+                <a href="timeline.html" class="nav-item"><span class="nav-icon">📅</span><span class="nav-text">Timeline</span></a>
+                <a href="cronograma.html" class="nav-item active"><span class="nav-icon">🗓️</span><span class="nav-text">Cronograma</span></a>
+                <a href="glossario.html" class="nav-item"><span class="nav-icon">📖</span><span class="nav-text">Glossário</span></a>
+                <a href="participantes.html" class="nav-item"><span class="nav-icon">👥</span><span class="nav-text">Participantes</span></a>
+                <a href="config.html" class="nav-item"><span class="nav-icon">⚙️</span><span class="nav-text">Configurações</span></a>
+                <a href="pontos-criticos.html" class="nav-item"><span class="nav-icon">⚠️</span><span class="nav-text">Pontos Críticos</span></a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <div class="page-header-text">
+                    <h1 class="page-title">Cronograma do Projeto</h1>
+                    <p class="page-subtitle">Timeline de workshops e marcos do GTM Vendas</p>
+                </div>
+                <button class="btn-teams" onclick="Utils.discussOnTeams('cronograma', 'Cronograma do Projeto', this)">
+                    📤 Discutir no Teams
+                </button>
+            </div>
+
+            <div class="projeto-info" id="projeto-info"></div>
+
+            <div class="card">
+                <h3 class="card-title" style="margin-bottom: 20px;">Timeline de Workshops</h3>
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    <div id="workshops-container"></div>
+                </div>
+            </div>
+
+            <div class="marcos-section">
+                <h3 style="color: #003B4A; margin-bottom: 20px;">Marcos do Projeto</h3>
+                <div id="marcos-container"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        const Cronograma = {
+            async init() {
+                await this.waitForData();
+                this.renderProjetoInfo();
+                this.renderWorkshops();
+                this.renderMarcos();
+            },
+
+            waitForData() {
+                return new Promise((resolve) => {
+                    const check = () => {
+                        if (App.data.cronograma) resolve();
+                        else setTimeout(check, 100);
+                    };
+                    check();
+                });
+            },
+
+            renderProjetoInfo() {
+                const p = App.data.cronograma.projeto;
+                const workshops = App.data.cronograma.workshops;
+                const concluidos = workshops.filter(w => w.status === 'Concluído').length;
+
+                document.getElementById('projeto-info').innerHTML = `
+                    <h2>${p.nome}</h2>
+                    <div class="projeto-stats">
+                        <div class="projeto-stat">
+                            <div class="projeto-stat-value">${p.faseAtual}</div>
+                            <div class="projeto-stat-label">Fase Atual</div>
+                        </div>
+                        <div class="projeto-stat">
+                            <div class="projeto-stat-value">${concluidos}/${workshops.length}</div>
+                            <div class="projeto-stat-label">Workshops</div>
+                        </div>
+                        <div class="projeto-stat">
+                            <div class="projeto-stat-value">${Utils.formatDate(p.goLive)}</div>
+                            <div class="projeto-stat-label">GO Live Fase I</div>
+                        </div>
+                    </div>
+                `;
+            },
+
+            renderWorkshops() {
+                const workshops = App.data.cronograma.workshops;
+                document.getElementById('workshops-container').innerHTML = workshops.map(w => `
+                    <div class="workshop-card ${w.status === 'Concluído' ? 'completed' : 'pending'}">
+                        <div class="workshop-date">📅 ${Utils.formatDate(w.data)}${w.horario ? ` • ${w.horario}` : ''}</div>
+                        <div class="workshop-title">${w.id} - ${w.titulo}</div>
+                        <span class="badge ${Utils.getBadgeClass(w.status)}">${w.status}</span>
+                        ${w.participantes ? `<span style="margin-left: 10px; color: #6b7280; font-size: 0.85rem;">👥 ${w.participantes} participantes</span>` : ''}
+                        <div class="workshop-focus">
+                            ${w.foco.map(f => `<span class="focus-tag">${f}</span>`).join('')}
+                        </div>
+                    </div>
+                `).join('');
+            },
+
+            renderMarcos() {
+                const marcos = App.data.cronograma.marcos;
+                document.getElementById('marcos-container').innerHTML = marcos.map(m => `
+                    <div class="marco-item">
+                        <div class="marco-date">${Utils.formatDate(m.data)}</div>
+                        <div class="marco-title">${m.titulo}</div>
+                        <span class="badge ${Utils.getBadgeClass(m.status)}">${m.status}</span>
+                    </div>
+                `).join('');
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => Cronograma.init(), 200);
+        });
+    </script>
+</body>
+</html>

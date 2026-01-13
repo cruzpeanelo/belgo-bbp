@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testes - Cockpit GTM Belgo</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .breadcrumb-alert {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border: 1px solid #3b82f6;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .breadcrumb-icon {
+            font-size: 1.5rem;
+        }
+
+        .breadcrumb-text {
+            font-size: 0.95rem;
+            color: #1e40af;
+        }
+
+        .breadcrumb-count {
+            background: #3b82f6;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .breadcrumb-clear {
+            background: white;
+            border: 1px solid #3b82f6;
+            color: #3b82f6;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-left: auto;
+            transition: all 0.2s ease;
+        }
+
+        .breadcrumb-clear:hover {
+            background: #3b82f6;
+            color: white;
+        }
+
+        #breadcrumb-container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">BELGO</div>
+                <div class="sidebar-subtitle">Cockpit GTM</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="../index.html" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="testes.html" class="nav-item active">
+                    <span class="nav-icon">✅</span>
+                    <span class="nav-text">Testes</span>
+                </a>
+                <a href="jornadas.html" class="nav-item">
+                    <span class="nav-icon">🔄</span>
+                    <span class="nav-text">Jornadas AS IS/TO BE</span>
+                </a>
+                <a href="documentos.html" class="nav-item">
+                    <span class="nav-icon">📄</span>
+                    <span class="nav-text">Documentos</span>
+                </a>
+                <a href="reunioes.html" class="nav-item">
+                    <span class="nav-icon">📝</span>
+                    <span class="nav-text">Reuniões</span>
+                </a>
+                <a href="timeline.html" class="nav-item">
+                    <span class="nav-icon">📅</span>
+                    <span class="nav-text">Timeline</span>
+                </a>
+                <a href="cronograma.html" class="nav-item">
+                    <span class="nav-icon">🗓️</span>
+                    <span class="nav-text">Cronograma</span>
+                </a>
+                <a href="glossario.html" class="nav-item">
+                    <span class="nav-icon">📖</span>
+                    <span class="nav-text">Glossário</span>
+                </a>
+                <a href="participantes.html" class="nav-item">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-text">Participantes</span>
+                </a>
+                <a href="config.html" class="nav-item">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-text">Configurações</span>
+                </a>
+                <a href="pontos-criticos.html" class="nav-item">
+                    <span class="nav-icon">⚠️</span>
+                    <span class="nav-text">Pontos Críticos</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+            <div class="page-header">
+                <div class="page-header-text">
+                    <h1 class="page-title">Gestão de Testes</h1>
+                    <p class="page-subtitle">115 casos de teste do projeto GTM Vendas</p>
+                </div>
+                <button class="btn-teams" onclick="Utils.discussOnTeams('testes', 'Gestão de Testes', this)">
+                    📤 Discutir no Teams
+                </button>
+            </div>
+
+            <!-- Breadcrumb de origem (quando vem de Jornadas) -->
+            <div id="breadcrumb-container"></div>
+
+            <!-- Filtros -->
+            <div class="card">
+                <div class="filters">
+                    <div class="filter-group">
+                        <label>Categoria</label>
+                        <select id="filter-categoria">
+                            <option value="all">Todas</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Status</label>
+                        <select id="filter-status">
+                            <option value="all">Todos</option>
+                            <option value="Concluído">Concluído</option>
+                            <option value="Pendente">Pendente</option>
+                            <option value="Falhou">Falhou</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Buscar</label>
+                        <input type="text" id="filter-busca" placeholder="CT-XX ou nome...">
+                    </div>
+                    <div class="filter-group" style="align-self: flex-end;">
+                        <button class="btn btn-primary" onclick="Testes.exportar()">Exportar CSV</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumo -->
+            <div class="metrics-grid" id="testes-resumo" style="margin-bottom: 20px;"></div>
+
+            <!-- Tabela de Testes -->
+            <div class="card">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 80px;">ID</th>
+                                <th>Caso de Teste</th>
+                                <th style="width: 150px;">Categoria</th>
+                                <th style="width: 100px;">Status</th>
+                                <th style="width: 120px;">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="testes-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Detalhe -->
+    <div class="modal-overlay" id="modal-detalhe">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modal-titulo">Detalhe do Teste</h3>
+                <button class="modal-close" onclick="Testes.fecharModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/testes.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+# Temporarios
+.playwright-mcp/
+**/tmpclaude-*/
+**/temp_*/
+**/extracted_*/
+
+# Backup
+*_backup_*.html
+bbp.html
+~*.tmp
+~$*.docx
+*.bak
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Midia (videos grandes)
+*.mp4
+*.mov
+*.avi
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (caso use)
+node_modules/
+package-lock.json
+
+# Logs
+*.log

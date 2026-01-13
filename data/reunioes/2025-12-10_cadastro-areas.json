@@ -1,0 +1,153 @@
+{
+  "id": "2025-12-10_cadastro-areas",
+  "data": "2025-12-10",
+  "titulo": "GTM - Desenho AS-IS e TO-BE - Sessao 2: Contatos, Logistica e Market Share",
+  "duracao": "1h 29min 44s",
+  "tipo": "Workshop AS-IS/TO-BE",
+  "status": "Concluido",
+  "transcricaoPath": "data/transcricoes/2025-12-10_cadastro-areas.txt",
+  "resumo": "Segunda sessao de workshops focada em contatos de cliente, restricoes logisticas integradas, AMD (cross company), fornecimento completo/parcial, notificacoes WhatsApp e market share por cliente.",
+  "participantes": [
+    {"nome": "Thalita Rhein", "papel": "Gerente Negocio GTM", "area": "Comercial/Marketing"},
+    {"nome": "Leandro Cruz", "papel": "Gerente de TI", "area": "TI"},
+    {"nome": "Leandro Gimenez", "papel": "PO GTM", "area": "Comercial"},
+    {"nome": "Joao Endo", "papel": "Key User", "area": "Construcao Civil"},
+    {"nome": "Francine Gayer", "papel": "Key User", "area": "Protec"},
+    {"nome": "Bruno Machado", "papel": "Key User", "area": "Agro/DCPC"},
+    {"nome": "Daniel Goncalves", "papel": "Analista", "area": "Marketing/Inteligencia"},
+    {"nome": "Jessica Vaz", "papel": "Key User", "area": "Energia"},
+    {"nome": "Renata Mello", "papel": "Key User", "area": "AMD"},
+    {"nome": "Kathleen Almeida", "papel": "Analista TI", "area": "TI"},
+    {"nome": "Lucas Pinheiro", "papel": "Desenvolvedor", "area": "TI"},
+    {"nome": "Maria Victoria Albuquerque", "papel": "Key User", "area": "Comercial"},
+    {"nome": "Frank Silva", "papel": "Key User", "area": "Fiscal/Cadastro"}
+  ],
+  "topicosAbordados": [
+    "Recapitulacao: Cadastro, Areas de Vendas, Canais, Areas de Credito",
+    "Pessoa de Contato para envio automatico de XML/Certificados",
+    "Restricoes Logisticas integradas (Salesforce -> SAP -> Portal)",
+    "AMD e processo Cross Company",
+    "Fornecimento Completo vs Parcial (tolerancias)",
+    "Notificacoes WhatsApp para clientes (pedido e NF)",
+    "Market Share por cliente (Share of Wallet)",
+    "Cadastro de Concorrentes normalizado"
+  ],
+  "sistemasDiscutidos": [
+    {"sistema": "Salesforce", "descricao": "Central de cadastro com restricoes logisticas"},
+    {"sistema": "SAP ECC", "descricao": "XD01/XD02/XD03 para dados de cliente"},
+    {"sistema": "Portal Logistico", "descricao": "Integracao para restricoes de entrega"},
+    {"sistema": "WhatsApp Bot", "descricao": "Notificacoes automaticas de pedidos"}
+  ],
+  "citacoesChave": [
+    {
+      "autor": "Pereira, Leandro Da Cruz",
+      "timestamp": "1:12",
+      "texto": "O parceiro do Eduardo, eu falei sobre as areas de vendas e a importancia das areas de vendas muito relacionado ao canal, ne? Entao canal 30, 20, 30 e 40 e quando eles tem que ser aplicados.",
+      "contexto": "Recapitulacao dos canais de venda"
+    },
+    {
+      "autor": "Pereira, Leandro Da Cruz",
+      "timestamp": "1:56",
+      "texto": "Na parte financeira sobre as areas de credito, falei das quatro areas que e a CSP que e a Supplier aqui e o Belgo Cash, ABBA que e a area de credito da Belgo, a DBA que e da distribuicao e a ALPE.",
+      "contexto": "4 areas de credito detalhadas"
+    },
+    {
+      "autor": "Vaz, Jessica De Assis",
+      "timestamp": "6:08",
+      "texto": "Eu uso para todos os clientes digitais. Todos os nossos clientes exigem receber nota fiscal, PDF, XML. A maior parte dos nossos clientes aqui ja estao com, quando eles recebem XML automatico, eles ja fazem a leitura dos campos do XML.",
+      "contexto": "Uso real da funcionalidade de contatos"
+    },
+    {
+      "autor": "Pereira, Leandro Da Cruz",
+      "timestamp": "11:14",
+      "texto": "Entao a gente criou essa aba e isso aqui conversa com o SAPCC, conversa com o portal da Logistica. Entao se o seu cliente nao recebe 3 quartos, clicou aqui.",
+      "contexto": "Integracao de restricoes logisticas"
+    },
+    {
+      "autor": "Gimenes, Leandro Augusto",
+      "timestamp": "12:26",
+      "texto": "Essa informacao que voce atualiza e ele vai ser atualizado em tempo real na XD03. Tanto as informacoes de restricao de veiculos, como agendamento de entregas, como restricoes de recebimentos.",
+      "contexto": "Integracao em tempo real"
+    },
+    {
+      "autor": "Gimenes, Leandro Augusto",
+      "timestamp": "14:45",
+      "texto": "Tinha um cliente que se o material chegasse nele, ele tivesse material de outro cliente, ele nao recebia. Tinha motorista que recebia ate um cafezinho para poder mostrar a nota do vizinho.",
+      "contexto": "Complexidade das restricoes de clientes"
+    },
+    {
+      "autor": "Mello, Renata Drumond Amorim Conrado De",
+      "timestamp": "25:04",
+      "texto": "Fica aqui a minha reclamacao, porque ate agora eu fico so quer dizer, so babando que essas coisa bonita ai nao tem nada para AMD.",
+      "contexto": "Necessidade de incluir AMD no Salesforce"
+    },
+    {
+      "autor": "Machado, Bruno Nolasco",
+      "timestamp": "54:56",
+      "texto": "Todas as vezes que registra um pedido, um AOV para o cliente, ele ta recebendo no WhatsApp dele que ta cadastrado ai. E no e-mail que esta cadastrado, ele esta recebendo AOV que foi registrada.",
+      "contexto": "Notificacoes WhatsApp implementadas"
+    },
+    {
+      "autor": "Gimenes, Leandro Augusto",
+      "timestamp": "1:08:41",
+      "texto": "Esse calculo de mercado, ele so leva em consideracao a parte estrategica da empresa. Entao nos estamos falando do segmento para cima. Quando nos falamos em market share a nivel de clientes, a nivel de regional, ai sim nos usamos um sistema de saber.",
+      "contexto": "Diferenca entre market share estrategico e tatico"
+    },
+    {
+      "autor": "Gayer, Francine",
+      "timestamp": "1:28:55",
+      "texto": "Os concorrentes sao sazonais, ta? Eu nao sei. Aqui a gente no Protec a nossa realidade e assim. De repente, tem alguns que estao sempre ali, mas tem outros concorrentes que surgem ali, tipo vogue galinha, aparece ali, da uma dorzinha de cabeca.",
+      "contexto": "Dinamica de concorrentes por segmento"
+    }
+  ],
+  "problemasIdentificados": [
+    "AMD nao tem funcionalidades no Salesforce (Cross Company)",
+    "Duplicidade de cadastro: Portal Logistico vs SAP",
+    "Fornecimento automatico gerando entregas parciais sem flag",
+    "Dados de contato desatualizados impactam NPS e comunicacao",
+    "Market share manual por planilhas"
+  ],
+  "decisoesTomadas": [
+    "Reuniao segunda-feira para tratar AMD",
+    "Levantar integracao Portal Logistico como ponto de teste",
+    "Tolerancias de fornecimento integradas ao cadastro",
+    "Concorrentes serao normalizados pela TI"
+  ],
+  "jornadasRelacionadas": [
+    "cadastro-cliente",
+    "contatos",
+    "logistica",
+    "documentos-fiscais",
+    "autoatendimento",
+    "concorrentes",
+    "areas-vendas"
+  ],
+  "funcionalidadesTO-BE": [
+    {
+      "nome": "Restricoes Logisticas Integradas",
+      "descricao": "Cadastro no Salesforce atualiza SAP e Portal Logistico em tempo real",
+      "beneficio": "Elimina e-mails e cadastros duplicados"
+    },
+    {
+      "nome": "Notificacoes WhatsApp",
+      "descricao": "Cliente recebe status do pedido e NF via WhatsApp",
+      "beneficio": "Transparencia e reducao de ligacoes"
+    },
+    {
+      "nome": "Market Share por Cliente",
+      "descricao": "Share of wallet com historico e concorrentes",
+      "beneficio": "Visao tatica para acoes comerciais"
+    },
+    {
+      "nome": "Tolerancias de Fornecimento",
+      "descricao": "Campos de excesso e incompleto no cadastro do cliente",
+      "beneficio": "Evita bloqueios e cancelamentos desnecessarios"
+    }
+  ],
+  "proximosPassos": [
+    "Sessao 3: Documentos Fiscais e Autoatendimento (16/12)",
+    "Reuniao AMD com Aline e Victoria (segunda-feira)",
+    "Demonstracao autoatendimento WhatsApp",
+    "Sessao 4: Cotacao e Ordem de Vendas"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "id": "874124",
+    "arquivo": "874124 - P3 - Testes.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\874124 - P3 - Testes.docx",
+    "tamanho_bytes": 178564,
+    "data_modificacao": "2025-10-23T11:54:16",
+    "extraido_em": "2026-01-13T11:31:14.798712",
+    "status": "extraido",
+    "total_paragrafos": 1,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Teste realizado para confirmar o campo “Informações Estratégicas”, localizado abaixo da descrição da reunião.\nO comportamento está conforme o esperado — campo exibido corretamente "
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n874124 - P3 - Testes",
+          "Data de Criação\n23/10/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 1,
+    "total_tabelas": 1
+  }
+}

@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jornadas - Cockpit GTM Belgo</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .processo-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .processo-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .processo-icon {
+            font-size: 2rem;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f3f4f6;
+            border-radius: 12px;
+        }
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        .as-is-box {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #ef4444;
+        }
+        .to-be-box {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #10b981;
+        }
+        .box-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .as-is-box .box-title { color: #dc2626; }
+        .to-be-box .box-title { color: #059669; }
+        .step-list {
+            list-style: none;
+            padding: 0;
+        }
+        .step-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            border-bottom: 1px dashed #d1d5db;
+        }
+        .step-list li:last-child { border-bottom: none; }
+        .step-list li::before {
+            content: counter(step);
+            counter-increment: step;
+            position: absolute;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            background: #6b7280;
+            color: white;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .as-is-box .step-list { counter-reset: step; }
+        .to-be-box .step-list { counter-reset: step; }
+        .to-be-box .step-list li::before { background: #10b981; }
+        .tag-list {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        .tag {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .tag-problem { background: #fee2e2; color: #991b1b; }
+        .tag-benefit { background: #d1fae5; color: #065f46; }
+        .tag-area { background: #dbeafe; color: #1e40af; }
+        .tag-system { background: #fef3c7; color: #92400e; }
+        .tag-integration { background: #e0e7ff; color: #3730a3; }
+        .tag-rule { background: #fce7f3; color: #9d174d; }
+        .details-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .details-section h4 {
+            color: #003B4A;
+            margin: 0 0 15px 0;
+            font-size: 1rem;
+        }
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        .detail-item {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border-left: 3px solid #003B4A;
+        }
+        .detail-item strong {
+            color: #003B4A;
+            font-size: 0.85rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .workflow-box {
+            background: #fdf4ff;
+            border: 1px solid #e879f9;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 10px;
+        }
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px dashed #e879f9;
+        }
+        .workflow-step:last-child { border-bottom: none; }
+        .workflow-level {
+            background: #a855f7;
+            color: white;
+            min-width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .tempo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        .as-is-box .tempo-badge { background: #fecaca; color: #991b1b; }
+        .to-be-box .tempo-badge { background: #a7f3d0; color: #065f46; }
+        /* Estilos BBP Enriquecido */
+        .citacao-box {
+            background: #fffbeb;
+            border-left: 3px solid #f59e0b;
+            padding: 10px 15px;
+            margin: 8px 0;
+            font-style: italic;
+            font-size: 0.85rem;
+            color: #92400e;
+            border-radius: 0 8px 8px 0;
+        }
+        .tipos-conta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .tipo-conta-card {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+            padding: 10px;
+        }
+        .tipo-conta-card strong { color: #0369a1; display: block; margin-bottom: 4px; font-size: 0.9rem; }
+        .tipo-conta-card span { font-size: 0.8rem; color: #6b7280; }
+        .campos-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            overflow-x: auto;
+        }
+        .campos-table th { background: #003B4A; color: white; padding: 8px; text-align: left; }
+        .campos-table td { padding: 8px; border-bottom: 1px solid #e5e7eb; }
+        .campos-table tr:nth-child(even) { background: #f9fafb; }
+        .regra-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 8px 0;
+        }
+        .regra-card h5 { margin: 0 0 8px 0; color: #003B4A; font-size: 0.9rem; }
+        .regra-card .exemplos {
+            background: #f3f4f6;
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 8px;
+            font-size: 0.8rem;
+        }
+        .ciclo-teste-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 8px 0;
+        }
+        .ciclo-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; }
+        .ciclo-status { padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+        .ciclo-status.aprovado { background: #d1fae5; color: #065f46; }
+        .ciclo-status.pendente { background: #fef3c7; color: #92400e; }
+        .participante-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            background: #f9fafb;
+            border-radius: 8px;
+            margin: 4px 0;
+        }
+        .participante-avatar {
+            width: 36px;
+            height: 36px;
+            background: #003B4A;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+        .section-divider { margin-top: 20px; padding-top: 15px; border-top: 2px solid #e5e7eb; }
+        .section-title { color: #003B4A; font-size: 1rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .tag-pendencia { background: #fef3c7; color: #92400e; }
+        .tag-prerequisito { background: #dbeafe; color: #1e40af; }
+        .collapsible-section { margin-top: 15px; }
+        .collapsible-header {
+            cursor: pointer;
+            background: #f1f5f9;
+            padding: 10px 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #003B4A;
+        }
+        .collapsible-header:hover { background: #e2e8f0; }
+        .collapsible-content { padding: 15px 0; }
+        .fonte-reuniao-tag {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin: 2px;
+            display: inline-block;
+        }
+                .aba-interface-card {
+                    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+                    border-left: 4px solid #0284c7;
+                    border-radius: 8px;
+                    padding: 15px;
+                    margin-bottom: 10px;
+                }
+
+                .aba-interface-card h5 {
+                    color: #0369a1;
+                    margin: 0 0 10px 0;
+                    font-size: 1rem;
+                }
+
+                .campos-list {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 6px;
+                    margin-top: 8px;
+                }
+
+                .campo-item {
+                    background: white;
+                    border: 1px solid #bae6fd;
+                    border-radius: 4px;
+                    padding: 4px 10px;
+                    font-size: 0.85rem;
+                    color: #0c4a6e;
+                }
+
+                .mensagem-sistema {
+                    background: #fef3c7;
+                    border-left: 4px solid #f59e0b;
+                    border-radius: 8px;
+                    padding: 15px;
+                    margin-bottom: 10px;
+                }
+
+                .mensagem-sistema .contexto {
+                    font-weight: 600;
+                    color: #92400e;
+                    margin-bottom: 8px;
+                }
+
+                .mensagem-sistema .texto {
+                    background: white;
+                    border: 1px solid #fcd34d;
+                    border-radius: 4px;
+                    padding: 10px;
+                    font-family: monospace;
+                    font-size: 0.9rem;
+                    color: #78350f;
+                }
+                .btn-ver-testes {
+                    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+                    color: white;
+                    border: none;
+                    padding: 6px 12px;
+                    border-radius: 6px;
+                    font-size: 0.8rem;
+                    font-weight: 500;
+                    cursor: pointer;
+                    text-decoration: none;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 4px;
+                    transition: all 0.2s ease;
+                    margin-left: 10px;
+                }
+
+                .btn-ver-testes:hover {
+                    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+                    transform: translateY(-1px);
+                    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+                }
+
+                .ciclo-actions {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">BELGO</div>
+                <div class="sidebar-subtitle">Cockpit GTM</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="../index.html" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="testes.html" class="nav-item">
+                    <span class="nav-icon">✅</span>
+                    <span class="nav-text">Testes</span>
+                </a>
+                <a href="jornadas.html" class="nav-item active">
+                    <span class="nav-icon">🔄</span>
+                    <span class="nav-text">Jornadas AS IS/TO BE</span>
+                </a>
+                <a href="documentos.html" class="nav-item">
+                    <span class="nav-icon">📄</span>
+                    <span class="nav-text">Documentos</span>
+                </a>
+                <a href="reunioes.html" class="nav-item">
+                    <span class="nav-icon">📝</span>
+                    <span class="nav-text">Reuniões</span>
+                </a>
+                <a href="timeline.html" class="nav-item">
+                    <span class="nav-icon">📅</span>
+                    <span class="nav-text">Timeline</span>
+                </a>
+                <a href="cronograma.html" class="nav-item">
+                    <span class="nav-icon">🗓️</span>
+                    <span class="nav-text">Cronograma</span>
+                </a>
+                <a href="glossario.html" class="nav-item">
+                    <span class="nav-icon">📖</span>
+                    <span class="nav-text">Glossário</span>
+                </a>
+                <a href="participantes.html" class="nav-item">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-text">Participantes</span>
+                </a>
+                <a href="config.html" class="nav-item">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-text">Configurações</span>
+                </a>
+                <a href="pontos-criticos.html" class="nav-item">
+                    <span class="nav-icon">⚠️</span>
+                    <span class="nav-text">Pontos Críticos</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+            <div class="page-header">
+                <div class="page-header-text">
+                    <h1 class="page-title">Jornadas AS IS → TO BE</h1>
+                    <p class="page-subtitle">Mapeamento de processos - Estado atual vs. Estado futuro</p>
+                </div>
+                <button class="btn-teams" onclick="Utils.discussOnTeams('jornadas', 'Jornadas AS IS TO BE', this)">
+                    📤 Discutir no Teams
+                </button>
+            </div>
+
+            <!-- Filtro de Processo -->
+            <div class="card" style="margin-bottom: 20px;">
+                <div class="filters">
+                    <div class="filter-group">
+                        <label>Selecionar Processo</label>
+                        <select id="filter-processo" style="min-width: 300px;">
+                            <option value="all">Todos os processos</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lista de Processos -->
+            <div id="processos-container"></div>
+        </main>
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        const Jornadas = {
+            async init() {
+                await this.waitForData();
+                this.populateFilter();
+                await this.renderProcessos();
+                this.setupFilter();
+            },
+
+            waitForData() {
+                return new Promise((resolve) => {
+                    const check = () => {
+                        if (App.data.jornadas) resolve();
+                        else setTimeout(check, 100);
+                    };
+                    check();
+                });
+            },
+
+            populateFilter() {
+                const select = document.getElementById('filter-processo');
+                App.data.jornadas.processos.forEach(p => {
+                    const opt = document.createElement('option');
+                    opt.value = p.id;
+                    opt.textContent = `${p.icone} ${p.nome}`;
+                    select.appendChild(opt);
+                });
+            },
+
+            setupFilter() {
+                document.getElementById('filter-processo').addEventListener('change', async (e) => {
+                    await this.renderProcessos(e.target.value);
+                });
+            },
+
+            // Compartilhar jornada no Microsoft Teams
+            async compartilharTeams(id) {
+                const processo = await App.loadProcesso(id);
+                if (!processo) {
+                    Utils.showToast('Processo não encontrado', 'error');
+                    return;
+                }
+
+                const card = Utils.formatTeamsCard('jornada', `🔄 Jornada: ${processo.nome}`, [
+                    { name: "Status", value: processo.status },
+                    { name: "AS-IS", value: processo.asIs?.descricao },
+                    { name: "TO-BE", value: processo.toBe?.descricao },
+                    { name: "Áreas Impactadas", value: processo.areasImpactadas?.join(', ') },
+                    { name: "Tempo AS-IS", value: processo.asIs?.tempoMedio },
+                    { name: "Tempo TO-BE", value: processo.toBe?.tempoMedio }
+                ]);
+
+                await Utils.sendToTeams(card);
+            },
+
+            async renderProcessos(filtro = 'all') {
+                const container = document.getElementById('processos-container');
+
+                // Mostrar indicador de carregamento
+                container.innerHTML = '<div style="text-align: center; padding: 40px; color: #6b7280;"><div style="font-size: 2rem; margin-bottom: 10px;">⏳</div>Carregando processos...</div>';
+
+                let processos;
+                try {
+                    if (filtro === 'all') {
+                        // Carregar todos os processos
+                        processos = await App.loadAllProcessos();
+                    } else {
+                        // Carregar apenas o processo selecionado
+                        const processo = await App.loadProcesso(filtro);
+                        processos = processo ? [processo] : [];
+                    }
+                } catch (error) {
+                    console.error('Erro ao carregar processos:', error);
+                    container.innerHTML = '<div style="text-align: center; padding: 40px; color: #ef4444;">Erro ao carregar processos</div>';
+                    return;
+                }
+
+                if (processos.length === 0) {
+                    container.innerHTML = '<div style="text-align: center; padding: 40px; color: #6b7280;">Nenhum processo encontrado</div>';
+                    return;
+                }
+
+                container.innerHTML = processos.map(p => `
+                    <div class="processo-card">
+                        <div class="processo-header">
+                            <div class="processo-icon">${p.icone}</div>
+                            <div style="flex: 1;">
+                                <h2 style="margin: 0; color: #003B4A;">${p.nome}</h2>
+                                <div style="display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap;">
+                                    <span class="badge ${Utils.getBadgeClass(p.status)}">${p.status}</span>
+                                    ${p.fontesReuniao ? p.fontesReuniao.map(f => `<span class="fonte-reuniao-tag">${f}</span>`).join('') : `<span style="color: #6b7280; font-size: 0.85rem;">Fonte: ${p.fonteReuniao}</span>`}
+                                </div>
+                            </div>
+                            <button class="btn" style="background: #6264A7; color: white; padding: 8px 15px;" onclick="Jornadas.compartilharTeams('${p.id}')">
+                                📤 Teams
+                            </button>
+                        </div>
+
+                        <div class="comparison-grid">
+                            <div class="as-is-box">
+                                <div class="box-title">❌ AS IS (Atual)</div>
+                                <p style="margin-bottom: 15px; color: #6b7280;">${p.asIs.descricao}</p>
+                                <ol class="step-list">
+                                    ${p.asIs.passos.map(s => `<li>${s}</li>`).join('')}
+                                </ol>
+                                <div class="tag-list">
+                                    ${p.asIs.problemas.map(prob => `<span class="tag tag-problem">${prob}</span>`).join('')}
+                                </div>
+                                <div class="tempo-badge">⏱️ ${p.asIs.tempoMedio}</div>
+                                ${p.asIs.citacoesReuniao ? `
+                                <div style="margin-top: 15px;">
+                                    <strong style="font-size: 0.85rem; color: #92400e;">💬 Citações das Reuniões:</strong>
+                                    ${p.asIs.citacoesReuniao.map(c => `<div class="citacao-box">${c}</div>`).join('')}
+                                </div>` : ''}
+                            </div>
+
+                            <div class="to-be-box">
+                                <div class="box-title">✅ TO BE (Futuro)</div>
+                                <p style="margin-bottom: 15px; color: #6b7280;">${p.toBe.descricao}</p>
+                                <ol class="step-list">
+                                    ${p.toBe.passos.map(s => `<li>${s}</li>`).join('')}
+                                </ol>
+                                <div class="tag-list">
+                                    ${p.toBe.beneficios.map(ben => `<span class="tag tag-benefit">${ben}</span>`).join('')}
+                                </div>
+                                <div class="tempo-badge">⏱️ ${p.toBe.tempoMedio}</div>
+                            </div>
+                        </div>
+
+                        ${p.tiposConta ? `
+                        <div class="section-divider">
+                            <div class="section-title">👥 Tipos de Conta</div>
+                            <div class="tipos-conta-grid">
+                                ${p.tiposConta.map(t => `
+                                    <div class="tipo-conta-card">
+                                        <strong>${t.tipo}</strong>
+                                        <span>${t.descricao}</span>
+                                        ${t.recordType ? `<div style="margin-top: 6px;"><span class="tag tag-system" style="font-size: 0.7rem;">RecordType: ${t.recordType}</span></div>` : ''}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>` : ''}
+
+                        ${p.campos ? `
+                        <div class="section-divider">
+                            <div class="section-title">📋 Campos do Cadastro</div>
+                            <div style="overflow-x: auto;">
+                                <table class="campos-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Campo</th>
+                                            <th>Descrição</th>
+                                            <th>Preenchimento</th>
+                                            <th>Validação</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${p.campos.map(c => `
+                                            <tr>
+                                                <td><strong>${c.campo}</strong></td>
+                                                <td>${c.descricao}</td>
+                                                <td>${c.preenchimento}</td>
+                                                <td>${c.validacao}</td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>` : ''}
+
+                        <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #e5e7eb;">
+                            <strong style="color: #6b7280; font-size: 0.85rem;">Áreas Impactadas:</strong>
+                            <div class="tag-list" style="margin-top: 8px;">
+                                ${p.areasImpactadas.map(a => `<span class="tag tag-area">${a}</span>`).join('')}
+                            </div>
+                        </div>
+
+                        ${p.regrasNegocio && Array.isArray(p.regrasNegocio) && p.regrasNegocio[0] && typeof p.regrasNegocio[0] === 'object' ? `
+                        <div class="section-divider">
+                            <div class="section-title">📜 Regras de Negócio Detalhadas</div>
+                            ${p.regrasNegocio.map(r => `
+                                <div class="regra-card">
+                                    <h5>${r.regra}</h5>
+                                    <p style="margin: 0; color: #6b7280; font-size: 0.85rem;">${r.descricao}</p>
+                                    ${r.status ? `<div style="margin-top: 8px;"><span class="tag tag-benefit">${r.status}</span></div>` : ''}
+                                    ${r.exemplos ? `
+                                    <div class="exemplos">
+                                        <strong>Exemplos:</strong><br>
+                                        ${r.exemplos.map(e => `• ${e}`).join('<br>')}
+                                    </div>` : ''}
+                                    ${r.canaisDetalhados ? `
+                                    <div style="margin-top: 12px; padding: 12px; background: #f0fdf4; border: 1px solid #86efac; border-radius: 8px;">
+                                        <strong style="color: #166534; font-size: 0.85rem;">📊 Critérios por Canal:</strong>
+                                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 10px;">
+                                            ${Object.entries(r.canaisDetalhados).map(([cod, info]) => `
+                                                <div style="background: white; padding: 10px; border-radius: 6px; border-left: 3px solid #22c55e;">
+                                                    <div style="font-weight: 600; color: #166534;">Canal ${cod} - ${info.nome}</div>
+                                                    <div style="font-size: 0.8rem; color: #6b7280; margin-top: 4px;">${info.criterio}</div>
+                                                    ${info.exemploCNAE ? `<div style="font-size: 0.75rem; color: #9ca3af; margin-top: 4px;">Ex: ${info.exemploCNAE.join(', ')}</div>` : ''}
+                                                    ${info.requerAprovacao ? `<span class="tag tag-pendencia" style="margin-top: 4px; font-size: 0.7rem;">Requer Aprovação</span>` : ''}
+                                                    ${info.aplicaPF ? `<span class="tag tag-area" style="margin-top: 4px; font-size: 0.7rem;">Aplica a PF</span>` : ''}
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                    </div>` : ''}
+                                    ${r.nota ? `<div style="margin-top: 8px; font-size: 0.8rem; color: #92400e; font-style: italic;">📝 ${r.nota}</div>` : ''}
+                                </div>
+                            `).join('')}
+                        </div>` : ''}
+
+                        ${p.ciclosTeste ? `
+                        <div class="section-divider">
+                            <div class="section-title">🧪 Ciclos de Teste</div>
+                            ${p.ciclosTeste.map(c => `
+                                <div class="ciclo-teste-card">
+                                    <div class="ciclo-header">
+                                        <div>
+                                            <strong style="color: #003B4A;">${c.documento} - ${c.titulo}</strong>
+                                            <div style="font-size: 0.8rem; color: #6b7280; margin-top: 4px;">Data: ${c.data}${c.ciclo ? ' | Ciclo: ' + c.ciclo : ''}</div>
+                                        </div>
+                                        <div class="ciclo-actions">
+                                            <span class="ciclo-status ${c.status === 'Aprovado' ? 'aprovado' : 'pendente'}">${c.status}</span>
+                                            ${c.testesRelacionados && c.testesRelacionados.length > 0 ? `
+                                                <a href="testes.html?ids=${c.testesRelacionados.join(',')}&origem=${encodeURIComponent(c.titulo)}" class="btn-ver-testes">
+                                                    🔗 Ver Testes (${c.testesRelacionados.length})
+                                                </a>
+                                            ` : ''}
+                                        </div>
+                                    </div>
+                                    <div style="margin-top: 8px;">
+                                        <strong style="font-size: 0.8rem; color: #6b7280;">Cenários:</strong>
+                                        <ul style="margin: 5px 0 0 20px; font-size: 0.85rem;">
+                                            ${c.cenarios.map(cen => `<li>${cen}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                    ${c.testesRelacionados && c.testesRelacionados.length > 0 ? `
+                                        <div style="margin-top: 10px; padding-top: 10px; border-top: 1px dashed #e5e7eb;">
+                                            <span style="font-size: 0.75rem; color: #9ca3af;">Testes relacionados: ${c.testesRelacionados.join(', ')}</span>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            `).join('')}
+                        </div>` : ''}
+
+                        ${p.abasInterface ? `
+                        <div class="section-divider">
+                            <div class="section-title">🖥️ Abas da Interface Salesforce</div>
+                            ${p.abasInterface.map(aba => `
+                                <div class="aba-interface-card">
+                                    <h5>${aba.aba}</h5>
+                                    <p style="margin: 0; font-size: 0.9rem; color: #334155;">${aba.descricao}</p>
+                                    ${aba.campos ? `
+                                    <div class="campos-list">
+                                        ${aba.campos.map(c => `<span class="campo-item">${c}</span>`).join('')}
+                                    </div>` : ''}
+                                    ${aba.areasCredito ? `
+                                    <div style="margin-top: 12px; padding: 10px; background: #fef3c7; border-radius: 6px;">
+                                        <strong style="color: #92400e; font-size: 0.85rem;">💰 Áreas de Crédito:</strong>
+                                        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;">
+                                            ${aba.areasCredito.map(area => `<span class="tag tag-system">${area}</span>`).join('')}
+                                        </div>
+                                    </div>` : ''}
+                                    ${aba.detalhes ? `
+                                    <div style="margin-top: 10px; font-size: 0.8rem; color: #6b7280;">
+                                        ${Object.entries(aba.detalhes).map(([k, v]) => `<div style="padding: 4px 0;">• <strong>${k}:</strong> ${v}</div>`).join('')}
+                                    </div>` : ''}
+                                    ${aba.fonte ? `<div style="margin-top: 8px; font-size: 0.75rem; color: #9ca3af;">Fonte: ${aba.fonte}</div>` : ''}
+                                </div>
+                            `).join('')}
+                        </div>` : ''}
+
+                        ${p.mensagensSistema ? `
+                        <div class="section-divider">
+                            <div class="section-title">💬 Mensagens do Sistema</div>
+                            ${p.mensagensSistema.map(msg => `
+                                <div class="mensagem-sistema" style="border-left-color: ${msg.tipo === 'Erro' ? '#ef4444' : msg.tipo === 'Alerta' ? '#f59e0b' : '#10b981'};">
+                                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                                        <span class="badge ${msg.tipo === 'Erro' ? 'badge-danger' : msg.tipo === 'Alerta' ? 'badge-warning' : 'badge-success'}" style="font-size: 0.7rem;">${msg.tipo || 'Info'}</span>
+                                        <span class="contexto" style="margin-bottom: 0;">${msg.contexto}</span>
+                                    </div>
+                                    <div class="texto">${msg.mensagem}</div>
+                                </div>
+                            `).join('')}
+                        </div>` : ''}
+
+                        ${p.participantesReuniao ? `
+                        <div class="section-divider">
+                            <div class="section-title">👤 Participantes das Reuniões</div>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px;">
+                                ${p.participantesReuniao.map(part => `
+                                    <div class="participante-card">
+                                        <div class="participante-avatar">${part.nome.split(' ').map(n => n[0]).join('').substring(0,2)}</div>
+                                        <div>
+                                            <strong style="color: #003B4A; font-size: 0.9rem;">${part.nome}</strong>
+                                            <div style="font-size: 0.8rem; color: #6b7280;">${part.papel}</div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>` : ''}
+
+                        ${p.pendencias ? `
+                        <div class="section-divider">
+                            <div class="section-title">⚠️ Pendências</div>
+                            <div class="tag-list">
+                                ${p.pendencias.map(pend => `<span class="tag tag-pendencia">${pend}</span>`).join('')}
+                            </div>
+                        </div>` : ''}
+
+                        ${p.prerequisitos ? `
+                        <div class="section-divider">
+                            <div class="section-title">✅ Pré-requisitos</div>
+                            <div class="tag-list">
+                                ${p.prerequisitos.map(pre => `<span class="tag tag-prerequisito">${pre}</span>`).join('')}
+                            </div>
+                        </div>` : ''}
+
+                        ${p.sistemasTecnicos || p.integracoes || p.detalhes || (p.regrasNegocio && Array.isArray(p.regrasNegocio) && (!p.regrasNegocio[0] || typeof p.regrasNegocio[0] !== 'object')) || p.fluxoAprovacao ? `
+                        <div class="details-section">
+                            <h4>📋 Detalhes Técnicos do BBP</h4>
+                            <div class="details-grid">
+                                ${p.sistemasTecnicos ? `
+                                <div class="detail-item">
+                                    <strong>🖥️ Sistemas Técnicos</strong>
+                                    <div class="tag-list" style="margin-top: 8px;">
+                                        ${p.sistemasTecnicos.map(s => `<span class="tag tag-system">${s}</span>`).join('')}
+                                    </div>
+                                </div>` : ''}
+                                
+                                ${p.integracoes ? `
+                                <div class="detail-item">
+                                    <strong>🔗 Integrações</strong>
+                                    <div class="tag-list" style="margin-top: 8px;">
+                                        ${p.integracoes.map(i => typeof i === 'object' ? `<span class="tag tag-integration">${i.origem} → ${i.destino} (${i.tipo})</span>` : `<span class="tag tag-integration">${i}</span>`).join('')}
+                                    </div>
+                                </div>` : ''}
+                                
+                                ${p.regrasNegocio && Array.isArray(p.regrasNegocio) && (!p.regrasNegocio[0] || typeof p.regrasNegocio[0] !== 'object') ? `
+                                <div class="detail-item">
+                                    <strong>📜 Regras de Negócio</strong>
+                                    <div style="margin-top: 8px;">
+                                        ${p.regrasNegocio.map(r => `<div style="padding: 4px 0; border-bottom: 1px dashed #e5e7eb;">• ${r}</div>`).join('')}
+                                    </div>
+                                </div>` : ''}
+                                
+                                ${p.detalhes ? `
+                                <div class="detail-item">
+                                    <strong>📝 Detalhes</strong>
+                                    <div style="margin-top: 8px;">
+                                        ${Object.entries(p.detalhes).map(([k, v]) => `
+                                            <div style="padding: 4px 0; border-bottom: 1px dashed #e5e7eb;">
+                                                <strong style="color: #6b7280; font-size: 0.8rem;">${k}:</strong>
+                                                <span style="color: #374151;">${typeof v === 'object' ? JSON.stringify(v) : v}</span>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>` : ''}
+                            </div>
+                            
+                            ${p.fluxoAprovacao ? `
+                            <div style="margin-top: 15px;">
+                                <strong style="color: #003B4A; font-size: 0.9rem;">🔄 Fluxo de Aprovação</strong>
+                                <div class="workflow-box">
+                                    ${p.fluxoAprovacao.map(f => `
+                                        <div class="workflow-step">
+                                            <div class="workflow-level">${f.nivel}</div>
+                                            <div><strong>${f.aprovador}</strong>${f.acao ? ` - ${f.acao}` : ''}</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>` : ''}
+                            
+                            ${p.documentosTeste ? `
+                            <div style="margin-top: 15px;">
+                                <strong style="color: #003B4A; font-size: 0.9rem;">📄 Documentos de Teste</strong>
+                                <div class="tag-list" style="margin-top: 8px;">
+                                    ${p.documentosTeste.map(d => `<span class="tag tag-rule">${d}</span>`).join('')}
+                                </div>
+                            </div>` : ''}
+
+                            ${p.detalhesTecnicos && p.detalhesTecnicos.recordTypes ? `
+                            <div style="margin-top: 15px; padding: 15px; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px;">
+                                <strong style="color: #0369a1; font-size: 0.9rem;">📋 Record Types do Salesforce</strong>
+                                <p style="margin: 8px 0; font-size: 0.85rem; color: #6b7280;">${p.detalhesTecnicos.recordTypes.descricao}</p>
+                                <div style="display: grid; gap: 8px; margin-top: 10px;">
+                                    ${p.detalhesTecnicos.recordTypes.tipos.map(rt => `
+                                        <div style="background: white; padding: 10px; border-radius: 6px; border-left: 3px solid #0284c7;">
+                                            <strong style="color: #0c4a6e;">${rt.nome}</strong>
+                                            <div style="font-size: 0.8rem; color: #6b7280; margin-top: 4px;">${rt.uso}</div>
+                                            ${rt.documento ? `<span class="tag tag-rule" style="margin-top: 6px; font-size: 0.7rem;">Doc: ${rt.documento}</span>` : ''}
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                ${p.detalhesTecnicos.recordTypes.fonte ? `<div style="margin-top: 8px; font-size: 0.75rem; color: #9ca3af;">Fonte: ${p.detalhesTecnicos.recordTypes.fonte}</div>` : ''}
+                            </div>` : ''}
+                        </div>` : ''}
+                    </div>
+                `).join('');
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => Jornadas.init(), 200);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2787 @@
+{
+  "categorias": [
+    {
+      "id": "workflow-pricing",
+      "nome": "Workflow Pricing",
+      "range": "CT 01-19",
+      "total": 19,
+      "cor": "#6366f1",
+      "casos": [
+        {
+          "id": "CT-01",
+          "nome": "Criar WF Pricing para desconto fixo em material especifico",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar Conta integrada SAP",
+            "2. New WFPricing",
+            "3. Selecionar Canal e Escritorio",
+            "4. Navegar hierarquia 6 niveis",
+            "5. Definir desconto %",
+            "6. Criar"
+          ],
+          "resultadoEsperado": "WF criado, status 'Aguardando Aprovacao', Integration Status=Completed",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-02",
+          "nome": "Alterar vigencia individual por linha de material",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Iniciar WF",
+            "2. Definir vigencia padrao",
+            "3. Alterar vigencia por material",
+            "4. Verificar diferencas",
+            "5. Criar"
+          ],
+          "resultadoEsperado": "Vigencias individuais por material respeitadas",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-03",
+          "nome": "Tentar criar WF sem canal atribuido ao cliente",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "passos": [
+            "1. Conta sem canais configurados",
+            "2. Clicar New WFPricing",
+            "3. Verificar comportamento"
+          ],
+          "resultadoEsperado": "Mensagem: 'Nao ha canais disponiveis'",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-04",
+          "nome": "Consultar historico de WF Pricing de um cliente",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "passos": [
+            "1. Conta com WF existentes",
+            "2. Navegar secao WF relacionados",
+            "3. Verificar lista",
+            "4. Visualizar detalhes"
+          ],
+          "resultadoEsperado": "Historico completo visivel com status, datas, materiais",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-05",
+          "nome": "Validar input manual de % de desconto",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Criar WF",
+            "2. Inserir valores: 5%, 10%, 7.5%",
+            "3. Validar limites 0-100%",
+            "4. Testar valor invalido (150%)"
+          ],
+          "resultadoEsperado": "Campo aceita 0-100%, decimais permitidos, validacao funcionando",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-06",
+          "nome": "Criar WF para desconto em grupo de mercadoria",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Abrir Conta",
+            "2. New WFPricing",
+            "3. Navegar ate 'Grupo de Mercadoria'",
+            "4. Definir desconto",
+            "5. Criar"
+          ],
+          "resultadoEsperado": "Desconto aplicado a todos materiais do grupo",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-07",
+          "nome": "Aprovar WF pelo time de Pricing",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Logar como aprovador Pricing",
+            "2. Verificar notificacoes",
+            "3. Acessar WF pendente",
+            "4. Revisar e Aprovar"
+          ],
+          "resultadoEsperado": "Status atualizado, aguardando gerente nivel 2",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-08",
+          "nome": "Aprovar WF pelo gerente do Escritorio",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Logar como gerente",
+            "2. Verificar notificacoes",
+            "3. Acessar WF aprovado pelo Pricing",
+            "4. Aprovar"
+          ],
+          "resultadoEsperado": "WF aprovado, YDCF criada no SAP, status 'Aprovado'",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-09",
+          "nome": "Rejeitar WF pelo time de Pricing",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "passos": [
+            "1. Logar como aprovador",
+            "2. Acessar WF pendente",
+            "3. Rejeitar com justificativa"
+          ],
+          "resultadoEsperado": "WF rejeitado, solicitante notificado, sem condition SAP",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-10",
+          "nome": "Criar WF com multiplos materiais e % diferentes",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Iniciar WF",
+            "2. Selecionar 3 materiais",
+            "3. Definir 5%, 8%, 3%",
+            "4. Criar"
+          ],
+          "resultadoEsperado": "3 linhas de desconto, cada material com seu %",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-11",
+          "nome": "Tentar criar WF em conta sem codigo SAP",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Conta sem codigo SAP",
+            "2. Tentar clicar New WFPricing",
+            "3. Verificar comportamento"
+          ],
+          "resultadoEsperado": "Botao indisponivel ou mensagem de erro",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Bug: Botao 'New WFPricing' disponivel mesmo para contas sem codigo SAP - deveria estar bloqueado"
+        },
+        {
+          "id": "CT-12",
+          "nome": "Verificar criacao da YDCF no SAP apos aprovacao",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Aprovar WF completamente",
+            "2. Logar SAP",
+            "3. VK13 buscar YDCF",
+            "4. Verificar dados"
+          ],
+          "resultadoEsperado": "YDCF criada com dados exatos do WF",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-13",
+          "nome": "Criar WF para Segmento de Produto (nivel hierarquico)",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "passos": [
+            "1. Iniciar WF",
+            "2. Navegar hierarquia",
+            "3. Parar em 'Segmento de Produto'",
+            "4. Definir desconto",
+            "5. Criar"
+          ],
+          "resultadoEsperado": "Desconto aplicavel a todos materiais do segmento",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-14",
+          "nome": "Tentar criar WF com % invalido (-5% ou >100%)",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Iniciar WF",
+            "2. Tentar -5% ou 150%",
+            "3. Tentar criar"
+          ],
+          "resultadoEsperado": "Sistema valida e impede (0-100%)",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Bug: O workflow foi criado com sucesso mas no momento de validar os descontos inseridos, valores abaixo de 0% (negativos) não estão exibindo uma mensagem de erro correta, entretanto o botão 'criar' é devidamente bloqueado. Porém, quando se insere um desconto válido dentro do workflow, o botão 'criar' é liberado e permite a criação mesmo com a existência de um desconto em negativo. O problema também ocorre para valores acima de 100%."
+        },
+        {
+          "id": "CT-15",
+          "nome": "Criar WF com vigencia retroativa",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "passos": [
+            "1. Iniciar WF",
+            "2. Data inicio no passado",
+            "3. Preencher demais dados"
+          ],
+          "resultadoEsperado": "Sistema alerta sobre data retroativa",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-16",
+          "nome": "Criar WF para canal especifico e validar aplicacao",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Cliente com multiplos canais",
+            "2. Criar WF para canal 20",
+            "3. Criar 2 cotacoes (20 e 30)",
+            "4. Verificar desconto"
+          ],
+          "resultadoEsperado": "Desconto apenas no canal Industrial (20)",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-17",
+          "nome": "Validar envio de email de notificacao",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "passos": [
+            "1. Criar novo WF",
+            "2. Clicar Criar",
+            "3. Verificar email do aprovador"
+          ],
+          "resultadoEsperado": "Email recebido com informacoes do WF",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-18",
+          "nome": "Validar navegacao completa na arvore de hierarquia",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "passos": [
+            "1. Iniciar WF",
+            "2. Verificar 6 niveis",
+            "3. Usar 'Abrir/Fechar todos'"
+          ],
+          "resultadoEsperado": "Arvore exibe 6 niveis corretamente, botoes funcionam",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-19",
+          "nome": "Validar aprovacao por aprovador alternativo",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "passos": [
+            "1. Criar WF",
+            "2. Verificar se aprovador delegado consegue aprovar"
+          ],
+          "resultadoEsperado": "Aprovador alternativo aprova, sistema registra quem",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        }
+      ]
+    },
+    {
+      "id": "tributario",
+      "nome": "Tributario",
+      "range": "CT 20-55",
+      "total": 36,
+      "cor": "#ef4444",
+      "casos": [
+        {
+          "id": "CT-20",
+          "nome": "Testar material importado (II)",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Material importado",
+            "2. Criar OV",
+            "3. Gerar NF",
+            "4. Verificar II"
+          ],
+          "resultadoEsperado": "II incorporado conforme parametrizacao",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-21",
+          "nome": "Validar isencao total - Zona Franca",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Cliente ZFM",
+            "2. Verificar Regiao=ZFM",
+            "3. Simular faturamento"
+          ],
+          "resultadoEsperado": "Isencao total: ICMS=0, IPI=0, PIS=0, COFINS=0, CFOP 6109",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-22",
+          "nome": "Validar isencao - categoria fiscal isento",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Cliente isento (orgao publico)",
+            "2. Verificar XD03",
+            "3. Simular faturamento"
+          ],
+          "resultadoEsperado": "Impostos isentos, CST 40/41, codigo I0",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-23",
+          "nome": "Determinacao automatica I3 - Canal 20",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Criar OV canal 20",
+            "2. Conferir VA02/VA03",
+            "3. Validar codigo I3"
+          ],
+          "resultadoEsperado": "I3 automatico, ICMS/IPI/PIS/COFINS calculados",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-24",
+          "nome": "Verificar I3 para canal Distribuidores (30)",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Cotacao canal 30",
+            "2. Sincronizar e converter OV",
+            "3. Validar codigo"
+          ],
+          "resultadoEsperado": "Codigo I3 atribuido para canal 30",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-25",
+          "nome": "Determinacao automatica C3 - Canal 40",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Criar OV canal 40",
+            "2. Conferir SAP",
+            "3. Validar C3"
+          ],
+          "resultadoEsperado": "C3 automatico, Base ICMS = Valor + IPI",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-26",
+          "nome": "Validar calculo ICMS ST na NF",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. OV com material ST",
+            "2. Faturar",
+            "3. VF03",
+            "4. Verificar ICMS ST"
+          ],
+          "resultadoEsperado": "ICMS ST calculado conforme NCM e UF",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-27",
+          "nome": "Validar calculo IPI na NF",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. OV com IPI",
+            "2. Faturar",
+            "3. VF03",
+            "4. Verificar IPI"
+          ],
+          "resultadoEsperado": "IPI conforme aliquota NCM",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-28",
+          "nome": "ICMS ST canal 30 - intraestadual",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Ordem canal 30 mesma UF",
+            "2. Material com ST",
+            "3. Simular"
+          ],
+          "resultadoEsperado": "Base ST = (Valor+IPI) x (1+MVA), CFOP 5401/5403",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-29",
+          "nome": "ICMS ST canal 30 - interestadual",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Ordem canal 30 UF diferente",
+            "2. Material com ST",
+            "3. Simular"
+          ],
+          "resultadoEsperado": "ST interestadual, MVA ajustado, CFOP 6401/6403",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-30",
+          "nome": "NCM com excecao (VK11-ISTN) NAO calcula ST",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Material com NCM excecao",
+            "2. Ordem canal 30",
+            "3. Simular"
+          ],
+          "resultadoEsperado": "ICMS normal calculado, ICMS ST = 0",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-31",
+          "nome": "DIFAL canal 40 (PF) interestadual",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Ordem canal 40 UF diferente",
+            "2. Simular",
+            "3. Analisar impostos"
+          ],
+          "resultadoEsperado": "DIFAL calculado, GNRE gerada",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-32",
+          "nome": "DIFAL NAO calculado para canal 20/30",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Ordem canal 20/30 UF diferente",
+            "2. Simular",
+            "3. Verificar impostos"
+          ],
+          "resultadoEsperado": "Sem DIFAL para contribuintes ICMS",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-33",
+          "nome": "FCP para canal 30",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Ordem canal 30",
+            "2. Estado com FCP",
+            "3. Simular"
+          ],
+          "resultadoEsperado": "FCP 2% calculado, GNRE para FCP",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-34",
+          "nome": "FCP para canal 40 com DIFAL",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Ordem interestadual canal 40",
+            "2. Estado com FCP",
+            "3. Simular"
+          ],
+          "resultadoEsperado": "FCP + DIFAL calculados, partilha origem/destino",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-35",
+          "nome": "IPI para todos os canais",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Ordens canais 20,30,40",
+            "2. Material com IPI",
+            "3. Simular cada"
+          ],
+          "resultadoEsperado": "IPI igual para todos canais conforme TIPI",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-36",
+          "nome": "Canal 30 - Industria com ICMS-ST (C4)",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Conferir OV SAP",
+            "2. Material ST",
+            "3. Verificar ICMS-ST"
+          ],
+          "resultadoEsperado": "Codigo C4, ICMS+IPI+PIS+COFINS+ST",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-37",
+          "nome": "Canal 40 - IPI integra base ICMS",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Conferir OV SAP",
+            "2. Cliente consumidor",
+            "3. Verificar base ICMS"
+          ],
+          "resultadoEsperado": "Base ICMS = Valor Produto + IPI",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-38",
+          "nome": "Diferimento de ICMS - Excecao VK",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Cliente com diferimento VK",
+            "2. Criar OV",
+            "3. Verificar ICMS=0",
+            "4. Verificar XML"
+          ],
+          "resultadoEsperado": "ICMS=0 (diferido), XML com tags diferimento",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-39",
+          "nome": "NCM sem IPI - J1BTAX aliquota zero",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Material com NCM J1BTAX aliq 0",
+            "2. Codigo I3",
+            "3. Verificar IPI"
+          ],
+          "resultadoEsperado": "IPI=0 (NCM sobrescreve codigo)",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-40",
+          "nome": "NCM com IPI - Calculo normal",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Material com NCM aliq IPI>0",
+            "2. Codigo I3",
+            "3. Verificar IPI"
+          ],
+          "resultadoEsperado": "IPI calculado conforme aliquota NCM",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-41",
+          "nome": "Excecoes multiplas por cliente e material",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Configurar excecoes VK11",
+            "2. Cliente com multiplas excecoes",
+            "3. Criar OV",
+            "4. Verificar aplicacao"
+          ],
+          "resultadoEsperado": "Excecoes aplicadas na ordem correta de prioridade",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-42",
+          "nome": "Testar venda interestadual com reducao base ICMS",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Origem SP, Destino SP",
+            "2. Material com reducao",
+            "3. Simular faturamento"
+          ],
+          "resultadoEsperado": "Base ICMS reduzida conforme legislacao SP",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-43",
+          "nome": "Testar venda intraestadual com aliquota interna",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Origem MG, Destino RJ",
+            "2. Criar OV",
+            "3. Verificar aliquota ICMS"
+          ],
+          "resultadoEsperado": "ICMS 12% aplicado corretamente",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-44",
+          "nome": "CFOP correto para venda intraestadual",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. OV intraestadual",
+            "2. Faturar",
+            "3. Verificar CFOP na NF"
+          ],
+          "resultadoEsperado": "CFOP iniciado com 5 (5102, 5401, etc)",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-45",
+          "nome": "CFOP correto para venda interestadual",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. OV interestadual",
+            "2. Faturar",
+            "3. Verificar CFOP na NF"
+          ],
+          "resultadoEsperado": "CFOP iniciado com 6 (6102, 6401, etc)",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-46",
+          "nome": "Validar ZSD190 - Simulacao de pricing",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar ZSD190",
+            "2. Informar parametros",
+            "3. Executar simulacao"
+          ],
+          "resultadoEsperado": "Pricing simulado com todos impostos",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-47",
+          "nome": "J1BTAX - Verificar tabelas de impostos",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar J1BTAX",
+            "2. Verificar NCM",
+            "3. Conferir aliquotas"
+          ],
+          "resultadoEsperado": "Aliquotas corretas conforme TIPI",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-48",
+          "nome": "XML NF-e - Validar estrutura completa",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Gerar NF",
+            "2. Extrair XML",
+            "3. Validar campos obrigatorios"
+          ],
+          "resultadoEsperado": "XML valido conforme schema SEFAZ",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-49",
+          "nome": "PIS/COFINS - Regime cumulativo",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Cliente regime cumulativo",
+            "2. Criar OV",
+            "3. Verificar aliquotas PIS/COFINS"
+          ],
+          "resultadoEsperado": "PIS 0.65%, COFINS 3%",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-50",
+          "nome": "PIS/COFINS - Regime nao cumulativo",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Cliente regime nao cumulativo",
+            "2. Criar OV",
+            "3. Verificar aliquotas PIS/COFINS"
+          ],
+          "resultadoEsperado": "PIS 1.65%, COFINS 7.6%",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-51",
+          "nome": "Aliquota ICMS por estado origem/destino",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Testar combinacoes UF origem x destino",
+            "2. Verificar aliquotas aplicadas"
+          ],
+          "resultadoEsperado": "Aliquotas corretas conforme tabela interestadual",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-52",
+          "nome": "MVA ajustado para ST interestadual",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Venda interestadual com ST",
+            "2. Verificar MVA aplicado"
+          ],
+          "resultadoEsperado": "MVA ajustado conforme estado destino",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-53",
+          "nome": "Base de calculo dupla ST (IPI na base)",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Material com IPI e ST",
+            "2. Verificar base ST"
+          ],
+          "resultadoEsperado": "Base ST = (Valor + IPI) x (1 + MVA)",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-54",
+          "nome": "Isencao IPI para exportacao",
+          "sistema": "SAP",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "passos": [
+            "1. OV de exportacao",
+            "2. Verificar IPI"
+          ],
+          "resultadoEsperado": "IPI = 0, CST 41 (isento)",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-55",
+          "nome": "Validar CST de ICMS na NF",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Gerar NF",
+            "2. Verificar CST ICMS no XML"
+          ],
+          "resultadoEsperado": "CST correto conforme situacao tributaria",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        }
+      ]
+    },
+    {
+      "id": "setup",
+      "nome": "Setup e Configuracao",
+      "range": "CT 56-77",
+      "total": 22,
+      "cor": "#6b7280",
+      "casos": [
+        {
+          "id": "CT-56",
+          "nome": "Transferir material para centro de vendas de teste",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar transacao MIGO no SAP",
+            "2. Selecionar tipo de movimento: Transferencia",
+            "3. Informar Material de teste",
+            "4. Centro Origem: X, Centro Destino: Y",
+            "5. Quantidade: 10.000 kg",
+            "6. Salvar documento"
+          ],
+          "resultadoEsperado": "Material transferido com sucesso. Documento MM gerado.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-57",
+          "nome": "Verificar disponibilidade de estoque no centro",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar transacao MMBE no SAP",
+            "2. Informar codigo do material",
+            "3. Informar centro de vendas",
+            "4. Verificar estoque disponivel",
+            "5. Alternativamente: ZWSSCM025"
+          ],
+          "resultadoEsperado": "Estoque disponivel > 5.000 kg no centro de teste",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-58",
+          "nome": "Testar cotacao com material expandido canal 20",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Identificar material expandido para canal 20",
+            "2. Identificar cliente com canal 20 ativo",
+            "3. Acessar Salesforce",
+            "4. Criar nova cotacao",
+            "5. Adicionar material ao carrinho",
+            "6. Sincronizar com SAP"
+          ],
+          "resultadoEsperado": "Cotacao criada sem erros. Material disponivel para canal.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-59",
+          "nome": "Testar erro com material NAO expandido",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Identificar material SEM expansao para canal 20",
+            "2. Acessar Salesforce",
+            "3. Criar cotacao para cliente canal 20",
+            "4. Tentar adicionar material nao expandido",
+            "5. Verificar comportamento do sistema"
+          ],
+          "resultadoEsperado": "Erro exibido: 'Material nao disponivel para o canal selecionado'",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-60",
+          "nome": "Testar WF Pricing com material multi-canal",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Identificar material expandido para canais 20, 30 e 40",
+            "2. Acessar Salesforce",
+            "3. Criar WF Pricing para cliente com todos os canais",
+            "4. Selecionar material multi-canal",
+            "5. Definir desconto",
+            "6. Verificar aplicacao em todos os canais"
+          ],
+          "resultadoEsperado": "Desconto aplicado em todos os 3 canais (20, 30, 40)",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-61",
+          "nome": "Expandir materiais para canal 20 (Industria)",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar transacao MM02 ou ZWSWF001",
+            "2. Selecionar material de teste",
+            "3. Criar visao de Vendas",
+            "4. Org.Vendas: 1",
+            "5. Canal: 20 (Industria)",
+            "6. Salvar material"
+          ],
+          "resultadoEsperado": "Material expandido para canal 20. Visivel na tabela MVKE.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-62",
+          "nome": "Expandir materiais para canal 30 (Revenda)",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar transacao MM02 ou ZWSWF001",
+            "2. Selecionar material de teste",
+            "3. Criar visao de Vendas",
+            "4. Org.Vendas: 1",
+            "5. Canal: 30 (Revenda)",
+            "6. Salvar material"
+          ],
+          "resultadoEsperado": "Material expandido para canal 30. Visivel na tabela MVKE.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-63",
+          "nome": "Expandir materiais para canal 40 (Consumidor)",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar transacao MM02 ou ZWSWF001",
+            "2. Selecionar material de teste",
+            "3. Criar visao de Vendas",
+            "4. Org.Vendas: 1",
+            "5. Canal: 40 (Consumidor)",
+            "6. Salvar material"
+          ],
+          "resultadoEsperado": "Material expandido para canal 40. Visivel na tabela MVKE.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-64",
+          "nome": "Cadastrar limite de credito no FSCM",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar transacao UKM_BP no SAP",
+            "2. Buscar Business Partner de teste",
+            "3. Definir Credit Limit: R$ 100.000",
+            "4. Definir Credit Control Area",
+            "5. Salvar configuracao"
+          ],
+          "resultadoEsperado": "Limite de credito de R$ 100.000 cadastrado no FSCM",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-65",
+          "nome": "Validar cliente com credito bloqueado",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar transacao UKM_BP no SAP",
+            "2. Buscar Business Partner de teste",
+            "3. Definir Credit Limit: R$ 0",
+            "4. OU definir Credit Block ativo",
+            "5. Salvar configuracao",
+            "6. Tentar criar OV para este cliente"
+          ],
+          "resultadoEsperado": "Cliente bloqueado. OV nao avanca sem liberacao.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-66",
+          "nome": "Validar cliente com credito liberado",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar transacao UKM_BP no SAP",
+            "2. Buscar Business Partner de teste",
+            "3. Definir Credit Limit: R$ 500.000",
+            "4. Verificar via UKM_CREDIT_CHECK",
+            "5. Criar OV para este cliente"
+          ],
+          "resultadoEsperado": "Cliente liberado. OVs processadas sem bloqueio de credito.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-67",
+          "nome": "Parametrizar condicoes de pagamento por canal e segmento",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar transacao ZWSSD067",
+            "2. Definir condicao de pagamento",
+            "3. Associar ao canal de vendas",
+            "4. Associar ao segmento de produto",
+            "5. Salvar parametrizacao"
+          ],
+          "resultadoEsperado": "Condicoes de pagamento parametrizadas por canal/segmento",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-68",
+          "nome": "Listar clientes necessarios para os testes",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Revisar casos de teste CT-01 a CT-112",
+            "2. Identificar perfis necessarios: PJ com credito, PJ sem credito, PF, clientes de diferentes UFs, cliente Zona Franca",
+            "3. Documentar lista em planilha"
+          ],
+          "resultadoEsperado": "Lista completa com minimo de 5 clientes de teste documentada",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-69",
+          "nome": "Validar expansao completa via tabelas SAP",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar SE16 no SAP",
+            "2. Consultar tabela MVKE (materiais)",
+            "3. Verificar registros para canais 20, 30, 40",
+            "4. Consultar tabela KNVV (clientes)",
+            "5. Verificar registros por canal"
+          ],
+          "resultadoEsperado": "100% dos materiais e clientes de teste expandidos corretamente",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-70",
+          "nome": "Listar materiais necessarios para os testes",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Revisar casos de teste CT-01 a CT-112",
+            "2. Identificar materiais necessarios: com IPI, sem IPI, com ST, importado, diferentes grupos",
+            "3. Documentar lista em planilha"
+          ],
+          "resultadoEsperado": "Lista completa com minimo de 10 materiais de teste documentada",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-71",
+          "nome": "Configurar usuario de teste no Salesforce",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar Setup do Salesforce",
+            "2. Criar usuario de teste",
+            "3. Atribuir perfil de vendedor",
+            "4. Associar escritorio de vendas",
+            "5. Testar login"
+          ],
+          "resultadoEsperado": "Usuario de teste criado e funcional",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-72",
+          "nome": "Configurar usuario aprovador Pricing",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar Setup do Salesforce",
+            "2. Criar usuario aprovador",
+            "3. Atribuir perfil de aprovador Pricing",
+            "4. Configurar queue de aprovacao",
+            "5. Testar login"
+          ],
+          "resultadoEsperado": "Usuario aprovador criado e funcional",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-73",
+          "nome": "Configurar usuario gerente escritorio",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar Setup do Salesforce",
+            "2. Criar usuario gerente",
+            "3. Atribuir perfil de gerente",
+            "4. Associar escritorio de vendas",
+            "5. Testar login"
+          ],
+          "resultadoEsperado": "Usuario gerente criado e funcional",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-74",
+          "nome": "Validar integracao SF-SAP esta ativa",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Verificar configuracao MuleSoft",
+            "2. Testar conexao SF -> SAP",
+            "3. Testar conexao SAP -> SF",
+            "4. Verificar logs de integracao"
+          ],
+          "resultadoEsperado": "Integracao bidirecional funcionando corretamente",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-75",
+          "nome": "Configurar tabela de precos no SAP",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar VK11",
+            "2. Criar condicao PR00 (preco base)",
+            "3. Definir preco para materiais de teste",
+            "4. Definir vigencia",
+            "5. Salvar"
+          ],
+          "resultadoEsperado": "Precos base cadastrados para todos materiais de teste",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-76",
+          "nome": "Validar hierarquia de produtos no SF",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar modulo de produtos",
+            "2. Verificar hierarquia de 6 niveis",
+            "3. Validar materiais em cada nivel",
+            "4. Testar navegacao"
+          ],
+          "resultadoEsperado": "Hierarquia completa com todos niveis funcionando",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-77",
+          "nome": "Documentar ambiente de teste",
+          "sistema": "SF+SAP",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "passos": [
+            "1. Listar URLs de acesso",
+            "2. Documentar credenciais de teste",
+            "3. Listar clientes de teste",
+            "4. Listar materiais de teste",
+            "5. Criar documento de referencia"
+          ],
+          "resultadoEsperado": "Documento completo com todas informacoes do ambiente",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        }
+      ]
+    },
+    {
+      "id": "financeiro",
+      "nome": "Financeiro e Credito",
+      "range": "CT 78-80",
+      "total": 3,
+      "cor": "#22c55e",
+      "casos": [
+        {
+          "id": "CT-78",
+          "nome": "Verificar bloqueio automatico de OV sem credito",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Identificar cliente SEM credito disponivel (Limite = R$ 0, OU Limite totalmente consumido, OU Credit Block ativo)",
+            "2. Criar cotacao no Salesforce",
+            "3. Sincronizar e converter em OV",
+            "4. Acessar OV no SAP (VA03)",
+            "5. Verificar bloqueios ativos"
+          ],
+          "resultadoEsperado": "OV bloqueada automaticamente com codigo Z3 (Bloqueio de Credito). Ordem nao avanca para faturamento.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-79",
+          "nome": "Validar mensagem de alerta de credito ao validar cotacao",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Identificar cliente com problema de credito (Limite baixo, Titulos em atraso, Credito quase esgotado)",
+            "2. Criar cotacao no Salesforce",
+            "3. Adicionar materiais",
+            "4. Clicar em 'Validar' ou 'Sincronizar'",
+            "5. Observar mensagens de alerta"
+          ],
+          "resultadoEsperado": "Alerta visual exibido na tela indicando problema de credito do cliente. Vendedor e informado antes de prosseguir.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-80",
+          "nome": "Consultar OV criada e verificar dados completos",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "passos": [
+            "1. Identificar OV retornada do SAP para SF",
+            "2. Acessar registro da OV no Salesforce",
+            "3. Clicar no link da ordem",
+            "4. Verificar aba 'Fluxo'",
+            "5. Verificar aba 'Detalhes'",
+            "6. Verificar aba 'Relacionado'",
+            "7. Verificar Order Tracking"
+          ],
+          "resultadoEsperado": "Todos os dados corretos e consistentes entre SF e SAP. Order Tracking atualizado com status atual.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        }
+      ]
+    },
+    {
+      "id": "cotacao-ov",
+      "nome": "Cotacao e Ordem de Vendas",
+      "range": "CT 81-101",
+      "total": 21,
+      "cor": "#3b82f6",
+      "casos": [
+        {
+          "id": "CT-81",
+          "nome": "Verificar aplicacao automatica de YDCF na cotacao",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Cliente com WF Pricing aprovado",
+            "2. Criar cotacao (mesmo canal/escritorio)",
+            "3. Incluir material com YDCF",
+            "4. Sincronizar com SAP",
+            "5. Verificar campo 'Desconto Fixo'"
+          ],
+          "resultadoEsperado": "Desconto Fixo aparece automaticamente. Campo preenchido sem intervencao.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-82",
+          "nome": "Incluir material via busca por codigo",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Tela Produtos da cotacao",
+            "2. Clicar 'Busca de Produtos'",
+            "3. Digitar codigo do material",
+            "4. Selecionar na lista",
+            "5. Preencher quantidade"
+          ],
+          "resultadoEsperado": "Material adicionado com codigo, descricao e quantidade corretos.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-83",
+          "nome": "Sincronizar cotacao com material sem parametrizacao",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Incluir material NAO parametrizado no SAP",
+            "2. Tentar sincronizar cotacao",
+            "3. Verificar mensagens de erro"
+          ],
+          "resultadoEsperado": "Erro vermelho indicando falta de parametrizacao no SAP.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-84",
+          "nome": "Verificar mensagem de disponibilidade (ATP)",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Criar cotacao",
+            "2. Adicionar material",
+            "3. Verificar coluna 'Disponibilidade'",
+            "4. Observar sinal visual"
+          ],
+          "resultadoEsperado": "Mensagem 'Disponivel em XX dias'. Sinal: verde imediato, amarelo alguns dias, vermelho indisponivel.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-85",
+          "nome": "Validar erro com material sem estoque",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Identificar material SEM estoque",
+            "2. Tentar criar cotacao",
+            "3. Verificar comportamento"
+          ],
+          "resultadoEsperado": "Erro: 'Material nao disponivel' ou alerta de indisponibilidade.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-86",
+          "nome": "Visualizar indicadores de pricing (tooltip)",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "passos": [
+            "1. Sincronizar cotacao",
+            "2. Localizar icone de dinheiro ($)",
+            "3. Posicionar mouse sobre o icone",
+            "4. Verificar tooltip exibido"
+          ],
+          "resultadoEsperado": "Tooltip mostra: descontos aplicados, impostos calculados, margem estimada.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-87",
+          "nome": "Verificar preco corresponde ao Pricing SAP",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Criar cotacao SF",
+            "2. Material X, sincronizar",
+            "3. Anotar preco no SF",
+            "4. Acessar VK13 no SAP",
+            "5. Comparar valores"
+          ],
+          "resultadoEsperado": "Preco SFDC = Preco SAP (VK13). Valores identicos.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-88",
+          "nome": "Uso da Area de Vendas na cotacao",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "passos": [
+            "1. Preencher Org Vendas",
+            "2. Selecionar Canal (20/30/40)",
+            "3. Selecionar Setor (55 - Prod. Acabado)",
+            "4. Confirmar dados"
+          ],
+          "resultadoEsperado": "Cotacao exibe informacoes da Area de Vendas corretamente.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-89",
+          "nome": "Incluir multiplos materiais via Lista de Produtos",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Clicar 'Lista de Produtos'",
+            "2. Selecionar Centro",
+            "3. Selecionar Grupo de Mercadoria",
+            "4. Clicar 'Buscar'",
+            "5. Selecionar 3 materiais",
+            "6. Clicar 'Salvar'"
+          ],
+          "resultadoEsperado": "3 materiais adicionados a tabela de produtos da cotacao.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-90",
+          "nome": "Incluir materiais via upload de planilha",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Clicar 'Template'",
+            "2. Baixar planilha Excel",
+            "3. Preencher codigos e quantidades",
+            "4. Clicar 'Carregar arquivos'",
+            "5. Fazer upload do Excel"
+          ],
+          "resultadoEsperado": "Materiais importados da planilha para a cotacao.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-91",
+          "nome": "Validacao completa: Canal 20 + I3 + Setor 55",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Cliente industrial canal 20",
+            "2. Setor 55 (Produto Acabado)",
+            "3. Material tributado normalmente",
+            "4. Criar ordem completa",
+            "5. Gerar XML da NF-e"
+          ],
+          "resultadoEsperado": "Codigo I3. ICMS + IPI + PIS + COFINS calculados. XML correto.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-92",
+          "nome": "Validar ATP mostra data correta de entrega",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Cotacao com material",
+            "2. Verificar data ATP exibida",
+            "3. Comparar com regra Belgo"
+          ],
+          "resultadoEsperado": "Data ATP = D + X dias uteis (conforme regra de lead time Belgo).",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-93",
+          "nome": "Validar sincronizacao com expansao correta",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Material e cliente expandidos",
+            "2. Criar cotacao",
+            "3. Clicar 'Sincronizar'",
+            "4. Verificar Integration Status"
+          ],
+          "resultadoEsperado": "Sincronizacao 100% sucesso. Integration Status = Completed.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-94",
+          "nome": "Criar cotacao completa para cliente com pre-requisitos",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Conta com: codigo SAP, escritorio, vendedor, canais, credito",
+            "2. Acessar 'Cotacao'",
+            "3. Preencher todos campos",
+            "4. Clicar 'Salvar'"
+          ],
+          "resultadoEsperado": "Cotacao criada com sucesso. Confirmacao exibida na tela.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-95",
+          "nome": "Criar cotacao para cliente PF (Pessoa Fisica)",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Conta tipo PF (com CPF)",
+            "2. Canal 40 (Consumidores)",
+            "3. Criar cotacao",
+            "4. Incluir materiais",
+            "5. Sincronizar e converter OV"
+          ],
+          "resultadoEsperado": "Processo funciona para PF. Tributacao adequada (C3 + DIFAL se interestadual).",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-96",
+          "nome": "Sincronizar cotacao e verificar precificacao",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Materiais incluidos",
+            "2. Verificar dados basicos",
+            "3. Clicar 'Sincronizar'",
+            "4. Aguardar processamento",
+            "5. Verificar campos de preco"
+          ],
+          "resultadoEsperado": "Campos preenchidos: preco unitario, impostos, descontos, totais.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-97",
+          "nome": "Aplicar desconto manual e ressincronizar",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Apos 1a sincronizacao",
+            "2. Preencher desconto manual (ex: 2%)",
+            "3. Clicar 'Sincronizar' novamente",
+            "4. Verificar recalculo"
+          ],
+          "resultadoEsperado": "Sistema recalcula todos valores com desconto de 2% aplicado.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-98",
+          "nome": "Verificar bloqueios na Ordem de Vendas",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar OV no Salesforce",
+            "2. Aba 'Detalhes'",
+            "3. Secao 'Status'",
+            "4. Verificar bloqueios ativos"
+          ],
+          "resultadoEsperado": "Bloqueios identificados com codigo e descricao clara.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-99",
+          "nome": "Verificar 'Farol de Status' no cabecalho da OV",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar OV",
+            "2. Verificar indicador visual (semaforo) no cabecalho"
+          ],
+          "resultadoEsperado": "Verde (sem bloqueios), Amarelo (alertas), Vermelho (criticos).",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-100",
+          "nome": "Visualizar indicadores completos (perfil autorizado)",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "passos": [
+            "1. Logar com usuario autorizado",
+            "2. Acessar cotacao",
+            "3. Rolar ate final da pagina",
+            "4. Verificar tabela de indicadores"
+          ],
+          "resultadoEsperado": "Tabela completa: pricing, margem, custos (visivel apenas para perfis autorizados).",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-101",
+          "nome": "Verificar atualizacao automatica OV apos mudancas no SAP",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. OV criada via SF",
+            "2. Acessar OV no SAP (VA02)",
+            "3. Fazer alteracao (ex: quantidade)",
+            "4. Salvar no SAP",
+            "5. Atualizar tela no SF"
+          ],
+          "resultadoEsperado": "Alteracoes feitas no SAP sincronizadas automaticamente no Salesforce.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        }
+      ]
+    },
+    {
+      "id": "conditions",
+      "nome": "Conditions Pricing SAP",
+      "range": "CT 102-108",
+      "total": 7,
+      "cor": "#ec4899",
+      "casos": [
+        {
+          "id": "CT-102",
+          "nome": "Cadastrar condition YAC1 com novas sequencias",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar transacao VK11 no SAP",
+            "2. Selecionar tipo de condicao: YAC1",
+            "3. Utilizar sequencias de acesso: 018 - Org.Vendas/Canal/Cliente, 019 - Org.Vendas/Canal/Grupo, 020 - Org.Vendas/Canal/Material, 021 - Escr.Vendas/Regiao/Centro",
+            "4. Definir percentual de acrescimo",
+            "5. Definir periodo de vigencia",
+            "6. Salvar"
+          ],
+          "resultadoEsperado": "YAC1 criada com novas sequencias. Visivel em VK13 com todos os dados.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-103",
+          "nome": "Cadastrar conditions YPOL e YESC com novas sequencias",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar transacao VK11",
+            "2. Para YPOL: Sequencias 001 a 004, Definir regras de politica",
+            "3. Para YESC: Sequencias 001 a 004, Definir escalas de quantidade",
+            "4. Salvar ambas"
+          ],
+          "resultadoEsperado": "YPOL e YESC criadas com sucesso. Visiveis em VK13.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-104",
+          "nome": "Cadastrar condition YACR com sequencia 021",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar transacao VK11",
+            "2. Selecionar tipo: YACR",
+            "3. Sequencia 021: Escritorio de Vendas, Regiao, Centro",
+            "4. Preencher valores",
+            "5. Salvar"
+          ],
+          "resultadoEsperado": "YACR criada com sequencia 021 (Escr.Vendas/Regiao/Centro).",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-105",
+          "nome": "Verificar renomeacao e reposicionamento da YDFC",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Acessar transacao V/08",
+            "2. Localizar esquema YVWS01 ou YVWS16",
+            "3. Localizar condition YDFC",
+            "4. Verificar nova descricao: 'WS-Desconto Cross'",
+            "5. Verificar posicionamento no final do nivel"
+          ],
+          "resultadoEsperado": "YDFC renomeada para 'WS-Desconto Cross' e posicionada corretamente.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-106",
+          "nome": "YDFC nao impactou processo cross-company",
+          "sistema": "SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Criar cenario de venda cross-company",
+            "2. Verificar se YDFC e aplicada",
+            "3. Comparar com comportamento anterior ao projeto",
+            "4. Validar que nao houve regressao"
+          ],
+          "resultadoEsperado": "Renomeacao/reposicionamento NAO quebrou processo cross-company existente.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-107",
+          "nome": "Criar OV no SFDC e verificar aplicacao das novas conditions",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Identificar cliente/material que atendam as conditions cadastradas",
+            "2. Criar cotacao no Salesforce",
+            "3. Sincronizar e converter em OV",
+            "4. Acessar OV no SAP (VA03)",
+            "5. Ir em 'Pricing' do item",
+            "6. Verificar se YAC1, YACR, YPOL estao presentes"
+          ],
+          "resultadoEsperado": "Conditions encontradas no pricing do item. Valores aplicados corretamente.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-108",
+          "nome": "Verificar calculo correto de preco liquido",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Criar cotacao completa no Salesforce",
+            "2. Verificar formula: Preco Base + YAC1 (acrescimo) + YPOL (politica) + YESC (escala) - YDCF (desconto fixo)",
+            "3. Comparar resultado calculado"
+          ],
+          "resultadoEsperado": "Preco liquido = soma correta de todas conditions. Integration Status = Completed.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        }
+      ]
+    },
+    {
+      "id": "integracao",
+      "nome": "Integração SF ↔ SAP",
+      "range": "CT 109-115",
+      "total": 7,
+      "cor": "#6f42c1",
+      "casos": [
+        {
+          "id": "CT-109",
+          "nome": "Teste end-to-end: WF Pricing → Cotação → OV → NF",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Criar WF Pricing com X% de desconto",
+            "2. Aprovar WF (Pricing + Gerente)",
+            "3. Verificar YDCF no SAP (VK13)",
+            "4. Criar cotação no Salesforce",
+            "5. Verificar desconto aplicado automaticamente",
+            "6. Converter cotação em OV",
+            "7. Liberar crédito se necessário",
+            "8. Faturar ordem (VF01)",
+            "9. Gerar NF-e"
+          ],
+          "resultadoEsperado": "Fluxo completo executado. Desconto X% consistente em todas as etapas. NF-e gerada corretamente.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-110",
+          "nome": "Verificar propagação Desconto Fixo Cliente SF → SAP",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Identificar cliente com YDCF ativa",
+            "2. Criar cotação no Salesforce",
+            "3. Sincronizar com SAP",
+            "4. Converter em Ordem de Venda",
+            "5. Acessar OV no SAP (VA03)",
+            "6. Verificar campo 'Desconto Fixo Cliente'"
+          ],
+          "resultadoEsperado": "Informação do desconto fixo visível e consistente em ambos os sistemas (SF e SAP)",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-111",
+          "nome": "LIMBO: Desconto acima do YDCF cai no Limbo",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Cliente com WF aprovado para X%",
+            "2. Criar cotação no Salesforce",
+            "3. Alterar desconto manualmente para Y% (onde Y > X)",
+            "4. Sincronizar cotação",
+            "5. Converter em Ordem de Venda",
+            "6. Verificar status no SAP"
+          ],
+          "resultadoEsperado": "Item cai no Limbo (WS-Limbo Preço). OV bloqueada até aprovação manual.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Mecanismo de bloqueio automático quando desconto excede YDCF aprovado"
+        },
+        {
+          "id": "CT-112",
+          "nome": "Alteração de preço base e ajuste proporcional do desconto",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Material com preço base R$ 100,00",
+            "2. YDCF configurada para 10%",
+            "3. Criar cotação (desconto = R$ 10,00)",
+            "4. Alterar preço base para R$ 120,00",
+            "5. Criar nova cotação",
+            "6. Verificar valor do desconto"
+          ],
+          "resultadoEsperado": "Desconto ajustado proporcionalmente: R$ 120 x 10% = R$ 12,00. Percentual mantido.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-113",
+          "nome": "SEM LIMBO: Desconto dentro do YDCF",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Cliente com WF aprovado para X%",
+            "2. Criar cotação com desconto ≤ X%",
+            "3. Sincronizar e converter em OV",
+            "4. Acessar OV no SAP (VA03)",
+            "5. Verificar status de bloqueio"
+          ],
+          "resultadoEsperado": "Item NÃO bloqueado. Desconto dentro do aprovado permite fluxo normal.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-114",
+          "nome": "Recálculo automático da YEDI quando houver YDCF",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Cliente com YDCF ativa",
+            "2. Criar OV via Salesforce",
+            "3. Acessar OV no SAP (VA03)",
+            "4. Acessar pricing do item",
+            "5. Localizar condition YEDI",
+            "6. Verificar se houve recálculo"
+          ],
+          "resultadoEsperado": "YEDI ajustada automaticamente para manter coerência com YDCF",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        },
+        {
+          "id": "CT-115",
+          "nome": "Comportamento quando YDCF expira",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "passos": [
+            "1. Criar WF Pricing com vigência curta (1 dia)",
+            "2. Aprovar WF completamente",
+            "3. Criar cotação dentro da vigência",
+            "4. Verificar desconto aplicado",
+            "5. Aguardar expiração da vigência",
+            "6. Criar nova cotação após expiração"
+          ],
+          "resultadoEsperado": "Após expiração, desconto NÃO é mais aplicado automaticamente. Vendedor precisa criar novo WF.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": ""
+        }
+      ]
+    },
+    {
+      "id": "cadastro-cliente",
+      "nome": "Cadastro de Cliente",
+      "range": "CT 116-132",
+      "total": 17,
+      "cor": "#10b981",
+      "casos": [
+        {
+          "id": "CT-116",
+          "nome": "Validar preenchimento automático de CNAE via SINTEGRA",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "documentoRef": "876268",
+          "processoRef": "cadastro-cliente",
+          "passos": [
+            "1. Acessar Salesforce e criar nova Conta PJ",
+            "2. Preencher CNPJ válido no campo correspondente",
+            "3. Clicar no botão 'Integrar SINTEGRA'",
+            "4. Aguardar retorno da integração",
+            "5. Verificar preenchimento automático do campo CNAE",
+            "6. Verificar descrição completa da atividade econômica"
+          ],
+          "resultadoEsperado": "Sistema preenche automaticamente o campo CNAE com descrição completa (ex: 'Comércio atacadista de defensivos agrícolas, adubos, fertilizantes e corretivos')",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Contas de teste: ADUBOSREAL, SANTA RITA, DIVINO ANT, VALDIR FLOR, PERAM. Documento: 876268"
+        },
+        {
+          "id": "CT-117",
+          "nome": "Validar descrição completa do CNAE para diferentes tipos de empresa",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "documentoRef": "876268",
+          "processoRef": "cadastro-cliente",
+          "passos": [
+            "1. Criar conta com CNPJ de empresa de comércio (ADUBOSREAL)",
+            "2. Validar CNAE: 'Comércio atacadista de defensivos agrícolas...'",
+            "3. Criar conta com CNPJ de indústria (SANTA RITA)",
+            "4. Validar CNAE: 'Produção de artefatos estampados de metal'",
+            "5. Criar conta com CNPJ de construção (DIVINO ANT)",
+            "6. Validar CNAE: 'Obras de alvenaria'",
+            "7. Criar conta com CNPJ de agropecuária (VALDIR FLOR)",
+            "8. Validar CNAE: 'Criação de peixes em água doce'"
+          ],
+          "resultadoEsperado": "Cada tipo de empresa deve ter seu CNAE preenchido corretamente com descrição específica da atividade",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Documento: 876268 - Testar diversos segmentos"
+        },
+        {
+          "id": "CT-118",
+          "nome": "Validar duplicidade por Termo de Pesquisa",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "documentoRef": "899139",
+          "processoRef": "cadastro-cliente",
+          "passos": [
+            "1. Acessar Salesforce e criar nova Conta",
+            "2. Preencher todos os campos obrigatórios",
+            "3. Inserir Termo de Pesquisa já existente na base",
+            "4. Tentar salvar a conta",
+            "5. Verificar comportamento do sistema"
+          ],
+          "resultadoEsperado": "Sistema deve bloquear a criação e exibir mensagem: 'Encontramos um obstáculo, já existe um cliente com o mesmo termo de pesquisa'",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Documento: 899139 - Validação crítica para evitar duplicidades"
+        },
+        {
+          "id": "CT-119",
+          "nome": "Validar mensagem de bloqueio quando Termo de Pesquisa duplicado",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "documentoRef": "899139",
+          "processoRef": "cadastro-cliente",
+          "passos": [
+            "1. Identificar uma conta existente e anotar o Termo de Pesquisa",
+            "2. Criar nova conta com o mesmo Termo de Pesquisa",
+            "3. Verificar que mensagem de erro aparece",
+            "4. Verificar texto exato da mensagem",
+            "5. Verificar que botão Salvar está bloqueado"
+          ],
+          "resultadoEsperado": "Mensagem exata: 'Encontramos um obstáculo, já existe um cliente com o mesmo termo de pesquisa'. Criação bloqueada.",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Documento: 899139"
+        },
+        {
+          "id": "CT-120",
+          "nome": "Validar cálculo automático de Cluster",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "documentoRef": "862865",
+          "processoRef": "cadastro-cliente",
+          "passos": [
+            "1. Criar nova conta no Salesforce",
+            "2. Preencher dados obrigatórios (CNPJ, Razão Social, etc.)",
+            "3. Integrar via SINTEGRA",
+            "4. Verificar campo Cluster após salvar",
+            "5. Validar que Cluster foi calculado automaticamente"
+          ],
+          "resultadoEsperado": "Sistema calcula automaticamente o Cluster baseado nas regras de negócio configuradas",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Contas de teste: Mercbenz, Leao, FRUITTOOLS. Documento: 862865"
+        },
+        {
+          "id": "CT-121",
+          "nome": "Validar workflow de aprovação para Cluster Exceção",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "documentoRef": "862865",
+          "processoRef": "cadastro-cliente",
+          "passos": [
+            "1. Abrir conta com Cluster calculado automaticamente",
+            "2. Solicitar alteração de Cluster (exceção)",
+            "3. Clicar no botão 'Enviar para aprovação'",
+            "4. Verificar que email é enviado ao aprovador",
+            "5. Logar como aprovador e aprovar",
+            "6. Verificar email de confirmação",
+            "7. Verificar campo 'Cluster exceção' marcado"
+          ],
+          "resultadoEsperado": "Workflow completo: Solicitação → Email → Aprovação → Campo 'Cluster exceção' marcado",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Documento: 862865 - Requer usuário aprovador configurado. Contas de teste para Cluster: Mercbenz, Leao, FRUITTOOLS"
+        },
+        {
+          "id": "CT-122",
+          "nome": "Validar notificação de cadastro pendente",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "documentoRef": "881196",
+          "processoRef": "cadastro-cliente",
+          "passos": [
+            "1. Criar conta com campos obrigatórios incompletos",
+            "2. Salvar conta em estado parcial",
+            "3. Aguardar processamento do sistema",
+            "4. Verificar envio de notificação automática",
+            "5. Verificar destinatário da notificação",
+            "6. Verificar conteúdo da notificação"
+          ],
+          "resultadoEsperado": "Sistema identifica cadastro incompleto e envia notificação automática para responsável",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Documento: 881196"
+        },
+        {
+          "id": "CT-123",
+          "nome": "Validar automatização de Segmento e Subsegmento",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "documentoRef": "895163",
+          "processoRef": "cadastro-cliente",
+          "passos": [
+            "1. Criar nova conta no Salesforce",
+            "2. Preencher CNPJ e integrar via SINTEGRA",
+            "3. Verificar campo Segmento após integração",
+            "4. Verificar campo Subsegmento após integração",
+            "5. Validar que segmentação está correta baseado no CNAE"
+          ],
+          "resultadoEsperado": "Campos Segmento e Subsegmento preenchidos automaticamente baseado nas regras de classificação",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Documento: 895163"
+        },
+        {
+          "id": "CT-124",
+          "nome": "Validar integração Salesforce → SAP (botão Enviar SAP)",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "documentoRef": "891121",
+          "processoRef": "cadastro-cliente",
+          "passos": [
+            "1. Criar conta completa no Salesforce",
+            "2. Preencher todos os campos obrigatórios",
+            "3. Clicar no botão 'Enviar SAP'",
+            "4. Verificar mensagem: 'A conta está em sincronização com o SAP'",
+            "5. Aguardar processamento",
+            "6. Verificar código SAP retornado",
+            "7. Validar dados no SAP via XD03"
+          ],
+          "resultadoEsperado": "Conta sincronizada com SAP, código SAP gerado e dados consistentes entre sistemas",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Documento: 891121 - Integração crítica"
+        },
+        {
+          "id": "CT-125",
+          "nome": "Validar preenchimento automático de Escritório e Equipe de Vendas",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "documentoRef": "Reuniao 10/12/2025",
+          "processoRef": "cadastro-cliente",
+          "passos": [
+            "1. Logar no Salesforce com usuário vinculado a escritório",
+            "2. Criar nova conta",
+            "3. Verificar campo 'Escritório de Vendas' preenchido automaticamente",
+            "4. Verificar campo 'Equipe de Vendas' preenchido automaticamente",
+            "5. Validar que valores correspondem ao perfil do usuário"
+          ],
+          "resultadoEsperado": "Campos Escritório e Equipe de Vendas preenchidos automaticamente conforme perfil do usuário logado",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Campo 'EV Alternativo' foi renomeado para 'Equipe de Vendas'. Mencionado na reuniao de 10/12/2025 sobre Cadastro de Cliente"
+        },
+        {
+          "id": "CT-136",
+          "nome": "Validar cadastro de Pessoa Fisica com CPF valido",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "documentoRef": "",
+          "processoRef": "cadastro-cliente",
+          "passos": [
+            "1. Acessar Salesforce e clicar em 'Criar Conta'",
+            "2. Selecionar tipo de conta: Pessoa Fisica",
+            "3. Preencher CPF valido (ex: 123.456.789-09)",
+            "4. Preencher Nome completo",
+            "5. Preencher Termo de Pesquisa",
+            "6. Preencher dados de contato (telefone, email)",
+            "7. Salvar a conta",
+            "8. Verificar que conta foi criada com sucesso"
+          ],
+          "resultadoEsperado": "Conta PF criada com sucesso, CPF validado e dados salvos corretamente",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Fluxo especifico para Pessoa Fisica - diferente de PJ que usa SINTEGRA"
+        },
+        {
+          "id": "CT-137",
+          "nome": "Validar algoritmo de CPF (Mod 11) - rejeitar CPF invalido",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "documentoRef": "",
+          "processoRef": "cadastro-cliente",
+          "passos": [
+            "1. Acessar Salesforce e criar nova Conta PF",
+            "2. Inserir CPF invalido (ex: 111.111.111-11)",
+            "3. Tentar salvar a conta",
+            "4. Verificar mensagem de erro de validacao",
+            "5. Inserir CPF com digitos verificadores incorretos",
+            "6. Tentar salvar novamente",
+            "7. Verificar que sistema bloqueia o cadastro"
+          ],
+          "resultadoEsperado": "Sistema bloqueia cadastro com CPF invalido e exibe mensagem de erro apropriada",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Validacao usa algoritmo Mod 11 para verificar digitos"
+        },
+        {
+          "id": "CT-138",
+          "nome": "Validar cadastro de Parceiro Agrupador (Holdings/Grupos)",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "documentoRef": "",
+          "processoRef": "cadastro-cliente",
+          "passos": [
+            "1. Acessar Salesforce e clicar em 'Criar Conta'",
+            "2. Selecionar tipo de conta: Parceiro Agrupador",
+            "3. Preencher Nome do grupo/holding",
+            "4. Preencher Termo de Pesquisa",
+            "5. Salvar a conta agrupadora",
+            "6. Vincular contas filhas (PJ) ao agrupador",
+            "7. Verificar hierarquia de contas"
+          ],
+          "resultadoEsperado": "Parceiro Agrupador criado e contas vinculadas corretamente na hierarquia",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Usado para holdings e grupos empresariais que agrupam multiplas contas PJ"
+        },
+        {
+          "id": "CT-139",
+          "nome": "Validar erro quando CNPJ invalido no SINTEGRA",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "documentoRef": "876268",
+          "processoRef": "cadastro-cliente",
+          "passos": [
+            "1. Acessar Salesforce e criar nova Conta PJ",
+            "2. Inserir CNPJ com formato invalido (ex: 00.000.000/0000-00)",
+            "3. Clicar no botao 'Integrar SINTEGRA'",
+            "4. Verificar mensagem de erro",
+            "5. Inserir CNPJ com digitos verificadores incorretos",
+            "6. Clicar novamente em 'Integrar SINTEGRA'",
+            "7. Verificar comportamento do sistema"
+          ],
+          "resultadoEsperado": "Sistema exibe mensagem: 'CNPJ informado nao e valido' e bloqueia integracao",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Cenario de erro - CNPJ com formato ou digitos invalidos"
+        },
+        {
+          "id": "CT-140",
+          "nome": "Validar erro quando CNPJ nao existe na base SINTEGRA",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "documentoRef": "876268",
+          "processoRef": "cadastro-cliente",
+          "passos": [
+            "1. Acessar Salesforce e criar nova Conta PJ",
+            "2. Inserir CNPJ valido mas inexistente na Receita (ex: empresa baixada)",
+            "3. Clicar no botao 'Integrar SINTEGRA'",
+            "4. Aguardar retorno da integracao",
+            "5. Verificar mensagem de erro exibida",
+            "6. Verificar se permite continuar cadastro manualmente",
+            "7. Documentar comportamento esperado"
+          ],
+          "resultadoEsperado": "Sistema exibe mensagem: 'CNPJ nao encontrado na base SINTEGRA' e permite cadastro manual",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Cenario de erro - CNPJ valido porem nao encontrado na base da Receita Federal"
+        },
+        {
+          "id": "CT-141",
+          "nome": "Validar dados minimos de contato obrigatorio",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "documentoRef": "881196",
+          "processoRef": "cadastro-cliente",
+          "passos": [
+            "1. Criar conta (PJ ou PF) com todos os campos obrigatorios",
+            "2. NAO preencher dados de contato",
+            "3. Tentar salvar a conta",
+            "4. Verificar se sistema permite salvar sem contato",
+            "5. Se permitir, verificar se notificacao de pendencia e disparada",
+            "6. Adicionar pelo menos um contato (nome, email, telefone)",
+            "7. Verificar que cadastro fica completo"
+          ],
+          "resultadoEsperado": "Sistema alerta sobre falta de contato ou dispara notificacao de cadastro incompleto",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Dados de contato sao criticos para Autoatendimento e outras areas"
+        },
+        {
+          "id": "CT-142",
+          "nome": "Validar selecao de canal conforme tipo de cliente",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "documentoRef": "",
+          "processoRef": "cadastro-cliente",
+          "passos": [
+            "1. Criar conta PJ com CNAE de industria",
+            "2. Verificar sugestao de Canal 20 (Industria)",
+            "3. Criar conta PJ com CNAE de comercio",
+            "4. Verificar sugestao de Canal 30 (Distribuidores/Revenda)",
+            "5. Criar conta PF",
+            "6. Verificar sugestao de Canal 40 (Consumidor Final)",
+            "7. Testar alteracao manual para Canal 25 (Casos Especiais)"
+          ],
+          "resultadoEsperado": "Sistema sugere canal correto baseado no tipo de cliente e CNAE, permitindo ajuste manual",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Canais: 20=Industria, 25=Especiais, 30=Distribuidores, 40=Consumidor Final"
+        }
+      ]
+    },
+    {
+      "id": "hub-gestao-oc",
+      "nome": "Hub de Gestão OC",
+      "range": "CT 126-130",
+      "total": 5,
+      "cor": "#f59e0b",
+      "casos": [
+        {
+          "id": "CT-126",
+          "nome": "Validar aba Gerenciar Grupos Solucionadores (LWC)",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "documentoRef": "889851",
+          "processoRef": "hub-gestao-oc",
+          "passos": [
+            "1. Acessar Hub de Gestão OC no Salesforce",
+            "2. Localizar nova aba 'Gerenciar Grupos Solucionadores'",
+            "3. Verificar que aba está visível e acessível",
+            "4. Verificar listagem de grupos configurados",
+            "5. Validar grupos: Comercial, Qualidade, Sistemas"
+          ],
+          "resultadoEsperado": "Aba LWC 'Gerenciar Grupos Solucionadores' visível com todos os grupos configurados",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Documento: 889851 - LWC = Lightning Web Component"
+        },
+        {
+          "id": "CT-127",
+          "nome": "Validar adição de membro ao grupo solucionador",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "documentoRef": "889851",
+          "processoRef": "hub-gestao-oc",
+          "passos": [
+            "1. Acessar aba Gerenciar Grupos Solucionadores",
+            "2. Selecionar um grupo (ex: Comercial)",
+            "3. Clicar em 'Adicionar Membro'",
+            "4. Preencher modal com dados do novo membro",
+            "5. Buscar por email ou nome",
+            "6. Confirmar adição",
+            "7. Verificar membro na lista do grupo"
+          ],
+          "resultadoEsperado": "Membro adicionado com sucesso e visível na lista do grupo",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Documento: 889851"
+        },
+        {
+          "id": "CT-128",
+          "nome": "Validar remoção de membro do grupo solucionador",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "documentoRef": "889851",
+          "processoRef": "hub-gestao-oc",
+          "passos": [
+            "1. Acessar aba Gerenciar Grupos Solucionadores",
+            "2. Selecionar grupo com membros",
+            "3. Localizar membro a ser removido",
+            "4. Clicar em 'Remover' ou ícone de exclusão",
+            "5. Confirmar remoção",
+            "6. Verificar que membro não aparece mais na lista"
+          ],
+          "resultadoEsperado": "Membro removido do grupo com sucesso",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Documento: 889851"
+        },
+        {
+          "id": "CT-129",
+          "nome": "Validar busca de membro por email e nome",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "documentoRef": "889851",
+          "processoRef": "hub-gestao-oc",
+          "passos": [
+            "1. Acessar modal de adicionar membro",
+            "2. Digitar email do usuário no campo de busca",
+            "3. Verificar resultado da busca",
+            "4. Limpar campo de busca",
+            "5. Digitar nome do usuário",
+            "6. Verificar resultado da busca"
+          ],
+          "resultadoEsperado": "Busca funciona tanto por email quanto por nome, retornando usuários corretos",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Documento: 889851"
+        },
+        {
+          "id": "CT-130",
+          "nome": "Validar restrição de acesso por perfil (Gestão, Analista, Gestor)",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "documentoRef": "889851",
+          "processoRef": "hub-gestao-oc",
+          "passos": [
+            "1. Logar com perfil 'Gestão' e verificar acesso",
+            "2. Logar com perfil 'Analista' e verificar acesso",
+            "3. Logar com perfil 'Gestor' e verificar acesso",
+            "4. Logar com perfil sem permissão e verificar bloqueio",
+            "5. Documentar permissões de cada perfil"
+          ],
+          "resultadoEsperado": "Acesso controlado conforme perfil: Gestão (total), Gestor (parcial), Analista (visualização)",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Documento: 889851 - Perfis: Gestão, Analista, Gestor"
+        }
+      ]
+    },
+    {
+      "id": "fup-carteira",
+      "nome": "FUP de Carteira",
+      "range": "CT 131-135",
+      "total": 5,
+      "cor": "#8b5cf6",
+      "casos": [
+        {
+          "id": "CT-131",
+          "nome": "Validar casos de atendimento FUP de carteira",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "documentoRef": "854298",
+          "processoRef": "fup-carteira",
+          "passos": [
+            "1. Acessar tela de FUP de Carteira",
+            "2. Selecionar cliente para atendimento",
+            "3. Verificar casos disponíveis para o cliente",
+            "4. Abrir caso e verificar detalhes",
+            "5. Atender caso e registrar solução"
+          ],
+          "resultadoEsperado": "Casos de atendimento listados corretamente com informações completas para resolução",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Documento: 854298 - Clientes teste: MOAGEIRA, CSULBRASIL, BOMBRIL, MAXDEL, FEEDER"
+        },
+        {
+          "id": "CT-132",
+          "nome": "Validar FUP de Carteira - Order Tracking",
+          "sistema": "Salesforce",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "documentoRef": "878256",
+          "processoRef": "fup-carteira",
+          "passos": [
+            "1. Acessar Order Tracking no Salesforce",
+            "2. Filtrar por cliente ou pedido",
+            "3. Verificar status do pedido",
+            "4. Verificar datas: solicitada, preparação, aceite",
+            "5. Verificar dados de material e quantidade",
+            "6. Verificar status de crédito",
+            "7. Verificar preço negociado e ajustes"
+          ],
+          "resultadoEsperado": "Order Tracking exibe informações completas e atualizadas do pedido",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Documento: 878256"
+        },
+        {
+          "id": "CT-133",
+          "nome": "Validar tela de FUP - interface e funcionalidades",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "documentoRef": "895963",
+          "processoRef": "fup-carteira",
+          "passos": [
+            "1. Acessar tela de FUP",
+            "2. Verificar layout e componentes",
+            "3. Testar filtros disponíveis",
+            "4. Testar ordenação de colunas",
+            "5. Testar exportação de dados",
+            "6. Verificar responsividade"
+          ],
+          "resultadoEsperado": "Tela de FUP funcional com todos os componentes operando corretamente",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Documento: 895963"
+        },
+        {
+          "id": "CT-134",
+          "nome": "Validar log de integração no Hub de Gestão OCs",
+          "sistema": "Salesforce",
+          "prioridade": "Media",
+          "status": "Pendente",
+          "documentoRef": "891121",
+          "processoRef": "fup-carteira",
+          "passos": [
+            "1. Acessar Hub de Gestão OCs",
+            "2. Localizar seção de log de integração",
+            "3. Verificar registros de integração",
+            "4. Validar mensagem 'Integração realizada com sucesso'",
+            "5. Verificar quantidade de registros processados"
+          ],
+          "resultadoEsperado": "Log de integração exibe todas as integrações realizadas com status e detalhes",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Documento: 891121 - Exemplo: 15 registros processados com sucesso"
+        },
+        {
+          "id": "CT-135",
+          "nome": "Validar busca e integração de cliente SAP no Salesforce",
+          "sistema": "SF+SAP",
+          "prioridade": "Alta",
+          "status": "Pendente",
+          "documentoRef": "891121",
+          "processoRef": "fup-carteira",
+          "passos": [
+            "1. Acessar tela de replicação de dados",
+            "2. Buscar cliente por código SAP",
+            "3. Clicar em 'Integrar'",
+            "4. Verificar criação/atualização no Salesforce",
+            "5. Verificar validação de duplicados na Org"
+          ],
+          "resultadoEsperado": "Cliente do SAP integrado no Salesforce sem duplicação",
+          "resultadoObtido": "",
+          "dataExecucao": null,
+          "executor": "",
+          "observacoes": "Documento: 891121 - Redesign telas de replicação"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "versao": "1.1",
+    "dataCriacao": "2026-01-12",
+    "totalCasos": 115,
+    "projeto": "Belgo BBP - GTM",
+    "resumo": {
+      "concluidos": 12,
+      "falhou": 2,
+      "pendentes": 101
+    }
+  }
+}

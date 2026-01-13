@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline - Cockpit GTM Belgo</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .timeline-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .go-live-banner {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
+        }
+        .go-live-date {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        .go-live-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        .days-remaining {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 25px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+        .phase-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            border-left: 5px solid #e5e7eb;
+        }
+        .phase-card.completed {
+            border-left-color: #10b981;
+        }
+        .phase-card.in-progress {
+            border-left-color: #3b82f6;
+        }
+        .phase-card.planned {
+            border-left-color: #f59e0b;
+        }
+        .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .phase-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+        .phase-period {
+            font-size: 0.9rem;
+            color: #6b7280;
+            background: #f3f4f6;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+        .phase-status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .status-completed {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .status-in-progress {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        .status-planned {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .milestone-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .milestone-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 0;
+            border-bottom: 1px dashed #e5e7eb;
+        }
+        .milestone-item:last-child {
+            border-bottom: none;
+        }
+        .milestone-date {
+            min-width: 100px;
+            font-weight: 600;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        .milestone-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #3b82f6;
+            margin: 4px 15px 0 0;
+            flex-shrink: 0;
+        }
+        .milestone-dot.marco { background: #8b5cf6; }
+        .milestone-dot.reuniao { background: #10b981; }
+        .milestone-dot.documento { background: #f59e0b; }
+        .milestone-dot.go-live { background: #dc2626; }
+        .milestone-content {
+            flex: 1;
+        }
+        .milestone-title {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 3px;
+        }
+        .milestone-desc {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+        .milestone-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        .tag-small {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+        .next-steps {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+        .next-steps h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        .step-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        .step-item:last-child {
+            border-bottom: none;
+        }
+        .step-priority {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: 700;
+        }
+        .step-deadline {
+            margin-left: auto;
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">BELGO</div>
+                <div class="sidebar-subtitle">Cockpit GTM</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="../index.html" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="testes.html" class="nav-item">
+                    <span class="nav-icon">✅</span>
+                    <span class="nav-text">Testes</span>
+                </a>
+                <a href="jornadas.html" class="nav-item">
+                    <span class="nav-icon">🔄</span>
+                    <span class="nav-text">Jornadas AS IS/TO BE</span>
+                </a>
+                <a href="documentos.html" class="nav-item">
+                    <span class="nav-icon">📄</span>
+                    <span class="nav-text">Documentos</span>
+                </a>
+                <a href="reunioes.html" class="nav-item">
+                    <span class="nav-icon">📝</span>
+                    <span class="nav-text">Reuniões</span>
+                </a>
+                <a href="timeline.html" class="nav-item active">
+                    <span class="nav-icon">📅</span>
+                    <span class="nav-text">Timeline</span>
+                </a>
+                <a href="cronograma.html" class="nav-item">
+                    <span class="nav-icon">🗓️</span>
+                    <span class="nav-text">Cronograma</span>
+                </a>
+                <a href="glossario.html" class="nav-item">
+                    <span class="nav-icon">📖</span>
+                    <span class="nav-text">Glossário</span>
+                </a>
+                <a href="participantes.html" class="nav-item">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-text">Participantes</span>
+                </a>
+                <a href="config.html" class="nav-item">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-text">Configurações</span>
+                </a>
+                <a href="pontos-criticos.html" class="nav-item">
+                    <span class="nav-icon">⚠️</span>
+                    <span class="nav-text">Pontos Críticos</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <div class="page-header-text">
+                    <h1 class="page-title">Timeline do Projeto</h1>
+                    <p class="page-subtitle">Linha do tempo com marcos principais do projeto GTM Vendas Belgo</p>
+                </div>
+                <button class="btn-teams" onclick="Utils.discussOnTeams('timeline', 'Timeline do Projeto', this)">
+                    📤 Discutir no Teams
+                </button>
+            </div>
+        <div class="timeline-container">
+            <!-- GO Live Banner -->
+            <div class="go-live-banner">
+                <div class="go-live-date">30/01/2026</div>
+                <div class="go-live-label">GO LIVE - Entrada em Producao</div>
+                <div class="days-remaining" id="daysRemaining">Calculando...</div>
+            </div>
+
+            <!-- Fase 1 -->
+            <div class="phase-card completed">
+                <div class="phase-header">
+                    <div>
+                        <div class="phase-title">Fase 1 - Discovery</div>
+                        <span class="phase-period">Out-Nov 2025</span>
+                    </div>
+                    <span class="phase-status status-completed">Concluido</span>
+                </div>
+                <ul class="milestone-list">
+                    <li class="milestone-item">
+                        <span class="milestone-date">01/10/2025</span>
+                        <div class="milestone-dot marco"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-title">Inicio do projeto GTM Vendas</div>
+                            <div class="milestone-desc">Kickoff oficial do projeto Salesforce</div>
+                        </div>
+                    </li>
+                    <li class="milestone-item">
+                        <span class="milestone-date">09/10/2025</span>
+                        <div class="milestone-dot documento"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-title">Primeiros casos de teste FUP de Carteira</div>
+                            <div class="milestone-desc">Documentos 854298, 878256</div>
+                        </div>
+                    </li>
+                    <li class="milestone-item">
+                        <span class="milestone-date">04/11/2025</span>
+                        <div class="milestone-dot documento"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-title">Consolidacao de Investimentos 2026</div>
+                            <div class="milestone-desc">Planejamento DTI Comercial</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Fase 2 -->
+            <div class="phase-card completed">
+                <div class="phase-header">
+                    <div>
+                        <div class="phase-title">Fase 2 - Workshops AS-IS/TO-BE</div>
+                        <span class="phase-period">Dez 2025</span>
+                    </div>
+                    <span class="phase-status status-completed">Concluido</span>
+                </div>
+                <ul class="milestone-list">
+                    <li class="milestone-item">
+                        <span class="milestone-date">03/12/2025</span>
+                        <div class="milestone-dot reuniao"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-title">Workshop Financeiro/Controladoria</div>
+                            <div class="milestone-desc">Definicao de areas de credito e canais de venda</div>
+                            <div class="milestone-tags">
+                                <span class="tag-small">Leandro</span>
+                                <span class="tag-small">Leonardo</span>
+                                <span class="tag-small">Rafael</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="milestone-item">
+                        <span class="milestone-date">04/12/2025</span>
+                        <div class="milestone-dot reuniao"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-title">Kickoff Workshops - Cadastro/Areas</div>
+                            <div class="milestone-desc">Confirmacao das 4 areas de credito: BBA, CSP, DBA, ALPE</div>
+                            <div class="milestone-tags">
+                                <span class="tag-small">Vanessa</span>
+                                <span class="tag-small">Talita</span>
+                                <span class="tag-small">Jefferson</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="milestone-item">
+                        <span class="milestone-date">10/12/2025</span>
+                        <div class="milestone-dot reuniao"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-title">Workshop Cadastro Cliente/Areas Venda</div>
+                            <div class="milestone-desc">CNAE, Canais 20/30/40, Clusterizacao</div>
+                            <div class="milestone-tags">
+                                <span class="tag-small">Leandro</span>
+                                <span class="tag-small">Augusto</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="milestone-item">
+                        <span class="milestone-date">16/12/2025</span>
+                        <div class="milestone-dot reuniao"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-title">Workshop Docs Fiscais/Autoatendimento</div>
+                            <div class="milestone-desc">NF-e, XML, App Mobile</div>
+                            <div class="milestone-tags">
+                                <span class="tag-small">Leandro</span>
+                                <span class="tag-small">Talita</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Fase 3 -->
+            <div class="phase-card in-progress">
+                <div class="phase-header">
+                    <div>
+                        <div class="phase-title">Fase 3 - Desenvolvimento/Testes</div>
+                        <span class="phase-period">Dez 2025 - Jan 2026</span>
+                    </div>
+                    <span class="phase-status status-in-progress">Em Andamento</span>
+                </div>
+                <ul class="milestone-list">
+                    <li class="milestone-item">
+                        <span class="milestone-date">20/12/2025</span>
+                        <div class="milestone-dot marco"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-title">Inicio ciclo de testes HML</div>
+                            <div class="milestone-desc">Ambiente de homologacao disponivel</div>
+                        </div>
+                    </li>
+                    <li class="milestone-item">
+                        <span class="milestone-date">12/01/2026</span>
+                        <div class="milestone-dot documento"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-title">Caderno de Testes GTM Vendas finalizado</div>
+                            <div class="milestone-desc">109 casos de teste documentados</div>
+                        </div>
+                    </li>
+                    <li class="milestone-item">
+                        <span class="milestone-date">13/01/2026</span>
+                        <div class="milestone-dot marco"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-title">Estruturacao BBP completo</div>
+                            <div class="milestone-desc">69 documentos extraidos, 11 jornadas mapeadas</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Fase 4 -->
+            <div class="phase-card planned">
+                <div class="phase-header">
+                    <div>
+                        <div class="phase-title">Fase 4 - Preparacao GO Live</div>
+                        <span class="phase-period">Jan 2026</span>
+                    </div>
+                    <span class="phase-status status-planned">Planejado</span>
+                </div>
+                <ul class="milestone-list">
+                    <li class="milestone-item">
+                        <span class="milestone-date">20/01/2026</span>
+                        <div class="milestone-dot marco"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-title">UAT - Testes de aceitacao</div>
+                            <div class="milestone-desc">Validacao final pelos key users</div>
+                        </div>
+                    </li>
+                    <li class="milestone-item">
+                        <span class="milestone-date">27/01/2026</span>
+                        <div class="milestone-dot marco"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-title">Treinamento Key Users</div>
+                            <div class="milestone-desc">Capacitacao da equipe para producao</div>
+                        </div>
+                    </li>
+                    <li class="milestone-item">
+                        <span class="milestone-date">30/01/2026</span>
+                        <div class="milestone-dot go-live"></div>
+                        <div class="milestone-content">
+                            <div class="milestone-title">GO LIVE - Entrada em producao</div>
+                            <div class="milestone-desc">Lancamento oficial do sistema GTM Vendas Salesforce</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Proximos Passos -->
+            <div class="next-steps">
+                <h3>Proximos Passos Criticos</h3>
+                <div class="step-item">
+                    <div class="step-priority">1</div>
+                    <div>Finalizar testes de integracao ACSAP</div>
+                    <div class="step-deadline">Prazo: 20/01/2026</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-priority">2</div>
+                    <div>Validar fluxos de workflow pricing</div>
+                    <div class="step-deadline">Prazo: 22/01/2026</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-priority">3</div>
+                    <div>Treinar usuarios finais</div>
+                    <div class="step-deadline">Prazo: 28/01/2026</div>
+                </div>
+            </div>
+        </div>
+        </main>
+    </div>
+
+    <script>
+        // Calcular dias restantes para GO Live
+        function updateDaysRemaining() {
+            const goLive = new Date('2026-01-30');
+            const today = new Date();
+            const diff = Math.ceil((goLive - today) / (1000 * 60 * 60 * 24));
+
+            const el = document.getElementById('daysRemaining');
+            if (diff > 0) {
+                el.textContent = `${diff} dias restantes`;
+            } else if (diff === 0) {
+                el.textContent = 'HOJE!';
+            } else {
+                el.textContent = `${Math.abs(diff)} dias apos GO Live`;
+            }
+        }
+
+        updateDaysRemaining();
+    </script>
+</body>
+</html>

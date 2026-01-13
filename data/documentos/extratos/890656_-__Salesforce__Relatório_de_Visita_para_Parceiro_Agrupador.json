@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "id": "890656",
+    "arquivo": "890656 - [Salesforce] Relatório de Visita para Parceiro Agrupador.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\890656 - [Salesforce] Relatório de Visita para Parceiro Agrupador.docx",
+    "tamanho_bytes": 208160,
+    "data_modificacao": "2025-11-11T18:05:38",
+    "extraido_em": "2026-01-13T11:31:15.011989",
+    "status": "extraido",
+    "total_paragrafos": 1,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Teste realizado e validado. A aba de Relatórios de Visita já está aparecendo corretamente, e as demais alterações (remoção das abas Pedido e Cotação e do botão Criar Cotação) estão de acordo."
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n890656 - [Salesforce] Relatório de Visita para Parceiro Agrupador",
+          "Data de Criação\n11/11/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 1,
+    "total_tabelas": 1
+  }
+}

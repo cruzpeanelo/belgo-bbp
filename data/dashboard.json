@@ -1,0 +1,29 @@
+{
+  "metricas": {
+    "totalTestes": 115,
+    "testesExecutados": 0,
+    "testesPendentes": 115,
+    "testesFalhados": 0,
+    "progressoGeral": 0,
+    "pontosCriticos": 9,
+    "workshopsConcluidos": 4,
+    "workshopsPendentes": 0
+  },
+  "statusPorCategoria": [
+    { "id": "workflow-pricing", "categoria": "Workflow Pricing", "range": "CT 01-19", "total": 19, "ok": 0, "falhou": 0, "pendente": 19, "cor": "#6366f1" },
+    { "id": "tributario", "categoria": "Tributario", "range": "CT 20-55", "total": 36, "ok": 0, "falhou": 0, "pendente": 36, "cor": "#f59e0b" },
+    { "id": "setup", "categoria": "Setup/Cadastro", "range": "CT 56-77", "total": 22, "ok": 0, "falhou": 0, "pendente": 22, "cor": "#10b981" },
+    { "id": "financeiro", "categoria": "Financeiro", "range": "CT 78-80", "total": 3, "ok": 0, "falhou": 0, "pendente": 3, "cor": "#198754" },
+    { "id": "cotacao-ov", "categoria": "Cotacao e OV", "range": "CT 81-101", "total": 21, "ok": 0, "falhou": 0, "pendente": 21, "cor": "#0d6efd" },
+    { "id": "conditions", "categoria": "Conditions SAP", "range": "CT 102-108", "total": 7, "ok": 0, "falhou": 0, "pendente": 7, "cor": "#e83e8c" },
+    { "id": "integracao", "categoria": "Integracao Salesforce - SAP", "range": "CT 109-115", "total": 7, "ok": 0, "falhou": 0, "pendente": 7, "cor": "#6f42c1" }
+  ],
+  "goLive": "2026-03-15",
+  "stakeholders": [
+    {"nome": "Leandro Cruz", "papel": "Gerente de TI"},
+    {"nome": "Leandro Gimenez", "papel": "PO GTM"},
+    {"nome": "Ronildo", "papel": "PO Pricing"},
+    {"nome": "Thalita Rhein", "papel": "Gerente Negocio GTM"}
+  ],
+  "ultimaAtualizacao": "2026-01-13T18:00:00"
+}

@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "id": null,
+    "arquivo": "Teste 3 - Boot.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\Teste 3 - Boot.docx",
+    "tamanho_bytes": 7310986,
+    "data_modificacao": "2025-12-10T10:44:01",
+    "extraido_em": "2026-01-13T11:31:16.142094",
+    "status": "extraido",
+    "total_paragrafos": 28,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "CNPJ 50564053000537",
+      "Ordem Faturada: ",
+      "Ordens em aberto: ",
+      "Nota fiscal faturada:",
+      "Período: 01/01/2025 a 08/12/2025",
+      "andreiadurans.maia@bbcontratos.com.br",
+      "Teste Faturado:",
+      "0201313374 ",
+      "0201084022",
+      "0201177404",
+      "0201180349",
+      "0201180391",
+      "Ordens em aberto: ",
+      "0201311915",
+      "Ordem de compra aberto:",
+      "Teste",
+      "Ordem de compra faturada:",
+      "4501977799",
+      "Nota fiscal faturada",
+      "001741869",
+      "001742446",
+      "001742346",
+      "001742394",
+      "Período: 01/01/2025 a 08/12/2025 - Faturada",
+      "Período: 01/01/2025 a 08/12/2025 – Ordem em aberto",
+      "10/12/2025",
+      "Ordem de venda em aberto:",
+      "201307126"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\nTeste - Boot",
+          "Data de Criação\n08/12/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 28,
+    "total_tabelas": 1
+  }
+}

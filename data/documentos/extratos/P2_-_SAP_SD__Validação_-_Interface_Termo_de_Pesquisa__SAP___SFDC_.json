@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "id": null,
+    "arquivo": "P2 -[SAP SD] Validação - Interface Termo de Pesquisa (SAP ↔ SFDC).docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\P2 -[SAP SD] Validação - Interface Termo de Pesquisa (SAP ↔ SFDC).docx",
+    "tamanho_bytes": 608344,
+    "data_modificacao": "2025-10-02T11:12:10",
+    "extraido_em": "2026-01-13T11:31:15.948744",
+    "status": "extraido",
+    "total_paragrafos": 8,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Ao tentar editar uma conta no Salesforce, foi gerado um erro",
+      "Pessoa jurídica, CNPJ",
+      "Ao tentar criar uma conta no Salesforce, ocorreu um erro",
+      "Pessoa jurídica, CNPJ",
+      "Pessoa Física, gerou erro",
+      "CPF",
+      "Ao Criar uma nova conta, gerou erro ",
+      "CPF"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n[SAP SD] Validação - Interface Termo de Pesquisa (SAP ↔ SFDC)",
+          "Data de Criação\n02/10/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 8,
+    "total_tabelas": 1
+  }
+}

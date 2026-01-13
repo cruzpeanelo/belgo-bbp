@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "id": "895163",
+    "arquivo": "895163 - Automatização de Segmento e Subsegmento, padronização de base.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\895163 - Automatização de Segmento e Subsegmento, padronização de base.docx",
+    "tamanho_bytes": 409802,
+    "data_modificacao": "2025-12-01T12:06:28",
+    "extraido_em": "2026-01-13T11:31:15.114651",
+    "status": "extraido",
+    "total_paragrafos": 3,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Ao realizar a atualização da conta, foi validado que os campos Segmento e Subsegmento foram preenchidos automaticamente conforme a regra configurada.",
+      "Também foi observado que o campo Setor Industrial permaneceu preenchido, mantendo corretamente o valor já existente antes da atualização.",
+      "Comportamento validado conforme evidência abaixo:"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n895163 - Automatização de Segmento e Subsegmento, padronização de base",
+          "Data de Criação\n01/12/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 3,
+    "total_tabelas": 1
+  }
+}

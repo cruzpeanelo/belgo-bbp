@@ -1,0 +1,37 @@
+{
+  "metadata": {
+    "id": "892950",
+    "arquivo": "892950-Refatoração do Formulário de Leads e Leads for Dummies.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\892950-Refatoração do Formulário de Leads e Leads for Dummies.docx",
+    "tamanho_bytes": 644960,
+    "data_modificacao": "2025-11-13T10:07:30",
+    "extraido_em": "2026-01-13T11:31:15.107985",
+    "status": "extraido",
+    "total_paragrafos": 4,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Os testes foram realizados com sucesso e validados conforme o comportamento esperado.",
+      "Ao criar um novo Lead, foi selecionado o tipo “Lead – BBA Arames”",
+      "Campo endereço, sem preenchimento no campo de contato. Não gera erro",
+      "A mensagem de erro é exibida corretamente quando o campo de tipo de contato está preenchido:"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n892950-Refatoração do Formulário de Leads e Leads for Dummies",
+          "Data de Criação\n13/11/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 4,
+    "total_tabelas": 1
+  }
+}

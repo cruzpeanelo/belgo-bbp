@@ -1,0 +1,205 @@
+{
+  "gerado_em": "2026-01-13T11:33:18.749750",
+  "total_planilhas": 6,
+  "processadas": 6,
+  "erros": 0,
+  "planilhas": [
+    {
+      "arquivo": "GTM Vendas - Caderno de Testes.xlsx",
+      "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Caderno de testes\\GTM Vendas - Caderno de Testes.xlsx",
+      "tamanho_bytes": 142737,
+      "data_modificacao": "2026-01-12T08:50:43.905674",
+      "extraido_em": "2026-01-13T11:33:15.965933",
+      "status": "extraido",
+      "total_sheets": 18,
+      "sheets": [
+        {
+          "nome": "Dashboard ",
+          "linhas": 17,
+          "colunas": 7
+        },
+        {
+          "nome": "Orientações Gerais",
+          "linhas": 46,
+          "colunas": 2
+        },
+        {
+          "nome": "Matriz RACI",
+          "linhas": 26,
+          "colunas": 15
+        },
+        {
+          "nome": "Dados Mestres",
+          "linhas": 287,
+          "colunas": 10
+        },
+        {
+          "nome": "Alertas Críticos",
+          "linhas": 9,
+          "colunas": 1
+        },
+        {
+          "nome": "Premissas e Acordos",
+          "linhas": 6,
+          "colunas": 1
+        },
+        {
+          "nome": "Checklist de Preparação",
+          "linhas": 26,
+          "colunas": 5
+        },
+        {
+          "nome": "Pré-requisitos",
+          "linhas": 31,
+          "colunas": 6
+        },
+        {
+          "nome": "Configurações Fiscais",
+          "linhas": 9,
+          "colunas": 7
+        },
+        {
+          "nome": "Materiais para teste",
+          "linhas": 51,
+          "colunas": 9
+        },
+        {
+          "nome": "Materiais Testes",
+          "linhas": 201,
+          "colunas": 7
+        },
+        {
+          "nome": "Clientes para teste",
+          "linhas": 43,
+          "colunas": 13
+        },
+        {
+          "nome": "Clientes Testes",
+          "linhas": 79,
+          "colunas": 32
+        },
+        {
+          "nome": "Centros BBA",
+          "linhas": 17,
+          "colunas": 2
+        },
+        {
+          "nome": "Parametrizações Fiscais",
+          "linhas": 75,
+          "colunas": 8
+        },
+        {
+          "nome": "Casos de Teste",
+          "linhas": 109,
+          "colunas": 14
+        },
+        {
+          "nome": "Sumário",
+          "linhas": 36,
+          "colunas": 2
+        },
+        {
+          "nome": "Problemas Encontrados",
+          "linhas": 2,
+          "colunas": 7
+        }
+      ],
+      "arquivo_extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\planilhas\\GTM_Vendas_-_Caderno_de_Testes.json"
+    },
+    {
+      "arquivo": "854298 -  Casos para atendimento de FUP de carteira1.xlsx",
+      "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\854298 -  Casos para atendimento de FUP de carteira1.xlsx",
+      "tamanho_bytes": 11401,
+      "data_modificacao": "2025-10-09T11:51:35",
+      "extraido_em": "2026-01-13T11:33:15.991424",
+      "status": "extraido",
+      "total_sheets": 1,
+      "sheets": [
+        {
+          "nome": "Planilha1",
+          "linhas": 34,
+          "colunas": 4
+        }
+      ],
+      "arquivo_extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\planilhas\\854298_-__Casos_para_atendimento_de_FUP_de_carteira1.json"
+    },
+    {
+      "arquivo": "Testes - FUP DE CARTEIRA.xlsx",
+      "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\Testes - FUP DE CARTEIRA.xlsx",
+      "tamanho_bytes": 10733,
+      "data_modificacao": "2025-10-13T10:33:42",
+      "extraido_em": "2026-01-13T11:33:16.002740",
+      "status": "extraido",
+      "total_sheets": 1,
+      "sheets": [
+        {
+          "nome": "Planilha1",
+          "linhas": 34,
+          "colunas": 5
+        }
+      ],
+      "arquivo_extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\planilhas\\Testes_-_FUP_DE_CARTEIRA.json"
+    },
+    {
+      "arquivo": "Consolidação de Investimentos 2026 - DTI Comercial & MKT - Resumido.xlsx",
+      "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\Consolidação de Investimentos 2026 - DTI Comercial & MKT - Resumido.xlsx",
+      "tamanho_bytes": 47666,
+      "data_modificacao": "2025-11-04T09:27:05",
+      "extraido_em": "2026-01-13T11:33:16.065608",
+      "status": "extraido",
+      "total_sheets": 2,
+      "sheets": [
+        {
+          "nome": "Projetos CAPEX e Adeq. Processo",
+          "linhas": 67,
+          "colunas": 17
+        },
+        {
+          "nome": "Seg_Prioridade",
+          "linhas": 22,
+          "colunas": 16
+        }
+      ],
+      "arquivo_extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\planilhas\\Consolidação_de_Investimentos_2026_-_DTI_Comercial___MKT_-_Resumido.json"
+    },
+    {
+      "arquivo": "Implementação para HML  1 - Contas.xlsx",
+      "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\Implementação para HML  1 - Contas.xlsx",
+      "tamanho_bytes": 1978020,
+      "data_modificacao": "2025-11-11T17:55:44",
+      "extraido_em": "2026-01-13T11:33:18.734379",
+      "status": "extraido",
+      "total_sheets": 2,
+      "sheets": [
+        {
+          "nome": "HML",
+          "linhas": 11551,
+          "colunas": 6
+        },
+        {
+          "nome": "PRD",
+          "linhas": 22150,
+          "colunas": 7
+        }
+      ],
+      "arquivo_extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\planilhas\\Implementação_para_HML__1_-_Contas.json"
+    },
+    {
+      "arquivo": "Boot.xlsx",
+      "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\Boot.xlsx",
+      "tamanho_bytes": 10947,
+      "data_modificacao": "2025-12-08T19:48:44",
+      "extraido_em": "2026-01-13T11:33:18.747529",
+      "status": "extraido",
+      "total_sheets": 1,
+      "sheets": [
+        {
+          "nome": "Planilha1",
+          "linhas": 33,
+          "colunas": 2
+        }
+      ],
+      "arquivo_extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\planilhas\\Boot.json"
+    }
+  ]
+}

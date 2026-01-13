@@ -1,0 +1,41 @@
+{
+  "metadata": {
+    "id": "909100",
+    "arquivo": "909100 – Plano de Testes Exploratórios e de Estresse1.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\909100 – Plano de Testes Exploratórios e de Estresse1.docx",
+    "tamanho_bytes": 691551,
+    "data_modificacao": "2025-12-29T11:35:30",
+    "extraido_em": "2026-01-13T11:31:15.670087",
+    "status": "extraido",
+    "total_paragrafos": 8,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Após o recebimento do convite via e-mail, preenchi todos os passos e a conta foi ",
+      "criada. O teste foi validado conforme evidências abaixo:",
+      "Conta criada PJ:",
+      "Conta criada PF:",
+      " Criar check-in para cliente existente: ",
+      "Criar check-in para cliente novo, mais anexo:",
+      "Após o recebimento do convite via e-mail, preenchi todos os passos e a conta foi ",
+      "criada. O teste foi validado conforme evidências abaixo:"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n909100 – Plano de Testes Exploratórios e de Estresse",
+          "Data de Criação"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 8,
+    "total_tabelas": 1
+  }
+}

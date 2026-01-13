@@ -1,0 +1,183 @@
+{
+  "reuniao": {
+    "titulo": "URGENTE! Revisao dos ajustes GTM",
+    "data": "2025-12-22",
+    "duracao": "~2:30h",
+    "tipo": "Meeting Recording",
+    "fonte": "SharePoint/Stream",
+    "tamanho": "1.17 GB"
+  },
+  "participantes": [
+    "Gimenes, Leandro Augusto",
+    "Pereira, Leandro da Cruz",
+    "Rhein, Thalita Merisio",
+    "Ciorlia, Maria L",
+    "Riqueti, Luis Eustaquio",
+    "Pinheiro, Jefferson",
+    "Franca, Fabricio",
+    "Victoria (mencionado)",
+    "Avila (mencionado)",
+    "Leo (mencionado)",
+    "Randolpho (mencionado)",
+    "Jeferson (mencionado)"
+  ],
+  "topicos": [
+    "Informacao confidencial",
+    "Nova estrutura organizacional",
+    "Mudancas de gestao regional",
+    "Gestao de contas-chave",
+    "Alocacao de produtos e segmentos",
+    "Ajustes de sistema e relatorios",
+    "Workflow de aprovacao",
+    "Gestao de dados de clientes e vendas",
+    "Proximos passos"
+  ],
+  "capitulos": [
+    {
+      "timestamp": "0:20",
+      "titulo": "Informacao Confidencial",
+      "descricao": "Gimenes lembrou que as informacoes discutidas na reuniao permanecem confidenciais ate o anuncio oficial da empresa"
+    },
+    {
+      "timestamp": "1:30",
+      "titulo": "Nova Estrutura Organizacional",
+      "descricao": "Gimenes apresentou a nova estrutura organizacional com diretoria comercial e quatro macro setores: alta energia, agricultura, industria e construcao civil. Todos os 46 segmentos serao alocados dentro desses quatro setores"
+    },
+    {
+      "timestamp": "3:03",
+      "titulo": "Mudancas de Gestao Regional",
+      "descricao": "Gimenes explicou as mudancas na gestao regional: Avila assume a regiao sul, Leo gerencia sudeste e nordeste"
+    },
+    {
+      "timestamp": "3:15",
+      "titulo": "Gestao de Contas-Chave",
+      "descricao": "Gimenes detalhou a nova estrutura de key accounts: tres contas-chave cada para alta energia, agricultura e industria, reportando aos respectivos gerentes de setor"
+    },
+    {
+      "timestamp": "4:51",
+      "titulo": "Alocacao de Produtos e Segmentos",
+      "descricao": "Discussao sobre alocacao de produtos e segmentos na nova estrutura. Protec sera unificado sob construcao, e a rede tera gestao propria"
+    },
+    {
+      "timestamp": "6:34",
+      "titulo": "Ajustes de Sistema e Relatorios",
+      "descricao": "Pereira e Gimenes discutiram a necessidade de ajustar estruturas de sistema e relatorios para refletir as mudancas organizacionais, incluindo hierarquia de produtos, clientes e organizacao comercial"
+    },
+    {
+      "timestamp": "46:39",
+      "titulo": "Workflow de Aprovacao",
+      "descricao": "Pereira e Gimenes debateram o workflow de aprovacao para pricing e descontos, enfatizando a necessidade de processo claro e eficiente envolvendo gerentes regionais e de segmento"
+    },
+    {
+      "timestamp": "2:14:17",
+      "titulo": "Gestao de Dados de Clientes e Vendas",
+      "descricao": "Gimenes e Pereira planejaram a gestao de dados de clientes e vendas, incluindo alocacao de clientes para novos escritorios regionais e responsabilidade de representantes de vendas"
+    },
+    {
+      "timestamp": "2:19:14",
+      "titulo": "Proximos Passos",
+      "descricao": "Equipe concordou com proximos passos: finalizar nova estrutura organizacional, atualizar sistema e gerenciar dados de clientes. Planejaram reunioes adicionais para garantir implementacao tranquila"
+    }
+  ],
+  "acoes": [
+    {
+      "acao": "Hierarquia Comercial e Gerencias",
+      "timestamp": "1:08:22",
+      "descricao": "Finalizar o ajuste da hierarquia comercial no ECC, alinhando nomes e siglas das gerencias com o Randolpho, e compartilhar com o time para validacao",
+      "responsaveis": ["Gimenes", "Ciorlia", "Riqueti"],
+      "prazo": "A definir"
+    },
+    {
+      "acao": "Escritorios de Vendas e Vendedores",
+      "timestamp": "1:56:11",
+      "descricao": "Montar e preencher a lista dos escritorios de vendas, incluindo gerente responsavel, delegado, vendedores, representantes, e-mails e codigos de agente para cada escritorio, e validar junto aos gerentes comerciais",
+      "responsaveis": ["Gimenes", "Rhein", "Ciorlia"],
+      "prazo": "A definir"
+    },
+    {
+      "acao": "Migracao de Clientes para Nova Estrutura",
+      "timestamp": "2:19:14",
+      "descricao": "Extrair a base de clientes dos ultimos 24 meses, associar cada cliente ao novo escritorio de vendas, e preparar o Excel para migracao, excluindo construcao civil e rede ativa inicialmente",
+      "responsaveis": ["Pereira", "Pinheiro", "Franca", "Gimenes"],
+      "prazo": "A definir"
+    },
+    {
+      "acao": "Ajuste do Workflow Pricing",
+      "timestamp": "1:08:08",
+      "descricao": "Desdobrar as historias de aprovacao por niveis da nova hierarquia dentro do workflow pricing, ajustando para que aprovacoes ocorram por gerente de segmento de produto e escritorio de vendas",
+      "responsaveis": ["Pinheiro", "Victoria", "Pereira"],
+      "prazo": "A definir"
+    },
+    {
+      "acao": "Parceiro Agrupador nos Relatorios",
+      "timestamp": "2:23:06",
+      "descricao": "Revisar e corrigir a criacao e visualizacao do campo parceiro agrupador nos relatorios, garantindo que a informacao esteja disponivel e agrupada corretamente para os gestores",
+      "responsaveis": ["Riqueti", "Pinheiro"],
+      "prazo": "A definir"
+    },
+    {
+      "acao": "Definicao de Regionais Comerciais na Construcao Civil",
+      "timestamp": "1:41:44",
+      "descricao": "Confirmar com Jeferson o numero e nomes das regionais comerciais que serao criadas para construcao civil e atualizar a estrutura conforme orientacao dele",
+      "responsaveis": ["Gimenes", "Rhein"],
+      "prazo": "A definir"
+    },
+    {
+      "acao": "Padronizacao de Nomenclaturas",
+      "timestamp": "1:49:17",
+      "descricao": "Padronizar as siglas e nomes das unidades de negocio, gerencias e escritorios de vendas para facilitar integracao e relatorios, evitando reaproveitamento de nomes antigos",
+      "responsaveis": ["Gimenes", "Pereira", "Ciorlia"],
+      "prazo": "A definir"
+    }
+  ],
+  "pontosPrincipais": [
+    {
+      "topico": "Nova Estrutura Comercial",
+      "descricao": "Diretoria comercial com 4 macro setores: alta energia, agricultura, industria e construcao civil",
+      "impacto": "Reorganizacao completa das 46 segmentos da empresa"
+    },
+    {
+      "topico": "Gestao Regional",
+      "descricao": "Redistribuicao de regioes entre gerentes: Avila no sul, Leo no sudeste/nordeste",
+      "impacto": "Novos responsaveis por territorios"
+    },
+    {
+      "topico": "Key Accounts",
+      "descricao": "3 contas-chave cada para alta energia, agricultura e industria",
+      "impacto": "Atendimento diferenciado para grandes clientes"
+    },
+    {
+      "topico": "Hierarquia ECC",
+      "descricao": "Ajuste da hierarquia comercial no SAP ECC com Randolpho",
+      "impacto": "Base para todos os relatorios e aprovacoes"
+    },
+    {
+      "topico": "Escritorios de Vendas",
+      "descricao": "Criacao de lista completa com gerentes, delegados, vendedores, codigos",
+      "impacto": "Estrutura operacional para alocacao de clientes"
+    },
+    {
+      "topico": "Migracao de Clientes",
+      "descricao": "Base de 24 meses de clientes sera associada aos novos escritorios",
+      "impacto": "Continuidade de relacionamentos comerciais"
+    },
+    {
+      "topico": "Workflow Pricing Ajustado",
+      "descricao": "Aprovacoes por gerente de segmento de produto e escritorio de vendas",
+      "impacto": "Novo fluxo de aprovacao de precos e descontos"
+    },
+    {
+      "topico": "Parceiro Agrupador",
+      "descricao": "Campo para agrupar parceiros nos relatorios",
+      "impacto": "Visibilidade consolidada para gestores"
+    }
+  ],
+  "jornadasRelacionadas": [
+    "hub-gestao",
+    "workflow-pricing",
+    "areas-vendas",
+    "cadastro-cliente"
+  ],
+  "statusExtracao": "Completo via Copilot - Key Topics e Action Items",
+  "ultimaAtualizacao": "2026-01-13"
+}

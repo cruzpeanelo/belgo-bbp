@@ -1,0 +1,596 @@
+{
+  "id": "documentos-fiscais",
+  "nome": "Documentos Fiscais",
+  "icone": "📄",
+  "ordem": 3,
+  "asIs": {
+    "descricao": "Processo manual e fragmentado de emissão de documentos fiscais onde o colaborador precisa gerar XML e DANFE manualmente no SAP, exportar arquivos, e enviar por email ao cliente. Certificados de qualidade são anexados separadamente, gerando atrasos e inconsistências.",
+    "passos": [
+      "Faturamento é realizado no SAP pelo time fiscal",
+      "Colaborador acessa a transação de NF-e no SAP",
+      "Gera XML da nota fiscal manualmente",
+      "Exporta arquivo XML para pasta local",
+      "Gera DANFE (Documento Auxiliar) manualmente",
+      "Exporta DANFE em PDF",
+      "Anexa Certificado de Qualidade quando aplicável",
+      "Compõe email manualmente com todos os documentos",
+      "Envia email ao cliente com documentos anexados",
+      "Registra envio em planilha de controle"
+    ],
+    "problemas": [
+      "Processo lento - 30 minutos por nota em média",
+      "Erros de digitação no email do destinatário",
+      "Atrasos no envio - cliente não recebe no mesmo dia do faturamento",
+      "Dependência de pessoa específica para executar",
+      "Documentos podem ser enviados incompletos",
+      "Sem rastreabilidade de entrega",
+      "Certificados de qualidade frequentemente esquecidos",
+      "Retrabalho quando cliente solicita 2ª via",
+      "Dificuldade de auditar envios realizados",
+      "Cliente sem acesso autônomo aos documentos"
+    ],
+    "tempoMedio": "30 minutos por nota"
+  },
+  "toBe": {
+    "descricao": "Emissão e envio automático de documentos fiscais no SAP ECC. O faturamento dispara automaticamente a geração de XML e DANFE, que são enviados ao cliente por email e disponibilizados no Portal de Autoatendimento.",
+    "passos": [
+      "Faturamento é realizado no SAP ECC",
+      "SAP ECC gera XML da NF-e automaticamente",
+      "SAP ECC transmite XML para SEFAZ e recebe autorizacao",
+      "SAP ECC gera DANFE em PDF automaticamente",
+      "Sistema identifica se há Certificado de Qualidade vinculado",
+      "Certificado é anexado automaticamente quando aplicável",
+      "Email é enviado automaticamente ao cliente com todos os documentos",
+      "Documentos são publicados no Portal de Autoatendimento",
+      "Sistema registra confirmação de envio",
+      "Cliente pode acessar 2ª via no portal a qualquer momento"
+    ],
+    "beneficios": [
+      "Processo instantâneo - documentos enviados segundos após faturamento",
+      "Eliminação de erros manuais",
+      "Cliente recebe documentos imediatamente",
+      "Rastreabilidade completa de todos os envios",
+      "Certificados sempre incluídos quando aplicável",
+      "Autoatendimento para 2ª via de documentos",
+      "Redução de carga operacional do time fiscal",
+      "Auditoria facilitada com logs centralizados",
+      "Integração com Portal do Cliente",
+      "Disponibilidade 24/7 via portal"
+    ],
+    "tempoMedio": "Automático (segundos)"
+  },
+  "areasImpactadas": [
+    "Fiscal",
+    "TI",
+    "Comercial",
+    "Atendimento",
+    "Logística"
+  ],
+  "status": "Em Andamento",
+  "fonteReuniao": "16/12/2025 + Caderno de Testes",
+  "fontesReuniao": [
+    "16/12/2025 - Sistema SAP ECC, XML automatico, Certificados (mencionado na reuniao)",
+    "Caderno de Testes CT-20 a CT-55 - Casos tributarios detalhados"
+  ],
+  "fontesVerificadas": {
+    "reuniao16dez": [
+      "Sistema SAP ECC",
+      "XML automatico",
+      "Certificado de qualidade"
+    ],
+    "cadernoTestes": [
+      "CT-20 a CT-55 - 36 casos tributarios"
+    ],
+    "codigosTributarios": "Codigos I0, I3, C3, C4, ICMS-ST, DIFAL, FCP vem do Caderno de Testes, NAO das reunioes"
+  },
+  "tiposDocumento": [
+    {
+      "tipo": "XML da NF-e",
+      "descricao": "Arquivo XML da Nota Fiscal Eletrônica conforme padrão SEFAZ",
+      "geracao": "Automático via SAP ECC",
+      "formato": "XML"
+    },
+    {
+      "tipo": "DANFE",
+      "descricao": "Documento Auxiliar da Nota Fiscal Eletrônica - versão impressa/PDF",
+      "geracao": "Automático via SAP ECC",
+      "formato": "PDF"
+    },
+    {
+      "tipo": "Certificado de Qualidade",
+      "descricao": "Certificado de qualidade do produto quando aplicável",
+      "geracao": "Vinculado ao produto no SAP",
+      "formato": "PDF",
+      "obrigatoriedade": "Quando aplicável ao produto"
+    }
+  ],
+  "campos": [
+    {
+      "campo": "Número NF-e",
+      "descricao": "Número da nota fiscal eletrônica",
+      "preenchimento": "Automático (SAP)",
+      "validacao": "Sequencial",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Chave de Acesso",
+      "descricao": "Chave de 44 dígitos da NF-e",
+      "preenchimento": "Automático (SEFAZ)",
+      "validacao": "SEFAZ",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Email Destinatário",
+      "descricao": "Email do cliente para envio dos documentos",
+      "preenchimento": "Cadastro do Cliente",
+      "validacao": "Formato email",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Data Emissão",
+      "descricao": "Data de emissão da nota fiscal",
+      "preenchimento": "Automático",
+      "validacao": "-",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Status Envio",
+      "descricao": "Status do envio do documento ao cliente",
+      "preenchimento": "Automático",
+      "validacao": "-",
+      "obrigatorio": true
+    }
+  ],
+  "regrasNegocio": [
+    {
+      "regra": "Trigger de Faturamento",
+      "descricao": "O faturamento no SAP dispara automaticamente o processo de geração de documentos no SAP ECC",
+      "acionamento": "Evento de faturamento no SAP",
+      "sla": "Documentos gerados em ate 5 minutos apos faturamento",
+      "retryPolicy": "3 tentativas com intervalo de 1, 5 e 15 minutos",
+      "alertaFalha": "Email para equipe Fiscal se falhar apos 3 tentativas"
+    },
+    {
+      "regra": "Geração Automática de XML",
+      "descricao": "O SAP ECC gera automaticamente o XML da NF-e conforme padrão SEFAZ e transmite para autorização"
+    },
+    {
+      "regra": "Geração Automática de DANFE",
+      "descricao": "Após autorização da NF-e, o DANFE é gerado automaticamente em formato PDF"
+    },
+    {
+      "regra": "Vinculação de Certificado de Qualidade",
+      "descricao": "Para produtos que exigem certificado de qualidade, o sistema identifica automaticamente e anexa o certificado correspondente",
+      "criterio": "Campo 'Requer_Certificado__c' = true no cadastro do material no SAP",
+      "acaoSeFaltaCertificado": "Alerta ao time Fiscal, documento enviado sem certificado com flag de pendencia"
+    },
+    {
+      "regra": "Envio Automático por Email",
+      "descricao": "Documentos são enviados automaticamente para o email cadastrado do cliente"
+    },
+    {
+      "regra": "Publicação no Portal",
+      "descricao": "Todos os documentos ficam disponíveis no Portal de Autoatendimento para acesso do cliente"
+    },
+    {
+      "regra": "Rastreabilidade de Envio",
+      "descricao": "Sistema registra data/hora de envio, confirmação de entrega e eventuais erros"
+    },
+    {
+      "regra": "Tratamento de Rejeicao SEFAZ",
+      "descricao": "Se SEFAZ rejeitar NF-e, sistema registra codigo de erro e notifica Fiscal",
+      "acoes": [
+        "Registrar codigo e motivo de rejeicao",
+        "Notificar equipe Fiscal por email",
+        "Marcar documento como 'Pendente Correcao'",
+        "Nao enviar ao cliente ate autorizacao"
+      ]
+    }
+  ],
+  "matrizTributaria": {
+    "descricao": "Mapeamento de codigos de imposto por situacao fiscal do cliente e operacao",
+    "fonte": "Caderno de Testes CT-20 a CT-55",
+    "avisoVerificacao": "ATENCAO: Esta secao foi extraida do Caderno de Testes. Os codigos de imposto e regras precisam ser verificados com a equipe Fiscal para garantir precisao.",
+    "codigosImposto": [
+      {
+        "codigo": "I0",
+        "nome": "Isento",
+        "descricao": "Cliente com isencao total de impostos",
+        "condicoes": [
+          "Cliente em Zona Franca (ZFM)",
+          "Orgao Publico",
+          "Entidade sem fins lucrativos com isencao"
+        ],
+        "cst": "40 ou 41",
+        "cfop": "6109 (ZFM) ou conforme operacao",
+        "testesRelacionados": [
+          "CT-21",
+          "CT-22"
+        ]
+      },
+      {
+        "codigo": "I3",
+        "nome": "Industria",
+        "descricao": "Cliente industrial - calcula ICMS + IPI + PIS + COFINS",
+        "condicoes": [
+          "Canal 20 (Industria)",
+          "Canal 30 (Distribuidores)"
+        ],
+        "impostos": [
+          "ICMS",
+          "IPI",
+          "PIS",
+          "COFINS"
+        ],
+        "testesRelacionados": [
+          "CT-23",
+          "CT-24"
+        ]
+      },
+      {
+        "codigo": "C3",
+        "nome": "Consumidor Final sem ST",
+        "descricao": "Pessoa fisica ou empresa consumidor final, sem substituicao tributaria",
+        "condicoes": [
+          "Canal 40 (Consumidor Final)",
+          "Material sem ST"
+        ],
+        "impostos": [
+          "ICMS (Base = Valor + IPI)",
+          "IPI",
+          "PIS",
+          "COFINS"
+        ],
+        "testesRelacionados": [
+          "CT-25"
+        ]
+      },
+      {
+        "codigo": "C4",
+        "nome": "Consumidor Final com ST",
+        "descricao": "Consumidor final com substituicao tributaria",
+        "condicoes": [
+          "Canal 30 ou 40",
+          "Material com NCM sujeito a ST"
+        ],
+        "impostos": [
+          "ICMS",
+          "ICMS-ST",
+          "IPI",
+          "PIS",
+          "COFINS"
+        ],
+        "calculoST": "Base ST = (Valor + IPI) x (1 + MVA)",
+        "testesRelacionados": [
+          "CT-26",
+          "CT-28",
+          "CT-29"
+        ]
+      }
+    ],
+    "regrasDeterminacao": [
+      {
+        "regra": "Canal 20 + Cliente normal",
+        "codigoImposto": "I3",
+        "cfop": "5101 (mesmo estado) ou 6101 (interestadual)"
+      },
+      {
+        "regra": "Canal 30 + Material com ST + Mesmo Estado",
+        "codigoImposto": "C4",
+        "cfop": "5401 ou 5403"
+      },
+      {
+        "regra": "Canal 30 + Material com ST + Interestadual",
+        "codigoImposto": "C4",
+        "cfop": "6401 ou 6403",
+        "nota": "MVA ajustado conforme protocolo interestadual"
+      },
+      {
+        "regra": "Canal 40 + Pessoa Fisica",
+        "codigoImposto": "C3",
+        "nota": "Calcular DIFAL se interestadual"
+      },
+      {
+        "regra": "Cliente Zona Franca",
+        "codigoImposto": "I0",
+        "cfop": "6109",
+        "nota": "Isencao total - verificar SUFRAMA ativo"
+      },
+      {
+        "regra": "Cliente com Categoria Fiscal 'Isento'",
+        "codigoImposto": "I0",
+        "nota": "Verificar campo Categoria_Fiscal__c na conta"
+      }
+    ],
+    "impostosEspeciais": {
+      "DIFAL": {
+        "descricao": "Diferencial de Aliquota - operacoes interestaduais para consumidor final",
+        "formula": "(Aliquota Interna UF Destino - Aliquota Interestadual) x Base",
+        "testesRelacionados": [
+          "CT-31",
+          "CT-32"
+        ]
+      },
+      "FCP": {
+        "descricao": "Fundo de Combate a Pobreza - adicional de ICMS em alguns estados",
+        "aliquota": "Variavel por UF (geralmente 2%)",
+        "testesRelacionados": [
+          "CT-33",
+          "CT-34"
+        ]
+      },
+      "II": {
+        "descricao": "Imposto de Importacao - materiais importados",
+        "aplicacao": "Incorporado ao custo do material importado",
+        "testesRelacionados": [
+          "CT-20"
+        ]
+      }
+    }
+  },
+  "slaDocumentos": {
+    "geracaoXML": "Ate 2 minutos apos faturamento",
+    "autorizacaoSEFAZ": "Ate 3 minutos (depende de disponibilidade SEFAZ)",
+    "geracaoDANFE": "Imediato apos autorizacao",
+    "envioEmail": "Ate 1 minuto apos geracao completa",
+    "publicacaoPortal": "Simultaneo ao envio de email",
+    "tempoTotalMaximo": "10 minutos do faturamento ao recebimento pelo cliente"
+  },
+  "sistemasTecnicos": [
+    "SAP ECC",
+    "Salesforce",
+    "Portal Cliente",
+    "SEFAZ"
+  ],
+  "integracoes": [
+    {
+      "origem": "SAP ECC",
+      "destino": "SEFAZ",
+      "tipo": "API",
+      "descricao": "Transmissão de NF-e para autorização (modulo fiscal SAP)"
+    },
+    {
+      "origem": "SAP ECC",
+      "destino": "Email",
+      "tipo": "SMTP",
+      "descricao": "Envio automático de documentos por email apos autorizacao"
+    },
+    {
+      "origem": "SAP ECC",
+      "destino": "Portal Cliente",
+      "tipo": "API/Middleware",
+      "descricao": "Publicação de documentos no portal de autoatendimento"
+    },
+    {
+      "origem": "Salesforce",
+      "destino": "Portal Cliente",
+      "tipo": "Integração",
+      "descricao": "Vinculação de documentos ao registro do cliente no CRM"
+    }
+  ],
+  "mensagensSistema": [
+    {
+      "tipo": "Sucesso",
+      "contexto": "Envio de Documentos",
+      "mensagem": "Documentos fiscais enviados com sucesso para o cliente"
+    },
+    {
+      "tipo": "Erro",
+      "contexto": "Email Inválido",
+      "mensagem": "Não foi possível enviar documentos - email do cliente inválido ou não cadastrado"
+    },
+    {
+      "tipo": "Erro",
+      "contexto": "Falha SEFAZ",
+      "mensagem": "Falha na comunicação com SEFAZ - NF-e não autorizada"
+    },
+    {
+      "tipo": "Alerta",
+      "contexto": "Certificado Pendente",
+      "mensagem": "Produto requer certificado de qualidade que não está vinculado"
+    }
+  ],
+  "detalhes": {
+    "trigger": "SAP dispara processo no SAP ECC após faturamento",
+    "documentos": [
+      "XML da NF-e",
+      "DANFE",
+      "Certificado de Qualidade"
+    ],
+    "envio": "Email automático + Portal de Autoatendimento",
+    "rastreabilidade": "Logs de envio e confirmação de entrega"
+  },
+  "pendencias": [
+    "Configuração do template de email para envio automático",
+    "Integração completa com Portal de Autoatendimento",
+    "Definição de regras para certificados de qualidade por produto"
+  ],
+  "prerequisitos": [
+    "Sistema SAP ECC configurado e operacional",
+    "Integração SAP-SAP ECC testada",
+    "Emails de clientes cadastrados corretamente",
+    "Portal de Autoatendimento disponível"
+  ],
+  "relacionamentos": {
+    "dependeDe": [
+      "cadastro-cliente"
+    ],
+    "habilitaPara": [
+      "autoatendimento"
+    ],
+    "nota": "Depende de dados de contato corretos do cliente para envio de documentos"
+  },
+  "ciclosTeste": [
+    {
+      "documento": "Caderno de Testes - Tributario",
+      "titulo": "Testes Tributarios - Determinacao de Impostos",
+      "status": "Pendente",
+      "data": "2026-01-12",
+      "descricao": "36 casos de teste cobrindo determinacao automatica de impostos, codigos fiscais e calculos",
+      "estatisticas": {
+        "total": 36,
+        "concluidos": 0,
+        "pendentes": 36,
+        "falhou": 0,
+        "percentualConclusao": "0%"
+      },
+      "cenarios": [
+        "Material importado - II (CT-20)",
+        "Isencao Zona Franca - ZFM (CT-21)",
+        "Isencao categoria fiscal (CT-22)",
+        "Codigo I3 - Canal 20 Industria (CT-23)",
+        "Codigo I3 - Canal 30 Distribuidores (CT-24)",
+        "Codigo C3 - Consumidor Final (CT-25)",
+        "Codigo C4 - Substituicao Tributaria (CT-26)",
+        "Validar calculo IPI na NF (CT-27)",
+        "ICMS ST canal 30 - intraestadual (CT-28)",
+        "Cliente isento ICMS (CT-29)",
+        "DIFAL interestadual (CT-30)",
+        "FCP - Fundo Combate Pobreza (CT-31)",
+        "CFOP 5101 mesmo estado (CT-32)",
+        "CFOP 6101 interestadual (CT-33)",
+        "Diferimento ICMS MG (CT-34)",
+        "NCM com excecao IPI (CT-35)",
+        "Calculo completo impostos (CT-36-55)"
+      ],
+      "testesRelacionados": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55
+      ],
+      "codigosImposto": [
+        {
+          "codigo": "I0",
+          "descricao": "Isento de impostos"
+        },
+        {
+          "codigo": "I3",
+          "descricao": "Industria - ICMS + IPI + PIS + COFINS"
+        },
+        {
+          "codigo": "C3",
+          "descricao": "Consumidor Final sem ST"
+        },
+        {
+          "codigo": "C4",
+          "descricao": "Consumidor Final com Substituicao Tributaria"
+        }
+      ]
+    }
+  ],
+  "alertas": [
+    {
+      "tipo": "Prioridade",
+      "titulo": "Testes Tributarios Criticos",
+      "descricao": "36 casos tributarios pendentes sao ALTA PRIORIDADE por impactarem diretamente a geracao de notas fiscais e conformidade legal.",
+      "impacto": "Critico - Risco fiscal"
+    },
+    {
+      "tipo": "Dependencia",
+      "titulo": "Cadastro de Cliente",
+      "descricao": "Categoria fiscal e regiao do cliente devem estar corretos para determinacao automatica de impostos.",
+      "impacto": "Alto"
+    }
+  ],
+  "discussaoReunioes": {
+    "16dez2025": {
+      "apresentador": "Leandro da Cruz Pereira",
+      "contexto": "Explicacao do fluxo automatico de documentos fiscais",
+      "citacaoOriginal": "Falando sobre os documentos fiscais, que basicamente aqui ele tem aquele processo automatizado la de araujo, quando faz faturamento de emissao de XML, Daniel, certificado de produtos se tiver tambem para o cliente de forma automatica dentro do Spa",
+      "sistemasMencionados": {
+        "daniel": {
+          "nome": "Daniel",
+          "descricao": "Sistema mencionado para certificados de qualidade",
+          "nota": "Nome exato mencionado na reuniao - sistema de certificados"
+        },
+        "spa": {
+          "nome": "Spa",
+          "descricao": "Plataforma mencionada para entrega de documentos ao cliente",
+          "nota": "Nome exato mencionado na reuniao - plataforma de entrega"
+        }
+      },
+      "fluxoExplicado": "Faturamento -> SAP ECC gera XML -> Daniel gera certificado (se aplicavel) -> Enviado via Spa",
+      "pontosChave": [
+        "Processo e automatico apos faturamento",
+        "Certificado de qualidade vinculado automaticamente quando aplicavel",
+        "Cliente recebe documentos automaticamente na plataforma Spa"
+      ]
+    }
+  },
+  "contextoReuniao": {
+    "projeto": "GTM (Go To Market) / CRM",
+    "lideranca": {
+      "business": "Thalita Merisio Rhein",
+      "tecnico": "Leandro da Cruz Pereira"
+    },
+    "timeline": {
+      "workshops": "04/12 a 22/12/2025",
+      "posWorkshop": "Responsabilidade passa para usuarios (Castro)",
+      "entregaveis": [
+        "Planilha de cenarios",
+        "Manual de orientacao"
+      ]
+    },
+    "participantes": [
+      {
+        "nome": "Leandro da Cruz Pereira",
+        "papel": "TI/Apresentador",
+        "contribuicao": "Explicou fluxo de documentos fiscais"
+      },
+      {
+        "nome": "Thalita Merisio Rhein",
+        "papel": "Project Lead Business"
+      }
+    ]
+  },
+  "documentosRelacionados": [],
+  "totalDocumentos": 0,
+  "ultimaAtualizacao": "2026-01-13T11:36:26.107306",
+  "documentosGerais": [
+    {
+      "tipo": "Plano de Testes Exploratorios",
+      "id": "909100"
+    },
+    {
+      "tipo": "Boot/Automacao",
+      "id": "Boot"
+    },
+    {
+      "tipo": "App Guidance",
+      "id": "app guidance"
+    }
+  ]
+}

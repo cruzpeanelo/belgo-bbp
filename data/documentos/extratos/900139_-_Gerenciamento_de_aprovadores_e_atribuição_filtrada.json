@@ -1,0 +1,56 @@
+{
+  "metadata": {
+    "id": "900139",
+    "arquivo": "900139 - Gerenciamento de aprovadores e atribuição filtrada.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\900139 - Gerenciamento de aprovadores e atribuição filtrada.docx",
+    "tamanho_bytes": 1825272,
+    "data_modificacao": "2025-12-17T14:25:57",
+    "extraido_em": "2026-01-13T11:31:15.285348",
+    "status": "extraido",
+    "total_paragrafos": 23,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Nesta tela é possível configurar as regras de aprovadores, definindo combinações de:",
+      "Analista",
+      "Foi validado que:",
+      "As regras são salvas com sucesso;",
+      "A mensagem de confirmação “Sucesso – Regra salva com sucesso” é exibida após o salvamento;",
+      "É possível adicionar mais de um Analista para a mesma combinação de chave composta.",
+      "Ao criar uma nova OC, o sistema apresenta ao final do formulário a seção Aprovadores.",
+      "Campos exibidos:",
+      "Aprovador",
+      "Aprovador Auxiliar",
+      "Quando existe regra compatível com a combinação de dados da OC:",
+      "O sistema retorna corretamente o(s) aprovador(es) disponíveis;",
+      "O usuário consegue selecionar o Aprovador e o Aprovador Auxiliar;",
+      "O botão Salvar Aprovadores fica habilitado;",
+      "Quando não existe regra cadastrada para a combinação informada:",
+      "O sistema exibe a mensagem:",
+      "“Nenhum aprovador encontrado para a combinação de dados desta Ocorrência. Verifique as Regras de Negócio ou clique em Atualizar após preencher os dados.”",
+      "Os campos permanecem vazios;",
+      "Não é possível prosseguir sem ajuste da regra ou correção dos dados da OC.",
+      "Mais de um Aprovador",
+      "Conforme a mensagem abaixo, nenhum aprovador encontrado para combinação de dados desta Ocorrência. Verifique as regras de negócio ou clique atualizar após preencher dados.",
+      "Aprovador ",
+      "Aprovador / Comercial"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n900139 - Gerenciamento de aprovadores e atribuição filtrada",
+          "Data de Criação\n16/12/25"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 23,
+    "total_tabelas": 1
+  }
+}

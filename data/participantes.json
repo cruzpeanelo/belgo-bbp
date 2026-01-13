@@ -1,0 +1,110 @@
+{
+  "titulo": "Participantes - Projeto GTM Vendas Belgo",
+  "descricao": "Diretorio de key users e participantes do projeto",
+  "dataAtualizacao": "2026-01-13",
+  "totalParticipantes": 15,
+  "participantes": [
+    {
+      "nome": "Leandro",
+      "papel": "Key User - Comercial",
+      "area": "Vendas/Comercial",
+      "expertise": ["Areas de vendas", "Canais", "Processos comerciais"],
+      "reunioesParticipou": ["03/12/2025", "10/12/2025", "16/12/2025"]
+    },
+    {
+      "nome": "Vanessa",
+      "papel": "Key User - Credito",
+      "area": "Financeiro/Credito",
+      "expertise": ["Areas de credito", "BBA", "CSP", "Limites"],
+      "reunioesParticipou": ["04/12/2025"]
+    },
+    {
+      "nome": "Rafael",
+      "papel": "Key User - Cadastro",
+      "area": "Cadastro/Dados Mestres",
+      "expertise": ["Record Types", "Cadastro de clientes"],
+      "reunioesParticipou": ["03/12/2025", "04/12/2025", "16/12/2025"]
+    },
+    {
+      "nome": "Talita",
+      "papel": "Key User - Fiscal",
+      "area": "Fiscal/Tributario",
+      "expertise": ["NF-e", "DANFE", "Documentos fiscais"],
+      "reunioesParticipou": ["04/12/2025", "16/12/2025"]
+    },
+    {
+      "nome": "Jefferson",
+      "papel": "Key User - Sistemas",
+      "area": "TI/Sistemas",
+      "expertise": ["Integracoes", "ACSAP", "Salesforce"],
+      "reunioesParticipou": ["04/12/2025"]
+    },
+    {
+      "nome": "Leonardo",
+      "papel": "Key User - Controladoria",
+      "area": "Financeiro/Controladoria",
+      "expertise": ["FSCM", "Controles financeiros"],
+      "reunioesParticipou": ["03/12/2025"]
+    },
+    {
+      "nome": "Augusto",
+      "papel": "Key User - Areas",
+      "area": "Comercial/Areas",
+      "expertise": ["Clusterizacao", "CNAE"],
+      "reunioesParticipou": ["10/12/2025"]
+    },
+    {
+      "nome": "Egidio",
+      "papel": "Key User - Distribuicao",
+      "area": "Comercial/Distribuicao",
+      "expertise": ["Canal 30", "Distribuidores"],
+      "reunioesParticipou": ["03/12/2025"]
+    },
+    {
+      "nome": "Rodrigo",
+      "papel": "Key User - Pricing",
+      "area": "Comercial/Pricing",
+      "expertise": ["Workflow pricing", "Precos", "Descontos"],
+      "reunioesParticipou": ["17/12/2025"],
+      "nota": "Responsavel por validar regras de desconto e aprovacao"
+    },
+    {
+      "nome": "Marcelo",
+      "papel": "Key User - OC",
+      "area": "Comercial/Pedidos",
+      "expertise": ["Hub de gestao OC", "Pedidos", "Cotacoes"],
+      "reunioesParticipou": ["22/12/2025"],
+      "nota": "Responsavel por validar fluxo de pedidos e cotacoes"
+    }
+  ],
+  "equipeProjeto": [
+    {
+      "nome": "Thalita Merisio Rhein",
+      "papel": "Gerente de Negocio",
+      "responsabilidade": "Definicao de requisitos e priorizacao",
+      "area": "Negocio"
+    },
+    {
+      "nome": "Leandro da Cruz Pereira",
+      "papel": "Lider Tecnico TI",
+      "responsabilidade": "Coordenacao tecnica e integracoes",
+      "area": "TI"
+    },
+    {
+      "nome": "Audrey",
+      "papel": "Analista de Negocio",
+      "responsabilidade": "Documentacao e analise",
+      "status": "Licenca maternidade"
+    },
+    {
+      "nome": "Dani Tamerao",
+      "papel": "Analista de Negocio",
+      "responsabilidade": "Documentacao e analise",
+      "status": "Saiu do projeto"
+    }
+  ],
+  "matrizRACI": {
+    "descricao": "Matriz de responsabilidades por jornada",
+    "fonte": "GTM Vendas - Caderno de Testes.xlsx - Aba 'Matriz RACI'"
+  }
+}

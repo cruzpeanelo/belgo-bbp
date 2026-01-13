@@ -1,0 +1,153 @@
+{
+  "titulo": "Regras de Validacao - Projeto GTM Vendas",
+  "descricao": "Regras de validacao implementadas no Salesforce para garantir qualidade de dados",
+  "dataAtualizacao": "2026-01-13",
+  "validacoes": {
+    "cadastro_cliente": [
+      {
+        "id": "VAL-001",
+        "campo": "CNPJ__c",
+        "tipo": "formato",
+        "regra": "CNPJ deve ter 14 digitos e ser valido (algoritmo de validacao)",
+        "mensagemErro": "CNPJ invalido. Verifique os digitos informados.",
+        "obrigatorio": true,
+        "integracaoSINTEGRA": true
+      },
+      {
+        "id": "VAL-002",
+        "campo": "TermoPesquisa__c",
+        "tipo": "tamanho",
+        "regra": "Maximo 50 caracteres, sem caracteres especiais",
+        "mensagemErro": "Termo de pesquisa deve ter no maximo 50 caracteres alfanumericos.",
+        "obrigatorio": true
+      },
+      {
+        "id": "VAL-003",
+        "campo": "Canal__c",
+        "tipo": "picklist",
+        "regra": "Deve ser um dos valores: 20, 25, 30, 40",
+        "mensagemErro": "Canal de venda invalido.",
+        "obrigatorio": true,
+        "determinadoPor": "CNAE"
+      },
+      {
+        "id": "VAL-004",
+        "campo": "AreaCredito__c",
+        "tipo": "picklist",
+        "regra": "Deve ser um dos valores: BBA, CSP, DBA, ALPE",
+        "mensagemErro": "Area de credito invalida.",
+        "obrigatorio": true
+      },
+      {
+        "id": "VAL-005",
+        "campo": "Cluster__c",
+        "tipo": "calculado",
+        "regra": "Cluster e determinado automaticamente baseado em Setor + Atratividade + Regiao",
+        "valores": ["Corporativas", "Especiais", "Regionais", "Dispersas"],
+        "excecao": "ClusterExcecao__c requer aprovacao para alteracao manual"
+      },
+      {
+        "id": "VAL-006",
+        "campo": "Segmento__c",
+        "tipo": "dependente",
+        "regra": "Segmento deve ser consistente com Subsegmento selecionado",
+        "dependeDe": "Subsegmento__c"
+      }
+    ],
+    "workflow_pricing": [
+      {
+        "id": "VAL-WF-001",
+        "campo": "Desconto__c",
+        "tipo": "range",
+        "regra": "Desconto deve estar dentro do limite aprovado para o nivel de aprovacao",
+        "limites": {
+          "nivel1": "0-5%",
+          "nivel2": "5-10%",
+          "nivel3": "10-15%",
+          "nivel4": ">15% (Diretoria)"
+        }
+      },
+      {
+        "id": "VAL-WF-002",
+        "campo": "Vigencia__c",
+        "tipo": "data",
+        "regra": "Data inicial deve ser menor ou igual a data final",
+        "mensagemErro": "Vigencia invalida. Data inicial deve ser anterior a data final."
+      },
+      {
+        "id": "VAL-WF-003",
+        "campo": "Material__c",
+        "tipo": "referencia",
+        "regra": "Material deve existir no cadastro de produtos SAP",
+        "integracaoSAP": true
+      },
+      {
+        "id": "VAL-WF-004",
+        "campo": "IntegrationStatus__c",
+        "tipo": "status",
+        "regra": "Apos aprovacao, Integration Status deve ser 'Completed'",
+        "valores": ["Pending", "In Progress", "Completed", "Error"]
+      },
+      {
+        "id": "VAL-WF-005",
+        "campo": "ExternalID__c",
+        "tipo": "gerado",
+        "regra": "External ID deve ser preenchido automaticamente apos integracao com SAP",
+        "formato": "alfanumerico unico"
+      }
+    ],
+    "pedido_cotacao": [
+      {
+        "id": "VAL-PED-001",
+        "campo": "Cliente__c",
+        "tipo": "referencia",
+        "regra": "Cliente deve ter cadastro ativo e sem bloqueio de credito"
+      },
+      {
+        "id": "VAL-PED-002",
+        "campo": "Vendedor__c",
+        "tipo": "obrigatorio",
+        "regra": "Conta deve ter vendedor vinculado ao Escritorio de Vendas"
+      },
+      {
+        "id": "VAL-PED-003",
+        "campo": "MotivoRecusa__c",
+        "tipo": "condicional",
+        "regra": "Motivo de recusa so pode ser usado quando ha itens selecionados",
+        "documento": "846129 - Impedir uso de Motivo de Recusa sem selecao de itens.docx"
+      }
+    ],
+    "contatos": [
+      {
+        "id": "VAL-CON-001",
+        "campo": "Celular__c",
+        "tipo": "formato",
+        "regra": "Celular deve estar no formato (XX) XXXXX-XXXX",
+        "documento": "901674 - Padronizacao de bases de contatos (celulares).docx"
+      },
+      {
+        "id": "VAL-CON-002",
+        "campo": "Email__c",
+        "tipo": "formato",
+        "regra": "Email deve ser valido (formato usuario@dominio.com)"
+      }
+    ]
+  },
+  "integracoesValidacao": {
+    "SINTEGRA": {
+      "descricao": "Validacao de CNPJ via servico externo",
+      "campos": ["CNPJ", "Razao Social", "Situacao Cadastral"],
+      "autoPreenchimento": true
+    },
+    "SAP": {
+      "descricao": "Validacao de existencia de cliente/material no SAP",
+      "campos": ["SapCode__c", "Material__c"]
+    }
+  },
+  "observacoes": [
+    "Validacoes executadas em triggers e process builders",
+    "Cluster e calculado automaticamente pelo sistema",
+    "Excecoes de cluster requerem workflow de aprovacao",
+    "Integracao SINTEGRA para auto-preenchimento de dados de CNPJ"
+  ]
+}

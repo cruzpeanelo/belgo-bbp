@@ -1,0 +1,39 @@
+{
+  "metadata": {
+    "id": null,
+    "arquivo": "app guidance.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\app guidance.docx",
+    "tamanho_bytes": 1726716,
+    "data_modificacao": "2025-11-04T14:45:15",
+    "extraido_em": "2026-01-13T11:31:15.750231",
+    "status": "extraido",
+    "total_paragrafos": 6,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "O cadastro de uma nova conta requer o preenchimento de dados essenciais, como nome (termo de pesquisa), CNPJ e tipo de conta. Como exemplo, a conta pode ser do tipo 'emissor da ordem'\n\nDepois de criar a conta e ser redirecionado, clique no botão Sintegra na nova tela. Isso buscará as informações básicas do cliente, como endereço e inscrição estadual (se houver) e mostrará na aba Detalhes.\n\n\nApós clicar no botão do Sintegra, você receberá uma mensagem de sucesso no canto superior da tela que a sincronização houve sucesso; \n\n\n\nApós o término de integração, você receberá uma notificação no canto superior direito. ",
+      "\n\nApós esse processo, você verá informações básicas da conta e para trazer mais informações a conta, clicamos no botão superior esquerdo “Enviar SAP”\n",
+      "Uma nova mensagem no topo da tela indicará que a conta está em sincronização com o SAP.",
+      "\nNa segunda Aba, após os Detalhes, temos os relatório de visitas e temos a opção de criar um relatório: \n\n\n\nApós clicar em “criar”, você verá essa tela com algumas informações que você poderá preencher de acordo com as necessidades, para realizar o processo, só clicar em salvar, após colocar informações necessárias: \n\n",
+      "Na terceira aba, 'Financeiro', ao selecionar a opção 'Partidas' serão exibidas as informações da consulta. Esta aba também contém a seção 'Ficha de Crédito'.\n\n \n",
+      "Ao consultar ficha de crédito, conseguimos ver algumas informações sobre o cliente: \n\n"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\nIn-app guidance para apoio ao usuário na navegação",
+          "Data de Criação\n26/09/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 6,
+    "total_tabelas": 1
+  }
+}

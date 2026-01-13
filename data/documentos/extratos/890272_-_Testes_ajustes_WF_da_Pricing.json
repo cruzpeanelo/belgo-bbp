@@ -1,0 +1,39 @@
+{
+  "metadata": {
+    "id": "890272",
+    "arquivo": "890272 - Testes ajustes WF da Pricing.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\890272 - Testes ajustes WF da Pricing.docx",
+    "tamanho_bytes": 785369,
+    "data_modificacao": "2025-11-05T11:54:27",
+    "extraido_em": "2026-01-13T11:31:15.005674",
+    "status": "extraido",
+    "total_paragrafos": 6,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Conta TANAPI \nConsulta da conta TANAPI, exibindo o Escritório de Vendas Alternativo como DIAP – DBA Penápolis 2. ",
+      "Configuração do Workflow Pricing para a conta TANAPI, com o escritório DIAP – DBA Penápolis 2 e vigência de 05/11/2025 a 07/12/2025.",
+      "Desconto de 10% para o grupo de mercadoria Cabos de Aço (BA), vinculada à unidade UNRIO – Ropes 1. Após o preenchimento, foi acionado o botão Criar.",
+      "Confirmação de que a solicitação de Workflow foi enviada com sucesso para aprovação.",
+      "Desconto de 10%. Após o preenchimento, foi acionado o botão Criar.",
+      "Confirmação de que a solicitação de Workflow foi enviada com sucesso para aprovação."
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n890272 - Testes ajustes WF da Pricing",
+          "Data de Criação\n05/11/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 6,
+    "total_tabelas": 1
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "id": "881196",
+    "arquivo": "881196 - [Salesforce]  Testes - Notificar sobre cadastro a finalizar - pendente – Copy V1.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\881196 - [Salesforce]  Testes - Notificar sobre cadastro a finalizar - pendente – Copy V1.docx",
+    "tamanho_bytes": 1453511,
+    "data_modificacao": "2025-10-24T11:17:47",
+    "extraido_em": "2026-01-13T11:31:14.895642",
+    "status": "extraido",
+    "total_paragrafos": 13,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Realizada a criação da conta",
+      "Conta: ESCOLL",
+      "Efetuada a chamada no Sintegra para consulta dos dados:",
+      "- Depois de criado com sapcode preenchido, não recebeu notificação ",
+      "Realizada a criação da conta",
+      "Cliente: AYLA",
+      "Efetuada a chamada no Sintegra para consulta dos dados:",
+      "- Depois de criado com sapcode preenchido, não recebeu notificação ",
+      "Conta criada: VALE DO SO",
+      "Não chamei no sintegra",
+      "Conta criada: EDUARDO MA",
+      "Não chamei no Sintegra, e-mail de confirmação recebido com sucesso.",
+      "Situação da receita cancelado"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n881196 - [Salesforce]  Testes - Notificar sobre cadastro a finalizar/pendente – Copy",
+          "Data de Criação\n23/10/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 13,
+    "total_tabelas": 1
+  }
+}

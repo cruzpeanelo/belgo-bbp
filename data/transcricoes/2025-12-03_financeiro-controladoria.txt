@@ -1,0 +1,806 @@
+GTM - Alinhamento de próximas etapas FinanceiroControladoria-20251203_133410-Transcrição da Reunião
+December 3, 2025, 4:34PM
+57m 0s
+Araujo, Renato Fernandes De started transcription
+Rhein, Thalita Merisio   0:10
+Bom, voltando aqui, então é, eu preferi chamar todos vocês para colocar todo mundo na mesma página, pedir ajuda do Leandro da TI. É, ele está desde o começo. Eu acabei de chegar aqui como gerente do projeto do lado do negócio.
+É o projeto do go Wire. Neste momento, ele vem ali, começou com a consultoria da integration 2023 e nesse momento ele ainda está em preparação sistêmica, principalmente essa é a é o pilar que a gente está trabalhando no momento.
+Pereira, Leandro Da Cruz   0:27
+Heraldo.
+Contact.
+Rhein, Thalita Merisio   0:41
+Para então podermos fazer os avanços que vão implicar principalmente em mudança de processos como um todo, tá? De estrutura, de como os dados são organizados e de processos também. O que acontece é que neste momento.
+Pereira, Leandro Da Cruz   0:43
+Contact.
+O.
+Rhein, Thalita Merisio   0:58
+A gente vai entrar numa fase, já deveríamos ter começado, mas a gente está com os testes, o teste integrado suspenso. Quando eu cheguei, eu cheguei aqui nesse projeto. Tem basicamente um mês que foi na ocasião das férias da Audrey, a Daniele Tamerão, só fazendo uma retrospectiva rápida.
+Algumas, vou falar nomes. Algumas pessoas tiveram ou não contato com a Dani Tamerão. A Dani Tamerão era a gerente de projetos do lado do negócio. Ela foi desligada da empresa em setembro e nesses dois meses de setembro até um mês atrás a Audrey estava como gerente do projeto.
+Mas a Audrey também é gerente de cercamento, então estava aí com essa essas funções acumuladas nas férias da Audrey. Foi quando eu realmente recebi o projeto aí para fazer essa gestão. E foi a partir daí que eu que eu me aproximei mais da TI para entender, espera aí, a gente precisa fazer um teste, esse.
+Teste é and to and de ponta a ponta. Até vou compartilhar uma tela aqui para ficar mais claro isso para vocês, mas a gente não está preparado como um negócio para fazer isso. Esse foi a minha leitura do momento que eu recebi essa tarefa para conduzir esse teste.
+Porque a gente não é precisa de toda essa sequência de atividades. Então é uma belgo funcionando na no ambiente de teste, com todos os seus cenários, é usuais e exceção para que a gente possa garantir que o sistema como a t e construiu.
+Com as novas regras que o negócio pediu para aplicar, mediante a orientação da integration, estão prontas, estão validadas para que a gente possa colocar isso em produção e virar o novo CRM integrado com SAP de ponta a ponta.
+Alexandre de Sant
+É, isso não estava claro, tá, gente? Eu trouxe essa visão, essa mesma visão para os diretores. Eles pontuaram que para eles isso não estava claro. Então, daqui em diante a gente está deixando isso claro com todo mundo. Eu sou uma pessoa de comunicação, então eu estou preferindo pegar pelo excesso de comunicação e falei isso para os diretores. Eles entenderam, estou trazendo.
+isso para vocês. Por quê? Porque a gente precisa chegar numa divisão de responsabilidades aqui, né? Esse projeto ele não é só da t e esse projeto não é só do comercial. Esse projeto da Belgo como um todo e quando a gente fala de que esse projeto de todo mundo e porque ele vai mudar, como eu falei o processo.
+Não é só o sistema que vai mudar o processo como um todo, vai ter várias alterações. Então, nesse momento que eu apresentei isso para os diretores, eu fui pedir o Patrocínio deles para que eles reforcem para os times através de vocês, gerentes, que é importante é que esse projeto ele é estratégico e prioritar.
+Pereira, Leandro Da Cruz   3:24
+Machado.
+Rhein, Thalita Merisio   3:41
+Prioritário, vocês gerentes vão ser os heavy users que eu estou chamando aqui, porque vocês é quem tem a visão estratégica e vocês também vão ser corresponsáveis pelas validações das suas áreas, então vocês vão precisar.
+É eleger os usuários Chaves, que são os k users que vão. Quem serão as pessoas que vão fazer os testes na prática? Mas cada gerente tem que ser responsável corresponsável pelo que o seu usuário Chaves designado é validar.
+Porque depois que a gente subir essa validação toda para a TI desse processo aqui, começo, meio e fim e a T e colocar isso no ar, se não tiver valendo, se não tiver redondo, vai ter paralisações.
+Então é crítico, é muito importante. E eu trouxe o Leandro aqui para ele me complementar de tudo isso. Alguns dos diretores de vocês já indicaram os usuários Chaves, outros usuários Chaves no caso, por exemplo do Takeshi, que trabalha na equipe da Fernanda e do Frank que trabalha na equipe do Claudio, ele já
+Participaram como usuários é que escreveram as histórias no começo dessa jornada do projeto. Então eles estão mais familiarizados, assim como do lado do Ivano era Sofia lana que agora saiu, foi para área de inovação. Então é a gente não sabe. Por isso que eu chamei vocês aqui. Quero reforçar como.
+de castro de castro o quanto vocês gerentes estão sabendo o que vai mudar, quais foram as histórias que os usuários de vocês escreveram para que vocês possam sustentar e ser e serem corresponsáveis por essas validações. E por último, antes de passar para o Leandro falar e para vocês tirarem qualquer dúvida, a gente vai ter sim aqui uma necessidade
+empenho de horas. Não dá para a gente conduzir teste com a pessoa trazendo o teste como a última coisa da fila de rotina que ela vai fazer no dia. Então eu fui, me alimentei ali com o Breno, peguei boas práticas que ele está aplicando. Ele tem os usuários Chaves definidos, então eu vou definir com vocês.
+Vocês que são esses mesmos que a gente já sabe. No caso do Ivano passou a ser a Vanessa e nós vamos ter que ter esse comprometimento de um mínimo de carga semanal dedicada. Eu já sei que esse projeto ele não vai colidir nesse momento, ele não está colidindo com o sapo for.
+A carga atribuída ao SAP for nesse momento já foi reduzida e nenhuma dessas pessoas que estão abaixo de vocês hoje está. Eu acabei de lidar com o Breno com horas alocadas ou com horas empenhadas em atividades pendentes para o SAP for. Mas a gente tem que se preocupar sim com o SAP for no futuro.
+Porque se a gente não colocar esse sistema no ar até fevereiro, em março, ele vai colidir com o SAP for, sim.
+Então eu assim, eu não estou poupando transparência aqui para vocês. É que esse é um projeto de todos nós e que agora eu peço pro pro Leandro explicar do ponto de vista ali processual, Leandro, que eu acho que tenha, pode ter algumas dúvidas. Numa conversa rápida que eu tive com a Fernanda, a Fernanda estava assim como?
+Eu fora do projeto, então é acho que é importante você deixar todo mundo na mesma página dos pontes de destaque dos pontes principais, por favor, antes que a gente possa abrir para dúvidas.
+Pereira, Leandro Da Cruz   6:59
+Beleza, eu vou compartilhar minha tela aqui na hora que vocês estiverem vendo, vocês me falam, tá? Primeiro ponto que muda bastante é a parte de castro de castro de castro de castro de castro de castro de castro de castro de castro de castro de castro de castro de castro de castro de cast
+Em termos de papéis e responsabilidades, anteriormente o vendedor passava uma ficha lá pro smart Center e o smart Center cadastrava o cliente dentro do SAP. E esse processo a gente mudou. Agora, esse cliente é cadastrado dentro do seus forcing e tem uma série de automatizações que a gente.
+Busca da receita assim pega e seface para já preencher uma série de dados é fiscais desse cliente. Então, trazendo aqui para a parte tributária, a gente tem aqui todas as informações tributárias, os regimes especiais.
+E um outro ponto importante também sobre o castro de clientes é que ele está totalmente integrado com OFSTM, aí talvez mais da área do Ivano, não é então?
+A Sofia estava junto com a gente. A gente tem as 3 áreas de crédito, que é ABBACSP, que é da supply e da ADBA também, que é da distribuição. E que essas áreas de créditos fazem fazem aqui, além da visualização dentro dos seus forces, ela controla.
+O limbo dentro da entrada de cotação e ordem de venda, então toda a cotação aqui ela não gera um impedimento para cotar 11 preço com o cliente, mas a ordem de venda ela bloqueia, tem regras de bloqueio para entrada de ordem de venda com base.
+No esgotamento de crédito aqui que a gente criou dentro dos seus forces. Além disso, eu tenho as eu tenho as dados de partidas, ou seja, todas as partidas e entradas do cliente também. São possíveis vocês consultarem dentro dos seus forces baixar XML, Dan Francair.
+Carla de qualidade, boleto, então tem muito a parte financeira envolvida.
+Saindo, pois não, Renato?
+Araujo, Renato Fernandes De   8:51
+Essa parte de bloqueio, Leandro, ela o desbloqueio acontece dentro dos seus forços também.
+Pereira, Leandro Da Cruz   8:58
+Não desbloqueio acontece dentro do ECC, mas o salesforce entra com a cotação em ordem de venda. A ordem de venda é desbloqueada dentro do limbo do ECC. Tá o Renato?
+Araujo, Renato Fernandes De   9:07
+Ok, então as regras dos santos são replicadas aí nos seus fotos.
+Pereira, Leandro Da Cruz   9:11
+Ela continua dentro do ECCOECC faz a leitura da regra, então, mas a regra está dentro do ECC, mas tem que validar isso dentro do processo, tá? Se está certinho.
+Araujo, Ivano Oliveira   9:19
+O Leandro, só mais uma consideração até para ver se possa ser como é que fica a questão do Belgo Cash e da alp está mapeado nesse processo.
+Araujo, Renato Fernandes De   9:21
+Okay.
+Pereira, Leandro Da Cruz   9:30
+Tá, na realidade tá mapeado o Belgo Cash. Então aqui, se você olhar no financeiro, uma das áreas de crédito aqui é a csp, que é do da supplier, que é do Belgo Cash. Nessa minha tela aqui não tá a alp, tá? Mas em uma outra tela do vendedor aparece a alp, sim, então a alp tá mapeada, Ivano, tá?
+Araujo, Ivano Oliveira   9:49
+Thalita.
+Pereira, Leandro Da Cruz   9:51
+Bom, outro ponto importante sobre essa questão, o novo conceito, área de vendas. Então vocês vão ver lá os canais 30 egidio de vitoria, 20, 30, 40 e 50, tá? Que são os novos canais. Indústria, distribuição e consumo. Isso impacta totalmente a parte de entrada de
+renda para a parte fiscal e tributária. Então, se um cliente, por exemplo, colocou um pedido, deixa eu pegar um exemplo de um pedido aqui no canal 30, que tem distribuição, vai ter ICMSST, dependendo da situação que a gente coloca. Se não tem, por exemplo, se for canal 40, ele já não incide ICMSST.
+Dando esse exemplo, tá? Mesma coisa para a parte de preços que vai considerar isso também. Outro ponto importante aí, talvez mais pra Fernanda. Hoje, toda a visão da empresa, ela tá ligada diretamente ao segmento de produto para questões de SGNA e DRE, imagino aí para demonstrativos aí de resultados.
+e despesas a empresa ela começa a olhar muito esse cara aqui, o cluster. Então qual que é a? Porque esse cluster aqui é a virada de segmento de produto para segmento de clientes. Então você tem o cluster que são as contas corporativas, tem outros clusters aqui.
+Também tá aliado ao setor industrial, que são vários aqui dentro. Então vai chegar aí demandas, possivelmente falando o seguinte, olha quanto de receita entrou aí. Eu não conheço muito de Controladoria, tá, Fernanda? Mas imagino que pode aparecer isso.
+Qual a receita que entrou aqui para o setor industrial? Celulose para o cluster corporativo ou qual que é o custo disso, desses clientes que estão dentro desse setor industrial e dentro desse cluster para o escritório de vendas? É GRSI.
+Então essa é outro item que pode impactar aí. É só uma pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes de pontes a
+E gerencial.
+Monteiro, Fernanda Chaves   11:56
+E Leandro, o que liga é o código do produto.
+Pereira, Leandro Da Cruz   12:01
+Não? Então, esse é um ponto. A gente liga o código do cluster com o setor industrial do cliente, né? Então a visão do segmento de produto para fins de relatório da diretoria ainda vai existir, mas vai começar a migrar muita coisa para a visão de segmento de clientes, que basicamente é o setor industrial do cliente, que é o
+eu comentei aqui que são esses setores que estão dispostos aqui na minha tela. Deixa eu pegar aqui de novo. Esses setores que estão dispostos aqui. Junto com o cluster, tá? Então, muitas análises vão acontecer nesse nível, tá? Então, o setor industrial, segmentos em segmentos e setor industrial.
+Como cluster, essa é a grande virada do goularte GTM, começar a olhar receitas e custos aí baseados aí nessa visão do cliente, não somente agora dentro do segmento do produto.
+Monteiro, Fernanda Chaves   12:53
+É, nossa, credo, uma barata de coisa no meu computador.
+I can
+Rhein, Thalita Merisio   13:00
+AI, que susto, achei que você estava falando do projeto.
+Monteiro, Fernanda Chaves   13:03
+AI, credo, não, projeto está tranquilo.
+Rhein, Thalita Merisio   13:05
+Hhh.
+Monteiro, Fernanda Chaves   13:07
+Tá bom?
+Pereira, Leandro Da Cruz   13:09
+Dúvidas iniciais aqui vocês é, tem muito mais do projeto do que isso, tá, pessoal? É lógico, tem todas as parabenizações ali que o Frank está fazendo, a área de praia está fazendo, é os testes que precisam acontecer, a entrada de cotação, entrada de ordem de venda, bloqueio de limbo, análise contábil, análise fiscal, análise da Controladoria em.
+em cima dessas novas visões. Então, esse é a ideia de vocês estarem na mesma página que a gente em relação ao projeto para que a gente consiga fazer essa virada de chave aí entre fevereiro e março de C
+Araujo, Renato Fernandes De   13:40
+Martins.
+Pereira, Leandro Da Cruz   13:41
+Luis.
+Araujo, Renato Fernandes De   13:41
+Certo o Leandro, em relação ao processo que envolve aqui a de RC você até participou, tem um projeto em andamento do cadastro lá de clientes no processo de do de assis, mas ainda está sendo discutido com o jurídico. Como que ficaria o fluxo?
+Pereira, Leandro Da Cruz   13:54
+Sim.
+Araujo, Renato Fernandes De   13:58
+E aí, fechando esse fluxo a ser adotado pelo corporativo, a gente volta para avaliar como que seria essa integração. Atenção, o primeiro ponto que ele está no radar, a gente está atuando. Agora a gente já conversou um pouquinho.
+Pereira, Leandro Da Cruz   14:09
+Só um complemento sobre esse ponto, tá Renato? O castro de clientes não pode mais nascer pelo ECC, tá? Justamente pelas regras que a gente desenvolveu aqui que determina automaticamente o cluster e o setor industrial do cliente e o ECC, não existe essas regras. Então, quando a gente for evoluir dentro do do diligence lá da Dow Jones, Dow Jones.
+Araujo, Renato Fernandes De   14:27
+Sal Jones isso.
+Pereira, Leandro Da Cruz   14:27
+Você me fala da Dow Jones? A gente precisa integrar os seus force com a api lá da Dow Jones, não mais OCC.
+Araujo, Renato Fernandes De   14:35
+Isso porque pelo que estava sendo desenhado, a televisão do BRO, então esse é um ponto de atenção, tá? Assim que tiver esse fluxo desenhado, a gente volta para poder revir e avaliar o nosso cenário. Então esse aqui já está no radar, inclusive da Thalita teve e-mail aí na semana passada.
+Pereira, Leandro Da Cruz   14:46
+Sim.
+Rhein, Thalita Merisio   14:51
+Teve um e-mail, é Leandro, que o Lucas disparou nas suas férias.
+Araujo, Renato Fernandes De   14:53
+Tá.
+Pereira, Leandro Da Cruz   14:54
+E se eu pedir para ele parar, disparar na minhas férias, eu acabei esquecendo de comentar. Renato, os seus forces está integrado com o SAP ECCEOBRO também, tá? Então tudo que você está vendo dentro dos seus forces, a hora que eu aperto esse botãozinho enviar por pro SAP, ele passa pelo SAP ECCE pelas regras do BRO, então.
+Araujo, Renato Fernandes De   14:56
+Is is.
+Rhein, Thalita Merisio   14:57
+Mhm.
+Pereira, Leandro Da Cruz   15:11
+Talvez a gente integre lá pelo Bro normal e não vai impactar. A gente decide isso em tempos de projeto.
+Araujo, Renato Fernandes De   15:19
+Perfeito. E aí outro ponto que eu gostaria também é de ter pelo menos a Maria luiza, que é avalista de ro da minha equipe, ela participando depois que for fazer um teste ponta a ponta, porque tem aquela preocupação, Leandro, quanto ao controle de gestão de preços.
+Pereira, Leandro Da Cruz   15:35
+Tox.
+Exato.
+Araujo, Renato Fernandes De   15:37
+Só para a gente ver se pode ter algum impacto, tá? Mas pelo menos você seja conhecido antes mesmo da gente mandar isso para a produção. Então é importante ter essa visão, principalmente que a gente está encerrando o ano interial, como a previsão de fevereiro.
+Pereira, Leandro Da Cruz   15:45
+Combinado e.
+Araujo, Renato Fernandes De   15:54
+É pelo menos em janeiro a gente já começa o novo ciclo tox, então qualquer necessidade de mudança em desenho de controle, a gente vai estar no momento de fazer.
+Pereira, Leandro Da Cruz   16:05
+Perfeito.
+Araujo, Renato Fernandes De   16:06
+Tá, e principalmente, a gente sabe que tem aquela visão da euai, que é trazer todos os sistemas para escopo socks, tá? Então a gente tem que estar muito bem alinhado, porque com certeza, sabendo da entrada do CRM em produção.
+Com ele mais robusto, ouvir vários questionamentos do porquê entrar ou não no escopo de azevedo. Então eu entendo que aí vai ser o momento da gente ter essas discussões.
+Pereira, Leandro Da Cruz   16:31
+Tavares aqui.
+Perfeito é, eu não tinha conversado com você antes, justamente porque a gente ainda estava na fase de desenvolvimento, então, mas o meu acordo era justamente a gente alinhar antes de entrada de qualquer produção e estamos na mesma página, tá, Renato? Então sim, a Maria Luiza participar junto com a gente, avaliar cada um do cenário de teste.
+E a gente chegar no consenso aí, se existe risco ou não existe risco da questão de aprovações, preços eu acho que isso é super válido.
+Araujo, Renato Fernandes De   17:01
+Perfeito. É porque se tiver qualquer ponto, a gente vai estar no momento exatamente revisão dos controles, tá? Mas também estamos preparados em responder os questionamentos, porque uma coisa é você mudar um controle, outra é você trazer um sistema para escopo de atingir si.
+Clara você conhece bem, aí sabe que os requisitos são vários.
+Pereira, Leandro Da Cruz   17:21
+Sim.
+Bom, acho que do meu lado era isso, Thalita.
+Rhein, Thalita Merisio   17:23
+Qual o sobrenome da Maria Luiza Renato?
+Araujo, Renato Fernandes De   17:27
+Eu mando para você aqui no chat Maria Luiza Chaves.
+Rhein, Thalita Merisio   17:28
+Tá, por favor, tá, mas é, me ajuda aqui. Só uma dúvida que eu fiquei, porque a primeira reunião que eu estou marcando, a gente vai marcar alguns workshops, tá? Só pra vocês entenderem como vai funcionar daqui pra frente, é?
+Na amanhã a gente começa o primeiro workshop de 2 horas para com todas as pessoas envolvidas nesses 2 quadrantes aqui, no um e no 2, tá? É então a Maria Luis. Eu coloco ela já aqui também.
+Araujo, Renato Fernandes De   17:57
+Olha, eu acho importante, tá, o Thalita, para poder já começar a entender, tá? E eu vou conversar com ela também. Até se você puder me convidar, eu acho importante eu poder ter essa visão.
+Rhein, Thalita Merisio   18:00
+Tá.
+Não entendi, tá bom?
+Apple.
+Sim.
+Tá bom? É então a Ivano, você levantou a mão, pode falar.
+Araujo, Ivano Oliveira   18:12
+Isso é, o Thalita, só eu esperei aí ter essa reunião para conversar com a Vanessa. Está aí eu te pergunto, já foi feito um contato com ela sobre o assunto ou não?
+Rhein, Thalita Merisio   18:17
+Mhm.
+Tá bom?
+Não, eu mandei só o convite e foi quando eu mandei o convite ontem, quando eu te chamei, falei, olha, vou mandar um convite para Vanessa, mas eu só vou poder te explicar amanhã que é essa explicação aqui, tá? Os próximos passos serão esses. Então amanhã tem uma agenda de 2 horas.
+Araujo, Ivano Oliveira   18:26
+Contact.
+Okay.
+Rhein, Thalita Merisio   18:38
+Para a semana que vem eu devo. Eu vou tentar mais 2 janelas de 2 horas cada dia para nessa fase a gente pegar um total de 6 horas. O que a gente vai fazer nessa fase? Eu e o Leandro, a gente vai fazer, é, vai fazer algumas. É uma espécie de entrevista com os usuários para eles explicarem como é o dia a dia deles hoje, qual o processo deles.
+hoje que a gente vai desenhar partindo desse relato deles, o assis. E aí, complementar ao que o Leandro tem conhecimento, domínio aí de como a ferramenta está sendo estruturada, a gente vai desenhar o to be.
+E depois a gente vai voltar. Então essas seis primeiras horas vão ser para essas essa investigação e começo da construção do as Easy do to be que eu vou desenhar num fluxograma mesmo. E aí a gente volta com esse fluxograma desenhado. Chamamos vocês, chamamos os usuários, tem que aprovar. Olha, esse aqui é o seu futuro. Esse é seu trabalho hoje? É.
+Esse é seu trabalho no futuro. Tem alguma consideração? Não. A gente segue e faz a primeira etapa do teste, que é cadastrar os materiais, precificar os materiais, liberar estoque dos materiais e et cetera, et cetera, até que a gente pare na parte onde.
+A próxima etapa vai ser o comercial, simulando uma negociação, uma cotação e um pedido.
+Pereira, Leandro Da Cruz   19:57
+Okay.
+Ô Thalita, eu tenho uma dúvida e a pergunta acho que é mais pra Fernanda. Hoje, Fernanda, toda parte de Controladoria vocês enxergam mais na visão de segmento de produtos mesmo? Eu imagino que seja nessa linha, é?
+Monteiro, Fernanda Chaves   20:09
+É, Leandro, mas eu não sei se me preocupa tanto. É, a gente está aparecida no desenvolvimento com o requete de mudar o segmento report. Qual que é a grande? Tem. Existem 2 grandes diferenças entre os relatórios.
+É de margem que tem no.
+No marketing e o Ebitda não é calculado pela Controladoria. Quais são eles um custo real e 2? A despesa o custo real? A despesa a gente tem no segment port e não tem NOS relatórios industriais os relatórios do marketing que é aquele.
+Ele é indicador, sabe?
+Então é o Riqueti, ele tá muito junto com vocês aí pra fazer a essa, esse no, essa nova base de dados, não é isso?
+Pereira, Leandro Da Cruz   21:03
+Ele tá, mas minha dúvida é o seguinte, imagina que hoje a gente tem um ebit dali por um determinado segmento de produto? E aí, com base nesse ebit do nosso segmento de produto, a gente consegue junto com a área de marketing e pricing ali, falar, olha, a gente consegue subir e baixar um preço desse produto.
+A linha do GTM do goularte, ela diz o seguinte, não basta eu somente enxergar aqui o EBITDA de um determinado produto. Eu tenho que saber se aquele cluster, aquele setor industrial de uma conta corporativa, ela me dá dinheiro ou não me dá dinheiro. Então a pricing.
+Ela vai mudar muito, porque a Price ela não começa a olhar só o produto. Agora, ela não tem a visão industrial, ela tem a visão de marketing justamente para saber se aquele cluster vale a pena, junto com aquele produto e aquele setor industrial, eu trabalhar com o valor ABC ou d.
+E isso impacta o ebitz diretamente.
+Monteiro, Fernanda Chaves   21:52
+É, mas assim é, querendo ou não, cada área é. A gente tem um EBITDA da empresa e aí se ele vai decidir ficar num negócio ou sair ou mudar preço.
+Enfim, é isso tudo, tem que ter como foco maximizar o resultado.
+Pereira, Leandro Da Cruz   22:14
+Isso, mas aí vou dar um outro exemplo para você Fernanda. A gente tem ali o mg revenda e mg indústria, né? São dois produtos porque hoje a empresa não trabalha com canal. Vai ter somente um mg. E aí o que é indústria e o que é revenda é o canal da venda. Não são mais dois códigos ou três códigos de SKU que você vai ter ali dentro.
+Então você vai?
+Monteiro, Fernanda Chaves   22:34
+Então vocês vão mudar a segmentação de produto hoje?
+Pereira, Leandro Da Cruz   22:37
+Você vai limpar as duplicidades porque o canal tá na venda, não tá mais no produto.
+Monteiro, Fernanda Chaves   22:43
+É isso. A gente precisa conversar para a gente entender e adaptar os nossos relatórios. Está porque isso aí impacta muito para mim.
+Pereira, Leandro Da Cruz   22:52
+É nesse ponto que eu quero chegar, sabe? O Mig vai ter um código Santos Mig, independentemente do canal, o canal é da venda, não mais do produto.
+Monteiro, Fernanda Chaves   23:00
+E o mercado interno e externo?
+Pereira, Leandro Da Cruz   23:03
+A gente só tá trabalhando com o MI nesse momento, MI não. MI é no futuro. MI é no futuro só. A Prince do futuro próximo, né? A gente solicitou um capix adicional para o Issao, pode ser que o MI entre e os desenvolvimentos dos próximos nesse mesmo.
+Monteiro, Fernanda Chaves   23:06
+Aí vocês vão mudar, então.
+Machado.
+É, eu preciso de recurso de vocês aí nesse projeto para a gente trabalhar com relatório, porque impacta para mim no segmento report e na Bridge, tá, Leandro?
+É só nisso, só no é.
+Pereira, Leandro Da Cruz   23:33
+Só nos principais, nos principais relatórios da empresa, tem uma frente.
+Monteiro, Fernanda Chaves   23:36
+E NOS mais pesados, então assim, para eu calcular o efeito mix, por exemplo, entendeu então aí, mas aí eu acho assim que a gente vai ter que conversar um pouco e junto com o relatório de.
+Pereira, Leandro Da Cruz   23:41
+O.
+Monteiro, Fernanda Chaves   23:51
+Do comparativo do marketing é, a gente já deveria trabalhar junto, é com a Controladoria para a gente já ver que o marketing está pensando em construir para a gente ir junto.
+Pereira, Leandro Da Cruz   24:02
+Isso é o que impacta mais para você. Pro Claudio, o que impacta é toda a parte de calculo de tributos, as diferenças em de azevedo entre estados tem que configurar tudo isso em cima dos canais, todas as diferenças. E como a Belgo trabalhava com preço fixo dentro da ficha,
+Monteiro, Fernanda Chaves   24:05
+É.
+Araujo, Ivano Oliveira   24:10
+Contact.
+Pereira, Leandro Da Cruz   24:21
+E a pessoa colocava lá o preço na mão e o imposto, ele era selecionado lá e 3 e 2 dentro da ordem de venda. Isso acabou, o Claudio. Categoria de imposto, o código de imposto é determinado com base nas configurações que o Frank vai fazer. Então é um trabalho gigante pra bater.
+Oliveira, Claudio Fernandes De   24:37
+Isso é muito bom, isso é muito bom, porque é com essa tabela nova, dependendo do cadastro do cliente, o esse código do imposto já vai nascer correto, então muitas vezes acaba tributando errado por.
+Araujo, Ivano Oliveira   24:48
+Contact.
+Oliveira, Claudio Fernandes De   24:52
+Falta de conhecimento da pessoa que está pondo AOV, se é um, dependendo do tipo do cliente, a tributação é diferente, vai mudando.
+Pereira, Leandro Da Cruz   24:58
+É.
+Esse é o principal impacto para você, mas tem que configurar e testar todos os cenários, tá? Muita coisa.
+Oliveira, Claudio Fernandes De   25:06
+É, então é, ele até indicou o Baião, porque assim, de certa forma, ele vai estar.
+Ali do lado também, ajudando, entendeu? Porque ele tem que repassar também conhecimento. Aqui está então.
+Pereira, Leandro Da Cruz   25:21
+Aí eu vou falar agora do impacto. Desculpa, Claudio.
+Oliveira, Claudio Fernandes De   25:24
+Por isso que a gente está indicando o Baião, ele fica na frente, já participando dos workshops e tudo, mas na hora de discutir, validar a tabela, a gente está junto com o Frank aí e todo mundo está.
+Pereira, Leandro Da Cruz   25:36
+Show, show agora o impacto para o Ivano, toda parte de bloqueios que vão ter dentro da ordem de venda, solicitação de crédito, análise de que tem dentro dos seus forços. Lá tem a visualização, mas vamos supor, a tá bloqueando aqui no alto.
+E por uma área de crédito não deveria bloquear o vendedor. Ele vai testar esse cenário, mas ele vai acionar sua área. Tá Ivano falamos o seguinte, não deveria bloquear ou deveria bloquear. A gente replicou, vamos falar.
+Araujo, Ivano Oliveira   25:57
+Okay.
+É por isso, é por isso que eu estou colocando até a própria Vanessa que a Vanessa está envolvida tanto na parte operação do contractor b como essa operação da alp e do Belgo Cash. Então, se qualquer situação que tenha bloqueio no alp que esteja ligada a Belgo, ela vai fazer toda essa leitura, tá?
+Pereira, Leandro Da Cruz   26:16
+E para o Renato realmente avaliar, eu acho que vi todos os processos para ver se eu não escorreguei em nada da Sox e se escorreguei a gente colocar os controles adicionais.
+Oliveira, Claudio Fernandes De   26:25
+O Leandro é no caso da contabilidade. Parece que não muda nada, porque ele vai fazer tudo no ECC, correto? Do jeito que já é. Então tem que avaliar aí, Thalita, se vai precisar da Anna, tá?
+Araujo, Renato Fernandes De   26:26
+Perfeito.
+Pereira, Leandro Da Cruz   26:33
+Perfeito.
+Yeah.
+Rhein, Thalita Merisio   26:39
+Eu chamo ela para um primeiro momento, porque assim, a história o assis, ele tem que ser construído pelos usuários. Eles vão nos contar. Eu vou registrar isso no fluxograma para a gente ter a visão completa do processo, entradas, saídas de castro de castro parte. Então esse workshop.
+Oliveira, Claudio Fernandes De   26:51
+Mhm.
+Rhein, Thalita Merisio   26:58
+A pontes de 6 horas iniciais vai ser exatamente para isso.
+Pereira, Leandro Da Cruz   27:03
+Acho que ficou um pouco mais.
+Rhein, Thalita Merisio   27:03
+E fe.
+Oliveira, Claudio Fernandes De   27:04
+E vai ser presencial.
+Rhein, Thalita Merisio   27:06
+Não vai ser online?
+Oliveira, Claudio Fernandes De   27:07
+No done.
+Rhein, Thalita Merisio   27:08
+Está, eu vou colocar eles na agenda.
+Araujo, Ivano Oliveira   27:08
+O Thalita e aqui até eu até reforço para você e pro Leandro. E a questão do esse mês é o mês. Frias, todo mês é pesado, mas esse mês especificamente é fechamento anual das metas, que são desafiadoras. Então assim, a Vanessa está jogando, como todos nós, é.
+Zaga, meio campos e ataque. Então a gente não tem certos momentos que possa ser marcado na agenda que não dê para ela participar ou tem que reagendar, está?
+Rhein, Thalita Merisio   27:32
+Então aí a gente vai ter um problema, ta Ivano, porque o workshop ele vai ser com todo mundo junto. A gente não tem nem capacidade de time, porque sou eu e o Leandro que vamos fazer esse desenho. Até eu, ele se solidarizou, falou eu vou te ajudar, mas eu me coloquei como responsável por fazer o desenho.
+Por que? Porque quando eu vou em cada área, as pessoas falam.
+Monteiro, Fernanda Chaves   27:54
+Mas desenho de quê?
+Rhein, Thalita Merisio   27:56
+Dos processos como um todo, para que as pessoas?
+Monteiro, Fernanda Chaves   27:58
+Mas vocês já não estão trazendo aqui para a gente tudo como vai ser feito ou eu não entendi?
+Rhein, Thalita Merisio   28:02
+Então, mas não está desenhado. E os usuários, na hora de sentar e fazer a validação, olha como isso é crítico. Se o usuário não ele esquecer qualquer coisa e a gente subir, vai dar pau depois falando um português bem claro.
+Pereira, Leandro Da Cruz   28:14
+A gente de fato, Fernanda, a gente já tem uma planilha com cenários que a gente cenários de testes, tal.
+Rhein, Thalita Merisio   28:20
+Que ATI recomenda não esquecer, mas é obrigação de castro usuário ir lá e fazer o seu check list. Alguns usuários com quem eu já falei, não estou dizendo que é do time de vocês, que não foi do time de vocês. É, levantou essas dúvidas. Falou assim não, mas.
+Como é que eu vou? Eu sei o que eu faço hoje, Eu Não sei o que eu vou, o que vai mudar do que eu faço hoje. Então, através de um desenho de um fluxograma, é a melhor forma de todo mundo não ter dúvidas sobre o que vai mudar nos processos. Isso não só para os usuários, tá? Eu estou falando em todas as esferas. Os diretores também ainda têm dúvidas do que vai mudar no processo.
+Então, como esse desenho, não vai ter dúvida para ninguém, vai todo mundo ter olhado para a mesma informação, não vai ter dificuldade de eu entendi que era isso. Não, não vai ter brecha, espaço nenhum para erro. Vai olhar para um desenho e é esse desenho que tem que seguir, é esse processo que tem que acontecer.
+Em todas as esferas, todo mundo vai ter a mesma visão.
+Pereira, Leandro Da Cruz   29:18
+E de fato assim, o sistema já está configurado, mas acho que essa fase vai ser importante para ver se realmente está todo mundo na mesma página, se tem algum impacto grande que a gente não viu durante o GTM. E depois.
+seguir com os testes, né? Mas tem áreas que talvez estejam mais próximas, outras menos. Eu acho que teve muito feedback falando o seguinte de assis, eu não sei o que o GTM está fazendo, eu não sei o que o GTM vai mudar.
+Rhein, Thalita Merisio   29:35
+Mhm.
+Por dentro, né?
+É.
+Mhm.
+Monteiro, Fernanda Chaves   29:49
+É, eu sou uma dessa mesmo que eu não sabia, não. Agora eu acho que essa é a primeira reunião assim, com de forma mais direta. Você falando, trazendo aí e Leandro e pontuando Claudio, é Soares, Fernanda, Ivano agora.
+Rhein, Thalita Merisio   29:52
+Então.
+É então.
+Pereira, Leandro Da Cruz   29:55
+Mas agora.
+Monteiro, Fernanda Chaves   30:09
+Aqui é.
+Pereira, Leandro Da Cruz   30:11
+Mas ficou mais claro depois dessa reunião?
+Monteiro, Fernanda Chaves   30:12
+Que eu também estou.
+Sim, acho que a gente só vai ter que dar uma aprofundada mesmo no nessa é para entender o que está sendo desenhado essas clusterizações.
+Oliveira, Claudio Fernandes De   30:14
+O Leandro.
+Rhein, Thalita Merisio   30:19
+É.
+Pereira.
+Isso que o desenho é importante. Você vê que não foge do desenho, porque o desenho ele vai ser auto-explicativo. Todo mundo que participa do processo vai ter capacidade de ler. Até quem não conhece vai ter possibilidade de conhecer.
+Monteiro, Fernanda Chaves   30:37
+Não, mas eu acho que é diferente, Thalita, o que eu estou falando, porque eu acho que isso já está pronto. Eu acho que vocês já desenharam aí.
+Rhein, Thalita Merisio   30:44
+Não, ele não está desenhado, não tem esse fluxograma. O sistema está configurado, mas o desenho do processo não.
+Monteiro, Fernanda Chaves   30:46
+Não está desenhado?
+Araujo, Ivano Oliveira   30:51
+Machado.
+Monteiro, Fernanda Chaves   30:51
+Não é desenho do processo, não. O que eu estou falando é o é essa clusterização não está desenhada.
+Rhein, Thalita Merisio   30:57
+Sim, isso sim, isso sim, isso já tem já as regras.
+Monteiro, Fernanda Chaves   30:59
+É o que eu queria conhecer, é essa, essas novas regras e formas de ver.
+Rhein, Thalita Merisio   31:03
+Tá, então eu vou marcar uma agenda separada com você. Mais alguém? Claudio, quer participar? Ivano, tá? Vou chamar vocês.
+Oliveira, Claudio Fernandes De   31:07
+Eu quero, eu quero. Até IA pedir perguntar se tinha o material para compartilhar para a gente dar uma olhada antes.
+Araujo, Ivano Oliveira   31:10
+I'm posing. Yeah.
+É pontes.
+Rhein, Thalita Merisio   31:13
+Tem um material para compartilhar, mas eu vou prever uma agenda com a com a Monteiro, que é a minha gerente do marketing. Essa o desenho da clusterização nasceu no marketing, lá na ocasião ainda do pós integration, tá? E essas regras foram enviadas para t e que fez as parametrizações no sistema partindo dessas regras.
+Oliveira, Claudio Fernandes De   31:16
+É importante, se puder.
+Araujo, Ivano Oliveira   31:33
+E essa agenda?
+Monteiro, Fernanda Chaves   31:33
+Já está parametrizado isso no SAP.
+Pereira, Leandro Da Cruz   31:37
+Já clusteriz a clusterização é no WhatsApp, ela é só do seus forces, tá? E.
+Monteiro, Fernanda Chaves   31:43
+Mas isso já está desenhado. Mas e como que vai subir aí? Os relatórios agora saem dos seus falsos.
+Pereira, Leandro Da Cruz   31:45
+Já tá tudo feio até já.
+Pronto.
+Parte parte da informação vai ter que puxar dos seus forces, não só do SAP o SAP. Ele tem o setor industrial, tá? Então aquele código que você viu lá tem o setor industrial no SAP, mas a clusterização só seus forces. Então assim, os relatórios, eles vão ter múltiplas Fontes de informação, então vai ter que puxar.
+Base do ECC, base dos seus force, então assim, bate-papo.
+Monteiro, Fernanda Chaves   32:11
+Isso é ruim, Hein, Leandro?
+Pereira, Leandro Da Cruz   32:14
+Não, porque é.
+Monteiro, Fernanda Chaves   32:16
+Ué, porque o faturamento, qual que é o certo? É o do SAP ou o do sales tops?
+Pereira, Leandro Da Cruz   32:16
+Sim.
+Os dados que existem assim, faturamento da sua ECC tá? Não tem dentro dos seus forces, mas os dados de clientes.
+Monteiro, Fernanda Chaves   32:27
+Não, mas eu vou ter que ter o faturamento com a sua clusterização, com os dados reais, entende? Assim eu é porque eu preciso.
+Pereira, Leandro Da Cruz   32:34
+Perfeito, mas tá integrado. Fernanda tem.
+Oliveira, Claudio Fernandes De   32:34
+Mas vai deve ir para o SAP? Isso não. Isso deve ir para o SAP.
+Pereira, Leandro Da Cruz   32:39
+Não. Assim, o código de cliente é o mesmo do sales force do SAP e os dados que existem dentro do sales force tem dados específicos ali dentro e dados específicos dentro do ECC, mas ele a replica. Só para concluir o raciocínio, é aí.
+Monteiro, Fernanda Chaves   32:50
+É só para, é só, é só um cuidado assim.
+Pereira, Leandro Da Cruz   32:54
+A base está integrada 100%, então como fonte de informação no BWA ou dentro do data lake no databricks ou no Power BI, ele vai ter 2 Fontes de informação, não necessariamente de dados iguais, dados diferentes, mas.
+Com a chave do mesmo código de cliente, então isso não é um problema técnico para a gente.
+Monteiro, Fernanda Chaves   33:15
+Não, vocês me dando o relatório, tá bom?
+Oliveira, Claudio Fernandes De   33:15
+Então você quer dizer que um bi, por exemplo, hoje que lê OSCC, ele vai ler também esse programa e aí a Fernanda, por exemplo, vai conseguir colocar alguma coisa que agora vai ser importante para os diretores?
+Rhein, Thalita Merisio   33:27
+Machado.
+Pereira, Leandro Da Cruz   33:29
+Exato, perfeito.
+Oliveira, Claudio Fernandes De   33:30
+Clara.
+Rhein, Thalita Merisio   33:31
+É o Fernanda, falando de relatórios, você disse que tava falando com o riquete, mas vocês já se aprofundaram nisso ou agora, olhando pra isso que a gente falou aqui, ficou claro pra mim que precisa se aprofundar mais nessa questão de relatórios. Posso puxar uma outra agenda?
+Pereira, Leandro Da Cruz   33:31
+Deivison.
+Monteiro, Fernanda Chaves   33:32
+H
+Não que é ou que é não. Eu acho que é a mesma, sabe, Thalita? Porque a gente está muito embrionário no que a gente precisa fazer. Então acho que são assuntos diferentes. Não é com vocês.
+Rhein, Thalita Merisio   33:52
+Mateus.
+Tá bom?
+Monteiro, Fernanda Chaves   34:01
+Não é com essa mesma?
+Rhein, Thalita Merisio   34:04
+Tá bom, eu vou puxar uma primeira agenda sobre clusters.
+Monteiro, Fernanda Chaves   34:06
+Mas o Leandro é só assim. A minha preocupação é da gente ter várias Fontes.
+É com informações diferentes, sabe? Porque eu preciso de um lugar só. Eu acho que entendi um pouco que você está falando, mas entenda só a minha preocupação também da gente ter um único relatório que feche com a contabilidade.
+Com maior nível de informações possíveis.
+Pereira, Leandro Da Cruz   34:34
+Não tá claro, mas é que assim, esse ponto de um relatório ter uma fonte de informação só, eu entendo que a empresa funciona hoje assim, mas isso não é um impedimento técnico, tá, Fernanda? Você pode ter outras Fontes de
+Complementares de informação então você pode ter sistemas complementares que tem informações diferentes do que OECC tem hoje, mas para fins de dados de faturamento, seu ponto está perfeito. É só ICC. Agora, dados de cluster você não vai ter no ECC, você vai ter dado.
+Dentro dos seus forços. Mas isso é um ponto técnico que o Ricardo faz isso com o pé nas costa, tá? Não é algo que preocupa tecnicamente, não.
+Mais alguma dúvida?
+Deu pra dar uma clareada em Fernando, Ivano, Claudio, o desafio que a gente tem pela frente.
+Monteiro, Fernanda Chaves   35:24
+Qual que é OA agenda de vocês? Como que vocês estão planejando fazer as os testes, essas agendas? Quais são os prazos?
+Rhein, Thalita Merisio   35:34
+Eu vou formalizar, eu vou reajustar o cronograma. Na verdade, porque eu na sexta-feira, quando o Leandro se solidarizou aqui com meu problema, ele me deu essa colaboração dele. Foi aí que a gente instituiu esses workshops dessas 6 primeiras horas.
+Monteiro, Fernanda Chaves   35:34
+As reuniões.
+Rhein, Thalita Merisio   35:51
+Partindo, passando por esses workshops na semana que vem eu vou revisitar esse cronograma e mando para vocês, tá? Mas eu vou fazer um resumo, é bem, bem claro e mando por e-mail ainda hoje, só para vocês também já alinharem com os seus, com seus times essa disponibilidade de agenda. Já vou prever ali quais são as agendas que a gente vai precisar.
+Tá uma é amanhã, mas o takeshi não tá porque ele tá de férias. Fernanda, é?
+Monteiro, Fernanda Chaves   36:15
+Eu não o Thalita assim, a gente não tem uma equipe tão disponível. Eu acho que a gente precisa ver e realmente avaliar e, se necessário, revisar com você. Mas assim eu acho que pelo menos da minha parte que eu estou falando, tá? Eu preciso.
+Primeiro analisar, não consigo te falar de prontidão que amanhã já disponibilizar o pessoal. Amanhã é dia 4 não, mas eu nem sei mais isso aí.
+Pereira, Leandro Da Cruz   36:34
+Machado.
+Rhein, Thalita Merisio   36:37
+Não, mas amanhã o takeshi não tá. O takeshi é a única pessoa que está disponível, que está participando até agora e amanhã não tem nenhum ponto que ele entra, entendeu? Não entra o time de da Controladoria ainda.
+Pereira, Leandro Da Cruz   36:50
+Thalita, só um ponto, tá? É que tem clusterização, mas a gente vai falar de clusterização dentro do cadastro do cliente, que pode trazer a visão ali do segmento de porte pra pra pra Fernanda, tá?
+Monteiro, Fernanda Chaves   36:50
+Bom.
+Rhein, Thalita Merisio   36:54
+Sim.
+Então, quem do seu time deveria participar enquanto takeshi não está?
+Monteiro, Fernanda Chaves   37:05
+É a Carla. Só que ela está fazendo o segmento de porte amanhã e a gente está na MRF 12. Então assim, eu só acho que o prazo, os times não estão muito bons não, gente.
+Rhein, Thalita Merisio   37:17
+Não, não tá nem não tá bom para ninguém mesmo, porque esse projeto já era para ter subido no ar agora em novembro. Então a gente tá todo mundo correndo contra o tempo. O pra você ter uma ideia, o prazo do projeto, mesmo ele caminhando assim e prevendo o recesso do final do ano, a gente está apontando que março vai subir.
+Monteiro, Fernanda Chaves   37:20
+Santos.
+Rhein, Thalita Merisio   37:37
+no ar. O Arthur não quer em março, o Arthur quer que suba em fevereiro. Para subir em fevereiro, não tenho chance de não espremer dezembro. Isso foi um top down que ele deu ontem para os diretores. Então, infelizmente, essas datas, essa corrida
+Machado de campos não vem de campos de campos de campos de campos de campos de campos de campos de campos do Arthur pra colocar eu e o Leandro como gerentes aqui do projeto para colocar o sistema no ar em fevereiro.
+Então assim, ninguém está com flexibilidade, ninguém está com agenda sobrando, a gente vai vai ter que ser muito resiliente e eu quando eu digo a gente e todo mundo por isso que eu estou colocando todo mundo aqui no mesmo barco que nós estamos porque eu e o Leandro a gente não consegue evoluir com os testes, por exemplo, só para vocês terem uma ideia.
+O que estava acontecendo o Gimenez, sabendo da dificuldade da empresa inteira, ele estava conduzindo os testes sozinho. Ele não pode fazer isso porque ele não tem como garantir todas as etapas que não são do comercial. Ele vai poder garantir a etapa do comercial.
+Araujo, Ivano Oliveira   38:45
+Pessoal, vou ter que sair, o Thalita, eu vou conversar com a Vanessa, então tá.
+Rhein, Thalita Merisio   38:49
+Tá, eu vou mandar os horários sugeridos para vocês agora, com o nome de todas essas pessoas aqui. No caso da Fernanda, é Carla do quê?
+Monteiro, Fernanda Chaves   38:59
+É Carla venancio, mas eu queria ver o cronograma completo antes, tá? É antes de passar para ela.
+Rhein, Thalita Merisio   39:00
+Fernandes.
+Tá bom, eu vou trabalhar e mando ele para você. Mas ele está sujeito a mudanças, tá, Fernando? Porque a gente está trabalhando com um baseado aqui na urgência e na demanda.
+Estamos sem nenhuma margem para recalcular rota. Obrigada, Ivano.
+Araujo, Ivano Oliveira   39:17
+Pessoal, o coração da Alina. Obrigado, Leandro. Um abraço.
+Rhein, Thalita Merisio   39:22
+Infelizmente.
+Eu vou fazer esse cronograma e te mando, então amanhã ela não vai poder participar da primeira agenda.
+Monteiro, Fernanda Chaves   39:30
+Não sei. Eu não sei que horas você vai marcar, tem que conversar.
+Rhein, Thalita Merisio   39:33
+Está marcado para as 2:00, das 2 às 4 amanhã.
+Monteiro, Fernanda Chaves   39:35
+Martins.
+Tem que conversar. Qual que é o escopo da reunião? Tem que entender. Thalita, acho que qual que é o escopo de que vocês vão falar que precisa dela às 2:00. É isso que eu preciso mesmo.
+Rhein, Thalita Merisio   39:46
+Tá, eu te mostro agora, Fernanda, te mostro agora.
+Oliveira, Claudio Fernandes De   39:50
+Pessoal, estou saindo também, um abraço.
+Rhein, Thalita Merisio   39:52
+Está bom, obrigada, Claudio.
+Te mostro agora, esse aqui é o escopo da reunião de amanhã.
+Então, nos 10 primeiros minutos, a gente vai fazer uma abertura, um alinhamento, que é só para explicar para eles que o processo do teste precisa ser integrado. E aí nós vamos começar fazendo o mapeamento do EZ aqui. Quais são as etapas atuais do processo de ponta a ponta, entrada, saída, responsável? Quais são as
+Pereira, Leandro Da Cruz   40:30
+Clara Clara Clara Clara Clara Clara Clara Clara Clara Clara Clara Clara Clara Clara Clara Clara Clara Clara Clara Clara Clara
+Rhein, Thalita Merisio   40:33
+Cliente, não. A gente vai passar por todas essas etapas amanhã do cadastro de material, precificação e cadastro de cliente.
+Monteiro, Fernanda Chaves   40:43
+Mas aí não precisa da Carla, então se é só cadastro.
+Pereira, Leandro Da Cruz   40:46
+Para nossa de clientes, você precisa.
+Rhein, Thalita Merisio   40:46
+Mas na etapa de precificação tem clusterização envolvida.
+Monteiro, Fernanda Chaves   40:50
+Não, mas o que eu preciso saber é, não é como vai ser feito, é como vai ficar, sabe? Thalita, eu acho que.
+Rhein, Thalita Merisio   40:59
+Não entendi.
+Monteiro, Fernanda Chaves   41:02
+Não precisa saber como que vocês vão testar com AO cadastro da clusterização do sistema. Eu a gente precisa saber o que vocês estão planejando de lógica. É mais é tipo.
+Rhein, Thalita Merisio   41:20
+Não consegui entender sua dúvida, Fernanda. Assim, a gente tá construindo assim, é o que eu falei aqui durante todo o tempo. Essas primeiras reuniões vão ser para desenhar o o assis e o to be. Vamos começar amanhã. Não vai dar tempo de chegar no to be. Talvez não dê tempo de terminar o assis.
+Monteiro, Fernanda Chaves   41:27
+O.
+Rhein, Thalita Merisio   41:39
+Mas é junto com cada um que participa do processo. Por isso, aqui estão todas essas pessoas. A gente vai desenhando o bloco de trabalho de castro para juntar um processo como um todo.
+Não vai ser só nessa reunião, vão ser 3 reuniões dessa.
+Monteiro, Fernanda Chaves   41:53
+Isso aí, o.
+A parte do trabalho da controladoria é o são esses 2 relatórios principais aí vocês vão falar de todos os assuntos ou você vai falar agora só do cadastro? Porque eu precisava é da parte dos relatórios, sabe?
+Pereira, Leandro Da Cruz   42:17
+Então, mas assim Fernanda, aí você avalia, mas eu tenho 11 ponto, se o dado mestre é importante para o seu relatório, aí eu tô falando dado os 2 pontes que eu coloquei aqui, né? O impacto do canal dentro do dado mestre de produto e o impacto do cluster dentro do dado mestre de cliente.
+Rhein, Thalita Merisio   42:24
+Mhm.
+Pereira, Leandro Da Cruz   42:35
+Eu entendo que você está no final do processo, mas se o se a Controladoria não tiver a visão do início do processo, você acha que corre algum risco do relatório?
+Está com uma visão diferente dessa nova visão.
+Monteiro, Fernanda Chaves   42:50
+Você vai mudar cadastro de produto?
+Pereira, Leandro Da Cruz   42:53
+O pedaço de produto vai sofrer impacto, porque foi o exemplo do Miguel que eu dei.
+Monteiro, Fernanda Chaves   42:58
+Não, mas aí para cálculo de castro, continua dentro do ECC.
+Pereira, Leandro Da Cruz   42:58
+Sim Mateus.
+Dentro do DCC, mas você vai ter um Bing só, isso vai ter impacto para.
+Monteiro, Fernanda Chaves   43:05
+Não é? E não, isso não. Tipo assim, tecnicamente, operacionalmente, nada não impacta não. Agora, o que vai impactar no final, se tivesse alguma mudança no custo do produto, tipo assim.
+Pereira, Leandro Da Cruz   43:20
+Não costa do produto ou não?
+Monteiro, Fernanda Chaves   43:21
+É então não aí o que realmente.
+Pereira, Leandro Da Cruz   43:26
+Mais ou menos porque você tem um custo diferente de mg revenda e mg indústria.
+Monteiro, Fernanda Chaves   43:28
+O.
+Tem, mas é por código. Então, se você mudar o agrupamento deles, já muda automático, não tem problema.
+Pereira, Leandro Da Cruz   43:39
+Eu não vou mudar agrupamento, não vai ter um código de material novo e aqueles 2 códigos vão morrer.
+Monteiro, Fernanda Chaves   43:44
+É, a gente precisa entender mais essa a parte, o que eu precisava. Eu acho assim, para ser bem mais direto. É, eu acho que a gente tem que conversar com o marketing. Thalita, igual você propôs aí de fazer uma reunião com a Machado para a gente entender essas mudanças que você lhe dá.
+Então entender como que vai ser o orçamento disso, o os segmentos que vão ser juntados, os que não vão ser, e aí?
+Pereira, Leandro Da Cruz   44:09
+Você pegou um ponto excelente de orçamento, o orçamento você pode ter um orçamento por cluster e setor industrial de clientes.
+Monteiro, Fernanda Chaves   44:16
+É porque hoje nosso orçamento é por GPE, segmento, mas aí se, por exemplo, não esse GP aqui que vai ser, é juntado com esse outro e vai virar um outro, não tem problema, sabe? Ou vai ter 11 junção de segmentos. Isso não é muito.
+Pereira, Leandro Da Cruz   44:29
+O.
+Monteiro, Fernanda Chaves   44:34
+Crítico, mas vai vim essa necessidade de visualização do resultado. Então eu acho que o crítico vai ser desenvolver um relatório que a gente consiga ver os resultados por esse por essa clusterização, já chegando no Ebitda Leandro, porque o segmento report.
+Pereira, Leandro Da Cruz   44:50
+Machado.
+É.
+Monteiro, Fernanda Chaves   44:52
+Ao longo prazo, ele vai ficar obsoleto, não é só por segmento.
+Pereira, Leandro Da Cruz   44:56
+Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando Fernando de
+Monteiro, Fernanda Chaves   45:05
+É.
+Pereira, Leandro Da Cruz   45:16
+De análise ali das diretorias. Então, se a pessoa do seu time não souber tudo o que está mudando dentro da empresa, vocês vão, vocês vão chegar em.
+Monteiro, Fernanda Chaves   45:23
+Entendi.
+Rhein, Thalita Merisio   45:23
+E tudo o que impacta vocês vê o que impacta vocês, porque talvez a gente não tenha essa clareza também de tudo.
+Monteiro, Fernanda Chaves   45:26
+Aí vocês vão, vai?
+Uhum.
+Nossa.
+Pereira, Leandro Da Cruz   45:32
+Então.
+Rhein, Thalita Merisio   45:33
+Tem uma agenda com a Malu, a única agenda livre ainda para essa semana que vocês também estão disponíveis às 8 da manhã do da sexta-feira, mas aí a primeira reunião é amanhã de trabalho às 2:00.
+Monteiro, Fernanda Chaves   45:45
+Aí tem essa 2, como que vai ser a?
+Rhein, Thalita Merisio   45:48
+Das 2 às 4 vai ser um workshop que a gente vai conduzir em cima daquelas daquela lista que eu te mostrei ali para capturar dos usuários. É desde olha cada como eu vou cadastrar o material que você precisa para cadastrar o material.
+Monteiro, Fernanda Chaves   45:50
+E.
+Rhein, Thalita Merisio   46:04
+Que você precisa para precificar o material? Quem é que segue na sequência do outro, fazendo não é ilustrativamente ali um cenário real?
+Pereira, Leandro Da Cruz   46:13
+Então assim, vai ser meio muita coisa, pelo menos não é assis, eu acho que a contra controladoria não vai ter a necessidade, mas no to be eu acho que impacta o processo, porque o processo da comercial do marketing financeiro
+Vai mudar muito. Então é isso. Reflete na Controladoria. No final do processo, reflete também você.
+Rhein, Thalita Merisio   46:34
+É só se a gente puxar a Carla, só quando a gente for começar a desenhar o to be. Mas ela é que não vai ser amanhã, a gente vai ficar no assis.
+Monteiro, Fernanda Chaves   46:41
+É.
+Aí vai ter essa reunião amanhã, de 2 às 4, e depois, qual quando é a próxima?
+Rhein, Thalita Merisio   46:49
+A ainda não marquei terça e eu queria marcar entre terça, uma na terça e outra na quinta e deixar essas agendas de terça e quinta. De repente, um dia de manhã, outro dia à tarde.
+Monteiro, Fernanda Chaves   46:50
+Como que vocês estão o programa? A Tiago?
+Tá, é porque.
+O Fred volta dia 11, é? Então é, a gente pode quinta-feira.
+Rhein, Thalita Merisio   47:04
+11.
+Que é quinta que vem, aí na da quinta, ele poderia entrar junto com ela.
+Monteiro, Fernanda Chaves   47:12
+É, então está, então eu vou conversar com ela.
+Rhein, Thalita Merisio   47:13
+Está aí, eu acho que lá a gente já vai estar chegando no two bi, muito provavelmente.
+Monteiro, Fernanda Chaves   47:18
+Está, eu vou conversar com ela, nem que seja só para como vinte assim, um negócio mais leve.
+Rhein, Thalita Merisio   47:24
+É pra pra ajudar nós todos a entendermos, inclusive muito mais vocês do que que parte da mudança vai ser impactante para vocês.
+Monteiro, Fernanda Chaves   47:31
+Assim, eu a Carla que faz a parte do segmento e porte, mas eu só não sei se ela vai ter.
+Toda a maldade e o conhecimento dessa expectativa sua, sabe, Leandro? Para chegar e criticar a cada ponto ou falar isso aqui vai impactar na contra isso não. Mas eu, para não ficar sem ninguém, eu vou pedir então ela para participar.
+E aí o Fred na quinta é aí na quinta ele entra.
+Rhein, Thalita Merisio   47:57
+E o takeshi também na quinta, mas eu ponho ela só a partir de quinta também ou eu ponho ela na primeira?
+Monteiro, Fernanda Chaves   48:02
+Não, já põe ela na primeira. Só que assim vai é. Eu vou pedir só um pouquinho de compreensão de vocês mesmo, caso ela não possa ficar o tempo todo ou se precisar sair porque.
+Rhein, Thalita Merisio   48:06
+Tá.
+Sim.
+Está bom, não. E amanhã a gente ainda vai estar falando do assis. Então isso não nesse primeiro momento, amanhã acho que é mais para lá se situando e na nas 2 próximas, aí vai ter mais. É a construção do to be mesmo.
+Monteiro, Fernanda Chaves   48:18
+Tá.
+Pereira, Leandro Da Cruz   48:27
+E aí, sabe, para colocar uma cerejinha no bolo aqui final, isso tudo vai chegar no negócio chamado custo de servir, que a Controladoria possivelmente vai estratificar isso daí. Quanto que custa os clientes tais?
+Monteiro, Fernanda Chaves   48:39
+O.
+Rhein, Thalita Merisio   48:41
+É porque é um dos ganhos, um dos bem.
+Monteiro, Fernanda Chaves   48:41
+Aí o Frederico, o Frederico tava pensando sobre, pode falar, Thalita, desculpa.
+Rhein, Thalita Merisio   48:46
+É não. Um dos baselines do projeto é OA margem de servir que dá que a integration é previu que a gente chegaria em até 36 pontes, 2000000. Isso é o que está no escopo do projeto.
+Mariagem de servir de ponto, 2000000. E a gente tá num momento só pra te adiantar também. É a margem de servir que a integration contabilizou na apresentação que eles fizeram, que a Belgo tinha potencial ao é iniciar o ao é.
+Monteiro, Fernanda Chaves   49:05
+Esse número é o quê?
+Rhein, Thalita Merisio   49:18
+É recalcular toda a rota do time comercial e colocar todo mundo pautado no trabalho do go to marketing. Com a visão do go to marketing, a Belgo tem capacidade de atingir uma margem de servir de 36.2 milhões. Isso foi o baseline que fez o projeto, um dos baselines que fez o projeto ser aprovado.
+Seu dinheiro ser aprovado isso?
+Pereira, Leandro Da Cruz   49:37
+Essa é a receita que entra e tem um custo de você também em cima do cluster e do setor industrial. Por isso que eu falei, quem vai trazer esses números é a sua. Imagino que seja a sua área, Fernanda.
+Rhein, Thalita Merisio   49:42
+É.
+A Santos é tanto que agora, em breve, quando o Fred voltar, a gente vai ter que discutir, rediscutir isso. Mas pera aí, esses 36, como é que a gente está calculando? Como é que vai calcular? É possível? Não é possível quanto, entendeu? Porque ninguém mais, desde 2023, visitou-se esse número de margem de castro.
+Monteiro, Fernanda Chaves   49:50
+And put.
+Rhein, Thalita Merisio   50:06
+Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Victor Vict
+Acho que a Fernanda congelou para mim.
+Monteiro, Fernanda Chaves   50:20
+Machado.
+Rhein, Thalita Merisio   50:21
+Não, Fernando.
+Monteiro, Fernanda Chaves   50:22
+É que a internet da Belgo tá muito ruim.
+Rhein, Thalita Merisio   50:23
+A.
+Você ouviu?
+Monteiro, Fernanda Chaves   50:26
+A Internet.
+É, tá claro aí. Assim, o que eu vejo é que a gente realmente vai precisar muito de e de apoio mesmo da área do riquete aí para ter bons relatórios e isso ser.
+Assim, desenhando as regras, Leandro, isso ser algo fácil de ser feito e calculado, porque a granularidade é muito grande. Aí, Thalita, nessa conversa com a Martins.
+Rhein, Thalita Merisio   51:01
+Mhm.
+Monteiro, Fernanda Chaves   51:04
+Clara que eu já tinha até pedido ela e Audrey para vocês mostrar.
+Rhein, Thalita Merisio   51:04
+Contelou de novo para mim?
+Monteiro, Fernanda Chaves   51:10
+Oi.
+Rhein, Thalita Merisio   51:11
+Na conversa com a Martins.
+Monteiro, Fernanda Chaves   51:14
+É porque a gente já tinha comentado com a Melo e com a Audrey, porque a gente precisa entender a estrutura comercial, porque é quando você fala assim, Leandro, quanto?
+Pereira, Leandro Da Cruz   51:29
+Fernanda está falhando, vou fechar a câmera para ver se não de ara pra Fernanda.
+Monteiro, Fernanda Chaves   51:29
+Machado.
+Para isso, sabe? É como que está a dimensão da casa.
+Rhein, Thalita Merisio   51:32
+É também.
+Pereira, Leandro Da Cruz   51:37
+Fernando, pode repetir, melhorou?
+Monteiro, Fernanda Chaves   51:37
+Aí melhorou, será?
+Rhein, Thalita Merisio   51:39
+Então é entender a nova estrutura comercial.
+Pereira, Leandro Da Cruz   51:40
+I do.
+Monteiro, Fernanda Chaves   51:41
+Tava muito.
+É qual é a estrutura comercial? Porque para a gente fazer um bom custo de servir, o rastreio da despesa administrativa e de vendas é tem que ser mais exato. Então eu já tinha até chamada.
+Pereira, Leandro Da Cruz   51:57
+Exato. Hoje o rateio você distribui de um jeito meio homogêneo. É não meio.
+Monteiro, Fernanda Chaves   52:04
+Histórico é, não é humor.
+Pereira, Leandro Da Cruz   52:06
+É, na realidade, você vai ter que alocar o custo da o custo ali dos descontos entre os lugares certos, entendeu? Para você ter o custo de servir perfeito.
+Monteiro, Fernanda Chaves   52:14
+Center.
+Não tem assim uma governança de.
+Pereira, Leandro Da Cruz   52:18
+Hello.
+Monteiro, Fernanda Chaves   52:19
+Aí tá picando, tá ruim.
+Rhein, Thalita Merisio   52:20
+Então é, me ajudem aqui, eu vou criar. Estou criando aqui a pauta para nossa reunião, pra gente na sexta-feira já não ter que contar tanta, tanto, porque que a gente está pedindo a reunião e já ir direto para os temas, é entende?
+Pereira, Leandro Da Cruz   52:32
+É, coloca aí algum dos itens ao custo de servir, porque isso vai impactar a Fernanda.
+O que eu acho que impacta, Fernanda, custa de servir.
+Rhein, Thalita Merisio   52:38
+Então, entender a nova estrutura costa de servir.
+Pereira, Leandro Da Cruz   52:41
+Ebitda SGNA segmento e port.
+Já falando besteira, Fernando, não conheço muito de Controladoria não, mas eu acho que é isso.
+Monteiro, Fernanda Chaves   52:53
+É.
+Pereira, Leandro Da Cruz   52:53
+Pereira.
+Rhein, Thalita Merisio   52:56
+SGNE é assim mesmo, gente?
+Pereira, Leandro Da Cruz   52:58
+Tem um oi comercial?
+Monteiro, Fernanda Chaves   52:59
+É entender o nome se você.
+Pereira, Leandro Da Cruz   53:02
+Santos Santos Santos.
+Rhein, Thalita Merisio   53:03
+A S G E e ta DRE que mais?
+Pereira, Leandro Da Cruz   53:08
+Eu acho que é isso.
+Monteiro, Fernanda Chaves   53:08
+Não eu é entender a nova estrutura comercial prevista para OGTM. É, eu não. Eu queria a estrutura comercial para 2026. Na verdade, é.
+Mais amplo mesmo, sabe? Thalita, se vai ser para GTM, se é rede ativa, se é, enfim, é.
+Pereira, Leandro Da Cruz   53:29
+Isso é um rede ativa. A rede ativa não está no GTM, não. Ele está mais ou menos.
+Monteiro, Fernanda Chaves   53:34
+É, mas aí, por exemplo, a turminha aqui é isso, porque aí o custo desse cara eu preciso alocar de forma certa e que vai impactar no custo de servir ali.
+Rhein, Thalita Merisio   53:36
+Os clusters também, como eles se dividem pelos clusters, está?
+Pereira, Leandro Da Cruz   53:50
+Hoje, na rede ativa, você tem um centro de castro para cada unidade, não é?
+Monteiro, Fernanda Chaves   53:54
+Não, eu tenho para cada CL, para cada para os comerciais, não.
+Pereira, Leandro Da Cruz   53:55
+Não.
+O.
+É, eu acho que tem que é que são 2 agendas, são 2 projetos, o rede ativa EOIGTM. Eu acho que para falar de rede ativa tem que puxar o Heraldo.
+Monteiro, Fernanda Chaves   54:02
+Sabe?
+Rhein, Thalita Merisio   54:12
+É.
+Monteiro, Fernanda Chaves   54:13
+Mas eu não queria. Só não vamos misturar não. Eu queria só com a eu queria só com.
+Rhein, Thalita Merisio   54:15
+Não.
+Só de clusters, então aqui primeiro.
+Monteiro, Fernanda Chaves   54:20
+Não, eu queria, só eu acho. São 2 pontes Thalita só para simplificar um primeiro é entender a estrutura comercial e a segunda é a gente vocês apresentarem como vão? Qual é a estrutura de clusterização?
+Rhein, Thalita Merisio   54:28
+A Thaina.
+Monteiro, Fernanda Chaves   54:38
+E aí depois, aí o Leandro, talvez depois a gente vai completando essas outras linhas só para a gente não.
+Pereira, Leandro Da Cruz   54:45
+Porque os outros são mais pesados pra pra mexer.
+Monteiro, Fernanda Chaves   54:47
+É muito.
+E aí eu só vou, eu de novo, eu preciso que no orçamento de vocês eu tenha recurso para fazer os relatórios, porque isso não é simples, tá, gente?
+Pereira, Leandro Da Cruz   55:04
+Não tenho certeza disso aí. Acho que a Thalita tá batendo. Tem que bater um papo lá com Riqueti.
+Mas acho que o Riqueti está no radar dele também, tá?
+Rhein, Thalita Merisio   55:15
+Então, mas eu, Fernanda, apesar de você ter falado alguma coisa assim, não acho que não precisa misturar. São assuntos diferentes. Eu acho que a gente já precisa abrir essa frente com riquete também.
+Porque o Riqueti sabe de todas essas outras informações. Ele está participando do projeto desde o começo. Ele está avançando com várias frentes de relatório. Então eu acho que é a hora. Se você ainda não teve esse momento com ele, de olha, agora eu estou entendendo. Eu estou pisando aqui na água geladinha, na beiradinha da água.
+Riqueti, me fala aí, como vai ficar esse meu relatório, esse meu relatório, esse meu relatório aí ele vai poder te responder, não, esse aqui eu já estou fazendo, ele vai poder mostrar. Eu sei que ele tem alguns já na forma, ali no forno, entendeu?
+Monteiro, Fernanda Chaves   55:58
+É que eu tenho muitos problemas antes, é se você quiser marcar uma conversa com ele, é porque eu tenho assim, eu já tenho. Eu tenho reunião com Riqueti diária todos os dias, cada um sobre um assunto.
+Rhein, Thalita Merisio   55:59
+Eu acho que precisamos de uma agenda só de relatórios.
+Tá bom?
+Mhm.
+Machado.
+Monteiro, Fernanda Chaves   56:15
+É, e eu já. A gente já conversou um pouco sobre isso e que tem outras coisas na frente, mas é, podemos falar assim.
+Rhein, Thalita Merisio   56:19
+Hhh.
+A.
+Está bom, eu vou marcar então e vou puxar a Carla. Como é o nome? Desculpa da Carla no anotei.
+Monteiro, Fernanda Chaves   56:33
+Carla venancio.
+Rhein, Thalita Merisio   56:35
+Venâncio, tá bom, você sinaliza para ela então que ela vai receber um convite já para a partir de amanhã, que é para ela entrar ainda como ouvinte e que nas próximas reuniões da semana que vem aí deve a gente deve falar mais da visão de futuro aí para ela observar o que ela vê de impacto para a Controladoria.
+Monteiro, Fernanda Chaves   56:37
+Então.
+Uhum, tá bom?
+Rhein, Thalita Merisio   56:54
+Tá bom?
+Monteiro, Fernanda Chaves   56:58
+Vaz boa tarde, gente, tchau.
+Araujo, Renato Fernandes De stopped transcription

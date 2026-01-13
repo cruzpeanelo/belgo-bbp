@@ -1,0 +1,131 @@
+{
+  "reuniao": {
+    "titulo": "GTM Relatorios e Segment Report",
+    "data": "2025-12-17",
+    "duracao": "~60min",
+    "tipo": "Meeting Recording",
+    "fonte": "SharePoint/Stream"
+  },
+  "participantes": [
+    "Riqueti, Luis Eustaquio",
+    "Franca, Fabricio",
+    "Santo (mencionado)",
+    "Rhein, Thalita Merisio",
+    "Monteiro, Fernanda Chaves",
+    "Ciorlia (mencionado)",
+    "Adriano (mencionado)",
+    "Tiago (mencionado)"
+  ],
+  "topicos": [
+    "Segmentacao de dados de cliente",
+    "Programa de fidelidade",
+    "Hierarquia de dados e relatorios",
+    "Governanca e ownership",
+    "Integracao com Salesforce",
+    "Impacto em relatorios de custo e receita",
+    "Proximos passos e itens de acao"
+  ],
+  "capitulos": [
+    {
+      "timestamp": "1:08",
+      "titulo": "Segmentacao de Dados de Cliente",
+      "descricao": "Riqueti e Franca discutem segmentacao de dados de clientes"
+    },
+    {
+      "timestamp": "5:12",
+      "titulo": "Programa de Fidelidade",
+      "descricao": "Riqueti e Santo discutem programa de fidelidade"
+    },
+    {
+      "timestamp": "9:41",
+      "titulo": "Hierarquia de Dados e Relatorios",
+      "descricao": "Riqueti apresenta estrutura de hierarquia para relatorios"
+    },
+    {
+      "timestamp": "23:56",
+      "titulo": "Impacto em Relatorios de Custo e Receita",
+      "descricao": "Monteiro discute impacto das mudancas em relatorios financeiros"
+    },
+    {
+      "timestamp": "31:23",
+      "titulo": "Integracao com Salesforce",
+      "descricao": "Riqueti apresenta integracao com Salesforce"
+    },
+    {
+      "timestamp": "46:19",
+      "titulo": "Governanca e Ownership",
+      "descricao": "Riqueti e Rhein discutem governanca e responsabilidades"
+    },
+    {
+      "timestamp": "52:39",
+      "titulo": "Proximos Passos e Itens de Acao",
+      "descricao": "Riqueti apresenta proximos passos"
+    }
+  ],
+  "acoes": [
+    {
+      "acao": "Validacao do Campo Agregador de Parceiros",
+      "timestamp": "36:26",
+      "descricao": "Validar campo de agregador de parceiros no sistema",
+      "responsaveis": ["Riqueti"],
+      "prazo": "A definir"
+    },
+    {
+      "acao": "Descricao do Campo Cluster",
+      "timestamp": "39:23",
+      "descricao": "Definir descricao e valores do campo de cluster",
+      "responsaveis": ["Riqueti"],
+      "prazo": "A definir"
+    },
+    {
+      "acao": "Definicao de Governanca para Hierarquias",
+      "timestamp": "52:23",
+      "descricao": "Estabelecer governanca e ownership das hierarquias de dados",
+      "responsaveis": ["Riqueti", "Rhein", "Ciorlia"],
+      "prazo": "A definir"
+    },
+    {
+      "acao": "Consistencia de CPV e Segmento",
+      "timestamp": "59:34",
+      "descricao": "Garantir consistencia entre CPV e segmentacao",
+      "responsaveis": ["Riqueti", "Adriano", "Tiago"],
+      "prazo": "A definir"
+    },
+    {
+      "acao": "Reuniao com Equipe de Planejamento",
+      "timestamp": "1:00:08",
+      "descricao": "Agendar reuniao com time de planejamento para alinhamento",
+      "responsaveis": ["Riqueti", "Rhein", "Ciorlia"],
+      "prazo": "A definir"
+    }
+  ],
+  "pontosPrincipais": [
+    {
+      "topico": "Segment Report",
+      "descricao": "Relatorio de segmentacao de clientes para analise comercial",
+      "impacto": "Base para decisoes de pricing e alocacao"
+    },
+    {
+      "topico": "Hierarquia de Dados",
+      "descricao": "Estrutura hierarquica para relatorios consistentes",
+      "impacto": "Padronizacao de relatorios"
+    },
+    {
+      "topico": "Governanca",
+      "descricao": "Definicao de ownership e responsabilidades para hierarquias",
+      "impacto": "Clareza em manutencao de dados"
+    },
+    {
+      "topico": "Integracao Salesforce",
+      "descricao": "Integracao de hierarquias com Salesforce CRM",
+      "impacto": "Visao unificada de dados"
+    }
+  ],
+  "jornadasRelacionadas": [
+    "hub-gestao",
+    "workflow-pricing",
+    "cadastro-cliente"
+  ],
+  "statusExtracao": "Completo via Copilot - Key Topics e Action Items",
+  "ultimaAtualizacao": "2026-01-13"
+}

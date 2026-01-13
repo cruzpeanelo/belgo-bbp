@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "id": "895852",
+    "arquivo": "895852 - [Mobile] Termos e Aceite.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\895852 - [Mobile] Termos e Aceite.docx",
+    "tamanho_bytes": 1010582,
+    "data_modificacao": "2025-11-19T17:11:28",
+    "extraido_em": "2026-01-13T11:31:15.136534",
+    "status": "extraido",
+    "total_paragrafos": 11,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Validar o comportamento do sistema ao criar um novo registro de Termos Arameis, garantindo que:",
+      "Quando já existe um termo ativo para a mesma categoria, o sistema exiba mensagem de alerta e impeça o salvamento.",
+      "Quando não existe termo ativo, o sistema permita salvar normalmente.",
+      "Criação concluída: Teste Termos",
+      "Ao tentar editar um termo em uma categoria que já possui um termo vigente, o sistema bloqueia a ação, exibindo:",
+      "- Aviso: “Revise os erros nesta página. Para prosseguir a edição deste Termo, encerre a versão atualizada.”",
+      "- Erro destacado: Quantidade de anexos (exemplo específico da sua base)",
+      " Validação funcionando corretamente — o sistema impede alterações e exige encerramento da versão anterior.",
+      "Arquivo foi adicionado:",
+      "Exibição completa do termo já existente na categoria Termos e condições de uso, incluindo conteúdo formatado e anexos listados ao lado direito.",
+      "Evidências anexadas conforme prints enviados"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n895852 - [Mobile] Termos e Aceite",
+          "Data de Criação\n19/11/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 11,
+    "total_tabelas": 1
+  }
+}

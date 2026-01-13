@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - Cockpit GTM Belgo</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .config-section {
+            margin-bottom: 30px;
+        }
+        .config-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .config-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #2563eb;
+        }
+        .config-card.canal {
+            border-left-color: #059669;
+        }
+        .config-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        .config-code {
+            background: #2563eb;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        .config-card.canal .config-code {
+            background: #059669;
+        }
+        .config-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1f2937;
+        }
+        .config-desc {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .config-details {
+            background: #f9fafb;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 10px;
+        }
+        .config-detail-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+        .config-detail-item:last-child {
+            margin-bottom: 0;
+        }
+        .detail-label {
+            color: #6b7280;
+            min-width: 80px;
+        }
+        .detail-value {
+            color: #1f2937;
+            font-weight: 500;
+        }
+        .citation-box {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.85rem;
+        }
+        .citation-quote {
+            font-style: italic;
+            color: #92400e;
+            margin-bottom: 5px;
+        }
+        .citation-source {
+            color: #a16207;
+            font-size: 0.75rem;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .status-confirmado {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+        .tab {
+            padding: 10px 20px;
+            background: #f3f4f6;
+            border: none;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            font-weight: 500;
+            color: #6b7280;
+            transition: all 0.2s;
+        }
+        .tab.active {
+            background: #2563eb;
+            color: white;
+        }
+        .tab:hover:not(.active) {
+            background: #e5e7eb;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .summary-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .summary-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .summary-number.blue { color: #2563eb; }
+        .summary-number.green { color: #059669; }
+        .summary-label {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-top: 5px;
+        }
+        .integrations-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        .integration-tag {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">BELGO</div>
+                <div class="sidebar-subtitle">Cockpit GTM</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="../index.html" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="testes.html" class="nav-item">
+                    <span class="nav-icon">✅</span>
+                    <span class="nav-text">Testes</span>
+                </a>
+                <a href="jornadas.html" class="nav-item">
+                    <span class="nav-icon">🔄</span>
+                    <span class="nav-text">Jornadas AS IS/TO BE</span>
+                </a>
+                <a href="documentos.html" class="nav-item">
+                    <span class="nav-icon">📄</span>
+                    <span class="nav-text">Documentos</span>
+                </a>
+                <a href="reunioes.html" class="nav-item">
+                    <span class="nav-icon">📝</span>
+                    <span class="nav-text">Reuniões</span>
+                </a>
+                <a href="timeline.html" class="nav-item">
+                    <span class="nav-icon">📅</span>
+                    <span class="nav-text">Timeline</span>
+                </a>
+                <a href="cronograma.html" class="nav-item">
+                    <span class="nav-icon">🗓️</span>
+                    <span class="nav-text">Cronograma</span>
+                </a>
+                <a href="glossario.html" class="nav-item">
+                    <span class="nav-icon">📖</span>
+                    <span class="nav-text">Glossário</span>
+                </a>
+                <a href="participantes.html" class="nav-item">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-text">Participantes</span>
+                </a>
+                <a href="config.html" class="nav-item active">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-text">Configurações</span>
+                </a>
+                <a href="pontos-criticos.html" class="nav-item">
+                    <span class="nav-icon">⚠️</span>
+                    <span class="nav-text">Pontos Críticos</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Configurações do Sistema</h1>
+                <p class="page-subtitle">Áreas de Crédito e Canais de Venda - Triple Check Confirmado</p>
+            </div>
+
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <div class="summary-number blue">4</div>
+                    <div class="summary-label">Áreas de Crédito</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-number green">4</div>
+                    <div class="summary-label">Canais de Venda</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-number blue">4</div>
+                    <div class="summary-label">Reuniões de Validação</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-number green">100%</div>
+                    <div class="summary-label">Itens Confirmados</div>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('areas')">Áreas de Crédito</button>
+                <button class="tab" onclick="showTab('canais')">Canais de Venda</button>
+            </div>
+
+            <div id="areas" class="tab-content active">
+                <div class="config-grid" id="areas-grid">
+                    <!-- Preenchido via JS -->
+                </div>
+            </div>
+
+            <div id="canais" class="tab-content">
+                <div class="config-grid" id="canais-grid">
+                    <!-- Preenchido via JS -->
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 30px;">
+                <div class="card-header">
+                    <h3 class="card-title">Fontes de Validação (Triple Check)</h3>
+                </div>
+                <div id="fontes-list" style="padding: 15px;">
+                    <!-- Preenchido via JS -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        async function loadConfig() {
+            try {
+                const [areasResp, canaisResp] = await Promise.all([
+                    fetch('../data/config/areas-credito.json'),
+                    fetch('../data/config/canais.json')
+                ]);
+                const areasData = await areasResp.json();
+                const canaisData = await canaisResp.json();
+
+                renderAreas(areasData);
+                renderCanais(canaisData);
+                renderFontes(areasData.fontes);
+            } catch (error) {
+                console.error('Erro ao carregar configuracoes:', error);
+            }
+        }
+
+        function renderAreas(data) {
+            const container = document.getElementById('areas-grid');
+            container.innerHTML = data.areas.map(area => {
+                const citation = area.citacoesExatas[0];
+                const integrations = area.integracoes.map(i => `<span class="integration-tag">${i}</span>`).join('');
+
+                return `
+                    <div class="config-card">
+                        <div class="config-card-header">
+                            <span class="config-code">${area.codigo}</span>
+                            <span class="config-name">${area.nome}</span>
+                        </div>
+                        <p class="config-desc">${area.descricao}</p>
+                        <span class="status-badge status-${area.status}">${area.status}</span>
+
+                        <div class="config-details">
+                            ${area.nomeAlternativo ? `<div class="config-detail-item"><span class="detail-label">Alias:</span><span class="detail-value">${area.nomeAlternativo}</span></div>` : ''}
+                            ${area.canalRelacionado ? `<div class="config-detail-item"><span class="detail-label">Canal:</span><span class="detail-value">${area.canalRelacionado}</span></div>` : ''}
+                            <div class="config-detail-item"><span class="detail-label">Integracoes:</span></div>
+                            <div class="integrations-list">${integrations}</div>
+                        </div>
+
+                        <div class="citation-box">
+                            <div class="citation-quote">"${citation.citacao}"</div>
+                            <div class="citation-source">- ${citation.participante}, ${citation.fonte}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderCanais(data) {
+            const container = document.getElementById('canais-grid');
+            container.innerHTML = data.canais.map(canal => {
+                const citation = canal.citacoesExatas[0];
+
+                return `
+                    <div class="config-card canal">
+                        <div class="config-card-header">
+                            <span class="config-code">${canal.codigo}</span>
+                            <span class="config-name">${canal.nome}</span>
+                        </div>
+                        <p class="config-desc">${canal.descricao}</p>
+                        <span class="status-badge status-${canal.status}">${canal.status}</span>
+
+                        <div class="config-details">
+                            <div class="config-detail-item">
+                                <span class="detail-label">Tipo Cliente:</span>
+                                <span class="detail-value">${canal.tipoCliente}</span>
+                            </div>
+                            ${canal.areaCredito ? `<div class="config-detail-item"><span class="detail-label">Area Credito:</span><span class="detail-value">${canal.areaCredito}</span></div>` : ''}
+                        </div>
+
+                        <div class="citation-box">
+                            <div class="citation-quote">"${citation.citacao}"</div>
+                            <div class="citation-source">- ${citation.participante}, ${citation.fonte}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderFontes(fontes) {
+            const container = document.getElementById('fontes-list');
+            container.innerHTML = fontes.map((fonte, i) => `
+                <div style="display: flex; align-items: center; gap: 10px; padding: 10px; ${i < fontes.length - 1 ? 'border-bottom: 1px solid #e5e7eb;' : ''}">
+                    <span style="background: #dbeafe; color: #1e40af; padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 500;">${i + 1}</span>
+                    <span style="color: #374151;">${fonte}</span>
+                </div>
+            `).join('');
+        }
+
+        loadConfig();
+    </script>
+</body>
+</html>

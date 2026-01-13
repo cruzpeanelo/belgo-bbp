@@ -1,0 +1,45 @@
+{
+  "metadata": {
+    "id": "901674",
+    "arquivo": "901674 - Testes - Padronização de bases de contatos (celulares).docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\901674 - Testes - Padronização de bases de contatos (celulares).docx",
+    "tamanho_bytes": 774889,
+    "data_modificacao": "2025-12-04T15:42:36",
+    "extraido_em": "2026-01-13T11:31:15.296884",
+    "status": "extraido",
+    "total_paragrafos": 12,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Ao incluir o número de celular no registro de Contato, o aplica automaticamente uma regra, acrescentando o DDI ‘55’ à frente do número informado.",
+      "Caso o número digitado ultrapasse 11 dígitos (DDD + 9 dígitos), o sistema apresenta uma mensagem de erro, impedindo o salvamento.",
+      "Conta sem País",
+      "A conta deve ter um País",
+      "Se não tirar o país a conta bloqueia",
+      "Campo celular preenchido",
+      "Automaticamente cria o ‘55’ na frente do número — trata-se de uma regra",
+      "Se não tiver o país a conta bloqueia",
+      " Exemplo : Chile ",
+      "Outro País deixa inserir o celular.",
+      "Sem o número 55 salva",
+      "Outra validação aplicada é que, ao inserir o número, o sistema remove automaticamente qualquer traço ou caractere especial, mantendo apenas os dígitos."
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n901674 - Testes - Padronização de bases de contatos (celulares)",
+          "Data de Criação\n04/12/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 12,
+    "total_tabelas": 1
+  }
+}

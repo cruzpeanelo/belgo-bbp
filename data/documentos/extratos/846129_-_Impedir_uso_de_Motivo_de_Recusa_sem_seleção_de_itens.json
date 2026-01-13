@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "id": "846129",
+    "arquivo": "846129 - Impedir uso de Motivo de Recusa sem seleção de itens.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\846129 - Impedir uso de Motivo de Recusa sem seleção de itens.docx",
+    "tamanho_bytes": 323230,
+    "data_modificacao": "2025-11-13T14:40:58",
+    "extraido_em": "2026-01-13T11:31:14.728574",
+    "status": "extraido",
+    "total_paragrafos": 3,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "O teste foi realizado com sucesso e está validado conforme o requisito.",
+      "\nO botão “Modo Recusa” permanece desabilitado quando não há itens selecionados:\n",
+      "O botão “Modo Recusa” é habilitado corretamente ao selecionar um item:"
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n846129 - Impedir uso de \"Motivo de Recusa\" sem seleção de itens",
+          "Data de Criação\n13/11/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 3,
+    "total_tabelas": 1
+  }
+}

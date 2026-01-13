@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participantes - Cockpit GTM Belgo</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .participant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .participant-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .participant-card:hover {
+            transform: translateY(-2px);
+        }
+        .participant-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .participant-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .participant-info h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #1f2937;
+        }
+        .participant-role {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+        .participant-area {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+        .expertise-list {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e5e7eb;
+        }
+        .expertise-tag {
+            display: inline-block;
+            background: #f3f4f6;
+            color: #374151;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin: 2px;
+        }
+        .meetings-count {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+        .meetings-count span {
+            font-weight: 600;
+            color: #059669;
+        }
+        .team-section {
+            margin-top: 30px;
+        }
+        .team-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid #bae6fd;
+        }
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2563eb;
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">BELGO</div>
+                <div class="sidebar-subtitle">Cockpit GTM</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="../index.html" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="testes.html" class="nav-item">
+                    <span class="nav-icon">✅</span>
+                    <span class="nav-text">Testes</span>
+                </a>
+                <a href="jornadas.html" class="nav-item">
+                    <span class="nav-icon">🔄</span>
+                    <span class="nav-text">Jornadas AS IS/TO BE</span>
+                </a>
+                <a href="documentos.html" class="nav-item">
+                    <span class="nav-icon">📄</span>
+                    <span class="nav-text">Documentos</span>
+                </a>
+                <a href="reunioes.html" class="nav-item">
+                    <span class="nav-icon">📝</span>
+                    <span class="nav-text">Reuniões</span>
+                </a>
+                <a href="timeline.html" class="nav-item">
+                    <span class="nav-icon">📅</span>
+                    <span class="nav-text">Timeline</span>
+                </a>
+                <a href="cronograma.html" class="nav-item">
+                    <span class="nav-icon">🗓️</span>
+                    <span class="nav-text">Cronograma</span>
+                </a>
+                <a href="glossario.html" class="nav-item">
+                    <span class="nav-icon">📖</span>
+                    <span class="nav-text">Glossário</span>
+                </a>
+                <a href="participantes.html" class="nav-item active">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-text">Participantes</span>
+                </a>
+                <a href="config.html" class="nav-item">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-text">Configurações</span>
+                </a>
+                <a href="pontos-criticos.html" class="nav-item">
+                    <span class="nav-icon">⚠️</span>
+                    <span class="nav-text">Pontos Críticos</span>
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <div class="page-header-text">
+                    <h1 class="page-title">Participantes do Projeto</h1>
+                    <p class="page-subtitle">Key Users e Equipe do Projeto GTM Vendas</p>
+                </div>
+                <button class="btn-teams" onclick="Utils.discussOnTeams('participantes', 'Participantes do Projeto', this)">
+                    📤 Discutir no Teams
+                </button>
+            </div>
+
+            <div class="stats-row" id="stats-row">
+                <!-- Preenchido via JS -->
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Key Users</h3>
+                </div>
+                <div class="participant-grid" id="key-users-grid">
+                    <!-- Preenchido via JS -->
+                </div>
+            </div>
+
+            <div class="card team-section">
+                <div class="card-header">
+                    <h3 class="card-title">Equipe do Projeto</h3>
+                </div>
+                <div class="participant-grid" id="team-grid">
+                    <!-- Preenchido via JS -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        async function loadParticipantes() {
+            try {
+                const response = await fetch('../data/participantes.json');
+                const data = await response.json();
+                renderStats(data);
+                renderKeyUsers(data.participantes);
+                renderTeam(data.equipeProjeto);
+            } catch (error) {
+                console.error('Erro ao carregar participantes:', error);
+            }
+        }
+
+        function renderStats(data) {
+            const container = document.getElementById('stats-row');
+            const totalKeyUsers = data.participantes.length;
+            const totalTeam = data.equipeProjeto.length;
+            const totalAreas = [...new Set(data.participantes.map(p => p.area))].length;
+
+            container.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">${totalKeyUsers}</div>
+                    <div class="stat-label">Key Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${totalTeam}</div>
+                    <div class="stat-label">Equipe Projeto</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${totalAreas}</div>
+                    <div class="stat-label">Areas Representadas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${totalKeyUsers + totalTeam}</div>
+                    <div class="stat-label">Total Participantes</div>
+                </div>
+            `;
+        }
+
+        function renderKeyUsers(participantes) {
+            const container = document.getElementById('key-users-grid');
+            container.innerHTML = participantes.map(p => {
+                const initials = p.nome.split(' ').map(n => n[0]).join('').substring(0, 2);
+                const expertiseTags = p.expertise.map(e => `<span class="expertise-tag">${e}</span>`).join('');
+                const meetingsCount = p.reunioesParticipou.length;
+
+                return `
+                    <div class="participant-card">
+                        <div class="participant-header">
+                            <div class="participant-avatar">${initials}</div>
+                            <div class="participant-info">
+                                <h3>${p.nome}</h3>
+                                <div class="participant-role">${p.papel}</div>
+                            </div>
+                        </div>
+                        <span class="participant-area">${p.area}</span>
+                        <div class="expertise-list">
+                            ${expertiseTags}
+                        </div>
+                        <div class="meetings-count">
+                            Reuniões: <span>${meetingsCount}</span> participação(ões)
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderTeam(team) {
+            const container = document.getElementById('team-grid');
+            container.innerHTML = team.map(p => {
+                const initials = p.papel;
+
+                return `
+                    <div class="participant-card team-card">
+                        <div class="participant-header">
+                            <div class="participant-avatar" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">${initials}</div>
+                            <div class="participant-info">
+                                <h3>${p.nome}</h3>
+                                <div class="participant-role">${p.papel}</div>
+                            </div>
+                        </div>
+                        <p style="margin-top: 10px; font-size: 0.9rem; color: #4b5563;">
+                            ${p.responsabilidade}
+                        </p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        loadParticipantes();
+    </script>
+</body>
+</html>

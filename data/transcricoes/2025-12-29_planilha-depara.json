@@ -1,0 +1,193 @@
+{
+  "reuniao": {
+    "titulo": "Construcao da planilha DE/PARA",
+    "data": "2025-12-29",
+    "duracao": "~50min",
+    "tipo": "Meeting Recording",
+    "fonte": "SharePoint/Stream",
+    "tamanho": "382 MB"
+  },
+  "participantes": [
+    "Gimenes, Leandro Augusto",
+    "Rhein, Thalita Merisio",
+    "Almeida, Marcelo",
+    "Pereira, Leandro da Cruz",
+    "Victoria (mencionado)",
+    "Kathleen (mencionado)",
+    "Fabi (mencionado)",
+    "Franca, Fabricio"
+  ],
+  "topicos": [
+    "Reboot da lista de clientes",
+    "Segmentacao de clientes",
+    "Alocacao de clientes por regional",
+    "Criacao de novos escritorios",
+    "Relatorio de vendas e alocacao",
+    "Segmento de produto",
+    "Listas suspensas (DEPARA)",
+    "Atribuicao de agentes de vendas"
+  ],
+  "capitulos": [
+    {
+      "timestamp": "0:11",
+      "titulo": "Reboot da Lista de Clientes",
+      "descricao": "Gimenes e Almeida discutem hard reboot da lista de clientes, removendo todos os agentes e reatribuindo clientes"
+    },
+    {
+      "timestamp": "1:01",
+      "titulo": "Segmentacao de Clientes",
+      "descricao": "Trabalho de segmentacao por ID e segmento para categorizacao correta"
+    },
+    {
+      "timestamp": "3:54",
+      "titulo": "Alocacao de Clientes",
+      "descricao": "Processo de alocacao de clientes para escritorios regionais baseado em historico de compras"
+    },
+    {
+      "timestamp": "4:49",
+      "titulo": "Service Request para Novos Escritorios",
+      "descricao": "Processo para criacao de novos escritorios via service request"
+    },
+    {
+      "timestamp": "5:17",
+      "titulo": "Relatorio de Vendas e Alocacao",
+      "descricao": "Importancia de nao criar escritorios ate finalizacao do relatorio de vendas em 30/01"
+    },
+    {
+      "timestamp": "8:38",
+      "titulo": "Atualizacao da Lista de Clientes",
+      "descricao": "Atualizacao com segmentos corretos"
+    },
+    {
+      "timestamp": "9:40",
+      "titulo": "Segmentacao e Relatorios",
+      "descricao": "Importancia de ter segmentos de cliente e produto no sistema"
+    },
+    {
+      "timestamp": "20:24",
+      "titulo": "Campo Segmento de Produto",
+      "descricao": "Adicao de novo campo com 46 valores de segmento"
+    },
+    {
+      "timestamp": "34:54",
+      "titulo": "Extracao de Dados para Listas Suspensas",
+      "descricao": "Extracap do CRM para listas dependentes em Excel"
+    },
+    {
+      "timestamp": "46:48",
+      "titulo": "Check-ins Semanais",
+      "descricao": "Reunioes semanais para acompanhar progresso"
+    }
+  ],
+  "acoes": [
+    {
+      "acao": "Hard Reboot da Lista de Clientes",
+      "timestamp": "0:11",
+      "descricao": "Remover todos os agentes e reatribuir clientes (ativos, inativos, fechados) antes de exportar para OCC",
+      "responsaveis": ["Gimenes"],
+      "prazo": "1-2 meses"
+    },
+    {
+      "acao": "Atualizacao de Dados de Cliente e Segmento",
+      "timestamp": "1:01",
+      "descricao": "Atualizar lista com ID cliente, grupo e segmento na ordem correta",
+      "responsaveis": ["Rhein", "Gimenes"],
+      "prazo": "A definir"
+    },
+    {
+      "acao": "Criacao de Service Requests para Novos Escritorios",
+      "timestamp": "4:49",
+      "descricao": "Criar SRs em QA e producao, sem alocar agentes ate finalizacao do segment report",
+      "responsaveis": ["Almeida"],
+      "prazo": "A definir"
+    },
+    {
+      "acao": "Finalizacao do Segment Report e Top Sales",
+      "timestamp": "5:17",
+      "descricao": "Finalizar antes de permitir alocacao de agentes",
+      "responsaveis": ["Gimenes"],
+      "prazo": "30/01/2026"
+    },
+    {
+      "acao": "Adicao do Campo Segmento de Produto",
+      "timestamp": "20:24",
+      "descricao": "Criar campo 'Segmentos de Produto' no cadastro com 46 valores",
+      "responsaveis": ["Victoria", "Gimenes"],
+      "prazo": "Proximo sprint"
+    },
+    {
+      "acao": "Extracao de Dados para Listas Suspensas",
+      "timestamp": "34:54",
+      "descricao": "Extrair do CRM listas de segmento, subsegmento e setor industrial para Excel",
+      "responsaveis": ["Kathleen"],
+      "prazo": "A definir"
+    },
+    {
+      "acao": "Atribuicao de Clientes sem Regional",
+      "timestamp": "29:13",
+      "descricao": "Atribuir clientes sem regional ao escritorio EVC (vendas balcao)",
+      "responsaveis": ["Gimenes"],
+      "prazo": "A definir"
+    },
+    {
+      "acao": "Atribuicao de Agentes de Vendas pelos Gerentes",
+      "timestamp": "35:28",
+      "descricao": "Gerentes regionais atribuem agentes usando lista atualizada com emails corporativos",
+      "responsaveis": ["Fabi"],
+      "prazo": "Apos finalizacao estrutura regional"
+    },
+    {
+      "acao": "Check-ins Semanais de Progresso",
+      "timestamp": "46:48",
+      "descricao": "Reunioes semanais para monitorar colunas amarelas e reorganizacao de dados",
+      "responsaveis": ["Franca", "Rhein"],
+      "prazo": "Semanal"
+    },
+    {
+      "acao": "Priorizacao do Campo Segmentos de Produto",
+      "timestamp": "47:21",
+      "descricao": "Priorizar criacao do campo e lista de valores para proximo sprint",
+      "responsaveis": ["Victoria"],
+      "prazo": "Proximo sprint"
+    }
+  ],
+  "pontosPrincipais": [
+    {
+      "topico": "Planilha DE/PARA",
+      "descricao": "Construcao de mapeamento entre sistema antigo e novo para clientes",
+      "impacto": "Migracao de dados de clientes"
+    },
+    {
+      "topico": "Hard Reboot de Clientes",
+      "descricao": "Limpeza total da lista de agentes para reorganizacao",
+      "impacto": "Base limpa para novo sistema"
+    },
+    {
+      "topico": "Deadline 30/01",
+      "descricao": "Nao modificar estrutura de escritorios ate finalizacao do relatorio",
+      "impacto": "Evitar disrupcoes nos dados de vendas"
+    },
+    {
+      "topico": "46 Segmentos de Produto",
+      "descricao": "Nova dimensao de segmentacao por produto alem de cliente",
+      "impacto": "Relatorios mais granulares"
+    },
+    {
+      "topico": "Listas Suspensas Dependentes",
+      "descricao": "Criacao de dropdowns hierarquicos em Excel",
+      "impacto": "Facilitar preenchimento de dados"
+    },
+    {
+      "topico": "EVC - Vendas Balcao",
+      "descricao": "Escritorio padrao para clientes sem regional",
+      "impacto": "Nenhum cliente orfao"
+    }
+  ],
+  "jornadasRelacionadas": [
+    "cadastro-cliente",
+    "areas-vendas",
+    "hub-gestao"
+  ],
+  "statusExtracao": "Completo via Copilot - Key Topics e Action Items",
+  "ultimaAtualizacao": "2026-01-13"
+}

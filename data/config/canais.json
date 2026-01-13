@@ -1,0 +1,83 @@
+{
+  "titulo": "Canais de Venda - Belgo Arames",
+  "descricao": "Canais de venda confirmados via triple check (reunioes 03/12, 04/12, 10/12/2025)",
+  "totalCanais": 4,
+  "dataVerificacao": "2026-01-13",
+  "fontes": [
+    "Transcricao 03/12/2025 - Financeiro/Controladoria",
+    "Transcricao 04/12/2025 - Kickoff Workshops",
+    "Transcricao 10/12/2025 - Cadastro/Areas"
+  ],
+  "canais": [
+    {
+      "codigo": "20",
+      "nome": "Industria",
+      "descricao": "Canal para vendas industriais",
+      "citacoesExatas": [
+        {
+          "fonte": "Reuniao 03/12/2025",
+          "participante": "Leandro",
+          "citacao": "os canais 30 egidio de vitoria, 20, 30, 40 e 50... Industria, distribuicao e consumo"
+        }
+      ],
+      "tipoCliente": "PJ Industrial",
+      "status": "confirmado"
+    },
+    {
+      "codigo": "25",
+      "nome": "Casos Especiais",
+      "descricao": "Canal para casos especiais e excecoes",
+      "citacoesExatas": [
+        {
+          "fonte": "Reuniao 10/12/2025",
+          "participante": "Leandro",
+          "citacao": "canal 25 para casos especiais"
+        }
+      ],
+      "tipoCliente": "Especial",
+      "status": "confirmado"
+    },
+    {
+      "codigo": "30",
+      "nome": "Distribuicao",
+      "descricao": "Canal para distribuidores",
+      "citacoesExatas": [
+        {
+          "fonte": "Reuniao 03/12/2025",
+          "participante": "Leandro",
+          "citacao": "Industria, distribuicao e consumo"
+        }
+      ],
+      "areaCredito": "DBA/ADBA",
+      "tipoCliente": "Distribuidor",
+      "status": "confirmado"
+    },
+    {
+      "codigo": "40",
+      "nome": "Consumo",
+      "descricao": "Canal para consumo/varejo",
+      "citacoesExatas": [
+        {
+          "fonte": "Reuniao 03/12/2025",
+          "participante": "Leandro",
+          "citacao": "Industria, distribuicao e consumo"
+        }
+      ],
+      "tipoCliente": "Consumidor/Varejo",
+      "status": "confirmado"
+    }
+  ],
+  "regrasAtribuicao": {
+    "descricao": "O canal e definido baseado no CNAE do cliente e tipo de operacao",
+    "criterios": [
+      "CNAE determina canal principal",
+      "Tipo de cliente (PJ/PF) influencia",
+      "Excecoes tratadas via canal 25"
+    ]
+  },
+  "observacoes": [
+    "Canal 50 mencionado mas nao detalhado nas reunioes",
+    "Integracao com CNAE para definicao automatica",
+    "Relacionamento direto com areas de credito"
+  ]
+}

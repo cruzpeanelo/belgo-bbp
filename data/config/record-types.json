@@ -1,0 +1,137 @@
+{
+  "titulo": "Record Types - Salesforce",
+  "descricao": "Mapeamento de Record Types utilizados no Salesforce para o projeto GTM",
+  "dataAtualizacao": "2026-01-13",
+  "objeto": "Account",
+  "recordTypes": [
+    {
+      "developerName": "PJ_Standard",
+      "label": "Pessoa Juridica",
+      "descricao": "Record Type padrao para contas de Pessoa Juridica",
+      "campos_obrigatorios": [
+        "CNPJ__c",
+        "RazaoSocial__c",
+        "NomeFantasia__c",
+        "TermoPesquisa__c"
+      ],
+      "canais": ["20", "30", "40"],
+      "status": "ativo"
+    },
+    {
+      "developerName": "PF_Standard",
+      "label": "Pessoa Fisica",
+      "descricao": "Record Type para contas de Pessoa Fisica",
+      "campos_obrigatorios": [
+        "CPF__c",
+        "Nome__c"
+      ],
+      "canais": ["40"],
+      "status": "ativo"
+    },
+    {
+      "developerName": "Agrupador",
+      "label": "Parceiro Agrupador",
+      "descricao": "Record Type para parceiros agrupadores que consolidam multiplas contas",
+      "campos_obrigatorios": [
+        "NomeAgrupador__c",
+        "CNPJ__c"
+      ],
+      "funcionalidades": [
+        "Consolidacao de pedidos",
+        "Relatorios agrupados",
+        "Gestao de credito consolidada"
+      ],
+      "status": "ativo",
+      "fontesReuniao": ["2025-12-17_relatorios-segment-report.json"]
+    },
+    {
+      "developerName": "Distribuidor",
+      "label": "Distribuidor",
+      "descricao": "Record Type especifico para distribuidores (Canal 30)",
+      "campos_obrigatorios": [
+        "CNPJ__c",
+        "AreaCredito__c",
+        "LimiteCredito__c"
+      ],
+      "areaCredito": "DBA/ADBA",
+      "canal": "30",
+      "status": "ativo"
+    }
+  ],
+  "camposCustomizados": [
+    {
+      "apiName": "TermoPesquisa__c",
+      "label": "Termo de Pesquisa",
+      "tipo": "Text",
+      "tamanho": 50,
+      "obrigatorio": true,
+      "descricao": "Campo para busca rapida de contas",
+      "validacao": "Maximo 50 caracteres, sem caracteres especiais"
+    },
+    {
+      "apiName": "SapCode__c",
+      "label": "Codigo SAP",
+      "tipo": "Text",
+      "tamanho": 10,
+      "obrigatorio": true,
+      "descricao": "Codigo do cliente no SAP ECC",
+      "integracao": "ACSAP"
+    },
+    {
+      "apiName": "Cluster__c",
+      "label": "Cluster",
+      "tipo": "Picklist",
+      "valores": ["Corporativas", "Especiais", "Regionais", "Dispersas"],
+      "obrigatorio": true,
+      "descricao": "Cluster do cliente calculado automaticamente",
+      "fontesReuniao": ["2025-12-12_regras-clusterizacao.json"]
+    },
+    {
+      "apiName": "ClusterExcecao__c",
+      "label": "Cluster Excecao",
+      "tipo": "Checkbox",
+      "descricao": "Indica se o cluster foi definido manualmente (excecao)",
+      "workflow": "Requer aprovacao para alteracao"
+    },
+    {
+      "apiName": "Segmento__c",
+      "label": "Segmento",
+      "tipo": "Picklist",
+      "descricao": "Segmento do cliente",
+      "dependeDe": "Subsegmento__c"
+    },
+    {
+      "apiName": "Subsegmento__c",
+      "label": "Subsegmento",
+      "tipo": "Picklist",
+      "descricao": "Subsegmento do cliente"
+    },
+    {
+      "apiName": "SetorIndustrial__c",
+      "label": "Setor Industrial",
+      "tipo": "Picklist",
+      "descricao": "Setor industrial baseado no CNAE"
+    },
+    {
+      "apiName": "Canal__c",
+      "label": "Canal de Venda",
+      "tipo": "Picklist",
+      "valores": ["20", "25", "30", "40"],
+      "obrigatorio": true,
+      "descricao": "Canal de venda do cliente"
+    },
+    {
+      "apiName": "AreaCredito__c",
+      "label": "Area de Credito",
+      "tipo": "Picklist",
+      "valores": ["BBA", "CSP", "DBA", "ALPE"],
+      "obrigatorio": true,
+      "descricao": "Area de credito do cliente"
+    }
+  ],
+  "observacoes": [
+    "Record Types confirmados via documentos Tester e reunioes",
+    "Campos de Cluster e Segmento sao calculados automaticamente",
+    "Integracao com SAP via ACSAP para sincronizacao"
+  ]
+}

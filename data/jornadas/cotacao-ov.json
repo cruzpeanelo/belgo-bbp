@@ -1,0 +1,731 @@
+{
+  "id": "cotacao-ov",
+  "nome": "Cotacao e Ordem de Vendas",
+  "icone": "📋",
+  "ordem": 10,
+  "asIs": {
+    "descricao": "Processo manual de criacao de cotacoes onde vendedor consulta precos em planilhas ou no SAP, verifica estoque manualmente, monta cotacao em Excel, e apos aceite do cliente digita o pedido manualmente no SAP. Sem verificacao de disponibilidade em tempo real (ATP).",
+    "passos": [
+      "Cliente solicita cotacao por telefone ou email",
+      "Vendedor acessa SAP para consultar precos",
+      "Verifica estoque manualmente em outra transacao",
+      "Monta cotacao em planilha Excel",
+      "Envia cotacao por email ao cliente",
+      "Cliente aceita cotacao",
+      "Vendedor acessa SAP para criar pedido",
+      "Digita todos os itens manualmente",
+      "Verifica credito do cliente",
+      "Se bloqueio de credito: aciona financeiro",
+      "Pedido criado e enviado para faturamento"
+    ],
+    "problemas": [
+      "Processo lento e manual",
+      "Precos podem estar desatualizados na planilha",
+      "Sem verificacao de disponibilidade em tempo real (ATP)",
+      "Retrabalho ao digitar pedido no SAP",
+      "Risco de erros de digitacao",
+      "Cliente sem visibilidade de prazo de entrega",
+      "Verificacao de credito apenas no momento do pedido",
+      "Cotacoes dispersas em emails e planilhas",
+      "Sem historico centralizado de cotacoes"
+    ],
+    "tempoMedio": "Horas"
+  },
+  "toBe": {
+    "descricao": "Criacao de cotacoes diretamente no Salesforce com integracao em tempo real ao SAP para precos, verificacao de disponibilidade (ATP) e aplicacao automatica de descontos YDCF. Cotacao aprovada e convertida automaticamente em Ordem de Venda no SAP.",
+    "passos": [
+      "Vendedor acessa conta do cliente no Salesforce",
+      "Clica em 'Nova Cotacao'",
+      "Sistema verifica credito disponivel do cliente",
+      "Adiciona produtos a cotacao",
+      "Sistema busca precos atualizados do SAP",
+      "Sistema aplica automaticamente descontos YDCF vigentes",
+      "Sistema consulta ATP (disponibilidade) em tempo real",
+      "ATP retorna data prevista de entrega",
+      "Vendedor visualiza resumo com precos e prazos",
+      "Envia cotacao ao cliente pelo sistema",
+      "Cliente aceita cotacao",
+      "Vendedor converte cotacao em Ordem de Venda (OV)",
+      "Sistema cria OV automaticamente no SAP",
+      "Status da OV visivel no Salesforce (Farol)"
+    ],
+    "beneficios": [
+      "Processo agil e integrado",
+      "Precos sempre atualizados do SAP",
+      "Descontos YDCF aplicados automaticamente",
+      "ATP em tempo real (disponibilidade e prazo)",
+      "Conversao automatica para OV no SAP",
+      "Visibilidade de status via Farol",
+      "Historico centralizado de cotacoes",
+      "Eliminacao de digitacao manual no SAP",
+      "Verificacao de credito proativa",
+      "Cliente informado de prazos reais"
+    ],
+    "tempoMedio": "Minutos"
+  },
+  "areasImpactadas": [
+    "Comercial",
+    "Logistica",
+    "Financeiro",
+    "TI"
+  ],
+  "status": "Em Andamento",
+  "fonteReuniao": "10/12/2025",
+  "fontesReuniao": [
+    "10/12/2025 - Discussao sobre Cotacao e OV",
+    "16/12/2025 - Revisao de integracao com SAP"
+  ],
+  "fontesVerificadas": {
+    "reuniao10dez": [
+      "Processo de Cotacao e OV",
+      "Integracao com SAP"
+    ],
+    "reuniao16dez": [
+      "Revisao de integracao"
+    ],
+    "cadernoTestes": [
+      "CT-81 a CT-101 - Cotacao e OV",
+      "CT-102 a CT-108 - Conditions SAP"
+    ],
+    "nota": "Detalhes tecnicos (ATP, YDCF, Farol) vem do Caderno de Testes"
+  },
+  "campos": [
+    {
+      "campo": "Cliente",
+      "descricao": "Conta do cliente para cotacao",
+      "preenchimento": "Selecao",
+      "validacao": "Obrigatorio",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Numero Cotacao",
+      "descricao": "Identificador unico da cotacao",
+      "preenchimento": "Automatico",
+      "validacao": "-",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Data Cotacao",
+      "descricao": "Data de criacao da cotacao",
+      "preenchimento": "Automatico",
+      "validacao": "-",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Validade",
+      "descricao": "Data de validade da cotacao",
+      "preenchimento": "Automatico/Manual",
+      "validacao": "Data > hoje",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Itens",
+      "descricao": "Lista de produtos cotados",
+      "preenchimento": "Manual",
+      "validacao": "Minimo 1 item",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Preco Unitario",
+      "descricao": "Preco do produto (do SAP)",
+      "preenchimento": "Automatico (SAP)",
+      "validacao": "-",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Desconto YDCF",
+      "descricao": "Desconto aplicado via condition YDCF",
+      "preenchimento": "Automatico",
+      "validacao": "-",
+      "obrigatorio": false
+    },
+    {
+      "campo": "Preco Final",
+      "descricao": "Preco apos descontos",
+      "preenchimento": "Calculado",
+      "validacao": "-",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Data Disponibilidade (ATP)",
+      "descricao": "Data prevista de disponibilidade",
+      "preenchimento": "Automatico (ATP)",
+      "validacao": "-",
+      "obrigatorio": false
+    },
+    {
+      "campo": "Valor Total",
+      "descricao": "Soma de todos os itens",
+      "preenchimento": "Calculado",
+      "validacao": "-",
+      "obrigatorio": true
+    },
+    {
+      "campo": "Status",
+      "descricao": "Status da cotacao",
+      "preenchimento": "Automatico",
+      "validacao": "-",
+      "obrigatorio": true,
+      "valores": [
+        "Rascunho",
+        "Enviada",
+        "Aceita",
+        "Convertida em OV",
+        "Expirada",
+        "Cancelada"
+      ]
+    },
+    {
+      "campo": "Numero OV SAP",
+      "descricao": "Numero da OV criada no SAP",
+      "preenchimento": "Automatico (SAP)",
+      "validacao": "-",
+      "obrigatorio": false
+    },
+    {
+      "campo": "Status OV (Farol)",
+      "descricao": "Status visual da OV no SAP",
+      "preenchimento": "Automatico (SAP)",
+      "validacao": "-",
+      "obrigatorio": false,
+      "valores": [
+        "Verde (OK)",
+        "Amarelo (Atencao)",
+        "Vermelho (Bloqueado)"
+      ]
+    }
+  ],
+  "regrasNegocio": [
+    {
+      "regra": "Consulta de Precos em Tempo Real",
+      "descricao": "Ao adicionar produto, sistema consulta preco atualizado no SAP"
+    },
+    {
+      "regra": "Aplicacao Automatica de YDCF",
+      "descricao": "Sistema verifica se cliente possui descontos YDCF vigentes e aplica automaticamente"
+    },
+    {
+      "regra": "ATP - Available to Promise",
+      "descricao": "Sistema consulta SAP para verificar disponibilidade de estoque e retorna data prevista de entrega",
+      "nota": "ATP considera estoques em todos os centros de distribuicao"
+    },
+    {
+      "regra": "Verificacao de Credito",
+      "descricao": "Sistema verifica credito disponivel do cliente antes de permitir criacao da cotacao"
+    },
+    {
+      "regra": "Conversao Automatica para OV",
+      "descricao": "Cotacao aceita pode ser convertida em OV com um clique, criando pedido automaticamente no SAP"
+    },
+    {
+      "regra": "Farol de Status da OV",
+      "descricao": "Status da OV no SAP e exibido como farol no Salesforce: Verde (liberado), Amarelo (pendencia), Vermelho (bloqueado)"
+    },
+    {
+      "regra": "Validade da Cotacao",
+      "descricao": "Cotacoes possuem data de validade, apos a qual precos e condicoes nao sao mais garantidos"
+    }
+  ],
+  "sistemasTecnicos": [
+    "Salesforce",
+    "SAP ECC"
+  ],
+  "integracoes": [
+    {
+      "origem": "Salesforce",
+      "destino": "SAP",
+      "tipo": "API",
+      "descricao": "Consulta de precos de produtos"
+    },
+    {
+      "origem": "Salesforce",
+      "destino": "SAP",
+      "tipo": "API",
+      "descricao": "Consulta de ATP (disponibilidade)"
+    },
+    {
+      "origem": "Salesforce",
+      "destino": "SAP",
+      "tipo": "API",
+      "descricao": "Consulta de descontos YDCF vigentes"
+    },
+    {
+      "origem": "Salesforce",
+      "destino": "SAP",
+      "tipo": "Middleware",
+      "descricao": "Criacao de Ordem de Venda"
+    },
+    {
+      "origem": "SAP",
+      "destino": "Salesforce",
+      "tipo": "Middleware",
+      "descricao": "Retorno de numero da OV e status"
+    }
+  ],
+  "mensagensSistema": [
+    {
+      "tipo": "Sucesso",
+      "contexto": "Cotacao Criada",
+      "mensagem": "Cotacao {numero} criada com sucesso"
+    },
+    {
+      "tipo": "Sucesso",
+      "contexto": "OV Criada",
+      "mensagem": "Ordem de Venda {numero} criada no SAP"
+    },
+    {
+      "tipo": "Alerta",
+      "contexto": "Credito Insuficiente",
+      "mensagem": "Cliente possui credito insuficiente. Limite disponivel: R$ {valor}"
+    },
+    {
+      "tipo": "Alerta",
+      "contexto": "Produto Indisponivel",
+      "mensagem": "Produto {codigo} indisponivel. Previsao de disponibilidade: {data}"
+    },
+    {
+      "tipo": "Erro",
+      "contexto": "Cotacao Expirada",
+      "mensagem": "Esta cotacao expirou em {data}. Crie uma nova cotacao."
+    },
+    {
+      "tipo": "Info",
+      "contexto": "ATP",
+      "mensagem": "Data prevista de entrega: {data}"
+    },
+    {
+      "tipo": "Info",
+      "contexto": "Desconto Aplicado",
+      "mensagem": "Desconto YDCF de {percentual}% aplicado automaticamente"
+    }
+  ],
+  "detalhes": {
+    "atp": "Available to Promise - disponibilidade em tempo real do SAP",
+    "farol": "Status visual da OV: Verde (OK), Amarelo (Atencao), Vermelho (Bloqueado)",
+    "ydcf": "Descontos aprovados via workflow sao aplicados automaticamente",
+    "conversao": "Cotacao -> OV com criacao automatica no SAP"
+  },
+  "logicaATP": {
+    "avisoVerificacao": "ATENCAO: Os detalhes tecnicos abaixo (BAPIs, algoritmos, lead times) sao SUGESTOES TECNICAS baseadas em conhecimento geral de SAP. NAO foram confirmados nas reunioes ou documentos do Tester. Precisam ser validados com a equipe de TI/SAP.",
+    "descricao": "Available to Promise - Logica de verificacao de disponibilidade",
+    "sigla": "ATP",
+    "funcao": "Verifica estoque disponivel e calcula data de entrega",
+    "consultaSAP": {
+      "transacao": "VA01/VA02 + BAPI_MATERIAL_AVAILABILITY",
+      "dados": [
+        "Estoque disponivel",
+        "Reservas",
+        "Ordens de producao",
+        "Recebimentos programados"
+      ]
+    },
+    "algoritmoCalculo": {
+      "descricao": "Calcula disponibilidade considerando multiplos centros",
+      "passos": [
+        "1. Verifica estoque livre no centro preferencial do cliente",
+        "2. Se indisponivel, verifica outros centros com estoque",
+        "3. Se nenhum centro tem estoque, verifica ordens de producao",
+        "4. Calcula data considerando lead time de producao + transporte"
+      ],
+      "prioridade": [
+        {
+          "nivel": 1,
+          "fonte": "Estoque livre no centro do cliente"
+        },
+        {
+          "nivel": 2,
+          "fonte": "Estoque livre em centros proximos"
+        },
+        {
+          "nivel": 3,
+          "fonte": "Ordens de producao confirmadas"
+        },
+        {
+          "nivel": 4,
+          "fonte": "Previsao de producao"
+        }
+      ]
+    },
+    "centros": {
+      "descricao": "Centros de distribuicao considerados no ATP",
+      "regra": "Centro default definido pela regiao do cliente (Escritorio de Vendas)"
+    },
+    "leadTimes": {
+      "descricao": "Prazos adicionados ao calculo de data",
+      "componentes": [
+        {
+          "tipo": "Separacao",
+          "prazo": "1 dia util"
+        },
+        {
+          "tipo": "Faturamento",
+          "prazo": "1 dia util"
+        },
+        {
+          "tipo": "Transporte",
+          "prazo": "Variavel conforme regiao (2-10 dias uteis)"
+        }
+      ]
+    },
+    "retorno": {
+      "disponivel": {
+        "status": "Verde",
+        "mensagem": "Disponivel. Entrega prevista: {data}"
+      },
+      "parcial": {
+        "status": "Amarelo",
+        "mensagem": "Disponivel parcialmente: {qtd} unidades. Restante previsto: {data}"
+      },
+      "indisponivel": {
+        "status": "Vermelho",
+        "mensagem": "Indisponivel. Previsao de producao: {data}"
+      }
+    }
+  },
+  "prioridadeYDCF": {
+    "avisoVerificacao": "ATENCAO: A hierarquia de prioridade abaixo e uma SUGESTAO TECNICA. O unico dado confirmado e que YDCF existe e propaga de WF->SAP->Salesforce (Tester 880788). Os niveis de prioridade precisam ser validados.",
+    "descricao": "Hierarquia de aplicacao de descontos YDCF",
+    "ordemAplicacao": [
+      {
+        "prioridade": 1,
+        "tipo": "YDCF Cliente + Material",
+        "descricao": "Desconto especifico para cliente e material",
+        "exemplo": "Cliente X tem 5% no produto Y"
+      },
+      {
+        "prioridade": 2,
+        "tipo": "YDCF Cliente + Grupo Material",
+        "descricao": "Desconto para cliente em grupo de materiais",
+        "exemplo": "Cliente X tem 3% em todos arames finos"
+      },
+      {
+        "prioridade": 3,
+        "tipo": "YDCF Cliente",
+        "descricao": "Desconto geral para o cliente",
+        "exemplo": "Cliente X tem 2% em qualquer produto"
+      },
+      {
+        "prioridade": 4,
+        "tipo": "YDCF Regiao + Material",
+        "descricao": "Desconto regional para material especifico",
+        "exemplo": "Sul tem 4% no produto Z"
+      },
+      {
+        "prioridade": 5,
+        "tipo": "YDCF Canal",
+        "descricao": "Desconto padrao do canal de venda",
+        "exemplo": "Canal 30 tem desconto base de 1%"
+      }
+    ],
+    "regrasCumulativas": {
+      "permiteCumulo": false,
+      "descricao": "Apenas o desconto de maior prioridade e aplicado",
+      "excecao": "Promocoes especiais podem ser cumulativas (marcadas como 'CUMULATIVA')"
+    },
+    "validacao": {
+      "vigencia": "Sistema verifica data de inicio e fim do YDCF",
+      "quantidade": "Alguns YDCF tem quantidade minima de pedido",
+      "faturamento": "YDCF pode exigir faturamento minimo mensal"
+    },
+    "workflow": {
+      "origem": "Descontos YDCF vem do Workflow Pricing aprovado",
+      "sincronizacao": "Atualizacao automatica quando novo YDCF e aprovado",
+      "historico": "Sistema mantem historico de YDCF aplicados em cada cotacao"
+    }
+  },
+  "conditions": {
+    "avisoVerificacao": "ATENCAO: Os codigos de condition (YAC1, YPOL, YESC, YACR) sao exemplos baseados em padroes SAP. Apenas YDCF foi confirmado no Tester 880788. Os demais codigos precisam ser validados.",
+    "descricao": "Conditions de pricing aplicaveis na cotacao",
+    "tipos": [
+      {
+        "codigo": "YAC1",
+        "nome": "Acrescimo Canal",
+        "descricao": "Ajuste por canal de venda"
+      },
+      {
+        "codigo": "YPOL",
+        "nome": "Politica Comercial",
+        "descricao": "Desconto por politica vigente"
+      },
+      {
+        "codigo": "YESC",
+        "nome": "Escala",
+        "descricao": "Desconto por escala de volume"
+      },
+      {
+        "codigo": "YACR",
+        "nome": "Acrescimo Regional",
+        "descricao": "Ajuste por regiao geografica"
+      },
+      {
+        "codigo": "YDCF",
+        "nome": "Desconto Flexivel",
+        "descricao": "Desconto aprovado via workflow (principal)"
+      }
+    ],
+    "sequenciaCalculo": "YAC1 -> YPOL -> YESC -> YACR -> YDCF",
+    "nota": "YDCF e aplicado por ultimo, sobre o preco ja com outras conditions"
+  },
+  "pendencias": [
+    "Integracao com API de precos do SAP",
+    "Integracao com ATP para disponibilidade",
+    "Configuracao do Farol de status",
+    "Definicao de prazo padrao de validade de cotacao"
+  ],
+  "prerequisitos": [
+    "APIs SAP de precos e ATP disponiveis",
+    "Workflow Pricing implementado (YDCF)",
+    "Middleware SAP configurado para criacao de OV",
+    "Catalogo de produtos sincronizado"
+  ],
+  "relacionamentos": {
+    "dependeDe": [
+      "cadastro-cliente",
+      "financeiro",
+      "workflow-pricing"
+    ],
+    "habilitaPara": [
+      "documentos-fiscais",
+      "logistica"
+    ],
+    "nota": "Cotacao depende de credito aprovado e utiliza descontos do Workflow Pricing"
+  },
+  "ciclosTesteAviso": "ATENCAO: Os numeros de casos de teste (CT-81 a CT-108) e cenarios listados abaixo sao REFERENCIAS ao Caderno de Testes Excel. Os codigos especificos NAO foram verificados nos arquivos fonte disponiveis. Verificar Caderno de Testes para confirmacao.",
+  "ciclosTeste": [
+    {
+      "documento": "Caderno de Testes - Cotacao e OV",
+      "titulo": "Cotacao e Ordem de Vendas - Ciclo Completo",
+      "status": "Pendente",
+      "data": "2026-01-12",
+      "descricao": "22 casos de teste cobrindo o fluxo de Cotacao e Ordem de Vendas",
+      "avisoVerificacao": "Cenarios listados referenciam Caderno de Testes Excel. Verificar arquivo GTM Vendas - Caderno de Testes.xlsx para confirmacao.",
+      "estatisticas": {
+        "total": 22,
+        "concluidos": 0,
+        "pendentes": 22,
+        "falhou": 0,
+        "percentualConclusao": "0%"
+      },
+      "cenarios": [
+        "Aplicacao automatica YDCF (CT-81)",
+        "Busca por codigo de material (CT-82)",
+        "Material sem parametrizacao SAP (CT-83)",
+        "Mensagem de disponibilidade (CT-84)",
+        "Material sem estoque (CT-85)",
+        "Indicadores de pricing (CT-86)",
+        "Preco sugerido vs SAP (CT-87)",
+        "Area de Vendas na cotacao (CT-88)",
+        "Lista de produtos multiplos (CT-89)",
+        "Upload de planilha template (CT-90)",
+        "Validacao Canal 20 + I3 (CT-91)",
+        "ATP data de entrega (CT-92)",
+        "Sincronizacao com expansao (CT-93)",
+        "Cotacao completa (CT-94)",
+        "Cliente PF com CPF (CT-95)",
+        "Sincronizacao e precificacao (CT-96)",
+        "Desconto manual e sincronizacao (CT-97)",
+        "Bloqueios na OV (CT-98)",
+        "Farol de Status OV (CT-99)",
+        "Indicadores com permissao (CT-100)",
+        "Atualizacao automatica OV (CT-101)",
+        "Conditions SAP YAC1 (CT-102)"
+      ],
+      "testesRelacionados": [
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102
+      ]
+    },
+    {
+      "documento": "Caderno de Testes - Conditions SAP",
+      "titulo": "Conditions Pricing SAP",
+      "status": "Pendente",
+      "data": "2026-01-12",
+      "descricao": "7 casos de teste para conditions de pricing no SAP",
+      "estatisticas": {
+        "total": 7,
+        "concluidos": 0,
+        "pendentes": 7,
+        "falhou": 0,
+        "percentualConclusao": "0%"
+      },
+      "cenarios": [
+        "Cadastrar YAC1 com sequencias (CT-102)",
+        "Cadastrar YPOL e YESC (CT-103)",
+        "Cadastrar YACR sequencia 021 (CT-104)",
+        "Renomeacao YDFC (CT-105)",
+        "YDFC cross-company (CT-106)",
+        "Aplicacao conditions OV (CT-107)",
+        "Calculo preco liquido (CT-108)"
+      ],
+      "testesRelacionados": [
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108
+      ]
+    }
+  ],
+  "alertas": [
+    {
+      "tipo": "Prerequisito",
+      "titulo": "Expansao de Materiais",
+      "descricao": "IMPORTANTE: Verificar com Planejamento se materiais estao expandidos para o centro de teste e possuem estoque disponivel.",
+      "impacto": "Bloqueante para execucao dos testes"
+    },
+    {
+      "tipo": "Dependencia",
+      "titulo": "Workflow Pricing",
+      "descricao": "Testes de YDCF dependem de Workflow Pricing aprovado e vigente para o cliente/material de teste.",
+      "impacto": "Medio"
+    }
+  ],
+  "campoYDCF": {
+    "nome": "YDCF",
+    "descricao": "Desc. Fixo Cliente (Desconto Fixo por Cliente)",
+    "fonte": "Documento Tester 880788",
+    "origem": "SAP - tabela de condicoes",
+    "comoFunciona": {
+      "etapa1": "Desconto criado via Workflow Pricing no Salesforce",
+      "etapa2": "Workflow aprovado sincroniza com SAP",
+      "etapa3": "SAP registra desconto na tabela YDCF",
+      "etapa4": "Ao criar cotacao no Salesforce, sistema consulta YDCF",
+      "etapa5": "Desconto aplicado automaticamente nos itens da cotacao"
+    },
+    "validacaoRealizada": {
+      "documento": "880788",
+      "cenario": "Desconto de 24% criado no WF Pricing",
+      "validacaoSAP": "YDCF mostra 24%",
+      "validacaoSalesforce": "Cotacao carrega 24% automaticamente",
+      "resultado": "Cotacao salva com desconto de 24% mantido"
+    }
+  },
+  "integracaoATP": {
+    "nome": "ATP - Available to Promise",
+    "descricao": "Verificacao de disponibilidade de estoque no SAP",
+    "fluxo": [
+      "Cotacao criada no Salesforce",
+      "Sistema consulta ATP no SAP",
+      "SAP retorna disponibilidade por centro/deposito",
+      "Salesforce exibe quantidade disponivel ao usuario",
+      "Usuario decide prosseguir ou ajustar quantidade"
+    ],
+    "cenariosSemEstoque": {
+      "opcao1": "Aguardar reposicao (backorder)",
+      "opcao2": "Ajustar quantidade",
+      "opcao3": "Substituir por material alternativo"
+    }
+  },
+  "discussaoReunioes": {
+    "16dez2025": {
+      "contexto": "Tema planejado mas nao discutido por falta de tempo",
+      "citacao": "Sessao de Preco seria hoje esta, mas a gente comecaria a falar de pricing, cotacao e ordem de vendas, mas nao vai dar tempo.",
+      "proximaDiscussao": "Agendada para 17/12/2025"
+    },
+    "interacaoMariaLuiza": {
+      "participante": "Maria Luiza Gomes Chaves",
+      "pergunta": "Vao ter mais sessoes? Porque eu queria saber se a gente vai falar um pouco mais sobre tabela de precos.",
+      "resposta": "Thalita: A gente tem mais 2 encontros. O proximo vai ser amanha das 4 as 5:30."
+    }
+  },
+  "contextoReuniao": {
+    "projeto": "GTM (Go To Market) / CRM",
+    "lideranca": {
+      "business": "Thalita Merisio Rhein",
+      "tecnico": "Leandro da Cruz Pereira"
+    },
+    "timeline": {
+      "workshops": "04/12 a 22/12/2025",
+      "posWorkshop": "Responsabilidade passa para usuarios (Castro)",
+      "entregaveis": [
+        "Planilha de cenarios",
+        "Manual de orientacao"
+      ]
+    },
+    "participantes": [
+      {
+        "nome": "Leandro da Cruz Pereira",
+        "papel": "TI/Apresentador"
+      },
+      {
+        "nome": "Thalita Merisio Rhein",
+        "papel": "Project Lead Business"
+      },
+      {
+        "nome": "Maria Luiza Gomes Chaves",
+        "papel": "Key User",
+        "contribuicao": "Perguntou sobre tabela de precos e proximas sessoes"
+      }
+    ]
+  },
+  "documentosRelacionados": [
+    {
+      "id": "846129",
+      "arquivo": "846129 - Impedir uso de Motivo de Recusa sem seleção de itens.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\846129_-_Impedir_uso_de_Motivo_de_Recusa_sem_seleção_de_itens.json"
+    },
+    {
+      "id": "846129",
+      "arquivo": "846129 - Impedir uso de Motivo de Recusa sem seleção de itens.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\846129_-_Impedir_uso_de_Motivo_de_Recusa_sem_seleção_de_itens.json"
+    },
+    {
+      "id": "891761",
+      "arquivo": "891761 – Criação de tarefas -atividades mediante Tipo de contato em cotação.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\891761___Criação_de_tarefas_-atividades_mediante_Tipo_de_contato_em_cotação.json"
+    },
+    {
+      "id": "909851",
+      "arquivo": "909851 - Exibição condicionada e tratativa de embalagens.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\909851_-_Exibição_condicionada_e_tratativa_de_embalagens.json"
+    },
+    {
+      "id": "909851",
+      "arquivo": "909851 - Exibição condicionada e tratativa de embalagens.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\909851_-_Exibição_condicionada_e_tratativa_de_embalagens.json"
+    },
+    {
+      "id": "909851",
+      "arquivo": "909851- Envio e recebimento de aprovadores de Limbo.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\909851-_Envio_e_recebimento_de_aprovadores_de_Limbo.json"
+    }
+  ],
+  "totalDocumentos": 6,
+  "ultimaAtualizacao": "2026-01-13T11:36:26.118118",
+  "documentosGerais": [
+    {
+      "tipo": "Plano de Testes Exploratorios",
+      "id": "909100"
+    },
+    {
+      "tipo": "Boot/Automacao",
+      "id": "Boot"
+    },
+    {
+      "tipo": "App Guidance",
+      "id": "app guidance"
+    }
+  ]
+}

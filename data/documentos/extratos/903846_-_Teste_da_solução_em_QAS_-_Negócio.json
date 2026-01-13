@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "id": "903846",
+    "arquivo": "903846 - Teste da solução em QAS - Negócio.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\903846 - Teste da solução em QAS - Negócio.docx",
+    "tamanho_bytes": 785011,
+    "data_modificacao": "2025-12-10T15:27:40",
+    "extraido_em": "2026-01-13T11:31:15.324548",
+    "status": "extraido",
+    "total_paragrafos": 1,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Conforme solicitado. Foi criada uma nova cotação com o tipo de pagamento ‘Antecipado 1%’ e o sistema gerou a Ordem de Venda corretamente. "
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n903846 - Teste da solução em QAS - Negócio",
+          "Data de Criação\n10/12/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 1,
+    "total_tabelas": 1
+  }
+}

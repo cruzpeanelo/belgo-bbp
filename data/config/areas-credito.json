@@ -1,0 +1,100 @@
+{
+  "titulo": "Areas de Credito - Belgo Arames",
+  "descricao": "4 areas de credito confirmadas via triple check (reunioes 03/12, 04/12, 10/12 e 16/12/2025)",
+  "totalAreas": 4,
+  "dataVerificacao": "2026-01-13",
+  "fontes": [
+    "Transcricao 03/12/2025 - Financeiro/Controladoria",
+    "Transcricao 04/12/2025 - Kickoff Workshops",
+    "Transcricao 10/12/2025 - Cadastro/Areas",
+    "Transcricao 16/12/2025 - Docs Fiscais/Autoatendimento"
+  ],
+  "areas": [
+    {
+      "codigo": "BBA",
+      "nome": "BBA - Limite Interno Belgo",
+      "descricao": "Area de credito interna da Belgo para concessao de limites",
+      "citacoesExatas": [
+        {
+          "fonte": "Reuniao 04/12/2025",
+          "participante": "Vanessa",
+          "citacao": "Se for um limite de credito para a area da BBA, que e um limite interno"
+        },
+        {
+          "fonte": "Reuniao 03/12/2025",
+          "participante": "Leandro",
+          "citacao": "a BBA é a interna"
+        }
+      ],
+      "integracoes": ["ACSAP", "FSCM"],
+      "status": "confirmado"
+    },
+    {
+      "codigo": "CSP",
+      "nome": "CSP - Supply (Belgo Cash)",
+      "nomeAlternativo": "Supplier",
+      "descricao": "Area de credito para operacoes de supply chain e Belgo Cash",
+      "citacoesExatas": [
+        {
+          "fonte": "Reuniao 03/12/2025",
+          "participante": "Leandro",
+          "citacao": "a CSP a da supplier"
+        },
+        {
+          "fonte": "Reuniao 04/12/2025",
+          "participante": "Vanessa",
+          "citacao": "se for o da supplier vai para a area da CSP"
+        }
+      ],
+      "integracoes": ["ACSAP", "FSCM"],
+      "status": "confirmado"
+    },
+    {
+      "codigo": "DBA",
+      "nome": "DBA/ADBA - Distribuicao",
+      "nomeAlternativo": "ADBA",
+      "descricao": "Area de credito para canal de distribuicao",
+      "citacoesExatas": [
+        {
+          "fonte": "Reuniao 03/12/2025",
+          "participante": "Leandro",
+          "citacao": "DBA, ADBA essas coisas assim... a da distribuicao"
+        },
+        {
+          "fonte": "Reuniao 04/12/2025",
+          "participante": "Participante",
+          "citacao": "DBA que e a area de credito de distribuidor"
+        }
+      ],
+      "canalRelacionado": "30",
+      "integracoes": ["ACSAP", "FSCM"],
+      "status": "confirmado"
+    },
+    {
+      "codigo": "ALPE",
+      "nome": "Alpe/BTC/ABPE - AuP (Altair)",
+      "nomesAlternativos": ["BTC", "ABPE", "Altair"],
+      "descricao": "Area de credito relacionada ao sistema Altair para operacoes especificas",
+      "citacoesExatas": [
+        {
+          "fonte": "Reuniao 03/12/2025",
+          "participante": "Leandro",
+          "citacao": "Alpe, ABPE essas coisas... e do Altair"
+        },
+        {
+          "fonte": "Reuniao 04/12/2025",
+          "participante": "Participante",
+          "citacao": "BTC que e para o AuP, o Altair"
+        }
+      ],
+      "sistemaRelacionado": "Altair",
+      "integracoes": ["ACSAP", "Altair"],
+      "status": "confirmado"
+    }
+  ],
+  "observacoes": [
+    "Variacoes de nomenclatura (DBA vs ADBA, BTC vs ABPE vs ALPE) referem-se as mesmas areas",
+    "Todas as 4 areas foram confirmadas em pelo menos 2 reunioes diferentes",
+    "Integracao principal via ACSAP (Advanced Credit SAP)"
+  ]
+}

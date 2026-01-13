@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cockpit GTM - Belgo Arames</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">BELGO</div>
+                <div class="sidebar-subtitle">Cockpit GTM</div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item active">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="pages/testes.html" class="nav-item">
+                    <span class="nav-icon">✅</span>
+                    <span class="nav-text">Testes</span>
+                </a>
+                <a href="pages/jornadas.html" class="nav-item">
+                    <span class="nav-icon">🔄</span>
+                    <span class="nav-text">Jornadas AS IS/TO BE</span>
+                </a>
+                <a href="pages/documentos.html" class="nav-item">
+                    <span class="nav-icon">📄</span>
+                    <span class="nav-text">Documentos</span>
+                </a>
+                <a href="pages/reunioes.html" class="nav-item">
+                    <span class="nav-icon">📝</span>
+                    <span class="nav-text">Reuniões</span>
+                </a>
+                <a href="pages/timeline.html" class="nav-item">
+                    <span class="nav-icon">📅</span>
+                    <span class="nav-text">Timeline</span>
+                </a>
+                <a href="pages/cronograma.html" class="nav-item">
+                    <span class="nav-icon">🗓️</span>
+                    <span class="nav-text">Cronograma</span>
+                </a>
+                <a href="pages/glossario.html" class="nav-item">
+                    <span class="nav-icon">📖</span>
+                    <span class="nav-text">Glossário</span>
+                </a>
+                <a href="pages/participantes.html" class="nav-item">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-text">Participantes</span>
+                </a>
+                <a href="pages/config.html" class="nav-item">
+                    <span class="nav-icon">⚙️</span>
+                    <span class="nav-text">Configurações</span>
+                </a>
+                <a href="pages/pontos-criticos.html" class="nav-item">
+                    <span class="nav-icon">⚠️</span>
+                    <span class="nav-text">Pontos Críticos</span>
+                </a>
+            </nav>
+            <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.8rem; opacity: 0.7;">
+                Última atualização:<br>
+                <span id="ultima-atualizacao">-</span>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="main-content">
+            <div class="page-header">
+                <div class="page-header-text">
+                    <h1 class="page-title">Dashboard GTM Vendas</h1>
+                    <p class="page-subtitle">Acompanhamento do projeto Belgo Arames - Fase II</p>
+                </div>
+                <button class="btn-teams" onclick="Utils.discussOnTeams('dashboard', 'Dashboard GTM Vendas', this)">
+                    📤 Discutir no Teams
+                </button>
+            </div>
+
+            <!-- Métricas -->
+            <div class="metrics-grid" id="metrics-grid">
+                <!-- Preenchido via JS -->
+            </div>
+
+            <!-- Grid de Conteúdo -->
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+                <!-- Progresso por Categoria -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Progresso por Categoria</h3>
+                    </div>
+                    <div id="categorias-progress">
+                        <!-- Preenchido via JS -->
+                    </div>
+                </div>
+
+                <!-- Pontos Críticos -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Pontos Críticos</h3>
+                        <a href="pages/pontos-criticos.html" class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;">Ver todos</a>
+                    </div>
+                    <div id="pontos-criticos-list">
+                        <!-- Preenchido via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Workshops -->
+            <div class="card" style="margin-top: 20px;">
+                <div class="card-header">
+                    <h3 class="card-title">Status dos Workshops</h3>
+                </div>
+                <div id="workshops-timeline" class="timeline">
+                    <!-- Preenchido via JS -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

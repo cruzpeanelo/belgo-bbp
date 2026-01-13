@@ -1,0 +1,49 @@
+{
+  "metadata": {
+    "id": null,
+    "arquivo": "Bot - Números.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\Bot - Números.docx",
+    "tamanho_bytes": 14475,
+    "data_modificacao": "2025-12-12T10:10:05",
+    "extraido_em": "2026-01-13T11:31:15.889809",
+    "status": "extraido",
+    "total_paragrafos": 29,
+    "total_tabelas": 0
+  },
+  "conteudo": {
+    "paragrafos": [
+      "andreiadurans.maia@bbcontratos.com.br",
+      "CNPJ 50564053000537",
+      "Ordem Faturada:",
+      "0201313374 ",
+      "0201084022",
+      "0201177404",
+      "0201180349",
+      "0201180391",
+      "Ordem em aberto: ",
+      "0201312296",
+      "0201312297",
+      "0201311915",
+      "0201311917",
+      "0201311918",
+      "0201311919",
+      "0201311920",
+      "0201311921",
+      "Ordem de compra aberto:",
+      "Teste",
+      "Ordem de compra faturada:",
+      "4501977799",
+      "999999-teste",
+      "Nota fiscal faturada",
+      "001741869",
+      "001742446",
+      "001742346",
+      "001742394",
+      "Período: 01/01/2025 a 08/12/2025",
+      "willy.b.sousa@arcelormittal.com.br"
+    ],
+    "tabelas": [],
+    "total_paragrafos": 29,
+    "total_tabelas": 0
+  }
+}

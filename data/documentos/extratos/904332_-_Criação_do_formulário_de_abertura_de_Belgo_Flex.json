@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "id": "904332",
+    "arquivo": "904332 - Criação do formulário de abertura de Belgo Flex.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\904332 - Criação do formulário de abertura de Belgo Flex.docx",
+    "tamanho_bytes": 1145749,
+    "data_modificacao": "2025-12-12T11:50:05",
+    "extraido_em": "2026-01-13T11:31:15.344887",
+    "status": "extraido",
+    "total_paragrafos": 17,
+    "total_tabelas": 1
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Foi solicitado incluir novas regras de validação e adicionar campos novos.\nO requisito é permitir a seleção da Nota Fiscal normalmente. A Nota Fiscal já possui o número da Ordem de Venda, que será consultado no SAP.\nAlém disso, deverá ser possível selecionar várias Notas Fiscais.",
+      "Requisito selecionar a ordem de venda, coloco o número da ordem de venda e ele ",
+      "Vai consultar quais são as notas fiscais lá o SAP relacionadas a ordem de venda:",
+      "Observação: No campo de busca de Notas Fiscais, atualmente é necessário pressionar Enter para confirmar a seleção. Ao clicar fora do campo, o sistema aciona outras validações. Seria interessante a inclusão de um botão de confirmação ao lado do campo para melhorar a usabilidade.",
+      "Trouxe a nota fiscal que foi selecionada anteriormente. Pode ser selecionada uma nota fiscal ou várias:",
+      "Comportamento observado:\nQuando o campo Termo de Pesquisa é preenchido, o sistema automaticamente preenche o campo Escritório de Vendas e bloqueia sua edição.\nAo alterar a Conta, o campo Escritório de Vendas volta a ficar editável.",
+      "No campo 1º Solic do Cliente, são exibidas duas opções: Rebate/Bônus e Prorrogação com Ônus.",
+      "Ao selecionar o Bônus:",
+      "Abre todos os motivos relacionado ao bônus",
+      "Selecionado Prorrogação com ônus:",
+      "Muda o grupo de motivo",
+      "Detalhes do registro:",
+      "- Trouxe a nota fiscal ",
+      "Aqui o sistema bloqueia, mostrando que está errado a seleção:",
+      "Obrigatório Preencher o valor solicitado:",
+      "Preenchido o valor solicitado:",
+      "Passou por todas as regras e salvou a alteração."
+    ],
+    "tabelas": [
+      [
+        [
+          "",
+          "Documento\n904332 - Criação do formulário de abertura de Belgo Flex",
+          "Data de Criação\n11/12/2025"
+        ],
+        [
+          "",
+          "Projeto\nGO WIRE",
+          "Projeto\nGO WIRE"
+        ]
+      ]
+    ],
+    "total_paragrafos": 17,
+    "total_tabelas": 1
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "id": null,
+    "arquivo": "Card 1699 1708.docx",
+    "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\Card 1699 1708.docx",
+    "tamanho_bytes": 14046,
+    "data_modificacao": "2025-09-25T19:19:38",
+    "extraido_em": "2026-01-13T11:31:15.920788",
+    "status": "extraido",
+    "total_paragrafos": 4,
+    "total_tabelas": 0
+  },
+  "conteudo": {
+    "paragrafos": [
+      "Card 1699 1708 = alta prioridade\nCard 1706 Como estamos nessa questão? \nCard 1693 e 1444 (Go live Outubro; porém pessoal interno necessita utilizar antes) \nCard 1713 (estamos atuando)\nCard 583 - assim que finalizar os demais, vamos seguir ",
+      "Tinha combinado com o Yan de Subir 1444, 1693 e 1696, todos juntos, porém tivemos uma mudança no fluxo do ticket 1693 que vou demorar alguns dias para finalizar, então preciso que os tickets 1444 e 1696 que já foram homologados subam para PRD.",
+      "prazo no ticket do retorno ",
+      "card 1708 - as 17:00 horas tem uma msg da Marilia no card , perguntar se esta em Prod ou não ?"
+    ],
+    "tabelas": [],
+    "total_paragrafos": 4,
+    "total_tabelas": 0
+  }
+}
