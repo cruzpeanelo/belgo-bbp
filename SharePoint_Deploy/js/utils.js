@@ -212,30 +212,25 @@ const Utils = {
     // Formato: https://teams.microsoft.com/l/channel/CHANNEL_ID/CHANNEL_NAME?groupId=TEAM_ID
     teamsChannelUrl: localStorage.getItem('teamsChannelUrl') || '',
 
-    // Abrir Teams no canal configurado
+    // Abrir Teams no canal configurado (compatível com iOS Safari)
     openTeamsChannel() {
         let url = this.teamsChannelUrl || localStorage.getItem('teamsChannelUrl');
 
         if (!url) {
-            // Se não há URL configurada, tenta abrir o Teams genericamente
             this.showToast('Configure a URL do canal nas Configurações para abrir o Teams automaticamente', 'warning');
             return false;
         }
 
-        // Converter URL web para protocolo msteams:// para abrir o app
-        // Formato web: https://teams.microsoft.com/l/channel/...
-        // Formato app: msteams://teams.microsoft.com/l/channel/...
-        const appUrl = url.replace('https://', 'msteams://');
-
-        // Tentar abrir no app primeiro, depois fallback para web
-        const appWindow = window.open(appUrl, '_blank');
-
-        // Se não conseguiu abrir o app (popup bloqueado ou app não instalado), abre na web
-        setTimeout(() => {
-            if (!appWindow || appWindow.closed) {
-                window.open(url, '_blank');
-            }
-        }, 500);
+        // iOS Safari bloqueia window.open() fora do contexto de gesto do usuário
+        // Usar elemento <a> com click() é mais confiável em todos os browsers
+        const link = document.createElement('a');
+        link.href = url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
 
         return true;
     },
@@ -247,7 +242,14 @@ const Utils = {
     },
 
     // Enviar mensagem para o Teams e abrir o canal
+    // IMPORTANTE: Abre o Teams PRIMEIRO (síncrono) para funcionar no iOS Safari
     async sendToTeams(card, openChannel = true) {
+        // Abrir Teams ANTES do fetch - iOS Safari exige que window.open/link.click
+        // seja chamado diretamente no contexto do gesto do usuário (click/tap)
+        if (openChannel) {
+            this.openTeamsChannel();
+        }
+
         try {
             this.showLoading('Enviando para Teams...');
 
@@ -262,13 +264,6 @@ const Utils = {
             this.hideLoading();
             // Com no-cors, não recebemos status, mas a mensagem é enviada
             this.showToast('Mensagem enviada para o Teams!', 'success');
-
-            // Abrir o Teams no canal após enviar (com pequeno delay para a mensagem chegar)
-            if (openChannel) {
-                setTimeout(() => {
-                    this.openTeamsChannel();
-                }, 800);
-            }
 
             return true;
         } catch (error) {
@@ -310,6 +305,9 @@ const Utils = {
 
     // Discutir página no Teams (função genérica para todas as páginas)
     async discussOnTeams(pageId, pageTitle, btn) {
+        // Abrir Teams PRIMEIRO - iOS Safari exige isso no contexto do gesto do usuário
+        this.openTeamsChannel();
+
         const originalText = btn.innerHTML;
         btn.innerHTML = '⏳ Enviando...';
         btn.disabled = true;
