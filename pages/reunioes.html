@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reuniões - Cockpit GTM Belgo</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../css/styles.css">
     <style>
         .reunioes-header {
@@ -268,55 +269,66 @@
     </style>
 </head>
 <body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <span class="mobile-header-logo">BELGO GTM</span>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+            ☰
+        </button>
+    </header>
+
+    <!-- Overlay para fechar menu -->
+    <div class="sidebar-overlay" onclick="toggleMobileMenu()"></div>
+
     <div class="app-container">
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-logo">BELGO</div>
                 <div class="sidebar-subtitle">Cockpit GTM</div>
             </div>
-            <nav class="sidebar-nav">
-                <a href="../index.html" class="nav-item">
-                    <span class="nav-icon">📊</span>
+            <nav class="sidebar-nav" role="navigation" aria-label="Menu principal">
+                <a href="../index.html" class="nav-item" aria-label="Dashboard">
+                    <span class="nav-icon" aria-hidden="true">📊</span>
                     <span class="nav-text">Dashboard</span>
                 </a>
-                <a href="testes.html" class="nav-item">
-                    <span class="nav-icon">✅</span>
+                <a href="testes.html" class="nav-item" aria-label="Testes">
+                    <span class="nav-icon" aria-hidden="true">✅</span>
                     <span class="nav-text">Testes</span>
                 </a>
-                <a href="jornadas.html" class="nav-item">
-                    <span class="nav-icon">🔄</span>
+                <a href="jornadas.html" class="nav-item" aria-label="Jornadas AS IS TO BE">
+                    <span class="nav-icon" aria-hidden="true">🔄</span>
                     <span class="nav-text">Jornadas AS IS/TO BE</span>
                 </a>
-                <a href="documentos.html" class="nav-item">
-                    <span class="nav-icon">📄</span>
+                <a href="documentos.html" class="nav-item" aria-label="Documentos">
+                    <span class="nav-icon" aria-hidden="true">📄</span>
                     <span class="nav-text">Documentos</span>
                 </a>
-                <a href="reunioes.html" class="nav-item active">
-                    <span class="nav-icon">📝</span>
+                <a href="reunioes.html" class="nav-item active" aria-current="page" aria-label="Reuniões">
+                    <span class="nav-icon" aria-hidden="true">📝</span>
                     <span class="nav-text">Reuniões</span>
                 </a>
-                <a href="timeline.html" class="nav-item">
-                    <span class="nav-icon">📅</span>
+                <a href="timeline.html" class="nav-item" aria-label="Timeline">
+                    <span class="nav-icon" aria-hidden="true">📅</span>
                     <span class="nav-text">Timeline</span>
                 </a>
-                <a href="cronograma.html" class="nav-item">
-                    <span class="nav-icon">🗓️</span>
+                <a href="cronograma.html" class="nav-item" aria-label="Cronograma">
+                    <span class="nav-icon" aria-hidden="true">🗓️</span>
                     <span class="nav-text">Cronograma</span>
                 </a>
-                <a href="glossario.html" class="nav-item">
-                    <span class="nav-icon">📖</span>
+                <a href="glossario.html" class="nav-item" aria-label="Glossário">
+                    <span class="nav-icon" aria-hidden="true">📖</span>
                     <span class="nav-text">Glossário</span>
                 </a>
-                <a href="participantes.html" class="nav-item">
-                    <span class="nav-icon">👥</span>
+                <a href="participantes.html" class="nav-item" aria-label="Participantes">
+                    <span class="nav-icon" aria-hidden="true">👥</span>
                     <span class="nav-text">Participantes</span>
                 </a>
-                <a href="config.html" class="nav-item">
-                    <span class="nav-icon">⚙️</span>
+                <a href="config.html" class="nav-item" aria-label="Configurações">
+                    <span class="nav-icon" aria-hidden="true">⚙️</span>
                     <span class="nav-text">Configurações</span>
                 </a>
-                <a href="pontos-criticos.html" class="nav-item">
-                    <span class="nav-icon">⚠️</span>
+                <a href="pontos-criticos.html" class="nav-item" aria-label="Pontos Críticos">
+                    <span class="nav-icon" aria-hidden="true">⚠️</span>
                     <span class="nav-text">Pontos Críticos</span>
                 </a>
             </nav>
@@ -367,7 +379,7 @@
             const participantes = (detalhes.participantes || []).slice(0, 5).map(p => typeof p === 'string' ? p : p.nome).join(', ');
             const decisões = (detalhes.decisõesTomadas || []).slice(0, 3).map(d => typeof d === 'string' ? d : d.decisao).join('; ');
 
-            const card = Utils.formatTeamsCard('reuniao', `📝 ${reuniao.titulo}`, [
+            const card = Utils.formatTeamsCard('reuniao', `📝 ${reuniao.título}`, [
                 { name: "Data", value: formatDate(reuniao.data) },
                 { name: "Duração", value: reuniao.duracao || detalhes.reuniao?.duracao },
                 { name: "Participantes", value: participantes || 'N/A' },
@@ -384,7 +396,7 @@
                 const indexData = await indexResponse.json();
 
                 // Carregar cada reuniao detalhada
-                for (const reuniao of indexData.reunioes) {
+                for (const reuniao of indexData.reuniões) {
                     try {
                         const reuniaoResponse = await fetch('../data/reunioes/' + reuniao.arquivo);
                         const reuniaoData = await reuniaoResponse.json();
@@ -484,7 +496,7 @@
             let filtered = reunioesData;
             if (filter !== 'todas') {
                 filtered = reunioesData.filter(r => {
-                    const titulo = (r.titulo || '').toLowerCase();
+                    const titulo = (r.título || '').toLowerCase();
                     const tipo = (r.tipo || r.detalhes?.tipo || '').toLowerCase();
                     if (filter === 'workshop') return titulo.includes('workshop') || tipo.includes('workshop');
                     if (filter === 'alinhamento') return titulo.includes('alinhamento') || tipo.includes('alinhamento');
@@ -508,17 +520,17 @@
                 const capitulos = detalhes.capitulos || [];
 
                 return `
-                    <div class="reuniao-card" data-index="${index}" onclick="toggleReuniao(this)">
+                    <div class="reuniao-card" data-index="${index}" role="button" tabindex="0" aria-expanded="false" aria-controls="reuniao-detalhes-${index}" onclick="toggleReuniao(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleReuniao(this);}">
                         <div class="reuniao-header">
                             <div>
                                 <span class="reuniao-data">${formatDate(r.data)}</span>
-                                <h3 class="reuniao-titulo">${r.titulo}</h3>
+                                <h3 class="reuniao-titulo" id="reuniao-titulo-${index}">${r.título}</h3>
                             </div>
                             <div style="display: flex; align-items: center; gap: 10px;">
-                                <button class="btn" style="background: #6264A7; color: white; padding: 6px 12px; font-size: 0.8rem;" onclick="compartilharReuniao(${index}, event)">
-                                    📤 Teams
+                                <button class="btn" style="background: #6264A7; color: white; padding: 6px 12px; font-size: 0.8rem;" onclick="compartilharReuniao(${index}, event)" aria-label="Compartilhar reunião no Teams">
+                                    <span aria-hidden="true">📤</span> Teams
                                 </button>
-                                <span class="expand-icon">▼</span>
+                                <span class="expand-icon" aria-hidden="true">▼</span>
                             </div>
                         </div>
 
@@ -530,12 +542,18 @@
                             ${ações.length > 0 ? `<span>⚡ ${ações.length} ações</span>` : ''}
                         </div>
 
+                        ${r.resumo ? `
+                        <div class="reuniao-resumo" style="margin: 12px 0; padding: 12px; background: #f0f9ff; border-left: 3px solid #0ea5e9; border-radius: 4px; font-size: 0.9rem; color: #0c4a6e; line-height: 1.5;">
+                            ${r.resumo}
+                        </div>
+                        ` : ''}
+
                         <div class="reuniao-tópicos">
                             ${tópicos.slice(0, 5).map(t => `<span class="topico-tag">${typeof t === 'string' ? t : t.titulo || t}</span>`).join('')}
                             ${tópicos.length > 5 ? `<span class="topico-tag">+${tópicos.length - 5}</span>` : ''}
                         </div>
 
-                        <div class="reuniao-detalhes">
+                        <div class="reuniao-detalhes" id="reuniao-detalhes-${index}" role="region" aria-labelledby="reuniao-titulo-${index}">
                             ${participantes.length > 0 ? `
                                 <div class="detalhe-secao">
                                     <div class="detalhe-titulo">👥 Participantes</div>
@@ -564,7 +582,7 @@
                                         <div class="decisao-item">
                                             <div class="decisao-icon">📌</div>
                                             <div>
-                                                <strong>${c.timestamp || ''}</strong> - ${c.titulo || c}
+                                                <strong>${c.timestamp || ''}</strong> - ${c.título || c}
                                                 ${c.descricao ? `<br><small style="color: #6b7280">${c.descricao}</small>` : ''}
                                             </div>
                                         </div>
@@ -604,8 +622,8 @@
                                         <div class="acao-item">
                                             <div class="acao-icon">!</div>
                                             <div>
-                                                ${a.acao || a.descricao || a}
-                                                ${a.responsaveis ? `<br><small style="color: #6b7280">Responsável: ${a.responsaveis}</small>` : ''}
+                                                ${a.acao || a.ação || a.descricao || a}
+                                                ${(a.responsaveis || a.responsável) ? `<br><small style="color: #6b7280">Responsável: ${a.responsaveis || a.responsável}</small>` : ''}
                                                 ${a.prazo ? `<br><small style="color: #6b7280">Prazo: ${a.prazo}</small>` : ''}
                                             </div>
                                             <span class="acao-status status-${(a.status || 'pendente').toLowerCase().replace(' ', '')}">${a.status || 'Pendente'}</span>
@@ -627,6 +645,8 @@
 
         function toggleReuniao(element) {
             element.classList.toggle('expanded');
+            const isExpanded = element.classList.contains('expanded');
+            element.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
         }
 
         function setupFilters() {

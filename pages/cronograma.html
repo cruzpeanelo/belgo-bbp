@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cronograma - Cockpit GTM Belgo</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../css/styles.css">
     <style>
         .timeline-container {
@@ -133,6 +134,20 @@
             font-size: 0.85rem;
             opacity: 0.8;
         }
+        .btn-teams-item {
+            background: #6264A7;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+        }
+        .btn-teams-item:hover {
+            background: #4f52a3;
+            transform: scale(1.05);
+        }
         @media (max-width: 900px) {
             .timeline-line { left: 20px; }
             .workshop-card { width: 85%; margin-left: 50px !important; }
@@ -141,24 +156,35 @@
     </style>
 </head>
 <body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <span class="mobile-header-logo">BELGO GTM</span>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+            ☰
+        </button>
+    </header>
+
+    <!-- Overlay para fechar menu -->
+    <div class="sidebar-overlay" onclick="toggleMobileMenu()"></div>
+
     <div class="app-container">
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-logo">BELGO</div>
                 <div class="sidebar-subtitle">Cockpit GTM</div>
             </div>
-            <nav class="sidebar-nav">
-                <a href="../index.html" class="nav-item"><span class="nav-icon">📊</span><span class="nav-text">Dashboard</span></a>
-                <a href="testes.html" class="nav-item"><span class="nav-icon">✅</span><span class="nav-text">Testes</span></a>
-                <a href="jornadas.html" class="nav-item"><span class="nav-icon">🔄</span><span class="nav-text">Jornadas AS IS/TO BE</span></a>
-                <a href="documentos.html" class="nav-item"><span class="nav-icon">📄</span><span class="nav-text">Documentos</span></a>
-                <a href="reunioes.html" class="nav-item"><span class="nav-icon">📝</span><span class="nav-text">Reuniões</span></a>
-                <a href="timeline.html" class="nav-item"><span class="nav-icon">📅</span><span class="nav-text">Timeline</span></a>
-                <a href="cronograma.html" class="nav-item active"><span class="nav-icon">🗓️</span><span class="nav-text">Cronograma</span></a>
-                <a href="glossario.html" class="nav-item"><span class="nav-icon">📖</span><span class="nav-text">Glossário</span></a>
-                <a href="participantes.html" class="nav-item"><span class="nav-icon">👥</span><span class="nav-text">Participantes</span></a>
-                <a href="config.html" class="nav-item"><span class="nav-icon">⚙️</span><span class="nav-text">Configurações</span></a>
-                <a href="pontos-criticos.html" class="nav-item"><span class="nav-icon">⚠️</span><span class="nav-text">Pontos Críticos</span></a>
+            <nav class="sidebar-nav" role="navigation" aria-label="Menu principal">
+                <a href="../index.html" class="nav-item" aria-label="Dashboard"><span class="nav-icon" aria-hidden="true">📊</span><span class="nav-text">Dashboard</span></a>
+                <a href="testes.html" class="nav-item" aria-label="Testes"><span class="nav-icon" aria-hidden="true">✅</span><span class="nav-text">Testes</span></a>
+                <a href="jornadas.html" class="nav-item" aria-label="Jornadas AS IS TO BE"><span class="nav-icon" aria-hidden="true">🔄</span><span class="nav-text">Jornadas AS IS/TO BE</span></a>
+                <a href="documentos.html" class="nav-item" aria-label="Documentos"><span class="nav-icon" aria-hidden="true">📄</span><span class="nav-text">Documentos</span></a>
+                <a href="reunioes.html" class="nav-item" aria-label="Reuniões"><span class="nav-icon" aria-hidden="true">📝</span><span class="nav-text">Reuniões</span></a>
+                <a href="timeline.html" class="nav-item" aria-label="Timeline"><span class="nav-icon" aria-hidden="true">📅</span><span class="nav-text">Timeline</span></a>
+                <a href="cronograma.html" class="nav-item active" aria-current="page" aria-label="Cronograma"><span class="nav-icon" aria-hidden="true">🗓️</span><span class="nav-text">Cronograma</span></a>
+                <a href="glossario.html" class="nav-item" aria-label="Glossário"><span class="nav-icon" aria-hidden="true">📖</span><span class="nav-text">Glossário</span></a>
+                <a href="participantes.html" class="nav-item" aria-label="Participantes"><span class="nav-icon" aria-hidden="true">👥</span><span class="nav-text">Participantes</span></a>
+                <a href="config.html" class="nav-item" aria-label="Configurações"><span class="nav-icon" aria-hidden="true">⚙️</span><span class="nav-text">Configurações</span></a>
+                <a href="pontos-criticos.html" class="nav-item" aria-label="Pontos Críticos"><span class="nav-icon" aria-hidden="true">⚠️</span><span class="nav-text">Pontos Críticos</span></a>
             </nav>
         </aside>
 
@@ -237,10 +263,13 @@
 
             renderWorkshops() {
                 const workshops = App.data.cronograma.workshops;
-                document.getElementById('workshops-container').innerHTML = workshops.map(w => `
+                document.getElementById('workshops-container').innerHTML = workshops.map((w, index) => `
                     <div class="workshop-card ${w.status === 'Concluído' ? 'completed' : 'pending'}">
-                        <div class="workshop-date">📅 ${Utils.formatDate(w.data)}${w.horario ? ` • ${w.horario}` : ''}</div>
-                        <div class="workshop-title">${w.id} - ${w.titulo}</div>
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
+                            <div class="workshop-date">📅 ${Utils.formatDate(w.data)}${w.horario ? ` • ${w.horario}` : ''}</div>
+                            <button class="btn-teams-item" onclick="Cronograma.compartilharWorkshop(${index})">📤 Teams</button>
+                        </div>
+                        <div class="workshop-title">${w.id} - ${w.título}</div>
                         <span class="badge ${Utils.getBadgeClass(w.status)}">${w.status}</span>
                         ${w.participantes ? `<span style="margin-left: 10px; color: #6b7280; font-size: 0.85rem;">👥 ${w.participantes} participantes</span>` : ''}
                         <div class="workshop-focus">
@@ -252,13 +281,39 @@
 
             renderMarcos() {
                 const marcos = App.data.cronograma.marcos;
-                document.getElementById('marcos-container').innerHTML = marcos.map(m => `
+                document.getElementById('marcos-container').innerHTML = marcos.map((m, index) => `
                     <div class="marco-item">
                         <div class="marco-date">${Utils.formatDate(m.data)}</div>
-                        <div class="marco-title">${m.titulo}</div>
+                        <div class="marco-title">${m.título}</div>
                         <span class="badge ${Utils.getBadgeClass(m.status)}">${m.status}</span>
+                        <button class="btn-teams-item" onclick="Cronograma.compartilharMarco(${index})">📤</button>
                     </div>
                 `).join('');
+            },
+
+            // Compartilhar workshop no Teams
+            compartilharWorkshop(index) {
+                const w = App.data.cronograma.workshops[index];
+                if (!w) return;
+                const card = Utils.formatTeamsCard('reuniao', `🗓️ Workshop: ${w.id} - ${w.título}`, [
+                    { name: "Data", value: Utils.formatDate(w.data) },
+                    { name: "Horário", value: w.horario },
+                    { name: "Status", value: w.status },
+                    { name: "Participantes", value: w.participantes ? `${w.participantes} pessoas` : 'N/A' },
+                    { name: "Foco", value: w.foco.join(', ') }
+                ]);
+                Utils.sendToTeams(card);
+            },
+
+            // Compartilhar marco no Teams
+            compartilharMarco(index) {
+                const m = App.data.cronograma.marcos[index];
+                if (!m) return;
+                const card = Utils.formatTeamsCard('reuniao', `🎯 Marco: ${m.título}`, [
+                    { name: "Data", value: Utils.formatDate(m.data) },
+                    { name: "Status", value: m.status }
+                ]);
+                Utils.sendToTeams(card);
             }
         };
 

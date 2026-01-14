@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glossário - Cockpit GTM Belgo</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../css/styles.css">
     <style>
         .glossary-container {
@@ -124,58 +125,84 @@
             background: #dbeafe;
             color: #1e40af;
         }
+        .btn-teams-term {
+            background: #6264A7;
+            color: white;
+            border: none;
+            padding: 3px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            float: right;
+            transition: all 0.2s ease;
+        }
+        .btn-teams-term:hover {
+            background: #4f52a3;
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <span class="mobile-header-logo">BELGO GTM</span>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+            ☰
+        </button>
+    </header>
+
+    <!-- Overlay para fechar menu -->
+    <div class="sidebar-overlay" onclick="toggleMobileMenu()"></div>
+
     <div class="app-container">
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-logo">BELGO</div>
                 <div class="sidebar-subtitle">Cockpit GTM</div>
             </div>
-            <nav class="sidebar-nav">
-                <a href="../index.html" class="nav-item">
-                    <span class="nav-icon">📊</span>
+            <nav class="sidebar-nav" role="navigation" aria-label="Menu principal">
+                <a href="../index.html" class="nav-item" aria-label="Dashboard">
+                    <span class="nav-icon" aria-hidden="true">📊</span>
                     <span class="nav-text">Dashboard</span>
                 </a>
-                <a href="testes.html" class="nav-item">
-                    <span class="nav-icon">✅</span>
+                <a href="testes.html" class="nav-item" aria-label="Testes">
+                    <span class="nav-icon" aria-hidden="true">✅</span>
                     <span class="nav-text">Testes</span>
                 </a>
-                <a href="jornadas.html" class="nav-item">
-                    <span class="nav-icon">🔄</span>
+                <a href="jornadas.html" class="nav-item" aria-label="Jornadas AS IS TO BE">
+                    <span class="nav-icon" aria-hidden="true">🔄</span>
                     <span class="nav-text">Jornadas AS IS/TO BE</span>
                 </a>
-                <a href="documentos.html" class="nav-item">
-                    <span class="nav-icon">📄</span>
+                <a href="documentos.html" class="nav-item" aria-label="Documentos">
+                    <span class="nav-icon" aria-hidden="true">📄</span>
                     <span class="nav-text">Documentos</span>
                 </a>
-                <a href="reunioes.html" class="nav-item">
-                    <span class="nav-icon">📝</span>
+                <a href="reunioes.html" class="nav-item" aria-label="Reuniões">
+                    <span class="nav-icon" aria-hidden="true">📝</span>
                     <span class="nav-text">Reuniões</span>
                 </a>
-                <a href="timeline.html" class="nav-item">
-                    <span class="nav-icon">📅</span>
+                <a href="timeline.html" class="nav-item" aria-label="Timeline">
+                    <span class="nav-icon" aria-hidden="true">📅</span>
                     <span class="nav-text">Timeline</span>
                 </a>
-                <a href="cronograma.html" class="nav-item">
-                    <span class="nav-icon">🗓️</span>
+                <a href="cronograma.html" class="nav-item" aria-label="Cronograma">
+                    <span class="nav-icon" aria-hidden="true">🗓️</span>
                     <span class="nav-text">Cronograma</span>
                 </a>
-                <a href="glossario.html" class="nav-item active">
-                    <span class="nav-icon">📖</span>
+                <a href="glossario.html" class="nav-item active" aria-current="page" aria-label="Glossário">
+                    <span class="nav-icon" aria-hidden="true">📖</span>
                     <span class="nav-text">Glossário</span>
                 </a>
-                <a href="participantes.html" class="nav-item">
-                    <span class="nav-icon">👥</span>
+                <a href="participantes.html" class="nav-item" aria-label="Participantes">
+                    <span class="nav-icon" aria-hidden="true">👥</span>
                     <span class="nav-text">Participantes</span>
                 </a>
-                <a href="config.html" class="nav-item">
-                    <span class="nav-icon">⚙️</span>
+                <a href="config.html" class="nav-item" aria-label="Configurações">
+                    <span class="nav-icon" aria-hidden="true">⚙️</span>
                     <span class="nav-text">Configurações</span>
                 </a>
-                <a href="pontos-criticos.html" class="nav-item">
-                    <span class="nav-icon">⚠️</span>
+                <a href="pontos-criticos.html" class="nav-item" aria-label="Pontos Críticos">
+                    <span class="nav-icon" aria-hidden="true">⚠️</span>
                     <span class="nav-text">Pontos Críticos</span>
                 </a>
             </nav>
@@ -427,6 +454,7 @@
         </main>
     </div>
 
+    <script src="../js/utils.js"></script>
     <script>
         function filterTerms() {
             const search = document.getElementById('searchTerm').value.toLowerCase();
@@ -436,6 +464,35 @@
                 const text = card.textContent.toLowerCase();
                 card.style.display = text.includes(search) ? 'block' : 'none';
             });
+        }
+
+        // Adicionar botões de Teams dinamicamente a cada termo
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.term-card').forEach((card, index) => {
+                const sigla = card.querySelector('.term-sigla')?.textContent?.replace(/CONFIRMADO/g, '').trim() || '';
+                const nome = card.querySelector('.term-nome')?.textContent || '';
+                const desc = card.querySelector('.term-desc')?.textContent || '';
+
+                const btn = document.createElement('button');
+                btn.className = 'btn-teams-term';
+                btn.innerHTML = '📤';
+                btn.onclick = function(e) {
+                    e.stopPropagation();
+                    compartilharTermo(sigla, nome, desc);
+                };
+                card.insertBefore(btn, card.firstChild);
+            });
+        });
+
+        // Compartilhar termo no Teams
+        function compartilharTermo(sigla, nome, desc) {
+            const card = Utils.formatTeamsCard('pagina', `📖 Glossário: ${sigla}`, [
+                { name: "Sigla", value: sigla },
+                { name: "Nome", value: nome },
+                { name: "Descrição", value: desc },
+                { name: "Fonte", value: "Cockpit GTM Belgo - Glossário" }
+            ]);
+            Utils.sendToTeams(card);
         }
     </script>
 </body>

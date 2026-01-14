@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Participantes - Cockpit GTM Belgo</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../css/styles.css">
     <style>
         .participant-grid {
@@ -112,58 +113,84 @@
             color: #6b7280;
             margin-top: 5px;
         }
+        .btn-teams-item {
+            background: #6264A7;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            margin-left: auto;
+            transition: all 0.2s ease;
+        }
+        .btn-teams-item:hover {
+            background: #4f52a3;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <span class="mobile-header-logo">BELGO GTM</span>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+            ☰
+        </button>
+    </header>
+
+    <!-- Overlay para fechar menu -->
+    <div class="sidebar-overlay" onclick="toggleMobileMenu()"></div>
+
     <div class="app-container">
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-logo">BELGO</div>
                 <div class="sidebar-subtitle">Cockpit GTM</div>
             </div>
-            <nav class="sidebar-nav">
-                <a href="../index.html" class="nav-item">
-                    <span class="nav-icon">📊</span>
+            <nav class="sidebar-nav" role="navigation" aria-label="Menu principal">
+                <a href="../index.html" class="nav-item" aria-label="Dashboard">
+                    <span class="nav-icon" aria-hidden="true">📊</span>
                     <span class="nav-text">Dashboard</span>
                 </a>
-                <a href="testes.html" class="nav-item">
-                    <span class="nav-icon">✅</span>
+                <a href="testes.html" class="nav-item" aria-label="Testes">
+                    <span class="nav-icon" aria-hidden="true">✅</span>
                     <span class="nav-text">Testes</span>
                 </a>
-                <a href="jornadas.html" class="nav-item">
-                    <span class="nav-icon">🔄</span>
+                <a href="jornadas.html" class="nav-item" aria-label="Jornadas AS IS TO BE">
+                    <span class="nav-icon" aria-hidden="true">🔄</span>
                     <span class="nav-text">Jornadas AS IS/TO BE</span>
                 </a>
-                <a href="documentos.html" class="nav-item">
-                    <span class="nav-icon">📄</span>
+                <a href="documentos.html" class="nav-item" aria-label="Documentos">
+                    <span class="nav-icon" aria-hidden="true">📄</span>
                     <span class="nav-text">Documentos</span>
                 </a>
-                <a href="reunioes.html" class="nav-item">
-                    <span class="nav-icon">📝</span>
+                <a href="reunioes.html" class="nav-item" aria-label="Reuniões">
+                    <span class="nav-icon" aria-hidden="true">📝</span>
                     <span class="nav-text">Reuniões</span>
                 </a>
-                <a href="timeline.html" class="nav-item">
-                    <span class="nav-icon">📅</span>
+                <a href="timeline.html" class="nav-item" aria-label="Timeline">
+                    <span class="nav-icon" aria-hidden="true">📅</span>
                     <span class="nav-text">Timeline</span>
                 </a>
-                <a href="cronograma.html" class="nav-item">
-                    <span class="nav-icon">🗓️</span>
+                <a href="cronograma.html" class="nav-item" aria-label="Cronograma">
+                    <span class="nav-icon" aria-hidden="true">🗓️</span>
                     <span class="nav-text">Cronograma</span>
                 </a>
-                <a href="glossario.html" class="nav-item">
-                    <span class="nav-icon">📖</span>
+                <a href="glossario.html" class="nav-item" aria-label="Glossário">
+                    <span class="nav-icon" aria-hidden="true">📖</span>
                     <span class="nav-text">Glossário</span>
                 </a>
-                <a href="participantes.html" class="nav-item active">
-                    <span class="nav-icon">👥</span>
+                <a href="participantes.html" class="nav-item active" aria-current="page" aria-label="Participantes">
+                    <span class="nav-icon" aria-hidden="true">👥</span>
                     <span class="nav-text">Participantes</span>
                 </a>
-                <a href="config.html" class="nav-item">
-                    <span class="nav-icon">⚙️</span>
+                <a href="config.html" class="nav-item" aria-label="Configurações">
+                    <span class="nav-icon" aria-hidden="true">⚙️</span>
                     <span class="nav-text">Configurações</span>
                 </a>
-                <a href="pontos-criticos.html" class="nav-item">
-                    <span class="nav-icon">⚠️</span>
+                <a href="pontos-criticos.html" class="nav-item" aria-label="Pontos Críticos">
+                    <span class="nav-icon" aria-hidden="true">⚠️</span>
                     <span class="nav-text">Pontos Críticos</span>
                 </a>
             </nav>
@@ -204,24 +231,14 @@
         </main>
     </div>
 
+    <script src="../js/utils.js"></script>
     <script>
-        async function loadParticipantes() {
-            try {
-                const response = await fetch('../data/participantes.json');
-                const data = await response.json();
-                renderStats(data);
-                renderKeyUsers(data.participantes);
-                renderTeam(data.equipeProjeto);
-            } catch (error) {
-                console.error('Erro ao carregar participantes:', error);
-            }
-        }
-
         function renderStats(data) {
             const container = document.getElementById('stats-row');
-            const totalKeyUsers = data.participantes.length;
+            const keyUsers = data.participantes || data.keyUsers || [];
+            const totalKeyUsers = keyUsers.length;
             const totalTeam = data.equipeProjeto.length;
-            const totalAreas = [...new Set(data.participantes.map(p => p.area))].length;
+            const totalAreas = [...new Set(keyUsers.map(p => p.area).filter(a => a))].length;
 
             container.innerHTML = `
                 <div class="stat-card">
@@ -245,10 +262,10 @@
 
         function renderKeyUsers(participantes) {
             const container = document.getElementById('key-users-grid');
-            container.innerHTML = participantes.map(p => {
+            container.innerHTML = participantes.map((p, index) => {
                 const initials = p.nome.split(' ').map(n => n[0]).join('').substring(0, 2);
                 const expertiseTags = p.expertise.map(e => `<span class="expertise-tag">${e}</span>`).join('');
-                const meetingsCount = p.reunioesParticipou.length;
+                const meetingsCount = p.reuniõesParticipou.length;
 
                 return `
                     <div class="participant-card">
@@ -258,6 +275,7 @@
                                 <h3>${p.nome}</h3>
                                 <div class="participant-role">${p.papel}</div>
                             </div>
+                            <button class="btn-teams-item" onclick="compartilharParticipante('keyuser', ${index})">📤</button>
                         </div>
                         <span class="participant-area">${p.area}</span>
                         <div class="expertise-list">
@@ -273,7 +291,7 @@
 
         function renderTeam(team) {
             const container = document.getElementById('team-grid');
-            container.innerHTML = team.map(p => {
+            container.innerHTML = team.map((p, index) => {
                 const initials = p.papel;
 
                 return `
@@ -284,6 +302,7 @@
                                 <h3>${p.nome}</h3>
                                 <div class="participant-role">${p.papel}</div>
                             </div>
+                            <button class="btn-teams-item" onclick="compartilharParticipante('team', ${index})">📤</button>
                         </div>
                         <p style="margin-top: 10px; font-size: 0.9rem; color: #4b5563;">
                             ${p.responsabilidade}
@@ -291,6 +310,48 @@
                     </div>
                 `;
             }).join('');
+        }
+
+        let participantesData = null;
+
+        async function loadParticipantes() {
+            try {
+                const response = await fetch('../data/participantes.json');
+                participantesData = await response.json();
+                // Normalizar nome do campo (pode ser participantes ou keyUsers)
+                participantesData.participantes = participantesData.participantes || participantesData.keyUsers || [];
+                renderStats(participantesData);
+                renderKeyUsers(participantesData.participantes);
+                renderTeam(participantesData.equipeProjeto);
+            } catch (error) {
+                console.error('Erro ao carregar participantes:', error);
+            }
+        }
+
+        // Compartilhar participante no Teams
+        function compartilharParticipante(tipo, index) {
+            if (!participantesData) return;
+
+            let p;
+            if (tipo === 'keyuser') {
+                p = participantesData.participantes[index];
+                const card = Utils.formatTeamsCard('pagina', `👤 Key User: ${p.nome}`, [
+                    { name: "Nome", value: p.nome },
+                    { name: "Papel", value: p.papel },
+                    { name: "Área", value: p.area },
+                    { name: "Expertise", value: p.expertise.join(', ') },
+                    { name: "Reuniões", value: `${p.reuniõesParticipou.length} participações` }
+                ]);
+                Utils.sendToTeams(card);
+            } else {
+                p = participantesData.equipeProjeto[index];
+                const card = Utils.formatTeamsCard('pagina', `👤 Equipe Projeto: ${p.nome}`, [
+                    { name: "Nome", value: p.nome },
+                    { name: "Papel", value: p.papel },
+                    { name: "Responsabilidade", value: p.responsabilidade }
+                ]);
+                Utils.sendToTeams(card);
+            }
         }
 
         loadParticipantes();

@@ -3,7 +3,7 @@
     "arquivo": "GTM Vendas - Caderno de Testes.xlsx",
     "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Caderno de testes\\GTM Vendas - Caderno de Testes.xlsx",
     "tamanho_bytes": 142737,
-    "data_modificacao": "2026-01-12T08:50:43.905674",
+    "data_modificação": "2026-01-12T08:50:43.905674",
     "extraido_em": "2026-01-13T11:33:15.965933",
     "status": "extraido",
     "total_sheets": 18,
@@ -515,7 +515,7 @@
             "",
             "Quem EXECUTA a atividade",
             "",
-            "Comercial cria a cotacao",
+            "Comercial cria a cotação",
             "",
             "",
             "",
@@ -547,9 +547,9 @@
             "C",
             "CONSULTADO (Consulted)",
             "",
-            "Quem deve ser CONSULTADO antes da decisao",
+            "Quem deve ser CONSULTADO antes da decisão",
             "",
-            "Pricing valida preco antes de aprovar",
+            "Pricing valida preço antes de aprovar",
             "",
             "",
             "",
@@ -564,9 +564,9 @@
             "I",
             "INFORMADO (Informed)",
             "",
-            "Quem deve ser INFORMADO apos a acao",
+            "Quem deve ser INFORMADO apos a ação",
             "",
-            "TI e informada apos criacao da OV",
+            "TI e informada apos criação da OV",
             "",
             "",
             "",
@@ -612,7 +612,7 @@
             ""
           ],
           [
-            "Criar Cotacao",
+            "Criar Cotação",
             "R/A",
             "C",
             "C",
@@ -680,7 +680,7 @@
             ""
           ],
           [
-            "Validar Preco Base",
+            "Validar Preço Base",
             "I",
             "R/A",
             "C",
@@ -765,7 +765,7 @@
             ""
           ],
           [
-            "Verificar Credito Cliente",
+            "Verificar Crédito Cliente",
             "C",
             "I",
             "I",
@@ -782,7 +782,7 @@
             ""
           ],
           [
-            "Configurar Limite Credito",
+            "Configurar Limite Crédito",
             "I",
             "I",
             "I",
@@ -833,7 +833,7 @@
             ""
           ],
           [
-            "Suporte Tecnico Integracao",
+            "Suporte Técnico Integração",
             "I",
             "I",
             "I",
@@ -884,7 +884,7 @@
             ""
           ],
           [
-            "LEGENDA: R = Responsavel | A = Aprovador | C = Consultado | I = Informado | R/A = Responsavel E Aprovador",
+            "LEGENDA: R = Responsável | A = Aprovador | C = Consultado | I = Informado | R/A = Responsável E Aprovador",
             "",
             "",
             "",
@@ -920,7 +920,7 @@
             ""
           ],
           [
-            "Caderno organizado em abas especializadas. Use o indice para navegar.",
+            "Caderno organizado em abas especializadas. Use o índice para navegar.",
             "",
             "",
             "",
@@ -969,7 +969,7 @@
           ],
           [
             "Checklist",
-            "Preparacao",
+            "Preparação",
             "Checklist de Preparação",
             "",
             "",
@@ -1028,7 +1028,7 @@
             ""
           ],
           [
-            "Versao 2.0 - 03/11/2025",
+            "Versão 2.0 - 03/11/2025",
             "",
             "",
             "",
@@ -1040,7 +1040,7 @@
             ""
           ],
           [
-            "Responsavel: Equipe GTM",
+            "Responsável: Equipe GTM",
             "",
             "",
             "",
@@ -1052,7 +1052,7 @@
             ""
           ],
           [
-            "Objetivo: Facilitar navegacao",
+            "Objetivo: Fácilitar navegação",
             "",
             "",
             "",
@@ -1112,7 +1112,7 @@
             ""
           ],
           [
-            "Codigo SAP",
+            "Código SAP",
             "CNPJ",
             "Insc.Estadual",
             "Segmento",
@@ -1940,10 +1940,10 @@
             ""
           ],
           [
-            "Codigo SAP",
+            "Código SAP",
             "Nome Produto",
-            "Descricao",
-            "Canal Distribuicao",
+            "Descrição",
+            "Canal Distribuição",
             "Grupo Mercador",
             "Mercado",
             "",
@@ -4408,7 +4408,7 @@
             "Comercial + Fiscal: Matriz de impostos"
           ],
           [
-            "Negocio: Expansão de materiais"
+            "Negócio: Expansão de materiais"
           ]
         ]
       },
@@ -4447,14 +4447,14 @@
           ],
           [
             "3",
-            "Lista de materiais aprovada por ambas areas (minimo 10 materiais)",
+            "Lista de materiais aprovada por ambas áreas (mínimo 10 materiais)",
             "Concluído",
             "Comercial, Planejamento",
             ""
           ],
           [
             "4",
-            "Lista de clientes aprovada por ambas areas (minimo 5 clientes)",
+            "Lista de clientes aprovada por ambas áreas (mínimo 5 clientes)",
             "Concluído",
             "Comercial, Planejamento",
             ""
@@ -4510,28 +4510,28 @@
           ],
           [
             "12",
-            "Limites de credito configurados",
+            "Limites de crédito configurados",
             "Pendente",
             "Financeiro (Contas a Receber) - Vanessa",
             "Necessário criar LC, pode ser o valor fixo de 300mil, para os clientes no ambiente QAS"
           ],
           [
             "13",
-            "Precos base cadastrados no SAP (VK11)",
+            "Preços base cadastrados no SAP (VK11)",
             "Pendente",
             "Marketing (Pricing) - Ronildo/Fabiana",
             "Cadastrar nos materiais da aba \"materiais para testes\""
           ],
           [
             "14",
-            "Condicoes de desconto padrao configuradas (YDCF) - New WFPricing",
+            "Condições de desconto padrão configuradas (YDCF) - New WFPricing",
             "Pendente",
             "Comercial, Marketing",
             ""
           ],
           [
             "15",
-            "Usuarios de teste criados com perfis e permissões corretos",
+            "Usuários de teste criados com perfis e permissões corretos",
             "Em andamento",
             "TI, Comercial",
             "Salesforce: Leandro Gimenes (aprovador GRSI, UNCC, GRSS); Kaiky (aprovador GCCI); Bruno Nolasco (aprovador DCPC, GRSS); Daniel Jardim (aprovador GVES), \nSAP: necessário liberar o perfil dos usuários de todos os grupos de usuários de teste no ambiente  QAS."
@@ -4615,7 +4615,7 @@
             ""
           ],
           [
-            "Checklist de preparacao do ambiente ANTES de iniciar os testes",
+            "Checklist de preparação do ambiente ANTES de iniciar os testes",
             "",
             "",
             "",
@@ -4626,14 +4626,14 @@
             "#",
             "Area",
             "Atividade (Pre-requisito)",
-            "Transacao SAP",
-            "Responsavel",
+            "Transação SAP",
+            "Responsável",
             "Status"
           ],
           [
             "1",
             "Pricing",
-            "Cadastrar precos base no SAP antes dos testes",
+            "Cadastrar preços base no SAP antes dos testes",
             "VK11",
             "Pricing",
             ""
@@ -4641,7 +4641,7 @@
           [
             "2",
             "Pricing",
-            "Cadastrar condicoes de desconto padrao (YDCF) para clientes de teste ( Fazer via WokflowPricing)",
+            "Cadastrar condições de desconto padrão (YDCF) para clientes de teste ( Fazer via WokflowPricing)",
             "WF Pricing",
             "Comercial e Pricing",
             ""
@@ -4657,7 +4657,7 @@
           [
             "4",
             "Pricing",
-            "Cadastrar condicoes de escala (YESC) para grupos de materiais",
+            "Cadastrar condições de escala (YESC) para grupos de materiais",
             "VK11",
             "Pricing",
             ""
@@ -4673,7 +4673,7 @@
           [
             "6",
             "Pricing",
-            "Verificar esquema de calculo de preco esta ativo",
+            "Verificar esquema de calculo de preço esta ativo",
             "V/08",
             "Pricing",
             ""
@@ -4729,7 +4729,7 @@
           [
             "15",
             "Financeira",
-            "Cadastrar limite de credito para clientes de teste",
+            "Cadastrar limite de crédito para clientes de teste",
             "UKM_BP",
             "Financeira",
             ""
@@ -4737,7 +4737,7 @@
           [
             "16",
             "Financeira",
-            "Criar cliente com credito bloqueado para teste de bloqueio",
+            "Criar cliente com crédito bloqueado para teste de bloqueio",
             "UKM_BP",
             "Financeira",
             ""
@@ -4745,7 +4745,7 @@
           [
             "17",
             "Financeira",
-            "Criar cliente com credito liberado para teste de aprovacao",
+            "Criar cliente com crédito liberado para teste de aprovação",
             "UKM_BP",
             "Financeira",
             ""
@@ -4753,7 +4753,7 @@
           [
             "19",
             "Financeira",
-            "Cadastrar condicoes de pagamento por canal e segmento",
+            "Cadastrar condições de pagamento por canal e segmento",
             "ZWSSD067",
             "Comercial e Pricing",
             ""
@@ -4777,7 +4777,7 @@
           [
             "22",
             "Comercial",
-            "Definir canais necessarios por material",
+            "Definir canais necessários por material",
             "-",
             "Comercial",
             ""
@@ -4785,7 +4785,7 @@
           [
             "24",
             "Fiscal",
-            "Verificar parametrizacoes na J1BTAX",
+            "Verificar parametrizações na J1BTAX",
             "J1BTAX",
             "Fiscal",
             ""
@@ -4793,7 +4793,7 @@
           [
             "25",
             "Fiscal",
-            "Verificar parametrizacoes na ZSD190",
+            "Verificar parametrizações na ZSD190",
             "ZSD190",
             "Fiscal",
             ""
@@ -4801,7 +4801,7 @@
           [
             "26",
             "Fiscal",
-            "Verificar parametrizacoes VK11 (ISTN)",
+            "Verificar parametrizações VK11 (ISTN)",
             "VK11",
             "Fiscal",
             ""
@@ -4809,7 +4809,7 @@
           [
             "27",
             "Fiscal",
-            "Parametrizacao J1BTAX - validar coberturas necessarias",
+            "Parametrização J1BTAX - validar coberturas necessarias",
             "J1BTAX",
             "Fiscal",
             ""
@@ -4817,7 +4817,7 @@
           [
             "28",
             "Fiscal",
-            "Parametrizacao VK11 (ISTN) - manter excecoes para NCMs/Clientes sem ICMS ST",
+            "Parametrização VK11 (ISTN) - manter exceções para NCMs/Clientes sem ICMS ST",
             "VK11",
             "Fiscal",
             ""
@@ -4825,7 +4825,7 @@
           [
             "29",
             "Fiscal",
-            "Parametrizacao ZSD190 - CFOP e direito fiscal corretos por cenario",
+            "Parametrização ZSD190 - CFOP e direito fiscal corretos por cenario",
             "ZSD190",
             "Fiscal",
             ""
@@ -5521,7 +5521,7 @@
             "_",
             "SapCode__c",
             "Name",
-            "CanalDistribuicao__c",
+            "CanalDistribuição__c",
             "GrupoMercador__c",
             "Mercado__c",
             "MaterialGroupSapCode__c"
@@ -10683,7 +10683,7 @@
             ""
           ],
           [
-            "Codigo Centro",
+            "Código Centro",
             "Nome Centro"
           ],
           [
@@ -10774,7 +10774,7 @@
             ""
           ],
           [
-            "Matriz de impostos aplicaveis por canal de vendas (baseado em imagem fornecida pela area Fiscal):",
+            "Matriz de impostos aplicaveis por canal de vendas (baseado em imagem fornecida pela área Fiscal):",
             "Impostos",
             "",
             "",
@@ -10804,7 +10804,7 @@
             ""
           ],
           [
-            "Zona Franca nao tem imposto",
+            "Zona Franca não tem imposto",
             "",
             "",
             "",
@@ -11195,7 +11195,7 @@
           ],
           [
             "  • Sistema:",
-            "Calculado automaticamente pela J1BTAX",
+            "Calculado automáticamente pela J1BTAX",
             "",
             "",
             "",
@@ -11520,7 +11520,7 @@
             "Resultado Obtido",
             "Ajustes necessários",
             "Estado",
-            "Areas Envolvidas",
+            "Áreas Envolvidas",
             "Responsável",
             "Última atualização",
             "Problemas encontrados",
@@ -11531,8 +11531,8 @@
             "Workflow Pricing",
             "Criar Workflow Pricing para desconto fixo em material específico",
             "Salesforce",
-            "1. Acessar Salesforce e entrar no aplicativo Go Wire 2. Ir para uma Conta integrada ao SAP (com Código SAP, Escritório de Vendas, vendedor e canais configurados) 3. Clicar no botão \"New WFPricing\" no topo da tela 4. Na primeira tela, confirmar Emissor de Ordem 5. Selecionar um Canal de distribuição disponível para o cliente 6. Confirmar o Escritório de Vendas 7. Definir data de vigência (Data Início e Data Fim) 8. Clicar em \"Próximo\" 9. Navegar pela hierarquia de materiais até chegar ao material específico desejado 10. No material, preencher o percentual de desconto (ex: 5%) 11. Confirmar vigência e canal 12. Clicar em \"Criar\" OBS: Testar com diferentes canais disponiveis para o cliente (20, 30, 40 ou outros) 3. Navegar pela hierarquia de materiais: - Nivel 1: Unidades - Nivel 2: Macro Segmentos de Produto - Nivel 3: Macro Segmentos de Produto Detalhado - Nível 4:  Segmento do produto - Nível 5: Grupo de Mercadoria - Nível 6: Material específico 4. Usar botoes 'Abrir todos' / 'Fechar todos' para expandir/colapsar arvore",
-            "O Workflow Pricing deve ser criado e enviado para aprovação. Notificações devem ser enviadas por e-mail e no Salesforce para o solicitante e aprovadores (time de Pricing e gerente do Escritório de Vendas). O workflow deve aparecer com status \"Aguardando Aprovação\". Validar campo 'Integration Status' = 'Completed' apos aprovacao Validar campo 'External ID' preenchido com codigo alfanumerico unico",
+            "1. Acessar Salesforce e entrar no aplicativo Go Wire 2. Ir para uma Conta integrada ao SAP (com Código SAP, Escritório de Vendas, vendedor e canais configurados) 3. Clicar no botão \"New WFPricing\" no topo da tela 4. Na primeira tela, confirmar Emissor de Ordem 5. Selecionar um Canal de distribuição disponível para o cliente 6. Confirmar o Escritório de Vendas 7. Definir data de vigência (Data Início e Data Fim) 8. Clicar em \"Próximo\" 9. Navegar pela hierarquia de materiais até chegar ao material específico desejado 10. No material, preencher o percentual de desconto (ex: 5%) 11. Confirmar vigência e canal 12. Clicar em \"Criar\" OBS: Testar com diferentes canais disponiveis para o cliente (20, 30, 40 ou outros) 3. Navegar pela hierarquia de materiais: - Nível 1: Unidades - Nível 2: Macro Segmentos de Produto - Nível 3: Macro Segmentos de Produto Detalhado - Nível 4:  Segmento do produto - Nível 5: Grupo de Mercadoria - Nível 6: Material específico 4. Usar botoes 'Abrir todos' / 'Fechar todos' para expandir/colapsar arvore",
+            "O Workflow Pricing deve ser criado e enviado para aprovação. Notificações devem ser enviadas por e-mail e no Salesforce para o solicitante e aprovadores (time de Pricing e gerente do Escritório de Vendas). O workflow deve aparecer com status \"Aguardando Aprovação\". Validar campo 'Integration Status' = 'Completed' apos aprovação Validar campo 'External ID' preenchido com código alfanumerico único",
             "O Workflow Pricing foi criado e enviado para aprovação com sucesso. As notificações foram enviadas corretamente por e-mail e no Salesforce, tanto para o solicitante quanto para os aprovadores (time de Pricing e gerente).\n\nO workflow exibiu o status \"Aguardando Aprovação\" conforme esperado.\n\nApós a aprovação, foi validado que o campo 'Integration Status' foi atualizado para 'Completed' e o 'External ID' foi preenchido com um código alfanumérico único.",
             "Colocar a descrição dos GPS\nIncluir a opção de filtro de bitola ou aço para filtrar o código do material.",
             "Concluido",
@@ -11549,7 +11549,7 @@
             "Salesforce",
             "1. Iniciar criação de Workflow Pricing 2. Na tela inicial, definir vigência padrão (ex: 01/11/2025 a 31/12/2025) 3. Avançar para tela de seleção de materiais 4. Selecionar Material A e manter vigência padrão 5. Selecionar Material B e alterar vigência para 01/11/2025 a 30/11/2025 6. Verificar se as vigências estão diferentes para cada linha 7. Criar workflow",
             "Workflow criado com vigências individuais por material. Cada linha deve respeitar sua vigência específica.",
-            "Conforme esperado. O workflow foi criado com vigências individuais por material e validou-se que cada linha respeitou sua vigência específica.",
+            "Conforme esperado. O workflow foi criado com vigências individuais por material é válidou-se que cada linha respeitou sua vigência específica.",
             "",
             "Concluido",
             "Comercial",
@@ -11595,8 +11595,8 @@
             "Workflow Pricing",
             "Validar input manual de porcentagem de desconto no Workflow Pricing",
             "Salesforce",
-            "1. Criar Workflow Pricing 2. Selecionar materiais via hierarquia 3. No grid de materiais, focar na coluna \"Desconto (%)\" 4. Inserir valores de desconto manualmente: - material compatível conforme aba Materiais Testes: 5% - Material 2: 10% - Material 3: 15% 5. Validar que campo aceita valores decimais (ex: 7.5%) 6. Validar limites: minimo 0%, maximo 100% 7. Tentar inserir valor invalido (ex: 150%) - deve dar erro 8. Validar que desconto e obrigatorio (nao pode ficar vazio).",
-            "Campo aceita valores entre 0-100%. Valores decimais permitidos. Validacao de limites funcionando",
+            "1. Criar Workflow Pricing 2. Selecionar materiais via hierarquia 3. No grid de materiais, focar na coluna \"Desconto (%)\" 4. Inserir valores de desconto manualmente: - material compatível conforme aba Materiais Testes: 5% - Material 2: 10% - Material 3: 15% 5. Validar que campo aceita valores decimais (ex: 7.5%) 6. Validar limites: mínimo 0%, máximo 100% 7. Tentar inserir valor inválido (ex: 150%) - deve dar erro 8. Validar que desconto é obrigatório (não pode ficar vazio).",
+            "Campo aceita valores entre 0-100%. Valores decimais permitidos. Validação de limites funcionando",
             "Conforme esperado. O campo aceitou valores entre 0-100% e permitiu a inserção de valores decimais. A validação de limites funcionou corretamente.",
             "",
             "Concluido",
@@ -11604,7 +11604,7 @@
             "",
             "",
             "",
-            "\n\nIMPORTANTE: Regras de credito ja estao em producao. Validar areas de credito: ABBA, ADBA, Belgo Cash e Alpe."
+            "\n\nIMPORTANTE: Regras de crédito ja estao em produção. Validar áreas de crédito: ABBA, ADBA, Belgo Cash e Alpe."
           ],
           [
             "6",
@@ -11612,7 +11612,7 @@
             "Criar Workflow Pricing para desconto fixo em grupo de mercadoria",
             "Salesforce",
             "1. Acessar Salesforce e abrir uma Conta válida 2. Clicar em \"New WFPricing\" 3. Confirmar Emissor, selecionar Canal e Escritório de Vendas 4. Definir vigência 5. Clicar em \"Próximo\" 6. Navegar pela hierarquia até o nível \"Grupo de Mercadoria\" (ex: GP466) 7. Preencher percentual de desconto (ex: 3%) 8. Clicar em \"Criar\" OBS: Testar com diferentes canais disponiveis para o cliente (20, 30, 40)",
-            "Workflow criado e enviado para aprovação. O desconto deve ser aplicado a todos os materiais do grupo de mercadoria selecionado. Validar campo 'Integration Status' = 'Completed' apos aprovacao Validar campo 'External ID' preenchido com codigo alfanumerico unico",
+            "Workflow criado e enviado para aprovação. O desconto deve ser aplicado a todos os materiais do grupo de mercadoria selecionado. Validar campo 'Integration Status' = 'Completed' apos aprovação Validar campo 'External ID' preenchido com código alfanumerico único",
             "Conforme esperado. O workflow foi criado e enviado para aprovação, e o desconto foi aplicado corretamente a todos os materiais do grupo de mercadoria selecionado.\n\nApós a aprovação, os campos 'Integration Status' (Completed) e 'External ID' (preenchido com código único) foram validados com sucesso.",
             "",
             "Concluido",
@@ -11628,7 +11628,7 @@
             "Aprovar Workflow Pricing pelo time de Pricing",
             "Salesforce",
             "1. Logar com usuário do time de Pricing (Marketing) 2. Verificar notificações no Salesforce ou e-mail 3. Acessar o Workflow Pricing pendente de aprovação 4. Revisar dados: cliente, material, percentual, vigência 5. Clicar em \"Aprovar\" 6. Adicionar comentário (opcional) 7. Confirmar aprovação",
-            "Workflow deve ter status atualizado indicando aprovação do Pricing. Deve estar aguardando aprovação do gerente do Escritório de Vendas. Validar campo 'Integration Status' = 'Completed' apos aprovacao Validar campo 'External ID' preenchido com codigo alfanumerico unico",
+            "Workflow deve ter status atualizado indicando aprovação do Pricing. Deve estar aguardando aprovação do gerente do Escritório de Vendas. Validar campo 'Integration Status' = 'Completed' apos aprovação Validar campo 'External ID' preenchido com código alfanumerico único",
             "",
             "",
             "Pendente",
@@ -11644,7 +11644,7 @@
             "Aprovar Workflow Pricing pelo gerente do Escritório de Vendas",
             "Salesforce",
             "1. Logar com usuário gerente do Escritório de Vendas 2. Verificar notificações 3. Acessar o Workflow Pricing que já foi aprovado pelo Pricing 4. Revisar informações 5. Clicar em \"Aprovar\" 6. Confirmar",
-            "Workflow deve ser totalmente aprovado. A condition YDCF deve ser criada no SAP. Status deve mudar para \"Aprovado\". Validar campo 'Integration Status' = 'Completed' apos aprovacao Validar campo 'External ID' preenchido com codigo alfanumerico unico",
+            "Workflow deve ser totalmente aprovado. A condition YDCF deve ser criada no SAP. Status deve mudar para \"Aprovado\". Validar campo 'Integration Status' = 'Completed' apos aprovação Validar campo 'External ID' preenchido com código alfanumerico único",
             "Conforme esperado. O workflow foi totalmente aprovado e o status foi atualizado para \"Aprovado\". A condition YDCF foi criada corretamente no SAP.\n\nOs campos 'Integration Status' ('Completed') e 'External ID' (preenchido com código único) foram validados com sucesso.",
             "",
             "Concluido",
@@ -11660,8 +11660,8 @@
             "Rejeitar Workflow Pricing pelo time de Pricing",
             "Salesforce",
             "1. Logar como aprovador do time de Pricing 2. Acessar Workflow Pricing pendente 3. Revisar dados 4. Clicar em \"Rejeitar\" 5. Preencher justificativa da rejeição 6. Confirmar rejeição",
-            "Workflow deve ser rejeitado. Solicitante deve receber notificação com justificativa. Status deve mudar para \"Rejeitado\". Não deve ser criada condition no SAP. Validar campo 'Integration Status' = 'Completed' apos aprovacao Validar campo 'External ID' preenchido com codigo alfanumerico unico",
-            "Conforme esperado. O workflow foi rejeitado com sucesso. O status foi atualizado para \"Rejeitado\", a notificação com justificativa foi enviada ao solicitante, e validou-se que nenhuma condition foi criada no SAP.\n\nOs campos 'Integration Status' e 'External ID' foram atualizados corretamente, refletindo a conclusão do processo de rejeição.",
+            "Workflow deve ser rejeitado. Solicitante deve receber notificação com justificativa. Status deve mudar para \"Rejeitado\". Não deve ser criada condition no SAP. Validar campo 'Integration Status' = 'Completed' apos aprovação Validar campo 'External ID' preenchido com código alfanumerico único",
+            "Conforme esperado. O workflow foi rejeitado com sucesso. O status foi atualizado para \"Rejeitado\", a notificação com justificativa foi enviada ao solicitante, é válidou-se que nenhuma condition foi criada no SAP.\n\nOs campos 'Integration Status' e 'External ID' foram atualizados corretamente, refletindo a conclusão do processo de rejeição.",
             "",
             "Concluido",
             "Pricing",
@@ -11708,7 +11708,7 @@
             "Verificar criação da condition YDCF no SAP após aprovação completa (WF pricing)",
             "Salesforce + SAP",
             "1. No Salesforce, criar e aprovar completamente um Workflow Pricing 2. Anotar: Cliente, Material, Canal, Escritório, Percentual e Vigência 3. Logar no SAP ECC 4. Acessar transação VK13 5. Buscar pela condition YDCF usando os dados do workflow:(- Escritório Vendas - Canal - Cliente - Material); (- Escritório Vendas - Canal - Cliente - Grup. mercadoria); (- Escritório Vendas - Canal - Cliente - Grup. mat.) 6. Verificar percentual e vigência. ",
-            "A condition YDCF deve estar criada no SAP com os dados exatos do workflow aprovado (percentual, vigência, combinações possiveis [(- Escritório Vendas - Canal - Cliente - Material); (- Escritório Vendas - Canal - Cliente - Grup. mercadoria); (- Escritório Vendas - Canal - Cliente - Grup. mat.)]. Condicao YDCF criada no SAP e visivel via transacao VK13",
+            "A condition YDCF deve estar criada no SAP com os dados exatos do workflow aprovado (percentual, vigência, combinações possiveis [(- Escritório Vendas - Canal - Cliente - Material); (- Escritório Vendas - Canal - Cliente - Grup. mercadoria); (- Escritório Vendas - Canal - Cliente - Grup. mat.)]. Condição YDCF criada no SAP e visível via transação VK13",
             "",
             "",
             "Pendente",
@@ -11723,7 +11723,7 @@
             "Workflow Pricing",
             "Criar WF Pricing para Segmento de Produto (nível hierárquico intermediário)",
             "Salesforce",
-            "1. Iniciar criação de Workflow Pricing 2. Navegar pela hierarquia de materiais 3. Parar no nível \"Segmento de Produto\" (não descer até material) 4. Definir desconto no nível de Segmento 5. Criar workflow 3. Navegar pela hierarquia de materiais (3 niveis): - Nivel 1: Unidades - Nivel 2: Macro Segmentos de Produto - Nivel 3: Macro Segmentos de Produto Detalhado - Nível 4:  Segmento do produto - Nível 5: Grupo de Mercadoria - Nível 6: Material específico 4. Usar botoes 'Abrir todos' / 'Fechar todos' para expandir/colapsar arvore 6. Selecionar o Segmento de Produto (ex.: Autopeças) 7. Definir percentual 8. Criar workflow",
+            "1. Iniciar criação de Workflow Pricing 2. Navegar pela hierarquia de materiais 3. Parar no nível \"Segmento de Produto\" (não descer até material) 4. Definir desconto no nível de Segmento 5. Criar workflow 3. Navegar pela hierarquia de materiais (3 niveis): - Nível 1: Unidades - Nível 2: Macro Segmentos de Produto - Nível 3: Macro Segmentos de Produto Detalhado - Nível 4:  Segmento do produto - Nível 5: Grupo de Mercadoria - Nível 6: Material específico 4. Usar botoes 'Abrir todos' / 'Fechar todos' para expandir/colapsar arvore 6. Selecionar o Segmento de Produto (ex.: Autopeças) 7. Definir percentual 8. Criar workflow",
             "Workflow criado com desconto aplicável a todos os materiais do segmento (ex.: Autopeças) selecionado. Verificar validade após aprovação",
             "Tudo está funcionando conforme o esperado: o workflow de Pricing foi criado com sucesso, a navegação pela hierarquia de materiais foi realizada até o nível Segmento de Produto, o percentual de desconto foi definido corretamente, e os controles de expansão da árvore estão operando normalmente.",
             "",
@@ -11785,10 +11785,10 @@
           [
             "17",
             "Workflow Pricing",
-            "Validar envio de email de notificacao ao criar Workflow Pricing",
+            "Validar envio de email de notificação ao criar Workflow Pricing",
             "Salesforce",
-            "1. Criar novo Workflow Pricing 2. Preencher todos os campos obrigatorios 3. Selecionar materiais e configurar descontos 4. Clicar em \"Criar\" 5. Verificar caixa de email do aprovador configurado 6. Validar conteudo do email: - Assunto: \"Sandbox: Novo Workflow Pricing\" (ou producao) - Remetente: noreply@salesforce.com (Belgo Arames) - Mensagem: \"Foi enviada solicitacao de Workflow Pricing para aprovacao\" - Dados: Conta, Usuario solicitante (obs.: pode ser enviado através do e-mail salesforce@belgo.com.br)",
-            "Email recebido pelo aprovador com informacoes corretas do Workflow Pricing criado",
+            "1. Criar novo Workflow Pricing 2. Preencher todos os campos obrigatórios 3. Selecionar materiais e configurar descontos 4. Clicar em \"Criar\" 5. Verificar caixa de email do aprovador configurado 6. Validar conteudo do email: - Assunto: \"Sandbox: Novo Workflow Pricing\" (ou produção) - Remetente: noreply@salesforce.com (Belgo Arames) - Mensagem: \"Foi enviada solicitação de Workflow Pricing para aprovação\" - Dados: Conta, Usuário solicitante (obs.: pode ser enviado através do e-mail salesforce@belgo.com.br)",
+            "Email recebido pelo aprovador com informações corretas do Workflow Pricing criado",
             "A validação foi concluída com sucesso. O Workflow Pricing foi criado corretamente, todos os campos obrigatórios foram preenchidos, os materiais e descontos foram configurados, e o e-mail de aprovação foi recebido conforme esperado, com o assunto, remetente e conteúdo compatíveis com os critérios definidos",
             "",
             "Concluido",
@@ -11801,9 +11801,9 @@
           [
             "18",
             "Workflow Pricing",
-            "Validar navegacao completa na arvore de hierarquia de materiais",
+            "Validar navegação completa na arvore de hierarquia de materiais",
             "Salesforce",
-            "1. Iniciar criacao de Workflow Pricing 2. Avancar para tela de selecao de materiais 3. Verificar estrutura da arvore: - Nivel 1: Unidades - Nivel 2: Macro Segmentos de Produto - Nivel 3: Macro Segmentos de Produto Detalhado - Nível 4:  Segmento do produto - Nível 5: Grupo de Mercadoria - Nível 6: Material específico 4. Expandir cada nivel e validar estrutura 5. Usar botoes \"Abrir todos\" e \"Fechar todos\" 6. Selecionar materiais de diferentes unidades 7. Validar que estrutura reflete hierarquia SAP",
+            "1. Iniciar criação de Workflow Pricing 2. Avancar para tela de seleção de materiais 3. Verificar estrutura da arvore: - Nível 1: Unidades - Nível 2: Macro Segmentos de Produto - Nível 3: Macro Segmentos de Produto Detalhado - Nível 4:  Segmento do produto - Nível 5: Grupo de Mercadoria - Nível 6: Material específico 4. Expandir cada nível e validar estrutura 5. Usar botoes \"Abrir todos\" e \"Fechar todos\" 6. Selecionar materiais de diferentes unidades 7. Validar que estrutura reflete hierarquia SAP",
             "Arvore exibe todos os níveis corretamente. Botões funcionam. Organização está coerente com o definido com time de dados e inteligência de negócio",
             "Arvore exibe todos os níveis corretamente. Botões funcionam. Organização está coerente com o definido com time de dados e inteligência de negócio",
             "",
@@ -11817,7 +11817,7 @@
           [
             "19",
             "Workflow Pricing",
-            "Validar aprovacao por aprovador alternativo quando aprovador principal indisponivel",
+            "Validar aprovação por aprovador alternativo quando aprovador principal indisponível",
             "Salesforce",
             "1. Criar Workflow Pricing 2. Verificar se aprovador delegado do usuário consegue aprovar solicitação (ou aprovador adicional)",
             "Aprovador alternativo consegue aprovar. Sistema registra quem aprovou. Integração prossegue normalmente",
@@ -11884,7 +11884,7 @@
             "Determinação automática código I3 - Cliente Indústria Canal 20",
             "Salesforce + SAP",
             "1. Criar ordem de venda pelo SFDC para canal de vendas 20. 2.conferir ordem de venda no SAP (VA02/VA03). 3. Validar código de imposto (I3)",
-            "Sistema determina automaticamente código I3. ICMS, IPI, PIS e COFINS calculados. Base de cálculo ICMS = Valor produto (IPI NÃO integra)",
+            "Sistema determina automáticamente código I3. ICMS, IPI, PIS e COFINS calculados. Base de cálculo ICMS = Valor produto (IPI NÃO integra)",
             "",
             "",
             "Pendente",
@@ -11916,7 +11916,7 @@
             "Determinação automática código C3 - Cliente Consumidor Canal 40",
             "Salesforce + SAP",
             "1. Criar ordem de venda pelo SFDC para canal de vendas 20. 2.conferir ordem de venda no SAP (VA02/VA03). 3. Validar código de imposto (C3)",
-            "Código C3 determinado automaticamente. Base ICMS = Valor produto + Valor IPI (IPI INTEGRA base). Todos impostos calculados",
+            "Código C3 determinado automáticamente. Base ICMS = Valor produto + Valor IPI (IPI INTEGRA base). Todos impostos calculados",
             "",
             "",
             "Pendente",
@@ -12428,7 +12428,7 @@
             "Verificar disponibilidade de estoque no centro",
             "SAP",
             "1. Acessar MMBE e ZWSSCM025 2. Material: (definir) 3. Centro:(definir) 4. Verificar estoque livre",
-            "Estoque disponivel > 5.000 kg",
+            "Estoque disponível > 5.000 kg",
             "",
             "",
             "Pendente",
@@ -12441,10 +12441,10 @@
           [
             "58",
             "Setup",
-            "Testar cotacao com material expandido canal 20",
+            "Testar cotação com material expandido canal 20",
             "Salesforce",
-            "1. Material: X (expandido canal 20) 2. Cliente: X (canal 20) 3. Criar cotacao 4. Verificar sucesso",
-            "Cotacao criada sem erros",
+            "1. Material: X (expandido canal 20) 2. Cliente: X (canal 20) 3. Criar cotação 4. Verificar sucesso",
+            "Cotação criada sem erros",
             "",
             "",
             "Pendente",
@@ -12459,8 +12459,8 @@
             "Setup",
             "Testar erro com material NAO expandido",
             "Salesforce",
-            "1. Material: X (NAO expandido) 2. Tentar criar cotacao canal 20 3. Verificar erro",
-            "Erro: Material nao disponivel para canal",
+            "1. Material: X (NAO expandido) 2. Tentar criar cotação canal 20 3. Verificar erro",
+            "Erro: Material não disponível para canal",
             "",
             "",
             "Pendente",
@@ -12491,7 +12491,7 @@
             "Setup",
             "Expandir materiais para canal 20 (Industria)",
             "SAP",
-            "1. MM02 - cada material ou ZWSWF001 2. Criar visao Vendas: Org.Vendas 1 3. Canal: 20 4. Preencher dados obrigatorios 5. Salvar",
+            "1. MM02 - cada material ou ZWSWF001 2. Criar visão Vendas: Org.Vendas 1 3. Canal: 20 4. Preencher dados obrigatórios 5. Salvar",
             "Todos materiais expandidos canal 20",
             "",
             "",
@@ -12507,7 +12507,7 @@
             "Setup",
             "Expandir materiais para canal 30 (Revenda)",
             "SAP",
-            "1. MM02 - cada material ou ZWSWF001 2. Criar visao Vendas: Org.Vendas 1 3. Canal: 30 4. Preencher dados 5. Salvar",
+            "1. MM02 - cada material ou ZWSWF001 2. Criar visão Vendas: Org.Vendas 1 3. Canal: 30 4. Preencher dados 5. Salvar",
             "Todos materiais expandidos canal 30",
             "",
             "",
@@ -12523,7 +12523,7 @@
             "Setup",
             "Expandir materiais para canal 40 (Consumidor)",
             "SAP",
-            "1. MM02 - cada material ou ZWSWF001 2. Criar visao Vendas: Org.Vendas 1 3. Canal: 40 4. Preencher dados 5. Salvar",
+            "1. MM02 - cada material ou ZWSWF001 2. Criar visão Vendas: Org.Vendas 1 3. Canal: 40 4. Preencher dados 5. Salvar",
             "Todos materiais expandidos canal 40",
             "",
             "",
@@ -12537,10 +12537,10 @@
           [
             "64",
             "Setup",
-            "Cadastrar limite de credito no FSCM para clientes de teste",
+            "Cadastrar limite de crédito no FSCM para clientes de teste",
             "SAP",
-            "1. Acessar transacao UKM_BP (FSCM - Credit Management) 2. Ou acessar via BP (Business Partner) e navegar para aba Credit Management 3. Informar numero do Business Partner (cliente) 4. Definir Credit Limit: R$ 100.000,00 5. Definir Credit Control Area (Area de controle de credito da Belgo) 6. Definir Credit Segment se aplicavel 7. Validade: Definir data inicial e final do limite 8. Salvar configuracao",
-            "Limite de credito cadastrado no FSCM: - Business Partner com limite de R$ 100.000 - Credit Control Area configurada - Sistema valida limite nas vendas - Bloqueio automatico se exceder limite - Log de credito disponivel no UKM_CREDIT_CHECK",
+            "1. Acessar transação UKM_BP (FSCM - Credit Management) 2. Ou acessar via BP (Business Partner) e navegar para aba Credit Management 3. Informar número do Business Partner (cliente) 4. Definir Credit Limit: R$ 100.000,00 5. Definir Credit Control Área (Área de controle de crédito da Belgo) 6. Definir Credit Segment se aplicavel 7. Validade: Definir data inicial e final do limite 8. Salvar configuração",
+            "Limite de crédito cadastrado no FSCM: - Business Partner com limite de R$ 100.000 - Credit Control Área configurada - Sistema valida limite nas vendas - Bloqueio automático se exceder limite - Log de crédito disponível no UKM_CREDIT_CHECK",
             "",
             "",
             "Pendente",
@@ -12548,15 +12548,15 @@
             "",
             "",
             "",
-            "IMPORTANTE: Na Belgo, o credito e gerenciado pelo FSCM (Financial Supply Chain Management), nao pelo modulo SD padrao. Transacoes principais: - UKM_BP: Cadastro de limites no FSCM - BP: Business Partner (acesso via aba Credit Management) - UKM_CREDIT_CHECK: Verificacao de credito - FD32: NAO USAR (transacao antiga de SD-FI, nao integrada com FSCM) Integracao: FSCM <- BP <- Customer (XD01/XD02/XD03)\n\nIMPORTANTE: Regras de credito ja estao em producao. Validar areas de credito: ABBA, ADBA, Belgo Cash e Alpe."
+            "IMPORTANTE: Na Belgo, o crédito e gerênciado pelo FSCM (Financial Supply Chain Management), não pelo modulo SD padrão. Transações principais: - UKM_BP: Cadastro de limites no FSCM - BP: Business Partner (acesso via aba Credit Management) - UKM_CREDIT_CHECK: Verificação de crédito - FD32: NAO USAR (transação antiga de SD-FI, não integrada com FSCM) Integração: FSCM <- BP <- Customer (XD01/XD02/XD03)\n\nIMPORTANTE: Regras de crédito ja estao em produção. Validar áreas de crédito: ABBA, ADBA, Belgo Cash e Alpe."
           ],
           [
             "65",
             "Setup",
-            "Validar cliente com credito bloqueado no FSCM para testes",
+            "Validar cliente com crédito bloqueado no FSCM para testes",
             "SAP",
-            "1. Acessar transacao UKM_BP (FSCM) 2. Informar Business Partner 3. Definir Credit Limit: R$ 0,00 (bloqueado) 4. OU marcar Credit Block (bloqueio de credito) 5. Credit Control Area: Area Belgo 6. Salvar 7. Validar status: Blocked",
-            "Cliente com credito bloqueado no FSCM: - Credit Limit = R$ 0 OU Credit Block ativo - Qualquer tentativa de criar OV sera bloqueada - Mensagem de erro: \"Cliente sem limite de credito disponivel\" - Documento de vendas nao avanca sem aprovacao manual",
+            "1. Acessar transação UKM_BP (FSCM) 2. Informar Business Partner 3. Definir Credit Limit: R$ 0,00 (bloqueado) 4. OU marcar Credit Block (bloqueio de crédito) 5. Credit Control Area: Área Belgo 6. Salvar 7. Validar status: Blocked",
+            "Cliente com crédito bloqueado no FSCM: - Credit Limit = R$ 0 OU Credit Block ativo - Qualquer tentativa de criar OV sera bloqueada - Mensagem de erro: \"Cliente sem limite de crédito disponível\" - Documento de vendas não avanca sem aprovação manual",
             "",
             "",
             "Pendente",
@@ -12564,15 +12564,15 @@
             "",
             "",
             "",
-            "IMPORTANTE: Na Belgo, o credito e gerenciado pelo FSCM (Financial Supply Chain Management), nao pelo modulo SD padrao. Transacoes principais: - UKM_BP: Cadastro de limites no FSCM - BP: Business Partner (acesso via aba Credit Management) - UKM_CREDIT_CHECK: Verificacao de credito - FD32: NAO USAR (transacao antiga de SD-FI, nao integrada com FSCM) Integracao: FSCM <- BP <- Customer (XD01/XD02/XD03)\n\nIMPORTANTE: Regras de credito ja estao em producao. Validar areas de credito: ABBA, ADBA, Belgo Cash e Alpe."
+            "IMPORTANTE: Na Belgo, o crédito e gerênciado pelo FSCM (Financial Supply Chain Management), não pelo modulo SD padrão. Transações principais: - UKM_BP: Cadastro de limites no FSCM - BP: Business Partner (acesso via aba Credit Management) - UKM_CREDIT_CHECK: Verificação de crédito - FD32: NAO USAR (transação antiga de SD-FI, não integrada com FSCM) Integração: FSCM <- BP <- Customer (XD01/XD02/XD03)\n\nIMPORTANTE: Regras de crédito ja estao em produção. Validar áreas de crédito: ABBA, ADBA, Belgo Cash e Alpe."
           ],
           [
             "66",
             "Setup",
-            "Validar cliente com credito liberado no FSCM para testes",
+            "Validar cliente com crédito liberado no FSCM para testes",
             "SAP",
-            "1. Acessar transacao UKM_BP (FSCM) 2. Informar Business Partner 3. Definir Credit Limit: R$ 500.000,00 (alto) 4. Credit Control Area: Area Belgo 5. Risk Category: Low (se aplicavel) 6. Validade: Data futura ampla 7. Salvar 8. Executar UKM_CREDIT_CHECK para validar",
-            "Cliente com credito liberado: - Limite alto (R$ 500.000) - Credit Check passa automaticamente - OVs podem ser criadas sem bloqueio - Utilizacao de credito atualizada em tempo real - Disponivel para todos os testes de vendas",
+            "1. Acessar transação UKM_BP (FSCM) 2. Informar Business Partner 3. Definir Credit Limit: R$ 500.000,00 (alto) 4. Credit Control Area: Área Belgo 5. Risk Category: Low (se aplicavel) 6. Validade: Data futura ampla 7. Salvar 8. Executar UKM_CREDIT_CHECK para validar",
+            "Cliente com crédito liberado: - Limite alto (R$ 500.000) - Credit Check passa automáticamente - OVs podem ser criadas sem bloqueio - Utilização de crédito atualizada em tempo real - Disponível para todos os testes de vendas",
             "",
             "",
             "Pendente",
@@ -12580,12 +12580,12 @@
             "",
             "",
             "",
-            "IMPORTANTE: Na Belgo, o credito e gerenciado pelo FSCM (Financial Supply Chain Management), nao pelo modulo SD padrao. Transacoes principais: - UKM_BP: Cadastro de limites no FSCM - BP: Business Partner (acesso via aba Credit Management) - UKM_CREDIT_CHECK: Verificacao de credito - FD32: NAO USAR (transacao antiga de SD-FI, nao integrada com FSCM) Integracao: FSCM <- BP <- Customer (XD01/XD02/XD03)\n\nIMPORTANTE: Regras de credito ja estao em producao. Validar areas de credito: ABBA, ADBA, Belgo Cash e Alpe."
+            "IMPORTANTE: Na Belgo, o crédito e gerênciado pelo FSCM (Financial Supply Chain Management), não pelo modulo SD padrão. Transações principais: - UKM_BP: Cadastro de limites no FSCM - BP: Business Partner (acesso via aba Credit Management) - UKM_CREDIT_CHECK: Verificação de crédito - FD32: NAO USAR (transação antiga de SD-FI, não integrada com FSCM) Integração: FSCM <- BP <- Customer (XD01/XD02/XD03)\n\nIMPORTANTE: Regras de crédito ja estao em produção. Validar áreas de crédito: ABBA, ADBA, Belgo Cash e Alpe."
           ],
           [
             "67",
             "Setup",
-            "Parametrizar condicoes de pagamento por canal e segmento",
+            "Parametrizar condições de pagamento por canal e segmento",
             "SAP",
             "1. Acessar ZWSSD067 2. Parametrizar condição/canal/segmento 4. Salvar",
             "Parametrização realizada",
@@ -12601,9 +12601,9 @@
           [
             "68",
             "Setup",
-            "Listar clientes necessarios para os testes",
+            "Listar clientes necessários para os testes",
             "Excel",
-            "1. Revisar casos 01-112 2. Perfis: PJ/PF, com/sem credito, UFs 3. Documentar na aba Dados Mestres",
+            "1. Revisar casos 01-112 2. Perfis: PJ/PF, com/sem crédito, UFs 3. Documentar na aba Dados Mestres",
             "Lista completa clientes (min. 5)",
             "",
             "",
@@ -12612,7 +12612,7 @@
             "",
             "",
             "",
-            "\n\nIMPORTANTE: Regras de credito ja estao em producao. Validar areas de credito: ABBA, ADBA, Belgo Cash e Alpe."
+            "\n\nIMPORTANTE: Regras de crédito ja estao em produção. Validar áreas de crédito: ABBA, ADBA, Belgo Cash e Alpe."
           ],
           [
             "69",
@@ -12633,9 +12633,9 @@
           [
             "70",
             "Setup",
-            "Listar materiais necessarios para os testes",
+            "Listar materiais necessários para os testes",
             "Excel",
-            "1. Revisar casos 01-112 2. Identificar materiais unicos 3. Documentar na aba Dados Mestres",
+            "1. Revisar casos 01-112 2. Identificar materiais únicos 3. Documentar na aba Dados Mestres",
             "Lista completa de materiais (min. 10)",
             "",
             "",
@@ -12732,7 +12732,7 @@
             "Verificar recalculo automático da YEDI quando houver YDCF",
             "SAP",
             "1. conferir ordem de venda no SAP (VA02/VA03), acessar o pricing do item 3. Localizar condition YEDI (desconto informado) 4. Verificar se YEDI foi recalculada corretamente considerando YDCF",
-            "YEDI deve ser automaticamente ajustada para manter coerência com YDCF e evitar arredondamentos/distorções.\n\n[Validar campo 'Integration Status' = 'Completed']\n[Validar campo 'External ID' preenchido e rastreável]",
+            "YEDI deve ser automáticamente ajustada para manter coerência com YDCF e evitar arredondamentos/distorções.\n\n[Validar campo 'Integration Status' = 'Completed']\n[Validar campo 'External ID' preenchido e rastreável]",
             "",
             "",
             "Pendente",
@@ -12748,7 +12748,7 @@
             "Verificar comportamento quando YDCF expira (vigência termina)",
             "Salesforce + SAP",
             "1. Criar WF Pricing com vigência curta (ex: válido apenas por 1 dia) 2. Aprovar 3. Criar cotação dentro da vigência - verificar que desconto é aplicado 4. Aguardar expiração da vigência 5. Criar nova cotação após expiração 6. Verificar se desconto fixo ainda é aplicado",
-            "Após expiração, desconto fixo NÃO deve mais ser aplicado automaticamente. Campo \"Desconto Fixo do Cliente\" deve estar vazio.\n\n[Validar campo 'Integration Status' = 'Completed']\n[Validar campo 'External ID' preenchido e rastreável]",
+            "Após expiração, desconto fixo NÃO deve mais ser aplicado automáticamente. Campo \"Desconto Fixo do Cliente\" deve estar vazio.\n\n[Validar campo 'Integration Status' = 'Completed']\n[Validar campo 'External ID' preenchido e rastreável]",
             "",
             "",
             "Pendente",
@@ -12761,10 +12761,10 @@
           [
             "78",
             "Financeiro",
-            "Verificar bloqueio automatico de OV sem credito",
+            "Verificar bloqueio automático de OV sem crédito",
             "Salesforce + SAP",
-            "[Transação SAP: UKM_BP (FSCM Credit Management)]\n\n1. Cliente CLI004 (sem credito) 2. Criar OV 3. Verificar bloqueio Z3",
-            "OV bloqueada automaticamente\n\n[Validar campo 'Integration Status' = 'Completed']\n[Validar campo 'External ID' preenchido e rastreável]",
+            "[Transação SAP: UKM_BP (FSCM Credit Management)]\n\n1. Cliente CLI004 (sem crédito) 2. Criar OV 3. Verificar bloqueio Z3",
+            "OV bloqueada automáticamente\n\n[Validar campo 'Integration Status' = 'Completed']\n[Validar campo 'External ID' preenchido e rastreável]",
             "",
             "",
             "Pendente",
@@ -12772,12 +12772,12 @@
             "",
             "",
             "",
-            "\n\nIMPORTANTE: Regras de credito ja estao em producao. Validar areas de credito: ABBA, ADBA, Belgo Cash e Alpe."
+            "\n\nIMPORTANTE: Regras de crédito ja estao em produção. Validar áreas de crédito: ABBA, ADBA, Belgo Cash e Alpe."
           ],
           [
             "79",
             "Financeiro",
-            "Validar mensagem de alerta de credito ao validar cotacao",
+            "Validar mensagem de alerta de crédito ao validar cotação",
             "Salesforce",
             "",
             "Alerta exibido",
@@ -12788,7 +12788,7 @@
             "",
             "",
             "",
-            "IMPORTANTE: Verificar com Planejamento se materiais estão expandidos para o centro de teste e possuem estoque disponível.\n\nIMPORTANTE: Regras de credito ja estao em producao. Validar areas de credito: ABBA, ADBA, Belgo Cash e Alpe."
+            "IMPORTANTE: Verificar com Planejamento se materiais estão expandidos para o centro de teste e possuem estoque disponível.\n\nIMPORTANTE: Regras de crédito ja estao em produção. Validar áreas de crédito: ABBA, ADBA, Belgo Cash e Alpe."
           ],
           [
             "80",
@@ -12811,8 +12811,8 @@
             "Cotação e Ordem de Vendas",
             "Verificar aplicação automática de Desconto Fixo do Cliente (YDCF) na cotação",
             "Salesforce",
-            "1. Usar cliente que possui Workflow Pricing aprovado e vigente para determinado material 2. Criar cotação para o mesmo canal e escritório do WF Pricing 3. Incluir o material que tem desconto fixo aprovado 4. Sincronizar 5. Verificar campo \"Desconto Fixo do Cliente\" 6. Verificar campo \"Desconto\" (deve ser preenchido automaticamente)",
-            "O percentual do Desconto Fixo do Cliente deve aparecer no campo específico. O campo Desconto deve ser preenchido automaticamente com o mesmo valor. Item não deve cair no Limbo se desconto estiver dentro do aprovado.",
+            "1. Usar cliente que possui Workflow Pricing aprovado e vigente para determinado material 2. Criar cotação para o mesmo canal e escritório do WF Pricing 3. Incluir o material que tem desconto fixo aprovado 4. Sincronizar 5. Verificar campo \"Desconto Fixo do Cliente\" 6. Verificar campo \"Desconto\" (deve ser preenchido automáticamente)",
+            "O percentual do Desconto Fixo do Cliente deve aparecer no campo específico. O campo Desconto deve ser preenchido automáticamente com o mesmo valor. Item não deve cair no Limbo se desconto estiver dentro do aprovado.",
             "",
             "",
             "Pendente",
@@ -12859,8 +12859,8 @@
             "Cotação e Ordem de Vendas",
             "Verificar mensagem de disponibilidade ao adicionar material",
             "Salesforce",
-            "1. Criar cotacao 2. Adicionar material 3. Verificar coluna de \"disponibilidade\" (ícone vermelho, amarelo ou verde)",
-            "Mensagem: Disponivel para entrega em XX dias. Sinal varia de acordo com a data. Data confirmada diferenciada",
+            "1. Criar cotação 2. Adicionar material 3. Verificar coluna de \"disponibilidade\" (ícone vermelho, amarelo ou verde)",
+            "Mensagem: Disponível para entrega em XX dias. Sinal varia de acordo com a data. Data confirmada diferenciada",
             "",
             "",
             "Pendente",
@@ -12873,10 +12873,10 @@
           [
             "85",
             "Cotação e Ordem de Vendas",
-            "Validar erro ao criar cotacao com material sem estoque",
+            "Validar erro ao criar cotação com material sem estoque",
             "Salesforce",
-            "1. Material: X (sem estoque) 2. Tentar criar cotacao 3. Verificar mensagem erro",
-            "Erro: Material nao disponivel. Possibilita perder a Cotação por Estoque",
+            "1. Material: X (sem estoque) 2. Tentar criar cotação 3. Verificar mensagem erro",
+            "Erro: Material não disponível. Possibilita perder a Cotação por Estoque",
             "",
             "",
             "Pendente",
@@ -12905,10 +12905,10 @@
           [
             "87",
             "Cotação e Ordem de Vendas",
-            "Verificar preco sugerido corresponde ao Pricing",
+            "Verificar preço sugerido corresponde ao Pricing",
             "Salesforce + SAP",
-            "1. Criar cotacao 2. Material: X 3. Verificar preco sugerido 4. Comparar com VK13",
-            "Preco SFDC = Preco SAP (VK13)",
+            "1. Criar cotação 2. Material: X 3. Verificar preço sugerido 4. Comparar com VK13",
+            "Preço SFDC = Preço SAP (VK13)",
             "",
             "",
             "Pendente",
@@ -12923,7 +12923,7 @@
             "Cotação e Ordem de Vendas",
             "Uso da Área de Vendas na cotação",
             "Salesforce",
-            "1. Na tela de Área de Vendas da cotação (após iniciá-la) 2. Preencher Organização de Vendas: Org Vendas BBA 3. Selecionar Canal de Distribuição (deve ser um canal estendido ao cliente) 4. Selecionar Produto Acabado (55) 5. Confirmar Vendedor, Escritório, Condição de Pagamento (preenchidos automaticamente) 6. Se necessário, adicionar dias adicionais 7. Alterar modalidade de frete se necessário (EXW ou CIF)",
+            "1. Na tela de Área de Vendas da cotação (após iniciá-la) 2. Preencher Organização de Vendas: Org Vendas BBA 3. Selecionar Canal de Distribuição (deve ser um canal estendido ao cliente) 4. Selecionar Produto Acabado (55) 5. Confirmar Vendedor, Escritório, Condição de Pagamento (preenchidos automáticamente) 6. Se necessário, adicionar dias adicionais 7. Alterar modalidade de frete se necessário (EXW ou CIF)",
             "Cotação exibe informações de Áreas de Vendas pertinentes ao Cliente iniciado na Cotação",
             "",
             "",
@@ -12972,7 +12972,7 @@
             "Validação completa - Canal 20 + I3 + Setor 55",
             "Salesforce + SAP",
             "1. Cliente industrial canal 20 2. Setor 55 3. Material tributado 4. Sem exceções 5. Criar ordem 6. Verificar pricing 7. Gerar XML",
-            "Código I3 determinado automaticamente. ICMS + IPI + PIS + COFINS calculados. Base ICMS sem IPI. XML correto",
+            "Código I3 determinado automáticamente. ICMS + IPI + PIS + COFINS calculados. Base ICMS sem IPI. XML correto",
             "",
             "",
             "Pendente",
@@ -12987,7 +12987,7 @@
             "Cotação e Ordem de Vendas",
             "Validar ATP mostra data correta de entrega",
             "Salesforce",
-            "1. Cotacao com material 2. Qtd: personalizada  3. Verificar data ATP (data confirmada)",
+            "1. Cotação com material 2. Qtd: personalizada  3. Verificar data ATP (data confirmada)",
             "Data ATP = D+X dias úteis (verificar qual a regra de dias para centros Belgo)",
             "",
             "",
@@ -13001,10 +13001,10 @@
           [
             "93",
             "Cotação e Ordem de Vendas",
-            "Validar sincronizacao com expansao correta",
+            "Validar sincronização com expansao correta",
             "Salesforce + SAP",
-            "1. Material e cliente expandidos 2. Criar cotacao SFDC 3. Sincronizar SAP 4. Verificar sem erros",
-            "Sincronizacao 100% sucesso\n\n[Validar campo 'Integration Status' = 'Completed']\n[Validar campo 'External ID' preenchido e rastreável]",
+            "1. Material e cliente expandidos 2. Criar cotação SFDC 3. Sincronizar SAP 4. Verificar sem erros",
+            "Sincronização 100% sucesso\n\n[Validar campo 'Integration Status' = 'Completed']\n[Validar campo 'External ID' preenchido e rastreável]",
             "",
             "",
             "Pendente",
@@ -13052,7 +13052,7 @@
             "Sincronizar cotação com SAP e verificar precificação",
             "Salesforce",
             "1. Com materiais já incluídos na cotação 2. Verificar que dados de centro e data estão corretos 3. Clicar no botão \"Sincronizar\" 4. Aguardar processamento (pode levar alguns segundos) 5. Verificar resultado",
-            "Sincronização bem-sucedida. Campos de preço devem ser preenchidos automaticamente pelo SAP. Colunas de impostos, descontos e valor total devem ser populadas. Não deve haver erros vermelhos.",
+            "Sincronização bem-sucedida. Campos de preço devem ser preenchidos automáticamente pelo SAP. Colunas de impostos, descontos e valor total devem ser populadas. Não deve haver erros vermelhos.",
             "",
             "",
             "Pendente",
@@ -13228,7 +13228,7 @@
             "Criar OV no SFDC e  verificar no SAP aplicação das novas conditions no pricing",
             "Salesforce + SAP",
             "\n1. conferir ordem de venda no SAP (VA02/VA03). Selecionar cliente e material que atendam às conditions cadastradas 4. Após incluir item, clicar em \"Condições\" (pricing) 5. Verificar se as conditions YAC1, YACR, YPOL aparecem no pricing com valores corretos.",
-            "Conditions devem ser encontradas e aplicadas automaticamente conforme sequências de acesso. Valores devem ser os previamente cadastrados.",
+            "Conditions devem ser encontradas e aplicadas automáticamente conforme sequências de acesso. Valores devem ser os previamente cadastrados.",
             "",
             "",
             "Pendente",
@@ -13241,10 +13241,10 @@
           [
             "108",
             "Conditions Pricing - SAP",
-            "Verificar calculo correto de preco liquido",
+            "Verificar calculo correto de preço liquido",
             "Salesforce + SAP",
-            "1. Criar cotacao 2. Verificar: Base + YAC1 + YPOL + YESC + YDCF 3. Comparar resultado",
-            "Preco liquido = Soma todas conditions\n\n[Validar campo 'Integration Status' = 'Completed']\n[Validar campo 'External ID' preenchido e rastreável]",
+            "1. Criar cotação 2. Verificar: Base + YAC1 + YPOL + YESC + YDCF 3. Comparar resultado",
+            "Preço liquido = Soma todas conditions\n\n[Validar campo 'Integration Status' = 'Completed']\n[Validar campo 'External ID' preenchido e rastreável]",
             "",
             "",
             "Pendente",
@@ -13350,7 +13350,7 @@
             ""
           ],
           [
-            "3. O Dashboard atualiza automaticamente quando você muda o status",
+            "3. O Dashboard atualiza automáticamente quando você muda o status",
             ""
           ],
           [
@@ -13379,7 +13379,7 @@
           ],
           [
             "Story 863146",
-            "Ajustar Cotacao/OV baseado na YDCF"
+            "Ajustar Cotação/OV baseado na YDCF"
           ],
           [
             "  Cobertura",
@@ -13387,7 +13387,7 @@
           ],
           [
             "Story 846943",
-            "Pricing, Cotacao/OV, Validacao impostos"
+            "Pricing, Cotação/OV, Validação impostos"
           ],
           [
             "  Cobertura",

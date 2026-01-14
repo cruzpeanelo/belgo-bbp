@@ -4,420 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jornadas - Cockpit GTM Belgo</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../css/styles.css">
-    <style>
-        .processo-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .processo-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e5e7eb;
-        }
-        .processo-icon {
-            font-size: 2rem;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f3f4f6;
-            border-radius: 12px;
-        }
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-        .as-is-box {
-            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
-            border-radius: 12px;
-            padding: 20px;
-            border-left: 4px solid #ef4444;
-        }
-        .to-be-box {
-            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-            border-radius: 12px;
-            padding: 20px;
-            border-left: 4px solid #10b981;
-        }
-        .box-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .as-is-box .box-title { color: #dc2626; }
-        .to-be-box .box-title { color: #059669; }
-        .step-list {
-            list-style: none;
-            padding: 0;
-        }
-        .step-list li {
-            padding: 8px 0;
-            padding-left: 25px;
-            position: relative;
-            border-bottom: 1px dashed #d1d5db;
-        }
-        .step-list li:last-child { border-bottom: none; }
-        .step-list li::before {
-            content: counter(step);
-            counter-increment: step;
-            position: absolute;
-            left: 0;
-            width: 20px;
-            height: 20px;
-            background: #6b7280;
-            color: white;
-            border-radius: 50%;
-            font-size: 0.7rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .as-is-box .step-list { counter-reset: step; }
-        .to-be-box .step-list { counter-reset: step; }
-        .to-be-box .step-list li::before { background: #10b981; }
-        .tag-list {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-top: 15px;
-        }
-        .tag {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-        .tag-problem { background: #fee2e2; color: #991b1b; }
-        .tag-benefit { background: #d1fae5; color: #065f46; }
-        .tag-area { background: #dbeafe; color: #1e40af; }
-        .tag-system { background: #fef3c7; color: #92400e; }
-        .tag-integration { background: #e0e7ff; color: #3730a3; }
-        .tag-rule { background: #fce7f3; color: #9d174d; }
-        .details-section {
-            margin-top: 20px;
-            padding: 20px;
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
-        }
-        .details-section h4 {
-            color: #003B4A;
-            margin: 0 0 15px 0;
-            font-size: 1rem;
-        }
-        .details-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-        }
-        .detail-item {
-            background: white;
-            padding: 12px 15px;
-            border-radius: 8px;
-            border-left: 3px solid #003B4A;
-        }
-        .detail-item strong {
-            color: #003B4A;
-            font-size: 0.85rem;
-            display: block;
-            margin-bottom: 5px;
-        }
-        .workflow-box {
-            background: #fdf4ff;
-            border: 1px solid #e879f9;
-            border-radius: 8px;
-            padding: 12px;
-            margin-top: 10px;
-        }
-        .workflow-step {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 0;
-            border-bottom: 1px dashed #e879f9;
-        }
-        .workflow-step:last-child { border-bottom: none; }
-        .workflow-level {
-            background: #a855f7;
-            color: white;
-            min-width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: bold;
-        }
-
-        .tempo-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-top: 10px;
-        }
-        .as-is-box .tempo-badge { background: #fecaca; color: #991b1b; }
-        .to-be-box .tempo-badge { background: #a7f3d0; color: #065f46; }
-        /* Estilos BBP Enriquecido */
-        .citacao-box {
-            background: #fffbeb;
-            border-left: 3px solid #f59e0b;
-            padding: 10px 15px;
-            margin: 8px 0;
-            font-style: italic;
-            font-size: 0.85rem;
-            color: #92400e;
-            border-radius: 0 8px 8px 0;
-        }
-        .tipos-conta-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .tipo-conta-card {
-            background: #f0f9ff;
-            border: 1px solid #bae6fd;
-            border-radius: 8px;
-            padding: 10px;
-        }
-        .tipo-conta-card strong { color: #0369a1; display: block; margin-bottom: 4px; font-size: 0.9rem; }
-        .tipo-conta-card span { font-size: 0.8rem; color: #6b7280; }
-        .campos-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            font-size: 0.8rem;
-            overflow-x: auto;
-        }
-        .campos-table th { background: #003B4A; color: white; padding: 8px; text-align: left; }
-        .campos-table td { padding: 8px; border-bottom: 1px solid #e5e7eb; }
-        .campos-table tr:nth-child(even) { background: #f9fafb; }
-        .regra-card {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 12px;
-            margin: 8px 0;
-        }
-        .regra-card h5 { margin: 0 0 8px 0; color: #003B4A; font-size: 0.9rem; }
-        .regra-card .exemplos {
-            background: #f3f4f6;
-            padding: 8px;
-            border-radius: 4px;
-            margin-top: 8px;
-            font-size: 0.8rem;
-        }
-        .ciclo-teste-card {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 12px;
-            margin: 8px 0;
-        }
-        .ciclo-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; }
-        .ciclo-status { padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
-        .ciclo-status.aprovado { background: #d1fae5; color: #065f46; }
-        .ciclo-status.pendente { background: #fef3c7; color: #92400e; }
-        .participante-card {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px;
-            background: #f9fafb;
-            border-radius: 8px;
-            margin: 4px 0;
-        }
-        .participante-avatar {
-            width: 36px;
-            height: 36px;
-            background: #003B4A;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 0.8rem;
-            flex-shrink: 0;
-        }
-        .section-divider { margin-top: 20px; padding-top: 15px; border-top: 2px solid #e5e7eb; }
-        .section-title { color: #003B4A; font-size: 1rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-        .tag-pendencia { background: #fef3c7; color: #92400e; }
-        .tag-prerequisito { background: #dbeafe; color: #1e40af; }
-        .collapsible-section { margin-top: 15px; }
-        .collapsible-header {
-            cursor: pointer;
-            background: #f1f5f9;
-            padding: 10px 15px;
-            border-radius: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            color: #003B4A;
-        }
-        .collapsible-header:hover { background: #e2e8f0; }
-        .collapsible-content { padding: 15px 0; }
-        .fonte-reuniao-tag {
-            background: #e0f2fe;
-            color: #0369a1;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            margin: 2px;
-            display: inline-block;
-        }
-                .aba-interface-card {
-                    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-                    border-left: 4px solid #0284c7;
-                    border-radius: 8px;
-                    padding: 15px;
-                    margin-bottom: 10px;
-                }
-
-                .aba-interface-card h5 {
-                    color: #0369a1;
-                    margin: 0 0 10px 0;
-                    font-size: 1rem;
-                }
-
-                .campos-list {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 6px;
-                    margin-top: 8px;
-                }
-
-                .campo-item {
-                    background: white;
-                    border: 1px solid #bae6fd;
-                    border-radius: 4px;
-                    padding: 4px 10px;
-                    font-size: 0.85rem;
-                    color: #0c4a6e;
-                }
-
-                .mensagem-sistema {
-                    background: #fef3c7;
-                    border-left: 4px solid #f59e0b;
-                    border-radius: 8px;
-                    padding: 15px;
-                    margin-bottom: 10px;
-                }
-
-                .mensagem-sistema .contexto {
-                    font-weight: 600;
-                    color: #92400e;
-                    margin-bottom: 8px;
-                }
-
-                .mensagem-sistema .texto {
-                    background: white;
-                    border: 1px solid #fcd34d;
-                    border-radius: 4px;
-                    padding: 10px;
-                    font-family: monospace;
-                    font-size: 0.9rem;
-                    color: #78350f;
-                }
-                .btn-ver-testes {
-                    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-                    color: white;
-                    border: none;
-                    padding: 6px 12px;
-                    border-radius: 6px;
-                    font-size: 0.8rem;
-                    font-weight: 500;
-                    cursor: pointer;
-                    text-decoration: none;
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 4px;
-                    transition: all 0.2s ease;
-                    margin-left: 10px;
-                }
-
-                .btn-ver-testes:hover {
-                    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-                    transform: translateY(-1px);
-                    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
-                }
-
-                .ciclo-actions {
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                }
-    </style>
 </head>
 <body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <span class="mobile-header-logo">BELGO GTM</span>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+            ☰
+        </button>
+    </header>
+
+    <!-- Overlay para fechar menu -->
+    <div class="sidebar-overlay" onclick="toggleMobileMenu()"></div>
+
     <div class="app-container">
         <!-- Sidebar -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-logo">BELGO</div>
                 <div class="sidebar-subtitle">Cockpit GTM</div>
             </div>
-            <nav class="sidebar-nav">
-                <a href="../index.html" class="nav-item">
-                    <span class="nav-icon">📊</span>
+            <nav class="sidebar-nav" role="navigation" aria-label="Menu principal">
+                <a href="../index.html" class="nav-item" aria-label="Dashboard">
+                    <span class="nav-icon" aria-hidden="true">📊</span>
                     <span class="nav-text">Dashboard</span>
                 </a>
-                <a href="testes.html" class="nav-item">
-                    <span class="nav-icon">✅</span>
+                <a href="testes.html" class="nav-item" aria-label="Testes">
+                    <span class="nav-icon" aria-hidden="true">✅</span>
                     <span class="nav-text">Testes</span>
                 </a>
-                <a href="jornadas.html" class="nav-item active">
-                    <span class="nav-icon">🔄</span>
+                <a href="jornadas.html" class="nav-item active" aria-current="page" aria-label="Jornadas AS IS TO BE">
+                    <span class="nav-icon" aria-hidden="true">🔄</span>
                     <span class="nav-text">Jornadas AS IS/TO BE</span>
                 </a>
-                <a href="documentos.html" class="nav-item">
-                    <span class="nav-icon">📄</span>
+                <a href="documentos.html" class="nav-item" aria-label="Documentos">
+                    <span class="nav-icon" aria-hidden="true">📄</span>
                     <span class="nav-text">Documentos</span>
                 </a>
-                <a href="reunioes.html" class="nav-item">
-                    <span class="nav-icon">📝</span>
+                <a href="reunioes.html" class="nav-item" aria-label="Reuniões">
+                    <span class="nav-icon" aria-hidden="true">📝</span>
                     <span class="nav-text">Reuniões</span>
                 </a>
-                <a href="timeline.html" class="nav-item">
-                    <span class="nav-icon">📅</span>
+                <a href="timeline.html" class="nav-item" aria-label="Timeline">
+                    <span class="nav-icon" aria-hidden="true">📅</span>
                     <span class="nav-text">Timeline</span>
                 </a>
-                <a href="cronograma.html" class="nav-item">
-                    <span class="nav-icon">🗓️</span>
+                <a href="cronograma.html" class="nav-item" aria-label="Cronograma">
+                    <span class="nav-icon" aria-hidden="true">🗓️</span>
                     <span class="nav-text">Cronograma</span>
                 </a>
-                <a href="glossario.html" class="nav-item">
-                    <span class="nav-icon">📖</span>
+                <a href="glossario.html" class="nav-item" aria-label="Glossário">
+                    <span class="nav-icon" aria-hidden="true">📖</span>
                     <span class="nav-text">Glossário</span>
                 </a>
-                <a href="participantes.html" class="nav-item">
-                    <span class="nav-icon">👥</span>
+                <a href="participantes.html" class="nav-item" aria-label="Participantes">
+                    <span class="nav-icon" aria-hidden="true">👥</span>
                     <span class="nav-text">Participantes</span>
                 </a>
-                <a href="config.html" class="nav-item">
-                    <span class="nav-icon">⚙️</span>
+                <a href="config.html" class="nav-item" aria-label="Configurações">
+                    <span class="nav-icon" aria-hidden="true">⚙️</span>
                     <span class="nav-text">Configurações</span>
                 </a>
-                <a href="pontos-criticos.html" class="nav-item">
-                    <span class="nav-icon">⚠️</span>
+                <a href="pontos-criticos.html" class="nav-item" aria-label="Pontos Críticos">
+                    <span class="nav-icon" aria-hidden="true">⚠️</span>
                     <span class="nav-text">Pontos Críticos</span>
                 </a>
             </nav>
@@ -499,9 +150,9 @@
 
                 const card = Utils.formatTeamsCard('jornada', `🔄 Jornada: ${processo.nome}`, [
                     { name: "Status", value: processo.status },
-                    { name: "AS-IS", value: processo.asIs?.descricao },
-                    { name: "TO-BE", value: processo.toBe?.descricao },
-                    { name: "Áreas Impactadas", value: processo.areasImpactadas?.join(', ') },
+                    { name: "AS-IS", value: processo.asIs?.descrição },
+                    { name: "TO-BE", value: processo.toBe?.descrição },
+                    { name: "Áreas Impactadas", value: processo.áreasImpactadas?.join(', ') },
                     { name: "Tempo AS-IS", value: processo.asIs?.tempoMedio },
                     { name: "Tempo TO-BE", value: processo.toBe?.tempoMedio }
                 ]);
@@ -544,7 +195,7 @@
                                 <h2 style="margin: 0; color: #003B4A;">${p.nome}</h2>
                                 <div style="display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap;">
                                     <span class="badge ${Utils.getBadgeClass(p.status)}">${p.status}</span>
-                                    ${p.fontesReuniao ? p.fontesReuniao.map(f => `<span class="fonte-reuniao-tag">${f}</span>`).join('') : `<span style="color: #6b7280; font-size: 0.85rem;">Fonte: ${p.fonteReuniao}</span>`}
+                                    ${p.fontesReunião ? p.fontesReunião.map(f => `<span class="fonte-reuniao-tag">${f}</span>`).join('') : `<span style="color: #6b7280; font-size: 0.85rem;">Fonte: ${p.fonteReunião}</span>`}
                                 </div>
                             </div>
                             <button class="btn" style="background: #6264A7; color: white; padding: 8px 15px;" onclick="Jornadas.compartilharTeams('${p.id}')">
@@ -555,7 +206,7 @@
                         <div class="comparison-grid">
                             <div class="as-is-box">
                                 <div class="box-title">❌ AS IS (Atual)</div>
-                                <p style="margin-bottom: 15px; color: #6b7280;">${p.asIs.descricao}</p>
+                                <p style="margin-bottom: 15px; color: #6b7280;">${p.asIs.descrição}</p>
                                 <ol class="step-list">
                                     ${p.asIs.passos.map(s => `<li>${s}</li>`).join('')}
                                 </ol>
@@ -572,7 +223,7 @@
 
                             <div class="to-be-box">
                                 <div class="box-title">✅ TO BE (Futuro)</div>
-                                <p style="margin-bottom: 15px; color: #6b7280;">${p.toBe.descricao}</p>
+                                <p style="margin-bottom: 15px; color: #6b7280;">${p.toBe.descrição}</p>
                                 <ol class="step-list">
                                     ${p.toBe.passos.map(s => `<li>${s}</li>`).join('')}
                                 </ol>
@@ -590,7 +241,7 @@
                                 ${p.tiposConta.map(t => `
                                     <div class="tipo-conta-card">
                                         <strong>${t.tipo}</strong>
-                                        <span>${t.descricao}</span>
+                                        <span>${t.descrição}</span>
                                         ${t.recordType ? `<div style="margin-top: 6px;"><span class="tag tag-system" style="font-size: 0.7rem;">RecordType: ${t.recordType}</span></div>` : ''}
                                     </div>
                                 `).join('')}
@@ -614,9 +265,9 @@
                                         ${p.campos.map(c => `
                                             <tr>
                                                 <td><strong>${c.campo}</strong></td>
-                                                <td>${c.descricao}</td>
+                                                <td>${c.descrição}</td>
                                                 <td>${c.preenchimento}</td>
-                                                <td>${c.validacao}</td>
+                                                <td>${c.validação}</td>
                                             </tr>
                                         `).join('')}
                                     </tbody>
@@ -627,17 +278,17 @@
                         <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #e5e7eb;">
                             <strong style="color: #6b7280; font-size: 0.85rem;">Áreas Impactadas:</strong>
                             <div class="tag-list" style="margin-top: 8px;">
-                                ${p.areasImpactadas.map(a => `<span class="tag tag-area">${a}</span>`).join('')}
+                                ${p.áreasImpactadas.map(a => `<span class="tag tag-area">${a}</span>`).join('')}
                             </div>
                         </div>
 
-                        ${p.regrasNegocio && Array.isArray(p.regrasNegocio) && p.regrasNegocio[0] && typeof p.regrasNegocio[0] === 'object' ? `
+                        ${p.regrasNegócio && Array.isArray(p.regrasNegócio) && p.regrasNegócio[0] && typeof p.regrasNegócio[0] === 'object' ? `
                         <div class="section-divider">
                             <div class="section-title">📜 Regras de Negócio Detalhadas</div>
-                            ${p.regrasNegocio.map(r => `
+                            ${p.regrasNegócio.map(r => `
                                 <div class="regra-card">
                                     <h5>${r.regra}</h5>
-                                    <p style="margin: 0; color: #6b7280; font-size: 0.85rem;">${r.descricao}</p>
+                                    <p style="margin: 0; color: #6b7280; font-size: 0.85rem;">${r.descrição}</p>
                                     ${r.status ? `<div style="margin-top: 8px;"><span class="tag tag-benefit">${r.status}</span></div>` : ''}
                                     ${r.exemplos ? `
                                     <div class="exemplos">
@@ -671,13 +322,13 @@
                                 <div class="ciclo-teste-card">
                                     <div class="ciclo-header">
                                         <div>
-                                            <strong style="color: #003B4A;">${c.documento} - ${c.titulo}</strong>
+                                            <strong style="color: #003B4A;">${c.documento} - ${c.título}</strong>
                                             <div style="font-size: 0.8rem; color: #6b7280; margin-top: 4px;">Data: ${c.data}${c.ciclo ? ' | Ciclo: ' + c.ciclo : ''}</div>
                                         </div>
                                         <div class="ciclo-actions">
                                             <span class="ciclo-status ${c.status === 'Aprovado' ? 'aprovado' : 'pendente'}">${c.status}</span>
                                             ${c.testesRelacionados && c.testesRelacionados.length > 0 ? `
-                                                <a href="testes.html?ids=${c.testesRelacionados.join(',')}&origem=${encodeURIComponent(c.titulo)}" class="btn-ver-testes">
+                                                <a href="testes.html?ids=${c.testesRelacionados.join(',')}&origem=${encodeURIComponent(c.título)}" class="btn-ver-testes">
                                                     🔗 Ver Testes (${c.testesRelacionados.length})
                                                 </a>
                                             ` : ''}
@@ -704,7 +355,7 @@
                             ${p.abasInterface.map(aba => `
                                 <div class="aba-interface-card">
                                     <h5>${aba.aba}</h5>
-                                    <p style="margin: 0; font-size: 0.9rem; color: #334155;">${aba.descricao}</p>
+                                    <p style="margin: 0; font-size: 0.9rem; color: #334155;">${aba.descrição}</p>
                                     ${aba.campos ? `
                                     <div class="campos-list">
                                         ${aba.campos.map(c => `<span class="campo-item">${c}</span>`).join('')}
@@ -771,31 +422,31 @@
                             </div>
                         </div>` : ''}
 
-                        ${p.sistemasTecnicos || p.integracoes || p.detalhes || (p.regrasNegocio && Array.isArray(p.regrasNegocio) && (!p.regrasNegocio[0] || typeof p.regrasNegocio[0] !== 'object')) || p.fluxoAprovacao ? `
+                        ${p.sistemasTécnicos || p.integrações || p.detalhes || (p.regrasNegócio && Array.isArray(p.regrasNegócio) && (!p.regrasNegócio[0] || typeof p.regrasNegócio[0] !== 'object')) || p.fluxoAprovacao ? `
                         <div class="details-section">
                             <h4>📋 Detalhes Técnicos do BBP</h4>
                             <div class="details-grid">
-                                ${p.sistemasTecnicos ? `
+                                ${p.sistemasTécnicos ? `
                                 <div class="detail-item">
                                     <strong>🖥️ Sistemas Técnicos</strong>
                                     <div class="tag-list" style="margin-top: 8px;">
-                                        ${p.sistemasTecnicos.map(s => `<span class="tag tag-system">${s}</span>`).join('')}
+                                        ${p.sistemasTécnicos.map(s => `<span class="tag tag-system">${s}</span>`).join('')}
                                     </div>
                                 </div>` : ''}
                                 
-                                ${p.integracoes ? `
+                                ${p.integrações ? `
                                 <div class="detail-item">
                                     <strong>🔗 Integrações</strong>
                                     <div class="tag-list" style="margin-top: 8px;">
-                                        ${p.integracoes.map(i => typeof i === 'object' ? `<span class="tag tag-integration">${i.origem} → ${i.destino} (${i.tipo})</span>` : `<span class="tag tag-integration">${i}</span>`).join('')}
+                                        ${p.integrações.map(i => typeof i === 'object' ? `<span class="tag tag-integration">${i.origem} → ${i.destino} (${i.tipo})</span>` : `<span class="tag tag-integration">${i}</span>`).join('')}
                                     </div>
                                 </div>` : ''}
                                 
-                                ${p.regrasNegocio && Array.isArray(p.regrasNegocio) && (!p.regrasNegocio[0] || typeof p.regrasNegocio[0] !== 'object') ? `
+                                ${p.regrasNegócio && Array.isArray(p.regrasNegócio) && (!p.regrasNegócio[0] || typeof p.regrasNegócio[0] !== 'object') ? `
                                 <div class="detail-item">
                                     <strong>📜 Regras de Negócio</strong>
                                     <div style="margin-top: 8px;">
-                                        ${p.regrasNegocio.map(r => `<div style="padding: 4px 0; border-bottom: 1px dashed #e5e7eb;">• ${r}</div>`).join('')}
+                                        ${p.regrasNegócio.map(r => `<div style="padding: 4px 0; border-bottom: 1px dashed #e5e7eb;">• ${r}</div>`).join('')}
                                     </div>
                                 </div>` : ''}
                                 
@@ -804,9 +455,18 @@
                                     <strong>📝 Detalhes</strong>
                                     <div style="margin-top: 8px;">
                                         ${Object.entries(p.detalhes).map(([k, v]) => `
-                                            <div style="padding: 4px 0; border-bottom: 1px dashed #e5e7eb;">
-                                                <strong style="color: #6b7280; font-size: 0.8rem;">${k}:</strong>
-                                                <span style="color: #374151;">${typeof v === 'object' ? JSON.stringify(v) : v}</span>
+                                            <div style="padding: 8px 0; border-bottom: 1px dashed #e5e7eb;">
+                                                <strong style="color: #6b7280; font-size: 0.85rem; text-transform: capitalize;">${k}:</strong>
+                                                ${typeof v === 'object' ? `
+                                                    <div style="margin-top: 4px; padding-left: 12px; border-left: 2px solid #e5e7eb;">
+                                                        ${Object.entries(v).map(([subK, subV]) => `
+                                                            <div style="padding: 2px 0; font-size: 0.85rem;">
+                                                                <span style="color: #6b7280;">${subK}:</span>
+                                                                <span style="color: #374151;">${subV}</span>
+                                                            </div>
+                                                        `).join('')}
+                                                    </div>
+                                                ` : `<span style="color: #374151; margin-left: 4px;">${v}</span>`}
                                             </div>
                                         `).join('')}
                                     </div>
@@ -834,12 +494,12 @@
                                 </div>
                             </div>` : ''}
 
-                            ${p.detalhesTecnicos && p.detalhesTecnicos.recordTypes ? `
+                            ${p.detalhesTécnicos && p.detalhesTécnicos.recordTypes ? `
                             <div style="margin-top: 15px; padding: 15px; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px;">
                                 <strong style="color: #0369a1; font-size: 0.9rem;">📋 Record Types do Salesforce</strong>
-                                <p style="margin: 8px 0; font-size: 0.85rem; color: #6b7280;">${p.detalhesTecnicos.recordTypes.descricao}</p>
+                                <p style="margin: 8px 0; font-size: 0.85rem; color: #6b7280;">${p.detalhesTécnicos.recordTypes.descrição}</p>
                                 <div style="display: grid; gap: 8px; margin-top: 10px;">
-                                    ${p.detalhesTecnicos.recordTypes.tipos.map(rt => `
+                                    ${p.detalhesTécnicos.recordTypes.tipos.map(rt => `
                                         <div style="background: white; padding: 10px; border-radius: 6px; border-left: 3px solid #0284c7;">
                                             <strong style="color: #0c4a6e;">${rt.nome}</strong>
                                             <div style="font-size: 0.8rem; color: #6b7280; margin-top: 4px;">${rt.uso}</div>
@@ -847,7 +507,7 @@
                                         </div>
                                     `).join('')}
                                 </div>
-                                ${p.detalhesTecnicos.recordTypes.fonte ? `<div style="margin-top: 8px; font-size: 0.75rem; color: #9ca3af;">Fonte: ${p.detalhesTecnicos.recordTypes.fonte}</div>` : ''}
+                                ${p.detalhesTécnicos.recordTypes.fonte ? `<div style="margin-top: 8px; font-size: 0.75rem; color: #9ca3af;">Fonte: ${p.detalhesTécnicos.recordTypes.fonte}</div>` : ''}
                             </div>` : ''}
                         </div>` : ''}
                     </div>

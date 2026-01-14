@@ -112,7 +112,8 @@ const Testes = {
     waitForData() {
         return new Promise((resolve) => {
             const check = () => {
-                if (App.data.testes) resolve();
+                // Aguardar dataReady (inclui restauração do KV)
+                if (App.dataReady && App.data.testes) resolve();
                 else setTimeout(check, 100);
             };
             check();

@@ -1,123 +1,133 @@
 {
-  "titulo": "Reunioes GTM - Workshops AS-IS/TO-BE",
-  "descricao": "Documentacao completa das reunioes de workshops do projeto GTM Salesforce",
+  "título": "Reuniões GTM - Workshops AS-IS/TO-BE",
+  "descrição": "Documentação completa das reuniões de workshops do projeto GTM Salesforce",
   "atualizadoEm": "2026-01-13",
-  "totalReunioes": 10,
-  "reunioes": [
+  "totalReuniões": 10,
+  "reuniões": [
     {
       "id": "2025-12-03_financeiro-controladoria",
       "data": "2025-12-03",
-      "titulo": "GTM - Alinhamento de Proximas Etapas Financeiro/Controladoria",
-      "duracao": "57min",
+      "título": "GTM - Alinhamento de Próximas Etapas Financeiro/Controladoria",
+      "duração": "57min",
       "arquivo": "2025-12-03_financeiro-controladoria.json",
-      "transcricao": "data/transcricoes/2025-12-03_financeiro-controladoria.txt",
-      "destaque": "Alinhamento estrategico com Controladoria antes dos workshops",
-      "topicos": ["Testes End-to-End", "Cluster", "Setor Industrial", "EBITDA", "SOX"]
+      "transcrição": "data/transcricoes/2025-12-03_financeiro-controladoria.txt",
+      "destaque": "Alinhamento estratégico com Controladoria antes dos workshops",
+      "resumo": "Reunião preparatoria com a Controladoria para alinhar expectativas do projeto GTM. Discutidos testes end-to-end, regras de clusterização de clientes, definição de setor industrial para segmentação, impacto no EBITDA e requisitos de compliance SOX. Definida a necessidade de envolvimento da Controladoria nas validações de relatórios financeiros e custo de servir.",
+      "tópicos": ["Testes End-to-End", "Cluster", "Setor Industrial", "EBITDA", "SOX"]
     },
     {
       "id": "2025-12-04_kickoff",
       "data": "2025-12-04",
-      "titulo": "GTM - Desenho AS-IS e TO-BE - Kickoff Workshops",
-      "duracao": "1h 54min 26s",
+      "título": "GTM - Desenho AS-IS e TO-BE - Kickoff Workshops",
+      "duração": "1h 54min 26s",
       "arquivo": "2025-12-04_kickoff.json",
-      "transcricao": "data/transcricoes/2025-12-04_kickoff-workshops.txt",
-      "destaque": "Definicao de key users e estrutura do projeto",
-      "topicos": ["Kickoff", "Cadastro Cliente", "BRO", "4 Areas de Credito"]
+      "transcrição": "data/transcricoes/2025-12-04_kickoff-workshops.txt",
+      "destaque": "Definição de key users e estrutura do projeto",
+      "resumo": "Kickoff oficial dos workshops GTM com apresentação da equipe e definição dos key users por area. Apresentada a estrutura do projeto com foco em Cadastro de Cliente, integração com BRO e as 4 áreas de crédito (BBA, CSP, DBA, ALPE). Discutida a transição de liderança de Dani para Thalita e compromisso de 2h semanais dos key users. Definido cronograma de workshops ate o GO LIVE.",
+      "tópicos": ["Kickoff", "Cadastro Cliente", "BRO", "4 Áreas de Crédito"]
     },
     {
-      "id": "2025-12-10_cadastro-areas",
+      "id": "2025-12-10_cadastro-áreas",
       "data": "2025-12-10",
-      "titulo": "GTM - Desenho AS-IS e TO-BE - Sessao 2",
-      "duracao": "1h 29min 44s",
-      "arquivo": "2025-12-10_cadastro-areas.json",
-      "transcricao": "data/transcricoes/2025-12-10_cadastro-areas.txt",
-      "destaque": "Restricoes Logisticas integradas e Market Share",
-      "topicos": ["Contatos", "Logistica", "AMD", "WhatsApp", "Market Share", "Concorrentes"]
+      "título": "GTM - Desenho AS-IS e TO-BE - Sessao 2",
+      "duração": "1h 29min 44s",
+      "arquivo": "2025-12-10_cadastro-áreas.json",
+      "transcrição": "data/transcricoes/2025-12-10_cadastro-áreas.txt",
+      "destaque": "Restrições Logísticas integradas e Market Share",
+      "resumo": "Workshop focado em cadastro de clientes, áreas de vendas e gestão de concorrentes. Definidas as regras de contatos por tipo de cliente, integração com restrições logísticas do AMD, uso de WhatsApp para comunicação. Discutida a problemática de market share e dados de concorrentes (sazonalidade apontada por Francine). Apresentados os canais de venda (20, 25, 30, 40) e suas características.",
+      "tópicos": ["Contatos", "Logística", "AMD", "WhatsApp", "Market Share", "Concorrentes"]
     },
     {
-      "id": "2025-12-12_regras-clusterizacao",
+      "id": "2025-12-12_regras-clusterização",
       "data": "2025-12-12",
-      "titulo": "Novas Regras de Clusterizacao e Apuracao de Resultados GTM",
-      "duracao": "53min 27s",
-      "arquivo": "../transcricoes/2025-12-12_regras-clusterizacao.json",
-      "destaque": "Definicao de dimensoes e algoritmo de clusterizacao",
-      "topicos": ["Clusterizacao", "Dimensoes", "Algoritmo", "Integracao", "Higiene de Dados"]
+      "título": "Novas Regras de Clusterização e Apuração de Resultados GTM",
+      "duração": "53min 27s",
+      "arquivo": "../transcricoes/2025-12-12_regras-clusterização.json",
+      "destaque": "Definição de dimensoes e algoritmo de clusterização",
+      "resumo": "Definição do algoritmo de clusterização automática de clientes. Estabelecidas as dimensoes para classificação: volume, frequência, potencial e mix de produtos. Discutida a integração com SAP para captura de dados históricos. Identificada necessidade de higiene de dados antes da implementação. Maria Ciorlia apresentou requisitos de segmentação comercial.",
+      "tópicos": ["Clusterização", "Dimensoes", "Algoritmo", "Integração", "Higiene de Dados"]
     },
     {
       "id": "2025-12-16_autoatendimento",
       "data": "2025-12-16",
-      "titulo": "GTM - Desenho AS-IS e TO-BE - Documentos Fiscais e Autoatendimento",
-      "duracao": "1h 35min 57s",
+      "título": "GTM - Desenho AS-IS e TO-BE - Documentos Fiscais e Autoatendimento",
+      "duração": "1h 35min 57s",
       "arquivo": "2025-12-16_autoatendimento.json",
-      "transcricao": "data/transcricoes/2025-12-16_docs-fiscais-autoatendimento.txt",
+      "transcrição": "data/transcricoes/2025-12-16_docs-fiscais-autoatendimento.txt",
       "destaque": "Consulta de partidas e workflow pricing",
-      "topicos": ["Documentos Fiscais", "Autoatendimento", "Partidas", "Boletos", "Workflow Pricing"]
+      "resumo": "Workshop sobre documentos fiscais e portal de autoatendimento. Detalhado o fluxo de download de NF-e, DANFE e XML via integração com Spa (Daniel). Discutida consulta de partidas em aberto e boletos. Apresentado o workflow de pricing com niveis de aprovação. Identificada pendência critica: Portal Logístico não integrado com SAP. Definida criticidade dos dados de contato para autoatendimento.",
+      "tópicos": ["Documentos Fiscais", "Autoatendimento", "Partidas", "Boletos", "Workflow Pricing"]
     },
     {
-      "id": "2025-12-17_relatorios-segment-report",
+      "id": "2025-12-17_relatórios-segment-report",
       "data": "2025-12-17",
-      "titulo": "GTM - Relatorios Atuais e Segment Report",
-      "duracao": "~60min",
-      "arquivo": "../transcricoes/2025-12-17_relatorios-segment-report.json",
-      "destaque": "Segmentacao, fidelidade e governanca de dados",
-      "topicos": ["Segment Report", "Segmentacao", "Fidelidade", "Hierarquia", "Governanca"]
+      "título": "GTM - Relatórios Atuais e Segment Report",
+      "duração": "~60min",
+      "arquivo": "../transcricoes/2025-12-17_relatórios-segment-report.json",
+      "destaque": "Segmentação, fidelidade e governanca de dados",
+      "resumo": "Apresentação dos relatórios atuais do GTM e definição do Segment Report. Discutidas regras de segmentação por canal, fidelidade de clientes e hierarquia de produtos. Luis Riqueti apresentou estrutura atual do BWA e Power BI. Definida governanca de dados com responsabilidades claras. Identificada necessidade de padronização de nomenclaturas entre sistemas.",
+      "tópicos": ["Segment Report", "Segmentação", "Fidelidade", "Hierarquia", "Governanca"]
     },
     {
-      "id": "2025-12-22_urgente-revisao-gtm",
+      "id": "2025-12-22_urgente-revisão-gtm",
       "data": "2025-12-22",
-      "titulo": "URGENTE! Revisao dos Ajustes GTM - Nova Estrutura Comercial",
-      "duracao": "~2h 30min",
-      "arquivo": "../transcricoes/2025-12-22_urgente-revisao-gtm.json",
+      "título": "URGENTE! Revisão dos Ajustes GTM - Nova Estrutura Comercial",
+      "duração": "~2h 30min",
+      "arquivo": "../transcricoes/2025-12-22_urgente-revisão-gtm.json",
       "destaque": "Nova estrutura organizacional com 4 macro setores",
-      "topicos": ["Estrutura Organizacional", "Macro Setores", "Gestao Regional", "Contas-Chave", "Workflow"]
+      "resumo": "Reunião de emergencia para redefinir estrutura comercial do GTM. Apresentada nova organização com 4 macro setores: Agro, Construção Civil, Industria e Distribuição. Definida gestão regional com escritorios de vendas e contas-chave. Ajustado workflow de aprovação para nova hierarquia. Impacto significativo no cronograma - necessaria revisão de todas as jornadas AS-IS/TO-BE.",
+      "tópicos": ["Estrutura Organizacional", "Macro Setores", "Gestão Regional", "Contas-Chave", "Workflow"]
     },
     {
       "id": "2025-12-23_alinhamento-cadastro-materiais",
       "data": "2025-12-23",
-      "titulo": "Alinhamento Cadastro de Materiais",
-      "duracao": "29min 24s",
+      "título": "Alinhamento Cadastro de Materiais",
+      "duração": "29min 24s",
       "arquivo": "../transcricoes/2025-12-23_alinhamento-cadastro-materiais.json",
-      "destaque": "Hierarquia de produtos e integracao SAP",
-      "topicos": ["Hierarquia", "GPS", "Precificacao", "Clustering", "Relatorios"]
+      "destaque": "Hierarquia de produtos e integração SAP",
+      "resumo": "Alinhamento sobre cadastro de materiais e hierarquia de produtos SAP. Definida estrutura de GPS (Grupo de Produtos SAP) para precificação. Discutida integração de hierarquia com clusterização de clientes. Apresentados requisitos para relatórios de mix de produtos. Identificadas inconsistencias entre hierarquias SAP e Salesforce que precisam ser tratadas.",
+      "tópicos": ["Hierarquia", "GPS", "Precificação", "Clustering", "Relatórios"]
     },
     {
       "id": "2025-12-29_planilha-depara",
       "data": "2025-12-29",
-      "titulo": "Construcao da Planilha DE/PARA",
-      "duracao": "~50min",
+      "título": "Construção da Planilha DE/PARA",
+      "duração": "~50min",
       "arquivo": "../transcricoes/2025-12-29_planilha-depara.json",
       "destaque": "Mapeamento de clientes e escritorios regionais",
-      "topicos": ["DE/PARA", "Segmentacao", "Escritorios", "Segment Report", "Agentes"]
+      "resumo": "Construção da planilha DE/PARA para migração de clientes para nova estrutura. Mapeados escritorios regionais e seus agentes comerciais. Definidas regras de segmentação para reclassificação de carteira. Alinhado impacto no Segment Report e relatórios gerênciais. Identificados clientes que precisam de tratamento manual (contas especiais e key accounts).",
+      "tópicos": ["DE/PARA", "Segmentação", "Escritorios", "Segment Report", "Agentes"]
     },
     {
-      "id": "2026-01-07_bot-einstein-logistica",
+      "id": "2026-01-07_bot-einstein-logística",
       "data": "2026-01-07",
-      "titulo": "Bot Einstein Planejamento & Logistica - Alinhamento GLOG",
-      "duracao": "52min 13s",
-      "arquivo": "../transcricoes/2026-01-07_bot-einstein-logistica.json",
-      "destaque": "Chatbot WhatsApp e integracao Smart Center",
-      "topicos": ["Bot Einstein", "WhatsApp", "Autenticacao", "Transbordo", "Salesforce"]
+      "título": "Bot Einstein Planejamento & Logística - Alinhamento GLOG",
+      "duração": "52min 13s",
+      "arquivo": "../transcricoes/2026-01-07_bot-einstein-logística.json",
+      "destaque": "Chatbot WhatsApp e integração Smart Center",
+      "resumo": "Alinhamento com GLOG sobre Bot Einstein para atendimento via WhatsApp. Definido MVP com consulta de status de pedido, tracking de entrega e segunda via de boleto. Discutida autenticação de usuários (CPF/CNPJ + código). Apresentado fluxo de transbordo para atendente humano no Smart Center. Integração via Salesforce Service Cloud com Einstein Bots.",
+      "tópicos": ["Bot Einstein", "WhatsApp", "Autenticação", "Transbordo", "Salesforce"]
     }
   ],
   "participantesFrequentes": [
-    {"nome": "Rhein, Thalita Merisio", "papel": "Lider Business", "presencas": 3},
-    {"nome": "Pereira, Leandro Da Cruz", "papel": "Lider Tecnico TI", "presencas": 3},
-    {"nome": "Gimenes, Leandro Augusto", "papel": "PO Comercial", "presencas": 2},
-    {"nome": "Endo, Joao Vitor Yuji", "papel": "Key User", "presencas": 3},
-    {"nome": "Gayer, Francine", "papel": "Key User Protec", "presencas": 2},
-    {"nome": "Machado, Bruno Nolasco", "papel": "Key User Agro", "presencas": 2}
+    {"nome": "Rhein, Thalita Merisio", "papel": "Lider Business", "presenças": 3},
+    {"nome": "Pereira, Leandro Da Cruz", "papel": "Lider Técnico TI", "presenças": 3},
+    {"nome": "Gimenes, Leandro Augusto", "papel": "PO Comercial", "presenças": 2},
+    {"nome": "Endo, Joao Vitor Yuji", "papel": "Key User", "presenças": 3},
+    {"nome": "Gayer, Francine", "papel": "Key User Protec", "presenças": 2},
+    {"nome": "Machado, Bruno Nolasco", "papel": "Key User Agro", "presenças": 2}
   ],
   "sistemasPrincipais": [
     "Salesforce",
     "SAP ECC",
     "BRO",
-    "Portal Logistico",
+    "Portal Logístico",
     "Spa (Documentos Fiscais)",
     "Portal BelgoCash"
   ],
   "timeline": {
-    "inicio": "2025-12-03",
-    "ultimaReuniao": "2026-01-07",
-    "proximaFase": "GO LIVE - 15/03/2026"
+    "início": "2025-12-03",
+    "últimaReunião": "2026-01-07",
+    "próximaFase": "GO LIVE - 15/03/2026"
   }
 }

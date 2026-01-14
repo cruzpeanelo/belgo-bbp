@@ -1,25 +1,17 @@
 {
   "projeto": {
     "nome": "GTM Vendas - Belgo Arames",
-    "inicio": "2025-10-01",
+    "início": "2025-01-01",
     "goLiveFaseI": "2025-09-01",
     "goLiveFaseII": "2026-03-15",
-    "faseAtual": "Fase II - Testes e Validação",
-    "observacao": "Go Live reprogramado de janeiro para março de 2026 para garantir qualidade dos testes"
+    "faseAtual": "Fase II - Testes e Validação"
   },
-  "stakeholders": [
-    {"nome": "Leandro Cruz", "papel": "Gerente de TI"},
-    {"nome": "Leandro Gimenez", "papel": "PO GTM"},
-    {"nome": "Ronildo", "papel": "PO Pricing"},
-    {"nome": "Thalita Rhein", "papel": "Gerente de Negócio GTM"}
-  ],
   "workshops": [
     {
       "id": "W1",
       "data": "2025-12-04",
-      "titulo": "Kickoff e Alinhamento",
-      "resumo": "Apresentação do projeto GTM/CRM para key users, comunicação sobre transição de liderança (Dani desligada, Audrey em licença) e definição de compromisso de 2h semanais para testes.",
-      "foco": ["Visão geral do projeto GTM/CRM", "Transição liderança (Dani->Thalita, Audrey em licença)", "Importância da participação - projeto de todos", "Compromisso 2h semanais para key users"],
+      "título": "Kickoff e Alinhamento",
+      "foco": ["Visão geral do projeto GTM/CRM", "Transição liderança (Dani->Thalita, Audrey em licença)", "Importancia da participação - projeto de todos", "Compromisso 2h semanais para key users"],
       "status": "Concluído",
       "participantes": 15,
       "problemasIdentificados": ["Key users não sabiam que eram key users", "Usuários perguntando: O que preciso testar?"]
@@ -27,96 +19,48 @@
     {
       "id": "W2",
       "data": "2025-12-10",
-      "titulo": "Cadastro, Áreas de Vendas e Concorrentes",
-      "resumo": "Workshop detalhando processos de cadastro de cliente via SINTEGRA, tipos de conta (PJ/PF/Agrupador), áreas de vendas, canais, documentos fiscais, contatos e rastreamento de concorrentes.",
+      "título": "Cadastro, Áreas de Vendas e Concorrentes",
       "foco": ["Cadastro de cliente (SINTEGRA)", "Tipos de conta (PJ/PF/Agrupador)", "Áreas de vendas e Canais", "Documentos fiscais", "Contatos", "Concorrentes (discussão Francine - sazonalidade)", "Financeiro/Crédito (ASCP)"],
       "status": "Concluído",
       "participantes": 12,
-      "destaques": ["Zero dúvidas sobre cadastro", "Francine levantou questão de concorrentes sazonais"]
+      "destaques": ["Zero duvidas sobre cadastro", "Francine levantou questao de concorrentes sazonais"]
     },
     {
       "id": "W3",
-      "data": "2025-12-12",
-      "titulo": "Regras de Clusterização e Apuração de Resultados",
-      "resumo": "Definição das 3 dimensões de clusterização (setor, atratividade, região) e 4 clusters de clientes (corporativas, especiais, regionais, dispersas). Discussão sobre cálculo automático no CRM e integração com relatórios.",
-      "foco": ["Dimensões de clusterização", "4 clusters de clientes", "Cálculo automático de cluster", "Custo de servir", "Integração BWA/Power BI"],
-      "status": "Concluído",
-      "participantes": 10,
-      "destaques": ["Algoritmo de cluster definido", "Necessidade de higiene de dados identificada"]
-    },
-    {
-      "id": "W4",
       "data": "2025-12-16",
-      "titulo": "Documentos Fiscais e Autoatendimento",
-      "resumo": "Cobertura dos processos de download de documentos fiscais (NF-e, DANFE, XML, boleto), criticidade dos dados de contato e funcionalidades do portal de autoatendimento.",
+      "título": "Documentos Fiscais e Autoatendimento",
       "foco": ["Download documentos fiscais (Daniel/Spa)", "Criticidade dados de contato", "Portal Autoatendimento", "Pendência Portal Logístico identificada"],
       "status": "Concluído",
       "participantes": 10,
-      "feedbackMaria": "Sessões muito didáticas - aprendi muita coisa de outros processos"
+      "feedbackMaria": "Sessoes muito didaticas - aprendi muita coisa de outros processos"
+    },
+    {
+      "id": "W4",
+      "data": "2025-12-17",
+      "horario": "16:00-17:30",
+      "título": "Workflow Pricing",
+      "foco": ["Fluxo de aprovação", "Níveis de desconto", "Início cotação"],
+      "status": "Concluído",
+      "participantes": ["Rodrigo", "Leandro", "Thalita"],
+      "destaques": ["Definido 4 niveis de aprovação", "Regras de desconto confirmadas"]
     },
     {
       "id": "W5",
-      "data": "2025-12-17",
-      "horario": "16:00-17:30",
-      "titulo": "Relatórios e Segment Report",
-      "resumo": "Discussão sobre segmentação de dados, hierarquia para relatórios, governança e ownership de dados, e integração com Salesforce para visão unificada.",
-      "foco": ["Segmentação de dados de cliente", "Hierarquia de dados", "Governança e ownership", "Integração Salesforce"],
-      "status": "Concluído",
-      "participantes": ["Riqueti", "França", "Rhein", "Monteiro"],
-      "destaques": ["Definição de governança para hierarquias", "Validação do campo agregador de parceiros"]
-    },
-    {
-      "id": "W6",
       "data": "2025-12-22",
-      "horario": "14:00-16:30",
-      "titulo": "Revisão GTM Urgente - Nova Estrutura Comercial",
-      "resumo": "Reunião estratégica sobre nova estrutura organizacional com 4 macro setores (alta energia, agricultura, indústria, construção civil), redistribuição de regiões entre gerentes, key accounts e ajustes de workflow pricing.",
-      "foco": ["Nova estrutura organizacional - 4 macro setores", "Gestão regional - redistribuição", "Key accounts por setor", "Workflow de aprovação pricing", "Escritórios de vendas", "Migração de clientes"],
+      "horario": "14:00-16:00",
+      "título": "Revisão GTM e Ajustes Finais",
+      "foco": ["Nova estrutura organizacional", "4 macro setores", "Ajustes de hierarquia", "Escritorios de vendas"],
       "status": "Concluído",
-      "participantes": ["Gimenes", "Pereira", "Rhein", "Ciorlia", "Riqueti", "Pinheiro", "França"],
-      "destaques": ["46 segmentos alocados em 4 macro setores", "7 ações definidas para ajustes GTM"]
-    },
-    {
-      "id": "W7",
-      "data": "2025-12-23",
-      "titulo": "Alinhamento Cadastro de Materiais",
-      "resumo": "Discussão técnica sobre hierarquia de grupo de mercadoria no SAP, GPS (Product Groups), precificação por segmento e impactos na clusterização.",
-      "foco": ["Hierarquia de grupo de mercadoria", "GPS como base de segmentação", "Precificação por segmento", "Impacto em relatórios"],
-      "status": "Concluído",
-      "participantes": ["Rhein", "Riqueti", "Barbosa", "Silva", "Monteiro", "Ronildo"],
-      "destaques": ["Segmento definido por hierarquia de grupo de mercadoria", "Não afeta SAP diretamente, apenas relatórios"]
-    },
-    {
-      "id": "W8",
-      "data": "2025-12-29",
-      "titulo": "Construção Planilha DE/PARA",
-      "resumo": "Planejamento do hard reboot da lista de clientes, segmentação por ID, alocação para escritórios regionais e criação de campo de segmentos de produto com 46 valores.",
-      "foco": ["Hard reboot de clientes", "Segmentação de clientes", "Alocação por regional", "46 segmentos de produto", "Listas suspensas dependentes"],
-      "status": "Concluído",
-      "participantes": ["Gimenes", "Rhein", "Almeida", "Pereira", "França"],
-      "destaques": ["Deadline 30/01 para segment report", "EVC como escritório padrão para clientes sem regional"]
-    },
-    {
-      "id": "W9",
-      "data": "2026-01-07",
-      "titulo": "Bot Einstein - Planejamento e Logística",
-      "resumo": "Apresentação do chatbot WhatsApp MVP para autoatendimento, com funcionalidades de consulta de conta, status de pedidos e documentos fiscais. Orçamento de R$ 400.000 aprovado para 2026.",
-      "foco": ["Chatbot WhatsApp MVP", "Autenticação de clientes", "Transbordo e criação de casos", "Canal unificado", "Integração Salesforce"],
-      "status": "Concluído",
-      "participantes": ["França", "Accioly", "Silva", "Ronildo", "Pinheiro", "Miranda", "Pereira", "Almeida"],
-      "destaques": ["Validação via email cadastrado", "Histórico de conversas no CRM"]
+      "participantes": ["Leandro", "Thalita", "Gimenes", "Ciorlia", "Riqueti"],
+      "destaques": ["Reorganização comercial em 4 macro setores", "7 ações definidas para ajustes GTM"]
     }
   ],
   "marcos": [
-    { "data": "2025-01-15", "titulo": "Kickoff Projeto", "status": "Concluído" },
-    { "data": "2025-09-01", "titulo": "GO Live Fase I", "status": "Concluído" },
-    { "data": "2025-12-22", "titulo": "Fim Workshops AS IS/TO BE", "status": "Concluído" },
-    { "data": "2026-01-13", "titulo": "Estruturação BBP Completo", "status": "Concluído" },
-    { "data": "2026-01-31", "titulo": "Conclusão Testes Unitários", "status": "Pendente" },
-    { "data": "2026-02-03", "titulo": "Início UAT", "status": "Pendente" },
-    { "data": "2026-02-28", "titulo": "Conclusão UAT", "status": "Pendente" },
-    { "data": "2026-03-03", "titulo": "Início Treinamento Key Users", "status": "Pendente" },
-    { "data": "2026-03-13", "titulo": "Freeze de Código", "status": "Pendente" },
-    { "data": "2026-03-15", "titulo": "GO Live Fase II", "status": "Pendente" }
+    { "data": "2025-01-15", "título": "Kickoff Projeto", "status": "Concluído" },
+    { "data": "2025-09-01", "título": "GO Live Fase I", "status": "Concluído" },
+    { "data": "2025-12-22", "título": "Fim Workshops AS IS/TO BE", "status": "Concluído" },
+    { "data": "2026-01-13", "título": "Estruturação BBP Completo", "status": "Concluído" },
+    { "data": "2026-01-20", "título": "UAT - Testes de Aceitação", "status": "Pendente" },
+    { "data": "2026-03-15", "título": "GO Live Fase II", "status": "Pendente" }
   ]
 }

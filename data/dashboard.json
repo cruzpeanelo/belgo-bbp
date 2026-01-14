@@ -1,38 +1,36 @@
 {
   "metricas": {
-    "totalTestes": 115,
+    "totalTestes": 142,
     "testesExecutados": 0,
-    "testesPendentes": 115,
+    "testesPendentes": 142,
     "testesFalhados": 0,
     "progressoGeral": 0,
-    "pontosCriticos": 12,
-    "workshopsConcluidos": 9,
+    "pontosCriticos": 14,
+    "workshopsConcluidos": 5,
     "workshopsPendentes": 0,
-    "totalReunioes": 9,
-    "totalDocumentos": 69
+    "totalJornadas": 14,
+    "totalParticipantes": 28,
+    "totalTermosGlossario": 72,
+    "totalReunioes": 10
   },
   "statusPorCategoria": [
     { "id": "workflow-pricing", "categoria": "Workflow Pricing", "range": "CT 01-19", "total": 19, "ok": 0, "falhou": 0, "pendente": 19, "cor": "#6366f1" },
-    { "id": "tributario", "categoria": "Tributário", "range": "CT 20-55", "total": 36, "ok": 0, "falhou": 0, "pendente": 36, "cor": "#f59e0b" },
+    { "id": "tributario", "categoria": "Tributario", "range": "CT 20-55", "total": 36, "ok": 0, "falhou": 0, "pendente": 36, "cor": "#f59e0b" },
     { "id": "setup", "categoria": "Setup/Cadastro", "range": "CT 56-77", "total": 22, "ok": 0, "falhou": 0, "pendente": 22, "cor": "#10b981" },
     { "id": "financeiro", "categoria": "Financeiro", "range": "CT 78-80", "total": 3, "ok": 0, "falhou": 0, "pendente": 3, "cor": "#198754" },
-    { "id": "cotacao-ov", "categoria": "Cotação e OV", "range": "CT 81-101", "total": 21, "ok": 0, "falhou": 0, "pendente": 21, "cor": "#0d6efd" },
+    { "id": "cotação-ov", "categoria": "Cotação e OV", "range": "CT 81-101", "total": 21, "ok": 0, "falhou": 0, "pendente": 21, "cor": "#0d6efd" },
     { "id": "conditions", "categoria": "Conditions SAP", "range": "CT 102-108", "total": 7, "ok": 0, "falhou": 0, "pendente": 7, "cor": "#e83e8c" },
-    { "id": "integracao", "categoria": "Integração Salesforce - SAP", "range": "CT 109-115", "total": 7, "ok": 0, "falhou": 0, "pendente": 7, "cor": "#6f42c1" }
+    { "id": "integração", "categoria": "Integração Salesforce - SAP", "range": "CT 109-115", "total": 7, "ok": 0, "falhou": 0, "pendente": 7, "cor": "#6f42c1" },
+    { "id": "cadastro-cliente", "categoria": "Cadastro de Cliente", "range": "CT 116-125", "total": 17, "ok": 0, "falhou": 0, "pendente": 17, "cor": "#14b8a6" },
+    { "id": "hub-gestão-oc", "categoria": "Hub de Gestão OC", "range": "CT 126-130", "total": 5, "ok": 0, "falhou": 0, "pendente": 5, "cor": "#f97316" },
+    { "id": "fup-carteira", "categoria": "FUP de Carteira", "range": "CT 131-142", "total": 5, "ok": 0, "falhou": 0, "pendente": 5, "cor": "#8b5cf6" }
   ],
   "goLive": "2026-03-15",
   "stakeholders": [
     {"nome": "Leandro Cruz", "papel": "Gerente de TI"},
     {"nome": "Leandro Gimenez", "papel": "PO GTM"},
     {"nome": "Ronildo", "papel": "PO Pricing"},
-    {"nome": "Thalita Rhein", "papel": "Gerente de Negócio GTM"}
+    {"nome": "Thalita Rhein", "papel": "Gerente Negócio GTM"}
   ],
-  "fases": [
-    {"nome": "Discovery", "status": "concluido", "periodo": "Out-Nov 2025"},
-    {"nome": "Workshops AS-IS/TO-BE", "status": "concluido", "periodo": "Dez 2025"},
-    {"nome": "Testes Unitários", "status": "em_andamento", "periodo": "Jan 2026"},
-    {"nome": "UAT", "status": "planejado", "periodo": "Fev 2026"},
-    {"nome": "Treinamento e GO LIVE", "status": "planejado", "periodo": "Mar 2026"}
-  ],
-  "ultimaAtualizacao": "2026-01-13T18:00:00"
+  "últimaAtualização": "2026-01-13T18:00:00"
 }

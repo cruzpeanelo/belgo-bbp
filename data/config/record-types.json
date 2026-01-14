@@ -1,14 +1,14 @@
 {
-  "titulo": "Record Types - Salesforce",
-  "descricao": "Mapeamento de Record Types utilizados no Salesforce para o projeto GTM",
-  "dataAtualizacao": "2026-01-13",
+  "título": "Record Types - Salesforce",
+  "descrição": "Mapeamento de Record Types utilizados no Salesforce para o projeto GTM",
+  "dataAtualização": "2026-01-13",
   "objeto": "Account",
   "recordTypes": [
     {
       "developerName": "PJ_Standard",
       "label": "Pessoa Juridica",
-      "descricao": "Record Type padrao para contas de Pessoa Juridica",
-      "campos_obrigatorios": [
+      "descrição": "Record Type padrão para contas de Pessoa Juridica",
+      "campos_obrigatórios": [
         "CNPJ__c",
         "RazaoSocial__c",
         "NomeFantasia__c",
@@ -20,8 +20,8 @@
     {
       "developerName": "PF_Standard",
       "label": "Pessoa Fisica",
-      "descricao": "Record Type para contas de Pessoa Fisica",
-      "campos_obrigatorios": [
+      "descrição": "Record Type para contas de Pessoa Fisica",
+      "campos_obrigatórios": [
         "CPF__c",
         "Nome__c"
       ],
@@ -31,29 +31,29 @@
     {
       "developerName": "Agrupador",
       "label": "Parceiro Agrupador",
-      "descricao": "Record Type para parceiros agrupadores que consolidam multiplas contas",
-      "campos_obrigatorios": [
+      "descrição": "Record Type para parceiros agrupadores que consolidam multiplas contas",
+      "campos_obrigatórios": [
         "NomeAgrupador__c",
         "CNPJ__c"
       ],
       "funcionalidades": [
-        "Consolidacao de pedidos",
-        "Relatorios agrupados",
-        "Gestao de credito consolidada"
+        "Consolidação de pedidos",
+        "Relatórios agrupados",
+        "Gestão de crédito consolidada"
       ],
       "status": "ativo",
-      "fontesReuniao": ["2025-12-17_relatorios-segment-report.json"]
+      "fontesReunião": ["2025-12-17_relatórios-segment-report.json"]
     },
     {
       "developerName": "Distribuidor",
       "label": "Distribuidor",
-      "descricao": "Record Type especifico para distribuidores (Canal 30)",
-      "campos_obrigatorios": [
+      "descrição": "Record Type específico para distribuidores (Canal 30)",
+      "campos_obrigatórios": [
         "CNPJ__c",
-        "AreaCredito__c",
-        "LimiteCredito__c"
+        "AreaCrédito__c",
+        "LimiteCrédito__c"
       ],
-      "areaCredito": "DBA/ADBA",
+      "areaCrédito": "DBA/ADBA",
       "canal": "30",
       "status": "ativo"
     }
@@ -64,74 +64,74 @@
       "label": "Termo de Pesquisa",
       "tipo": "Text",
       "tamanho": 50,
-      "obrigatorio": true,
-      "descricao": "Campo para busca rapida de contas",
-      "validacao": "Maximo 50 caracteres, sem caracteres especiais"
+      "obrigatório": true,
+      "descrição": "Campo para busca rapida de contas",
+      "validação": "Máximo 50 caracteres, sem caracteres especiais"
     },
     {
       "apiName": "SapCode__c",
-      "label": "Codigo SAP",
+      "label": "Código SAP",
       "tipo": "Text",
       "tamanho": 10,
-      "obrigatorio": true,
-      "descricao": "Codigo do cliente no SAP ECC",
-      "integracao": "ASCP"
+      "obrigatório": true,
+      "descrição": "Código do cliente no SAP ECC",
+      "integração": "ASCP"
     },
     {
       "apiName": "Cluster__c",
       "label": "Cluster",
       "tipo": "Picklist",
       "valores": ["Corporativas", "Especiais", "Regionais", "Dispersas"],
-      "obrigatorio": true,
-      "descricao": "Cluster do cliente calculado automaticamente",
-      "fontesReuniao": ["2025-12-12_regras-clusterizacao.json"]
+      "obrigatório": true,
+      "descrição": "Cluster do cliente calculado automáticamente",
+      "fontesReunião": ["2025-12-12_regras-clusterização.json"]
     },
     {
-      "apiName": "ClusterExcecao__c",
-      "label": "Cluster Excecao",
+      "apiName": "ClusterExceção__c",
+      "label": "Cluster Exceção",
       "tipo": "Checkbox",
-      "descricao": "Indica se o cluster foi definido manualmente (excecao)",
-      "workflow": "Requer aprovacao para alteracao"
+      "descrição": "Indica se o cluster foi definido manualmente (exceção)",
+      "workflow": "Requer aprovação para alteração"
     },
     {
       "apiName": "Segmento__c",
       "label": "Segmento",
       "tipo": "Picklist",
-      "descricao": "Segmento do cliente",
+      "descrição": "Segmento do cliente",
       "dependeDe": "Subsegmento__c"
     },
     {
       "apiName": "Subsegmento__c",
       "label": "Subsegmento",
       "tipo": "Picklist",
-      "descricao": "Subsegmento do cliente"
+      "descrição": "Subsegmento do cliente"
     },
     {
       "apiName": "SetorIndustrial__c",
       "label": "Setor Industrial",
       "tipo": "Picklist",
-      "descricao": "Setor industrial baseado no CNAE"
+      "descrição": "Setor industrial baseado no CNAE"
     },
     {
       "apiName": "Canal__c",
       "label": "Canal de Venda",
       "tipo": "Picklist",
       "valores": ["20", "25", "30", "40"],
-      "obrigatorio": true,
-      "descricao": "Canal de venda do cliente"
+      "obrigatório": true,
+      "descrição": "Canal de venda do cliente"
     },
     {
-      "apiName": "AreaCredito__c",
-      "label": "Area de Credito",
+      "apiName": "AreaCrédito__c",
+      "label": "Área de Crédito",
       "tipo": "Picklist",
       "valores": ["BBA", "CSP", "DBA", "ALPE"],
-      "obrigatorio": true,
-      "descricao": "Area de credito do cliente"
+      "obrigatório": true,
+      "descrição": "Área de crédito do cliente"
     }
   ],
-  "observacoes": [
-    "Record Types confirmados via documentos Tester e reunioes",
-    "Campos de Cluster e Segmento sao calculados automaticamente",
-    "Integracao com SAP via ASCP para sincronizacao"
+  "observações": [
+    "Record Types confirmados via documentos Tester e reuniões",
+    "Campos de Cluster e Segmento sao calculados automáticamente",
+    "Integração com SAP via ASCP para sincronização"
   ]
 }

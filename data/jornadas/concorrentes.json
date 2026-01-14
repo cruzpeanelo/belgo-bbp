@@ -4,78 +4,78 @@
   "icone": "🎯",
   "ordem": 7,
   "asIs": {
-    "descricao": "Registro manual e esporadico de informacoes sobre concorrentes onde vendedores anotam dados em planilhas pessoais ou cadernos, sem padronizacao, consolidacao ou analise sistematica. Informacoes ficam dispersas e perdem-se com a saida de vendedores.",
+    "descrição": "Registro manual e esporadico de informações sobre concorrentes onde vendedores anotam dados em planilhas pessoais ou cadernos, sem padronização, consolidação ou análise sistematica. Informações ficam dispersas e perdem-se com a saida de vendedores.",
     "passos": [
       "Vendedor identifica concorrente em visita ao cliente",
-      "Anota informacoes em papel ou planilha pessoal",
-      "Dados incluem: nome do concorrente, produto, preco, condicoes",
-      "Informacoes nao sao compartilhadas sistematicamente",
-      "Quando solicitado, vendedor busca em suas anotacoes",
-      "Consolidacao feita manualmente pelo gestor (quando feita)",
-      "Sem vinculacao com oportunidades de venda",
+      "Anota informações em papel ou planilha pessoal",
+      "Dados incluem: nome do concorrente, produto, preço, condições",
+      "Informações não sao compartilhadas sistematicamente",
+      "Quando solicitado, vendedor busca em suas anotações",
+      "Consolidação feita manualmente pelo gestor (quando feita)",
+      "Sem vinculação com oportunidades de venda",
       "Dados ficam desatualizados rapidamente"
     ],
     "problemas": [
       "Dados fragmentados entre varios vendedores",
-      "Informacoes desatualizadas sobre precos e condicoes",
-      "Sem analise sistematica de concorrencia",
-      "Perda de informacoes com rotatividade de vendedores",
-      "Sem vinculacao com oportunidades perdidas",
-      "Dificuldade de identificar padroes de atuacao",
-      "Sem historico de atuacao do concorrente",
+      "Informações desatualizadas sobre preços e condições",
+      "Sem análise sistematica de concorrencia",
+      "Perda de informações com rotatividade de vendedores",
+      "Sem vinculação com oportunidades perdidas",
+      "Dificuldade de identificar padroes de atuação",
+      "Sem histórico de atuação do concorrente",
       "Decisoes comerciais sem base em dados",
-      "Concorrentes sazonais nao mapeados",
-      "Falta de padronizacao nas informacoes coletadas"
+      "Concorrentes sazonais não mapeados",
+      "Falta de padronização nas informações coletadas"
     ],
     "tempoMedio": "N/A (esporadico)"
   },
   "toBe": {
-    "descricao": "Gestao sistematica de concorrentes no Salesforce com registro estruturado vinculado a contas e oportunidades. Permite analise de participacao de mercado, acompanhamento de precos e identificacao de padroes de concorrencia por regiao e segmento.",
+    "descrição": "Gestão sistematica de concorrentes no Salesforce com registro estruturado vinculado a contas e oportunidades. Permite análise de participação de mercado, acompanhamento de preços e identificação de padroes de concorrencia por região e segmento.",
     "passos": [
       "Vendedor acessa conta do cliente no Salesforce",
       "Clica em 'Adicionar Concorrente' ou 'Registrar Perda'",
       "Seleciona concorrente de lista padronizada",
-      "Se concorrente novo: cadastra com dados basicos",
-      "Preenche informacoes: produto, preco, condicoes, motivo de escolha",
+      "Se concorrente novo: cadastra com dados básicos",
+      "Preenche informações: produto, preço, condições, motivo de escolha",
       "Vincula a oportunidade de venda (se aplicavel)",
-      "Sistema registra data e vendedor responsavel",
-      "Relatorios automaticos consolidam informacoes",
-      "Alertas para concorrentes frequentes em determinada regiao"
+      "Sistema registra data e vendedor responsável",
+      "Relatórios automáticos consolidam informações",
+      "Alertas para concorrentes frequentes em determinada região"
     ],
     "beneficios": [
-      "Visao consolidada de todos os concorrentes",
-      "Analise de mercado baseada em dados reais",
-      "Historico completo de atuacao de cada concorrente",
-      "Vinculacao com oportunidades ganhas e perdidas",
-      "Identificacao de padroes por regiao e segmento",
+      "Visão consolidada de todos os concorrentes",
+      "Análise de mercado baseada em dados reais",
+      "Histórico completo de atuação de cada concorrente",
+      "Vinculação com oportunidades ganhas e perdidas",
+      "Identificação de padroes por região e segmento",
       "Decisoes comerciais embasadas",
-      "Relatorios automaticos de concorrencia",
+      "Relatórios automáticos de concorrencia",
       "Mapeamento de concorrentes sazonais",
-      "Retencao de conhecimento independente de pessoas",
-      "Alertas proativos sobre acoes de concorrentes"
+      "Retenção de conhecimento independente de pessoas",
+      "Alertas proativos sobre ações de concorrentes"
     ],
     "tempoMedio": "5 minutos"
   },
-  "areasImpactadas": [
+  "áreasImpactadas": [
     "Comercial",
     "Marketing",
     "Estrategia",
     "Inteligencia de Mercado"
   ],
   "status": "Pendente",
-  "fonteReuniao": "10/12/2025",
-  "fontesReuniao": [
-    "10/12/2025 - Discussao sobre gestao de concorrentes",
+  "fonteReunião": "10/12/2025",
+  "fontesReunião": [
+    "10/12/2025 - Discussão sobre gestão de concorrentes",
     "10/12/2025 - Questionamento de Francine sobre concorrentes sazonais"
   ],
   "fontesVerificadas": {
-    "reuniao10dez": [
-      "Discussao sobre concorrentes sazonais (Francine)"
+    "reunião10dez": [
+      "Discussão sobre concorrentes sazonais (Francine)"
     ],
-    "citacaoExata": "Francine (1:28:55): 'Os concorrentes sao sazonais, ta? Eu nao sei. Aqui a gente no Protec a nossa realidade e assim. De repente, tem alguns que estao sempre ali, e os nomes permanentes ali, peres, mas tem outros concorrentes que surgem ali, tipo vogue galinha, aparece ali, da uma dorzinha de cabeca, incomodou um pouquinho, daqui a pouco some.'"
+    "citaçãoExata": "Francine (1:28:55): 'Os concorrentes sao sazonais, ta? Eu não sei. Aqui a gente no Protec a nossa realidade e assim. De repente, tem alguns que estao sempre ali, e os nomes permanentes ali, peres, mas tem outros concorrentes que surgem ali, tipo vogue galinha, aparece ali, da uma dorzinha de cabeca, incomodou um pouquinho, daqui a pouco some.'"
   },
   "exemplosReais": {
-    "fonte": "Reuniao 10/12/2025 - Francine",
+    "fonte": "Reunião 10/12/2025 - Francine",
     "concorrentesPermanentes": [
       "Peres (mencionado)"
     ],
@@ -87,17 +87,17 @@
   "campos": [
     {
       "campo": "Nome do Concorrente",
-      "descricao": "Nome da empresa concorrente",
-      "preenchimento": "Selecao/Manual",
-      "validacao": "Obrigatorio",
-      "obrigatorio": true
+      "descrição": "Nome da empresa concorrente",
+      "preenchimento": "Seleção/Manual",
+      "validação": "Obrigatório",
+      "obrigatório": true
     },
     {
       "campo": "Tipo Concorrente",
-      "descricao": "Classificacao do tipo de concorrente",
-      "preenchimento": "Selecao",
-      "validacao": "-",
-      "obrigatorio": true,
+      "descrição": "Classificação do tipo de concorrente",
+      "preenchimento": "Seleção",
+      "validação": "-",
+      "obrigatório": true,
       "valores": [
         "Direto",
         "Indireto",
@@ -107,33 +107,33 @@
     },
     {
       "campo": "Produto Concorrente",
-      "descricao": "Produto oferecido pelo concorrente",
+      "descrição": "Produto oferecido pelo concorrente",
       "preenchimento": "Manual",
-      "validacao": "-",
-      "obrigatorio": true
+      "validação": "-",
+      "obrigatório": true
     },
     {
-      "campo": "Preco Informado",
-      "descricao": "Preco praticado pelo concorrente",
+      "campo": "Preço Informado",
+      "descrição": "Preço praticado pelo concorrente",
       "preenchimento": "Manual",
-      "validacao": "Numerico",
-      "obrigatorio": false
+      "validação": "Numerico",
+      "obrigatório": false
     },
     {
-      "campo": "Condicoes Comerciais",
-      "descricao": "Condicoes de pagamento e entrega",
+      "campo": "Condições Comerciais",
+      "descrição": "Condições de pagamento e entrega",
       "preenchimento": "Manual",
-      "validacao": "-",
-      "obrigatorio": false
+      "validação": "-",
+      "obrigatório": false
     },
     {
       "campo": "Motivo da Escolha",
-      "descricao": "Por que cliente escolheu o concorrente",
-      "preenchimento": "Selecao/Manual",
-      "validacao": "-",
-      "obrigatorio": false,
+      "descrição": "Por que cliente escolheu o concorrente",
+      "preenchimento": "Seleção/Manual",
+      "validação": "-",
+      "obrigatório": false,
       "valores": [
-        "Preco",
+        "Preço",
         "Prazo",
         "Qualidade",
         "Relacionamento",
@@ -144,86 +144,86 @@
     },
     {
       "campo": "Conta Relacionada",
-      "descricao": "Cliente onde o concorrente foi identificado",
-      "preenchimento": "Automatico",
-      "validacao": "Obrigatorio",
-      "obrigatorio": true
+      "descrição": "Cliente onde o concorrente foi identificado",
+      "preenchimento": "Automático",
+      "validação": "Obrigatório",
+      "obrigatório": true
     },
     {
       "campo": "Oportunidade Relacionada",
-      "descricao": "Oportunidade de venda vinculada (se houver)",
-      "preenchimento": "Selecao",
-      "validacao": "-",
-      "obrigatorio": false
+      "descrição": "Oportunidade de venda vinculada (se houver)",
+      "preenchimento": "Seleção",
+      "validação": "-",
+      "obrigatório": false
     },
     {
       "campo": "Data do Registro",
-      "descricao": "Data em que a informacao foi coletada",
-      "preenchimento": "Automatico",
-      "validacao": "-",
-      "obrigatorio": true
+      "descrição": "Data em que a informação foi coletada",
+      "preenchimento": "Automático",
+      "validação": "-",
+      "obrigatório": true
     },
     {
-      "campo": "Vendedor Responsavel",
-      "descricao": "Vendedor que coletou a informacao",
-      "preenchimento": "Automatico (Usuario)",
-      "validacao": "-",
-      "obrigatorio": true
+      "campo": "Vendedor Responsável",
+      "descrição": "Vendedor que coletou a informação",
+      "preenchimento": "Automático (Usuário)",
+      "validação": "-",
+      "obrigatório": true
     },
     {
-      "campo": "Regiao",
-      "descricao": "Regiao onde concorrente atua",
-      "preenchimento": "Automatico (Conta)",
-      "validacao": "-",
-      "obrigatorio": false
+      "campo": "Região",
+      "descrição": "Região onde concorrente atua",
+      "preenchimento": "Automático (Conta)",
+      "validação": "-",
+      "obrigatório": false
     },
     {
-      "campo": "Observacoes",
-      "descricao": "Informacoes adicionais sobre o concorrente",
+      "campo": "Observações",
+      "descrição": "Informações adicionais sobre o concorrente",
       "preenchimento": "Manual",
-      "validacao": "-",
-      "obrigatorio": false
+      "validação": "-",
+      "obrigatório": false
     }
   ],
-  "regrasNegocio": [
+  "regrasNegócio": [
     {
       "regra": "Lista Padronizada de Concorrentes",
-      "descricao": "Sistema mantem lista de concorrentes conhecidos para selecao rapida, evitando duplicacoes e padronizando nomenclatura"
+      "descrição": "Sistema mantem lista de concorrentes conhecidos para seleção rapida, evitando duplicações e padronizando nomenclatura"
     },
     {
-      "regra": "Vinculacao com Oportunidades Perdidas",
-      "descricao": "Ao registrar uma oportunidade como perdida, sistema solicita informacoes sobre o concorrente vencedor"
+      "regra": "Vinculação com Oportunidades Perdidas",
+      "descrição": "Ao registrar uma oportunidade como perdida, sistema solicita informações sobre o concorrente vencedor"
     },
     {
       "regra": "Concorrentes Sazonais",
-      "descricao": "Sistema permite marcar concorrentes como sazonais, indicando periodos de maior atuacao",
-      "nota": "Definicao de regras pendente conforme questionamento na reuniao"
+      "descrição": "Sistema permite marcar concorrentes como sazonais, indicando períodos de maior atuação",
+      "nota": "Definição de regras pendente conforme questionamento na reunião"
     },
     {
       "regra": "Alertas de Concorrencia",
-      "descricao": "Sistema gera alertas quando concorrente aparece frequentemente em determinada regiao ou cliente"
+      "descrição": "Sistema gera alertas quando concorrente aparece frequentemente em determinada região ou cliente"
     },
     {
-      "regra": "Historico por Cliente",
-      "descricao": "Na tela da conta, exibe historico de concorrentes identificados para aquele cliente"
+      "regra": "Histórico por Cliente",
+      "descrição": "Na tela da conta, exibe histórico de concorrentes identificados para aquele cliente"
     }
   ],
-  "sistemasTecnicos": [
+  "sistemasTécnicos": [
     "Salesforce"
   ],
-  "integracoes": [
+  "integrações": [
     {
       "origem": "Salesforce",
-      "destino": "Relatorios BI",
-      "tipo": "Exportacao",
-      "descricao": "Dados de concorrentes podem ser exportados para analise em ferramentas de BI"
+      "destino": "Relatórios BI",
+      "tipo": "Exportação",
+      "descrição": "Dados de concorrentes podem ser exportados para análise em ferramentas de BI"
     }
   ],
   "mensagensSistema": [
     {
       "tipo": "Sucesso",
       "contexto": "Concorrente Registrado",
-      "mensagem": "Informacao de concorrente registrada com sucesso"
+      "mensagem": "Informação de concorrente registrada com sucesso"
     },
     {
       "tipo": "Alerta",
@@ -233,62 +233,62 @@
     {
       "tipo": "Info",
       "contexto": "Perda para Concorrente",
-      "mensagem": "Registre as informacoes do concorrente para ajudar na analise de mercado"
+      "mensagem": "Registre as informações do concorrente para ajudar na análise de mercado"
     },
     {
       "tipo": "Alerta",
       "contexto": "Concorrente Frequente",
-      "mensagem": "Atencao: {concorrente} apareceu em {n} oportunidades nesta regiao no ultimo mes"
+      "mensagem": "Atenção: {concorrente} apareceu em {n} oportunidades nesta região no último mes"
     }
   ],
   "detalhes": {
-    "objetivo": "Centralizar informacoes de concorrentes para tomada de decisao",
-    "analises": [
-      "Participacao por regiao",
-      "Precos praticados",
+    "objetivo": "Centralizar informações de concorrentes para tomada de decisão",
+    "análises": [
+      "Participação por região",
+      "Preços praticados",
       "Motivos de perda",
       "Tendencias de mercado"
     ],
-    "concorrentesSazonais": "Pendente definicao de regras"
+    "concorrentesSazonais": "Pendente definição de regras"
   },
   "questionamentoSazonalidade": {
-    "descricao": "Questionamento levantado na reuniao sobre tratamento de concorrentes sazonais",
-    "fonte": "Reuniao 10/12/2025 - Francine Gayer",
+    "descrição": "Questionamento levantado na reunião sobre tratamento de concorrentes sazonais",
+    "fonte": "Reunião 10/12/2025 - Francine Gayer",
     "pergunta": "Como o sistema vai tratar concorrentes que aparecem e desaparecem sazonalmente?",
     "exemplos": {
       "permanentes": "Peres - sempre presente no mercado",
       "sazonais": "Tipo 'vogue galinha' - aparecem, incomodam e somem"
     },
-    "status": "PENDENTE - regras ainda nao definidas",
-    "nota": "Na reuniao, Leandro precisou sair e o tema ficou em aberto para definicao futura"
+    "status": "PENDENTE - regras ainda não definidas",
+    "nota": "Na reunião, Leandro precisou sair e o tema ficou em aberto para definição futura"
   },
-  "pendencias": [
-    "Definicao da lista padronizada de concorrentes",
-    "Definicao de regras para concorrentes sazonais",
-    "Configuracao de alertas de concorrencia",
-    "Relatorios de analise de mercado"
+  "pendências": [
+    "Definição da lista padronizada de concorrentes",
+    "Definição de regras para concorrentes sazonais",
+    "Configuração de alertas de concorrencia",
+    "Relatórios de análise de mercado"
   ],
   "prerequisitos": [
     "Lista de concorrentes conhecidos catalogada",
-    "Definicao de campos obrigatorios validada pela area comercial",
+    "Definição de campos obrigatórios validada pela área comercial",
     "Treinamento de vendedores sobre importancia do registro"
   ],
   "ciclosTeste": [
     {
       "documento": "Pendente",
-      "titulo": "Gestao de Concorrentes - Testes Funcionais",
+      "título": "Gestão de Concorrentes - Testes Funcionais",
       "status": "A Definir",
       "data": "-",
-      "descricao": "Testes de funcionalidades de rastreamento de concorrentes ainda nao definidos",
+      "descrição": "Testes de funcionalidades de rastreamento de concorrentes ainda não definidos",
       "cenarios": [
         "Cadastro de novo concorrente",
-        "Vinculacao de concorrente a oportunidade perdida",
-        "Registro de precos e condicoes do concorrente",
-        "Classificacao de concorrentes sazonais",
-        "Relatorios de analise de mercado",
+        "Vinculação de concorrente a oportunidade perdida",
+        "Registro de preços e condições do concorrente",
+        "Classificação de concorrentes sazonais",
+        "Relatórios de análise de mercado",
         "Alertas de concorrencia frequente"
       ],
-      "nota": "Funcionalidade em status Pendente - testes serao definidos apos implementacao"
+      "nota": "Funcionalidade em status Pendente - testes serao definidos apos implementação"
     }
   ],
   "relacionamentos": {
@@ -296,47 +296,47 @@
       "cadastro-cliente"
     ],
     "relacionadoCom": [
-      "cotacao-ov"
+      "cotação-ov"
     ],
-    "nota": "Informacoes de concorrentes sao relevantes para analise de oportunidades perdidas"
+    "nota": "Informações de concorrentes sao relevantes para análise de oportunidades perdidas"
   },
-  "discussaoReunioes": {
+  "discussãoReuniões": {
     "10dez2025": {
       "participante": "Francine Gayer",
-      "divisao": "Protec",
+      "divisão": "Protec",
       "timestamp": "1:28:38",
-      "contexto": "Discussao sobre como o sistema deveria tratar concorrentes e integrar com plataforma Share",
-      "citacaoSobreShare": "E ai ele ja linkar com essa outra plataforma do Share. Eu nao sei se tem como amarrar os dados ali para depois eu nao ter que ir la analisar tudo que eu perdi. Se ela 10 cotacoes, eu ganhei 7 e perdi 3. Como e que eu vou amarrar isso la no share do cliente e colocar esse outro concorrente la?",
-      "citacaoSobreSazonalidade": "Os concorrentes sao sazonais, ta? Eu nao sei. Aqui a gente no Protec a nossa realidade e assim. De repente, tem alguns que estao sempre ali, e os nomes permanentes ali, peres, mas tem outros concorrentes que surgem ali, tipo vogue galinha, aparece ali, da uma dorzinha de cabeca, incomodou um pouquinho, daqui a pouco some.",
+      "contexto": "Discussão sobre como o sistema deveria tratar concorrentes e integrar com plataforma Share",
+      "citaçãoSobreShare": "E ai ele ja linkar com essa outra plataforma do Share. Eu não sei se tem como amarrar os dados ali para depois eu não ter que ir la analisar tudo que eu perdi. Se ela 10 cotações, eu ganhei 7 e perdi 3. Como e que eu vou amarrar isso la no share do cliente e colocar esse outro concorrente la?",
+      "citaçãoSobreSazonalidade": "Os concorrentes sao sazonais, ta? Eu não sei. Aqui a gente no Protec a nossa realidade e assim. De repente, tem alguns que estao sempre ali, e os nomes permanentes ali, peres, mas tem outros concorrentes que surgem ali, tipo vogue galinha, aparece ali, da uma dorzinha de cabeca, incomodou um pouquinho, daqui a pouco some.",
       "insights": [
         "Concorrentes podem ser permanentes (ex: Peres) ou sazonais",
         "Sazonais 'aparecem e somem' - dificil rastrear",
-        "Realidade varia por divisao (Protec tem essa dinamica)",
+        "Realidade varia por divisão (Protec tem essa dinamica)",
         "Expressao 'vogue galinha' usada para descrever concorrente oportunista"
       ],
       "necessidadeIdentificada": "Sistema precisa diferenciar e tratar concorrentes sazonais de forma diferente dos permanentes",
       "respostaObtida": "Pendente - regras de sazonalidade a serem definidas"
     }
   },
-  "contextoReuniao": {
+  "contextoReunião": {
     "projeto": "GTM (Go To Market) / CRM",
-    "lideranca": {
+    "liderança": {
       "business": "Thalita Merisio Rhein",
-      "tecnico": "Leandro da Cruz Pereira"
+      "técnico": "Leandro da Cruz Pereira"
     },
     "timeline": {
       "workshops": "04/12 a 22/12/2025",
-      "posWorkshop": "Responsabilidade passa para usuarios (Castro)",
+      "posWorkshop": "Responsabilidade passa para usuários (Castro)",
       "entregaveis": [
         "Planilha de cenarios",
-        "Manual de orientacao"
+        "Manual de orientação"
       ]
     },
     "participantes": [
       {
         "nome": "Francine Gayer",
-        "divisao": "Protec",
-        "contribuicao": "Levantou questao sobre concorrentes sazonais"
+        "divisão": "Protec",
+        "contribuição": "Levantou questao sobre concorrentes sazonais"
       },
       {
         "nome": "Leandro da Cruz Pereira",
@@ -361,14 +361,14 @@
     }
   ],
   "totalDocumentos": 2,
-  "ultimaAtualizacao": "2026-01-13T11:36:26.123967",
+  "últimaAtualização": "2026-01-13T11:36:26.123967",
   "documentosGerais": [
     {
       "tipo": "Plano de Testes Exploratorios",
       "id": "909100"
     },
     {
-      "tipo": "Boot/Automacao",
+      "tipo": "Boot/Automação",
       "id": "Boot"
     },
     {

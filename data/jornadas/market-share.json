@@ -1,0 +1,75 @@
+{
+  "id": "market-share",
+  "nome": "Market Share e Concorrentes",
+  "icone": "📊",
+  "ordem": 13,
+  "asIs": {
+    "descrição": "Informações de concorrentes e market share dispersas, sem gestão centralizada ou análise sistemática",
+    "passos": [
+      "Vendedor coleta informações de concorrentes informalmente",
+      "Dados registrados em planilhas individuais",
+      "Projetos perdidos não vinculados a concorrentes",
+      "Sem histórico de market share por cliente",
+      "Análise de mercado feita manualmente"
+    ],
+    "problemas": [
+      "Informações de concorrentes sazonais e dinâmicas",
+      "Dificuldade em vincular projetos perdidos a concorrentes específicos",
+      "Sem visão consolidada de share of wallet",
+      "Dados fragmentados e inconsistentes",
+      "Impossível rastrear tendências de mercado"
+    ],
+    "tempoMedio": "N/A"
+  },
+  "toBe": {
+    "descrição": "Gestão centralizada de concorrentes e market share no Salesforce com análise automatizada",
+    "passos": [
+      "Cadastro normalizado de concorrentes no Salesforce",
+      "Registro de share of wallet por cliente",
+      "Vinculação de oportunidades perdidas a concorrentes",
+      "Dashboard de análise de mercado automático",
+      "Histórico de evolução de market share"
+    ],
+    "beneficios": [
+      "Visão consolidada de concorrentes por região/segmento",
+      "Análise de share of wallet por cliente",
+      "Identificação de tendências de mercado",
+      "Decisões estratégicas baseadas em dados",
+      "Rastreamento de projetos perdidos para concorrência"
+    ],
+    "tempoMedio": "5 minutos por registro"
+  },
+  "áreasImpactadas": [
+    "Comercial",
+    "Marketing",
+    "Estratégia",
+    "Inteligência de Mercado"
+  ],
+  "status": "Pendente",
+  "fonteReunião": "10/12/2025",
+  "detalhes": {
+    "shareOfWallet": {
+      "descrição": "Percentual de compra do cliente na Belgo versus concorrentes",
+      "cálculo": "Volume Belgo / Volume Total Cliente",
+      "objetivo": "Identificar potencial de crescimento em cada conta"
+    },
+    "concorrentes": {
+      "cadastro": "Lista normalizada pela TI",
+      "desafio": "Concorrentes são sazonais e dinâmicos por região",
+      "responsável": "Discussão agendada com Edmundo"
+    },
+    "marketShareTipos": {
+      "estratégico": "Visão de longo prazo por segmento",
+      "tático": "Visão de curto prazo por oportunidade"
+    }
+  },
+  "sistemasTécnicos": [
+    "Salesforce",
+    "Power BI"
+  ],
+  "pendências": [
+    "Normalização de cadastro de concorrentes pela TI",
+    "Definição de critérios para vinculação de projetos perdidos",
+    "Discussão com Edmundo sobre gestão de dados de concorrentes"
+  ]
+}

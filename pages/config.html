@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configurações - Cockpit GTM Belgo</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../css/styles.css">
     <style>
         .config-section {
@@ -174,55 +175,66 @@
     </style>
 </head>
 <body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <span class="mobile-header-logo">BELGO GTM</span>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+            ☰
+        </button>
+    </header>
+
+    <!-- Overlay para fechar menu -->
+    <div class="sidebar-overlay" onclick="toggleMobileMenu()"></div>
+
     <div class="app-container">
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-logo">BELGO</div>
                 <div class="sidebar-subtitle">Cockpit GTM</div>
             </div>
-            <nav class="sidebar-nav">
-                <a href="../index.html" class="nav-item">
-                    <span class="nav-icon">📊</span>
+            <nav class="sidebar-nav" role="navigation" aria-label="Menu principal">
+                <a href="../index.html" class="nav-item" aria-label="Dashboard">
+                    <span class="nav-icon" aria-hidden="true">📊</span>
                     <span class="nav-text">Dashboard</span>
                 </a>
-                <a href="testes.html" class="nav-item">
-                    <span class="nav-icon">✅</span>
+                <a href="testes.html" class="nav-item" aria-label="Testes">
+                    <span class="nav-icon" aria-hidden="true">✅</span>
                     <span class="nav-text">Testes</span>
                 </a>
-                <a href="jornadas.html" class="nav-item">
-                    <span class="nav-icon">🔄</span>
+                <a href="jornadas.html" class="nav-item" aria-label="Jornadas AS IS TO BE">
+                    <span class="nav-icon" aria-hidden="true">🔄</span>
                     <span class="nav-text">Jornadas AS IS/TO BE</span>
                 </a>
-                <a href="documentos.html" class="nav-item">
-                    <span class="nav-icon">📄</span>
+                <a href="documentos.html" class="nav-item" aria-label="Documentos">
+                    <span class="nav-icon" aria-hidden="true">📄</span>
                     <span class="nav-text">Documentos</span>
                 </a>
-                <a href="reunioes.html" class="nav-item">
-                    <span class="nav-icon">📝</span>
+                <a href="reunioes.html" class="nav-item" aria-label="Reuniões">
+                    <span class="nav-icon" aria-hidden="true">📝</span>
                     <span class="nav-text">Reuniões</span>
                 </a>
-                <a href="timeline.html" class="nav-item">
-                    <span class="nav-icon">📅</span>
+                <a href="timeline.html" class="nav-item" aria-label="Timeline">
+                    <span class="nav-icon" aria-hidden="true">📅</span>
                     <span class="nav-text">Timeline</span>
                 </a>
-                <a href="cronograma.html" class="nav-item">
-                    <span class="nav-icon">🗓️</span>
+                <a href="cronograma.html" class="nav-item" aria-label="Cronograma">
+                    <span class="nav-icon" aria-hidden="true">🗓️</span>
                     <span class="nav-text">Cronograma</span>
                 </a>
-                <a href="glossario.html" class="nav-item">
-                    <span class="nav-icon">📖</span>
+                <a href="glossario.html" class="nav-item" aria-label="Glossário">
+                    <span class="nav-icon" aria-hidden="true">📖</span>
                     <span class="nav-text">Glossário</span>
                 </a>
-                <a href="participantes.html" class="nav-item">
-                    <span class="nav-icon">👥</span>
+                <a href="participantes.html" class="nav-item" aria-label="Participantes">
+                    <span class="nav-icon" aria-hidden="true">👥</span>
                     <span class="nav-text">Participantes</span>
                 </a>
-                <a href="config.html" class="nav-item active">
-                    <span class="nav-icon">⚙️</span>
+                <a href="config.html" class="nav-item active" aria-current="page" aria-label="Configurações">
+                    <span class="nav-icon" aria-hidden="true">⚙️</span>
                     <span class="nav-text">Configurações</span>
                 </a>
-                <a href="pontos-criticos.html" class="nav-item">
-                    <span class="nav-icon">⚠️</span>
+                <a href="pontos-criticos.html" class="nav-item" aria-label="Pontos Críticos">
+                    <span class="nav-icon" aria-hidden="true">⚠️</span>
                     <span class="nav-text">Pontos Críticos</span>
                 </a>
             </nav>
@@ -270,6 +282,93 @@
                 </div>
             </div>
 
+            <!-- Configuração do Microsoft Teams -->
+            <div class="card" style="margin-top: 30px; border-left: 4px solid #6264A7;">
+                <div class="card-header">
+                    <h3 class="card-title" style="display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.5rem;">📤</span>
+                        Integração Microsoft Teams
+                    </h3>
+                </div>
+                <div style="padding: 20px;">
+                    <div style="background: #d1fae5; border: 1px solid #10b981; border-radius: 8px; padding: 12px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.5rem;">✅</span>
+                        <div>
+                            <strong style="color: #065f46;">Teams já configurado!</strong>
+                            <p style="color: #047857; margin: 0; font-size: 0.9rem;">O webhook e canal do Teams já vêm pré-configurados. Você pode usar as funções de envio normalmente.</p>
+                        </div>
+                    </div>
+
+                    <details style="margin-bottom: 20px;">
+                        <summary style="cursor: pointer; font-weight: 600; color: #374151; padding: 10px; background: #f3f4f6; border-radius: 8px;">
+                            ⚙️ Configuração Avançada (opcional - sobrescrever URLs padrão)
+                        </summary>
+                        <div style="padding: 15px; background: #f9fafb; border-radius: 0 0 8px 8px; margin-top: -5px;">
+                            <div style="margin-bottom: 20px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #374151;">
+                                    URL do Webhook do Teams (Incoming Webhook)
+                                </label>
+                                <input type="text" id="teams-webhook-url"
+                                    placeholder="Usando URL padrão pré-configurada..."
+                                    style="width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 14px;"
+                                    onchange="saveTeamsWebhookUrl()">
+                                <small style="color: #9ca3af; display: block; margin-top: 8px;">
+                                    Deixe em branco para usar a URL padrão pré-configurada
+                                </small>
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #374151;">
+                                    URL do Canal do Teams
+                                </label>
+                                <input type="text" id="teams-channel-url"
+                                    placeholder="Usando URL padrão pré-configurada..."
+                                    style="width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 14px;"
+                                    onchange="saveTeamsChannelUrl()">
+                                <small style="color: #9ca3af; display: block; margin-top: 8px;">
+                                    Deixe em branco para usar a URL padrão pré-configurada
+                                </small>
+                            </div>
+                        </div>
+                    </details>
+
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button onclick="testTeamsWebhook()" class="btn" style="background: #6264A7; color: white; padding: 10px 20px;">
+                            🧪 Testar Envio de Mensagem
+                        </button>
+                        <button onclick="testTeamsChannel()" class="btn" style="background: #505AC9; color: white; padding: 10px 20px;">
+                            📺 Testar Abertura do Canal
+                        </button>
+                        <button onclick="clearTeamsConfig()" class="btn" style="background: #ef4444; color: white; padding: 10px 20px;">
+                            🗑️ Limpar Tudo
+                        </button>
+                    </div>
+
+                    <div style="background: #fef3c7; border: 1px solid #fcd34d; border-radius: 8px; padding: 15px; margin-top: 20px;">
+                        <strong style="color: #92400e;">Como obter a URL do Webhook (Incoming Webhook):</strong>
+                        <ol style="margin: 10px 0 0 20px; color: #78350f; font-size: 0.9rem;">
+                            <li>Abra o Microsoft Teams</li>
+                            <li>Navegue até o canal desejado</li>
+                            <li>Clique nos 3 pontos (...) ao lado do nome do canal</li>
+                            <li>Selecione "Conectores" ou "Connectors"</li>
+                            <li>Procure "Incoming Webhook" e clique em "Configurar"</li>
+                            <li>Dê um nome (ex: "Cockpit GTM") e copie a URL gerada</li>
+                        </ol>
+                    </div>
+
+                    <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 15px; margin-top: 15px;">
+                        <strong style="color: #0369a1;">Como obter a URL do Canal:</strong>
+                        <ol style="margin: 10px 0 0 20px; color: #0c4a6e; font-size: 0.9rem;">
+                            <li>Abra o Microsoft Teams</li>
+                            <li>Navegue até o canal desejado</li>
+                            <li>Clique nos 3 pontos (...) ao lado do nome do canal</li>
+                            <li>Selecione "Obter link para o canal"</li>
+                            <li>Cole o link aqui</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
             <div class="card" style="margin-top: 30px;">
                 <div class="card-header">
                     <h3 class="card-title">Fontes de Validação (Triple Check)</h3>
@@ -281,6 +380,7 @@
         </main>
     </div>
 
+    <script src="../js/utils.js"></script>
     <script>
         function showTab(tabId) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -308,17 +408,23 @@
 
         function renderAreas(data) {
             const container = document.getElementById('areas-grid');
-            container.innerHTML = data.areas.map(area => {
-                const citation = area.citacoesExatas[0];
-                const integrations = area.integracoes.map(i => `<span class="integration-tag">${i}</span>`).join('');
+            // Suporta ambas as versões (com e sem acento)
+            const areas = data.areas || data.áreas || [];
+            container.innerHTML = areas.map(area => {
+                const citacoes = area.citacoesExatas || area.citaçõesExatas || [];
+                const citation = citacoes[0] || {};
+                const integracoes = area.integracoes || area.integrações || [];
+                const integrations = integracoes.map(i => `<span class="integration-tag">${i}</span>`).join('');
+                const codigo = area.codigo || area.código;
+                const descricao = area.descricao || area.descrição;
 
                 return `
                     <div class="config-card">
                         <div class="config-card-header">
-                            <span class="config-code">${area.codigo}</span>
+                            <span class="config-code">${codigo}</span>
                             <span class="config-name">${area.nome}</span>
                         </div>
-                        <p class="config-desc">${area.descricao}</p>
+                        <p class="config-desc">${descricao}</p>
                         <span class="status-badge status-${area.status}">${area.status}</span>
 
                         <div class="config-details">
@@ -329,8 +435,8 @@
                         </div>
 
                         <div class="citation-box">
-                            <div class="citation-quote">"${citation.citacao}"</div>
-                            <div class="citation-source">- ${citation.participante}, ${citation.fonte}</div>
+                            <div class="citation-quote">"${citation.citacao || citation.citação || ''}"</div>
+                            <div class="citation-source">- ${citation.participante || ''}, ${citation.fonte || ''}</div>
                         </div>
                     </div>
                 `;
@@ -340,15 +446,20 @@
         function renderCanais(data) {
             const container = document.getElementById('canais-grid');
             container.innerHTML = data.canais.map(canal => {
-                const citation = canal.citacoesExatas[0];
+                // Suporta ambas as versões (com e sem acento)
+                const citacoes = canal.citacoesExatas || canal.citaçõesExatas || [];
+                const citation = citacoes[0] || {};
+                const areaCredito = canal.areaCredito || canal.areaCrédito;
+                const codigo = canal.codigo || canal.código;
+                const descricao = canal.descricao || canal.descrição;
 
                 return `
                     <div class="config-card canal">
                         <div class="config-card-header">
-                            <span class="config-code">${canal.codigo}</span>
+                            <span class="config-code">${codigo}</span>
                             <span class="config-name">${canal.nome}</span>
                         </div>
-                        <p class="config-desc">${canal.descricao}</p>
+                        <p class="config-desc">${descricao}</p>
                         <span class="status-badge status-${canal.status}">${canal.status}</span>
 
                         <div class="config-details">
@@ -356,12 +467,12 @@
                                 <span class="detail-label">Tipo Cliente:</span>
                                 <span class="detail-value">${canal.tipoCliente}</span>
                             </div>
-                            ${canal.areaCredito ? `<div class="config-detail-item"><span class="detail-label">Area Credito:</span><span class="detail-value">${canal.areaCredito}</span></div>` : ''}
+                            ${areaCredito ? `<div class="config-detail-item"><span class="detail-label">Area Credito:</span><span class="detail-value">${areaCredito}</span></div>` : ''}
                         </div>
 
                         <div class="citation-box">
-                            <div class="citation-quote">"${citation.citacao}"</div>
-                            <div class="citation-source">- ${citation.participante}, ${citation.fonte}</div>
+                            <div class="citation-quote">"${citation.citacao || citation.citação || ''}"</div>
+                            <div class="citation-source">- ${citation.participante || ''}, ${citation.fonte || ''}</div>
                         </div>
                     </div>
                 `;
@@ -378,7 +489,78 @@
             `).join('');
         }
 
+        // =====================================================
+        // CONFIGURAÇÃO DO MICROSOFT TEAMS
+        // =====================================================
+
+        function saveTeamsWebhookUrl() {
+            const url = document.getElementById('teams-webhook-url').value.trim();
+            if (url) {
+                localStorage.setItem('teamsWebhookUrl', url);
+                Utils.showToast('URL do Webhook salva com sucesso!', 'success');
+            }
+        }
+
+        function saveTeamsChannelUrl() {
+            const url = document.getElementById('teams-channel-url').value.trim();
+            if (url) {
+                localStorage.setItem('teamsChannelUrl', url);
+                Utils.showToast('URL do canal salva com sucesso!', 'success');
+            }
+        }
+
+        async function testTeamsWebhook() {
+            const webhookUrl = document.getElementById('teams-webhook-url').value.trim();
+            if (!webhookUrl) {
+                Utils.showToast('Digite a URL do Webhook primeiro', 'warning');
+                return;
+            }
+            // Salvar antes de testar
+            localStorage.setItem('teamsWebhookUrl', webhookUrl);
+
+            // Criar card de teste
+            const testCard = Utils.formatTeamsCard('teste', 'Teste de Conexão', [
+                { name: 'Origem', value: 'Cockpit GTM Belgo' },
+                { name: 'Status', value: 'Webhook configurado com sucesso!' },
+                { name: 'Data/Hora', value: new Date().toLocaleString('pt-BR') }
+            ]);
+
+            await Utils.sendToTeams(testCard, false);
+        }
+
+        function testTeamsChannel() {
+            const url = document.getElementById('teams-channel-url').value.trim();
+            if (!url) {
+                Utils.showToast('Digite a URL do canal primeiro', 'warning');
+                return;
+            }
+            // Salvar antes de testar
+            localStorage.setItem('teamsChannelUrl', url);
+            Utils.openTeamsChannel();
+        }
+
+        function clearTeamsConfig() {
+            document.getElementById('teams-webhook-url').value = '';
+            document.getElementById('teams-channel-url').value = '';
+            localStorage.removeItem('teamsWebhookUrl');
+            localStorage.removeItem('teamsChannelUrl');
+            Utils.showToast('Configurações do Teams removidas', 'success');
+        }
+
+        function loadTeamsConfig() {
+            const savedWebhookUrl = localStorage.getItem('teamsWebhookUrl');
+            const savedChannelUrl = localStorage.getItem('teamsChannelUrl');
+            if (savedWebhookUrl) {
+                document.getElementById('teams-webhook-url').value = savedWebhookUrl;
+            }
+            if (savedChannelUrl) {
+                document.getElementById('teams-channel-url').value = savedChannelUrl;
+            }
+        }
+
+        // Carregar configurações
         loadConfig();
+        loadTeamsConfig();
     </script>
 </body>
 </html>

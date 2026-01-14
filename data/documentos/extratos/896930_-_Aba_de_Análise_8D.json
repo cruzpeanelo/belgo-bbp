@@ -4,7 +4,7 @@
     "arquivo": "896930 - Aba de Análise 8D.docx",
     "caminho": "C:\\Users\\lcruz\\Belgo BBP\\Tester\\extracted_tests\\Testes - Belgo Arames\\896930 - Aba de Análise 8D.docx",
     "tamanho_bytes": 1409722,
-    "data_modificacao": "2025-11-28T15:36:14",
+    "data_modificação": "2025-11-28T15:36:14",
     "extraido_em": "2026-01-13T11:31:15.213330",
     "status": "extraido",
     "total_paragrafos": 14,
@@ -25,7 +25,7 @@
       "Verificar: Se não for procedente não deveria preencher a análise ",
       "A aba “Análise 8D” exibe o acompanhamento do processo aplicado exclusivamente às ocorrências classificadas como Graves.",
       "No topo da seção, é apresentada uma barra de Progresso da Análise 8D, indicando o percentual concluído de todas as etapas obrigatórias.\nQuando o progresso atinge 100%, significa que todas as disciplinas do 8D foram preenchidas corretamente, permitindo o avanço e o encerramento do processo.",
-      "Essa visualização facilita o controle do usuário sobre o andamento da análise e garante que nenhum passo da metodologia fique pendente."
+      "Essa visualização fácilita o controle do usuário sobre o andamento da análise e garante que nenhum passo da métodologia fique pendente."
     ],
     "tabelas": [
       [

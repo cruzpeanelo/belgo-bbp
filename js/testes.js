@@ -11,7 +11,16 @@ const Testes = {
     },
     origemJornada: null,  // Origem da navegacao (ex: ciclo de teste)
 
+    // Paginação
+    paginacao: {
+        currentPage: 1,
+        itemsPerPage: 20
+    },
+
     async init() {
+        // Mostrar skeletons imediatamente
+        this.showSkeletons();
+
         await this.waitForData();
         this.parseUrlParams();  // Ler parametros da URL primeiro
         this.populateCategorias();
@@ -19,6 +28,37 @@ const Testes = {
         this.renderBreadcrumb();  // Mostrar origem se veio de jornadas
         this.renderResumo();
         this.renderTabela();
+    },
+
+    // Mostrar skeleton loaders enquanto carrega
+    showSkeletons() {
+        // Skeleton para resumo (métricas)
+        const resumoContainer = document.getElementById('testes-resumo');
+        if (resumoContainer) {
+            resumoContainer.innerHTML = Array(4).fill(0).map(() => `
+                <div class="skeleton-metric">
+                    <div class="skeleton skeleton-metric-icon"></div>
+                    <div class="skeleton-metric-info">
+                        <div class="skeleton skeleton-metric-value"></div>
+                        <div class="skeleton skeleton-metric-label"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Skeleton para tabela
+        const tbody = document.getElementById('testes-tbody');
+        if (tbody) {
+            tbody.innerHTML = Array(10).fill(0).map(() => `
+                <tr>
+                    <td><div class="skeleton" style="width: 50px; height: 1rem;"></div></td>
+                    <td><div class="skeleton" style="width: 100%; height: 1rem;"></div></td>
+                    <td><div class="skeleton" style="width: 100px; height: 1rem;"></div></td>
+                    <td><div class="skeleton" style="width: 70px; height: 1.5rem; border-radius: 12px;"></div></td>
+                    <td><div class="skeleton" style="width: 80px; height: 1.5rem;"></div></td>
+                </tr>
+            `).join('');
+        }
     },
 
     parseUrlParams() {
@@ -42,11 +82,12 @@ const Testes = {
         if (!container) return;
 
         if (this.origemJornada && this.filtros.ids.length > 0) {
+            // Sanitizar para prevenir XSS
             container.innerHTML = `
                 <div class="breadcrumb-alert">
                     <span class="breadcrumb-icon">🔗</span>
                     <span class="breadcrumb-text">
-                        <strong>Origem:</strong> ${this.origemJornada}
+                        <strong>Origem:</strong> ${Utils.escapeHTML(this.origemJornada)}
                     </span>
                     <span class="breadcrumb-count">${this.filtros.ids.length} teste(s) vinculado(s)</span>
                     <button class="breadcrumb-clear" onclick="Testes.clearUrlFilter()">✕ Limpar filtro</button>
@@ -71,7 +112,8 @@ const Testes = {
     waitForData() {
         return new Promise((resolve) => {
             const check = () => {
-                if (App.data.testes) resolve();
+                // Aguardar dataReady (inclui restauração do KV)
+                if (App.dataReady && App.data.testes) resolve();
                 else setTimeout(check, 100);
             };
             check();
@@ -97,16 +139,19 @@ const Testes = {
 
         categoriaSelect?.addEventListener('change', (e) => {
             this.filtros.categoria = e.target.value;
+            this.paginacao.currentPage = 1; // Reset página ao filtrar
             this.renderTabela();
         });
 
         statusSelect?.addEventListener('change', (e) => {
             this.filtros.status = e.target.value;
+            this.paginacao.currentPage = 1; // Reset página ao filtrar
             this.renderTabela();
         });
 
         buscaInput?.addEventListener('input', Utils.debounce((e) => {
             this.filtros.busca = e.target.value;
+            this.paginacao.currentPage = 1; // Reset página ao filtrar
             this.renderTabela();
         }, 300));
     },
@@ -167,32 +212,130 @@ const Testes = {
         const tbody = document.getElementById('testes-tbody');
         if (!tbody) return;
 
-        const testes = this.getTestesFiltrados();
+        const allTestes = this.getTestesFiltrados();
         this.renderResumo();
 
-        if (testes.length === 0) {
+        if (allTestes.length === 0) {
             tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 40px; color: #6b7280;">Nenhum teste encontrado</td></tr>`;
+            this.renderPaginacao(0, 0);
             return;
         }
 
-        tbody.innerHTML = testes.map(t => `
+        // Calcular paginação
+        const totalPages = Math.ceil(allTestes.length / this.paginacao.itemsPerPage);
+
+        // Garantir página válida
+        if (this.paginacao.currentPage > totalPages) {
+            this.paginacao.currentPage = totalPages;
+        }
+        if (this.paginacao.currentPage < 1) {
+            this.paginacao.currentPage = 1;
+        }
+
+        const startIndex = (this.paginacao.currentPage - 1) * this.paginacao.itemsPerPage;
+        const endIndex = startIndex + this.paginacao.itemsPerPage;
+        const testes = allTestes.slice(startIndex, endIndex);
+
+        // Sanitizar dados para prevenir XSS
+        tbody.innerHTML = testes.map(t => {
+            const safeId = Utils.escapeHTML(t.id);
+            const safeName = Utils.escapeHTML(t.nome);
+            const safeCategoria = Utils.escapeHTML(t.categoria);
+            const safeStatus = Utils.escapeHTML(t.status);
+            return `
             <tr>
-                <td><strong>${t.id}</strong></td>
-                <td>${t.nome}</td>
-                <td><span style="color: #6b7280; font-size: 0.85rem;">${t.categoria}</span></td>
-                <td><span class="badge ${Utils.getBadgeClass(t.status)}">${t.status}</span></td>
+                <td><strong>${safeId}</strong></td>
+                <td>${safeName}</td>
+                <td><span style="color: #6b7280; font-size: 0.85rem;">${safeCategoria}</span></td>
+                <td><span class="badge ${Utils.getBadgeClass(t.status)}">${safeStatus}</span></td>
                 <td>
                     <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"
-                            onclick="Testes.verDetalhe('${t.id}')">Ver</button>
+                            data-test-id="${safeId}" onclick="Testes.verDetalhe(this.dataset.testId)">Ver</button>
                     ${t.status === 'Pendente' ? `
                         <button class="btn btn-success" style="padding: 5px 10px; font-size: 0.8rem;"
-                                onclick="Testes.marcarStatus('${t.id}', 'Concluído')">OK</button>
+                                data-test-id="${safeId}" onclick="Testes.marcarStatus(this.dataset.testId, 'Concluído')">OK</button>
                     ` : ''}
                     <button class="btn" style="background: #6264A7; color: white; padding: 5px 10px; font-size: 0.8rem;"
-                            onclick="event.stopPropagation(); Testes.compartilharTeams('${t.id}')">📤</button>
+                            data-test-id="${safeId}" onclick="event.stopPropagation(); Testes.compartilharTeams(this.dataset.testId)">📤</button>
                 </td>
             </tr>
-        `).join('');
+        `;
+        }).join('');
+
+        // Renderizar controles de paginação
+        this.renderPaginacao(allTestes.length, totalPages);
+    },
+
+    // Renderizar controles de paginação
+    renderPaginacao(totalItems, totalPages) {
+        let paginacaoContainer = document.getElementById('paginacao-container');
+
+        // Criar container se não existir
+        if (!paginacaoContainer) {
+            const tableContainer = document.querySelector('.table-container');
+            if (tableContainer) {
+                paginacaoContainer = document.createElement('div');
+                paginacaoContainer.id = 'paginacao-container';
+                tableContainer.after(paginacaoContainer);
+            } else {
+                return;
+            }
+        }
+
+        if (totalItems === 0 || totalPages <= 1) {
+            paginacaoContainer.innerHTML = '';
+            return;
+        }
+
+        const { currentPage, itemsPerPage } = this.paginacao;
+        const startItem = (currentPage - 1) * itemsPerPage + 1;
+        const endItem = Math.min(currentPage * itemsPerPage, totalItems);
+
+        // Gerar botões de página
+        let pageButtons = '';
+        const maxButtons = 5;
+        let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
+        let endPage = Math.min(totalPages, startPage + maxButtons - 1);
+
+        if (endPage - startPage < maxButtons - 1) {
+            startPage = Math.max(1, endPage - maxButtons + 1);
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+            pageButtons += `
+                <button class="pagination-btn ${i === currentPage ? 'active' : ''}"
+                        onclick="Testes.goToPage(${i})">${i}</button>
+            `;
+        }
+
+        paginacaoContainer.innerHTML = `
+            <div class="pagination">
+                <button class="pagination-btn" onclick="Testes.goToPage(1)" ${currentPage === 1 ? 'disabled' : ''}>
+                    ⟨⟨
+                </button>
+                <button class="pagination-btn" onclick="Testes.goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+                    ⟨
+                </button>
+                ${pageButtons}
+                <button class="pagination-btn" onclick="Testes.goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+                    ⟩
+                </button>
+                <button class="pagination-btn" onclick="Testes.goToPage(${totalPages})" ${currentPage === totalPages ? 'disabled' : ''}>
+                    ⟩⟩
+                </button>
+                <span class="pagination-info">
+                    ${startItem}-${endItem} de ${totalItems}
+                </span>
+            </div>
+        `;
+    },
+
+    // Ir para página específica
+    goToPage(page) {
+        this.paginacao.currentPage = page;
+        this.renderTabela();
+        // Scroll suave para o topo da tabela
+        document.querySelector('.table-container')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     },
 
     verDetalhe(id) {
@@ -210,48 +353,58 @@ const Testes = {
 
         if (!teste) return;
 
+        // Sanitizar todos os dados para prevenir XSS
+        const safeId = Utils.escapeHTML(teste.id);
+        const safeName = Utils.escapeHTML(teste.nome);
+        const safeStatus = Utils.escapeHTML(teste.status);
+        const safeCategoria = Utils.escapeHTML(categoria);
+        const safeResultadoEsperado = Utils.escapeHTML(teste.resultadoEsperado);
+        const safeResultadoObtido = Utils.escapeHTML(teste.resultadoObtido || '');
+        const safeObservacoes = Utils.escapeHTML(teste.observacoes || '');
+        const safePassos = (teste.passos || []).map(p => Utils.escapeHTML(p));
+
         document.getElementById('modal-titulo').textContent = `${teste.id}: ${teste.nome}`;
         document.getElementById('modal-body').innerHTML = `
             <div style="margin-bottom: 20px;">
-                <span class="badge ${Utils.getBadgeClass(teste.status)}">${teste.status}</span>
-                <span style="margin-left: 10px; color: #6b7280;">${categoria}</span>
+                <span class="badge ${Utils.getBadgeClass(teste.status)}">${safeStatus}</span>
+                <span style="margin-left: 10px; color: #6b7280;">${safeCategoria}</span>
             </div>
 
             <h4 style="color: #003B4A; margin-bottom: 10px;">Passo a Passo</h4>
             <ol style="margin: 0 0 20px 20px; line-height: 1.8;">
-                ${teste.passos.map(p => `<li>${p}</li>`).join('')}
+                ${safePassos.map(p => `<li>${p}</li>`).join('')}
             </ol>
 
             <h4 style="color: #003B4A; margin-bottom: 10px;">Resultado Esperado</h4>
             <div style="background: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                ${teste.resultadoEsperado}
+                ${safeResultadoEsperado}
             </div>
 
             ${teste.resultadoObtido ? `
                 <h4 style="color: #003B4A; margin-bottom: 10px;">Resultado Obtido</h4>
                 <div style="background: ${teste.status === 'Falhou' ? '#fee2e2' : '#d1fae5'}; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                    ${teste.resultadoObtido}
+                    ${safeResultadoObtido}
                 </div>
             ` : ''}
 
             ${teste.observacoes ? `
                 <h4 style="color: #003B4A; margin-bottom: 10px;">Observações</h4>
                 <div style="background: #fef3c7; padding: 15px; border-radius: 8px;">
-                    ${teste.observacoes}
+                    ${safeObservacoes}
                 </div>
             ` : ''}
 
-            <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
-                <button class="btn btn-success" onclick="Testes.marcarStatus('${teste.id}', 'Concluído'); Testes.fecharModal();">
+            <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #e5e7eb;" data-test-id="${safeId}">
+                <button class="btn btn-success" onclick="Testes.marcarStatus(this.parentElement.dataset.testId, 'Concluído'); Testes.fecharModal();">
                     ✅ Marcar Concluído
                 </button>
-                <button class="btn btn-danger" onclick="Testes.marcarStatus('${teste.id}', 'Falhou'); Testes.fecharModal();">
+                <button class="btn btn-danger" onclick="Testes.marcarStatus(this.parentElement.dataset.testId, 'Falhou'); Testes.fecharModal();">
                     ❌ Marcar Falhou
                 </button>
-                <button class="btn" style="background: #f59e0b; color: white;" onclick="Testes.marcarStatus('${teste.id}', 'Pendente'); Testes.fecharModal();">
+                <button class="btn" style="background: #f59e0b; color: white;" onclick="Testes.marcarStatus(this.parentElement.dataset.testId, 'Pendente'); Testes.fecharModal();">
                     ⏳ Marcar Pendente
                 </button>
-                <button class="btn" style="background: #6264A7; color: white; margin-left: 10px;" onclick="Testes.compartilharTeams('${teste.id}');">
+                <button class="btn" style="background: #6264A7; color: white; margin-left: 10px;" onclick="Testes.compartilharTeams(this.parentElement.dataset.testId);">
                     📤 Teams
                 </button>
             </div>
@@ -264,7 +417,22 @@ const Testes = {
         document.getElementById('modal-detalhe').classList.remove('active');
     },
 
-    marcarStatus(id, status) {
+    marcarStatus(id, status, skipConfirm = false) {
+        // Confirmar antes de marcar como "Falhou" (ação destrutiva)
+        if (status === 'Falhou' && !skipConfirm) {
+            Utils.showConfirmModal({
+                title: 'Marcar como Falhou?',
+                message: `Tem certeza que deseja marcar o teste ${id} como "Falhou"? Esta ação indica que o teste não passou na validação.`,
+                icon: 'danger',
+                confirmText: 'Sim, Falhou',
+                confirmClass: 'btn-danger',
+                onConfirm: () => {
+                    this.marcarStatus(id, status, true);
+                }
+            });
+            return;
+        }
+
         App.updateTestStatus(id, status);
         this.renderTabela();
         Utils.showToast(`Teste ${id} marcado como ${status}`, status === 'Concluído' ? 'success' : status === 'Falhou' ? 'error' : 'info');

@@ -4,7 +4,7 @@
   "icone": "👤",
   "ordem": 1,
   "asIs": {
-    "descricao": "Processo manual e fragmentado onde o vendedor coleta dados do cliente via formulários em papel ou planilhas Excel, envia para o SmartCenter por e-mail, que então digita manualmente no SAP. Validações de CNPJ/CPF são feitas manualmente através de consultas em sites externos, sem verificação automática de duplicidades, resultando em cadastros duplicados frequentes e dados inconsistentes.",
+    "descrição": "Processo manual e fragmentado onde o vendedor coleta dados do cliente via formulários em papel ou planilhas Excel, envia para o SmartCenter por e-mail, que então digita manualmente no SAP. Validações de CNPJ/CPF são feitas manualmente através de consultas em sites externos, sem verificação automática de duplicidades, resultando em cadastros duplicados frequentes e dados inconsistentes.",
     "passos": [
       "Vendedor visita cliente ou recebe contato comercial",
       "Coleta dados em formulário físico ou planilha Excel (Razão Social, CNPJ, Endereço, Contatos)",
@@ -30,14 +30,14 @@
     "tempoMedio": "2 a 3 dias úteis"
   },
   "toBe": {
-    "descricao": "Cadastro automatizado via integração SINTEGRA diretamente no Salesforce. O vendedor digita apenas o CNPJ, clica no botão 'Integrar SINTEGRA' e o sistema preenche automaticamente todos os dados oficiais (Razão Social, Endereço, Inscrição Estadual, CNAE com descrição completa). O sistema valida duplicidades automaticamente pelo campo 'Termo de Pesquisa', impedindo cadastros duplicados. Após validação, ocorre integração automática com SAP via middleware.",
+    "descrição": "Cadastro automatizado via integração SINTEGRA diretamente no Salesforce. O vendedor digita apenas o CNPJ, clica no botão 'Integrar SINTEGRA' e o sistema preenche automáticamente todos os dados oficiais (Razão Social, Endereço, Inscrição Estadual, CNAE com descrição completa). O sistema valida duplicidades automáticamente pelo campo 'Termo de Pesquisa', impedindo cadastros duplicados. Após validação, ocorre integração automática com SAP via middleware.",
     "passos": [
       "Vendedor acessa o Salesforce (aplicativo mobile ou desktop)",
       "Clica em 'Criar Conta' e seleciona o tipo: Pessoa Jurídica, Pessoa Física ou Parceiro Agrupador",
       "Preenche o CNPJ do cliente",
-      "Sistema preenche automaticamente: Escritório de Vendas (conforme perfil) e Equipe de Vendas (conforme time)",
+      "Sistema preenche automáticamente: Escritório de Vendas (conforme perfil) e Equipe de Vendas (conforme time)",
       "Clica no botão 'Integrar SINTEGRA'",
-      "Sistema consulta SINTEGRA e preenche automaticamente: Razão Social, Endereço, Inscrição Estadual (IE), CNAE com descrição completa",
+      "Sistema consulta SINTEGRA e preenche automáticamente: Razão Social, Endereço, Inscrição Estadual (IE), CNAE com descrição completa",
       "Sistema exibe mensagem de sucesso no canto superior da tela",
       "Sistema valida 'Termo de Pesquisa' contra base existente para evitar duplicidade",
       "Se duplicado: exibe mensagem 'Já existe um cliente com o mesmo termo de pesquisa' e bloqueia",
@@ -47,9 +47,9 @@
       "Se cadastro incompleto: sistema envia notificação automática de pendência"
     ],
     "beneficios": [
-      "Cadastro concluído em aproximadamente 5 minutos",
+      "Cadastro concluído em apróximadamente 5 minutos",
       "Eliminação de erros de digitação manual",
-      "Dados validados automaticamente via SINTEGRA (fonte oficial)",
+      "Dados validados automáticamente via SINTEGRA (fonte oficial)",
       "Deduplicação automática por Termo de Pesquisa",
       "CNAE sempre correto e com descrição completa",
       "Preenchimento automático de Escritório e Equipe de Vendas",
@@ -61,7 +61,7 @@
     ],
     "tempoMedio": "5 minutos"
   },
-  "areasImpactadas": [
+  "áreasImpactadas": [
     "Comercial",
     "SmartCenter",
     "TI",
@@ -70,18 +70,18 @@
     "Logística"
   ],
   "status": "Em Andamento",
-  "fonteReuniao": "10/12/2025",
-  "fontesReuniao": [
+  "fonteReunião": "10/12/2025",
+  "fontesReunião": [
     "10/12/2025 - Sessao dedicada a Cadastro de Cliente",
-    "16/12/2025 - Revisao de Cadastro e Documentos Fiscais"
+    "16/12/2025 - Revisão de Cadastro e Documentos Fiscais"
   ],
   "fontesVerificadas": {
-    "reuniao10dez": [
+    "reunião10dez": [
       "Tipos de conta (PJ, PF, Parceiro Agrupador)",
       "Canais 20, 25, 30, 40",
-      "Areas de vendas"
+      "Áreas de vendas"
     ],
-    "reuniao16dez": [
+    "reunião16dez": [
       "Review geral do cadastro"
     ],
     "cadernoTestes": [
@@ -89,35 +89,35 @@
       "Tester 902162 - Belgo Flex"
     ]
   },
-  "integracoesDiscutidas": {
+  "integraçõesDiscutidas": {
     "share": {
-      "status": "Pendente definicao",
-      "descricao": "Integracao com plataforma Share para rastreamento de oportunidades perdidas e concorrentes",
-      "fonte": "Reuniao 10/12/2025 - Francine: 'E ai ele ja linkar com essa outra plataforma do Share. Eu nao sei se tem como amarrar os dados ali para depois eu nao ter que ir la analisar tudo que eu perdi.'",
+      "status": "Pendente definição",
+      "descrição": "Integração com plataforma Share para rastreamento de oportunidades perdidas e concorrentes",
+      "fonte": "Reunião 10/12/2025 - Francine: 'E ai ele ja linkar com essa outra plataforma do Share. Eu não sei se tem como amarrar os dados ali para depois eu não ter que ir la analisar tudo que eu perdi.'",
       "objetivos": [
         "Vincular dados de oportunidades perdidas entre Salesforce e Share",
-        "Automatizar analise de motivos de perda",
-        "Consolidar informacoes de concorrentes"
+        "Automatizar análise de motivos de perda",
+        "Consolidar informações de concorrentes"
       ],
-      "requisitosIntegracao": {
-        "avisoVerificacao": "ATENCAO: Os requisitos abaixo sao SUGESTOES TECNICAS baseadas no questionamento da Francine. Precisam ser definidos em reuniao especifica com equipe Share.",
+      "requisitosIntegração": {
+        "avisoVerificação": "ATENCAO: Os requisitos abaixo sao SUGESTOES TECNICAS baseadas no questionamento da Francine. Precisam ser definidos em reunião específica com equipe Share.",
         "apiShare": "A definir",
         "dadosCompartilhados": "A definir",
-        "frequencia": "A definir",
-        "responsavel": "A definir"
+        "frequência": "A definir",
+        "responsável": "A definir"
       },
-      "proximosPassos": [
-        "Agendar reuniao com equipe Share para entender API",
+      "próximosPassos": [
+        "Agendar reunião com equipe Share para entender API",
         "Mapear campos entre Salesforce e Share",
-        "Definir regras de sincronizacao de dados"
+        "Definir regras de sincronização de dados"
       ]
     }
   },
   "tiposConta": [
     {
       "tipo": "Pessoa Jurídica (PJ)",
-      "descricao": "Empresas com CNPJ - Business Account",
-      "camposObrigatorios": [
+      "descrição": "Empresas com CNPJ - Business Account",
+      "camposObrigatórios": [
         "CNPJ",
         "Razão Social",
         "Termo de Pesquisa",
@@ -127,8 +127,8 @@
     },
     {
       "tipo": "Pessoa Física (PF)",
-      "descricao": "Clientes individuais com CPF",
-      "camposObrigatorios": [
+      "descrição": "Clientes individuais com CPF",
+      "camposObrigatórios": [
         "CPF",
         "Nome",
         "Termo de Pesquisa"
@@ -137,125 +137,125 @@
     },
     {
       "tipo": "Parceiro Agrupador",
-      "descricao": "Grupos empresariais ou holdings",
-      "camposObrigatorios": [
+      "descrição": "Grupos empresariais ou holdings",
+      "camposObrigatórios": [
         "Nome",
         "Termo de Pesquisa"
       ],
       "recordType": "A verificar no Salesforce"
     }
   ],
-  "tiposContaNota": "Os tres tipos de conta foram confirmados na reuniao 10/12. Os Record Type API Names do Salesforce precisam ser verificados com a equipe de TI.",
+  "tiposContaNota": "Os tres tipos de conta foram confirmados na reunião 10/12. Os Record Type API Names do Salesforce precisam ser verificados com a equipe de TI.",
   "campos": [
     {
       "campo": "CNPJ",
-      "descricao": "Cadastro Nacional de Pessoa Jurídica",
+      "descrição": "Cadastro Nacional de Pessoa Jurídica",
       "preenchimento": "Manual",
-      "validacao": "SINTEGRA",
-      "obrigatorio": true
+      "validação": "SINTEGRA",
+      "obrigatório": true
     },
     {
       "campo": "CPF",
-      "descricao": "Cadastro de Pessoa Física",
+      "descrição": "Cadastro de Pessoa Física",
       "preenchimento": "Manual",
-      "validacao": "Algoritmo",
-      "obrigatorio": true
+      "validação": "Algoritmo",
+      "obrigatório": true
     },
     {
       "campo": "Razão Social",
-      "descricao": "Nome oficial da empresa",
+      "descrição": "Nome oficial da empresa",
       "preenchimento": "Automático (SINTEGRA)",
-      "validacao": "-",
-      "obrigatorio": true
+      "validação": "-",
+      "obrigatório": true
     },
     {
       "campo": "Nome Fantasia",
-      "descricao": "Nome comercial da empresa",
+      "descrição": "Nome comercial da empresa",
       "preenchimento": "Manual",
-      "validacao": "-",
-      "obrigatorio": false
+      "validação": "-",
+      "obrigatório": false
     },
     {
       "campo": "Endereço",
-      "descricao": "Endereço completo",
+      "descrição": "Endereço completo",
       "preenchimento": "Automático (SINTEGRA)",
-      "validacao": "-",
-      "obrigatorio": true
+      "validação": "-",
+      "obrigatório": true
     },
     {
       "campo": "Inscrição Estadual (IE)",
-      "descricao": "Registro estadual do contribuinte",
+      "descrição": "Registro estadual do contribuinte",
       "preenchimento": "Automático (SINTEGRA)",
-      "validacao": "-",
-      "obrigatorio": false
+      "validação": "-",
+      "obrigatório": false
     },
     {
       "campo": "CNAE",
-      "descricao": "Classificação Nacional de Atividades Econômicas",
+      "descrição": "Classificação Nacional de Atividades Econômicas",
       "preenchimento": "Automático (SINTEGRA)",
-      "validacao": "-",
-      "obrigatorio": true
+      "validação": "-",
+      "obrigatório": true
     },
     {
       "campo": "Termo de Pesquisa",
-      "descricao": "Identificador único para evitar duplicidade",
+      "descrição": "Identificador único para evitar duplicidade",
       "preenchimento": "Manual",
-      "validacao": "Duplicidade",
-      "obrigatorio": true
+      "validação": "Duplicidade",
+      "obrigatório": true
     },
     {
       "campo": "Tipo de Conta",
-      "descricao": "PJ, PF ou Parceiro Agrupador",
+      "descrição": "PJ, PF ou Parceiro Agrupador",
       "preenchimento": "Manual",
-      "validacao": "Obrigatório",
-      "obrigatorio": true
+      "validação": "Obrigatório",
+      "obrigatório": true
     },
     {
       "campo": "Escritório de Vendas",
-      "descricao": "Escritório responsável pela conta",
+      "descrição": "Escritório responsável pela conta",
       "preenchimento": "Automático (Perfil)",
-      "validacao": "-",
-      "obrigatorio": true
+      "validação": "-",
+      "obrigatório": true
     },
     {
       "campo": "Equipe de Vendas",
-      "descricao": "Time comercial responsável (antigo EV Alternativo)",
+      "descrição": "Time comercial responsável (antigo EV Alternativo)",
       "preenchimento": "Automático (Time)",
-      "validacao": "-",
-      "obrigatorio": true
+      "validação": "-",
+      "obrigatório": true
     },
     {
       "campo": "Canal",
-      "descricao": "Canal de venda: 20, 25, 30 ou 40",
+      "descrição": "Canal de venda: 20, 25, 30 ou 40",
       "preenchimento": "Manual",
-      "validacao": "-",
-      "obrigatorio": true
+      "validação": "-",
+      "obrigatório": true
     },
     {
       "campo": "Cluster",
-      "descricao": "Classificação automática do cliente",
+      "descrição": "Classificação automática do cliente",
       "preenchimento": "Automático",
-      "validacao": "Workflow para exceção",
-      "obrigatorio": false
+      "validação": "Workflow para exceção",
+      "obrigatório": false
     },
     {
       "campo": "Atividade Principal",
-      "descricao": "Descrição da atividade baseada no CNAE",
+      "descrição": "Descrição da atividade baseada no CNAE",
       "preenchimento": "Automático (CNAE)",
-      "validacao": "-",
-      "obrigatorio": false
+      "validação": "-",
+      "obrigatório": false
     }
   ],
-  "regrasNegocio": [
+  "regrasNegócio": [
     {
       "regra": "Validação de Duplicidade por Termo de Pesquisa",
-      "descricao": "O sistema verifica se já existe outro cliente cadastrado com o mesmo 'Termo de Pesquisa'. Caso exista, a criação é bloqueada e uma mensagem de erro é exibida.",
+      "descrição": "O sistema verifica se já existe outro cliente cadastrado com o mesmo 'Termo de Pesquisa'. Caso exista, a criação é bloqueada e uma mensagem de erro é exibida.",
       "mensagemErro": "Encontramos um obstáculo, já existe um cliente com o mesmo termo de pesquisa",
       "documento": "899139"
     },
     {
       "regra": "Preenchimento Automático via SINTEGRA",
-      "descricao": "Após inserir o CNPJ e clicar no botão 'Integrar SINTEGRA', o sistema consulta a base do SINTEGRA e preenche automaticamente: Inscrição Estadual, CNAE com descrição completa, Endereço e informações complementares.",
+      "descrição": "Após inserir o CNPJ e clicar no botão 'Integrar SINTEGRA', o sistema consulta a base do SINTEGRA e preenche automáticamente: Inscrição Estadual, CNAE com descrição completa, Endereço e informações complementares.",
       "exemplos": [
         "ADUBOSREAL → 'Comércio atacadista de defensivos agrícolas, adubos, fertilizantes e corretivos'",
         "SANTA RITA → 'Produção de artefatos estampados de metal'",
@@ -266,26 +266,26 @@
     },
     {
       "regra": "Preenchimento Automático de Escritório e Equipe",
-      "descricao": "O campo 'Escritório de Vendas' é preenchido automaticamente conforme o escritório do perfil do usuário logado. O campo 'Equipe de Vendas' é preenchido conforme o time do usuário.",
+      "descrição": "O campo 'Escritório de Vendas' é preenchido automáticamente conforme o escritório do perfil do usuário logado. O campo 'Equipe de Vendas' é preenchido conforme o time do usuário.",
       "nota": "Campo 'EV Alternativo' foi renomeado para 'Equipe de Vendas'"
     },
     {
       "regra": "Canais de Venda",
-      "descricao": "Cada cliente deve ser associado a um canal de venda específico que determina políticas comerciais, preços e condições.",
+      "descrição": "Cada cliente deve ser associado a um canal de venda específico que determina políticas comerciais, preços e condições.",
       "canais": {
         "20": "A definir",
         "25": "A definir",
         "30": "A definir",
         "40": "A definir"
       },
-      "avisoVerificacao": "ATENCAO: Os canais 20, 25, 30 e 40 foram MENCIONADOS na reuniao de 10/12, mas as DEFINICOES de cada canal (criterios, CNAEs, etc.) NAO foram explicadas. Precisam ser validados com a equipe Comercial/TI.",
-      "fonteReuniao": "Reuniao 10/12 - Leandro: 'Entao canal 30, 20, 30 e 40 e quando eles tem que ser aplicados. Falei tambem sobre o canal 25'",
-      "nota": "Canal 25 mencionado como existente, mas criterios nao detalhados"
+      "avisoVerificação": "ATENCAO: Os canais 20, 25, 30 e 40 foram MENCIONADOS na reunião de 10/12, mas as DEFINICOES de cada canal (critérios, CNAEs, etc.) NAO foram explicadas. Precisam ser validados com a equipe Comercial/TI.",
+      "fonteReunião": "Reunião 10/12 - Leandro: 'Entao canal 30, 20, 30 e 40 e quando eles tem que ser aplicados. Falei tambem sobre o canal 25'",
+      "nota": "Canal 25 mencionado como existente, mas critérios não detalhados"
     },
     {
       "regra": "Cluster Automático com Exceção",
-      "descricao": "O sistema calcula automaticamente o Cluster do cliente baseado em regras de negócio. Para casos especiais, existe o campo 'Cluster Exceção' que requer aprovação via workflow.",
-      "fluxoAprovacao": [
+      "descrição": "O sistema calcula automáticamente o Cluster do cliente baseado em regras de negócio. Para casos especiais, existe o campo 'Cluster Exceção' que requer aprovação via workflow.",
+      "fluxoAprovação": [
         "Usuário clica em 'Enviar para Aprovação'",
         "Status muda para 'Enviado'",
         "Aprovador recebe e-mail com solicitação",
@@ -297,36 +297,36 @@
     },
     {
       "regra": "Notificação de Cadastro Pendente",
-      "descricao": "O sistema identifica automaticamente cadastros que estão incompletos ou pendentes de ações complementares e envia notificações aos responsáveis.",
+      "descrição": "O sistema identifica automáticamente cadastros que estão incompletos ou pendentes de ações complementares e envia notificações aos responsáveis.",
       "documento": "881196"
     },
     {
       "regra": "Sincronização com SAP",
-      "descricao": "Após conclusão do cadastro no Salesforce, o usuário clica em 'Enviar SAP' para sincronizar os dados. O sistema exibe a mensagem 'A conta está em sincronização com o SAP'.",
+      "descrição": "Após conclusão do cadastro no Salesforce, o usuário clica em 'Enviar SAP' para sincronizar os dados. O sistema exibe a mensagem 'A conta está em sincronização com o SAP'.",
       "documento": "Interface Termo de Pesquisa (SAP ↔ SFDC)"
     },
     {
       "regra": "Remoção de Botões Desnecessários",
-      "descricao": "Os botões 'Descobrir Empresas', 'Importar' e 'Atribuir Rótulo' foram removidos da tela de Contas para simplificar a interface.",
+      "descrição": "Os botões 'Descobrir Empresas', 'Importar' e 'Atribuir Rótulo' foram removidos da tela de Contas para simplificar a interface.",
       "documento": "Roteiro de Teste - CNAE"
     },
     {
       "regra": "Qualidade de Dados de Contato",
-      "descricao": "Os dados de contato devem ser preenchidos corretamente pois são críticos para o funcionamento do Autoatendimento e são utilizados por outras áreas da empresa."
+      "descrição": "Os dados de contato devem ser preenchidos corretamente pois são críticos para o funcionamento do Autoatendimento e são utilizados por outras áreas da empresa."
     }
   ],
-  "sistemasTecnicos": [
+  "sistemasTécnicos": [
     "Salesforce",
     "SAP ECC",
     "SINTEGRA",
     "Middleware"
   ],
-  "integracoes": [
+  "integrações": [
     {
       "origem": "Salesforce",
       "destino": "SINTEGRA",
       "tipo": "API",
-      "descricao": "Consulta de CNPJ para obter IE, CNAE e endereço",
+      "descrição": "Consulta de CNPJ para obter IE, CNAE e endereço",
       "acionamento": "Botão 'Integrar SINTEGRA'",
       "retorno": "Mensagem de sucesso no canto superior da tela"
     },
@@ -334,7 +334,7 @@
       "origem": "Salesforce",
       "destino": "SAP",
       "tipo": "Middleware",
-      "descricao": "Criação e atualização de conta no SAP",
+      "descrição": "Criação e atualização de conta no SAP",
       "acionamento": "Botão 'Enviar SAP'",
       "retorno": "Mensagem 'A conta está em sincronização com o SAP'"
     },
@@ -342,13 +342,13 @@
       "origem": "SAP",
       "destino": "Salesforce",
       "tipo": "Middleware",
-      "descricao": "Retorno de código SAP e confirmação de sincronização"
+      "descrição": "Retorno de código SAP e confirmação de sincronização"
     }
   ],
   "ciclosTeste": [
     {
       "documento": "876268",
-      "titulo": "CNAE - Classificação Nacional de Atividades Econômicas",
+      "título": "CNAE - Classificação Nacional de Atividades Econômicas",
       "status": "Pendente",
       "ciclo": "P1",
       "data": "21/10/2025",
@@ -360,24 +360,24 @@
       "contasTeste": [
         {
           "nome": "ADUBOSREAL",
-          "cnaeDescricao": "Comércio atacadista de defensivos agrícolas, adubos, fertilizantes e corretivos"
+          "cnaeDescrição": "Comércio atacadista de defensivos agrícolas, adubos, fertilizantes e corretivos"
         },
         {
           "nome": "SANTA RITA",
-          "cnaeDescricao": "Produção de artefatos estampados de metal"
+          "cnaeDescrição": "Produção de artefatos estampados de metal"
         },
         {
           "nome": "PERAM",
-          "cnaeDescricao": "A verificar no sistema - descrição não documentada",
+          "cnaeDescrição": "A verificar no sistema - descrição não documentada",
           "nota": "No documento 876268 aparece apenas como 'CNAE Principal' com hyperlink"
         },
         {
           "nome": "DIVINO ANT",
-          "cnaeDescricao": "Obras de alvenaria"
+          "cnaeDescrição": "Obras de alvenaria"
         },
         {
           "nome": "VALDIR FLOR",
-          "cnaeDescricao": "Criação de peixes em água doce"
+          "cnaeDescrição": "Criação de peixes em água doce"
         }
       ],
       "testesRelacionados": [
@@ -387,7 +387,7 @@
     },
     {
       "documento": "899139",
-      "titulo": "Validação do Campo Termo de Pesquisa no Cadastro de Cliente",
+      "título": "Validação do Campo Termo de Pesquisa no Cadastro de Cliente",
       "status": "Pendente",
       "ciclo": "P2",
       "data": "12/12/2025",
@@ -404,7 +404,7 @@
     },
     {
       "documento": "895163",
-      "titulo": "Automatização de Segmento e Subsegmento - Padronização de Base",
+      "título": "Automatização de Segmento e Subsegmento - Padronização de Base",
       "status": "Pendente",
       "ciclo": "P2",
       "data": "-",
@@ -418,7 +418,7 @@
     },
     {
       "documento": "881196",
-      "titulo": "Notificar sobre Cadastro a Finalizar - Pendente",
+      "título": "Notificar sobre Cadastro a Finalizar - Pendente",
       "status": "Pendente",
       "ciclo": "P2",
       "data": "17-24/10/2025",
@@ -433,7 +433,7 @@
     },
     {
       "documento": "862865",
-      "titulo": "Definição Automática de Cluster",
+      "título": "Definição Automática de Cluster",
       "status": "Pendente",
       "ciclo": "P2",
       "data": "14/10/2025",
@@ -455,7 +455,7 @@
     },
     {
       "documento": "Roteiro de Teste - CNAE",
-      "titulo": "Roteiro Completo de Teste de CNAE",
+      "título": "Roteiro Completo de Teste de CNAE",
       "status": "Pendente",
       "ciclo": "P2",
       "data": "-",
@@ -472,42 +472,42 @@
     },
     {
       "documento": "902162",
-      "titulo": "Separacao entre Ocorrencia de Cliente e Belgo Flex",
+      "título": "Separação entre Ocorrencia de Cliente e Belgo Flex",
       "status": "Pendente",
       "ciclo": "P2",
       "data": "-",
       "cenarios": [
-        "Diferenciacao entre tipos de Case (Ocorrencia vs Belgo Flex)",
+        "Diferenciação entre tipos de Case (Ocorrencia vs Belgo Flex)",
         "Record Types de Case configurados corretamente",
-        "Fluxo de criacao de caso de condicoes flexiveis"
+        "Fluxo de criação de caso de condições flexiveis"
       ],
-      "nota": "Belgo Flex usado para condicoes flexiveis especiais de venda"
+      "nota": "Belgo Flex usado para condições flexiveis especiais de venda"
     }
   ],
   "abasInterface": [
     {
       "aba": "Detalhes",
-      "descricao": "Exibe informações básicas da conta, dados do SINTEGRA (endereço, IE, CNAE)"
+      "descrição": "Exibe informações básicas da conta, dados do SINTEGRA (endereço, IE, CNAE)"
     },
     {
       "aba": "Relatório de Visitas",
-      "descricao": "Permite criar e visualizar relatórios de visitas comerciais"
+      "descrição": "Permite criar e visualizar relatórios de visitas comerciais"
     },
     {
       "aba": "Financeiro",
-      "descricao": "Exibe informações de crédito, partidas e ficha de crédito do cliente",
-      "avisoVerificacao": "ATENCAO: Os nomes das 4 areas de credito (ABBA, ADBA, Belgo Cash, Alpe) sao SUGESTOES - NAO foram mencionados na reuniao. Leandro disse apenas '4 areas de credito, que e o ASCP, Supplier'. Os nomes precisam ser verificados com a equipe de Credito.",
-      "areasCredito": [
+      "descrição": "Exibe informações de crédito, partidas e ficha de crédito do cliente",
+      "avisoVerificação": "ATENCAO: Os nomes das 4 áreas de crédito (ABBA, ADBA, Belgo Cash, Alpe) sao SUGESTOES - NAO foram mencionados na reunião. Leandro disse apenas '4 áreas de crédito, que e o ASCP, Supplier'. Os nomes precisam ser verificados com a equipe de Crédito.",
+      "áreasCrédito": [
         "Supplier (confirmado)",
-        "Area 2 (a verificar)",
-        "Area 3 (a verificar)",
-        "Area 4 (a verificar)"
+        "Área 2 (a verificar)",
+        "Área 3 (a verificar)",
+        "Área 4 (a verificar)"
       ],
       "detalhes": {
-        "fichaCredito": "Exibe limite de credito e partidas abertas",
-        "supplier": "Mencionado por Leandro como uma das areas"
+        "fichaCrédito": "Exibe limite de crédito e partidas abertas",
+        "supplier": "Mencionado por Leandro como uma das áreas"
       },
-      "fonte": "Reuniao 16/12/2025 - Leandro: 'as 4 areas de credito, que e o ASCP e basicamente aqui a gente tem a Supplier'"
+      "fonte": "Reunião 16/12/2025 - Leandro: 'as 4 áreas de crédito, que e o ASCP e basicamente aqui a gente tem a Supplier'"
     }
   ],
   "mensagensSistema": [
@@ -528,34 +528,34 @@
     },
     {
       "tipo": "Erro",
-      "contexto": "SINTEGRA - CNPJ Invalido",
-      "mensagem": "CNPJ informado nao e valido"
+      "contexto": "SINTEGRA - CNPJ Inválido",
+      "mensagem": "CNPJ informado não é válido"
     },
     {
       "tipo": "Erro",
-      "contexto": "SINTEGRA - CNPJ Nao Encontrado",
-      "mensagem": "CNPJ nao encontrado na base SINTEGRA"
+      "contexto": "SINTEGRA - CNPJ Não Encontrado",
+      "mensagem": "CNPJ não encontrado na base SINTEGRA"
     },
     {
       "tipo": "Erro",
-      "contexto": "Validacao CPF",
-      "mensagem": "CPF informado nao e valido"
+      "contexto": "Validação CPF",
+      "mensagem": "CPF informado não é válido"
     },
     {
       "tipo": "Alerta",
-      "contexto": "Contato Obrigatorio",
-      "mensagem": "E necessario informar pelo menos um contato para completar o cadastro"
+      "contexto": "Contato Obrigatório",
+      "mensagem": "E necessário informar pelo menos um contato para completar o cadastro"
     },
     {
       "tipo": "Alerta",
       "contexto": "Cadastro Incompleto",
-      "mensagem": "O cadastro esta incompleto. Verifique os campos obrigatorios."
+      "mensagem": "O cadastro esta incompleto. Verifique os campos obrigatórios."
     }
   ],
-  "participantesReuniao": [
+  "participantesReunião": [
     {
       "nome": "Leandro Da Cruz",
-      "papel": "Facilitador do workshop, apresentou fluxo de cadastro"
+      "papel": "Fácilitador do workshop, apresentou fluxo de cadastro"
     },
     {
       "nome": "Francine Gayer",
@@ -570,13 +570,13 @@
       "papel": "Representante do segmento Agro"
     }
   ],
-  "pendencias": [
+  "pendências": [
     "Integração com Portal Logístico pendente de definição para evitar redundância de dados",
     "Padronização de celulares e bases de contatos (documento 901674)",
     "Definição de regras para concorrentes sazonais",
-    "Definicao de criterios automaticos para selecao de Canal baseado em CNAE",
-    "Validacao de formato de telefone celular (padronizacao)",
-    "Integracao com bureau de credito para analise automatica"
+    "Definição de critérios automáticos para seleção de Canal baseado em CNAE",
+    "Validação de formato de telefone celular (padronização)",
+    "Integração com bureau de crédito para análise automática"
   ],
   "prerequisitos": [
     "Acesso à API SINTEGRA configurado e operacional",
@@ -586,31 +586,31 @@
   ],
   "detalhes": {
     "sintegra": "Integração automática para consulta de CNPJ, IE, CNAE e endereço",
-    "deduplicacao": "Validação automática por Termo de Pesquisa na organização Salesforce",
-    "integracao": "Salesforce → SAP via middleware com confirmação de sincronização",
-    "notificacoes": "Sistema notifica automaticamente cadastros pendentes ou incompletos",
+    "deduplicação": "Validação automática por Termo de Pesquisa na organização Salesforce",
+    "integração": "Salesforce → SAP via middleware com confirmação de sincronização",
+    "notificações": "Sistema notifica automáticamente cadastros pendentes ou incompletos",
     "accountTypes": "Três tipos de conta: PJ, PF e Parceiro Agrupador (Record Type API Names a verificar)",
     "caseTypes": "Separação entre Ocorrência de Cliente e Belgo Flex (documento 902162)"
   },
-  "detalhesTecnicos": {
+  "detalhesTécnicos": {
     "accountRecordTypes": {
-      "descricao": "Tipos de registro de Account (Conta) no Salesforce",
-      "avisoVerificacao": "ATENCAO: Os API Names (PJ_Standard, PF_Standard, Agrupador) sao SUGESTOES TECNICAS. Os tipos de conta (PJ, PF, Parceiro Agrupador) foram confirmados nas reunioes, mas os API Names exatos do Salesforce NAO foram mencionados. Precisam ser validados com a equipe de TI.",
+      "descrição": "Tipos de registro de Account (Conta) no Salesforce",
+      "avisoVerificação": "ATENCAO: Os API Names (PJ_Standard, PF_Standard, Agrupador) sao SUGESTOES TECNICAS. Os tipos de conta (PJ, PF, Parceiro Agrupador) foram confirmados nas reuniões, mas os API Names exatos do Salesforce NAO foram mencionados. Precisam ser validados com a equipe de TI.",
       "tiposConfirmados": [
         "Pessoa Juridica (PJ)",
         "Pessoa Fisica (PF)",
         "Parceiro Agrupador"
       ],
-      "fonteReuniao": "Reuniao 10/12 - Leandro explicou os tres tipos de conta",
-      "apiNamesASugestao": {
+      "fonteReunião": "Reunião 10/12 - Leandro explicou os tres tipos de conta",
+      "apiNamesASugestão": {
         "pj": "A verificar no Salesforce",
         "pf": "A verificar no Salesforce",
         "agrupador": "A verificar no Salesforce"
       },
-      "nota": "Selecionado pelo usuario ao criar uma nova conta"
+      "nota": "Selecionado pelo usuário ao criar uma nova conta"
     },
     "caseRecordTypes": {
-      "descricao": "Tipos de registro de Case (Caso) no Salesforce relacionados a clientes",
+      "descrição": "Tipos de registro de Case (Caso) no Salesforce relacionados a clientes",
       "tipos": [
         {
           "nome": "Ocorrência de Cliente",
@@ -625,69 +625,69 @@
       "fonte": "Reunião 10/12/2025"
     }
   },
-  "discussaoReunioes": {
+  "discussãoReuniões": {
     "04dez2025": {
       "tipo": "Kickoff",
-      "duracao": "~1h51min",
+      "duração": "~1h51min",
       "contexto": "Alinhamento inicial do projeto GTM",
       "pontosChave": [
         "Projeto GTM (Go To Market) / CRM apresentado",
-        "Transicao de lideranca: Dani Tamerao saiu, Audrey passou para Thalita",
-        "TI ja terminou desenvolvimento, mas business nao estava preparado para testar",
-        "Key users (Chaves) nao sabiam que eram key users"
+        "Transição de liderança: Dani Tamerao saiu, Audrey passou para Thalita",
+        "TI ja terminou desenvolvimento, mas business não estava preparado para testar",
+        "Key users (Chaves) não sabiam que eram key users"
       ],
       "problemasIdentificados": [
-        "Usuarios perguntando 'O que eu preciso testar?'",
-        "Usuarios perguntando 'O que mudou no meu processo?'",
-        "Necessidade de workshops para educar sobre mudancas"
+        "Usuários perguntando 'O que eu preciso testar?'",
+        "Usuários perguntando 'O que mudou no meu processo?'",
+        "Necessidade de workshops para educar sobre mudanças"
       ]
     },
     "10dez2025": {
-      "topico": "Detalhamento de Cadastro de Cliente",
+      "tópico": "Detalhamento de Cadastro de Cliente",
       "status": "CONCLUIDO - zero duvidas pendentes",
-      "citacao": "A gente fez o Cadastro do Cliente, a gente passou, e fez ele automatico la chama naquele botaozinho do sintegra.",
+      "citação": "A gente fez o Cadastro do Cliente, a gente passou, e fez ele automático la chama naquele botaozinho do sintegra.",
       "discussoes": [
-        "Automacao via SINTEGRA explicada",
+        "Automação via SINTEGRA explicada",
         "Tipos de conta: PJ, PF, Parceiro Agrupador",
         "Canais 20, 25, 30, 40 diferenciados"
       ],
-      "feedbackFrancine": "Muitas pessoas de diferentes areas precisam se comunicar para o sistema funcionar 100%"
+      "feedbackFrancine": "Muitas pessoas de diferentes áreas precisam se comunicar para o sistema funcionar 100%"
     },
     "16dez2025": {
-      "topico": "Recapitulacao de cadastro e contexto para proximos temas",
-      "citacao": "Como de costume, eu sempre dou uma passada geral do que a gente ja viu, so para a gente relembrar algumas coisinhas."
+      "tópico": "Recapitulação de cadastro e contexto para próximos temas",
+      "citação": "Como de costume, eu sempre dou uma passada geral do que a gente ja viu, so para a gente relembrar algumas coisinhas."
     }
   },
   "estruturaOrganizacionalProjeto": {
-    "fonte": "Reunioes 04/12, 10/12, 16/12",
-    "lideranca": {
+    "fonte": "Reuniões 04/12, 10/12, 16/12",
+    "liderança": {
       "business": "Thalita Merisio Rhein",
-      "tecnico": "Leandro da Cruz Pereira",
-      "transicao": "Dani Tamerao -> Thalita, Audrey em licenca maternidade"
+      "técnico": "Leandro da Cruz Pereira",
+      "transição": "Dani Tamerao -> Thalita, Audrey em licença maternidade"
     },
     "segmentos": [
       {
         "segmento": "Industria",
-        "responsavel": "Leandro"
+        "responsável": "Leandro"
       },
       {
         "segmento": "Agro",
-        "responsavel": "Bruno Nolasco Machado"
+        "responsável": "Bruno Nolasco Machado"
       },
       {
         "segmento": "Outros",
-        "responsavel": "Aline"
+        "responsável": "Aline"
       }
     ],
     "keyUsersIdentificados": [
       {
         "nome": "Francine Gayer",
-        "divisao": "Protec",
-        "contribuicao": "Questoes sobre concorrentes sazonais"
+        "divisão": "Protec",
+        "contribuição": "Questoes sobre concorrentes sazonais"
       },
       {
         "nome": "Maria Luiza Gomes Chaves",
-        "observacao": "Nova na Belgo (4 meses)",
+        "observação": "Nova na Belgo (4 meses)",
         "feedback": "Sessoes muito didaticas"
       },
       {
@@ -700,25 +700,25 @@
       }
     ]
   },
-  "contextoReuniao": {
+  "contextoReunião": {
     "projeto": "GTM (Go To Market) / CRM",
-    "lideranca": {
+    "liderança": {
       "business": "Thalita Merisio Rhein",
-      "tecnico": "Leandro da Cruz Pereira"
+      "técnico": "Leandro da Cruz Pereira"
     },
     "timeline": {
       "workshops": "04/12 a 22/12/2025",
-      "posWorkshop": "Responsabilidade passa para usuarios (Castro)",
+      "posWorkshop": "Responsabilidade passa para usuários (Castro)",
       "entregaveis": [
         "Planilha de cenarios",
-        "Manual de orientacao"
+        "Manual de orientação"
       ]
     },
     "participantes": [
       {
         "nome": "Leandro da Cruz Pereira",
         "papel": "TI/Apresentador",
-        "contribuicao": "Explicou SINTEGRA, tipos de conta, canais"
+        "contribuição": "Explicou SINTEGRA, tipos de conta, canais"
       },
       {
         "nome": "Thalita Merisio Rhein",
@@ -726,7 +726,7 @@
       },
       {
         "nome": "Francine Gayer",
-        "divisao": "Protec"
+        "divisão": "Protec"
       },
       {
         "nome": "Bruno Nolasco Machado",
@@ -739,7 +739,7 @@
     ],
     "feedback": {
       "autor": "Maria Luiza Gomes Chaves",
-      "citacao": "Primeiramente, queria agradecer. Todas essas sessoes tem sido muito didaticas. Eu entrei na Belgo ha 4 meses, entao aprendi muita coisa tambem de outros processos daqui.",
+      "citação": "Primeiramente, queria agradecer. Todas essas sessoes tem sido muito didaticas. Eu entrei na Belgo ha 4 meses, entao aprendi muita coisa tambem de outros processos daqui.",
       "contexto": "Nova funcionaria expressando valor dos workshops"
     }
   },
@@ -876,19 +876,56 @@
     }
   ],
   "totalDocumentos": 26,
-  "ultimaAtualizacao": "2026-01-13T11:36:26.083875",
+  "últimaAtualização": "2026-01-13T11:36:26.083875",
   "documentosGerais": [
     {
       "tipo": "Plano de Testes Exploratorios",
       "id": "909100"
     },
     {
-      "tipo": "Boot/Automacao",
+      "tipo": "Boot/Automação",
       "id": "Boot"
     },
     {
       "tipo": "App Guidance",
       "id": "app guidance"
     }
-  ]
+  ],
+  "detalhesTécnicosAdicionais": {
+    "fonte": "Análise de reuniões 03/12, 04/12, 10/12, 16/12/2025",
+    "validaçãoTelefone": {
+      "descrição": "Validação de formato de telefone celular",
+      "padrão": "(XX) XXXXX-XXXX para celular, (XX) XXXX-XXXX para fixo",
+      "obrigatório": true,
+      "impacto": "Dados de contato padronizados habilitam autoatendimento corretamente"
+    },
+    "integraçãoBureauCrédito": {
+      "sistema": "Serasa",
+      "descrição": "Integração com bureau de crédito para análise automática",
+      "status": "Pendente",
+      "fluxo": "Salesforce consulta Serasa automaticamente para novos clientes PJ"
+    },
+    "caixasCompartilhadas": {
+      "cadastro.clientes": {
+        "descrição": "Caixa compartilhada do SmartCenter para solicitações de alteração de cadastro",
+        "uso": "Alternativa ao Teams para solicitações rápidas de correção de dados",
+        "fonte": "Reunião 04/12/2025"
+      }
+    },
+    "termoDePesquisa": {
+      "descrição": "Identificador único do cliente para evitar duplicidade de cadastro",
+      "processoCoreção": [
+        "Identificar cliente com termo incorreto",
+        "Abrir chamado via caixa cadastro.clientes",
+        "SmartCenter corrige via transação XD02",
+        "Sincronização automática com Salesforce"
+      ],
+      "validação": "Sistema bloqueia cadastro se termo já existe na base"
+    },
+    "transaçõesSAP": {
+      "XD01": "Criar Cliente - substituída pelo cadastro via Salesforce no TO-BE",
+      "XD02": "Alterar Cliente - SmartCenter usa para complemento de dados",
+      "XD03": "Exibir Cliente - restrições logísticas aparecem aqui"
+    }
+  }
 }

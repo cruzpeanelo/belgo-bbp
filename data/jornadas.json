@@ -6,7 +6,7 @@
       "icone": "👤",
       "ordem": 1,
       "asIs": {
-        "descricao": "Processo manual e fragmentado onde o vendedor coleta dados do cliente via formulários em papel ou planilhas Excel, envia para o SmartCenter por e-mail, que então digita manualmente no SAP. Validações de CNPJ/CPF são feitas manualmente através de consultas em sites externos, sem verificação automática de duplicidades, resultando em cadastros duplicados frequentes e dados inconsistentes.",
+        "descrição": "Processo manual e fragmentado onde o vendedor coleta dados do cliente via formulários em papel ou planilhas Excel, envia para o SmartCenter por e-mail, que então digita manualmente no SAP. Validações de CNPJ/CPF são feitas manualmente através de consultas em sites externos, sem verificação automática de duplicidades, resultando em cadastros duplicados frequentes e dados inconsistentes.",
         "passos": [
           "Vendedor visita cliente ou recebe contato comercial",
           "Coleta dados em formulário físico ou planilha Excel (Razão Social, CNPJ, Endereço, Contatos)",
@@ -32,14 +32,14 @@
         "tempoMedio": "2 a 3 dias úteis"
       },
       "toBe": {
-        "descricao": "Cadastro automatizado via integração SINTEGRA diretamente no Salesforce. O vendedor digita apenas o CNPJ, clica no botão 'Integrar SINTEGRA' e o sistema preenche automaticamente todos os dados oficiais (Razão Social, Endereço, Inscrição Estadual, CNAE com descrição completa). O sistema valida duplicidades automaticamente pelo campo 'Termo de Pesquisa', impedindo cadastros duplicados. Após validação, ocorre integração automática com SAP via middleware.",
+        "descrição": "Cadastro automatizado via integração SINTEGRA diretamente no Salesforce. O vendedor digita apenas o CNPJ, clica no botão 'Integrar SINTEGRA' e o sistema preenche automáticamente todos os dados oficiais (Razão Social, Endereço, Inscrição Estadual, CNAE com descrição completa). O sistema valida duplicidades automáticamente pelo campo 'Termo de Pesquisa', impedindo cadastros duplicados. Após validação, ocorre integração automática com SAP via middleware.",
         "passos": [
           "Vendedor acessa o Salesforce (aplicativo mobile ou desktop)",
           "Clica em 'Criar Conta' e seleciona o tipo: Pessoa Jurídica, Pessoa Física ou Parceiro Agrupador",
           "Preenche o CNPJ do cliente",
-          "Sistema preenche automaticamente: Escritório de Vendas (conforme perfil) e Equipe de Vendas (conforme time)",
+          "Sistema preenche automáticamente: Escritório de Vendas (conforme perfil) e Equipe de Vendas (conforme time)",
           "Clica no botão 'Integrar SINTEGRA'",
-          "Sistema consulta SINTEGRA e preenche automaticamente: Razão Social, Endereço, Inscrição Estadual (IE), CNAE com descrição completa",
+          "Sistema consulta SINTEGRA e preenche automáticamente: Razão Social, Endereço, Inscrição Estadual (IE), CNAE com descrição completa",
           "Sistema exibe mensagem de sucesso no canto superior da tela",
           "Sistema valida 'Termo de Pesquisa' contra base existente para evitar duplicidade",
           "Se duplicado: exibe mensagem 'Já existe um cliente com o mesmo termo de pesquisa' e bloqueia",
@@ -49,9 +49,9 @@
           "Se cadastro incompleto: sistema envia notificação automática de pendência"
         ],
         "beneficios": [
-          "Cadastro concluído em aproximadamente 5 minutos",
+          "Cadastro concluído em apróximadamente 5 minutos",
           "Eliminação de erros de digitação manual",
-          "Dados validados automaticamente via SINTEGRA (fonte oficial)",
+          "Dados validados automáticamente via SINTEGRA (fonte oficial)",
           "Deduplicação automática por Termo de Pesquisa",
           "CNAE sempre correto e com descrição completa",
           "Preenchimento automático de Escritório e Equipe de Vendas",
@@ -63,7 +63,7 @@
         ],
         "tempoMedio": "5 minutos"
       },
-      "areasImpactadas": [
+      "áreasImpactadas": [
         "Comercial",
         "SmartCenter",
         "TI",
@@ -72,16 +72,16 @@
         "Logística"
       ],
       "status": "Em Andamento",
-      "fonteReuniao": "10/12/2025",
-      "fontesReuniao": [
+      "fonteReunião": "10/12/2025",
+      "fontesReunião": [
         "10/12/2025 - Sessão dedicada a Cadastro de Cliente",
         "16/12/2025 - Revisão de Cadastro e Documentos Fiscais"
       ],
       "tiposConta": [
         {
           "tipo": "Pessoa Jurídica (PJ)",
-          "descricao": "Empresas com CNPJ - Business Account",
-          "camposObrigatorios": [
+          "descrição": "Empresas com CNPJ - Business Account",
+          "camposObrigatórios": [
             "CNPJ",
             "Razão Social",
             "Termo de Pesquisa",
@@ -91,8 +91,8 @@
         },
         {
           "tipo": "Pessoa Física (PF)",
-          "descricao": "Clientes individuais com CPF",
-          "camposObrigatorios": [
+          "descrição": "Clientes individuais com CPF",
+          "camposObrigatórios": [
             "CPF",
             "Nome",
             "Termo de Pesquisa"
@@ -101,8 +101,8 @@
         },
         {
           "tipo": "Parceiro Agrupador",
-          "descricao": "Grupos empresariais ou holdings",
-          "camposObrigatorios": [
+          "descrição": "Grupos empresariais ou holdings",
+          "camposObrigatórios": [
             "Nome",
             "Termo de Pesquisa"
           ],
@@ -112,113 +112,113 @@
       "campos": [
         {
           "campo": "CNPJ",
-          "descricao": "Cadastro Nacional de Pessoa Jurídica",
+          "descrição": "Cadastro Nacional de Pessoa Jurídica",
           "preenchimento": "Manual",
-          "validacao": "SINTEGRA",
-          "obrigatorio": true
+          "validação": "SINTEGRA",
+          "obrigatório": true
         },
         {
           "campo": "CPF",
-          "descricao": "Cadastro de Pessoa Física",
+          "descrição": "Cadastro de Pessoa Física",
           "preenchimento": "Manual",
-          "validacao": "Algoritmo",
-          "obrigatorio": true
+          "validação": "Algoritmo",
+          "obrigatório": true
         },
         {
           "campo": "Razão Social",
-          "descricao": "Nome oficial da empresa",
+          "descrição": "Nome oficial da empresa",
           "preenchimento": "Automático (SINTEGRA)",
-          "validacao": "-",
-          "obrigatorio": true
+          "validação": "-",
+          "obrigatório": true
         },
         {
           "campo": "Nome Fantasia",
-          "descricao": "Nome comercial da empresa",
+          "descrição": "Nome comercial da empresa",
           "preenchimento": "Manual",
-          "validacao": "-",
-          "obrigatorio": false
+          "validação": "-",
+          "obrigatório": false
         },
         {
           "campo": "Endereço",
-          "descricao": "Endereço completo",
+          "descrição": "Endereço completo",
           "preenchimento": "Automático (SINTEGRA)",
-          "validacao": "-",
-          "obrigatorio": true
+          "validação": "-",
+          "obrigatório": true
         },
         {
           "campo": "Inscrição Estadual (IE)",
-          "descricao": "Registro estadual do contribuinte",
+          "descrição": "Registro estadual do contribuinte",
           "preenchimento": "Automático (SINTEGRA)",
-          "validacao": "-",
-          "obrigatorio": false
+          "validação": "-",
+          "obrigatório": false
         },
         {
           "campo": "CNAE",
-          "descricao": "Classificação Nacional de Atividades Econômicas",
+          "descrição": "Classificação Nacional de Atividades Econômicas",
           "preenchimento": "Automático (SINTEGRA)",
-          "validacao": "-",
-          "obrigatorio": true
+          "validação": "-",
+          "obrigatório": true
         },
         {
           "campo": "Termo de Pesquisa",
-          "descricao": "Identificador único para evitar duplicidade",
+          "descrição": "Identificador único para evitar duplicidade",
           "preenchimento": "Manual",
-          "validacao": "Duplicidade",
-          "obrigatorio": true
+          "validação": "Duplicidade",
+          "obrigatório": true
         },
         {
           "campo": "Tipo de Conta",
-          "descricao": "PJ, PF ou Parceiro Agrupador",
+          "descrição": "PJ, PF ou Parceiro Agrupador",
           "preenchimento": "Manual",
-          "validacao": "Obrigatório",
-          "obrigatorio": true
+          "validação": "Obrigatório",
+          "obrigatório": true
         },
         {
           "campo": "Escritório de Vendas",
-          "descricao": "Escritório responsável pela conta",
+          "descrição": "Escritório responsável pela conta",
           "preenchimento": "Automático (Perfil)",
-          "validacao": "-",
-          "obrigatorio": true
+          "validação": "-",
+          "obrigatório": true
         },
         {
           "campo": "Equipe de Vendas",
-          "descricao": "Time comercial responsável (antigo EV Alternativo)",
+          "descrição": "Time comercial responsável (antigo EV Alternativo)",
           "preenchimento": "Automático (Time)",
-          "validacao": "-",
-          "obrigatorio": true
+          "validação": "-",
+          "obrigatório": true
         },
         {
           "campo": "Canal",
-          "descricao": "Canal de venda: 20, 25, 30 ou 40",
+          "descrição": "Canal de venda: 20, 25, 30 ou 40",
           "preenchimento": "Manual",
-          "validacao": "-",
-          "obrigatorio": true
+          "validação": "-",
+          "obrigatório": true
         },
         {
           "campo": "Cluster",
-          "descricao": "Classificação automática do cliente",
+          "descrição": "Classificação automática do cliente",
           "preenchimento": "Automático",
-          "validacao": "Workflow para exceção",
-          "obrigatorio": false
+          "validação": "Workflow para exceção",
+          "obrigatório": false
         },
         {
           "campo": "Atividade Principal",
-          "descricao": "Descrição da atividade baseada no CNAE",
+          "descrição": "Descrição da atividade baseada no CNAE",
           "preenchimento": "Automático (CNAE)",
-          "validacao": "-",
-          "obrigatorio": false
+          "validação": "-",
+          "obrigatório": false
         }
       ],
-      "regrasNegocio": [
+      "regrasNegócio": [
         {
           "regra": "Validação de Duplicidade por Termo de Pesquisa",
-          "descricao": "O sistema verifica se já existe outro cliente cadastrado com o mesmo 'Termo de Pesquisa'. Caso exista, a criação é bloqueada e uma mensagem de erro é exibida.",
+          "descrição": "O sistema verifica se já existe outro cliente cadastrado com o mesmo 'Termo de Pesquisa'. Caso exista, a criação é bloqueada e uma mensagem de erro é exibida.",
           "mensagemErro": "Encontramos um obstáculo, já existe um cliente com o mesmo termo de pesquisa",
           "documento": "899139"
         },
         {
           "regra": "Preenchimento Automático via SINTEGRA",
-          "descricao": "Após inserir o CNPJ e clicar no botão 'Integrar SINTEGRA', o sistema consulta a base do SINTEGRA e preenche automaticamente: Inscrição Estadual, CNAE com descrição completa, Endereço e informações complementares.",
+          "descrição": "Após inserir o CNPJ e clicar no botão 'Integrar SINTEGRA', o sistema consulta a base do SINTEGRA e preenche automáticamente: Inscrição Estadual, CNAE com descrição completa, Endereço e informações complementares.",
           "exemplos": [
             "ADUBOSREAL → 'Comércio atacadista de defensivos agrícolas, adubos, fertilizantes e corretivos'",
             "SANTA RITA → 'Produção de artefatos estampados de metal'",
@@ -229,12 +229,12 @@
         },
         {
           "regra": "Preenchimento Automático de Escritório e Equipe",
-          "descricao": "O campo 'Escritório de Vendas' é preenchido automaticamente conforme o escritório do perfil do usuário logado. O campo 'Equipe de Vendas' é preenchido conforme o time do usuário.",
+          "descrição": "O campo 'Escritório de Vendas' é preenchido automáticamente conforme o escritório do perfil do usuário logado. O campo 'Equipe de Vendas' é preenchido conforme o time do usuário.",
           "nota": "Campo 'EV Alternativo' foi renomeado para 'Equipe de Vendas'"
         },
         {
           "regra": "Canais de Venda",
-          "descricao": "Cada cliente deve ser associado a um canal de venda específico que determina políticas comerciais, preços e condições.",
+          "descrição": "Cada cliente deve ser associado a um canal de venda específico que determina políticas comerciais, preços e condições.",
           "canais": {
             "20": "Indústria",
             "25": "Casos Especiais",
@@ -244,37 +244,37 @@
           "canaisDetalhados": {
             "20": {
               "nome": "Industria",
-              "criterio": "Empresas com CNAE de atividade industrial (transformacao, fabricacao)",
+              "critério": "Empresas com CNAE de atividade industrial (transformação, fabricação)",
               "exemploCNAE": [
-                "Producao de artefatos estampados de metal",
+                "Produção de artefatos estampados de metal",
                 "Siderurgia"
               ]
             },
             "25": {
               "nome": "Casos Especiais",
-              "criterio": "Excecoes aprovadas pela diretoria comercial, clientes estrategicos",
-              "requerAprovacao": true
+              "critério": "Exceções aprovadas pela diretoria comercial, clientes estratégicos",
+              "requerAprovação": true
             },
             "30": {
               "nome": "Distribuidores e Revenda",
-              "criterio": "Empresas com CNAE de comercio atacadista ou varejista",
+              "critério": "Empresas com CNAE de comércio atacadista ou varejista",
               "exemploCNAE": [
-                "Comercio atacadista de defensivos agricolas",
-                "Comercio varejista"
+                "Comércio atacadista de defensivos agricolas",
+                "Comércio varejista"
               ]
             },
             "40": {
               "nome": "Consumidor Final",
-              "criterio": "Pessoa Fisica ou pequenas empresas sem fins de revenda",
+              "critério": "Pessoa Fisica ou pequenas empresas sem fins de revenda",
               "aplicaPF": true
             }
           },
-          "nota": "Canal 25 mencionado como 'especial/diferenciado' na reuniao de 10/12/2025"
+          "nota": "Canal 25 mencionado como 'especial/diferenciado' na reunião de 10/12/2025"
         },
         {
           "regra": "Cluster Automático com Exceção",
-          "descricao": "O sistema calcula automaticamente o Cluster do cliente baseado em regras de negócio. Para casos especiais, existe o campo 'Cluster Exceção' que requer aprovação via workflow.",
-          "fluxoAprovacao": [
+          "descrição": "O sistema calcula automáticamente o Cluster do cliente baseado em regras de negócio. Para casos especiais, existe o campo 'Cluster Exceção' que requer aprovação via workflow.",
+          "fluxoAprovação": [
             "Usuário clica em 'Enviar para Aprovação'",
             "Status muda para 'Enviado'",
             "Aprovador recebe e-mail com solicitação",
@@ -286,36 +286,36 @@
         },
         {
           "regra": "Notificação de Cadastro Pendente",
-          "descricao": "O sistema identifica automaticamente cadastros que estão incompletos ou pendentes de ações complementares e envia notificações aos responsáveis.",
+          "descrição": "O sistema identifica automáticamente cadastros que estão incompletos ou pendentes de ações complementares e envia notificações aos responsáveis.",
           "documento": "881196"
         },
         {
           "regra": "Sincronização com SAP",
-          "descricao": "Após conclusão do cadastro no Salesforce, o usuário clica em 'Enviar SAP' para sincronizar os dados. O sistema exibe a mensagem 'A conta está em sincronização com o SAP'.",
+          "descrição": "Após conclusão do cadastro no Salesforce, o usuário clica em 'Enviar SAP' para sincronizar os dados. O sistema exibe a mensagem 'A conta está em sincronização com o SAP'.",
           "documento": "Interface Termo de Pesquisa (SAP ↔ SFDC)"
         },
         {
           "regra": "Remoção de Botões Desnecessários",
-          "descricao": "Os botões 'Descobrir Empresas', 'Importar' e 'Atribuir Rótulo' foram removidos da tela de Contas para simplificar a interface.",
+          "descrição": "Os botões 'Descobrir Empresas', 'Importar' e 'Atribuir Rótulo' foram removidos da tela de Contas para simplificar a interface.",
           "documento": "Roteiro de Teste - CNAE"
         },
         {
           "regra": "Qualidade de Dados de Contato",
-          "descricao": "Os dados de contato devem ser preenchidos corretamente pois são críticos para o funcionamento do Autoatendimento e são utilizados por outras áreas da empresa."
+          "descrição": "Os dados de contato devem ser preenchidos corretamente pois são críticos para o funcionamento do Autoatendimento e são utilizados por outras áreas da empresa."
         }
       ],
-      "sistemasTecnicos": [
+      "sistemasTécnicos": [
         "Salesforce",
         "SAP ECC",
         "SINTEGRA",
         "Middleware"
       ],
-      "integracoes": [
+      "integrações": [
         {
           "origem": "Salesforce",
           "destino": "SINTEGRA",
           "tipo": "API",
-          "descricao": "Consulta de CNPJ para obter IE, CNAE e endereço",
+          "descrição": "Consulta de CNPJ para obter IE, CNAE e endereço",
           "acionamento": "Botão 'Integrar SINTEGRA'",
           "retorno": "Mensagem de sucesso no canto superior da tela"
         },
@@ -323,7 +323,7 @@
           "origem": "Salesforce",
           "destino": "SAP",
           "tipo": "Middleware",
-          "descricao": "Criação e atualização de conta no SAP",
+          "descrição": "Criação e atualização de conta no SAP",
           "acionamento": "Botão 'Enviar SAP'",
           "retorno": "Mensagem 'A conta está em sincronização com o SAP'"
         },
@@ -331,13 +331,13 @@
           "origem": "SAP",
           "destino": "Salesforce",
           "tipo": "Middleware",
-          "descricao": "Retorno de código SAP e confirmação de sincronização"
+          "descrição": "Retorno de código SAP e confirmação de sincronização"
         }
       ],
       "ciclosTeste": [
         {
           "documento": "876268",
-          "titulo": "CNAE - Classificação Nacional de Atividades Econômicas",
+          "título": "CNAE - Classificação Nacional de Atividades Econômicas",
           "status": "Pendente",
           "ciclo": "P1",
           "data": "21/10/2025",
@@ -360,7 +360,7 @@
         },
         {
           "documento": "899139",
-          "titulo": "Validação do Campo Termo de Pesquisa no Cadastro de Cliente",
+          "título": "Validação do Campo Termo de Pesquisa no Cadastro de Cliente",
           "status": "Pendente",
           "ciclo": "P2",
           "data": "12/12/2025",
@@ -377,7 +377,7 @@
         },
         {
           "documento": "895163",
-          "titulo": "Automatização de Segmento e Subsegmento - Padronização de Base",
+          "título": "Automatização de Segmento e Subsegmento - Padronização de Base",
           "status": "Pendente",
           "ciclo": "P2",
           "data": "-",
@@ -391,7 +391,7 @@
         },
         {
           "documento": "881196",
-          "titulo": "Notificar sobre Cadastro a Finalizar - Pendente",
+          "título": "Notificar sobre Cadastro a Finalizar - Pendente",
           "status": "Pendente",
           "ciclo": "P2",
           "data": "17-24/10/2025",
@@ -406,7 +406,7 @@
         },
         {
           "documento": "862865",
-          "titulo": "Definição Automática de Cluster",
+          "título": "Definição Automática de Cluster",
           "status": "Pendente",
           "ciclo": "P2",
           "data": "14/10/2025",
@@ -428,7 +428,7 @@
         },
         {
           "documento": "Roteiro de Teste - CNAE",
-          "titulo": "Roteiro Completo de Teste de CNAE",
+          "título": "Roteiro Completo de Teste de CNAE",
           "status": "Pendente",
           "ciclo": "P2",
           "data": "-",
@@ -447,27 +447,27 @@
       "abasInterface": [
         {
           "aba": "Detalhes",
-          "descricao": "Exibe informações básicas da conta, dados do SINTEGRA (endereço, IE, CNAE)"
+          "descrição": "Exibe informações básicas da conta, dados do SINTEGRA (endereço, IE, CNAE)"
         },
         {
           "aba": "Relatório de Visitas",
-          "descricao": "Permite criar e visualizar relatórios de visitas comerciais"
+          "descrição": "Permite criar e visualizar relatórios de visitas comerciais"
         },
         {
           "aba": "Financeiro",
-          "descricao": "Exibe informações de crédito, partidas e ficha de crédito do cliente",
-          "areasCredito": [
+          "descrição": "Exibe informações de crédito, partidas e ficha de crédito do cliente",
+          "áreasCrédito": [
             "BBA",
             "DBA",
             "CSP",
             "ALPE"
           ],
           "detalhes": {
-            "fichaCredito": "Exibe limite de credito e partidas abertas",
-            "supplier": "Informacoes de fornecedor (quando aplicavel)",
+            "fichaCrédito": "Exibe limite de crédito e partidas abertas",
+            "supplier": "Informações de fornecedor (quando aplicavel)",
             "fscm": "Financial Supply Chain Management integrado ao SAP"
           },
-          "fonte": "Reuniao 16/12/2025"
+          "fonte": "Reunião 16/12/2025"
         }
       ],
       "mensagensSistema": [
@@ -488,34 +488,34 @@
         },
         {
           "tipo": "Erro",
-          "contexto": "SINTEGRA - CNPJ Invalido",
-          "mensagem": "CNPJ informado nao e valido"
+          "contexto": "SINTEGRA - CNPJ Inválido",
+          "mensagem": "CNPJ informado não é válido"
         },
         {
           "tipo": "Erro",
-          "contexto": "SINTEGRA - CNPJ Nao Encontrado",
-          "mensagem": "CNPJ nao encontrado na base SINTEGRA"
+          "contexto": "SINTEGRA - CNPJ Não Encontrado",
+          "mensagem": "CNPJ não encontrado na base SINTEGRA"
         },
         {
           "tipo": "Erro",
-          "contexto": "Validacao CPF",
-          "mensagem": "CPF informado nao e valido"
+          "contexto": "Validação CPF",
+          "mensagem": "CPF informado não é válido"
         },
         {
           "tipo": "Alerta",
-          "contexto": "Contato Obrigatorio",
-          "mensagem": "E necessario informar pelo menos um contato para completar o cadastro"
+          "contexto": "Contato Obrigatório",
+          "mensagem": "E necessário informar pelo menos um contato para completar o cadastro"
         },
         {
           "tipo": "Alerta",
           "contexto": "Cadastro Incompleto",
-          "mensagem": "O cadastro esta incompleto. Verifique os campos obrigatorios."
+          "mensagem": "O cadastro esta incompleto. Verifique os campos obrigatórios."
         }
       ],
-      "participantesReuniao": [
+      "participantesReunião": [
         {
           "nome": "Leandro Da Cruz",
-          "papel": "Facilitador do workshop, apresentou fluxo de cadastro"
+          "papel": "Fácilitador do workshop, apresentou fluxo de cadastro"
         },
         {
           "nome": "Francine Gayer",
@@ -530,13 +530,13 @@
           "papel": "Representante do segmento Agro"
         }
       ],
-      "pendencias": [
+      "pendências": [
         "Integração com Portal Logístico pendente de definição para evitar redundância de dados",
         "Padronização de celulares e bases de contatos (documento 901674)",
         "Definição de regras para concorrentes sazonais",
-        "Definicao de criterios automaticos para selecao de Canal baseado em CNAE",
-        "Validacao de formato de telefone celular (padronizacao)",
-        "Integracao com bureau de credito para analise automatica"
+        "Definição de critérios automáticos para seleção de Canal baseado em CNAE",
+        "Validação de formato de telefone celular (padronização)",
+        "Integração com bureau de crédito para análise automática"
       ],
       "prerequisitos": [
         "Acesso à API SINTEGRA configurado e operacional",
@@ -546,14 +546,14 @@
       ],
       "detalhes": {
         "sintegra": "Integração automática para consulta de CNPJ, IE, CNAE e endereço",
-        "deduplicacao": "Validação automática por Termo de Pesquisa na organização Salesforce",
-        "integracao": "Salesforce → SAP via middleware com confirmação de sincronização",
-        "notificacoes": "Sistema notifica automaticamente cadastros pendentes ou incompletos",
+        "deduplicação": "Validação automática por Termo de Pesquisa na organização Salesforce",
+        "integração": "Salesforce → SAP via middleware com confirmação de sincronização",
+        "notificações": "Sistema notifica automáticamente cadastros pendentes ou incompletos",
         "recordTypes": "Separação entre Ocorrência de Cliente e Belgo Flex (documento 902162)"
       },
-      "detalhesTecnicos": {
+      "detalhesTécnicos": {
         "recordTypes": {
-          "descricao": "Separacao entre tipos de registro no Salesforce",
+          "descrição": "Separação entre tipos de registro no Salesforce",
           "tipos": [
             {
               "nome": "Ocorrencia de Cliente",
@@ -561,21 +561,21 @@
             },
             {
               "nome": "Belgo Flex",
-              "uso": "Para contas com condicoes flexiveis especiais",
+              "uso": "Para contas com condições flexiveis especiais",
               "documento": "902162"
             }
           ],
-          "fonte": "Reuniao 10/12/2025"
+          "fonte": "Reunião 10/12/2025"
         }
       }
     },
     {
-      "id": "areas-vendas",
+      "id": "áreas-vendas",
       "nome": "Áreas de Vendas",
       "icone": "🏢",
       "ordem": 2,
       "asIs": {
-        "descricao": "Atribuição manual de canais e escritórios",
+        "descrição": "Atribuição manual de canais e escritórios",
         "passos": [
           "Identificar tipo de cliente",
           "Definir canal manualmente",
@@ -590,10 +590,10 @@
         "tempoMedio": "1 dia"
       },
       "toBe": {
-        "descricao": "Canais 20, 30, 40, 25 automatizados",
+        "descrição": "Canais 20, 30, 40, 25 automatizados",
         "passos": [
           "Sistema identifica tipo de cliente",
-          "Canal sugerido automaticamente",
+          "Canal sugerido automáticamente",
           "Usuário confirma ou ajusta",
           "Integração automática"
         ],
@@ -604,31 +604,31 @@
         ],
         "tempoMedio": "Imediato"
       },
-      "areasImpactadas": [
+      "áreasImpactadas": [
         "Comercial",
         "Operações"
       ],
       "status": "Em Andamento",
-      "fonteReuniao": "10/12/2025",
+      "fonteReunião": "10/12/2025",
       "detalhes": {
         "canais": {
           "20": {
             "nome": "Indústria",
-            "descricao": "Canal de vendas industriais",
+            "descrição": "Canal de vendas industriais",
             "clientes": "Fábricas, manufaturas, indústrias em geral"
           },
           "25": {
             "nome": "Casos Especiais",
-            "descricao": "Exceções e casos especiais que não se enquadram nos demais canais"
+            "descrição": "Exceções e casos especiais que não se enquadram nos demais canais"
           },
           "30": {
             "nome": "Distribuição",
-            "descricao": "Canal de distribuidores e revendas",
-            "areaCredito": "DBA/ADBA"
+            "descrição": "Canal de distribuidores e revendas",
+            "areaCrédito": "DBA/ADBA"
           },
           "40": {
             "nome": "Consumo/Varejo",
-            "descricao": "Canal de varejo e consumidor final"
+            "descrição": "Canal de varejo e consumidor final"
           }
         },
         "clusters": {
@@ -637,10 +637,10 @@
           "Regionais": "Contas de atuação regional",
           "Dispersas": "Contas menores e dispersas"
         },
-        "clusterAutomatico": "Sistema define cluster baseado em faturamento, potencial e frequência de compra",
-        "workflowExcecao": "Aprovação em 2 níveis para alteração manual de cluster"
+        "clusterAutomático": "Sistema define cluster baseado em faturamento, potencial e frequência de compra",
+        "workflowExceção": "Aprovação em 2 níveis para alteração manual de cluster"
       },
-      "regrasNegocio": [
+      "regrasNegócio": [
         "Canal definido pelo CNAE",
         "Cluster calculado por algoritmo",
         "Exceções via workflow de 2 níveis",
@@ -653,7 +653,7 @@
       "icone": "📄",
       "ordem": 3,
       "asIs": {
-        "descricao": "Emissão manual de XML e DANFE",
+        "descrição": "Emissão manual de XML e DANFE",
         "passos": [
           "Faturamento no SAP",
           "Colaborador gera XML manualmente",
@@ -669,11 +669,11 @@
         "tempoMedio": "30 minutos por nota"
       },
       "toBe": {
-        "descricao": "Emissão automática integrada",
+        "descrição": "Emissão automática integrada",
         "passos": [
           "Faturamento no SAP dispara trigger",
-          "XML gerado automaticamente",
-          "DANFE gerado automaticamente",
+          "XML gerado automáticamente",
+          "DANFE gerado automáticamente",
           "Envio automático por email/portal"
         ],
         "beneficios": [
@@ -684,13 +684,13 @@
         ],
         "tempoMedio": "Automático"
       },
-      "areasImpactadas": [
+      "áreasImpactadas": [
         "Fiscal",
         "TI",
         "Comercial"
       ],
       "status": "Em Andamento",
-      "fonteReuniao": "16/12/2025",
+      "fonteReunião": "16/12/2025",
       "detalhes": {
         "trigger": "SAP dispara processo no Araujo",
         "documentos": [
@@ -698,9 +698,9 @@
           "DANFE",
           "Certificado de Qualidade"
         ],
-        "envio": "Email automatico + portal"
+        "envio": "Email automático + portal"
       },
-      "sistemasTecnicos": [
+      "sistemasTécnicos": [
         "SAP",
         "Araujo",
         "Salesforce",
@@ -713,7 +713,7 @@
       "icone": "📞",
       "ordem": 4,
       "asIs": {
-        "descricao": "Cadastro manual de contatos",
+        "descrição": "Cadastro manual de contatos",
         "passos": [
           "Vendedor coleta dados",
           "Digita manualmente no sistema",
@@ -727,7 +727,7 @@
         "tempoMedio": "15 minutos"
       },
       "toBe": {
-        "descricao": "Auto-preenchimento e validação",
+        "descrição": "Auto-preenchimento e validação",
         "passos": [
           "Sistema sugere contatos existentes",
           "Validação de email/telefone",
@@ -741,32 +741,32 @@
         ],
         "tempoMedio": "2 minutos"
       },
-      "areasImpactadas": [
+      "áreasImpactadas": [
         "Comercial",
         "Marketing"
       ],
       "status": "Pendente",
-      "fonteReuniao": "16/12/2025",
+      "fonteReunião": "16/12/2025",
       "detalhes": {
         "criticidade": "PRE-REQUISITO para Autoatendimento",
-        "validacoes": [
+        "validações": [
           "Formato de email",
           "Formato de telefone",
           "CPF/CNPJ"
         ],
-        "deduplicacao": "Matching por email, telefone e nome"
+        "deduplicação": "Matching por email, telefone e nome"
       },
       "prerequisitoPara": [
         "autoatendimento"
       ]
     },
     {
-      "id": "logistica",
+      "id": "logística",
       "nome": "Portal Logístico",
       "icone": "🚚",
       "ordem": 5,
       "asIs": {
-        "descricao": "Portal separado do SAP",
+        "descrição": "Portal separado do SAP",
         "passos": [
           "Dados digitados no portal",
           "Replicação manual para SAP",
@@ -780,7 +780,7 @@
         "tempoMedio": "Variável"
       },
       "toBe": {
-        "descricao": "Integração Portal-SAP",
+        "descrição": "Integração Portal-SAP",
         "passos": [
           "Dados inseridos uma vez",
           "Sincronização automática",
@@ -793,12 +793,12 @@
         ],
         "tempoMedio": "Automático"
       },
-      "areasImpactadas": [
+      "áreasImpactadas": [
         "Logística",
         "TI"
       ],
       "status": "Pendente",
-      "fonteReuniao": "16/12/2025"
+      "fonteReunião": "16/12/2025"
     },
     {
       "id": "financeiro",
@@ -806,7 +806,7 @@
       "icone": "💰",
       "ordem": 6,
       "asIs": {
-        "descricao": "Ficha de crédito manual",
+        "descrição": "Ficha de crédito manual",
         "passos": [
           "Análise manual de crédito",
           "Ficha física/Excel",
@@ -820,7 +820,7 @@
         "tempoMedio": "2-3 dias"
       },
       "toBe": {
-        "descricao": "FSCM integrado",
+        "descrição": "FSCM integrado",
         "passos": [
           "Análise automática via FSCM",
           "Limite calculado pelo sistema",
@@ -833,52 +833,52 @@
         ],
         "tempoMedio": "Horas"
       },
-      "areasImpactadas": [
+      "áreasImpactadas": [
         "Financeiro",
         "Comercial"
       ],
       "status": "Em Andamento",
-      "fonteReuniao": "04/12/2025",
+      "fonteReunião": "04/12/2025",
       "detalhes": {
-        "areasCredito": {
+        "áreasCrédito": {
           "BBA": {
             "nome": "Limite Interno Belgo",
-            "descricao": "Área de crédito interna da Belgo para concessão de limites",
-            "integracao": "ASCP"
+            "descrição": "Área de crédito interna da Belgo para concessão de limites",
+            "integração": "ASCP"
           },
           "CSP": {
             "nome": "Supply/Belgo Cash",
-            "descricao": "Área de crédito para operações de supply chain e Belgo Cash",
-            "integracao": "ASCP"
+            "descrição": "Área de crédito para operações de supply chain e Belgo Cash",
+            "integração": "ASCP"
           },
           "DBA": {
             "nome": "Distribuição",
             "alternativo": "ADBA",
-            "descricao": "Área de crédito para canal de distribuição - gerenciada pela própria Rede",
+            "descrição": "Área de crédito para canal de distribuição - gerênciada pela própria Rede",
             "canalRelacionado": "30",
-            "integracao": "ASCP"
+            "integração": "ASCP"
           },
           "ALPE": {
             "nome": "Aços Longos PE",
             "alternativo": "BTC/ABPE",
-            "descricao": "Área de crédito Aços Longos Pernambuco",
-            "observacao": "Não usar 'Altair' - nome correto é ALPE",
-            "integracao": "ASCP"
+            "descrição": "Área de crédito Aços Longos Pernambuco",
+            "observação": "Não usar 'Altair' - nome correto é ALPE",
+            "integração": "ASCP"
           }
         },
         "fscm": {
           "nome": "Financial Supply Chain Management",
-          "descricao": "Módulo SAP para gestão da cadeia financeira",
+          "descrição": "Módulo SAP para gestão da cadeia financeira",
           "funcionalidades": ["Gestão de crédito", "Controle de recebíveis", "Bloqueio de vendas"]
         },
         "ascp": {
           "nome": "Advanced Supply Chain Planning",
-          "descricao": "Middleware para integração de crédito entre Salesforce e SAP",
+          "descrição": "Middleware para integração de crédito entre Salesforce e SAP",
           "funcionalidades": ["Sincronização de áreas de crédito", "Consulta de limites", "Bloqueio/desbloqueio de clientes"]
         },
         "workflow": "Analista -> Gestor -> Diretoria"
       },
-      "sistemasTecnicos": [
+      "sistemasTécnicos": [
         "Salesforce",
         "SAP FSCM",
         "ASCP",
@@ -891,7 +891,7 @@
       "icone": "🎯",
       "ordem": 7,
       "asIs": {
-        "descricao": "Registro manual e esporádico",
+        "descrição": "Registro manual e esporádico",
         "passos": [
           "Vendedor anota informações",
           "Planilhas individuais",
@@ -905,7 +905,7 @@
         "tempoMedio": "N/A"
       },
       "toBe": {
-        "descricao": "Gestão sistemática no CRM",
+        "descrição": "Gestão sistemática no CRM",
         "passos": [
           "Registro estruturado no Salesforce",
           "Vinculação com oportunidades",
@@ -918,13 +918,13 @@
         ],
         "tempoMedio": "5 minutos"
       },
-      "areasImpactadas": [
+      "áreasImpactadas": [
         "Comercial",
         "Marketing",
         "Estratégia"
       ],
       "status": "Pendente",
-      "fonteReuniao": "10/12/2025"
+      "fonteReunião": "10/12/2025"
     },
     {
       "id": "autoatendimento",
@@ -932,7 +932,7 @@
       "icone": "🖥️",
       "ordem": 8,
       "asIs": {
-        "descricao": "Inexistente - Cliente depende totalmente do vendedor ou Smart Center para qualquer consulta",
+        "descrição": "Inexistente - Cliente depende totalmente do vendedor ou Smart Center para qualquer consulta",
         "passos": [
           "Cliente liga para vendedor ou Smart Center",
           "Vendedor consulta múltiplos sistemas manualmente",
@@ -949,7 +949,7 @@
         "tempoMedio": "Horas/Dias"
       },
       "toBe": {
-        "descricao": "Portal self-service e Bot Einstein via WhatsApp para atendimento 24/7",
+        "descrição": "Portal self-service e Bot Einstein via WhatsApp para atendimento 24/7",
         "passos": [
           "Cliente acessa portal web ou WhatsApp",
           "Bot Einstein faz autenticação via CNPJ/CPF",
@@ -968,15 +968,15 @@
         ],
         "tempoMedio": "Imediato"
       },
-      "areasImpactadas": [
+      "áreasImpactadas": [
         "Comercial",
         "Atendimento",
         "TI",
         "Smart Center"
       ],
       "status": "Em Desenvolvimento",
-      "fonteReuniao": "16/12/2025",
-      "fontesReuniao": [
+      "fonteReunião": "16/12/2025",
+      "fontesReunião": [
         "16/12/2025 - Documentos Fiscais e Autoatendimento",
         "07/01/2026 - Bot Einstein Planejamento e Logística"
       ],
@@ -1007,37 +1007,37 @@
       "icone": "💲",
       "ordem": 9,
       "asIs": {
-        "descricao": "Descontos sem controle centralizado",
+        "descrição": "Descontos sem controle centralizado",
         "passos": [
           "Vendedor negocia desconto",
-          "Aprovacao informal",
+          "Aprovação informal",
           "Desconto manual no pedido",
           "Sem registro"
         ],
         "problemas": [
           "Sem controle",
-          "Aprovacoes informais",
+          "Aprovações informais",
           "Sem vigencia",
           "Margens corroidas"
         ],
         "tempoMedio": "Variavel"
       },
       "toBe": {
-        "descricao": "Workflow de aprovacao com condition YDCF no SAP",
+        "descrição": "Workflow de aprovação com condition YDCF no SAP",
         "passos": [
           "Acessa Pricing no Salesforce",
           "Navega hierarquia de materiais (6 niveis)",
           "Define % desconto e vigencia",
-          "Nivel 1: Time Pricing aprova",
-          "Nivel 2: Gerente aprova",
+          "Nível 1: Time Pricing aprova",
+          "Nível 2: Gerente aprova",
           "YDCF criada no SAP"
         ],
         "beneficios": [
           "Controle total",
           "Rastreabilidade",
           "Workflow 2 niveis",
-          "Vigencia automatica",
-          "Integracao SAP"
+          "Vigencia automática",
+          "Integração SAP"
         ],
         "tempoMedio": "1-2 dias"
       },
@@ -1051,67 +1051,67 @@
           "Material"
         ],
         "conditionSAP": "YDCF - Desconto de Cliente",
-        "fluxoAprovacao": [
+        "fluxoAprovação": [
           {
-            "nivel": 1,
+            "nível": 1,
             "aprovador": "Time Pricing"
           },
           {
-            "nivel": 2,
+            "nível": 2,
             "aprovador": "Gerente Escritorio"
           }
         ]
       },
-      "sistemasTecnicos": [
+      "sistemasTécnicos": [
         "Salesforce",
         "SAP"
       ],
-      "areasImpactadas": [
+      "áreasImpactadas": [
         "Comercial",
         "Marketing",
         "Pricing",
         "TI"
       ],
       "status": "Em Andamento",
-      "fonteReuniao": "16/12/2025",
+      "fonteReunião": "16/12/2025",
       "documentosTeste": [
         "791093 - WF Pricing",
         "880788 - P5 Testes"
       ]
     },
     {
-      "id": "cotacao-ov",
-      "nome": "Cotacao e Ordem de Vendas",
+      "id": "cotação-ov",
+      "nome": "Cotação e Ordem de Vendas",
       "icone": "📋",
       "ordem": 10,
       "asIs": {
-        "descricao": "Processo manual de cotacao",
+        "descrição": "Processo manual de cotação",
         "passos": [
-          "Consulta preco no SAP",
+          "Consulta preço no SAP",
           "Verifica estoque manualmente",
-          "Monta cotacao em Excel",
+          "Monta cotação em Excel",
           "Digita pedido no SAP"
         ],
         "problemas": [
           "Processo lento",
-          "Precos desatualizados",
+          "Preços desatualizados",
           "Sem ATP",
           "Retrabalho"
         ],
         "tempoMedio": "Horas"
       },
       "toBe": {
-        "descricao": "Cotacao integrada com ATP e conversao automatica",
+        "descrição": "Cotação integrada com ATP e conversão automática",
         "passos": [
-          "Cria cotacao no Salesforce",
-          "Sistema busca precos do SAP",
+          "Cria cotação no Salesforce",
+          "Sistema busca preços do SAP",
           "ATP verifica disponibilidade",
-          "Descontos YDCF automaticos",
-          "Conversao para OV"
+          "Descontos YDCF automáticos",
+          "Conversão para OV"
         ],
         "beneficios": [
-          "Processo agil",
-          "Precos atualizados",
+          "Processo ágil",
+          "Preços atualizados",
           "ATP em tempo real",
           "Visibilidade completa"
         ],
@@ -1121,27 +1121,27 @@
         "atp": "Available to Promise - disponibilidade em tempo real",
         "farol": "Status OV (verde/amarelo/vermelho)"
       },
-      "sistemasTecnicos": [
+      "sistemasTécnicos": [
         "Salesforce",
         "SAP"
       ],
-      "areasImpactadas": [
+      "áreasImpactadas": [
         "Comercial",
-        "Logistica",
+        "Logística",
         "Financeiro"
       ],
       "status": "Em Andamento",
-      "fonteReuniao": "10/12/2025"
+      "fonteReunião": "10/12/2025"
     },
     {
-      "id": "hub-gestao",
-      "nome": "Hub de Gestao OC",
+      "id": "hub-gestão",
+      "nome": "Hub de Gestão OC",
       "icone": "⚙️",
       "ordem": 11,
       "asIs": {
-        "descricao": "Gestao descentralizada de grupos",
+        "descrição": "Gestão descentralizada de grupos",
         "passos": [
-          "Solicitacoes por email",
+          "Solicitações por email",
           "TI configura manualmente",
           "Sem visibilidade de grupos",
           "Logs separados"
@@ -1155,9 +1155,9 @@
         "tempoMedio": "Dias"
       },
       "toBe": {
-        "descricao": "Hub centralizado com gestao via LWC",
+        "descrição": "Hub centralizado com gestão via LWC",
         "passos": [
-          "Gestor acessa Gerenciar Grupos",
+          "Gestor acessa Gerênciar Grupos",
           "Visualiza grupos",
           "Adiciona/remove membros",
           "Busca por email/nome",
@@ -1179,30 +1179,261 @@
           "Sistemas"
         ]
       },
-      "sistemasTecnicos": [
+      "sistemasTécnicos": [
         "Salesforce (LWC)"
       ],
-      "areasImpactadas": [
+      "áreasImpactadas": [
         "TI",
-        "Todas as areas"
+        "Todas as áreas"
       ],
       "status": "Em Andamento",
-      "fonteReuniao": "Documentos de teste",
+      "fonteReunião": "Documentos de teste",
       "documentosTeste": [
-        "889851 - Hub de gestao OC"
+        "889851 - Hub de gestão OC"
+      ]
+    },
+    {
+      "id": "restricoes-logisticas",
+      "nome": "Restrições Logísticas",
+      "icone": "🚛",
+      "ordem": 12,
+      "asIs": {
+        "descrição": "Restrições de entrega gerenciadas em sistemas separados sem integração, causando problemas de comunicação entre áreas",
+        "passos": [
+          "Informações de restrição registradas no Portal Logístico",
+          "Dados duplicados manualmente no SAP",
+          "Vendedor consulta XD03 para ver restrições",
+          "Sem visibilidade em tempo real para o cliente",
+          "Agendamentos feitos por telefone ou email"
+        ],
+        "problemas": [
+          "Redundância de dados entre Portal Logístico e SAP",
+          "Inconsistências nas informações de restrição",
+          "Cliente não tem visibilidade das restrições",
+          "Agendamentos manuais sujeitos a erros",
+          "Sem integração em tempo real"
+        ],
+        "tempoMedio": "Variável"
+      },
+      "toBe": {
+        "descrição": "Integração Salesforce → SAP → Portal Logístico em tempo real para gestão centralizada de restrições de entrega",
+        "passos": [
+          "Vendedor registra restrições no Salesforce",
+          "Sistema sincroniza automaticamente com SAP",
+          "Integração em tempo real com Portal Logístico",
+          "Cliente visualiza restrições no autoatendimento",
+          "Agendamentos online com confirmação automática"
+        ],
+        "beneficios": [
+          "Dados unificados em todos os sistemas",
+          "Visibilidade em tempo real",
+          "Cliente com autonomia para consultar restrições",
+          "Eliminação de redundância de dados",
+          "Processo de agendamento otimizado"
+        ],
+        "tempoMedio": "Imediato"
+      },
+      "áreasImpactadas": [
+        "Logística",
+        "Comercial",
+        "TI",
+        "Atendimento"
+      ],
+      "status": "Pendente",
+      "fonteReunião": "10/12/2025",
+      "detalhes": {
+        "tiposRestrição": [
+          {
+            "tipo": "Veículo",
+            "descrição": "Restrições de tipo de veículo para entrega",
+            "exemplos": ["3/4", "Truque", "Sider", "Carreta"]
+          },
+          {
+            "tipo": "Janela de Entrega",
+            "descrição": "Horários permitidos para recebimento",
+            "exemplos": ["08:00-12:00", "14:00-17:00", "Somente manhã"]
+          },
+          {
+            "tipo": "Agendamento",
+            "descrição": "Necessidade de agendamento prévio",
+            "opções": ["Obrigatório", "Recomendado", "Não necessário"]
+          },
+          {
+            "tipo": "Descarga",
+            "descrição": "Condições especiais de descarga",
+            "exemplos": ["Empilhadeira própria", "Doca necessária", "Paletizado"]
+          }
+        ],
+        "transaçãoSAP": "XD03 - Exibir Cliente (Restrições na ordem de embarque)",
+        "integração": "Portal Logístico ↔ SAP ↔ Salesforce"
+      },
+      "sistemasTécnicos": [
+        "Salesforce",
+        "SAP ECC",
+        "Portal Logístico"
+      ],
+      "pendências": [
+        "Integração Portal Logístico com SAP pendente",
+        "Definição de campos obrigatórios de restrição",
+        "Reunião específica agendada com equipe de logística"
+      ]
+    },
+    {
+      "id": "market-share",
+      "nome": "Market Share e Concorrentes",
+      "icone": "📊",
+      "ordem": 13,
+      "asIs": {
+        "descrição": "Informações de concorrentes e market share dispersas, sem gestão centralizada ou análise sistemática",
+        "passos": [
+          "Vendedor coleta informações de concorrentes informalmente",
+          "Dados registrados em planilhas individuais",
+          "Projetos perdidos não vinculados a concorrentes",
+          "Sem histórico de market share por cliente",
+          "Análise de mercado feita manualmente"
+        ],
+        "problemas": [
+          "Informações de concorrentes sazonais e dinâmicas",
+          "Dificuldade em vincular projetos perdidos a concorrentes específicos",
+          "Sem visão consolidada de share of wallet",
+          "Dados fragmentados e inconsistentes",
+          "Impossível rastrear tendências de mercado"
+        ],
+        "tempoMedio": "N/A"
+      },
+      "toBe": {
+        "descrição": "Gestão centralizada de concorrentes e market share no Salesforce com análise automatizada",
+        "passos": [
+          "Cadastro normalizado de concorrentes no Salesforce",
+          "Registro de share of wallet por cliente",
+          "Vinculação de oportunidades perdidas a concorrentes",
+          "Dashboard de análise de mercado automático",
+          "Histórico de evolução de market share"
+        ],
+        "beneficios": [
+          "Visão consolidada de concorrentes por região/segmento",
+          "Análise de share of wallet por cliente",
+          "Identificação de tendências de mercado",
+          "Decisões estratégicas baseadas em dados",
+          "Rastreamento de projetos perdidos para concorrência"
+        ],
+        "tempoMedio": "5 minutos por registro"
+      },
+      "áreasImpactadas": [
+        "Comercial",
+        "Marketing",
+        "Estratégia",
+        "Inteligência de Mercado"
+      ],
+      "status": "Pendente",
+      "fonteReunião": "10/12/2025",
+      "detalhes": {
+        "shareOfWallet": {
+          "descrição": "Percentual de compra do cliente na Belgo versus concorrentes",
+          "cálculo": "Volume Belgo / Volume Total Cliente",
+          "objetivo": "Identificar potencial de crescimento em cada conta"
+        },
+        "concorrentes": {
+          "cadastro": "Lista normalizada pela TI",
+          "desafio": "Concorrentes são sazonais e dinâmicos por região",
+          "responsável": "Discussão agendada com Edmundo"
+        },
+        "marketShareTipos": {
+          "estratégico": "Visão de longo prazo por segmento",
+          "tático": "Visão de curto prazo por oportunidade"
+        }
+      },
+      "sistemasTécnicos": [
+        "Salesforce",
+        "Power BI"
+      ],
+      "pendências": [
+        "Normalização de cadastro de concorrentes pela TI",
+        "Definição de critérios para vinculação de projetos perdidos",
+        "Discussão com Edmundo sobre gestão de dados de concorrentes"
+      ]
+    },
+    {
+      "id": "amd-cross-company",
+      "nome": "AMD Cross Company",
+      "icone": "🔄",
+      "ordem": 14,
+      "asIs": {
+        "descrição": "Processo de vendas entre empresas do grupo ArcelorMittal não contemplado no Salesforce atual",
+        "passos": [
+          "AMD (ArcelorMittal Distribuição) gerencia vendas em sistema próprio",
+          "Transações cross company processadas manualmente",
+          "Sem integração com Salesforce",
+          "Visibilidade limitada para equipe comercial"
+        ],
+        "problemas": [
+          "Processo AMD não tem funcionalidades no Salesforce",
+          "Processo Cross Company não contemplado",
+          "Falta de rastreabilidade de vendas intercompany",
+          "Dificuldade de consolidação de resultados"
+        ],
+        "tempoMedio": "Variável"
+      },
+      "toBe": {
+        "descrição": "Integração do processo AMD Cross Company no Salesforce para gestão unificada de vendas intercompany",
+        "passos": [
+          "Registro de transações AMD no Salesforce",
+          "Workflow de aprovação para vendas cross company",
+          "Integração com SAP para contabilização",
+          "Relatórios consolidados de vendas intercompany",
+          "Visibilidade completa para equipe comercial"
+        ],
+        "beneficios": [
+          "Gestão unificada de vendas do grupo",
+          "Rastreabilidade completa de transações intercompany",
+          "Consolidação de resultados facilitada",
+          "Visibilidade para todas as áreas",
+          "Processo padronizado e auditável"
+        ],
+        "tempoMedio": "A definir"
+      },
+      "áreasImpactadas": [
+        "Comercial",
+        "Financeiro",
+        "Controladoria",
+        "AMD"
+      ],
+      "status": "Pendente",
+      "fonteReunião": "10/12/2025",
+      "detalhes": {
+        "amd": {
+          "nome": "ArcelorMittal Distribuição",
+          "descrição": "Empresa do grupo para distribuição de produtos",
+          "processo": "Vendas entre empresas do grupo (intercompany)"
+        },
+        "crossCompany": {
+          "descrição": "Transações de venda entre diferentes empresas do grupo ArcelorMittal",
+          "desafio": "Contabilização e rastreamento entre entidades legais distintas"
+        },
+        "responsável": "Renata Mello e Victoria"
+      },
+      "sistemasTécnicos": [
+        "Salesforce",
+        "SAP ECC",
+        "Sistema AMD"
+      ],
+      "pendências": [
+        "Reunião específica agendada com Renata Mello e Victoria",
+        "Definição de escopo de funcionalidades AMD no Salesforce",
+        "Mapeamento de processo cross company"
       ]
     }
   ],
   "projeto": {
     "nome": "GTM Vendas - Belgo Arames",
-    "fase": "II - Testes e Validacao",
-    "goLive": "30/01/2026",
+    "fase": "II - Testes e Validação",
+    "goLive": "15/03/2026",
     "sistemas": [
       "Salesforce",
       "SAP ECC",
       "SINTEGRA",
       "FSCM",
-      "Portal Logistico",
+      "Portal Logístico",
       "Araujo",
       "Share"
     ],
@@ -1213,10 +1444,10 @@
       "25": "Especiais"
     },
     "equipe": {
-      "gerenteNegocio": "Thalita Rhein",
+      "gerenteNegócio": "Thalita Rhein",
       "ti": "Leandro Pereira"
     },
-    "areasCredito": [
+    "áreasCrédito": [
       "BBA",
       "DBA",
       "CSP",

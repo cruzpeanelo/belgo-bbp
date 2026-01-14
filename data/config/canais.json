@@ -1,83 +1,83 @@
 {
-  "titulo": "Canais de Venda - Belgo Arames",
-  "descricao": "Canais de venda confirmados via triple check (reunioes 03/12, 04/12, 10/12/2025)",
+  "título": "Canais de Venda - Belgo Arames",
+  "descrição": "Canais de venda confirmados via triple check (reuniões 03/12, 04/12, 10/12/2025)",
   "totalCanais": 4,
-  "dataVerificacao": "2026-01-13",
+  "dataVerificação": "2026-01-13",
   "fontes": [
-    "Transcricao 03/12/2025 - Financeiro/Controladoria",
-    "Transcricao 04/12/2025 - Kickoff Workshops",
-    "Transcricao 10/12/2025 - Cadastro/Areas"
+    "Transcrição 03/12/2025 - Financeiro/Controladoria",
+    "Transcrição 04/12/2025 - Kickoff Workshops",
+    "Transcrição 10/12/2025 - Cadastro/Áreas"
   ],
   "canais": [
     {
-      "codigo": "20",
+      "código": "20",
       "nome": "Industria",
-      "descricao": "Canal para vendas industriais",
-      "citacoesExatas": [
+      "descrição": "Canal para vendas industriais",
+      "citaçõesExatas": [
         {
-          "fonte": "Reuniao 03/12/2025",
+          "fonte": "Reunião 03/12/2025",
           "participante": "Leandro",
-          "citacao": "os canais 30 egidio de vitoria, 20, 30, 40 e 50... Industria, distribuicao e consumo"
+          "citação": "os canais 30 egidio de vitoria, 20, 30, 40 e 50... Industria, distribuição e consumo"
         }
       ],
       "tipoCliente": "PJ Industrial",
       "status": "confirmado"
     },
     {
-      "codigo": "25",
+      "código": "25",
       "nome": "Casos Especiais",
-      "descricao": "Canal para casos especiais e excecoes",
-      "citacoesExatas": [
+      "descrição": "Canal para casos especiais e exceções",
+      "citaçõesExatas": [
         {
-          "fonte": "Reuniao 10/12/2025",
+          "fonte": "Reunião 10/12/2025",
           "participante": "Leandro",
-          "citacao": "canal 25 para casos especiais"
+          "citação": "canal 25 para casos especiais"
         }
       ],
       "tipoCliente": "Especial",
       "status": "confirmado"
     },
     {
-      "codigo": "30",
-      "nome": "Distribuicao",
-      "descricao": "Canal para distribuidores",
-      "citacoesExatas": [
+      "código": "30",
+      "nome": "Distribuição",
+      "descrição": "Canal para distribuidores",
+      "citaçõesExatas": [
         {
-          "fonte": "Reuniao 03/12/2025",
+          "fonte": "Reunião 03/12/2025",
           "participante": "Leandro",
-          "citacao": "Industria, distribuicao e consumo"
+          "citação": "Industria, distribuição e consumo"
         }
       ],
-      "areaCredito": "DBA/ADBA",
+      "areaCrédito": "DBA/ADBA",
       "tipoCliente": "Distribuidor",
       "status": "confirmado"
     },
     {
-      "codigo": "40",
+      "código": "40",
       "nome": "Consumo",
-      "descricao": "Canal para consumo/varejo",
-      "citacoesExatas": [
+      "descrição": "Canal para consumo/varejo",
+      "citaçõesExatas": [
         {
-          "fonte": "Reuniao 03/12/2025",
+          "fonte": "Reunião 03/12/2025",
           "participante": "Leandro",
-          "citacao": "Industria, distribuicao e consumo"
+          "citação": "Industria, distribuição e consumo"
         }
       ],
       "tipoCliente": "Consumidor/Varejo",
       "status": "confirmado"
     }
   ],
-  "regrasAtribuicao": {
-    "descricao": "O canal e definido baseado no CNAE do cliente e tipo de operacao",
-    "criterios": [
+  "regrasAtribuição": {
+    "descrição": "O canal e definido baseado no CNAE do cliente e tipo de operação",
+    "critérios": [
       "CNAE determina canal principal",
       "Tipo de cliente (PJ/PF) influencia",
-      "Excecoes tratadas via canal 25"
+      "Exceções tratadas via canal 25"
     ]
   },
-  "observacoes": [
-    "Canal 50 mencionado mas nao detalhado nas reunioes",
-    "Integracao com CNAE para definicao automatica",
-    "Relacionamento direto com areas de credito"
+  "observações": [
+    "Canal 50 mencionado mas não detalhado nas reuniões",
+    "Integração com CNAE para definição automática",
+    "Relacionamento direto com áreas de crédito"
   ]
 }

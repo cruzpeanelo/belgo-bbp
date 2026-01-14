@@ -1,8 +1,8 @@
 {
-  "reuniao": {
-    "titulo": "Alinhamento Cadastro de Materiais",
+  "reunião": {
+    "título": "Alinhamento Cadastro de Materiais",
     "data": "2025-12-23",
-    "duracao": "29:24",
+    "duração": "29:24",
     "tipo": "Meeting Transcript",
     "fonte": "SharePoint/Stream",
     "resumo": "Reunião de alinhamento sobre hierarquia de grupo de mercadoria SAP e estrutura de produtos. Discussão sobre GPS (Product Groups), segmentação de produtos para precificação, clusterização e integração com SAP ECC."
@@ -16,7 +16,7 @@
     "Silva, Hudson Jose Aparecido Da",
     "Souza, Ronildo Rodrigues De"
   ],
-  "topicos": [
+  "tópicos": [
     "Hierarquia de grupo de mercadoria",
     "Segmentação de produtos",
     "GPS (Product Groups)",
@@ -31,7 +31,7 @@
     "Discussão sobre Segmentação e Precificação no Processo de Reunião",
     "Discussão sobre Hierarquias e Planejamento de Produtos"
   ],
-  "transcricao": [
+  "transcrição": [
     {
       "timestamp": "0:07",
       "speaker": "Rhein, Thalita Merisio",
@@ -225,48 +225,48 @@
   ],
   "pontosPrincipais": [
     {
-      "topico": "Hierarquia de Grupo de Mercadoria",
-      "descricao": "Segmento será definido por hierarquia de grupo de mercadoria, que é atributo do material no SAP",
+      "tópico": "Hierarquia de Grupo de Mercadoria",
+      "descrição": "Segmento será definido por hierarquia de grupo de mercadoria, que é atributo do material no SAP",
       "impacto": "Automatização do processo de segmentação"
     },
     {
-      "topico": "GPS como base de Segmentação",
-      "descricao": "Segmento passa a ser agrupamento de GP, não mais tabela de depara do SAP ECC",
+      "tópico": "GPS como base de Segmentação",
+      "descrição": "Segmento passa a ser agrupamento de GP, não mais tabela de depara do SAP ECC",
       "impacto": "Eliminação de tabela ZE manual"
     },
     {
-      "topico": "Precificação por Segmento",
-      "descricao": "Tabelas de preço diferenciadas por tipo de cliente: AMD, atacado, revenda, cooperativa",
+      "tópico": "Precificação por Segmento",
+      "descrição": "Tabelas de preço diferenciadas por tipo de cliente: AMD, atacado, revenda, cooperativa",
       "impacto": "Pricing diferenciada por canal"
     },
     {
-      "topico": "Clusterização",
-      "descricao": "Percentuais de descontos diferentes para cada cluster",
+      "tópico": "Clusterização",
+      "descrição": "Percentuais de descontos diferentes para cada cluster",
       "impacto": "Não será implementado em janeiro - aguarda testes GTM"
     },
     {
-      "topico": "Relatórios",
-      "descricao": "Mudança apenas em relatórios, não afeta SAP diretamente",
+      "tópico": "Relatórios",
+      "descrição": "Mudança apenas em relatórios, não afeta SAP diretamente",
       "impacto": "Substituição de tabela com 2M registros por hierarquia simplificada"
     },
     {
-      "topico": "Organização de Vendas",
-      "descricao": "Atenção para GP que pode ser diferente entre Monlevade e outras unidades",
+      "tópico": "Organização de Vendas",
+      "descrição": "Atenção para GP que pode ser diferente entre Monlevade e outras unidades",
       "impacto": "Validação de aderência necessária"
     }
   ],
-  "acoes": [
+  "ações": [
     {
-      "responsavel": "Hudson (Planejamento)",
-      "acao": "Avaliar aderência do cadastro de produtos com a nova hierarquia",
+      "responsável": "Hudson (Planejamento)",
+      "ação": "Avaliar aderência do cadastro de produtos com a nova hierarquia",
       "prazo": "A definir"
     },
     {
-      "responsavel": "Equipe",
-      "acao": "Garantir consistência entre SAP e relatórios",
+      "responsável": "Equipe",
+      "ação": "Garantir consistência entre SAP e relatórios",
       "prazo": "Contínuo"
     }
   ],
-  "statusExtracao": "Parcial - lacunas entre 2min e 12min devido a virtualização do painel",
-  "ultimaAtualizacao": "2026-01-13"
+  "statusExtração": "Parcial - lacunas entre 2min e 12min devido a virtualização do painel",
+  "últimaAtualização": "2026-01-13"
 }

@@ -7,21 +7,12 @@
 // =====================================================
 (function() {
     const SENHA_CORRETA = 'BelgoGTM2024';
+    if (sessionStorage.getItem('belgo_auth') === 'true') return;
 
-    // Verificar se já está autenticado
-    if (sessionStorage.getItem('belgo_auth') === 'true') {
-        return; // Já autenticado, continuar normalmente
-    }
-
-    // Criar tela de login
     document.addEventListener('DOMContentLoaded', function() {
-        // Ocultar conteúdo original
         const appContainer = document.querySelector('.app-container');
-        if (appContainer) {
-            appContainer.style.display = 'none';
-        }
+        if (appContainer) appContainer.style.display = 'none';
 
-        // Criar overlay de login
         const loginOverlay = document.createElement('div');
         loginOverlay.className = 'login-overlay';
         loginOverlay.innerHTML = `
@@ -36,14 +27,11 @@
         `;
         document.body.appendChild(loginOverlay);
 
-        // Focar no campo de senha
         const senhaInput = document.getElementById('senha-input');
         senhaInput.focus();
 
-        // Função de validação
         function validarSenha() {
-            const senha = senhaInput.value;
-            if (senha === SENHA_CORRETA) {
+            if (senhaInput.value === SENHA_CORRETA) {
                 sessionStorage.setItem('belgo_auth', 'true');
                 location.reload();
             } else {
@@ -53,16 +41,10 @@
             }
         }
 
-        // Event listeners
         document.getElementById('btn-entrar').addEventListener('click', validarSenha);
-        senhaInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                validarSenha();
-            }
-        });
+        senhaInput.addEventListener('keypress', e => { if (e.key === 'Enter') validarSenha(); });
     });
 
-    // Impedir execução do resto do código
     throw new Error('Autenticação necessária');
 })();
 
@@ -126,6 +108,7 @@ const KVSync = {
 window.KVSync = KVSync;
 
 const App = {
+    dataReady: false,  // Flag para indicar que todos os dados (incluindo KV) estão prontos
     data: {
         dashboard: null,
         testes: null,
@@ -170,8 +153,11 @@ const App = {
             this.data.cronograma = cronograma;
             this.data.pontosCriticos = pontosCriticos;
 
-            // Restaurar status salvos no localStorage
-            this.restoreSavedStatuses();
+            // Restaurar status salvos (KV primeiro, localStorage fallback)
+            await this.restoreSavedStatuses();
+
+            // Marcar dados como prontos
+            this.dataReady = true;
 
             console.log('Dados carregados:', this.data);
         } catch (error) {
