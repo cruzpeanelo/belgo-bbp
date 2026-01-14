@@ -111,6 +111,69 @@
       "açãoTomada": "Maria Luiza Chaves (Controladoria) designada como key user para acompanhar",
       "responsável": "Controladoria / TI",
       "fonteReunião": "03/12/2025"
+    },
+    {
+      "id": "PC-10",
+      "título": "Integração Dow Jones não contemplada",
+      "descrição": "Integração com Dow Jones para due diligence de clientes (compliance/RC) não está no escopo atual do projeto. Fluxo via BRO precisa ser revisto.",
+      "categoria": "Integração",
+      "severidade": "Alta",
+      "status": "Pendente",
+      "dataIdentificação": "2025-12-03",
+      "açãoTomada": "Necessário avaliar com Controladoria o fluxo de compliance para novos clientes",
+      "responsável": "Renato Araujo / TI",
+      "fonteReunião": "03/12/2025",
+      "impacto": "Risco de compliance para cadastro de novos clientes"
+    },
+    {
+      "id": "PC-11",
+      "título": "Segment Report precisa reestruturação",
+      "descrição": "Segment Report da Controladoria precisa ser ajustado devido às mudanças organizacionais dos 4 macro setores (Agro, Construção Civil, Indústria, Distribuição)",
+      "categoria": "Relatórios",
+      "severidade": "Média",
+      "status": "Pendente",
+      "dataIdentificação": "2025-12-17",
+      "açãoTomada": "Carla Venâncio e equipe de BI precisam redefinir estrutura de relatórios",
+      "responsável": "Carla Venâncio / Luis Riqueti",
+      "fonteReunião": "17/12/2025"
+    },
+    {
+      "id": "PC-12",
+      "título": "Canal 25 em desativação",
+      "descrição": "Canal 25 (Casos Especiais) está sendo desativado. Clientes existentes precisam ser migrados para canais 20, 30 ou 40.",
+      "categoria": "Configuração",
+      "severidade": "Média",
+      "status": "Pendente",
+      "dataIdentificação": "2025-12-03",
+      "açãoTomada": "Identificar clientes no canal 25 e definir para qual canal serão migrados",
+      "responsável": "Comercial",
+      "fonteReunião": "03/12/2025",
+      "impacto": "Clientes que usam canal 25 precisam ser reclassificados"
+    },
+    {
+      "id": "PC-13",
+      "título": "Nova estrutura organizacional 4 macro setores",
+      "descrição": "Mudança estrutural urgente: diretoria comercial reorganizada em 4 macro setores (Alta Energia, Agricultura, Indústria, Construção Civil). Impacta hierarquia ECC, escritórios de vendas e workflow de aprovação.",
+      "categoria": "Organizacional",
+      "severidade": "Crítica",
+      "status": "Em Andamento",
+      "dataIdentificação": "2025-12-22",
+      "açãoTomada": "Reunião de emergência realizada. 7 ações definidas para ajustar hierarquia comercial, escritórios e workflow.",
+      "responsável": "Leandro Gimenes / Thalita Rhein",
+      "fonteReunião": "22/12/2025",
+      "impacto": "Revisão completa das jornadas AS-IS/TO-BE necessária"
+    },
+    {
+      "id": "PC-14",
+      "título": "Migração massiva de clientes (Hard Reboot)",
+      "descrição": "Base de clientes dos últimos 24 meses precisa ser associada aos novos escritórios de vendas conforme nova estrutura organizacional",
+      "categoria": "Dados",
+      "severidade": "Alta",
+      "status": "Pendente",
+      "dataIdentificação": "2025-12-22",
+      "açãoTomada": "Planilha DE/PARA em construção. Extração da base de clientes pendente.",
+      "responsável": "Leandro Cruz / Jefferson Pinheiro / Fabricio França",
+      "fonteReunião": "22/12/2025, 29/12/2025"
     }
   ]
 }

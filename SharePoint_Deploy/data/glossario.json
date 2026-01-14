@@ -2,7 +2,7 @@
   "título": "Glossário - Projeto Belgo BBP",
   "descrição": "Dicionário de siglas, termos e conceitos do projeto",
   "dataAtualização": "2026-01-13",
-  "totalTermos": 45,
+  "totalTermos": 72,
   "categorias": {
     "sistemas": [
       {
@@ -47,6 +47,80 @@
         "nome": "Salesforce CRM",
         "descrição": "Plataforma CRM central do projeto",
         "contexto": "Sistema central do projeto - SEMPRE usar 'Salesforce' (não SF ou SFDC)"
+      },
+      {
+        "sigla": "Dow Jones",
+        "nome": "Dow Jones Risk & Compliance",
+        "descrição": "Sistema de compliance para due diligence de clientes",
+        "contexto": "Integração pendente para validação de novos clientes"
+      },
+      {
+        "sigla": "Araujo",
+        "nome": "Sistema Araujo",
+        "descrição": "Sistema de automação de documentos fiscais (XML, NF-e, certificados)",
+        "contexto": "Trigger disparado pelo SAP para emissão automática"
+      },
+      {
+        "sigla": "Portal Logístico",
+        "nome": "Portal de Logística",
+        "descrição": "Portal separado para gestão de restrições de entrega e agendamentos",
+        "contexto": "Integração com SAP pendente - redundância de dados"
+      },
+      {
+        "sigla": "Belgo Cash",
+        "nome": "Belgo Cash",
+        "descrição": "Produto de crédito/financiamento para clientes",
+        "contexto": "Vinculado à área de crédito CSP"
+      },
+      {
+        "sigla": "On Based",
+        "nome": "On Based",
+        "descrição": "Sistema de arquivamento de documentos financeiros (Serasa, DRE, balanços)",
+        "contexto": "Usado pela equipe financeira para análise de crédito"
+      }
+    ],
+    "transaçõesSAP": [
+      {
+        "sigla": "XD01",
+        "nome": "Criar Cliente",
+        "descrição": "Transação SAP para criação de cliente no dado mestre",
+        "contexto": "Substituída pelo cadastro via Salesforce no TO-BE"
+      },
+      {
+        "sigla": "XD02",
+        "nome": "Alterar Cliente",
+        "descrição": "Transação SAP para alteração de dados do cliente",
+        "contexto": "SmartCenter usa para complemento de dados"
+      },
+      {
+        "sigla": "XD03",
+        "nome": "Exibir Cliente",
+        "descrição": "Transação SAP para visualização de dados do cliente",
+        "contexto": "Restrições logísticas aparecem aqui"
+      },
+      {
+        "sigla": "FMBL5N",
+        "nome": "Consulta de Partidas",
+        "descrição": "Transação SAP para consulta de partidas financeiras",
+        "contexto": "Base para tela de consulta de partidas no Salesforce"
+      },
+      {
+        "sigla": "FBL50",
+        "nome": "Consulta Partidas Cliente",
+        "descrição": "Transação SAP para consulta de partidas do cliente",
+        "contexto": "Usado para verificar títulos em aberto e pagos"
+      },
+      {
+        "sigla": "KM_BP",
+        "nome": "Gestão de Crédito BP",
+        "descrição": "Nova transação SAP para gestão de crédito de business partners",
+        "contexto": "Substituiu transação antiga de gestão de limites"
+      },
+      {
+        "sigla": "ZW_SSD_145",
+        "nome": "Ficha Comercial",
+        "descrição": "Transação customizada para ficha comercial do cliente",
+        "contexto": "Usado para negociação de preços e condições"
       }
     ],
     "áreasCrédito": [
@@ -148,6 +222,82 @@
         "nome": "Caso de Teste",
         "descrição": "Cenario de teste no caderno de testes",
         "contexto": "CT-01, CT-02, etc."
+      }
+    ],
+    "conceitosNegócio": [
+      {
+        "sigla": "AMD",
+        "nome": "ArcelorMittal Distribuição",
+        "descrição": "Processo cross company para vendas entre empresas do grupo ArcelorMittal",
+        "contexto": "Pendente inclusão no Salesforce"
+      },
+      {
+        "sigla": "Ficha Comercial",
+        "nome": "Ficha Comercial do Cliente",
+        "descrição": "Documento de negociação de preços e condições comerciais por cliente",
+        "contexto": "Acessada via transação ZW_SSD_145"
+      },
+      {
+        "sigla": "Hard Reboot",
+        "nome": "Hard Reboot de Clientes",
+        "descrição": "Processo de migração massiva de clientes para nova estrutura organizacional",
+        "contexto": "Base de 24 meses de clientes sendo associada aos novos escritórios"
+      },
+      {
+        "sigla": "NPS",
+        "nome": "Net Promoter Score",
+        "descrição": "Métrica de satisfação de clientes baseada em recomendação",
+        "contexto": "Usado para medir qualidade do atendimento"
+      },
+      {
+        "sigla": "Share of Wallet",
+        "nome": "Participação de Carteira",
+        "descrição": "Percentual de compra do cliente na Belgo versus concorrentes",
+        "contexto": "Funcionalidade de market share no Salesforce"
+      },
+      {
+        "sigla": "Custo de Servir",
+        "nome": "Cost to Serve",
+        "descrição": "Métrica de margem de serviço - meta de 36.2M definida pela Integration",
+        "contexto": "Impacta cálculo de EBITDA e Segment Report"
+      },
+      {
+        "sigla": "Termo de Pesquisa",
+        "nome": "Termo de Pesquisa",
+        "descrição": "Identificador único do cliente para evitar duplicidade de cadastro",
+        "contexto": "Validação automática no Salesforce contra base existente"
+      },
+      {
+        "sigla": "Parceiro Agrupador",
+        "nome": "Parceiro Agrupador",
+        "descrição": "Tipo de conta para grupos empresariais ou holdings que agrupam múltiplas contas",
+        "contexto": "Um dos 3 tipos de conta: PJ, PF ou Parceiro Agrupador"
+      },
+      {
+        "sigla": "Segment Report",
+        "nome": "Segment Report",
+        "descrição": "Relatório de margem e EBITDA por segmento de cliente",
+        "contexto": "Gerenciado pela Controladoria - precisa reestruturação"
+      },
+      {
+        "sigla": "Cluster",
+        "nome": "Cluster de Cliente",
+        "descrição": "Classificação automática de clientes baseada em volume, frequência e potencial",
+        "contexto": "Virada estratégica de segmento de produto para segmento de cliente"
+      }
+    ],
+    "caixasEmail": [
+      {
+        "sigla": "cobranca.limite",
+        "nome": "Caixa Cobrança Limite",
+        "descrição": "Caixa compartilhada para solicitações de limite de crédito",
+        "contexto": "Usado há anos pelos vendedores para solicitar limites"
+      },
+      {
+        "sigla": "cadastro.clientes",
+        "nome": "Caixa Cadastro Clientes",
+        "descrição": "Caixa do SmartCenter para solicitações de alteração de cadastro",
+        "contexto": "Alternativa ao Teams para solicitações rápidas"
       }
     ],
     "projeto": [

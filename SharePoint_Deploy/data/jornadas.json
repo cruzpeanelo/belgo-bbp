@@ -1191,6 +1191,237 @@
       "documentosTeste": [
         "889851 - Hub de gestão OC"
       ]
+    },
+    {
+      "id": "restricoes-logisticas",
+      "nome": "Restrições Logísticas",
+      "icone": "🚛",
+      "ordem": 12,
+      "asIs": {
+        "descrição": "Restrições de entrega gerenciadas em sistemas separados sem integração, causando problemas de comunicação entre áreas",
+        "passos": [
+          "Informações de restrição registradas no Portal Logístico",
+          "Dados duplicados manualmente no SAP",
+          "Vendedor consulta XD03 para ver restrições",
+          "Sem visibilidade em tempo real para o cliente",
+          "Agendamentos feitos por telefone ou email"
+        ],
+        "problemas": [
+          "Redundância de dados entre Portal Logístico e SAP",
+          "Inconsistências nas informações de restrição",
+          "Cliente não tem visibilidade das restrições",
+          "Agendamentos manuais sujeitos a erros",
+          "Sem integração em tempo real"
+        ],
+        "tempoMedio": "Variável"
+      },
+      "toBe": {
+        "descrição": "Integração Salesforce → SAP → Portal Logístico em tempo real para gestão centralizada de restrições de entrega",
+        "passos": [
+          "Vendedor registra restrições no Salesforce",
+          "Sistema sincroniza automaticamente com SAP",
+          "Integração em tempo real com Portal Logístico",
+          "Cliente visualiza restrições no autoatendimento",
+          "Agendamentos online com confirmação automática"
+        ],
+        "beneficios": [
+          "Dados unificados em todos os sistemas",
+          "Visibilidade em tempo real",
+          "Cliente com autonomia para consultar restrições",
+          "Eliminação de redundância de dados",
+          "Processo de agendamento otimizado"
+        ],
+        "tempoMedio": "Imediato"
+      },
+      "áreasImpactadas": [
+        "Logística",
+        "Comercial",
+        "TI",
+        "Atendimento"
+      ],
+      "status": "Pendente",
+      "fonteReunião": "10/12/2025",
+      "detalhes": {
+        "tiposRestrição": [
+          {
+            "tipo": "Veículo",
+            "descrição": "Restrições de tipo de veículo para entrega",
+            "exemplos": ["3/4", "Truque", "Sider", "Carreta"]
+          },
+          {
+            "tipo": "Janela de Entrega",
+            "descrição": "Horários permitidos para recebimento",
+            "exemplos": ["08:00-12:00", "14:00-17:00", "Somente manhã"]
+          },
+          {
+            "tipo": "Agendamento",
+            "descrição": "Necessidade de agendamento prévio",
+            "opções": ["Obrigatório", "Recomendado", "Não necessário"]
+          },
+          {
+            "tipo": "Descarga",
+            "descrição": "Condições especiais de descarga",
+            "exemplos": ["Empilhadeira própria", "Doca necessária", "Paletizado"]
+          }
+        ],
+        "transaçãoSAP": "XD03 - Exibir Cliente (Restrições na ordem de embarque)",
+        "integração": "Portal Logístico ↔ SAP ↔ Salesforce"
+      },
+      "sistemasTécnicos": [
+        "Salesforce",
+        "SAP ECC",
+        "Portal Logístico"
+      ],
+      "pendências": [
+        "Integração Portal Logístico com SAP pendente",
+        "Definição de campos obrigatórios de restrição",
+        "Reunião específica agendada com equipe de logística"
+      ]
+    },
+    {
+      "id": "market-share",
+      "nome": "Market Share e Concorrentes",
+      "icone": "📊",
+      "ordem": 13,
+      "asIs": {
+        "descrição": "Informações de concorrentes e market share dispersas, sem gestão centralizada ou análise sistemática",
+        "passos": [
+          "Vendedor coleta informações de concorrentes informalmente",
+          "Dados registrados em planilhas individuais",
+          "Projetos perdidos não vinculados a concorrentes",
+          "Sem histórico de market share por cliente",
+          "Análise de mercado feita manualmente"
+        ],
+        "problemas": [
+          "Informações de concorrentes sazonais e dinâmicas",
+          "Dificuldade em vincular projetos perdidos a concorrentes específicos",
+          "Sem visão consolidada de share of wallet",
+          "Dados fragmentados e inconsistentes",
+          "Impossível rastrear tendências de mercado"
+        ],
+        "tempoMedio": "N/A"
+      },
+      "toBe": {
+        "descrição": "Gestão centralizada de concorrentes e market share no Salesforce com análise automatizada",
+        "passos": [
+          "Cadastro normalizado de concorrentes no Salesforce",
+          "Registro de share of wallet por cliente",
+          "Vinculação de oportunidades perdidas a concorrentes",
+          "Dashboard de análise de mercado automático",
+          "Histórico de evolução de market share"
+        ],
+        "beneficios": [
+          "Visão consolidada de concorrentes por região/segmento",
+          "Análise de share of wallet por cliente",
+          "Identificação de tendências de mercado",
+          "Decisões estratégicas baseadas em dados",
+          "Rastreamento de projetos perdidos para concorrência"
+        ],
+        "tempoMedio": "5 minutos por registro"
+      },
+      "áreasImpactadas": [
+        "Comercial",
+        "Marketing",
+        "Estratégia",
+        "Inteligência de Mercado"
+      ],
+      "status": "Pendente",
+      "fonteReunião": "10/12/2025",
+      "detalhes": {
+        "shareOfWallet": {
+          "descrição": "Percentual de compra do cliente na Belgo versus concorrentes",
+          "cálculo": "Volume Belgo / Volume Total Cliente",
+          "objetivo": "Identificar potencial de crescimento em cada conta"
+        },
+        "concorrentes": {
+          "cadastro": "Lista normalizada pela TI",
+          "desafio": "Concorrentes são sazonais e dinâmicos por região",
+          "responsável": "Discussão agendada com Edmundo"
+        },
+        "marketShareTipos": {
+          "estratégico": "Visão de longo prazo por segmento",
+          "tático": "Visão de curto prazo por oportunidade"
+        }
+      },
+      "sistemasTécnicos": [
+        "Salesforce",
+        "Power BI"
+      ],
+      "pendências": [
+        "Normalização de cadastro de concorrentes pela TI",
+        "Definição de critérios para vinculação de projetos perdidos",
+        "Discussão com Edmundo sobre gestão de dados de concorrentes"
+      ]
+    },
+    {
+      "id": "amd-cross-company",
+      "nome": "AMD Cross Company",
+      "icone": "🔄",
+      "ordem": 14,
+      "asIs": {
+        "descrição": "Processo de vendas entre empresas do grupo ArcelorMittal não contemplado no Salesforce atual",
+        "passos": [
+          "AMD (ArcelorMittal Distribuição) gerencia vendas em sistema próprio",
+          "Transações cross company processadas manualmente",
+          "Sem integração com Salesforce",
+          "Visibilidade limitada para equipe comercial"
+        ],
+        "problemas": [
+          "Processo AMD não tem funcionalidades no Salesforce",
+          "Processo Cross Company não contemplado",
+          "Falta de rastreabilidade de vendas intercompany",
+          "Dificuldade de consolidação de resultados"
+        ],
+        "tempoMedio": "Variável"
+      },
+      "toBe": {
+        "descrição": "Integração do processo AMD Cross Company no Salesforce para gestão unificada de vendas intercompany",
+        "passos": [
+          "Registro de transações AMD no Salesforce",
+          "Workflow de aprovação para vendas cross company",
+          "Integração com SAP para contabilização",
+          "Relatórios consolidados de vendas intercompany",
+          "Visibilidade completa para equipe comercial"
+        ],
+        "beneficios": [
+          "Gestão unificada de vendas do grupo",
+          "Rastreabilidade completa de transações intercompany",
+          "Consolidação de resultados facilitada",
+          "Visibilidade para todas as áreas",
+          "Processo padronizado e auditável"
+        ],
+        "tempoMedio": "A definir"
+      },
+      "áreasImpactadas": [
+        "Comercial",
+        "Financeiro",
+        "Controladoria",
+        "AMD"
+      ],
+      "status": "Pendente",
+      "fonteReunião": "10/12/2025",
+      "detalhes": {
+        "amd": {
+          "nome": "ArcelorMittal Distribuição",
+          "descrição": "Empresa do grupo para distribuição de produtos",
+          "processo": "Vendas entre empresas do grupo (intercompany)"
+        },
+        "crossCompany": {
+          "descrição": "Transações de venda entre diferentes empresas do grupo ArcelorMittal",
+          "desafio": "Contabilização e rastreamento entre entidades legais distintas"
+        },
+        "responsável": "Renata Mello e Victoria"
+      },
+      "sistemasTécnicos": [
+        "Salesforce",
+        "SAP ECC",
+        "Sistema AMD"
+      ],
+      "pendências": [
+        "Reunião específica agendada com Renata Mello e Victoria",
+        "Definição de escopo de funcionalidades AMD no Salesforce",
+        "Mapeamento de processo cross company"
+      ]
     }
   ],
   "projeto": {
