@@ -205,16 +205,72 @@ const Utils = {
     // INTEGRAÇÃO MICROSOFT TEAMS
     // =====================================================
 
-    // Webhook URL do Teams
-    teamsWebhookUrl: 'https://arcelormittal.webhook.office.com/webhookb2/d931a635-801d-4032-ae69-27f6ee2c88af@37cd273a-1cec-4aae-a297-41480ea54f8d/IncomingWebhook/6284fbb6970849d8b57350074fa5ebff/8dd31791-e6bc-444b-b6c5-e4b6d73f1e5b/V28WZxUnp0pMRDYdKBFpYYVN6kJcnybTAzf0u5KUh9tvg1',
+    // URLs padrão do Teams (pré-configuradas)
+    _defaultTeamsWebhookUrl: 'https://arcelormittal.webhook.office.com/webhookb2/d931a635-801d-4032-ae69-27f6ee2c88af@37cd273a-1cec-4aae-a297-41480ea54f8d/IncomingWebhook/a56c5195921c4bc9935c4501e161652d/8dd31791-e6bc-444b-b6c5-e4b6d73f1e5b/V25Gop5NcUsvXfqoNNrt2p0APQBOvrUZQb52Amrtfz9XA1',
+    _defaultTeamsChannelUrl: 'https://teams.microsoft.com/l/channel/19%3Ad931a635-801d-4032-ae69-27f6ee2c88af%40thread.tacv2/GTM%20-%20Cockpit?groupId=d931a635-801d-4032-ae69-27f6ee2c88af',
 
-    // Enviar mensagem para o Teams
-    async sendToTeams(card) {
+    // Webhook URL do Teams - usa padrão se não houver configuração local
+    get teamsWebhookUrl() {
+        return localStorage.getItem('teamsWebhookUrl') || this._defaultTeamsWebhookUrl;
+    },
+
+    set teamsWebhookUrl(url) {
+        localStorage.setItem('teamsWebhookUrl', url);
+    },
+
+    // URL do canal do Teams - usa padrão se não houver configuração local
+    get teamsChannelUrl() {
+        return localStorage.getItem('teamsChannelUrl') || this._defaultTeamsChannelUrl;
+    },
+
+    set teamsChannelUrl(url) {
+        localStorage.setItem('teamsChannelUrl', url);
+    },
+
+    // Verificar se Teams está configurado
+    isTeamsConfigured() {
+        return !!this.teamsWebhookUrl && !!this.teamsChannelUrl;
+    },
+
+    // Abrir Teams no canal (compatível com iOS Safari)
+    openTeamsChannel() {
+        const channelUrl = this.teamsChannelUrl;
+        if (!channelUrl) {
+            this.showToast('URL do canal do Teams não configurada. Configure em Configurações.', 'warning');
+            return false;
+        }
+        const link = document.createElement('a');
+        link.href = channelUrl;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        return true;
+    },
+
+    // Enviar mensagem para o Teams e abrir o canal
+    // IMPORTANTE: Abre o Teams PRIMEIRO (síncrono) para funcionar no iOS Safari
+    async sendToTeams(card, openChannel = true) {
+        // Verificar se webhook está configurado
+        const webhookUrl = this.teamsWebhookUrl;
+        if (!webhookUrl) {
+            this.showToast('Webhook do Teams não configurado. Configure em Configurações.', 'warning');
+            return false;
+        }
+
+        // Abrir Teams ANTES do fetch - iOS Safari exige que window.open/link.click
+        // seja chamado diretamente no contexto do gesto do usuário (click/tap)
+        if (openChannel) {
+            this.openTeamsChannel();
+        }
+
         try {
             this.showLoading('Enviando para Teams...');
 
             // Usar mode: 'no-cors' para evitar bloqueio CORS em webhooks
-            const response = await fetch(this.teamsWebhookUrl, {
+            const response = await fetch(webhookUrl, {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
@@ -224,6 +280,7 @@ const Utils = {
             this.hideLoading();
             // Com no-cors, não recebemos status, mas a mensagem é enviada
             this.showToast('Mensagem enviada para o Teams!', 'success');
+
             return true;
         } catch (error) {
             this.hideLoading();
@@ -264,6 +321,16 @@ const Utils = {
 
     // Discutir página no Teams (função genérica para todas as páginas)
     async discussOnTeams(pageId, pageTitle, btn) {
+        // Verificar se Teams está configurado
+        const webhookUrl = this.teamsWebhookUrl;
+        if (!webhookUrl) {
+            this.showToast('Webhook do Teams não configurado. Configure em Configurações.', 'warning');
+            return;
+        }
+
+        // Abrir Teams PRIMEIRO - iOS Safari exige isso no contexto do gesto do usuário
+        this.openTeamsChannel();
+
         const originalText = btn.innerHTML;
         btn.innerHTML = '⏳ Enviando...';
         btn.disabled = true;
@@ -276,7 +343,7 @@ const Utils = {
         ]);
 
         try {
-            await fetch(this.teamsWebhookUrl, {
+            await fetch(webhookUrl, {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
