@@ -230,32 +230,9 @@ const Utils = {
     // INTEGRAÇÃO MICROSOFT TEAMS
     // =====================================================
 
-    // URLs padrão do Teams (pré-configuradas)
-    _defaultTeamsWebhookUrl: 'https://arcelormittal.webhook.office.com/webhookb2/d931a635-801d-4032-ae69-27f6ee2c88af@37cd273a-1cec-4aae-a297-41480ea54f8d/IncomingWebhook/a56c5195921c4bc9935c4501e161652d/8dd31791-e6bc-444b-b6c5-e4b6d73f1e5b/V25Gop5NcUsvXfqoNNrt2p0APQBOvrUZQb52Amrtfz9XA1',
-    _defaultTeamsChannelUrl: 'https://teams.microsoft.com/l/channel/19%3Ad931a635-801d-4032-ae69-27f6ee2c88af%40thread.tacv2/GTM%20-%20Cockpit?groupId=d931a635-801d-4032-ae69-27f6ee2c88af',
-
-    // Webhook URL do Teams - usa padrão se não houver configuração local
-    get teamsWebhookUrl() {
-        return localStorage.getItem('teamsWebhookUrl') || this._defaultTeamsWebhookUrl;
-    },
-
-    set teamsWebhookUrl(url) {
-        localStorage.setItem('teamsWebhookUrl', url);
-    },
-
-    // URL do canal do Teams - usa padrão se não houver configuração local
-    get teamsChannelUrl() {
-        return localStorage.getItem('teamsChannelUrl') || this._defaultTeamsChannelUrl;
-    },
-
-    set teamsChannelUrl(url) {
-        localStorage.setItem('teamsChannelUrl', url);
-    },
-
-    // Verificar se Teams está configurado
-    isTeamsConfigured() {
-        return !!this.teamsWebhookUrl && !!this.teamsChannelUrl;
-    },
+    // URLs do Teams (HARDCODED - não usa localStorage)
+    teamsWebhookUrl: 'https://arcelormittal.webhook.office.com/webhookb2/d931a635-801d-4032-ae69-27f6ee2c88af@37cd273a-1cec-4aae-a297-41480ea54f8d/IncomingWebhook/a56c5195921c4bc9935c4501e161652d/8dd31791-e6bc-444b-b6c5-e4b6d73f1e5b/V25Gop5NcUsvXfqoNNrt2p0APQBOvrUZQb52Amrtfz9XA1',
+    teamsChannelUrl: 'https://teams.microsoft.com/l/channel/19%3Ad931a635-801d-4032-ae69-27f6ee2c88af%40thread.tacv2/GTM%20-%20Cockpit?groupId=d931a635-801d-4032-ae69-27f6ee2c88af',
 
     // Abrir Teams no canal (compatível com iOS Safari)
     openTeamsChannel() {
