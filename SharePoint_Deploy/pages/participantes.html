@@ -264,7 +264,7 @@
             container.innerHTML = participantes.map((p, index) => {
                 const initials = p.nome.split(' ').map(n => n[0]).join('').substring(0, 2);
                 const expertiseTags = p.expertise.map(e => `<span class="expertise-tag">${e}</span>`).join('');
-                const meetingsCount = p.reunioesParticipou.length;
+                const meetingsCount = p.reuniõesParticipou.length;
 
                 return `
                     <div class="participant-card">
@@ -339,7 +339,7 @@
                     { name: "Papel", value: p.papel },
                     { name: "Área", value: p.area },
                     { name: "Expertise", value: p.expertise.join(', ') },
-                    { name: "Reuniões", value: `${p.reunioesParticipou.length} participações` }
+                    { name: "Reuniões", value: `${p.reuniõesParticipou.length} participações` }
                 ]);
                 Utils.sendToTeams(card);
             } else {
