@@ -175,8 +175,10 @@ const Dashboard = {
     // Atualizar última atualização
     updateLastUpdate() {
         const el = document.getElementById('ultima-atualizacao');
-        if (el && App.data.dashboard?.ultimaAtualizacao) {
-            el.textContent = Utils.formatDateTime(App.data.dashboard.ultimaAtualizacao);
+        // Suporta ambas as versões da chave (com e sem acento)
+        const data = App.data.dashboard?.últimaAtualização || App.data.dashboard?.ultimaAtualizacao;
+        if (el && data) {
+            el.textContent = Utils.formatDateTime(data);
         }
     },
 
