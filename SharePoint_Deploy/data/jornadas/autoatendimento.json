@@ -267,6 +267,60 @@
     "disponibilidade": "24/7",
     "autenticação": "Email cadastrado no Salesforce"
   },
+  "detalhesTécnicosAdicionais": {
+    "consultaPartidasCompensadas": {
+      "descrição": "Consulta de partidas financeiras compensadas no portal de autoatendimento",
+      "transaçãoSAP": "FMBL5N / FBL50",
+      "informaçõesDisponíveis": [
+        "Data de compensação",
+        "Valor compensado",
+        "Documento de origem",
+        "Número do pagamento"
+      ],
+      "filtros": ["Período", "Tipo de documento", "Status"],
+      "fonteReunião": "16/12/2025"
+    },
+    "dataValorPagamento": {
+      "descrição": "Visualização de data e valor de pagamentos realizados",
+      "detalhes": {
+        "dataEfetiva": "Data real do pagamento registrado no SAP",
+        "valorOriginal": "Valor original do título",
+        "valorPago": "Valor efetivamente pago",
+        "diferenças": "Juros, multas ou descontos aplicados"
+      },
+      "atualizaçãoAutomática": true,
+      "fonteReunião": "16/12/2025"
+    },
+    "créditosDisponíveis": {
+      "descrição": "Consulta de créditos disponíveis para o cliente",
+      "tipos": {
+        "créditosVinculados": {
+          "descrição": "Créditos já vinculados a títulos específicos",
+          "visibilidade": "Lista de títulos vinculados",
+          "status": "Aguardando compensação"
+        },
+        "créditosNãoVinculados": {
+          "descrição": "Créditos livres disponíveis para uso",
+          "visibilidade": "Saldo disponível para utilização",
+          "açãoPermitida": "Solicitar vinculação a título em aberto"
+        }
+      },
+      "fonteReunião": "16/12/2025"
+    },
+    "relatórioFinanceiroExportável": {
+      "descrição": "Exportação de relatório financeiro consolidado",
+      "formatosDisponíveis": ["PDF", "Excel", "CSV"],
+      "conteúdo": [
+        "Títulos em aberto",
+        "Títulos pagos no período",
+        "Créditos disponíveis",
+        "Histórico de compensações"
+      ],
+      "filtros": ["Período", "Tipo de título", "Status"],
+      "agendamento": "Possibilidade de relatório periódico por email",
+      "fonteReunião": "16/12/2025"
+    }
+  },
   "específicaçãoPlataforma": {
     "avisoVerificação": "ATENCAO: Os detalhes técnicos abaixo sao SUGESTOES, não foram definidos nas reuniões. Precisam ser validados com a equipe de TI.",
     "descrição": "Portal de Autoatendimento para clientes Belgo Arames",

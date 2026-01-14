@@ -715,5 +715,53 @@
       "tipo": "App Guidance",
       "id": "app guidance"
     }
-  ]
+  ],
+  "detalhesTécnicosAdicionais": {
+    "fonte": "Análise de reuniões 03/12, 04/12/2025",
+    "transaçõesSAP": {
+      "KM_BP": {
+        "nome": "Gestão de Crédito BP",
+        "descrição": "Nova transação SAP para gestão de crédito de business partners",
+        "contexto": "Substituiu transação antiga de gestão de limites",
+        "fonte": "Reunião 04/12/2025"
+      },
+      "FMBL5N": {
+        "nome": "Consulta de Partidas",
+        "descrição": "Transação SAP para consulta de partidas financeiras",
+        "contexto": "Base para tela de consulta de partidas no Salesforce"
+      },
+      "FBL50": {
+        "nome": "Consulta Partidas Cliente",
+        "descrição": "Transação SAP para consulta de partidas do cliente",
+        "contexto": "Usado para verificar títulos em aberto e pagos"
+      }
+    },
+    "sistemaOnBased": {
+      "nome": "On Based",
+      "descrição": "Sistema de arquivamento de documentos financeiros",
+      "documentos": ["Consultas Serasa", "DRE", "Balanços patrimoniais", "Demonstrativos financeiros"],
+      "uso": "Equipe financeira utiliza para análise de crédito de clientes PJ",
+      "fonte": "Reunião 04/12/2025"
+    },
+    "caixasCompartilhadas": {
+      "cobranca.limite": {
+        "descrição": "Caixa compartilhada para solicitações de limite de crédito",
+        "uso": "Usado há anos pelos vendedores para solicitar aumento de limite",
+        "fluxo": "Vendedor envia email → Analista recebe → Análise manual → Resposta",
+        "fonte": "Reunião 04/12/2025"
+      }
+    },
+    "equipeAnáliseLimite": {
+      "descrição": "Equipe responsável pela análise de limite interno (BBA)",
+      "analistas": ["Felipe", "Arthur"],
+      "área": "Financeiro/Crédito",
+      "fonte": "Reunião 04/12/2025"
+    },
+    "notasDebitoJuros": {
+      "descrição": "Emissão automática de notas de débito por juros de atraso",
+      "trigger": "Título vencido com dias de atraso acima do limite",
+      "integração": "SAP gera automaticamente e envia para cliente",
+      "status": "Processo existente mantido no TO-BE"
+    }
+  }
 }

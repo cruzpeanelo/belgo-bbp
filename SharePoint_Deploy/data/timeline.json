@@ -166,5 +166,88 @@
       "descrição": "Treinar usuários finais",
       "prazo": "2026-03-10"
     }
-  ]
+  ],
+  "estruturaOrganizacional": {
+    "título": "Nova Estrutura Comercial - 4 Macro Setores",
+    "dataDefinição": "2025-12-22",
+    "fonte": "Reunião URGENTE! Revisão dos Ajustes GTM",
+    "macroSetores": [
+      {
+        "nome": "Alta Energia",
+        "descrição": "Segmento de alta energia e infraestrutura",
+        "keyAccounts": 3,
+        "responsável": "A definir"
+      },
+      {
+        "nome": "Agricultura",
+        "descrição": "Segmento agropecuário e proteção agrícola",
+        "keyAccounts": 3,
+        "responsável": "A definir"
+      },
+      {
+        "nome": "Indústria",
+        "descrição": "Segmento industrial e manufatura",
+        "keyAccounts": 3,
+        "responsável": "A definir"
+      },
+      {
+        "nome": "Construção Civil",
+        "descrição": "Segmento de construção civil e edificações",
+        "keyAccounts": 3,
+        "responsável": "A definir"
+      }
+    ],
+    "gestãoRegional": [
+      {
+        "região": "Sul",
+        "gerente": "Avila",
+        "estados": ["RS", "SC", "PR"]
+      },
+      {
+        "região": "Sudeste + Nordeste",
+        "gerente": "Leo",
+        "estados": ["SP", "RJ", "MG", "ES", "BA", "PE", "CE"]
+      }
+    ],
+    "açõesPendentes": [
+      {
+        "ação": "Finalizar hierarquia comercial no ECC",
+        "responsável": "Randolpho",
+        "status": "Pendente"
+      },
+      {
+        "ação": "Montar lista de escritórios de vendas",
+        "responsável": "Leandro Gimenez",
+        "detalhes": "Gerente, delegado, vendedores, códigos",
+        "status": "Pendente"
+      },
+      {
+        "ação": "Migração de clientes para nova estrutura (Hard Reboot)",
+        "responsável": "Jefferson Pinheiro / Fabricio França",
+        "detalhes": "Base de 24 meses de clientes",
+        "status": "Pendente"
+      },
+      {
+        "ação": "Ajuste do workflow pricing por níveis",
+        "responsável": "Ronildo",
+        "status": "Pendente"
+      },
+      {
+        "ação": "Incluir Parceiro Agrupador nos relatórios",
+        "responsável": "Luis Riqueti",
+        "status": "Pendente"
+      },
+      {
+        "ação": "Definir regionais da Construção Civil",
+        "responsável": "Jeferson",
+        "status": "Pendente"
+      },
+      {
+        "ação": "Padronizar nomenclaturas de unidades de negócio",
+        "responsável": "TI / Comercial",
+        "status": "Pendente"
+      }
+    ],
+    "impacto": "Revisão completa das jornadas AS-IS/TO-BE, hierarquia ECC, escritórios de vendas e workflow de aprovação"
+  }
 }

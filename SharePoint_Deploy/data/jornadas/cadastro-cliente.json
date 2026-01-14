@@ -890,5 +890,42 @@
       "tipo": "App Guidance",
       "id": "app guidance"
     }
-  ]
+  ],
+  "detalhesTécnicosAdicionais": {
+    "fonte": "Análise de reuniões 03/12, 04/12, 10/12, 16/12/2025",
+    "validaçãoTelefone": {
+      "descrição": "Validação de formato de telefone celular",
+      "padrão": "(XX) XXXXX-XXXX para celular, (XX) XXXX-XXXX para fixo",
+      "obrigatório": true,
+      "impacto": "Dados de contato padronizados habilitam autoatendimento corretamente"
+    },
+    "integraçãoBureauCrédito": {
+      "sistema": "Serasa",
+      "descrição": "Integração com bureau de crédito para análise automática",
+      "status": "Pendente",
+      "fluxo": "Salesforce consulta Serasa automaticamente para novos clientes PJ"
+    },
+    "caixasCompartilhadas": {
+      "cadastro.clientes": {
+        "descrição": "Caixa compartilhada do SmartCenter para solicitações de alteração de cadastro",
+        "uso": "Alternativa ao Teams para solicitações rápidas de correção de dados",
+        "fonte": "Reunião 04/12/2025"
+      }
+    },
+    "termoDePesquisa": {
+      "descrição": "Identificador único do cliente para evitar duplicidade de cadastro",
+      "processoCoreção": [
+        "Identificar cliente com termo incorreto",
+        "Abrir chamado via caixa cadastro.clientes",
+        "SmartCenter corrige via transação XD02",
+        "Sincronização automática com Salesforce"
+      ],
+      "validação": "Sistema bloqueia cadastro se termo já existe na base"
+    },
+    "transaçõesSAP": {
+      "XD01": "Criar Cliente - substituída pelo cadastro via Salesforce no TO-BE",
+      "XD02": "Alterar Cliente - SmartCenter usa para complemento de dados",
+      "XD03": "Exibir Cliente - restrições logísticas aparecem aqui"
+    }
+  }
 }
