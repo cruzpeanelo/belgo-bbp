@@ -1,0 +1,70 @@
+{
+  "id": "amd-cross-company",
+  "nome": "AMD Cross Company",
+  "icone": "🔄",
+  "ordem": 14,
+  "asIs": {
+    "descrição": "Processo de vendas entre empresas do grupo ArcelorMittal não contemplado no Salesforce atual",
+    "passos": [
+      "AMD (ArcelorMittal Distribuição) gerencia vendas em sistema próprio",
+      "Transações cross company processadas manualmente",
+      "Sem integração com Salesforce",
+      "Visibilidade limitada para equipe comercial"
+    ],
+    "problemas": [
+      "Processo AMD não tem funcionalidades no Salesforce",
+      "Processo Cross Company não contemplado",
+      "Falta de rastreabilidade de vendas intercompany",
+      "Dificuldade de consolidação de resultados"
+    ],
+    "tempoMedio": "Variável"
+  },
+  "toBe": {
+    "descrição": "Integração do processo AMD Cross Company no Salesforce para gestão unificada de vendas intercompany",
+    "passos": [
+      "Registro de transações AMD no Salesforce",
+      "Workflow de aprovação para vendas cross company",
+      "Integração com SAP para contabilização",
+      "Relatórios consolidados de vendas intercompany",
+      "Visibilidade completa para equipe comercial"
+    ],
+    "beneficios": [
+      "Gestão unificada de vendas do grupo",
+      "Rastreabilidade completa de transações intercompany",
+      "Consolidação de resultados facilitada",
+      "Visibilidade para todas as áreas",
+      "Processo padronizado e auditável"
+    ],
+    "tempoMedio": "A definir"
+  },
+  "áreasImpactadas": [
+    "Comercial",
+    "Financeiro",
+    "Controladoria",
+    "AMD"
+  ],
+  "status": "Pendente",
+  "fonteReunião": "10/12/2025",
+  "detalhes": {
+    "amd": {
+      "nome": "ArcelorMittal Distribuição",
+      "descrição": "Empresa do grupo para distribuição de produtos",
+      "processo": "Vendas entre empresas do grupo (intercompany)"
+    },
+    "crossCompany": {
+      "descrição": "Transações de venda entre diferentes empresas do grupo ArcelorMittal",
+      "desafio": "Contabilização e rastreamento entre entidades legais distintas"
+    },
+    "responsável": "Renata Mello e Victoria"
+  },
+  "sistemasTécnicos": [
+    "Salesforce",
+    "SAP ECC",
+    "Sistema AMD"
+  ],
+  "pendências": [
+    "Reunião específica agendada com Renata Mello e Victoria",
+    "Definição de escopo de funcionalidades AMD no Salesforce",
+    "Mapeamento de processo cross company"
+  ]
+}

@@ -124,6 +124,27 @@
       "icone": "⚙️",
       "ordem": 11,
       "status": "Em Andamento"
+    },
+    {
+      "id": "restricoes-logisticas",
+      "nome": "Restrições Logísticas",
+      "icone": "🚛",
+      "ordem": 12,
+      "status": "Pendente"
+    },
+    {
+      "id": "market-share",
+      "nome": "Market Share e Concorrentes",
+      "icone": "📊",
+      "ordem": 13,
+      "status": "Pendente"
+    },
+    {
+      "id": "amd-cross-company",
+      "nome": "AMD Cross Company",
+      "icone": "🔄",
+      "ordem": 14,
+      "status": "Pendente"
     }
   ],
   "últimaAtualização": "2026-01-13T11:36:26.126028",
