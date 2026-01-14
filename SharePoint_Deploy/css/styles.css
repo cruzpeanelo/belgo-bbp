@@ -693,6 +693,13 @@ tr:hover {
         padding: 14px 25px;
     }
 
+    /* Sidebar nav com scroll */
+    .sidebar-nav {
+        flex: 1;
+        overflow-y: auto;
+        max-height: calc(100vh - 180px); /* Espaço para header e footer */
+    }
+
     /* Conteúdo principal */
     .main-content {
         margin-left: 0;
