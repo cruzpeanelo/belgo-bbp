@@ -207,7 +207,7 @@ const Utils = {
 
     // URLs do Teams (HARDCODED - não usa localStorage)
     teamsWebhookUrl: 'https://arcelormittal.webhook.office.com/webhookb2/d931a635-801d-4032-ae69-27f6ee2c88af@37cd273a-1cec-4aae-a297-41480ea54f8d/IncomingWebhook/a56c5195921c4bc9935c4501e161652d/8dd31791-e6bc-444b-b6c5-e4b6d73f1e5b/V25Gop5NcUsvXfqoNNrt2p0APQBOvrUZQb52Amrtfz9XA1',
-    teamsChannelUrl: 'https://teams.microsoft.com/l/channel/19%3Ad931a635-801d-4032-ae69-27f6ee2c88af%40thread.tacv2/GTM%20-%20Cockpit?groupId=d931a635-801d-4032-ae69-27f6ee2c88af',
+    teamsChannelUrl: 'https://teams.microsoft.com/l/channel/19%3AxndnLok8wB0SnqnaZBVpwMHXuu12opEWgO9EUQ3vA2M1%40thread.tacv2/Workshops%20e%20Testes%20GTM?groupId=d931a635-801d-4032-ae69-27f6ee2c88af&tenantId=37cd273a-1cec-4aae-a297-41480ea54f8d&ngc=true&allowXTenantAccess=true',
 
     // Abrir Teams no canal (compatível com iOS Safari)
     openTeamsChannel() {
