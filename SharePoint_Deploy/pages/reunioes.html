@@ -378,7 +378,7 @@
             const participantes = (detalhes.participantes || []).slice(0, 5).map(p => typeof p === 'string' ? p : p.nome).join(', ');
             const decisões = (detalhes.decisõesTomadas || []).slice(0, 3).map(d => typeof d === 'string' ? d : d.decisao).join('; ');
 
-            const card = Utils.formatTeamsCard('reuniao', `📝 ${reuniao.titulo}`, [
+            const card = Utils.formatTeamsCard('reuniao', `📝 ${reuniao.título}`, [
                 { name: "Data", value: formatDate(reuniao.data) },
                 { name: "Duração", value: reuniao.duracao || detalhes.reuniao?.duracao },
                 { name: "Participantes", value: participantes || 'N/A' },
@@ -495,7 +495,7 @@
             let filtered = reunioesData;
             if (filter !== 'todas') {
                 filtered = reunioesData.filter(r => {
-                    const titulo = (r.titulo || '').toLowerCase();
+                    const titulo = (r.título || '').toLowerCase();
                     const tipo = (r.tipo || r.detalhes?.tipo || '').toLowerCase();
                     if (filter === 'workshop') return titulo.includes('workshop') || tipo.includes('workshop');
                     if (filter === 'alinhamento') return titulo.includes('alinhamento') || tipo.includes('alinhamento');
@@ -523,7 +523,7 @@
                         <div class="reuniao-header">
                             <div>
                                 <span class="reuniao-data">${formatDate(r.data)}</span>
-                                <h3 class="reuniao-titulo">${r.titulo}</h3>
+                                <h3 class="reuniao-titulo">${r.título}</h3>
                             </div>
                             <div style="display: flex; align-items: center; gap: 10px;">
                                 <button class="btn" style="background: #6264A7; color: white; padding: 6px 12px; font-size: 0.8rem;" onclick="compartilharReuniao(${index}, event)">
@@ -581,7 +581,7 @@
                                         <div class="decisao-item">
                                             <div class="decisao-icon">📌</div>
                                             <div>
-                                                <strong>${c.timestamp || ''}</strong> - ${c.titulo || c}
+                                                <strong>${c.timestamp || ''}</strong> - ${c.título || c}
                                                 ${c.descricao ? `<br><small style="color: #6b7280">${c.descricao}</small>` : ''}
                                             </div>
                                         </div>
