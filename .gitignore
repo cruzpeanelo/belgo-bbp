@@ -1,8 +1,9 @@
 # Temporarios
 .playwright-mcp/
-**/tmpclaude-*/
+**/tmpclaude-*
 **/temp_*/
 **/extracted_*/
+.claude/
 
 # Backup
 *_backup_*.html
