@@ -5,9 +5,13 @@
     "testesPendentes": 142,
     "testesFalhados": 0,
     "progressoGeral": 0,
-    "pontosCriticos": 9,
+    "pontosCriticos": 14,
     "workshopsConcluidos": 5,
-    "workshopsPendentes": 0
+    "workshopsPendentes": 0,
+    "totalJornadas": 14,
+    "totalParticipantes": 28,
+    "totalTermosGlossario": 72,
+    "totalReunioes": 4
   },
   "statusPorCategoria": [
     { "id": "workflow-pricing", "categoria": "Workflow Pricing", "range": "CT 01-19", "total": 19, "ok": 0, "falhou": 0, "pendente": 19, "cor": "#6366f1" },

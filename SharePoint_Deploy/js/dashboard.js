@@ -63,6 +63,34 @@ const Dashboard = {
                     <p>Falharam</p>
                 </div>
             </div>
+            <div class="metric-card">
+                <div class="metric-icon" style="background: #e0f2fe; color: #0369a1;">🔄</div>
+                <div class="metric-info">
+                    <h3>${metrics.totalJornadas || 14}</h3>
+                    <p>Jornadas</p>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon" style="background: #fef3c7; color: #92400e;">⚠️</div>
+                <div class="metric-info">
+                    <h3>${metrics.pontosCriticos || 0}</h3>
+                    <p>Pontos Críticos</p>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon" style="background: #f0fdf4; color: #166534;">👥</div>
+                <div class="metric-info">
+                    <h3>${metrics.totalParticipantes || 0}</h3>
+                    <p>Participantes</p>
+                </div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-icon" style="background: #fdf4ff; color: #86198f;">📖</div>
+                <div class="metric-info">
+                    <h3>${metrics.totalTermosGlossario || 0}</h3>
+                    <p>Termos Glossário</p>
+                </div>
+            </div>
         `;
     },
 
