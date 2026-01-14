@@ -82,11 +82,12 @@ const Testes = {
         if (!container) return;
 
         if (this.origemJornada && this.filtros.ids.length > 0) {
+            // Sanitizar para prevenir XSS
             container.innerHTML = `
                 <div class="breadcrumb-alert">
                     <span class="breadcrumb-icon">🔗</span>
                     <span class="breadcrumb-text">
-                        <strong>Origem:</strong> ${this.origemJornada}
+                        <strong>Origem:</strong> ${Utils.escapeHTML(this.origemJornada)}
                     </span>
                     <span class="breadcrumb-count">${this.filtros.ids.length} teste(s) vinculado(s)</span>
                     <button class="breadcrumb-clear" onclick="Testes.clearUrlFilter()">✕ Limpar filtro</button>
@@ -234,24 +235,31 @@ const Testes = {
         const endIndex = startIndex + this.paginacao.itemsPerPage;
         const testes = allTestes.slice(startIndex, endIndex);
 
-        tbody.innerHTML = testes.map(t => `
+        // Sanitizar dados para prevenir XSS
+        tbody.innerHTML = testes.map(t => {
+            const safeId = Utils.escapeHTML(t.id);
+            const safeName = Utils.escapeHTML(t.nome);
+            const safeCategoria = Utils.escapeHTML(t.categoria);
+            const safeStatus = Utils.escapeHTML(t.status);
+            return `
             <tr>
-                <td><strong>${t.id}</strong></td>
-                <td>${t.nome}</td>
-                <td><span style="color: #6b7280; font-size: 0.85rem;">${t.categoria}</span></td>
-                <td><span class="badge ${Utils.getBadgeClass(t.status)}">${t.status}</span></td>
+                <td><strong>${safeId}</strong></td>
+                <td>${safeName}</td>
+                <td><span style="color: #6b7280; font-size: 0.85rem;">${safeCategoria}</span></td>
+                <td><span class="badge ${Utils.getBadgeClass(t.status)}">${safeStatus}</span></td>
                 <td>
                     <button class="btn btn-primary" style="padding: 5px 10px; font-size: 0.8rem;"
-                            onclick="Testes.verDetalhe('${t.id}')">Ver</button>
+                            data-test-id="${safeId}" onclick="Testes.verDetalhe(this.dataset.testId)">Ver</button>
                     ${t.status === 'Pendente' ? `
                         <button class="btn btn-success" style="padding: 5px 10px; font-size: 0.8rem;"
-                                onclick="Testes.marcarStatus('${t.id}', 'Concluído')">OK</button>
+                                data-test-id="${safeId}" onclick="Testes.marcarStatus(this.dataset.testId, 'Concluído')">OK</button>
                     ` : ''}
                     <button class="btn" style="background: #6264A7; color: white; padding: 5px 10px; font-size: 0.8rem;"
-                            onclick="event.stopPropagation(); Testes.compartilharTeams('${t.id}')">📤</button>
+                            data-test-id="${safeId}" onclick="event.stopPropagation(); Testes.compartilharTeams(this.dataset.testId)">📤</button>
                 </td>
             </tr>
-        `).join('');
+        `;
+        }).join('');
 
         // Renderizar controles de paginação
         this.renderPaginacao(allTestes.length, totalPages);
@@ -344,48 +352,58 @@ const Testes = {
 
         if (!teste) return;
 
+        // Sanitizar todos os dados para prevenir XSS
+        const safeId = Utils.escapeHTML(teste.id);
+        const safeName = Utils.escapeHTML(teste.nome);
+        const safeStatus = Utils.escapeHTML(teste.status);
+        const safeCategoria = Utils.escapeHTML(categoria);
+        const safeResultadoEsperado = Utils.escapeHTML(teste.resultadoEsperado);
+        const safeResultadoObtido = Utils.escapeHTML(teste.resultadoObtido || '');
+        const safeObservacoes = Utils.escapeHTML(teste.observacoes || '');
+        const safePassos = (teste.passos || []).map(p => Utils.escapeHTML(p));
+
         document.getElementById('modal-titulo').textContent = `${teste.id}: ${teste.nome}`;
         document.getElementById('modal-body').innerHTML = `
             <div style="margin-bottom: 20px;">
-                <span class="badge ${Utils.getBadgeClass(teste.status)}">${teste.status}</span>
-                <span style="margin-left: 10px; color: #6b7280;">${categoria}</span>
+                <span class="badge ${Utils.getBadgeClass(teste.status)}">${safeStatus}</span>
+                <span style="margin-left: 10px; color: #6b7280;">${safeCategoria}</span>
             </div>
 
             <h4 style="color: #003B4A; margin-bottom: 10px;">Passo a Passo</h4>
             <ol style="margin: 0 0 20px 20px; line-height: 1.8;">
-                ${teste.passos.map(p => `<li>${p}</li>`).join('')}
+                ${safePassos.map(p => `<li>${p}</li>`).join('')}
             </ol>
 
             <h4 style="color: #003B4A; margin-bottom: 10px;">Resultado Esperado</h4>
             <div style="background: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                ${teste.resultadoEsperado}
+                ${safeResultadoEsperado}
             </div>
 
             ${teste.resultadoObtido ? `
                 <h4 style="color: #003B4A; margin-bottom: 10px;">Resultado Obtido</h4>
                 <div style="background: ${teste.status === 'Falhou' ? '#fee2e2' : '#d1fae5'}; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                    ${teste.resultadoObtido}
+                    ${safeResultadoObtido}
                 </div>
             ` : ''}
 
             ${teste.observacoes ? `
                 <h4 style="color: #003B4A; margin-bottom: 10px;">Observações</h4>
                 <div style="background: #fef3c7; padding: 15px; border-radius: 8px;">
-                    ${teste.observacoes}
+                    ${safeObservacoes}
                 </div>
             ` : ''}
 
-            <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
-                <button class="btn btn-success" onclick="Testes.marcarStatus('${teste.id}', 'Concluído'); Testes.fecharModal();">
+            <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #e5e7eb;" data-test-id="${safeId}">
+                <button class="btn btn-success" onclick="Testes.marcarStatus(this.parentElement.dataset.testId, 'Concluído'); Testes.fecharModal();">
                     ✅ Marcar Concluído
                 </button>
-                <button class="btn btn-danger" onclick="Testes.marcarStatus('${teste.id}', 'Falhou'); Testes.fecharModal();">
+                <button class="btn btn-danger" onclick="Testes.marcarStatus(this.parentElement.dataset.testId, 'Falhou'); Testes.fecharModal();">
                     ❌ Marcar Falhou
                 </button>
-                <button class="btn" style="background: #f59e0b; color: white;" onclick="Testes.marcarStatus('${teste.id}', 'Pendente'); Testes.fecharModal();">
+                <button class="btn" style="background: #f59e0b; color: white;" onclick="Testes.marcarStatus(this.parentElement.dataset.testId, 'Pendente'); Testes.fecharModal();">
                     ⏳ Marcar Pendente
                 </button>
-                <button class="btn" style="background: #6264A7; color: white; margin-left: 10px;" onclick="Testes.compartilharTeams('${teste.id}');">
+                <button class="btn" style="background: #6264A7; color: white; margin-left: 10px;" onclick="Testes.compartilharTeams(this.parentElement.dataset.testId);">
                     📤 Teams
                 </button>
             </div>

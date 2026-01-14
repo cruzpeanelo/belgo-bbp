@@ -133,7 +133,7 @@ const Dashboard = {
         }, 100);
     },
 
-    // Renderizar progresso por categoria
+    // Renderizar progresso por categoria (com sanitização XSS)
     renderCategoriasProgress() {
         const categorias = App.data.dashboard.statusPorCategoria;
         const container = document.getElementById('categorias-progress');
@@ -144,13 +144,13 @@ const Dashboard = {
             return `
                 <div style="margin-bottom: 20px;">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                        <span style="font-weight: 500;">${cat.categoria}</span>
+                        <span style="font-weight: 500;">${Utils.escapeHTML(cat.categoria)}</span>
                         <span style="color: #6b7280; font-size: 0.9rem;">
                             ${cat.ok}/${cat.total} (${percent}%)
                         </span>
                     </div>
                     <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${percent}%; background: ${cat.cor};"></div>
+                        <div class="progress-fill" style="width: ${percent}%; background: ${Utils.escapeHTML(cat.cor)};"></div>
                     </div>
                     <div style="display: flex; gap: 15px; margin-top: 5px; font-size: 0.8rem; color: #6b7280;">
                         <span>✅ ${cat.ok} OK</span>
@@ -162,7 +162,7 @@ const Dashboard = {
         }).join('');
     },
 
-    // Renderizar pontos críticos
+    // Renderizar pontos críticos (com sanitização XSS)
     renderPontosCriticos() {
         const issues = App.data.pontosCriticos?.issues || [];
         const container = document.getElementById('pontos-criticos-list');
@@ -173,21 +173,22 @@ const Dashboard = {
             .filter(i => i.status !== 'Resolvido')
             .slice(0, 4);
 
+        // Sanitizar dados para prevenir XSS
         container.innerHTML = criticalIssues.map(issue => `
             <div style="padding: 12px; border-left: 4px solid ${this.getSeverityColor(issue.severidade)};
                         background: #f9fafb; margin-bottom: 10px; border-radius: 0 8px 8px 0;">
                 <div style="display: flex; justify-content: space-between; align-items: start;">
-                    <strong style="font-size: 0.9rem;">${issue.id}: ${issue.título}</strong>
-                    <span class="badge ${Utils.getBadgeClass(issue.severidade)}">${issue.severidade}</span>
+                    <strong style="font-size: 0.9rem;">${Utils.escapeHTML(issue.id)}: ${Utils.escapeHTML(issue.título)}</strong>
+                    <span class="badge ${Utils.getBadgeClass(issue.severidade)}">${Utils.escapeHTML(issue.severidade)}</span>
                 </div>
                 <p style="font-size: 0.8rem; color: #6b7280; margin-top: 5px;">
-                    ${(issue.descrição || '').substring(0, 80)}...
+                    ${Utils.escapeHTML((issue.descrição || '').substring(0, 80))}...
                 </p>
             </div>
         `).join('') || '<p style="color: #6b7280;">Nenhum ponto crítico pendente</p>';
     },
 
-    // Renderizar timeline de workshops
+    // Renderizar timeline de workshops (com sanitização XSS)
     renderWorkshops() {
         const workshops = App.data.cronograma?.workshops || [];
         const container = document.getElementById('workshops-timeline');
@@ -197,15 +198,15 @@ const Dashboard = {
             <div class="timeline-item ${w.status === 'Concluído' ? 'completed' : 'pending'}">
                 <div style="display: flex; justify-content: space-between; align-items: start;">
                     <div>
-                        <strong>${w.título}</strong>
+                        <strong>${Utils.escapeHTML(w.título)}</strong>
                         <p style="font-size: 0.85rem; color: #6b7280; margin-top: 3px;">
                             ${Utils.formatDate(w.data)}
                         </p>
                     </div>
-                    <span class="badge ${Utils.getBadgeClass(w.status)}">${w.status}</span>
+                    <span class="badge ${Utils.getBadgeClass(w.status)}">${Utils.escapeHTML(w.status)}</span>
                 </div>
                 <div style="margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
-                    ${w.foco.map(f => `<span style="background: #e5e7eb; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem;">${f}</span>`).join('')}
+                    ${(w.foco || []).map(f => `<span style="background: #e5e7eb; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem;">${Utils.escapeHTML(f)}</span>`).join('')}
                 </div>
             </div>
         `).join('');

@@ -3,6 +3,18 @@
 // =====================================================
 
 const Utils = {
+    // =====================================================
+    // SEGURANÇA - Sanitização XSS
+    // =====================================================
+
+    // Escapar HTML para prevenir XSS
+    escapeHTML(str) {
+        if (str === null || str === undefined) return '';
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    },
+
     // Formatar data BR
     formatDate(dateStr) {
         if (!dateStr) return '-';
@@ -126,14 +138,27 @@ const Utils = {
             info: 'ℹ'
         };
 
-        // Criar toast
+        // Criar toast (com sanitização XSS)
         const toast = document.createElement('div');
         toast.className = `toast toast-${type}`;
-        toast.innerHTML = `
-            <span class="toast-icon">${icons[type] || icons.info}</span>
-            <span class="toast-message">${message}</span>
-            <button class="toast-close" onclick="this.parentElement.remove()">×</button>
-        `;
+
+        // Criar elementos de forma segura para prevenir XSS
+        const iconSpan = document.createElement('span');
+        iconSpan.className = 'toast-icon';
+        iconSpan.textContent = icons[type] || icons.info;
+
+        const messageSpan = document.createElement('span');
+        messageSpan.className = 'toast-message';
+        messageSpan.textContent = message; // textContent é seguro contra XSS
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'toast-close';
+        closeBtn.textContent = '×';
+        closeBtn.addEventListener('click', () => toast.remove());
+
+        toast.appendChild(iconSpan);
+        toast.appendChild(messageSpan);
+        toast.appendChild(closeBtn);
 
         container.appendChild(toast);
 
@@ -205,18 +230,41 @@ const Utils = {
     // INTEGRAÇÃO MICROSOFT TEAMS
     // =====================================================
 
-    // Webhook URL do Teams
-    teamsWebhookUrl: 'https://arcelormittal.webhook.office.com/webhookb2/d931a635-801d-4032-ae69-27f6ee2c88af@37cd273a-1cec-4aae-a297-41480ea54f8d/IncomingWebhook/6284fbb6970849d8b57350074fa5ebff/8dd31791-e6bc-444b-b6c5-e4b6d73f1e5b/V28WZxUnp0pMRDYdKBFpYYVN6kJcnybTAzf0u5KUh9tvg1',
+    // Webhook URL do Teams - Carregado de localStorage para segurança
+    // NOTA: URLs sensíveis não devem ficar hardcoded no código fonte
+    get teamsWebhookUrl() {
+        return localStorage.getItem('teamsWebhookUrl') || '';
+    },
 
-    // URL do canal do Teams - Workshops e Testes GTM
-    teamsChannelUrl: 'https://teams.microsoft.com/l/channel/19%3AxndnLok8wB0SnqnaZBVpwMHXuu12opEWgO9EUQ3vA2M1%40thread.tacv2/Workshops%20e%20Testes%20GTM?groupId=d931a635-801d-4032-ae69-27f6ee2c88af&tenantId=37cd273a-1cec-4aae-a297-41480ea54f8d&ngc=true&allowXTenantAccess=true',
+    set teamsWebhookUrl(url) {
+        localStorage.setItem('teamsWebhookUrl', url);
+    },
+
+    // URL do canal do Teams - Carregado de localStorage
+    get teamsChannelUrl() {
+        return localStorage.getItem('teamsChannelUrl') || '';
+    },
+
+    set teamsChannelUrl(url) {
+        localStorage.setItem('teamsChannelUrl', url);
+    },
+
+    // Verificar se Teams está configurado
+    isTeamsConfigured() {
+        return !!this.teamsWebhookUrl && !!this.teamsChannelUrl;
+    },
 
     // Abrir Teams no canal (compatível com iOS Safari)
     openTeamsChannel() {
+        const channelUrl = this.teamsChannelUrl;
+        if (!channelUrl) {
+            this.showToast('URL do canal do Teams não configurada. Configure em Configurações.', 'warning');
+            return false;
+        }
         // iOS Safari bloqueia window.open() fora do contexto de gesto do usuário
         // Usar elemento <a> com click() é mais confiável em todos os browsers
         const link = document.createElement('a');
-        link.href = this.teamsChannelUrl;
+        link.href = channelUrl;
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
         link.style.display = 'none';
@@ -226,15 +274,17 @@ const Utils = {
         return true;
     },
 
-    // Salvar URL do canal do Teams
-    setTeamsChannelUrl(url) {
-        this.teamsChannelUrl = url;
-        localStorage.setItem('teamsChannelUrl', url);
-    },
 
     // Enviar mensagem para o Teams e abrir o canal
     // IMPORTANTE: Abre o Teams PRIMEIRO (síncrono) para funcionar no iOS Safari
     async sendToTeams(card, openChannel = true) {
+        // Verificar se webhook está configurado
+        const webhookUrl = this.teamsWebhookUrl;
+        if (!webhookUrl) {
+            this.showToast('Webhook do Teams não configurado. Configure em Configurações.', 'warning');
+            return false;
+        }
+
         // Abrir Teams ANTES do fetch - iOS Safari exige que window.open/link.click
         // seja chamado diretamente no contexto do gesto do usuário (click/tap)
         if (openChannel) {
@@ -245,7 +295,7 @@ const Utils = {
             this.showLoading('Enviando para Teams...');
 
             // Usar mode: 'no-cors' para evitar bloqueio CORS em webhooks
-            const response = await fetch(this.teamsWebhookUrl, {
+            const response = await fetch(webhookUrl, {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
@@ -322,20 +372,44 @@ const Utils = {
         const existingModal = document.querySelector('.modal-overlay');
         if (existingModal) existingModal.remove();
 
-        // Criar modal
+        // Criar modal (com sanitização XSS)
         const modal = document.createElement('div');
         modal.className = 'modal-overlay';
-        modal.innerHTML = `
-            <div class="modal-content">
-                <div class="modal-icon ${icon}">${iconEmojis[icon] || iconEmojis.warning}</div>
-                <h3 class="modal-title">${title}</h3>
-                <p class="modal-message">${message}</p>
-                <div class="modal-actions">
-                    <button class="btn btn-secondary modal-cancel">${cancelText}</button>
-                    <button class="btn ${confirmClass} modal-confirm">${confirmText}</button>
-                </div>
-            </div>
-        `;
+
+        const modalContent = document.createElement('div');
+        modalContent.className = 'modal-content';
+
+        const iconDiv = document.createElement('div');
+        iconDiv.className = `modal-icon ${icon}`;
+        iconDiv.textContent = iconEmojis[icon] || iconEmojis.warning;
+
+        const titleEl = document.createElement('h3');
+        titleEl.className = 'modal-title';
+        titleEl.textContent = title; // textContent é seguro contra XSS
+
+        const messageEl = document.createElement('p');
+        messageEl.className = 'modal-message';
+        messageEl.textContent = message; // textContent é seguro contra XSS
+
+        const actionsDiv = document.createElement('div');
+        actionsDiv.className = 'modal-actions';
+
+        const cancelBtn = document.createElement('button');
+        cancelBtn.className = 'btn btn-secondary modal-cancel';
+        cancelBtn.textContent = cancelText;
+
+        const confirmBtn = document.createElement('button');
+        confirmBtn.className = `btn ${this.escapeHTML(confirmClass)} modal-confirm`;
+        confirmBtn.textContent = confirmText;
+
+        actionsDiv.appendChild(cancelBtn);
+        actionsDiv.appendChild(confirmBtn);
+
+        modalContent.appendChild(iconDiv);
+        modalContent.appendChild(titleEl);
+        modalContent.appendChild(messageEl);
+        modalContent.appendChild(actionsDiv);
+        modal.appendChild(modalContent);
 
         document.body.appendChild(modal);
 
@@ -348,13 +422,13 @@ const Utils = {
             setTimeout(() => modal.remove(), 200);
         };
 
-        // Event listeners
-        modal.querySelector('.modal-cancel').addEventListener('click', () => {
+        // Event listeners (usando referências diretas)
+        cancelBtn.addEventListener('click', () => {
             closeModal();
             onCancel();
         });
 
-        modal.querySelector('.modal-confirm').addEventListener('click', () => {
+        confirmBtn.addEventListener('click', () => {
             closeModal();
             onConfirm();
         });
@@ -442,6 +516,13 @@ const Utils = {
 
     // Discutir página no Teams (função genérica para todas as páginas)
     async discussOnTeams(pageId, pageTitle, btn) {
+        // Verificar se Teams está configurado
+        const webhookUrl = this.teamsWebhookUrl;
+        if (!webhookUrl) {
+            this.showToast('Webhook do Teams não configurado. Configure em Configurações.', 'warning');
+            return;
+        }
+
         // Abrir Teams PRIMEIRO - iOS Safari exige isso no contexto do gesto do usuário
         this.openTeamsChannel();
 
@@ -450,14 +531,14 @@ const Utils = {
         btn.disabled = true;
         btn.classList.remove('enviado', 'erro');
 
-        const card = this.formatTeamsCard('pagina', `💬 Discussão: ${pageTitle}`, [
+        const card = this.formatTeamsCard('pagina', `💬 Discussão: ${this.escapeHTML(pageTitle)}`, [
             { name: 'Página', value: pageTitle },
             { name: 'ID', value: pageId },
             { name: 'Solicitado em', value: new Date().toLocaleString('pt-BR') }
         ]);
 
         try {
-            await fetch(this.teamsWebhookUrl, {
+            await fetch(webhookUrl, {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
