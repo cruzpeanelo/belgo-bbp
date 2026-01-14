@@ -2,6 +2,129 @@
 // BELGO GTM - CORE DA APLICAÇÃO
 // =====================================================
 
+// =====================================================
+// CONTROLE DE ACESSO - Verificação de Autenticação
+// =====================================================
+(function() {
+    const SENHA_CORRETA = 'BelgoGTM2024';
+
+    // Verificar se já está autenticado
+    if (sessionStorage.getItem('belgo_auth') === 'true') {
+        return; // Já autenticado, continuar normalmente
+    }
+
+    // Criar tela de login
+    document.addEventListener('DOMContentLoaded', function() {
+        // Ocultar conteúdo original
+        const appContainer = document.querySelector('.app-container');
+        if (appContainer) {
+            appContainer.style.display = 'none';
+        }
+
+        // Criar overlay de login
+        const loginOverlay = document.createElement('div');
+        loginOverlay.className = 'login-overlay';
+        loginOverlay.innerHTML = `
+            <div class="login-box">
+                <div class="login-logo">BELGO</div>
+                <h2>Acesso Restrito</h2>
+                <p>Cockpit GTM Belgo</p>
+                <input type="password" id="senha-input" placeholder="Digite a senha" autocomplete="off">
+                <button id="btn-entrar">Entrar</button>
+                <p id="erro-msg" class="erro"></p>
+            </div>
+        `;
+        document.body.appendChild(loginOverlay);
+
+        // Focar no campo de senha
+        const senhaInput = document.getElementById('senha-input');
+        senhaInput.focus();
+
+        // Função de validação
+        function validarSenha() {
+            const senha = senhaInput.value;
+            if (senha === SENHA_CORRETA) {
+                sessionStorage.setItem('belgo_auth', 'true');
+                location.reload();
+            } else {
+                document.getElementById('erro-msg').textContent = 'Senha incorreta';
+                senhaInput.value = '';
+                senhaInput.focus();
+            }
+        }
+
+        // Event listeners
+        document.getElementById('btn-entrar').addEventListener('click', validarSenha);
+        senhaInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                validarSenha();
+            }
+        });
+    });
+
+    // Impedir execução do resto do código
+    throw new Error('Autenticação necessária');
+})();
+
+// =====================================================
+// SINCRONIZAÇÃO COM CLOUDFLARE KV
+// =====================================================
+const KVSync = {
+    apiUrl: '/api/testes-status',
+    syncEnabled: true,
+    lastSync: null,
+
+    // Carregar status do KV
+    async load() {
+        if (!this.syncEnabled) return null;
+
+        try {
+            const response = await fetch(this.apiUrl, {
+                method: 'GET',
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                this.lastSync = new Date();
+                console.log(`KV Sync: Carregados ${data.testes?.length || 0} status (${data.updatedAt || 'nunca'})`);
+                return data.testes || [];
+            }
+        } catch (e) {
+            console.warn('KV Sync: Offline, usando localStorage como fallback', e);
+        }
+        return null;
+    },
+
+    // Salvar status no KV (background, nao bloqueia UI)
+    async save(testes) {
+        if (!this.syncEnabled) return false;
+
+        try {
+            const response = await fetch(this.apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    testes,
+                    updatedBy: 'cockpit-gtm'
+                })
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                this.lastSync = new Date();
+                console.log(`KV Sync: Salvos ${result.count} status`);
+                return true;
+            }
+        } catch (e) {
+            console.warn('KV Sync: Erro ao salvar', e);
+        }
+        return false;
+    }
+};
+
+window.KVSync = KVSync;
+
 const App = {
     data: {
         dashboard: null,
@@ -56,24 +179,50 @@ const App = {
         }
     },
 
-    // Restaurar status de testes salvos no localStorage
-    restoreSavedStatuses() {
+    // Restaurar status de testes (KV primeiro, depois localStorage)
+    async restoreSavedStatuses() {
         if (!this.data.testes) return;
 
+        // Tentar carregar do KV primeiro
+        const kvStatuses = await KVSync.load();
+
         let restored = 0;
-        this.data.testes.categorias.forEach(cat => {
-            cat.casos.forEach(caso => {
-                const saved = Utils.loadFromStorage('testes_' + caso.id);
-                if (saved && saved.status) {
-                    caso.status = saved.status;
-                    caso.dataExecucao = saved.data;
-                    restored++;
+
+        if (kvStatuses && kvStatuses.length > 0) {
+            // Usar dados do KV
+            kvStatuses.forEach(item => {
+                for (const cat of this.data.testes.categorias) {
+                    const caso = cat.casos.find(c => c.id === item.id);
+                    if (caso) {
+                        caso.status = item.status;
+                        caso.dataExecucao = item.data;
+                        // Tambem salvar no localStorage como cache
+                        Utils.saveToStorage('testes_' + item.id, { status: item.status, data: item.data });
+                        restored++;
+                        break;
+                    }
                 }
             });
-        });
+            console.log(`Restaurados ${restored} status de testes do Cloudflare KV`);
+        } else {
+            // Fallback: usar localStorage
+            this.data.testes.categorias.forEach(cat => {
+                cat.casos.forEach(caso => {
+                    const saved = Utils.loadFromStorage('testes_' + caso.id);
+                    if (saved && saved.status) {
+                        caso.status = saved.status;
+                        caso.dataExecucao = saved.data;
+                        restored++;
+                    }
+                });
+            });
+
+            if (restored > 0) {
+                console.log(`Restaurados ${restored} status de testes do localStorage (fallback)`);
+            }
+        }
 
         if (restored > 0) {
-            console.log(`Restaurados ${restored} status de testes do localStorage`);
             this.recalculateMetrics();
         }
     },
@@ -138,10 +287,48 @@ const App = {
                 test.dataExecucao = new Date().toISOString();
                 Utils.saveToStorage('testes_' + testId, { status: newStatus, data: test.dataExecucao });
                 this.recalculateMetrics();
+
+                // Sincronizar com KV em background (nao bloqueia)
+                this.syncToKV();
+
                 return true;
             }
         }
         return false;
+    },
+
+    // Sincronizar todos os status com KV (debounced)
+    _syncTimeout: null,
+    syncToKV() {
+        // Debounce: esperar 1 segundo apos ultima mudanca
+        if (this._syncTimeout) clearTimeout(this._syncTimeout);
+
+        this._syncTimeout = setTimeout(async () => {
+            const allStatuses = this.getAllTestStatuses();
+            await KVSync.save(allStatuses);
+        }, 1000);
+    },
+
+    // Obter todos os status de testes (para sincronizacao)
+    getAllTestStatuses() {
+        const statuses = [];
+
+        if (!this.data.testes) return statuses;
+
+        this.data.testes.categorias.forEach(cat => {
+            cat.casos.forEach(caso => {
+                // Incluir apenas testes que nao estao Pendente
+                if (caso.status && caso.status !== 'Pendente') {
+                    statuses.push({
+                        id: caso.id,
+                        status: caso.status,
+                        data: caso.dataExecucao || new Date().toISOString()
+                    });
+                }
+            });
+        });
+
+        return statuses;
     },
 
     // Recalcular métricas
