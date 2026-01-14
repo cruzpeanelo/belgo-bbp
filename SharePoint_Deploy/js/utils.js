@@ -294,6 +294,152 @@ const Utils = {
         };
     },
 
+    // =====================================================
+    // FASE 3 - FEEDBACK UX
+    // =====================================================
+
+    // Modal de Confirmação
+    showConfirmModal(options = {}) {
+        const {
+            title = 'Confirmar ação',
+            message = 'Tem certeza que deseja continuar?',
+            icon = 'warning',
+            confirmText = 'Confirmar',
+            cancelText = 'Cancelar',
+            confirmClass = 'btn-primary',
+            onConfirm = () => {},
+            onCancel = () => {}
+        } = options;
+
+        const iconEmojis = {
+            warning: '⚠️',
+            danger: '🚨',
+            success: '✅',
+            info: 'ℹ️'
+        };
+
+        // Remover modal existente se houver
+        const existingModal = document.querySelector('.modal-overlay');
+        if (existingModal) existingModal.remove();
+
+        // Criar modal
+        const modal = document.createElement('div');
+        modal.className = 'modal-overlay';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <div class="modal-icon ${icon}">${iconEmojis[icon] || iconEmojis.warning}</div>
+                <h3 class="modal-title">${title}</h3>
+                <p class="modal-message">${message}</p>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary modal-cancel">${cancelText}</button>
+                    <button class="btn ${confirmClass} modal-confirm">${confirmText}</button>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+
+        // Ativar com animação
+        requestAnimationFrame(() => modal.classList.add('active'));
+
+        // Fechar modal
+        const closeModal = () => {
+            modal.classList.remove('active');
+            setTimeout(() => modal.remove(), 200);
+        };
+
+        // Event listeners
+        modal.querySelector('.modal-cancel').addEventListener('click', () => {
+            closeModal();
+            onCancel();
+        });
+
+        modal.querySelector('.modal-confirm').addEventListener('click', () => {
+            closeModal();
+            onConfirm();
+        });
+
+        // Fechar ao clicar fora
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+                onCancel();
+            }
+        });
+
+        // Fechar com Escape
+        const handleEscape = (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+                onCancel();
+                document.removeEventListener('keydown', handleEscape);
+            }
+        };
+        document.addEventListener('keydown', handleEscape);
+
+        return modal;
+    },
+
+    // Animação CountUp para números
+    countUp(element, target, duration = 1000) {
+        if (!element) return;
+
+        const start = 0;
+        const startTime = performance.now();
+
+        const update = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            // Easing function (ease out)
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const current = Math.round(start + (target - start) * easeOut);
+
+            element.textContent = current;
+
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            } else {
+                element.textContent = target;
+            }
+        };
+
+        requestAnimationFrame(update);
+    },
+
+    // Loading state para botões
+    setLoading(button, isLoading) {
+        if (!button) return;
+
+        if (isLoading) {
+            // Salvar texto original
+            button.dataset.originalText = button.innerHTML;
+
+            // Adicionar classe e spinner
+            button.classList.add('loading');
+
+            // Envolver texto em span se não estiver
+            if (!button.querySelector('.btn-text')) {
+                button.innerHTML = `<span class="btn-text">${button.innerHTML}</span>`;
+            }
+
+            // Adicionar spinner
+            if (!button.querySelector('.btn-spinner')) {
+                const spinner = document.createElement('span');
+                spinner.className = 'btn-spinner';
+                button.appendChild(spinner);
+            }
+        } else {
+            button.classList.remove('loading');
+
+            // Restaurar texto original
+            if (button.dataset.originalText) {
+                button.innerHTML = button.dataset.originalText;
+                delete button.dataset.originalText;
+            }
+        }
+    },
+
     // Discutir página no Teams (função genérica para todas as páginas)
     async discussOnTeams(pageId, pageTitle, btn) {
         // Abrir Teams PRIMEIRO - iOS Safari exige isso no contexto do gesto do usuário

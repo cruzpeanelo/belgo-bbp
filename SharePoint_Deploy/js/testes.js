@@ -11,6 +11,12 @@ const Testes = {
     },
     origemJornada: null,  // Origem da navegacao (ex: ciclo de teste)
 
+    // Paginação
+    paginacao: {
+        currentPage: 1,
+        itemsPerPage: 20
+    },
+
     async init() {
         await this.waitForData();
         this.parseUrlParams();  // Ler parametros da URL primeiro
@@ -97,16 +103,19 @@ const Testes = {
 
         categoriaSelect?.addEventListener('change', (e) => {
             this.filtros.categoria = e.target.value;
+            this.paginacao.currentPage = 1; // Reset página ao filtrar
             this.renderTabela();
         });
 
         statusSelect?.addEventListener('change', (e) => {
             this.filtros.status = e.target.value;
+            this.paginacao.currentPage = 1; // Reset página ao filtrar
             this.renderTabela();
         });
 
         buscaInput?.addEventListener('input', Utils.debounce((e) => {
             this.filtros.busca = e.target.value;
+            this.paginacao.currentPage = 1; // Reset página ao filtrar
             this.renderTabela();
         }, 300));
     },
@@ -167,13 +176,29 @@ const Testes = {
         const tbody = document.getElementById('testes-tbody');
         if (!tbody) return;
 
-        const testes = this.getTestesFiltrados();
+        const allTestes = this.getTestesFiltrados();
         this.renderResumo();
 
-        if (testes.length === 0) {
+        if (allTestes.length === 0) {
             tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 40px; color: #6b7280;">Nenhum teste encontrado</td></tr>`;
+            this.renderPaginacao(0, 0);
             return;
         }
+
+        // Calcular paginação
+        const totalPages = Math.ceil(allTestes.length / this.paginacao.itemsPerPage);
+
+        // Garantir página válida
+        if (this.paginacao.currentPage > totalPages) {
+            this.paginacao.currentPage = totalPages;
+        }
+        if (this.paginacao.currentPage < 1) {
+            this.paginacao.currentPage = 1;
+        }
+
+        const startIndex = (this.paginacao.currentPage - 1) * this.paginacao.itemsPerPage;
+        const endIndex = startIndex + this.paginacao.itemsPerPage;
+        const testes = allTestes.slice(startIndex, endIndex);
 
         tbody.innerHTML = testes.map(t => `
             <tr>
@@ -193,6 +218,81 @@ const Testes = {
                 </td>
             </tr>
         `).join('');
+
+        // Renderizar controles de paginação
+        this.renderPaginacao(allTestes.length, totalPages);
+    },
+
+    // Renderizar controles de paginação
+    renderPaginacao(totalItems, totalPages) {
+        let paginacaoContainer = document.getElementById('paginacao-container');
+
+        // Criar container se não existir
+        if (!paginacaoContainer) {
+            const tableContainer = document.querySelector('.table-container');
+            if (tableContainer) {
+                paginacaoContainer = document.createElement('div');
+                paginacaoContainer.id = 'paginacao-container';
+                tableContainer.after(paginacaoContainer);
+            } else {
+                return;
+            }
+        }
+
+        if (totalItems === 0 || totalPages <= 1) {
+            paginacaoContainer.innerHTML = '';
+            return;
+        }
+
+        const { currentPage, itemsPerPage } = this.paginacao;
+        const startItem = (currentPage - 1) * itemsPerPage + 1;
+        const endItem = Math.min(currentPage * itemsPerPage, totalItems);
+
+        // Gerar botões de página
+        let pageButtons = '';
+        const maxButtons = 5;
+        let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
+        let endPage = Math.min(totalPages, startPage + maxButtons - 1);
+
+        if (endPage - startPage < maxButtons - 1) {
+            startPage = Math.max(1, endPage - maxButtons + 1);
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+            pageButtons += `
+                <button class="pagination-btn ${i === currentPage ? 'active' : ''}"
+                        onclick="Testes.goToPage(${i})">${i}</button>
+            `;
+        }
+
+        paginacaoContainer.innerHTML = `
+            <div class="pagination">
+                <button class="pagination-btn" onclick="Testes.goToPage(1)" ${currentPage === 1 ? 'disabled' : ''}>
+                    ⟨⟨
+                </button>
+                <button class="pagination-btn" onclick="Testes.goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+                    ⟨
+                </button>
+                ${pageButtons}
+                <button class="pagination-btn" onclick="Testes.goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+                    ⟩
+                </button>
+                <button class="pagination-btn" onclick="Testes.goToPage(${totalPages})" ${currentPage === totalPages ? 'disabled' : ''}>
+                    ⟩⟩
+                </button>
+                <span class="pagination-info">
+                    ${startItem}-${endItem} de ${totalItems}
+                </span>
+            </div>
+        `;
+    },
+
+    // Ir para página específica
+    goToPage(page) {
+        this.paginacao.currentPage = page;
+        this.renderTabela();
+        // Scroll suave para o topo da tabela
+        document.querySelector('.table-container')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     },
 
     verDetalhe(id) {
@@ -264,7 +364,22 @@ const Testes = {
         document.getElementById('modal-detalhe').classList.remove('active');
     },
 
-    marcarStatus(id, status) {
+    marcarStatus(id, status, skipConfirm = false) {
+        // Confirmar antes de marcar como "Falhou" (ação destrutiva)
+        if (status === 'Falhou' && !skipConfirm) {
+            Utils.showConfirmModal({
+                title: 'Marcar como Falhou?',
+                message: `Tem certeza que deseja marcar o teste ${id} como "Falhou"? Esta ação indica que o teste não passou na validação.`,
+                icon: 'danger',
+                confirmText: 'Sim, Falhou',
+                confirmClass: 'btn-danger',
+                onConfirm: () => {
+                    this.marcarStatus(id, status, true);
+                }
+            });
+            return;
+        }
+
         App.updateTestStatus(id, status);
         this.renderTabela();
         Utils.showToast(`Teste ${id} marcado como ${status}`, status === 'Concluído' ? 'success' : status === 'Falhou' ? 'error' : 'info');

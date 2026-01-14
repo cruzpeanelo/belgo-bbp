@@ -28,70 +28,41 @@ const Dashboard = {
         });
     },
 
-    // Renderizar métricas principais
+    // Renderizar métricas principais com animação countUp
     renderMetrics() {
         const metrics = App.data.dashboard.metricas;
         const container = document.getElementById('metrics-grid');
         if (!container) return;
 
-        container.innerHTML = `
+        const metricsData = [
+            { icon: '📊', iconClass: 'blue', value: metrics.totalTestes, label: 'Total de Testes' },
+            { icon: '✅', iconClass: 'green', value: metrics.testesExecutados, label: 'Executados' },
+            { icon: '⏳', iconClass: 'yellow', value: metrics.testesPendentes, label: 'Pendentes' },
+            { icon: '❌', iconClass: 'red', value: metrics.testesFalhados, label: 'Falharam' },
+            { icon: '🔄', style: 'background: #e0f2fe; color: #0369a1;', value: metrics.totalJornadas || 14, label: 'Jornadas' },
+            { icon: '⚠️', style: 'background: #fef3c7; color: #92400e;', value: metrics.pontosCriticos || 0, label: 'Pontos Críticos' },
+            { icon: '👥', style: 'background: #f0fdf4; color: #166534;', value: metrics.totalParticipantes || 0, label: 'Participantes' },
+            { icon: '📖', style: 'background: #fdf4ff; color: #86198f;', value: metrics.totalTermosGlossario || 0, label: 'Termos Glossário' }
+        ];
+
+        container.innerHTML = metricsData.map((m, i) => `
             <div class="metric-card">
-                <div class="metric-icon blue">📊</div>
+                <div class="metric-icon ${m.iconClass || ''}" ${m.style ? `style="${m.style}"` : ''}>${m.icon}</div>
                 <div class="metric-info">
-                    <h3>${metrics.totalTestes}</h3>
-                    <p>Total de Testes</p>
+                    <h3 class="countup" data-target="${m.value}">0</h3>
+                    <p>${m.label}</p>
                 </div>
             </div>
-            <div class="metric-card">
-                <div class="metric-icon green">✅</div>
-                <div class="metric-info">
-                    <h3>${metrics.testesExecutados}</h3>
-                    <p>Executados</p>
-                </div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-icon yellow">⏳</div>
-                <div class="metric-info">
-                    <h3>${metrics.testesPendentes}</h3>
-                    <p>Pendentes</p>
-                </div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-icon red">❌</div>
-                <div class="metric-info">
-                    <h3>${metrics.testesFalhados}</h3>
-                    <p>Falharam</p>
-                </div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-icon" style="background: #e0f2fe; color: #0369a1;">🔄</div>
-                <div class="metric-info">
-                    <h3>${metrics.totalJornadas || 14}</h3>
-                    <p>Jornadas</p>
-                </div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-icon" style="background: #fef3c7; color: #92400e;">⚠️</div>
-                <div class="metric-info">
-                    <h3>${metrics.pontosCriticos || 0}</h3>
-                    <p>Pontos Críticos</p>
-                </div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-icon" style="background: #f0fdf4; color: #166534;">👥</div>
-                <div class="metric-info">
-                    <h3>${metrics.totalParticipantes || 0}</h3>
-                    <p>Participantes</p>
-                </div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-icon" style="background: #fdf4ff; color: #86198f;">📖</div>
-                <div class="metric-info">
-                    <h3>${metrics.totalTermosGlossario || 0}</h3>
-                    <p>Termos Glossário</p>
-                </div>
-            </div>
-        `;
+        `).join('');
+
+        // Aplicar animação countUp após renderização
+        setTimeout(() => {
+            container.querySelectorAll('.countup').forEach((el, i) => {
+                const target = parseInt(el.dataset.target, 10);
+                // Delay escalonado para cada número
+                setTimeout(() => Utils.countUp(el, target, 800), i * 50);
+            });
+        }, 100);
     },
 
     // Renderizar progresso por categoria
