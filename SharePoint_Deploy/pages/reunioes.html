@@ -395,7 +395,7 @@
                 const indexData = await indexResponse.json();
 
                 // Carregar cada reuniao detalhada
-                for (const reuniao of indexData.reunioes) {
+                for (const reuniao of indexData.reuniões) {
                     try {
                         const reuniaoResponse = await fetch('../data/reunioes/' + reuniao.arquivo);
                         const reuniaoData = await reuniaoResponse.json();
