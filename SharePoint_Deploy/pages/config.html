@@ -369,17 +369,23 @@
 
         function renderAreas(data) {
             const container = document.getElementById('areas-grid');
-            container.innerHTML = data.areas.map(area => {
-                const citation = area.citacoesExatas[0];
-                const integrations = area.integracoes.map(i => `<span class="integration-tag">${i}</span>`).join('');
+            // Suporta ambas as versões (com e sem acento)
+            const areas = data.areas || data.áreas || [];
+            container.innerHTML = areas.map(area => {
+                const citacoes = area.citacoesExatas || area.citaçõesExatas || [];
+                const citation = citacoes[0] || {};
+                const integracoes = area.integracoes || area.integrações || [];
+                const integrations = integracoes.map(i => `<span class="integration-tag">${i}</span>`).join('');
+                const codigo = area.codigo || area.código;
+                const descricao = area.descricao || area.descrição;
 
                 return `
                     <div class="config-card">
                         <div class="config-card-header">
-                            <span class="config-code">${area.codigo}</span>
+                            <span class="config-code">${codigo}</span>
                             <span class="config-name">${area.nome}</span>
                         </div>
-                        <p class="config-desc">${area.descricao}</p>
+                        <p class="config-desc">${descricao}</p>
                         <span class="status-badge status-${area.status}">${area.status}</span>
 
                         <div class="config-details">
@@ -390,8 +396,8 @@
                         </div>
 
                         <div class="citation-box">
-                            <div class="citation-quote">"${citation.citacao}"</div>
-                            <div class="citation-source">- ${citation.participante}, ${citation.fonte}</div>
+                            <div class="citation-quote">"${citation.citacao || citation.citação || ''}"</div>
+                            <div class="citation-source">- ${citation.participante || ''}, ${citation.fonte || ''}</div>
                         </div>
                     </div>
                 `;
@@ -401,15 +407,20 @@
         function renderCanais(data) {
             const container = document.getElementById('canais-grid');
             container.innerHTML = data.canais.map(canal => {
-                const citation = canal.citacoesExatas[0];
+                // Suporta ambas as versões (com e sem acento)
+                const citacoes = canal.citacoesExatas || canal.citaçõesExatas || [];
+                const citation = citacoes[0] || {};
+                const areaCredito = canal.areaCredito || canal.areaCrédito;
+                const codigo = canal.codigo || canal.código;
+                const descricao = canal.descricao || canal.descrição;
 
                 return `
                     <div class="config-card canal">
                         <div class="config-card-header">
-                            <span class="config-code">${canal.codigo}</span>
+                            <span class="config-code">${codigo}</span>
                             <span class="config-name">${canal.nome}</span>
                         </div>
-                        <p class="config-desc">${canal.descricao}</p>
+                        <p class="config-desc">${descricao}</p>
                         <span class="status-badge status-${canal.status}">${canal.status}</span>
 
                         <div class="config-details">
@@ -417,12 +428,12 @@
                                 <span class="detail-label">Tipo Cliente:</span>
                                 <span class="detail-value">${canal.tipoCliente}</span>
                             </div>
-                            ${canal.areaCredito ? `<div class="config-detail-item"><span class="detail-label">Area Credito:</span><span class="detail-value">${canal.areaCredito}</span></div>` : ''}
+                            ${areaCredito ? `<div class="config-detail-item"><span class="detail-label">Area Credito:</span><span class="detail-value">${areaCredito}</span></div>` : ''}
                         </div>
 
                         <div class="citation-box">
-                            <div class="citation-quote">"${citation.citacao}"</div>
-                            <div class="citation-source">- ${citation.participante}, ${citation.fonte}</div>
+                            <div class="citation-quote">"${citation.citacao || citation.citação || ''}"</div>
+                            <div class="citation-source">- ${citation.participante || ''}, ${citation.fonte || ''}</div>
                         </div>
                     </div>
                 `;

@@ -622,8 +622,8 @@
                                         <div class="acao-item">
                                             <div class="acao-icon">!</div>
                                             <div>
-                                                ${a.acao || a.descricao || a}
-                                                ${a.responsaveis ? `<br><small style="color: #6b7280">Responsável: ${a.responsaveis}</small>` : ''}
+                                                ${a.acao || a.ação || a.descricao || a}
+                                                ${(a.responsaveis || a.responsável) ? `<br><small style="color: #6b7280">Responsável: ${a.responsaveis || a.responsável}</small>` : ''}
                                                 ${a.prazo ? `<br><small style="color: #6b7280">Prazo: ${a.prazo}</small>` : ''}
                                             </div>
                                             <span class="acao-status status-${(a.status || 'pendente').toLowerCase().replace(' ', '')}">${a.status || 'Pendente'}</span>

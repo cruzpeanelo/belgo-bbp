@@ -455,9 +455,18 @@
                                     <strong>📝 Detalhes</strong>
                                     <div style="margin-top: 8px;">
                                         ${Object.entries(p.detalhes).map(([k, v]) => `
-                                            <div style="padding: 4px 0; border-bottom: 1px dashed #e5e7eb;">
-                                                <strong style="color: #6b7280; font-size: 0.8rem;">${k}:</strong>
-                                                <span style="color: #374151;">${typeof v === 'object' ? JSON.stringify(v) : v}</span>
+                                            <div style="padding: 8px 0; border-bottom: 1px dashed #e5e7eb;">
+                                                <strong style="color: #6b7280; font-size: 0.85rem; text-transform: capitalize;">${k}:</strong>
+                                                ${typeof v === 'object' ? `
+                                                    <div style="margin-top: 4px; padding-left: 12px; border-left: 2px solid #e5e7eb;">
+                                                        ${Object.entries(v).map(([subK, subV]) => `
+                                                            <div style="padding: 2px 0; font-size: 0.85rem;">
+                                                                <span style="color: #6b7280;">${subK}:</span>
+                                                                <span style="color: #374151;">${subV}</span>
+                                                            </div>
+                                                        `).join('')}
+                                                    </div>
+                                                ` : `<span style="color: #374151; margin-left: 4px;">${v}</span>`}
                                             </div>
                                         `).join('')}
                                     </div>
