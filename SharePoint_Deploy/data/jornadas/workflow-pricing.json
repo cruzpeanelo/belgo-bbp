@@ -89,7 +89,25 @@
     ],
     "reuniões": "NAO COBERTO - Reunião 16/12 adiou para 17/12 (sem transcrição)"
   },
-  "alertaFonte": "IMPORTANTE: Workflow Pricing NAO foi discutido na reunião 16/12/2025. Foi adiado para 17/12 conforme transcrição: 'Faltou workflow Price fica para amanha'. Não existe transcrição de 17/12.",
+  "fonteDocumentoOficial": {
+    "arquivo": "0_PricingWF_ Pricing_Cotação_Ordem de venda (1).pdf",
+    "dataCriacao": "27/10/2025",
+    "ultimaAtualizacao": "30/10/2025",
+    "descricao": "Documento oficial de entrega de WF Pricing, Condition Pricing, Código imposto, Cotação e OV via CRM"
+  },
+  "prerequisitosConta": {
+    "fonte": "PDF Oficial - Documento de Entrega WF Pricing (30/10/2025)",
+    "obrigatorios": [
+      "Código SAP",
+      "Escritório de Vendas",
+      "Vendedor atribuído",
+      "Canais de distribuição"
+    ],
+    "vinculacoes": [
+      "Vendedor deve estar devidamente vinculado ao Escritório de Vendas no Salesforce E no SAP ECC",
+      "Escritório de Vendas no Salesforce deve estar devidamente atribuído a um responsável (gerente) para aprovação do desconto"
+    ]
+  },
   "hierarquiaMateriais": [
     {
       "nível": 1,
@@ -473,17 +491,41 @@
   },
   "campoYDCF": {
     "nome": "YDCF",
-    "descrição": "Desc. Fixo Cliente (Desconto Fixo por Cliente)",
+    "descricaoCompleta": "WS-Desc. Fixo Client (Desconto Fixo por Cliente)",
     "origem": "SAP",
-    "preenchimento": "Via Workflow Pricing",
-    "propagação": {
+    "cadastro": "Via Workflow Pricing no Salesforce",
+    "transacaoCadastroSAP": "VK11",
+    "sequencias": [
+      { "seq": "010", "descricao": "EscrVendas / CanalDistr / Cliente / Material" },
+      { "seq": "020", "descricao": "EscrVendas / CanalDistr / Cliente / Grp.merc." },
+      { "seq": "030", "descricao": "EscrVendas / CanalDistr / Cliente / Grp.material" }
+    ],
+    "propagacao": {
       "etapa1": "Workflow Pricing criado no Salesforce",
-      "etapa2": "Aprovado e sincronizado com SAP",
-      "etapa3": "SAP registra na tabela YDCF",
+      "etapa2": "Aprovado pelo Time Pricing e Gerente do Escritório",
+      "etapa3": "Sistema cria condition YDCF no SAP automaticamente",
       "etapa4": "Salesforce consulta YDCF ao criar cotação",
-      "etapa5": "Desconto aplicado automáticamente na cotação"
+      "etapa5": "Desconto aplicado automaticamente na cotação"
     },
-    "validaçãoTester": "Documento 880788 válidou propagação end-to-end"
+    "validacaoTester": "Documento 880788 validou propagação end-to-end"
+  },
+  "conditionYVND": {
+    "nome": "YVND",
+    "descricao": "Condition de permissividade",
+    "nota": "YDCF delimita a condition YVND com permissividade"
+  },
+  "regraLimbo": {
+    "fonte": "PDF Oficial - Seção WF Pricing/Limbo",
+    "descricao": "Desconto dentro do percentual aprovado via YDCF não faz a OV cair no Limbo",
+    "comportamento": "YDCF não fixa o preço de lista, mas fixa o percentual de desconto aprovado",
+    "ajusteAutomatico": "Em casos de alteração no preço base (manual ou por reprecificação automática), o valor absoluto do desconto é ajustado proporcionalmente, mantendo o percentual definido na YDCF",
+    "integracao": "Desconto integrado do SAP → SFDC, tanto em cotações quanto em ordens de venda",
+    "regraYEDI": "Recálculo da YEDI sempre que houver YDFC (% Desconto Cliente) na pricing da OV para evitar arredondamentos/distorções e manter coerência entre YEDI e limite aprovado YDFC"
+  },
+  "esquemasCalculo": {
+    "YVWS01": "Esquema de cálculo padrão",
+    "YVWS16": "Esquema de cálculo alternativo",
+    "nota": "YDFC (WS-Desconto Cross) movida para final do nível destes esquemas (processo cross-company)"
   },
   "contextoReunião": {
     "projeto": "GTM (Go To Market) / CRM",
@@ -604,7 +646,8 @@
     }
   ],
   "totalDocumentos": 16,
-  "últimaAtualização": "2026-01-13T11:36:26.079058",
+  "ultimaAtualizacao": "2026-01-14T10:30:00.000000",
+  "atualizacaoPDF": "Dados atualizados com base no PDF oficial de entrega (30/10/2025)",
   "documentosGerais": [
     {
       "tipo": "Plano de Testes Exploratorios",

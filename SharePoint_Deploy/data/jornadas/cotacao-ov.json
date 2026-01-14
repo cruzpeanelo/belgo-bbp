@@ -75,19 +75,38 @@
     "10/12/2025 - Discussão sobre Cotação e OV",
     "16/12/2025 - Revisão de integração com SAP"
   ],
+  "fonteDocumentoOficial": {
+    "arquivo": "0_PricingWF_ Pricing_Cotação_Ordem de venda (1).pdf",
+    "dataCriacao": "27/10/2025",
+    "ultimaAtualizacao": "30/10/2025",
+    "descricao": "Documento oficial de entrega de WF Pricing, Condition Pricing, Código imposto, Cotação e OV via CRM"
+  },
   "fontesVerificadas": {
-    "reunião10dez": [
+    "reuniao10dez": [
       "Processo de Cotação e OV",
       "Integração com SAP"
     ],
-    "reunião16dez": [
+    "reuniao16dez": [
       "Revisão de integração"
     ],
     "cadernoTestes": [
       "CT-81 a CT-101 - Cotação e OV",
       "CT-102 a CT-108 - Conditions SAP"
     ],
-    "nota": "Detalhes técnicos (ATP, YDCF, Farol) vem do Caderno de Testes"
+    "pdfOficial": "Documento de entrega WF Pricing (30/10/2025) - Conditions, Impostos, Cotação/OV"
+  },
+  "prerequisitosConta": {
+    "fonte": "PDF Oficial - Documento de Entrega (30/10/2025)",
+    "obrigatorios": [
+      "Código SAP",
+      "Escritório de Vendas",
+      "Vendedor atribuído",
+      "Canais de distribuição",
+      "Alocação de crédito para pagamentos a prazo"
+    ],
+    "vinculacoes": [
+      "Vendedor deve estar devidamente vinculado ao Escritório de Vendas no Salesforce E no SAP ECC"
+    ]
   },
   "campos": [
     {
@@ -193,6 +212,42 @@
         "Amarelo (Atenção)",
         "Vermelho (Bloqueado)"
       ]
+    },
+    {
+      "campo": "Pessoa de Contato",
+      "descrição": "Contato do cliente associado à cotação",
+      "preenchimento": "Seleção",
+      "validação": "Deve ser Contato cadastrado na Conta (NÃO Tipo de Contato/Docs Fiscais)",
+      "obrigatório": true,
+      "fonte": "PDF Oficial - Página 5"
+    },
+    {
+      "campo": "INCOTERMS",
+      "descrição": "Modalidade de frete (EXW ou CIF)",
+      "preenchimento": "Seleção",
+      "validação": "-",
+      "obrigatório": false,
+      "valores": [
+        "EXW",
+        "Custo, Seguro & Frete (CIF)"
+      ],
+      "fonte": "PDF Oficial - Página 6"
+    },
+    {
+      "campo": "Dias Adicionais",
+      "descrição": "Dias adicionais para entrega",
+      "preenchimento": "Manual",
+      "validação": "Numérico",
+      "obrigatório": false,
+      "fonte": "PDF Oficial - Página 6"
+    },
+    {
+      "campo": "Nº do Pedido do Cliente",
+      "descrição": "Número do pedido informado pelo cliente",
+      "preenchimento": "Manual",
+      "validação": "-",
+      "obrigatório": false,
+      "fonte": "PDF Oficial - Página 6"
     }
   ],
   "regrasNegócio": [
@@ -226,9 +281,15 @@
       "descrição": "Cotações possuem data de validade, apos a qual preços e condições não sao mais garantidos"
     }
   ],
-  "sistemasTécnicos": [
+  "sistemasTecnicos": [
     "Salesforce",
     "SAP ECC"
+  ],
+  "transacoesSAP": [
+    "VK11 - Cadastro de Conditions",
+    "J1BTAX - Regras gerais de impostos",
+    "ZSD190 - Cenários de sobreposição J1BTAX",
+    "ZWSSD067 - Parametrizações de materiais"
   ],
   "integrações": [
     {
@@ -433,38 +494,90 @@
       "histórico": "Sistema mantem histórico de YDCF aplicados em cada cotação"
     }
   },
-  "conditions": {
-    "avisoVerificação": "ATENCAO: Os códigos de condition (YAC1, YPOL, YESC, YACR) sao exemplos baseados em padroes SAP. Apenas YDCF foi confirmado no Tester 880788. Os demais códigos precisam ser validados.",
-    "descrição": "Conditions de pricing aplicaveis na cotação",
-    "tipos": [
+  "conditionsConfirmadas": {
+    "fonte": "PDF Oficial - Documento de Entrega WF Pricing (30/10/2025)",
+    "transacaoCadastro": "VK11",
+    "descricao": "Conditions de pricing aplicaveis na cotação - CONFIRMADAS",
+    "conditions": [
       {
-        "código": "YAC1",
-        "nome": "Acrescimo Canal",
-        "descrição": "Ajuste por canal de venda"
+        "codigo": "YAC1",
+        "nome": "Ajuste por Canal",
+        "sequencias": [
+          { "seq": "018", "tabela": "YCD1", "descricao": "CanalDistr / Set.Ind / Material" },
+          { "seq": "019", "tabela": "YCD1", "descricao": "CanalDistr / Set.Ind / Grupo Mercadoria" },
+          { "seq": "020", "tabela": "YCD1", "descricao": "Centro / CanalDistr / Set.Ind / Grupo de Material" },
+          { "seq": "021", "tabela": "YCD1", "descricao": "CanalDistr / Set.Ind / Grupo de Material" }
+        ]
       },
       {
-        "código": "YPOL",
-        "nome": "Politica Comercial",
-        "descrição": "Desconto por politica vigente"
+        "codigo": "YACR",
+        "nome": "WS-Acréscimo Estado %",
+        "sequencias": [
+          { "seq": "021", "tabela": "YACR", "descricao": "Escritório Vendas / Região / Centro" }
+        ]
       },
       {
-        "código": "YESC",
-        "nome": "Escala",
-        "descrição": "Desconto por escala de volume"
+        "codigo": "YPOL",
+        "nome": "WS-Política Comercial",
+        "sequencias": [
+          { "seq": "001", "descricao": "Prog. fidel. / Escr. Vendas / Grupo Mercadoria" },
+          { "seq": "002", "descricao": "Prog. fidel. / Escr. Vendas / Grupo Material" },
+          { "seq": "003", "descricao": "Escr. Vendas / Canal / Set. Ind / Cluster / Grupo Mercadoria" },
+          { "seq": "004", "descricao": "Escr. Vendas / Canal / Set. Ind / Cluster / Grupo Material" }
+        ]
       },
       {
-        "código": "YACR",
-        "nome": "Acrescimo Regional",
-        "descrição": "Ajuste por região geografica"
+        "codigo": "YESC",
+        "nome": "Política de Escala",
+        "sequencias": [
+          { "seq": "001", "descricao": "Prog. fidel. / Escr. Vendas / Grupo Mercadoria" },
+          { "seq": "002", "descricao": "Prog. fidel. / Escr. Vendas / Grupo Material" },
+          { "seq": "003", "descricao": "Escr. Vendas / Canal / Set. Ind / Cluster / Grupo Mercadoria" },
+          { "seq": "004", "descricao": "Escr. Vendas / Canal / Set. Ind / Cluster / Grupo Material" }
+        ]
       },
       {
-        "código": "YDCF",
-        "nome": "Desconto Flexivel",
-        "descrição": "Desconto aprovado via workflow (principal)"
+        "codigo": "YDCF",
+        "nome": "WS-Desc. Fixo Client",
+        "cadastro": "Via Workflow Pricing no Salesforce",
+        "sequencias": [
+          { "seq": "010", "descricao": "EscrVendas / CanalDistr / Cliente / Material" },
+          { "seq": "020", "descricao": "EscrVendas / CanalDistr / Cliente / Grp.merc." },
+          { "seq": "030", "descricao": "EscrVendas / CanalDistr / Cliente / Grp.material" }
+        ]
+      },
+      {
+        "codigo": "YDFC",
+        "nomeAnterior": "WS-Desc. Fixo Client",
+        "nomeAtual": "WS-Desconto Cross",
+        "posicao": "Final do nível do esquema de cálculo (YVWS01 e YVWS16)",
+        "uso": "Processo cross-company apenas",
+        "alerta": "Foi renomeada - necessário teste de regressão para verificar impactos"
       }
+    ]
+  },
+  "codigoImpostos": {
+    "fonte": "PDF Oficial - Seção Código Impostos",
+    "logica": "Atribuição automática de código de imposto I3 ou C3 conforme canal de distribuição",
+    "transacoesSAP": [
+      { "codigo": "J1BTAX", "descricao": "Regras gerais de impostos" },
+      { "codigo": "ZSD190", "descricao": "Cenários de sobreposição J1BTAX" },
+      { "codigo": "VK11 (ISTN)", "descricao": "Exceções para NCMs/Clientes sem ICMS ST" }
     ],
-    "sequenciaCalculo": "YAC1 -> YPOL -> YESC -> YACR -> YDCF",
-    "nota": "YDCF e aplicado por último, sobre o preço ja com outras conditions"
+    "alerta": "Ponto sensível - deve-se estressar nos testes e abranger os cenários gerais Belgo para certificar a correta tributação nas vendas",
+    "responsavel": "Área fiscal para parametrizações fiscais e validação de cenários (OV/Nota fiscal)"
+  },
+  "regraYEDI": {
+    "fonte": "PDF Oficial - Seção WF Pricing/Limbo",
+    "descricao": "Recálculo da YEDI sempre que houver YDFC (% Desconto Cliente) na pricing da OV",
+    "motivo": "Evitar arredondamentos/distorções e manter coerência entre YEDI e limite aprovado YDFC"
+  },
+  "transacaoZWSSSD067": {
+    "fonte": "PDF Oficial",
+    "descricao": "Transação SAP para parametrizações de materiais",
+    "uso": "Materiais devem estar parametrizados corretamente para sincronização funcionar",
+    "erroComum": "ERRO! Falta cadastro para canal X, condição Y e segmento Z na transação ZWSSD067",
+    "solucao": "Correção no SAP vigora automaticamente no Salesforce mediante nova sincronização"
   },
   "pendências": [
     "Integração com API de preços do SAP",
@@ -713,7 +826,8 @@
     }
   ],
   "totalDocumentos": 6,
-  "últimaAtualização": "2026-01-13T11:36:26.118118",
+  "ultimaAtualizacao": "2026-01-14T15:30:00.000000",
+  "atualizacaoPDF": "Dados atualizados com base no PDF oficial de entrega (30/10/2025) - Conditions com sequências confirmadas, impostos I3/C3, transação ZWSSD067, canais de distribuição Belgo, área de vendas, campos cotação (Pessoa de Contato, INCOTERMS, Dias Adicionais), abas OV (Order Tracking), status de bloqueio, indicadores de pricing",
   "documentosGerais": [
     {
       "tipo": "Plano de Testes Exploratorios",
@@ -727,5 +841,69 @@
       "tipo": "App Guidance",
       "id": "app guidance"
     }
-  ]
+  ],
+  "canaisDistribuicaoBelgo": {
+    "fonte": "PDF Oficial - Página 6",
+    "descricao": "Canais de Distribuição disponíveis para clientes Belgo",
+    "canais": [
+      { "codigo": "20", "nome": "Indústrias" },
+      { "codigo": "25", "nome": "Venda Interna" },
+      { "codigo": "30", "nome": "Distribuidor" },
+      { "codigo": "40", "nome": "Consumidores" },
+      { "codigo": "51", "nome": "E-Commerce" }
+    ]
+  },
+  "areaVendasBelgo": {
+    "fonte": "PDF Oficial - Página 6",
+    "organizacaoVendas": "Org Vendas BBA",
+    "setorAtividade": { "codigo": "55", "nome": "Produto Acabado" }
+  },
+  "abasOrdemVenda": {
+    "fonte": "PDF Oficial - Página 9",
+    "descricao": "Abas disponíveis na tela de Ordem de Venda no Salesforce",
+    "abas": [
+      { "nome": "Fluxo", "descricao": "Visualização do fluxo de aprovação e status" },
+      { "nome": "Detalhes", "descricao": "Informações do pedido, bloqueios, status" },
+      { "nome": "Order Tracking", "descricao": "Acompanhamento do trâmite da ordem" },
+      { "nome": "Relacionado", "descricao": "Itens e documentos relacionados" }
+    ]
+  },
+  "statusBloqueio": {
+    "fonte": "PDF Oficial - Página 10",
+    "descricao": "Tipos de status de bloqueio na Ordem de Venda",
+    "tiposStatus": [
+      { "campo": "Status de Bloqueio do Item", "exemplo": "WS-Limbo (Preço)" },
+      { "campo": "Bloqueio de Remessa", "descricao": "Status de bloqueio de remessa" },
+      { "campo": "Status Geral de Bloqueio", "exemplo": "Bloqueado (C)" },
+      { "campo": "Status de Crédito", "exemplo": "Operação Não OK (B)" }
+    ],
+    "farolStatus": "Exibido no cabeçalho da Ordem (Verde/Amarelo/Vermelho)"
+  },
+  "indicadoresPricing": {
+    "fonte": "PDF Oficial - Página 8",
+    "descricao": "Indicadores adicionais visíveis no ícone de dinheiro na tabela de produtos",
+    "indicadores": [
+      { "sigla": "MKP", "descricao": "Markup" },
+      { "sigla": "RAG", "descricao": "RAG X Qtd/kg" },
+      { "sigla": "Parametrização", "descricao": "Status de parametrização do material" },
+      { "sigla": "PVL", "descricao": "Preço de Venda Líquido" },
+      { "sigla": "ICMS Incluso no Preço", "descricao": "Percentual de ICMS incluído no preço" },
+      { "sigla": "IPI", "descricao": "Imposto sobre Produtos Industrializados" }
+    ]
+  },
+  "alertasSincronizacao": {
+    "fonte": "PDF Oficial - Página 7",
+    "descricao": "Tipos de alertas exibidos após sincronização com SAP",
+    "tipos": [
+      { "cor": "Amarelo", "tipo": "Alerta", "descricao": "Aviso que não bloqueia a operação" },
+      { "cor": "Vermelho", "tipo": "Erro", "descricao": "Erro bloqueante que requer correção antes de prosseguir" }
+    ],
+    "exemploErro": "ERRO! Falta cadastro para canal 20, condição WA01 e segmento 3G na transação ZWSSD067"
+  },
+  "pendenciaCentros": {
+    "fonte": "PDF Oficial - Página 2",
+    "descricao": "Necessário que o time de negócio Belgo reporte a listagem de centros que deve ser contemplada no SFDC",
+    "status": "Pendente de definição pelo time Belgo",
+    "impacto": "Bloqueante para adequação completa do processo de Cotação e OV Belgo"
+  }
 }

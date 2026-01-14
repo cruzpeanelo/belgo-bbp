@@ -297,6 +297,19 @@
 
                     <div style="margin-bottom: 20px;">
                         <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #374151;">
+                            URL do Webhook do Teams (Incoming Webhook)
+                        </label>
+                        <input type="text" id="teams-webhook-url"
+                            placeholder="https://belgobekaert.webhook.office.com/webhookb2/..."
+                            style="width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 14px;"
+                            onchange="saveTeamsWebhookUrl()">
+                        <small style="color: #9ca3af; display: block; margin-top: 8px;">
+                            Cole aqui a URL do Incoming Webhook do canal (para enviar mensagens)
+                        </small>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #374151;">
                             URL do Canal do Teams
                         </label>
                         <input type="text" id="teams-channel-url"
@@ -304,21 +317,36 @@
                             style="width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 14px;"
                             onchange="saveTeamsChannelUrl()">
                         <small style="color: #9ca3af; display: block; margin-top: 8px;">
-                            Cole aqui o link do canal onde as notificações são enviadas
+                            Cole aqui o link do canal para abrir após enviar notificações
                         </small>
                     </div>
 
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button onclick="testTeamsChannel()" class="btn" style="background: #6264A7; color: white; padding: 10px 20px;">
-                            🧪 Testar Abertura do Teams
+                        <button onclick="testTeamsWebhook()" class="btn" style="background: #6264A7; color: white; padding: 10px 20px;">
+                            🧪 Testar Envio de Mensagem
                         </button>
-                        <button onclick="clearTeamsChannelUrl()" class="btn" style="background: #ef4444; color: white; padding: 10px 20px;">
-                            🗑️ Limpar
+                        <button onclick="testTeamsChannel()" class="btn" style="background: #505AC9; color: white; padding: 10px 20px;">
+                            📺 Testar Abertura do Canal
+                        </button>
+                        <button onclick="clearTeamsConfig()" class="btn" style="background: #ef4444; color: white; padding: 10px 20px;">
+                            🗑️ Limpar Tudo
                         </button>
                     </div>
 
-                    <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 15px; margin-top: 20px;">
-                        <strong style="color: #0369a1;">Como obter a URL do canal:</strong>
+                    <div style="background: #fef3c7; border: 1px solid #fcd34d; border-radius: 8px; padding: 15px; margin-top: 20px;">
+                        <strong style="color: #92400e;">Como obter a URL do Webhook (Incoming Webhook):</strong>
+                        <ol style="margin: 10px 0 0 20px; color: #78350f; font-size: 0.9rem;">
+                            <li>Abra o Microsoft Teams</li>
+                            <li>Navegue até o canal desejado</li>
+                            <li>Clique nos 3 pontos (...) ao lado do nome do canal</li>
+                            <li>Selecione "Conectores" ou "Connectors"</li>
+                            <li>Procure "Incoming Webhook" e clique em "Configurar"</li>
+                            <li>Dê um nome (ex: "Cockpit GTM") e copie a URL gerada</li>
+                        </ol>
+                    </div>
+
+                    <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 15px; margin-top: 15px;">
+                        <strong style="color: #0369a1;">Como obter a URL do Canal:</strong>
                         <ol style="margin: 10px 0 0 20px; color: #0c4a6e; font-size: 0.9rem;">
                             <li>Abra o Microsoft Teams</li>
                             <li>Navegue até o canal desejado</li>
@@ -454,42 +482,74 @@
         // CONFIGURAÇÃO DO MICROSOFT TEAMS
         // =====================================================
 
+        function saveTeamsWebhookUrl() {
+            const url = document.getElementById('teams-webhook-url').value.trim();
+            if (url) {
+                localStorage.setItem('teamsWebhookUrl', url);
+                Utils.showToast('URL do Webhook salva com sucesso!', 'success');
+            }
+        }
+
         function saveTeamsChannelUrl() {
             const url = document.getElementById('teams-channel-url').value.trim();
             if (url) {
-                Utils.setTeamsChannelUrl(url);
+                localStorage.setItem('teamsChannelUrl', url);
                 Utils.showToast('URL do canal salva com sucesso!', 'success');
             }
+        }
+
+        async function testTeamsWebhook() {
+            const webhookUrl = document.getElementById('teams-webhook-url').value.trim();
+            if (!webhookUrl) {
+                Utils.showToast('Digite a URL do Webhook primeiro', 'warning');
+                return;
+            }
+            // Salvar antes de testar
+            localStorage.setItem('teamsWebhookUrl', webhookUrl);
+
+            // Criar card de teste
+            const testCard = Utils.formatTeamsCard('teste', 'Teste de Conexão', [
+                { name: 'Origem', value: 'Cockpit GTM Belgo' },
+                { name: 'Status', value: 'Webhook configurado com sucesso!' },
+                { name: 'Data/Hora', value: new Date().toLocaleString('pt-BR') }
+            ]);
+
+            await Utils.sendToTeams(testCard, false);
         }
 
         function testTeamsChannel() {
             const url = document.getElementById('teams-channel-url').value.trim();
             if (!url) {
-                Utils.showToast('Digite uma URL do canal primeiro', 'warning');
+                Utils.showToast('Digite a URL do canal primeiro', 'warning');
                 return;
             }
             // Salvar antes de testar
-            Utils.setTeamsChannelUrl(url);
+            localStorage.setItem('teamsChannelUrl', url);
             Utils.openTeamsChannel();
         }
 
-        function clearTeamsChannelUrl() {
+        function clearTeamsConfig() {
+            document.getElementById('teams-webhook-url').value = '';
             document.getElementById('teams-channel-url').value = '';
+            localStorage.removeItem('teamsWebhookUrl');
             localStorage.removeItem('teamsChannelUrl');
-            Utils.teamsChannelUrl = '';
-            Utils.showToast('URL do canal removida', 'success');
+            Utils.showToast('Configurações do Teams removidas', 'success');
         }
 
-        function loadTeamsChannelUrl() {
-            const savedUrl = localStorage.getItem('teamsChannelUrl');
-            if (savedUrl) {
-                document.getElementById('teams-channel-url').value = savedUrl;
+        function loadTeamsConfig() {
+            const savedWebhookUrl = localStorage.getItem('teamsWebhookUrl');
+            const savedChannelUrl = localStorage.getItem('teamsChannelUrl');
+            if (savedWebhookUrl) {
+                document.getElementById('teams-webhook-url').value = savedWebhookUrl;
+            }
+            if (savedChannelUrl) {
+                document.getElementById('teams-channel-url').value = savedChannelUrl;
             }
         }
 
         // Carregar configurações
         loadConfig();
-        loadTeamsChannelUrl();
+        loadTeamsConfig();
     </script>
 </body>
 </html>
