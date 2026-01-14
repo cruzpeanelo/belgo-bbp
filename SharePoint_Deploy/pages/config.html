@@ -291,35 +291,46 @@
                     </h3>
                 </div>
                 <div style="padding: 20px;">
-                    <p style="color: #6b7280; margin-bottom: 20px;">
-                        Configure a URL do canal do Teams para abrir automaticamente após enviar notificações.
-                    </p>
-
-                    <div style="margin-bottom: 20px;">
-                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #374151;">
-                            URL do Webhook do Teams (Incoming Webhook)
-                        </label>
-                        <input type="text" id="teams-webhook-url"
-                            placeholder="https://belgobekaert.webhook.office.com/webhookb2/..."
-                            style="width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 14px;"
-                            onchange="saveTeamsWebhookUrl()">
-                        <small style="color: #9ca3af; display: block; margin-top: 8px;">
-                            Cole aqui a URL do Incoming Webhook do canal (para enviar mensagens)
-                        </small>
+                    <div style="background: #d1fae5; border: 1px solid #10b981; border-radius: 8px; padding: 12px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.5rem;">✅</span>
+                        <div>
+                            <strong style="color: #065f46;">Teams já configurado!</strong>
+                            <p style="color: #047857; margin: 0; font-size: 0.9rem;">O webhook e canal do Teams já vêm pré-configurados. Você pode usar as funções de envio normalmente.</p>
+                        </div>
                     </div>
 
-                    <div style="margin-bottom: 20px;">
-                        <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #374151;">
-                            URL do Canal do Teams
-                        </label>
-                        <input type="text" id="teams-channel-url"
-                            placeholder="https://teams.microsoft.com/l/channel/..."
-                            style="width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 14px;"
-                            onchange="saveTeamsChannelUrl()">
-                        <small style="color: #9ca3af; display: block; margin-top: 8px;">
-                            Cole aqui o link do canal para abrir após enviar notificações
-                        </small>
-                    </div>
+                    <details style="margin-bottom: 20px;">
+                        <summary style="cursor: pointer; font-weight: 600; color: #374151; padding: 10px; background: #f3f4f6; border-radius: 8px;">
+                            ⚙️ Configuração Avançada (opcional - sobrescrever URLs padrão)
+                        </summary>
+                        <div style="padding: 15px; background: #f9fafb; border-radius: 0 0 8px 8px; margin-top: -5px;">
+                            <div style="margin-bottom: 20px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #374151;">
+                                    URL do Webhook do Teams (Incoming Webhook)
+                                </label>
+                                <input type="text" id="teams-webhook-url"
+                                    placeholder="Usando URL padrão pré-configurada..."
+                                    style="width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 14px;"
+                                    onchange="saveTeamsWebhookUrl()">
+                                <small style="color: #9ca3af; display: block; margin-top: 8px;">
+                                    Deixe em branco para usar a URL padrão pré-configurada
+                                </small>
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #374151;">
+                                    URL do Canal do Teams
+                                </label>
+                                <input type="text" id="teams-channel-url"
+                                    placeholder="Usando URL padrão pré-configurada..."
+                                    style="width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 14px;"
+                                    onchange="saveTeamsChannelUrl()">
+                                <small style="color: #9ca3af; display: block; margin-top: 8px;">
+                                    Deixe em branco para usar a URL padrão pré-configurada
+                                </small>
+                            </div>
+                        </div>
+                    </details>
 
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                         <button onclick="testTeamsWebhook()" class="btn" style="background: #6264A7; color: white; padding: 10px 20px;">

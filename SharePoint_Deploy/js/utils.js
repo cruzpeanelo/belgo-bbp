@@ -230,19 +230,22 @@ const Utils = {
     // INTEGRAÇÃO MICROSOFT TEAMS
     // =====================================================
 
-    // Webhook URL do Teams - Carregado de localStorage para segurança
-    // NOTA: URLs sensíveis não devem ficar hardcoded no código fonte
+    // URLs padrão do Teams (pré-configuradas)
+    _defaultTeamsWebhookUrl: 'https://arcelormittal.webhook.office.com/webhookb2/d931a635-801d-4032-ae69-27f6ee2c88af@37cd273a-1cec-4aae-a297-41480ea54f8d/IncomingWebhook/6284fbb6970849d8b57350074fa5ebff/8dd31791-e6bc-444b-b6c5-e4b6d73f1e5b/V28WZxUnp0pMRDYdKBFpYYVN6kJcnybTAzf0u5KUh9tvg1',
+    _defaultTeamsChannelUrl: 'https://teams.microsoft.com/l/channel/19%3Ad931a635-801d-4032-ae69-27f6ee2c88af%40thread.tacv2/GTM%20-%20Cockpit?groupId=d931a635-801d-4032-ae69-27f6ee2c88af',
+
+    // Webhook URL do Teams - usa padrão se não houver configuração local
     get teamsWebhookUrl() {
-        return localStorage.getItem('teamsWebhookUrl') || '';
+        return localStorage.getItem('teamsWebhookUrl') || this._defaultTeamsWebhookUrl;
     },
 
     set teamsWebhookUrl(url) {
         localStorage.setItem('teamsWebhookUrl', url);
     },
 
-    // URL do canal do Teams - Carregado de localStorage
+    // URL do canal do Teams - usa padrão se não houver configuração local
     get teamsChannelUrl() {
-        return localStorage.getItem('teamsChannelUrl') || '';
+        return localStorage.getItem('teamsChannelUrl') || this._defaultTeamsChannelUrl;
     },
 
     set teamsChannelUrl(url) {
