@@ -18,6 +18,9 @@ const Testes = {
     },
 
     async init() {
+        // Mostrar skeletons imediatamente
+        this.showSkeletons();
+
         await this.waitForData();
         this.parseUrlParams();  // Ler parametros da URL primeiro
         this.populateCategorias();
@@ -25,6 +28,37 @@ const Testes = {
         this.renderBreadcrumb();  // Mostrar origem se veio de jornadas
         this.renderResumo();
         this.renderTabela();
+    },
+
+    // Mostrar skeleton loaders enquanto carrega
+    showSkeletons() {
+        // Skeleton para resumo (métricas)
+        const resumoContainer = document.getElementById('testes-resumo');
+        if (resumoContainer) {
+            resumoContainer.innerHTML = Array(4).fill(0).map(() => `
+                <div class="skeleton-metric">
+                    <div class="skeleton skeleton-metric-icon"></div>
+                    <div class="skeleton-metric-info">
+                        <div class="skeleton skeleton-metric-value"></div>
+                        <div class="skeleton skeleton-metric-label"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Skeleton para tabela
+        const tbody = document.getElementById('testes-tbody');
+        if (tbody) {
+            tbody.innerHTML = Array(10).fill(0).map(() => `
+                <tr>
+                    <td><div class="skeleton" style="width: 50px; height: 1rem;"></div></td>
+                    <td><div class="skeleton" style="width: 100%; height: 1rem;"></div></td>
+                    <td><div class="skeleton" style="width: 100px; height: 1rem;"></div></td>
+                    <td><div class="skeleton" style="width: 70px; height: 1.5rem; border-radius: 12px;"></div></td>
+                    <td><div class="skeleton" style="width: 80px; height: 1.5rem;"></div></td>
+                </tr>
+            `).join('');
+        }
     },
 
     parseUrlParams() {

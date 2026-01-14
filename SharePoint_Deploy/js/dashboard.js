@@ -5,13 +5,81 @@
 const Dashboard = {
     // Inicializar dashboard
     async init() {
+        // Mostrar skeletons imediatamente
+        this.showSkeletons();
+
         // Aguardar App carregar dados
         await this.waitForData();
+
+        // Substituir skeletons por dados reais
         this.renderMetrics();
         this.renderCategoriasProgress();
         this.renderPontosCriticos();
         this.renderWorkshops();
         this.updateLastUpdate();
+    },
+
+    // Mostrar skeleton loaders enquanto carrega
+    showSkeletons() {
+        // Skeleton para métricas
+        const metricsContainer = document.getElementById('metrics-grid');
+        if (metricsContainer) {
+            metricsContainer.innerHTML = Array(8).fill(0).map(() => `
+                <div class="skeleton-metric">
+                    <div class="skeleton skeleton-metric-icon"></div>
+                    <div class="skeleton-metric-info">
+                        <div class="skeleton skeleton-metric-value"></div>
+                        <div class="skeleton skeleton-metric-label"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Skeleton para categorias
+        const categoriasContainer = document.getElementById('categorias-progress');
+        if (categoriasContainer) {
+            categoriasContainer.innerHTML = Array(5).fill(0).map(() => `
+                <div class="skeleton-progress">
+                    <div class="skeleton-progress-header">
+                        <div class="skeleton skeleton-progress-label"></div>
+                        <div class="skeleton skeleton-progress-value"></div>
+                    </div>
+                    <div class="skeleton skeleton-progress-bar"></div>
+                </div>
+            `).join('');
+        }
+
+        // Skeleton para pontos críticos
+        const pontosContainer = document.getElementById('pontos-criticos-list');
+        if (pontosContainer) {
+            pontosContainer.innerHTML = Array(4).fill(0).map(() => `
+                <div class="skeleton-card" style="margin-bottom: 10px;">
+                    <div class="skeleton-card-header">
+                        <div class="skeleton skeleton-card-title"></div>
+                        <div class="skeleton skeleton-card-badge"></div>
+                    </div>
+                    <div class="skeleton skeleton-card-line" style="width: 90%;"></div>
+                </div>
+            `).join('');
+        }
+
+        // Skeleton para workshops
+        const workshopsContainer = document.getElementById('workshops-timeline');
+        if (workshopsContainer) {
+            workshopsContainer.innerHTML = Array(3).fill(0).map(() => `
+                <div class="skeleton-card" style="margin-bottom: 15px;">
+                    <div class="skeleton-card-header">
+                        <div class="skeleton skeleton-card-title" style="width: 180px;"></div>
+                        <div class="skeleton skeleton-card-badge"></div>
+                    </div>
+                    <div class="skeleton skeleton-card-line" style="width: 100px; margin-top: 5px;"></div>
+                    <div style="display: flex; gap: 8px; margin-top: 10px;">
+                        <div class="skeleton" style="width: 80px; height: 20px; border-radius: 12px;"></div>
+                        <div class="skeleton" style="width: 100px; height: 20px; border-radius: 12px;"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
     },
 
     // Aguardar dados carregarem
