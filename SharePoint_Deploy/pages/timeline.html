@@ -185,6 +185,139 @@
             font-size: 0.85rem;
             opacity: 0.8;
         }
+        /* Estrutura Organizacional */
+        .org-structure {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .org-structure h3 {
+            color: #1f2937;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 10px;
+        }
+        .org-source {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+        .macro-setores {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .setor-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid #bae6fd;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+        .setor-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        .setor-nome {
+            font-weight: 700;
+            color: #0369a1;
+            margin-bottom: 5px;
+        }
+        .setor-info {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+        .regional-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .regional-card {
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        .regional-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .regional-header .icon {
+            font-size: 1.5rem;
+        }
+        .regional-nome {
+            font-weight: 700;
+            color: #166534;
+        }
+        .regional-gerente {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+        .regional-estados {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 8px;
+        }
+        .estado-tag {
+            background: #dcfce7;
+            color: #166534;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .acoes-pendentes {
+            background: #fef3c7;
+            border: 1px solid #fcd34d;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        .acoes-pendentes h4 {
+            color: #92400e;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .acao-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 10px 0;
+            border-bottom: 1px dashed #fcd34d;
+        }
+        .acao-item:last-child {
+            border-bottom: none;
+        }
+        .acao-check {
+            color: #f59e0b;
+            margin-right: 10px;
+        }
+        .acao-content {
+            flex: 1;
+        }
+        .acao-titulo {
+            font-weight: 600;
+            color: #1f2937;
+        }
+        .acao-responsavel {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+        .acao-status {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #fef3c7;
+            color: #92400e;
+        }
     </style>
 </head>
 <body>
@@ -501,10 +634,26 @@
                     <div class="step-deadline">Prazo: 28/01/2026</div>
                 </div>
             </div>
+
+            <!-- Estrutura Organizacional -->
+            <div class="org-structure" id="orgStructure">
+                <h3>Nova Estrutura Comercial - 4 Macro Setores</h3>
+                <div class="org-source" id="orgSource">Carregando...</div>
+
+                <div class="macro-setores" id="macroSetores"></div>
+
+                <div class="regional-section" id="regionalSection"></div>
+
+                <div class="acoes-pendentes" id="acoesPendentes">
+                    <h4>⚠️ Ações Pendentes</h4>
+                    <div id="acoesLista"></div>
+                </div>
+            </div>
         </div>
         </main>
     </div>
 
+    <script src="../js/utils.js"></script>
     <script>
         // Calcular dias restantes para GO Live
         function updateDaysRemaining() {
@@ -523,6 +672,98 @@
         }
 
         updateDaysRemaining();
+
+        // Carregar estrutura organizacional do JSON
+        async function loadOrgStructure() {
+            try {
+                const response = await fetch('../data/timeline.json');
+                const data = await response.json();
+
+                if (data.estruturaOrganizacional) {
+                    renderOrgStructure(data.estruturaOrganizacional);
+                } else {
+                    document.getElementById('orgStructure').style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Erro ao carregar estrutura organizacional:', error);
+                document.getElementById('orgStructure').style.display = 'none';
+            }
+        }
+
+        function renderOrgStructure(org) {
+            // Fonte/Data
+            const sourceEl = document.getElementById('orgSource');
+            sourceEl.innerHTML = `Fonte: ${org.fonte || 'Reunião'} | Definido em: ${org.dataDefinição || 'N/A'}`;
+
+            // Macro Setores
+            const setoresEl = document.getElementById('macroSetores');
+            const setorIcons = {
+                'Alta Energia': '⚡',
+                'Agricultura': '🌾',
+                'Indústria': '🏭',
+                'Construção Civil': '🏗️'
+            };
+
+            if (org.macroSetores && org.macroSetores.length > 0) {
+                setoresEl.innerHTML = org.macroSetores.map(setor => `
+                    <div class="setor-card">
+                        <div class="setor-icon">${setorIcons[setor.nome] || '📦'}</div>
+                        <div class="setor-nome">${setor.nome}</div>
+                        <div class="setor-info">${setor.keyAccounts} Key Accounts</div>
+                        <div class="setor-info">${setor.responsável || 'A definir'}</div>
+                    </div>
+                `).join('');
+            }
+
+            // Gestão Regional
+            const regionalEl = document.getElementById('regionalSection');
+            if (org.gestãoRegional && org.gestãoRegional.length > 0) {
+                regionalEl.innerHTML = org.gestãoRegional.map(reg => `
+                    <div class="regional-card">
+                        <div class="regional-header">
+                            <span class="icon">📍</span>
+                            <div>
+                                <div class="regional-nome">${reg.região}</div>
+                                <div class="regional-gerente">Gerente: ${reg.gerente}</div>
+                            </div>
+                        </div>
+                        ${reg.estados ? `
+                            <div class="regional-estados">
+                                ${reg.estados.map(e => `<span class="estado-tag">${e}</span>`).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `).join('');
+            }
+
+            // Ações Pendentes
+            const acoesEl = document.getElementById('acoesLista');
+            if (org.açõesPendentes && org.açõesPendentes.length > 0) {
+                acoesEl.innerHTML = org.açõesPendentes.map(acao => `
+                    <div class="acao-item">
+                        <span class="acao-check">☐</span>
+                        <div class="acao-content">
+                            <div class="acao-titulo">${acao.ação}</div>
+                            <div class="acao-responsavel">Responsável: ${acao.responsável}${acao.detalhes ? ` | ${acao.detalhes}` : ''}</div>
+                        </div>
+                        <span class="acao-status">${acao.status}</span>
+                    </div>
+                `).join('');
+            } else {
+                document.getElementById('acoesPendentes').style.display = 'none';
+            }
+        }
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        // Inicializar
+        loadOrgStructure();
     </script>
 </body>
 </html>
