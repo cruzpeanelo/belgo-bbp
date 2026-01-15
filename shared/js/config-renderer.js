@@ -1145,7 +1145,7 @@ const ConfigRenderer = {
         await this.carregarCampos();
 
         const modalHtml = `
-            <div class="modal-overlay" id="modalCriar" onclick="if(event.target === this) ConfigRenderer.fecharModalCriar()">
+            <div class="modal-overlay active" id="modalCriar" onclick="if(event.target === this) ConfigRenderer.fecharModalCriar()">
                 <div class="modal-content modal-criar">
                     <div class="modal-header">
                         <h3>➕ Adicionar ${this.entidade?.nome || 'Registro'}</h3>
