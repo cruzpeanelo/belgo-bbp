@@ -610,5 +610,65 @@
       "tipo": "App Guidance",
       "id": "app guidance"
     }
-  ]
+  ],
+  "citacoesTranscricoes": {
+    "07jan2026_BotEinstein": {
+      "fonte": "2026-01-07_bot-einstein-logistica.json",
+      "tema": "Bot Einstein para Autoatendimento via WhatsApp",
+      "resumo": "Reunião sobre o Bot Einstein MVP com consulta de conta, status de pedidos e documentos fiscais. Autenticação por email, transbordo para Smart Center.",
+      "citacoes": [
+        {
+          "autor": "Fabricio Franca",
+          "timestamp": "0:36",
+          "texto": "Equipe GTM atende comercial, marketing e planejamento. Duas soluções: relatório Power BI + autoatendimento WhatsApp"
+        },
+        {
+          "autor": "Fabricio Franca",
+          "timestamp": "1:57",
+          "texto": "Conversa guiada para informações de conta, criado como MVP"
+        },
+        {
+          "autor": "Fabricio Franca",
+          "timestamp": "3:38",
+          "texto": "Projeto iniciou em outubro, entregue em dezembro. 400.000 BRL aprovados para 2026"
+        },
+        {
+          "autor": "Fabricio Franca",
+          "timestamp": "11:16",
+          "texto": "Validação por email para segurança"
+        },
+        {
+          "autor": "Fabricio Franca",
+          "timestamp": "19:24",
+          "texto": "Casos para consultas não resolvidas tratados pelo Smart Center"
+        },
+        {
+          "autor": "Fabricio Franca",
+          "timestamp": "23:59",
+          "texto": "Número único de WhatsApp para todas as interações"
+        }
+      ],
+      "funcionalidadesMVP": [
+        "Consulta de conta/cliente",
+        "Status de pedidos",
+        "Documentos fiscais (XML, DANFE)",
+        "Autenticação por email cadastrado",
+        "Transbordo para Smart Center quando não resolvido"
+      ],
+      "orcamento2026": "R$ 400.000 aprovados para continuidade"
+    },
+    "10dez2025_NotificacoesWhatsApp": {
+      "fonte": "2025-12-10_cadastro-areas.txt",
+      "tema": "Notificações WhatsApp para Clientes",
+      "citacoes": [
+        {
+          "autor": "Bruno Machado",
+          "timestamp": "N/A",
+          "texto": "Todas as vezes que registra um pedido, uma OV para o cliente, ele está recebendo no WhatsApp dele que está cadastrado aí"
+        }
+      ],
+      "segmentosAtivos": ["Agro", "Protec"]
+    }
+  },
+  "últimaAtualizacaoEnriquecimento": "2026-01-15"
 }

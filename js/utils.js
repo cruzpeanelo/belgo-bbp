@@ -23,6 +23,14 @@ const Utils = {
         return Math.round((value / total) * 100);
     },
 
+    // Escapar HTML para prevenir XSS
+    escapeHTML(str) {
+        if (!str) return '';
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    },
+
     // Gerar cor do status
     getStatusColor(status) {
         const colors = {

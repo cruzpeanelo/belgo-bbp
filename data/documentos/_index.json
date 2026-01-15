@@ -262,7 +262,7 @@
       "status": "extraido",
       "total_paragrafos": 0,
       "total_tabelas": 1,
-      "arquivo_extrato": "data/documentos/extratos/891871-_Interface_síncrona_para_auto-preenchimento_no_SFDC.json"
+      "arquivo_extrato": "data/documentos/extratos/891871-_Interface_sincrona_para_auto-preenchimento_no_Salesforce.json"
     },
     {
       "id": "892940",
@@ -542,7 +542,7 @@
       "status": "extraido",
       "total_paragrafos": 8,
       "total_tabelas": 1,
-      "arquivo_extrato": "data/documentos/extratos/P2_-_SAP_SD__Validação_-_Interface_Termo_de_Pesquisa__SAP___SFDC_.json"
+      "arquivo_extrato": "data/documentos/extratos/P2_-_SAP_SD__Validacao_-_Interface_Termo_de_Pesquisa__SAP___Salesforce_.json"
     },
     {
       "id": "req-bot-wili",

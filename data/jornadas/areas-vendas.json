@@ -485,5 +485,64 @@
       "tipo": "App Guidance",
       "id": "app guidance"
     }
-  ]
+  ],
+  "citacoesTranscricoes": {
+    "12dez2025_Clusterizacao": {
+      "fonte": "2025-12-12_regras-clusterizacao.json",
+      "tema": "Definição de Clusters e Regras",
+      "citacoes": [
+        {
+          "autor": "Maria L. Ciorlia",
+          "timestamp": "0:17",
+          "texto": "Visão geral do processo de clusterização, enfatizando tres dimensões principais: setor do cliente, atratividade e região"
+        },
+        {
+          "autor": "Maria L. Ciorlia",
+          "timestamp": "5:47",
+          "texto": "Descrição dos quatro clusters principais: contas corporativas, contas especiais, contas regionais e contas dispersas"
+        },
+        {
+          "autor": "Leandro Pereira",
+          "timestamp": "10:36",
+          "texto": "Sistema de cadastro de clientes agora inclui informações de segmentos e clusters com determinação automática"
+        }
+      ],
+      "clustersDefinidos": {
+        "corporativas": "Grandes clientes estratégicos com alto volume",
+        "especiais": "Clientes com tratamento diferenciado",
+        "regionais": "Clientes relevantes em regiões específicas",
+        "dispersas": "Clientes de menor volume/frequência"
+      },
+      "dimensoesClusterizacao": ["Setor do cliente", "Atratividade (volume potencial)", "Região geográfica"]
+    },
+    "10dez2025_Canais": {
+      "fonte": "2025-12-10_cadastro-areas.txt",
+      "tema": "Definição de Canais de Venda",
+      "citacoes": [
+        {
+          "autor": "Leandro Pereira",
+          "timestamp": "1:12",
+          "texto": "Eu falei sobre as áreas de vendas e a importância das áreas de vendas muito relacionado ao canal, né? Então canal 30, 20, 30 e 40 e quando eles têm que ser aplicados. Falei também sobre o canal 25"
+        },
+        {
+          "autor": "Leandro Pereira",
+          "timestamp": "1:28",
+          "texto": "O canal 25 possivelmente vai ser inativado em breve. O ideal é que vocês já façam uma revisão nos cadastros de vocês aqui nos canais que cada cliente tem que ter."
+        }
+      ],
+      "canal25Status": "Em processo de inativação - revisar clientes atuais"
+    },
+    "03dez2025_ImpactoTributario": {
+      "fonte": "2025-12-03_financeiro-controladoria.txt",
+      "tema": "Impacto dos Canais na Tributação",
+      "citacoes": [
+        {
+          "autor": "Leandro Pereira",
+          "timestamp": "11:56",
+          "texto": "Se um cliente colocou um pedido no canal 30, que tem distribuição, vai ter ICMSST. Se for canal 40, ele já não incide ICMSST."
+        }
+      ]
+    }
+  },
+  "últimaAtualizacaoEnriquecimento": "2026-01-15"
 }

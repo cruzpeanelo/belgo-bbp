@@ -251,7 +251,7 @@
       "nome": "Salesforce",
       "descrição": "CRM principal para gestão comercial, cotações, pedidos e workflow de pricing",
       "siglasUsadas": ["Salesforce", "CRM"],
-      "observação": "Usar sempre 'Salesforce' - não usar 'SF' ou 'SFDC'"
+      "observação": "Sistema central do projeto GTM"
     },
     "sap": {
       "nome": "SAP ECC",
@@ -277,7 +277,7 @@
       "CSP": ["Supplier", "Belgo Cash", "Cash Supplier"],
       "ALPE": ["BTC", "ABPE"]
     },
-    "observação": "ALPE é o nome oficial - não usar 'Altair' pois não existe"
+    "observação": "ALPE é o nome oficial"
   },
   "matrizRACI": {
     "descrição": "Matriz de responsabilidades por jornada",

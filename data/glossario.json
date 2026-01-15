@@ -43,10 +43,9 @@
       },
       {
         "sigla": "Salesforce",
-        "alternativas": ["SFDC", "SF"],
         "nome": "Salesforce CRM",
-        "descrição": "Plataforma CRM central do projeto",
-        "contexto": "Sistema central do projeto - SEMPRE usar 'Salesforce' (não SF ou SFDC)"
+        "descrição": "Plataforma CRM central do projeto GTM",
+        "contexto": "Sistema central do projeto"
       },
       {
         "sigla": "Dow Jones",
@@ -149,8 +148,7 @@
         "nome": "Aços Longos PE",
         "alternativo": "ABPE",
         "descrição": "Área de crédito Aços Longos Pernambuco",
-        "status": "confirmado",
-        "nota": "Não usar 'Altair' - usar sempre ALPE"
+        "status": "confirmado"
       }
     ],
     "canais": [
@@ -401,7 +399,6 @@
     ]
   },
   "nomenclaturasPadrão": {
-    "naoUsar": ["ACSAP", "Altair", "SF", "SFDC"],
-    "usar": ["ASCP", "ALPE", "Salesforce", "Salesforce"]
+    "termosOficiais": ["ASCP", "ALPE", "Salesforce"]
   }
 }

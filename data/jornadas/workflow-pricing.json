@@ -519,7 +519,7 @@
     "descricao": "Desconto dentro do percentual aprovado via YDCF não faz a OV cair no Limbo",
     "comportamento": "YDCF não fixa o preço de lista, mas fixa o percentual de desconto aprovado",
     "ajusteAutomatico": "Em casos de alteração no preço base (manual ou por reprecificação automática), o valor absoluto do desconto é ajustado proporcionalmente, mantendo o percentual definido na YDCF",
-    "integracao": "Desconto integrado do SAP → SFDC, tanto em cotações quanto em ordens de venda",
+    "integracao": "Desconto integrado do SAP → Salesforce, tanto em cotações quanto em ordens de venda",
     "regraYEDI": "Recálculo da YEDI sempre que houver YDFC (% Desconto Cliente) na pricing da OV para evitar arredondamentos/distorções e manter coerência entre YEDI e limite aprovado YDFC"
   },
   "esquemasCalculo": {
@@ -661,5 +661,43 @@
       "tipo": "App Guidance",
       "id": "app guidance"
     }
-  ]
+  ],
+  "citacoesTranscricoes": {
+    "17dez2025_RelatoriosWF": {
+      "fonte": "2025-12-17_relatorios-workflow.json",
+      "tema": "Detalhamento do Workflow Pricing e Relatórios",
+      "nota": "Reunião específica sobre WF Pricing realizada em 17/12",
+      "topicosAbordados": [
+        "Workflow de aprovação em 2 níveis",
+        "Integração com condition YDCF no SAP",
+        "Hierarquia de materiais (6 níveis)",
+        "Vigência de descontos"
+      ]
+    },
+    "16dez2025_TabelaPrecos": {
+      "fonte": "2025-12-16_docs-fiscais-autoatendimento.txt",
+      "tema": "Dúvida sobre Tabela de Preços",
+      "citacoes": [
+        {
+          "autor": "Maria Luiza Gomes Chaves",
+          "timestamp": "Final da reunião",
+          "texto": "Eu também queria saber em qual momento abordam a tabela de preço?"
+        }
+      ],
+      "contexto": "Key User nova (4 meses) questionou sobre quando seria abordado pricing"
+    },
+    "03dez2025_MargensEBITDA": {
+      "fonte": "2025-12-03_financeiro-controladoria.txt",
+      "tema": "Custo de Servir e Margens",
+      "citacoes": [
+        {
+          "autor": "Leandro Pereira",
+          "timestamp": "N/A",
+          "texto": "Custo de Servir é a métrica de margem de serviço - meta de 36.2M definida pela Integration"
+        }
+      ],
+      "impactoNegocio": "Descontos impactam diretamente o Custo de Servir e EBITDA"
+    }
+  },
+  "últimaAtualizacaoEnriquecimento": "2026-01-15"
 }

@@ -2774,14 +2774,11 @@
     }
   ],
   "metadata": {
-    "versão": "1.1",
+    "versão": "1.2",
     "dataCriação": "2026-01-12",
-    "totalCasos": 115,
+    "dataAtualização": "2026-01-15",
+    "totalCasos": 142,
     "projeto": "Belgo BBP - GTM",
-    "resumo": {
-      "concluidos": 12,
-      "falhou": 2,
-      "pendentes": 101
-    }
+    "nota": "Status dos testes são calculados dinamicamente pelo app.js e sincronizados com Cloudflare KV"
   }
 }

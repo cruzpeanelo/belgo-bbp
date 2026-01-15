@@ -303,7 +303,7 @@
     {
       "regra": "Sincronização com SAP",
       "descrição": "Após conclusão do cadastro no Salesforce, o usuário clica em 'Enviar SAP' para sincronizar os dados. O sistema exibe a mensagem 'A conta está em sincronização com o SAP'.",
-      "documento": "Interface Termo de Pesquisa (SAP ↔ SFDC)"
+      "documento": "Interface Termo de Pesquisa (SAP ↔ Salesforce)"
     },
     {
       "regra": "Remoção de Botões Desnecessários",
@@ -811,8 +811,8 @@
     },
     {
       "id": "891871",
-      "arquivo": "891871- Interface síncrona para auto-preenchimento no SFDC.docx",
-      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\891871-_Interface_síncrona_para_auto-preenchimento_no_SFDC.json"
+      "arquivo": "891871- Interface síncrona para auto-preenchimento no Salesforce.docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\891871-_Interface_sincrona_para_auto-preenchimento_no_Salesforce.json"
     },
     {
       "id": "892940",
@@ -861,8 +861,8 @@
     },
     {
       "id": null,
-      "arquivo": "P2 -[SAP SD] Validação - Interface Termo de Pesquisa (SAP ↔ SFDC).docx",
-      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\P2_-_SAP_SD__Validação_-_Interface_Termo_de_Pesquisa__SAP___SFDC_.json"
+      "arquivo": "P2 -[SAP SD] Validação - Interface Termo de Pesquisa (SAP ↔ Salesforce).docx",
+      "extrato": "C:\\Users\\lcruz\\Belgo BBP\\data\\documentos\\extratos\\P2_-_SAP_SD__Validacao_-_Interface_Termo_de_Pesquisa__SAP___Salesforce_.json"
     },
     {
       "id": null,
@@ -927,5 +927,73 @@
       "XD02": "Alterar Cliente - SmartCenter usa para complemento de dados",
       "XD03": "Exibir Cliente - restrições logísticas aparecem aqui"
     }
-  }
+  },
+  "citacoesTranscricoes": {
+    "04dez2025_Kickoff": {
+      "fonte": "2025-12-04_kickoff-workshops.txt",
+      "tema": "Contextualização do Projeto GTM",
+      "citacoes": [
+        {
+          "autor": "Vanessa",
+          "timestamp": "N/A",
+          "texto": "Se for um limite de crédito para a área da BBA, que é um limite interno"
+        },
+        {
+          "autor": "Vanessa",
+          "timestamp": "N/A",
+          "texto": "Se for o da supplier vai para a área da CSP"
+        }
+      ]
+    },
+    "10dez2025_CadastroDetalhado": {
+      "fonte": "2025-12-10_cadastro-areas.txt",
+      "tema": "Detalhamento de Cadastro de Cliente",
+      "citacoes": [
+        {
+          "autor": "Leandro Pereira",
+          "timestamp": "0:45",
+          "texto": "A gente fez o Cadastro do Cliente, a gente passou, e fez ele automático lá chama naquele botãozinho do sintegra."
+        },
+        {
+          "autor": "Leandro Pereira",
+          "timestamp": "1:05",
+          "texto": "Tipos de conta: pessoa jurídica, pessoa física, parceiro agrupador"
+        },
+        {
+          "autor": "Francine Gayer",
+          "timestamp": "N/A",
+          "texto": "Muitas pessoas de diferentes áreas precisam se comunicar para o sistema funcionar 100%"
+        }
+      ],
+      "statusWorkshop": "CONCLUÍDO - zero dúvidas pendentes"
+    },
+    "03dez2025_AreaCredito": {
+      "fonte": "2025-12-03_financeiro-controladoria.txt",
+      "tema": "Áreas de Crédito",
+      "citacoes": [
+        {
+          "autor": "Leandro Pereira",
+          "timestamp": "8:30",
+          "texto": "A BBA é a interna"
+        },
+        {
+          "autor": "Leandro Pereira",
+          "timestamp": "8:35",
+          "texto": "A CSP é da supplier"
+        },
+        {
+          "autor": "Leandro Pereira",
+          "timestamp": "8:40",
+          "texto": "DBA, ADBA essas coisas assim... é a da distribuição"
+        },
+        {
+          "autor": "Leandro Pereira",
+          "timestamp": "8:45",
+          "texto": "ALPE, ABPE essas coisas... é o ALPE"
+        }
+      ],
+      "areasCreditoConfirmadas": ["BBA - Interno", "CSP - Supplier/Belgo Cash", "DBA - Distribuição", "ALPE - Aços Longos PE"]
+    }
+  },
+  "últimaAtualizacaoEnriquecimento": "2026-01-15"
 }

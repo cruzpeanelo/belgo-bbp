@@ -292,7 +292,7 @@
         {
           "regra": "Sincronização com SAP",
           "descrição": "Após conclusão do cadastro no Salesforce, o usuário clica em 'Enviar SAP' para sincronizar os dados. O sistema exibe a mensagem 'A conta está em sincronização com o SAP'.",
-          "documento": "Interface Termo de Pesquisa (SAP ↔ SFDC)"
+          "documento": "Interface Termo de Pesquisa (SAP ↔ Salesforce)"
         },
         {
           "regra": "Remoção de Botões Desnecessários",
@@ -862,7 +862,7 @@
             "nome": "Aços Longos PE",
             "alternativo": "BTC/ABPE",
             "descrição": "Área de crédito Aços Longos Pernambuco",
-            "observação": "Não usar 'Altair' - nome correto é ALPE",
+            "observação": "Nome oficial é ALPE",
             "integração": "ASCP"
           }
         },
@@ -1457,7 +1457,7 @@
       "BBA": "ABBA (legado)",
       "DBA": "ADBA",
       "CSP": "Supplier, Belgo Cash",
-      "ALPE": "BTC, ABPE (não usar Altair)"
+      "ALPE": "BTC, ABPE"
     }
   }
 }

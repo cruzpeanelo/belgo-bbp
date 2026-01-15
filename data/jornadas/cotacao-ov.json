@@ -902,7 +902,7 @@
   },
   "pendenciaCentros": {
     "fonte": "PDF Oficial - Página 2",
-    "descricao": "Necessário que o time de negócio Belgo reporte a listagem de centros que deve ser contemplada no SFDC",
+    "descricao": "Necessário que o time de negócio Belgo reporte a listagem de centros que deve ser contemplada no Salesforce",
     "status": "Pendente de definição pelo time Belgo",
     "impacto": "Bloqueante para adequação completa do processo de Cotação e OV Belgo"
   }

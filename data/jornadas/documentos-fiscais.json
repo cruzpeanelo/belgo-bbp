@@ -592,5 +592,43 @@
       "tipo": "App Guidance",
       "id": "app guidance"
     }
-  ]
+  ],
+  "citacoesTranscricoes": {
+    "16dez2025_DocsAutoatendimento": {
+      "fonte": "2025-12-16_docs-fiscais-autoatendimento.txt",
+      "tema": "Fluxo de Documentos Fiscais e Autoatendimento",
+      "citacoes": [
+        {
+          "autor": "Leandro Pereira",
+          "timestamp": "N/A",
+          "texto": "Falando sobre os documentos fiscais, que basicamente aqui ele tem aquele processo automatizado lá de Araujo, quando faz faturamento de emissão de XML, Danfe, certificado de produtos se tiver também para o cliente de forma automática dentro do Spa"
+        },
+        {
+          "autor": "Leandro Pereira",
+          "timestamp": "N/A",
+          "texto": "E hoje a gente vai falar sobre autoatendimento também e o autoatendimento. Vocês vão ver a importância desse dado preenchido corretamente."
+        }
+      ],
+      "sistemasIdentificados": {
+        "araujo": "Sistema de automação de documentos fiscais (XML, NF-e, certificados)",
+        "spa": "Plataforma de entrega de documentos ao cliente"
+      }
+    },
+    "03dez2025_ImpactoCanais": {
+      "fonte": "2025-12-03_financeiro-controladoria.txt",
+      "tema": "Impacto dos Canais na Tributação",
+      "citacoes": [
+        {
+          "autor": "Leandro Pereira",
+          "timestamp": "11:56",
+          "texto": "Se um cliente colocou um pedido no canal 30, que tem distribuição, vai ter ICMSST. Se for canal 40, ele já não incide ICMSST."
+        }
+      ],
+      "regrasTributarias": {
+        "canal30": "Distribuição - incide ICMS-ST",
+        "canal40": "Consumo - não incide ICMS-ST"
+      }
+    }
+  },
+  "últimaAtualizacaoEnriquecimento": "2026-01-15"
 }

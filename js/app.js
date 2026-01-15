@@ -131,6 +131,10 @@ const App = {
     async init() {
         console.log('Iniciando Cockpit GTM Belgo...');
         await this.loadAllData();
+
+        // SEMPRE recalcular métricas após carregar dados (corrige dashboard mockado)
+        this.recalculateMetrics();
+
         this.setupNavigation();
         console.log('Cockpit inicializado com sucesso!');
     },
@@ -317,16 +321,17 @@ const App = {
         return statuses;
     },
 
-    // Recalcular métricas
+    // Recalcular métricas baseado nos dados REAIS de testes.json
     recalculateMetrics() {
         if (!this.data.testes || !this.data.dashboard) return;
 
-        let executados = 0, pendentes = 0, falhados = 0;
+        let executados = 0, pendentes = 0, falhados = 0, totalReal = 0;
 
         this.data.testes.categorias.forEach(cat => {
             let catOk = 0, catFalhou = 0, catPendente = 0;
 
             cat.casos.forEach(caso => {
+                totalReal++;
                 if (caso.status === 'Concluído') { executados++; catOk++; }
                 else if (caso.status === 'Falhou') { falhados++; catFalhou++; }
                 else { pendentes++; catPendente++; }
@@ -338,13 +343,18 @@ const App = {
                 dashCat.ok = catOk;
                 dashCat.falhou = catFalhou;
                 dashCat.pendente = catPendente;
+                dashCat.total = cat.casos.length; // Sincronizar total também
             }
         });
 
+        // Atualizar métricas com valores REAIS calculados
+        this.data.dashboard.metricas.totalTestes = totalReal;
         this.data.dashboard.metricas.testesExecutados = executados;
         this.data.dashboard.metricas.testesFalhados = falhados;
         this.data.dashboard.metricas.testesPendentes = pendentes;
-        this.data.dashboard.metricas.progressoGeral = Utils.calcPercent(executados, this.data.dashboard.metricas.totalTestes);
+        this.data.dashboard.metricas.progressoGeral = Utils.calcPercent(executados, totalReal);
+
+        console.log(`Métricas recalculadas: ${executados} executados, ${falhados} falhados, ${pendentes} pendentes de ${totalReal} testes`);
     },
 
     // Filtrar testes

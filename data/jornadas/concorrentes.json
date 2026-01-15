@@ -375,5 +375,30 @@
       "tipo": "App Guidance",
       "id": "app guidance"
     }
-  ]
+  ],
+  "citacoesTranscricoes": {
+    "10dez2025_ConcorrentesSazonais": {
+      "fonte": "2025-12-10_cadastro-areas.txt",
+      "tema": "Concorrentes Sazonais e Integração Share",
+      "citacoes": [
+        {
+          "autor": "Francine Gayer",
+          "timestamp": "1:28:38",
+          "texto": "E aí ele já linkar com essa outra plataforma do Share. Eu não sei se tem como amarrar os dados ali para depois eu não ter que ir lá analisar tudo que eu perdi."
+        },
+        {
+          "autor": "Francine Gayer",
+          "timestamp": "1:28:55",
+          "texto": "Os concorrentes são sazonais, tá? Aqui a gente no Protec a nossa realidade é assim. De repente, tem alguns que estão sempre ali, os nomes permanentes ali, Peres, mas tem outros concorrentes que surgem ali, tipo vogue galinha, aparece ali, dá uma dorzinha de cabeça, incomodou um pouquinho, daqui a pouco some."
+        }
+      ],
+      "insights": {
+        "concorrentesPermanentes": ["Peres"],
+        "concorrentesSazonais": "Aparecem e somem - ex: 'vogue galinha'",
+        "divisao": "Protec",
+        "integracaoPendente": "Share - para análise de oportunidades perdidas"
+      }
+    }
+  },
+  "últimaAtualizacaoEnriquecimento": "2026-01-15"
 }

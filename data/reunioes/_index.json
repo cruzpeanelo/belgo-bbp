@@ -1,7 +1,7 @@
 {
   "título": "Reuniões GTM - Workshops AS-IS/TO-BE",
   "descrição": "Documentação completa das reuniões de workshops do projeto GTM Salesforce",
-  "atualizadoEm": "2026-01-13",
+  "atualizadoEm": "2026-01-15",
   "totalReuniões": 10,
   "reuniões": [
     {
@@ -12,8 +12,11 @@
       "arquivo": "2025-12-03_financeiro-controladoria.json",
       "transcrição": "data/transcricoes/2025-12-03_financeiro-controladoria.txt",
       "destaque": "Alinhamento estratégico com Controladoria antes dos workshops",
-      "resumo": "Reunião preparatoria com a Controladoria para alinhar expectativas do projeto GTM. Discutidos testes end-to-end, regras de clusterização de clientes, definição de setor industrial para segmentação, impacto no EBITDA e requisitos de compliance SOX. Definida a necessidade de envolvimento da Controladoria nas validações de relatórios financeiros e custo de servir.",
-      "tópicos": ["Testes End-to-End", "Cluster", "Setor Industrial", "EBITDA", "SOX"]
+      "resumo": "CONTEXTO: Reunião preparatória convocada por Thalita Rhein para alinhar a Controladoria sobre o projeto GTM antes do início dos workshops. Foi a primeira reunião formal com foco em aspectos financeiros e de compliance.\n\nPARTICIPANTES: Thalita Rhein (líder do projeto), Leandro da Cruz (TI), Renato Araujo (Controladoria), Fernanda Monteiro (Financeiro), Ivano Oliveira (Crédito). Thalita explicou a transição de liderança: Dani Tamerão → Audrey → Thalita.\n\nTEMAS ABORDADOS: Leandro apresentou a visão técnica do projeto, incluindo cadastro de clientes integrado com Salesforce, as 4 áreas de crédito (BBA, CSP, DBA, ALPE), consulta de partidas financeiras, e a grande mudança de segmento de produto para segmento de cliente (cluster + setor industrial).\n\nAS-IS IDENTIFICADO: Atualmente o vendedor preenche ficha Excel e envia para Smart Center que cadastra no SAP. Impostos são preenchidos manualmente. Tabela de preços é fixa há mais de 30 anos. Visão da empresa é por segmento de produto.\n\nTO-BE DEFINIDO: Cadastro obrigatório via Salesforce integrado com BRO. Impostos puxados automaticamente com base no canal (20, 30, 40). Visão migra para segmento de cliente (cluster + setor industrial). Consulta de partidas, XML, boleto direto no Salesforce.\n\nDECISÕES TOMADAS: Controladoria participará das validações de relatórios. Maria Luiza (equipe Renato) será incluída nos testes ponta-a-ponta. Necessidade de avaliar impacto no escopo SOX para o CRM.\n\nPENDÊNCIAS: Integração com Dow Jones (due diligence) ainda não definida. Revisão de controles SOX para inclusão do CRM no escopo.\n\nPRÓXIMOS PASSOS: Início dos workshops semanais de AS-IS/TO-BE. Meta de GO LIVE entre fevereiro e março para não colidir com SAP For.\n\nSISTEMAS MENCIONADOS: Salesforce, SAP ECC, BRO, FSCM, Dow Jones, XD01/XD02.\n\nIMPACTO NO PROJETO: Alinhamento crítico para garantir que relatórios financeiros (EBITDA, DRE, custo de servir) reflitam a nova visão por segmento de cliente. Sem esse alinhamento, há risco de inconsistências em demonstrativos gerenciais.",
+      "tópicos": ["Testes End-to-End", "Cluster", "Setor Industrial", "EBITDA", "SOX"],
+      "participantes": ["Thalita Rhein", "Leandro da Cruz", "Renato Araujo", "Fernanda Monteiro", "Ivano Oliveira"],
+      "decisoes": ["Controladoria participará das validações", "Maria Luiza incluída nos testes", "Avaliar impacto SOX"],
+      "pendencias": ["Integração Dow Jones", "Revisão controles SOX"]
     },
     {
       "id": "2025-12-04_kickoff",
@@ -23,8 +26,16 @@
       "arquivo": "2025-12-04_kickoff.json",
       "transcrição": "data/transcricoes/2025-12-04_kickoff-workshops.txt",
       "destaque": "Definição de key users e estrutura do projeto",
-      "resumo": "Kickoff oficial dos workshops GTM com apresentação da equipe e definição dos key users por area. Apresentada a estrutura do projeto com foco em Cadastro de Cliente, integração com BRO e as 4 áreas de crédito (BBA, CSP, DBA, ALPE). Discutida a transição de liderança de Dani para Thalita e compromisso de 2h semanais dos key users. Definido cronograma de workshops ate o GO LIVE.",
-      "tópicos": ["Kickoff", "Cadastro Cliente", "BRO", "4 Áreas de Crédito"]
+      "resumo": "CONTEXTO: Primeira reunião oficial dos workshops de mapeamento AS-IS/TO-BE do projeto GTM. Thalita convocou todos os key users para alinhar expectativas e iniciar o processo de validação. O caderno de testes já estava liberado pela TI, mas o negócio não estava preparado para testar.\n\nPARTICIPANTES: Thalita Rhein (líder negócio), Leandro da Cruz (TI), Leandro Gimenes (PO Comercial), Bruno Nolasco (Agro), Marcio Silva (Smart Center), Vanessa Souza (Crédito), João Vitor Endo (Key User). Thalita destacou que alguns key users não sabiam que eram key users.\n\nTEMAS ABORDADOS: Processo completo de cadastro de clientes, desde a prospecção até a atribuição de crédito. Definição das 4 áreas de crédito (BBA, CSP, DBA, ALPE). Fluxo BRO para validação fiscal automática. Mudança estrutural dos canais de venda (20, 25, 30, 40).\n\nAS-IS IDENTIFICADO: Vendedor preenche planilha Excel com dados do cliente. Planilha é enviada via Teams/email para Smart Center. Smart Center cadastra no SAP via BRO que valida em SINTEGRA, Sefaz, Receita, Suframa. Sigla do cliente é preenchida manualmente, gerando duplicações e erros.\n\nTO-BE DEFINIDO: Cadastro obrigatório nasce no Salesforce, não mais no SAP ECC. Salesforce valida termo de pesquisa para evitar duplicações. Impostos e preços são puxados automaticamente com base no canal. Visão por segmento de cliente (cluster + setor industrial) substitui visão por produto.\n\nDECISÕES TOMADAS: Workshops serão semanais com 2h de dedicação dos key users. Cada gerente é corresponsável pelas validações de sua área. Cadastro de clientes DEVE nascer no Salesforce para garantir consistência de dados.\n\nPENDÊNCIAS: Bloqueio de termos de pesquisa duplicados no BRO ainda não implementado. Definição de regras para siglas de clientes novos vs existentes.\n\nPRÓXIMOS PASSOS: Próximos workshops focados em Áreas de Vendas, Documentos Fiscais e Workflow Pricing.\n\nSISTEMAS MENCIONADOS: Salesforce, SAP ECC, BRO, XD01/XD02, SINTEGRA, Sefaz, Receita, Suframa, FSCM.\n\nIMPACTO NO PROJETO: Reunião crítica que estabeleceu a governança do projeto e deixou claro que SEM validação dos key users, o sistema pode travar faturamento da empresa por dias. Leandro Gimenes destacou que 'o canal mudou para 100% dos clientes' - mudança estrutural massiva.",
+      "tópicos": ["Kickoff", "Cadastro Cliente", "BRO", "4 Áreas de Crédito", "Canais"],
+      "participantes": ["Thalita Rhein", "Leandro da Cruz", "Leandro Gimenes", "Bruno Nolasco", "Marcio Silva", "Vanessa Souza", "João Vitor Endo"],
+      "decisoes": ["Workshops semanais 2h", "Cadastro nasce no Salesforce", "Gerentes corresponsáveis"],
+      "pendencias": ["Bloqueio de duplicações no BRO", "Regras de siglas"],
+      "citacoesChave": [
+        {"autor": "Thalita", "texto": "Alguns key users não sabiam que eram key users"},
+        {"autor": "Leandro Gimenes", "texto": "O canal mudou para 100% dos clientes"},
+        {"autor": "Marcio", "texto": "Hoje em dia a gente já tá no BRO, não usa mais a XD"}
+      ]
     },
     {
       "id": "2025-12-10_cadastro-áreas",
@@ -34,8 +45,15 @@
       "arquivo": "2025-12-10_cadastro-áreas.json",
       "transcrição": "data/transcricoes/2025-12-10_cadastro-áreas.txt",
       "destaque": "Restrições Logísticas integradas e Market Share",
-      "resumo": "Workshop focado em cadastro de clientes, áreas de vendas e gestão de concorrentes. Definidas as regras de contatos por tipo de cliente, integração com restrições logísticas do AMD, uso de WhatsApp para comunicação. Discutida a problemática de market share e dados de concorrentes (sazonalidade apontada por Francine). Apresentados os canais de venda (20, 25, 30, 40) e suas características.",
-      "tópicos": ["Contatos", "Logística", "AMD", "WhatsApp", "Market Share", "Concorrentes"]
+      "resumo": "CONTEXTO: Segunda sessão dos workshops AS-IS/TO-BE, focada em aprofundar temas pendentes do kickoff. Reunião trouxe discussões importantes sobre concorrentes, market share e integração com sistemas logísticos da AMD.\n\nPARTICIPANTES: Leandro da Cruz (TI), Francine Gayer (Key User Protec), Bruno Nolasco (Agro), Maria Luiza (Controladoria). Francine trouxe perspectiva prática sobre sazonalidade de concorrentes.\n\nTEMAS ABORDADOS: Cadastro de contatos por tipo de cliente (PJ, PF, Parceiro Agrupador). Definição dos canais de venda: Canal 20 (Indústria), Canal 25 (Casos Especiais), Canal 30 (Distribuição), Canal 40 (Consumo). Integração com restrições logísticas da AMD (ArcelorMittal Distribuição). Gestão de market share e dados de concorrentes.\n\nAS-IS IDENTIFICADO: Dados de concorrentes são sazonais e inconsistentes. Contatos de clientes estão dispersos em múltiplas bases. Restrições logísticas não estão integradas com SAP. Market share é estimado manualmente sem fonte confiável. Comunicação com cliente depende de dados de contato corretos.\n\nTO-BE DEFINIDO: Contatos centralizados no Salesforce com validação. Restrições logísticas integradas automaticamente via SAP. WhatsApp como canal de comunicação com cliente (depende de dados corretos). Concorrentes padronizados em lista, mas com gestão de sazonalidade.\n\nDECISÕES TOMADAS: Integração com plataforma Share para dados de mercado. Canal 25 será usado para casos especiais que não se encaixam nos demais. Restrições logísticas devem vir do Portal Logístico integrado.\n\nPENDÊNCIAS: Integração Portal Logístico com SAP não definida. Definição de quais concorrentes são permanentes vs sazonais. Qualidade dos dados de contato para WhatsApp.\n\nPRÓXIMOS PASSOS: Workshop sobre Documentos Fiscais e Autoatendimento.\n\nSISTEMAS MENCIONADOS: Salesforce, SAP ECC, Portal Logístico, AMD, WhatsApp, Share (plataforma de mercado).\n\nIMPACTO NO PROJETO: Francine alertou que 'concorrentes são sazonais, aparecem e somem'. Isso impacta a modelagem de dados de market share. A integração com Portal Logístico foi identificada como pendência crítica que pode bloquear entregas se não resolvida.",
+      "tópicos": ["Contatos", "Logística", "AMD", "WhatsApp", "Market Share", "Concorrentes", "Canais"],
+      "participantes": ["Leandro da Cruz", "Francine Gayer", "Bruno Nolasco", "Maria Luiza"],
+      "decisoes": ["Integração com Share", "Canal 25 para casos especiais", "Restrições do Portal Logístico"],
+      "pendencias": ["Integração Portal Logístico", "Concorrentes sazonais", "Qualidade dados contato"],
+      "citacoesChave": [
+        {"autor": "Francine", "texto": "Os concorrentes são sazonais, aparecem ali, incomodam um pouquinho, daqui a pouco somem"},
+        {"autor": "Francine", "texto": "E aí ele já linkar com essa outra plataforma do Share"}
+      ]
     },
     {
       "id": "2025-12-12_regras-clusterização",
@@ -44,8 +62,11 @@
       "duração": "53min 27s",
       "arquivo": "../transcricoes/2025-12-12_regras-clusterização.json",
       "destaque": "Definição de dimensoes e algoritmo de clusterização",
-      "resumo": "Definição do algoritmo de clusterização automática de clientes. Estabelecidas as dimensoes para classificação: volume, frequência, potencial e mix de produtos. Discutida a integração com SAP para captura de dados históricos. Identificada necessidade de higiene de dados antes da implementação. Maria Ciorlia apresentou requisitos de segmentação comercial.",
-      "tópicos": ["Clusterização", "Dimensoes", "Algoritmo", "Integração", "Higiene de Dados"]
+      "resumo": "CONTEXTO: Reunião técnica para definir as regras de clusterização automática de clientes no novo sistema GTM. A clusterização é fundamental para precificação dinâmica e segmentação comercial.\n\nPARTICIPANTES: Leandro da Cruz (TI), Maria Ciorlia (Estratégia Comercial), equipe de segmentação. Maria apresentou os requisitos de negócio para classificação de clientes.\n\nTEMAS ABORDADOS: Definição do algoritmo de clusterização com 4 dimensões principais. Integração com SAP ECC para captura de dados históricos de compras. Regras de exceção para contas especiais. Higiene de dados como pré-requisito crítico.\n\nAS-IS IDENTIFICADO: Clusterização atual é manual e inconsistente. Dados históricos de clientes estão fragmentados entre sistemas. Não existe padronização de critérios de segmentação. Classificação depende de julgamento individual do vendedor.\n\nTO-BE DEFINIDO: Clusterização automática baseada em: (1) Volume de compras, (2) Frequência de pedidos, (3) Potencial de crescimento, (4) Mix de produtos. Quatro tipos de cluster: Corporativas, Especiais, Regionais, Dispersas. Algoritmo roda periodicamente para reclassificação.\n\nDECISÕES TOMADAS: Dimensões de clusterização aprovadas pela equipe comercial. Integração via interface SAP para dados históricos. Período de higiene de dados antes do GO LIVE.\n\nPENDÊNCIAS: Definição de thresholds exatos para cada cluster. Tratamento de clientes novos (sem histórico). Exceções para key accounts.\n\nPRÓXIMOS PASSOS: Validação dos thresholds com dados reais. Teste piloto com amostra de clientes.\n\nSISTEMAS MENCIONADOS: Salesforce, SAP ECC, interfaces de dados históricos.\n\nIMPACTO NO PROJETO: Clusterização é a base da precificação dinâmica. Sem ela funcionando corretamente, preços podem ser atribuídos incorretamente, gerando perdas ou reclamações de clientes.",
+      "tópicos": ["Clusterização", "Dimensoes", "Algoritmo", "Integração", "Higiene de Dados"],
+      "participantes": ["Leandro da Cruz", "Maria Ciorlia"],
+      "decisoes": ["4 dimensões de clusterização", "Integração SAP aprovada", "Período de higiene"],
+      "pendencias": ["Thresholds exatos", "Clientes novos", "Key accounts"]
     },
     {
       "id": "2025-12-16_autoatendimento",
@@ -55,8 +76,15 @@
       "arquivo": "2025-12-16_autoatendimento.json",
       "transcrição": "data/transcricoes/2025-12-16_docs-fiscais-autoatendimento.txt",
       "destaque": "Consulta de partidas e workflow pricing",
-      "resumo": "Workshop sobre documentos fiscais e portal de autoatendimento. Detalhado o fluxo de download de NF-e, DANFE e XML via integração com Spa (Daniel). Discutida consulta de partidas em aberto e boletos. Apresentado o workflow de pricing com niveis de aprovação. Identificada pendência critica: Portal Logístico não integrado com SAP. Definida criticidade dos dados de contato para autoatendimento.",
-      "tópicos": ["Documentos Fiscais", "Autoatendimento", "Partidas", "Boletos", "Workflow Pricing"]
+      "resumo": "CONTEXTO: Terceira sessão dos workshops AS-IS/TO-BE, focada em documentos fiscais e funcionalidades de autoatendimento. Reunião de revisão geral antes do recesso de final de ano.\n\nPARTICIPANTES: Leandro da Cruz (TI), equipe comercial e financeira. Discussão técnica sobre integração com sistema Spa (Araujo) para documentos fiscais.\n\nTEMAS ABORDADOS: Fluxo completo de documentos fiscais (NF-e, DANFE, XML, certificado de qualidade). Consulta de partidas financeiras em aberto. Segunda via de boleto. Workflow de pricing com hierarquia de 6 níveis e aprovação em 2 níveis. Integração com sistema Spa para emissão automática.\n\nAS-IS IDENTIFICADO: Download de documentos fiscais é manual via SAP. Consulta de partidas via transação FBL5N/FBL50 no SAP. Boletos solicitados manualmente ao financeiro. Workflow pricing inexistente - aprovações por e-mail informal.\n\nTO-BE DEFINIDO: Download automático de NF-e, DANFE, XML, certificado diretamente no Salesforce. Consulta de partidas integrada (transação FMBL5N replicada). Segunda via de boleto self-service. Workflow pricing formal com: hierarquia de 6 níveis (Presidente→VP→Diretor→Gerente→Coordenador→Vendedor), aprovação em 2 níveis, condition YDCF para descontos.\n\nDECISÕES TOMADAS: Sistema Spa será trigger do SAP para emissão automática. Workflow pricing com 2 níveis de aprovação definido. Dados de contato são críticos para autoatendimento.\n\nPENDÊNCIAS: Portal Logístico não integrado com SAP - pendência crítica levantada. Workflow Pricing ficou para reunião de 17/12 (adiado).\n\nPRÓXIMOS PASSOS: Reunião específica de Workflow Pricing em 17/12.\n\nSISTEMAS MENCIONADOS: Salesforce, SAP ECC, Spa (Daniel/Araujo), FBL5N, FBL50, FMBL5N, Portal Logístico.\n\nIMPACTO NO PROJETO: Leandro apontou: 'Faltou workflow pricing, fica para amanhã'. A integração do Portal Logístico foi identificada como bloqueador potencial - se não integrado, haverá redundância de dados e risco de entregas incorretas.",
+      "tópicos": ["Documentos Fiscais", "Autoatendimento", "Partidas", "Boletos", "Workflow Pricing"],
+      "participantes": ["Leandro da Cruz"],
+      "decisoes": ["Sistema Spa como trigger", "Workflow 2 níveis aprovação", "Dados contato críticos"],
+      "pendencias": ["Portal Logístico integração", "Workflow Pricing adiado"],
+      "citacoesChave": [
+        {"autor": "Leandro", "texto": "Faltou workflow pricing, fica para amanhã"},
+        {"autor": "Leandro", "texto": "Tem que verificar essa questão do portal Logística, integrar com o SAP também para evitar redundância"}
+      ]
     },
     {
       "id": "2025-12-17_relatórios-segment-report",
@@ -65,8 +93,11 @@
       "duração": "~60min",
       "arquivo": "../transcricoes/2025-12-17_relatórios-segment-report.json",
       "destaque": "Segmentação, fidelidade e governanca de dados",
-      "resumo": "Apresentação dos relatórios atuais do GTM e definição do Segment Report. Discutidas regras de segmentação por canal, fidelidade de clientes e hierarquia de produtos. Luis Riqueti apresentou estrutura atual do BWA e Power BI. Definida governanca de dados com responsabilidades claras. Identificada necessidade de padronização de nomenclaturas entre sistemas.",
-      "tópicos": ["Segment Report", "Segmentação", "Fidelidade", "Hierarquia", "Governanca"]
+      "resumo": "CONTEXTO: Reunião focada em relatórios gerenciais e definição do Segment Report, que será o principal relatório de acompanhamento de performance comercial no novo GTM.\n\nPARTICIPANTES: Leandro da Cruz (TI), Luis Riqueti (BI/Relatórios), equipe de estratégia comercial. Luis apresentou a estrutura atual de relatórios em BWA e Power BI.\n\nTEMAS ABORDADOS: Estrutura do Segment Report com segmentação por canal e cluster. Programa de fidelidade de clientes e suas regras. Hierarquia de produtos (GPS) e impacto em relatórios. Governança de dados entre Salesforce e SAP. Padronização de nomenclaturas.\n\nAS-IS IDENTIFICADO: Relatórios atuais baseados em BWA (Business Warehouse) e Power BI. Dados fragmentados entre sistemas. Nomenclaturas inconsistentes entre sistemas. Fidelidade de clientes calculada manualmente. Hierarquia de produtos não padronizada.\n\nTO-BE DEFINIDO: Segment Report centralizado com visão por: (1) Canal de venda, (2) Cluster de cliente, (3) Setor industrial, (4) Região/Escritório. Fidelidade calculada automaticamente com base em frequência e volume. Hierarquia GPS padronizada entre sistemas. Nomenclaturas únicas.\n\nDECISÕES TOMADAS: Segment Report será a visão principal de performance. Governança de dados com responsabilidades claras por sistema. Padronização de nomenclaturas obrigatória.\n\nPENDÊNCIAS: Definição de KPIs específicos do Segment Report. Integração de dados históricos para comparativo. Alinhamento de hierarquia GPS entre Salesforce e SAP.\n\nPRÓXIMOS PASSOS: Validação de KPIs com diretoria comercial.\n\nSISTEMAS MENCIONADOS: Salesforce, SAP ECC, BWA, Power BI, GPS (Grupo de Produtos SAP).\n\nIMPACTO NO PROJETO: Segment Report é a principal ferramenta de gestão comercial pós-GO LIVE. Sem ele funcionando corretamente, a diretoria não terá visibilidade de performance por segmento de cliente.",
+      "tópicos": ["Segment Report", "Segmentação", "Fidelidade", "Hierarquia", "Governanca"],
+      "participantes": ["Leandro da Cruz", "Luis Riqueti"],
+      "decisoes": ["Segment Report como visão principal", "Governança de dados definida", "Nomenclaturas padronizadas"],
+      "pendencias": ["KPIs específicos", "Dados históricos", "Hierarquia GPS"]
     },
     {
       "id": "2025-12-22_urgente-revisão-gtm",
@@ -75,8 +106,11 @@
       "duração": "~2h 30min",
       "arquivo": "../transcricoes/2025-12-22_urgente-revisão-gtm.json",
       "destaque": "Nova estrutura organizacional com 4 macro setores",
-      "resumo": "Reunião de emergencia para redefinir estrutura comercial do GTM. Apresentada nova organização com 4 macro setores: Agro, Construção Civil, Industria e Distribuição. Definida gestão regional com escritorios de vendas e contas-chave. Ajustado workflow de aprovação para nova hierarquia. Impacto significativo no cronograma - necessaria revisão de todas as jornadas AS-IS/TO-BE.",
-      "tópicos": ["Estrutura Organizacional", "Macro Setores", "Gestão Regional", "Contas-Chave", "Workflow"]
+      "resumo": "CONTEXTO: Reunião de EMERGÊNCIA convocada para redefinir toda a estrutura comercial do projeto GTM. Decisão da diretoria exigiu mudanças significativas na arquitetura do sistema. Marcada como URGENTE no título original.\n\nPARTICIPANTES: Leandro da Cruz (TI), Thalita Rhein (Negócio), equipe comercial completa, representantes de todas as áreas. Participação massiva devido à criticidade.\n\nTEMAS ABORDADOS: Nova estrutura organizacional com 4 macro setores. Redefinição de escritórios de vendas e regionais. Gestão de contas-chave (key accounts). Ajustes no workflow de aprovação para nova hierarquia. Impacto no cronograma e no GO LIVE.\n\nAS-IS IDENTIFICADO: Estrutura comercial anterior estava organizada de forma diferente. Workflow de aprovação não comportava nova hierarquia. Relatórios precisavam ser redesenhados. Segment Report afetado.\n\nTO-BE DEFINIDO: Nova organização com 4 macro setores: (1) Agro, (2) Construção Civil, (3) Indústria, (4) Distribuição. Cada macro setor com gestão regional própria. Contas-chave com tratamento diferenciado. Workflow de aprovação adaptado para nova hierarquia de 6 níveis. Escritórios de vendas reorganizados.\n\nDECISÕES TOMADAS: Nova estrutura de 4 macro setores aprovada. Todas as jornadas AS-IS/TO-BE precisam ser revisadas. Cronograma ajustado considerando mudanças. Workflow de aprovação redefinido.\n\nPENDÊNCIAS: Revisão de todas as 14 jornadas existentes. Redefinição de relatórios afetados. Comunicação da mudança para toda a empresa. Ajuste nos testes já planejados.\n\nPRÓXIMOS PASSOS: Reunião de Cadastro de Materiais (23/12). Construção da planilha DE/PARA (29/12).\n\nSISTEMAS MENCIONADOS: Salesforce, SAP ECC, Workflow de Aprovação, Segment Report.\n\nIMPACTO NO PROJETO: CRÍTICO - Mudança estrutural que afeta TODAS as jornadas. GO LIVE potencialmente impactado. Necessidade de retrabalho significativo. Esta foi a reunião mais impactante do projeto, exigindo revisão de todo o mapeamento feito até então.",
+      "tópicos": ["Estrutura Organizacional", "Macro Setores", "Gestão Regional", "Contas-Chave", "Workflow"],
+      "participantes": ["Leandro da Cruz", "Thalita Rhein", "Equipe Completa"],
+      "decisoes": ["4 macro setores aprovados", "Revisão de todas as jornadas", "Novo workflow aprovação"],
+      "pendencias": ["Revisão 14 jornadas", "Redefinição relatórios", "Comunicação empresa"]
     },
     {
       "id": "2025-12-23_alinhamento-cadastro-materiais",
@@ -85,8 +119,11 @@
       "duração": "29min 24s",
       "arquivo": "../transcricoes/2025-12-23_alinhamento-cadastro-materiais.json",
       "destaque": "Hierarquia de produtos e integração SAP",
-      "resumo": "Alinhamento sobre cadastro de materiais e hierarquia de produtos SAP. Definida estrutura de GPS (Grupo de Produtos SAP) para precificação. Discutida integração de hierarquia com clusterização de clientes. Apresentados requisitos para relatórios de mix de produtos. Identificadas inconsistencias entre hierarquias SAP e Salesforce que precisam ser tratadas.",
-      "tópicos": ["Hierarquia", "GPS", "Precificação", "Clustering", "Relatórios"]
+      "resumo": "CONTEXTO: Reunião rápida de alinhamento sobre cadastro de materiais, realizada um dia após a reunião urgente de reestruturação. Foco em garantir consistência da hierarquia de produtos entre sistemas.\n\nPARTICIPANTES: Leandro da Cruz (TI), equipe de cadastro de produtos. Reunião técnica focada.\n\nTEMAS ABORDADOS: Estrutura de GPS (Grupo de Produtos SAP) e sua integração com Salesforce. Hierarquia de produtos para precificação dinâmica. Impacto da hierarquia nos relatórios de mix de produtos. Inconsistências identificadas entre sistemas.\n\nAS-IS IDENTIFICADO: Hierarquia de produtos definida no SAP ECC via GPS. Salesforce não possui mesma hierarquia replicada. Precificação por segmento de produto (não por cliente). Relatórios de mix baseados em estrutura legada.\n\nTO-BE DEFINIDO: GPS padronizado e sincronizado entre SAP e Salesforce. Precificação dinâmica considera: hierarquia de produto + cluster de cliente + canal. Relatórios de mix de produtos integrados ao Segment Report. Hierarquia unificada para consistência.\n\nDECISÕES TOMADAS: GPS será a estrutura master de produtos. Sincronização de hierarquia entre sistemas obrigatória. Relatórios de mix adaptados para nova estrutura.\n\nPENDÊNCIAS: Tratamento de inconsistências entre hierarquias SAP e Salesforce. Validação de todos os códigos GPS. Mapeamento completo de produtos.\n\nPRÓXIMOS PASSOS: Construção da planilha DE/PARA (29/12).\n\nSISTEMAS MENCIONADOS: SAP ECC, Salesforce, GPS (Grupo de Produtos SAP).\n\nIMPACTO NO PROJETO: Hierarquia de produtos é fundamental para precificação correta. Inconsistências podem gerar erros de preço em faturamento. Integração GPS-Salesforce crítica para GO LIVE.",
+      "tópicos": ["Hierarquia", "GPS", "Precificação", "Clustering", "Relatórios"],
+      "participantes": ["Leandro da Cruz"],
+      "decisoes": ["GPS como estrutura master", "Sincronização obrigatória", "Relatórios adaptados"],
+      "pendencias": ["Inconsistências hierarquia", "Validação GPS", "Mapeamento produtos"]
     },
     {
       "id": "2025-12-29_planilha-depara",
@@ -95,8 +132,11 @@
       "duração": "~50min",
       "arquivo": "../transcricoes/2025-12-29_planilha-depara.json",
       "destaque": "Mapeamento de clientes e escritorios regionais",
-      "resumo": "Construção da planilha DE/PARA para migração de clientes para nova estrutura. Mapeados escritorios regionais e seus agentes comerciais. Definidas regras de segmentação para reclassificação de carteira. Alinhado impacto no Segment Report e relatórios gerênciais. Identificados clientes que precisam de tratamento manual (contas especiais e key accounts).",
-      "tópicos": ["DE/PARA", "Segmentação", "Escritorios", "Segment Report", "Agentes"]
+      "resumo": "CONTEXTO: Reunião de trabalho para construir a planilha DE/PARA que mapeará a migração de clientes da estrutura antiga para a nova organização com 4 macro setores. Consequência direta da reunião urgente de 22/12.\n\nPARTICIPANTES: Leandro da Cruz (TI), equipe de cadastro e migração. Trabalho colaborativo de construção.\n\nTEMAS ABORDADOS: Mapeamento DE (estrutura antiga) → PARA (nova estrutura). Escritórios regionais e seus agentes comerciais. Regras de segmentação para reclassificação automática de carteira. Tratamento de exceções (contas especiais, key accounts). Impacto no Segment Report.\n\nAS-IS IDENTIFICADO: Clientes classificados na estrutura antiga. Carteiras de vendedores definidas por critérios diversos. Sem mapeamento claro DE/PARA. Exceções tratadas caso a caso.\n\nTO-BE DEFINIDO: Planilha DE/PARA com mapeamento completo de: (1) Cliente antigo → Novo macro setor, (2) Escritório antigo → Novo escritório regional, (3) Vendedor antigo → Novo agente comercial. Regras automáticas de reclassificação com base em setor industrial e cluster. Tratamento especial para key accounts e contas especiais.\n\nDECISÕES TOMADAS: Estrutura da planilha DE/PARA aprovada. Regras de reclassificação automática definidas. Tratamento manual para contas especiais.\n\nPENDÊNCIAS: Preenchimento completo da planilha (milhares de clientes). Validação de cada reclassificação. Comunicação para vendedores sobre mudanças de carteira.\n\nPRÓXIMOS PASSOS: Reunião Bot Einstein em 07/01/2026. Testes de migração.\n\nSISTEMAS MENCIONADOS: Salesforce, SAP ECC, Segment Report.\n\nIMPACTO NO PROJETO: Planilha DE/PARA é crítica para migração sem perda de dados. Erros no mapeamento podem gerar: (1) Clientes sem vendedor responsável, (2) Relatórios inconsistentes, (3) Perda de histórico comercial.",
+      "tópicos": ["DE/PARA", "Segmentação", "Escritorios", "Segment Report", "Agentes", "Migração"],
+      "participantes": ["Leandro da Cruz"],
+      "decisoes": ["Estrutura DE/PARA aprovada", "Reclassificação automática", "Tratamento key accounts"],
+      "pendencias": ["Preenchimento planilha", "Validação reclassificações", "Comunicação vendedores"]
     },
     {
       "id": "2026-01-07_bot-einstein-logística",
@@ -105,8 +145,11 @@
       "duração": "52min 13s",
       "arquivo": "../transcricoes/2026-01-07_bot-einstein-logística.json",
       "destaque": "Chatbot WhatsApp e integração Smart Center",
-      "resumo": "Alinhamento com GLOG sobre Bot Einstein para atendimento via WhatsApp. Definido MVP com consulta de status de pedido, tracking de entrega e segunda via de boleto. Discutida autenticação de usuários (CPF/CNPJ + código). Apresentado fluxo de transbordo para atendente humano no Smart Center. Integração via Salesforce Service Cloud com Einstein Bots.",
-      "tópicos": ["Bot Einstein", "WhatsApp", "Autenticação", "Transbordo", "Salesforce"]
+      "resumo": "CONTEXTO: Primeira reunião de 2026, focada em definir o MVP do Bot Einstein para autoatendimento via WhatsApp. Alinhamento com equipe GLOG (Gestão Logística) para requisitos de integração.\n\nPARTICIPANTES: Leandro da Cruz (TI), equipe GLOG, Smart Center. Discussão técnica sobre funcionalidades do chatbot.\n\nTEMAS ABORDADOS: Funcionalidades do MVP do Bot Einstein. Autenticação de usuários via CPF/CNPJ + código. Consulta de status de pedido e tracking de entrega. Segunda via de boleto self-service. Fluxo de transbordo para atendente humano. Integração com Salesforce Service Cloud.\n\nAS-IS IDENTIFICADO: Atendimento via telefone para Smart Center. Cliente precisa ligar para consultar status de pedido. Segunda via de boleto solicitada por telefone/e-mail. Sem opção self-service. Dependência total de atendentes humanos.\n\nTO-BE DEFINIDO: Bot Einstein via WhatsApp com funcionalidades: (1) Consulta de status de pedido, (2) Tracking de entrega em tempo real, (3) Segunda via de boleto automática, (4) Transbordo para humano quando necessário. Autenticação segura via CPF/CNPJ + código de verificação. Integração nativa com Salesforce Service Cloud.\n\nDECISÕES TOMADAS: MVP aprovado com 3 funcionalidades principais. Autenticação via CPF/CNPJ + código. Transbordo para Smart Center em casos complexos.\n\nPENDÊNCIAS: Desenvolvimento do bot Einstein. Integração com base de pedidos SAP. Treinamento do modelo de NLP. Homologação com usuários piloto.\n\nPRÓXIMOS PASSOS: Desenvolvimento do MVP. Testes integrados antes do GO LIVE.\n\nSISTEMAS MENCIONADOS: Salesforce Service Cloud, Einstein Bots, WhatsApp Business API, SAP ECC.\n\nIMPACTO NO PROJETO: Bot Einstein é diferencial competitivo do projeto GTM. Reduz carga do Smart Center e melhora experiência do cliente. Dependência crítica de dados de contato corretos (pendência levantada em reuniões anteriores).",
+      "tópicos": ["Bot Einstein", "WhatsApp", "Autenticação", "Transbordo", "Salesforce", "MVP"],
+      "participantes": ["Leandro da Cruz", "Equipe GLOG", "Smart Center"],
+      "decisoes": ["MVP com 3 funcionalidades", "Autenticação CPF/CNPJ", "Transbordo Smart Center"],
+      "pendencias": ["Desenvolvimento bot", "Integração SAP", "Treinamento NLP", "Usuários piloto"]
     }
   ],
   "participantesFrequentes": [
