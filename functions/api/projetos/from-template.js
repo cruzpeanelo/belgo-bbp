@@ -70,16 +70,16 @@ export async function onRequestPost(context) {
         }
 
         // Criar projeto
+        // Nota: template_origem_id referencia projetos, nao templates, entao nao usamos
         const projetoResult = await context.env.DB.prepare(`
-            INSERT INTO projetos (codigo, nome, descricao, icone, cor, template_origem_id, criado_por, ativo)
-            VALUES (?, ?, ?, ?, ?, ?, ?, 1)
+            INSERT INTO projetos (codigo, nome, descricao, icone, cor, criado_por, ativo)
+            VALUES (?, ?, ?, ?, ?, ?, 1)
         `).bind(
             codigo,
             nome,
             descricao || `Projeto criado a partir do template ${template.nome}`,
             icone || template.icone || '📁',
             cor || template.cor || '#003B4A',
-            template_id,
             usuario.id
         ).run();
 
