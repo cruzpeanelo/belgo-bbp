@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios - Admin - Belgo BBP</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>BELGO BBP</h1>
+                <span class="badge">Admin</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="usuarios.html" class="nav-item active">
+                    <span class="icon">👥</span>
+                    Usuarios
+                </a>
+                <a href="auditoria.html" class="nav-item">
+                    <span class="icon">📋</span>
+                    Auditoria
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../landing.html" class="nav-item">
+                    <span class="icon">🏠</span>
+                    Voltar ao Portal
+                </a>
+                <button class="nav-item btn-logout" onclick="logout()">
+                    <span class="icon">🚪</span>
+                    Sair
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h2>Gestao de Usuarios</h2>
+                <button class="btn btn-primary" onclick="showModal('create')">
+                    + Novo Usuario
+                </button>
+            </header>
+
+            <div class="content-body">
+                <!-- Filters -->
+                <div class="filters">
+                    <input type="text" id="searchInput" placeholder="Buscar por nome ou email..." class="input-search">
+                    <select id="filterStatus" class="select-filter">
+                        <option value="">Todos</option>
+                        <option value="1">Ativos</option>
+                        <option value="0">Inativos</option>
+                    </select>
+                    <select id="filterAdmin" class="select-filter">
+                        <option value="">Todos os perfis</option>
+                        <option value="1">Admins</option>
+                        <option value="0">Usuarios</option>
+                    </select>
+                </div>
+
+                <!-- Users Table -->
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Area</th>
+                                    <th>Cargo</th>
+                                    <th>Perfil</th>
+                                    <th>Status</th>
+                                    <th>Acoes</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTable">
+                                <tr>
+                                    <td colspan="7" class="loading">Carregando...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Criar/Editar Usuario -->
+    <div class="modal-overlay hidden" id="userModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Novo Usuario</h3>
+                <button class="btn-close" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="userForm">
+                <div class="modal-body">
+                    <input type="hidden" id="userId">
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" required placeholder="nome@belgo.com.br">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nome">Nome *</label>
+                            <input type="text" id="nome" required placeholder="Nome de exibicao">
+                        </div>
+                        <div class="form-group">
+                            <label for="nomeCompleto">Nome Completo</label>
+                            <input type="text" id="nomeCompleto" placeholder="Nome completo">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="area">Area</label>
+                            <input type="text" id="area" placeholder="Ex: TI, Comercial">
+                        </div>
+                        <div class="form-group">
+                            <label for="cargo">Cargo</label>
+                            <input type="text" id="cargo" placeholder="Ex: Analista, Gerente">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Modulos com Acesso</label>
+                        <div class="checkbox-group" id="modulosCheckboxes">
+                            <!-- Preenchido via JS -->
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="isAdmin">
+                                Administrador
+                            </label>
+                        </div>
+                        <div class="form-group" id="ativoGroup">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="ativo" checked>
+                                Ativo
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="btnSave">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Convite -->
+    <div class="modal-overlay hidden" id="inviteModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Enviar Convite</h3>
+                <button class="btn-close" onclick="closeInviteModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Convite gerado para: <strong id="inviteEmail"></strong></p>
+                <p>Link de ativacao:</p>
+                <div class="link-box">
+                    <input type="text" id="inviteLink" readonly>
+                    <button class="btn btn-small" onclick="copyLink()">Copiar</button>
+                </div>
+                <p class="hint">O convite expira em 7 dias.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeInviteModal()">Fechar</button>
+                <a id="teamsLink" href="#" target="_blank" class="btn btn-primary">
+                    📩 Enviar via Teams
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+    <script>
+        let allUsers = [];
+        let allModulos = [];
+
+        // Carregar usuarios
+        async function loadUsers() {
+            try {
+                const res = await apiRequest('/api/admin/usuarios');
+                if (res.success) {
+                    allUsers = res.usuarios;
+                    renderUsers();
+                }
+            } catch (error) {
+                console.error('Erro ao carregar usuarios:', error);
+            }
+        }
+
+        // Carregar modulos
+        async function loadModulos() {
+            try {
+                const res = await apiRequest('/api/admin/modulos');
+                if (res.success) {
+                    allModulos = res.modulos;
+                    renderModulosCheckboxes();
+                }
+            } catch (error) {
+                console.error('Erro ao carregar modulos:', error);
+            }
+        }
+
+        // Renderizar checkboxes de modulos
+        function renderModulosCheckboxes() {
+            const container = document.getElementById('modulosCheckboxes');
+            container.innerHTML = allModulos.map(m => `
+                <label class="checkbox-label">
+                    <input type="checkbox" name="modulos" value="${m.id}">
+                    ${m.icone} ${m.nome}
+                </label>
+            `).join('');
+        }
+
+        // Renderizar tabela de usuarios
+        function renderUsers() {
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const statusFilter = document.getElementById('filterStatus').value;
+            const adminFilter = document.getElementById('filterAdmin').value;
+
+            let filtered = allUsers.filter(u => {
+                if (search && !u.nome.toLowerCase().includes(search) && !u.email.toLowerCase().includes(search)) {
+                    return false;
+                }
+                if (statusFilter !== '' && u.ativo !== parseInt(statusFilter)) {
+                    return false;
+                }
+                if (adminFilter !== '' && u.is_admin !== parseInt(adminFilter)) {
+                    return false;
+                }
+                return true;
+            });
+
+            const tbody = document.getElementById('usersTable');
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="empty">Nenhum usuario encontrado</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = filtered.map(u => `
+                <tr>
+                    <td>
+                        <strong>${u.nome}</strong>
+                        ${u.nome_completo ? `<br><small>${u.nome_completo}</small>` : ''}
+                    </td>
+                    <td>${u.email}</td>
+                    <td>${u.area || '-'}</td>
+                    <td>${u.cargo || '-'}</td>
+                    <td>
+                        <span class="badge ${u.is_admin ? 'badge-blue' : 'badge-gray'}">
+                            ${u.is_admin ? 'Admin' : 'Usuario'}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge ${u.ativo ? 'badge-green' : 'badge-red'}">
+                            ${u.ativo ? 'Ativo' : 'Inativo'}
+                        </span>
+                    </td>
+                    <td class="actions">
+                        <button class="btn btn-small" onclick="editUser(${u.id})" title="Editar">✏️</button>
+                        <button class="btn btn-small" onclick="sendInvite(${u.id}, '${u.email}', '${u.nome}')" title="Enviar convite">📩</button>
+                        <button class="btn btn-small" onclick="resetPassword(${u.id}, '${u.nome}')" title="Resetar senha">🔑</button>
+                        ${u.ativo ?
+                            `<button class="btn btn-small btn-danger" onclick="deactivateUser(${u.id}, '${u.nome}')" title="Desativar">🚫</button>` :
+                            `<button class="btn btn-small btn-success" onclick="activateUser(${u.id})" title="Reativar">✅</button>`
+                        }
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Abrir modal para criar/editar
+        function showModal(mode, userId = null) {
+            document.getElementById('userModal').classList.remove('hidden');
+            document.getElementById('modalTitle').textContent = mode === 'create' ? 'Novo Usuario' : 'Editar Usuario';
+            document.getElementById('ativoGroup').style.display = mode === 'create' ? 'none' : 'block';
+            document.getElementById('email').disabled = mode === 'edit';
+
+            if (mode === 'create') {
+                document.getElementById('userForm').reset();
+                document.getElementById('userId').value = '';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('userModal').classList.add('hidden');
+        }
+
+        // Editar usuario
+        async function editUser(id) {
+            try {
+                const res = await apiRequest(`/api/admin/usuarios/${id}`);
+                if (res.success) {
+                    const u = res.usuario;
+                    document.getElementById('userId').value = u.id;
+                    document.getElementById('email').value = u.email;
+                    document.getElementById('nome').value = u.nome;
+                    document.getElementById('nomeCompleto').value = u.nome_completo || '';
+                    document.getElementById('area').value = u.area || '';
+                    document.getElementById('cargo').value = u.cargo || '';
+                    document.getElementById('isAdmin').checked = u.is_admin === 1;
+                    document.getElementById('ativo').checked = u.ativo === 1;
+
+                    // Marcar modulos
+                    document.querySelectorAll('input[name="modulos"]').forEach(cb => {
+                        cb.checked = u.modulos.some(m => m.id === parseInt(cb.value));
+                    });
+
+                    showModal('edit', id);
+                }
+            } catch (error) {
+                alert('Erro ao carregar usuario');
+            }
+        }
+
+        // Salvar usuario
+        document.getElementById('userForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const userId = document.getElementById('userId').value;
+            const modulos = Array.from(document.querySelectorAll('input[name="modulos"]:checked')).map(cb => parseInt(cb.value));
+
+            const data = {
+                email: document.getElementById('email').value,
+                nome: document.getElementById('nome').value,
+                nomeCompleto: document.getElementById('nomeCompleto').value || null,
+                area: document.getElementById('area').value || null,
+                cargo: document.getElementById('cargo').value || null,
+                isAdmin: document.getElementById('isAdmin').checked,
+                ativo: document.getElementById('ativo').checked,
+                modulos
+            };
+
+            try {
+                let res;
+                if (userId) {
+                    res = await apiRequest(`/api/admin/usuarios/${userId}`, {
+                        method: 'PUT',
+                        body: JSON.stringify(data)
+                    });
+                } else {
+                    res = await apiRequest('/api/admin/usuarios', {
+                        method: 'POST',
+                        body: JSON.stringify(data)
+                    });
+                }
+
+                if (res.success) {
+                    closeModal();
+                    loadUsers();
+                    alert(userId ? 'Usuario atualizado!' : 'Usuario criado!');
+                } else {
+                    alert(res.error || 'Erro ao salvar');
+                }
+            } catch (error) {
+                alert('Erro ao salvar usuario');
+            }
+        });
+
+        // Enviar convite
+        async function sendInvite(id, email, nome) {
+            try {
+                const res = await apiRequest('/api/admin/convites', {
+                    method: 'POST',
+                    body: JSON.stringify({ email })
+                });
+
+                if (res.success) {
+                    document.getElementById('inviteEmail').textContent = `${nome} (${email})`;
+                    document.getElementById('inviteLink').value = res.convite.activationUrl;
+                    document.getElementById('teamsLink').href = res.convite.teamsUrl;
+                    document.getElementById('inviteModal').classList.remove('hidden');
+                } else {
+                    alert(res.error || 'Erro ao gerar convite');
+                }
+            } catch (error) {
+                alert('Erro ao gerar convite');
+            }
+        }
+
+        function closeInviteModal() {
+            document.getElementById('inviteModal').classList.add('hidden');
+        }
+
+        function copyLink() {
+            const input = document.getElementById('inviteLink');
+            input.select();
+            document.execCommand('copy');
+            alert('Link copiado!');
+        }
+
+        // Resetar senha
+        async function resetPassword(id, nome) {
+            if (!confirm(`Resetar a senha de ${nome} para a senha padrao?`)) return;
+
+            try {
+                const res = await apiRequest(`/api/admin/reset-senha/${id}`, {
+                    method: 'POST'
+                });
+
+                if (res.success) {
+                    alert(`Senha resetada!\nNova senha: ${res.senhaPadrao}`);
+                } else {
+                    alert(res.error || 'Erro ao resetar senha');
+                }
+            } catch (error) {
+                alert('Erro ao resetar senha');
+            }
+        }
+
+        // Desativar usuario
+        async function deactivateUser(id, nome) {
+            if (!confirm(`Desativar o usuario ${nome}?`)) return;
+
+            try {
+                const res = await apiRequest(`/api/admin/usuarios/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (res.success) {
+                    loadUsers();
+                    alert('Usuario desativado!');
+                } else {
+                    alert(res.error || 'Erro ao desativar');
+                }
+            } catch (error) {
+                alert('Erro ao desativar usuario');
+            }
+        }
+
+        // Reativar usuario
+        async function activateUser(id) {
+            try {
+                const res = await apiRequest(`/api/admin/usuarios/${id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ ativo: true })
+                });
+
+                if (res.success) {
+                    loadUsers();
+                    alert('Usuario reativado!');
+                }
+            } catch (error) {
+                alert('Erro ao reativar usuario');
+            }
+        }
+
+        // Filtros
+        document.getElementById('searchInput').addEventListener('input', renderUsers);
+        document.getElementById('filterStatus').addEventListener('change', renderUsers);
+        document.getElementById('filterAdmin').addEventListener('change', renderUsers);
+
+        // Inicializar
+        checkAuth().then(() => {
+            loadModulos();
+            loadUsers();
+        });
+    </script>
+</body>
+</html>

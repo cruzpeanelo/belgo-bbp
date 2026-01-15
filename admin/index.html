@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Belgo BBP</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>BELGO BBP</h1>
+                <span class="badge">Admin</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item active">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="usuarios.html" class="nav-item">
+                    <span class="icon">👥</span>
+                    Usuarios
+                </a>
+                <a href="auditoria.html" class="nav-item">
+                    <span class="icon">📋</span>
+                    Auditoria
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../landing.html" class="nav-item">
+                    <span class="icon">🏠</span>
+                    Voltar ao Portal
+                </a>
+                <button class="nav-item btn-logout" onclick="logout()">
+                    <span class="icon">🚪</span>
+                    Sair
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h2>Dashboard Administrativo</h2>
+                <div class="user-info">
+                    <span id="userName">Carregando...</span>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="totalUsuarios">-</span>
+                            <span class="stat-label">Usuarios</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="usuariosAtivos">-</span>
+                            <span class="stat-label">Ativos</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔐</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="totalLogins">-</span>
+                            <span class="stat-label">Logins (30 dias)</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📝</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="totalAcoes">-</span>
+                            <span class="stat-label">Acoes (30 dias)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Atividade Recente</h3>
+                        <a href="auditoria.html" class="link">Ver todas</a>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Data/Hora</th>
+                                    <th>Usuario</th>
+                                    <th>Acao</th>
+                                    <th>Detalhes</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentActivity">
+                                <tr>
+                                    <td colspan="4" class="loading">Carregando...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Users by Module -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Usuarios por Modulo</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="modules-stats" id="modulesStats">
+                            <p class="loading">Carregando...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/admin.js"></script>
+    <script>
+        // Carregar dashboard
+        async function loadDashboard() {
+            try {
+                // Usuarios
+                const usersRes = await apiRequest('/api/admin/usuarios');
+                if (usersRes.success) {
+                    document.getElementById('totalUsuarios').textContent = usersRes.total;
+                    document.getElementById('usuariosAtivos').textContent =
+                        usersRes.usuarios.filter(u => u.ativo).length;
+                }
+
+                // Estatisticas de auditoria
+                const statsRes = await apiRequest('/api/admin/auditoria', {
+                    method: 'POST',
+                    body: JSON.stringify({ periodo: '30dias' })
+                });
+                if (statsRes.success) {
+                    document.getElementById('totalLogins').textContent = statsRes.estatisticas.totalLogins;
+                    document.getElementById('totalAcoes').textContent = statsRes.estatisticas.totalAcoes;
+                }
+
+                // Atividade recente
+                const activityRes = await apiRequest('/api/admin/auditoria?limite=10');
+                if (activityRes.success) {
+                    const tbody = document.getElementById('recentActivity');
+                    if (activityRes.logs.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="4" class="empty">Nenhuma atividade registrada</td></tr>';
+                    } else {
+                        tbody.innerHTML = activityRes.logs.map(log => `
+                            <tr>
+                                <td>${formatDate(log.created_at)}</td>
+                                <td>${log.usuario_nome || '-'}</td>
+                                <td><span class="badge badge-${getActionColor(log.acao)}">${log.acao}</span></td>
+                                <td>${getActionDetails(log)}</td>
+                            </tr>
+                        `).join('');
+                    }
+                }
+
+                // Usuarios por modulo
+                loadModulesStats();
+
+            } catch (error) {
+                console.error('Erro ao carregar dashboard:', error);
+            }
+        }
+
+        async function loadModulesStats() {
+            try {
+                const modulosRes = await apiRequest('/api/admin/modulos');
+                const usersRes = await apiRequest('/api/admin/usuarios');
+
+                if (modulosRes.success && usersRes.success) {
+                    // Contar usuarios por modulo (simulado, seria melhor uma query no backend)
+                    const container = document.getElementById('modulesStats');
+                    container.innerHTML = modulosRes.modulos.map(m => `
+                        <div class="module-stat">
+                            <span class="module-icon">${m.icone}</span>
+                            <span class="module-name">${m.nome}</span>
+                            <span class="module-count">-</span>
+                        </div>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Erro ao carregar modulos:', error);
+            }
+        }
+
+        function getActionColor(acao) {
+            const colors = {
+                'login': 'green',
+                'logout': 'gray',
+                'criar': 'blue',
+                'editar': 'yellow',
+                'excluir': 'red',
+                'aprovar': 'green',
+                'login_falha': 'red'
+            };
+            return colors[acao] || 'gray';
+        }
+
+        function getActionDetails(log) {
+            if (log.entidade) {
+                return `${log.entidade}${log.entidade_id ? ` #${log.entidade_id}` : ''}`;
+            }
+            return '-';
+        }
+
+        // Inicializar
+        checkAuth().then(() => {
+            loadDashboard();
+        });
+    </script>
+</body>
+</html>

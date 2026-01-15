@@ -19,6 +19,51 @@
             color: #1f2937;
             line-height: 1.6;
         }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255,255,255,0.9);
+            font-size: 0.9rem;
+        }
+        .user-badge {
+            background: #00A799;
+            padding: 0.125rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+        .btn-header {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .btn-admin {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+        .btn-admin:hover {
+            background: rgba(255,255,255,0.25);
+        }
+        .btn-logout {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            cursor: pointer;
+        }
+        .btn-logout:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .hidden {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
@@ -27,6 +72,11 @@
         <header class="landing-header">
             <div class="landing-logo">BELGO BBP</div>
             <div class="landing-subtitle">Business Process Platform - Belgo Arames</div>
+            <div class="header-actions" id="headerActions">
+                <div class="user-info" id="userInfo"></div>
+                <a href="admin/index.html" class="btn-header btn-admin hidden" id="adminLink">⚙️ Admin</a>
+                <button class="btn-header btn-logout hidden" id="logoutBtn" onclick="BelgoAuth.logout()">Sair</button>
+            </div>
         </header>
 
         <!-- Main Content -->
@@ -102,9 +152,30 @@
         </footer>
     </div>
 
+    <script src="shared/js/auth.js"></script>
     <script>
-        // Verificar ultimo modulo visitado e oferecer redirecionamento
-        document.addEventListener('DOMContentLoaded', () => {
+        // Inicializar autenticacao
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Verificar se esta autenticado
+            if (BelgoAuth.isAuthenticated()) {
+                const usuario = BelgoAuth.getUsuario();
+
+                // Mostrar info do usuario
+                document.getElementById('userInfo').innerHTML = `
+                    <span>Ola, ${usuario.nome}</span>
+                    ${usuario.isAdmin ? '<span class="user-badge">Admin</span>' : ''}
+                `;
+
+                // Mostrar botao admin se for admin
+                if (usuario.isAdmin) {
+                    document.getElementById('adminLink').classList.remove('hidden');
+                }
+
+                // Mostrar botao logout
+                document.getElementById('logoutBtn').classList.remove('hidden');
+            }
+
+            // Verificar ultimo modulo visitado
             const lastModule = localStorage.getItem('belgo_last_module');
             if (lastModule && lastModule !== 'landing') {
                 // Opcional: auto-redirecionar para ultimo modulo

@@ -1,0 +1,14 @@
+name = "belgo-bbp"
+compatibility_date = "2024-01-15"
+compatibility_flags = ["nodejs_compat"]
+
+# Cloudflare D1 Database
+[[d1_databases]]
+binding = "DB"
+database_name = "belgo-bbp-db"
+database_id = "f27aba6f-cdd3-411b-93f0-a6b86b930214"
+
+# Cloudflare KV (legado - manter por compatibilidade)
+[[kv_namespaces]]
+binding = "BELGO_TESTES"
+id = "2a33eb2760ff4c309da942300cf54d8f"

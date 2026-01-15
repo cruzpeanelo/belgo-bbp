@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditoria - Admin - Belgo BBP</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>BELGO BBP</h1>
+                <span class="badge">Admin</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="usuarios.html" class="nav-item">
+                    <span class="icon">👥</span>
+                    Usuarios
+                </a>
+                <a href="auditoria.html" class="nav-item active">
+                    <span class="icon">📋</span>
+                    Auditoria
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../landing.html" class="nav-item">
+                    <span class="icon">🏠</span>
+                    Voltar ao Portal
+                </a>
+                <button class="nav-item btn-logout" onclick="logout()">
+                    <span class="icon">🚪</span>
+                    Sair
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h2>Logs de Auditoria</h2>
+                <button class="btn btn-secondary" onclick="exportLogs()">
+                    📥 Exportar CSV
+                </button>
+            </header>
+
+            <div class="content-body">
+                <!-- Filters -->
+                <div class="filters">
+                    <select id="filterAcao" class="select-filter">
+                        <option value="">Todas as acoes</option>
+                        <option value="login">Login</option>
+                        <option value="logout">Logout</option>
+                        <option value="login_falha">Login falha</option>
+                        <option value="criar">Criar</option>
+                        <option value="editar">Editar</option>
+                        <option value="excluir">Excluir</option>
+                        <option value="aprovar">Aprovar</option>
+                        <option value="trocar_senha">Trocar senha</option>
+                        <option value="reset_senha">Reset senha</option>
+                    </select>
+                    <select id="filterEntidade" class="select-filter">
+                        <option value="">Todas as entidades</option>
+                        <option value="usuario">Usuario</option>
+                        <option value="teste">Teste</option>
+                        <option value="jornada">Jornada</option>
+                        <option value="sessao">Sessao</option>
+                        <option value="convite">Convite</option>
+                    </select>
+                    <input type="date" id="filterDataInicio" class="input-date" title="Data inicio">
+                    <input type="date" id="filterDataFim" class="input-date" title="Data fim">
+                    <button class="btn btn-primary" onclick="loadLogs()">Filtrar</button>
+                </div>
+
+                <!-- Logs Table -->
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Data/Hora</th>
+                                    <th>Usuario</th>
+                                    <th>Acao</th>
+                                    <th>Entidade</th>
+                                    <th>Detalhes</th>
+                                    <th>IP</th>
+                                </tr>
+                            </thead>
+                            <tbody id="logsTable">
+                                <tr>
+                                    <td colspan="6" class="loading">Carregando...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="card-footer">
+                        <div class="pagination">
+                            <button class="btn btn-small" onclick="prevPage()" id="btnPrev" disabled>&lt; Anterior</button>
+                            <span id="pageInfo">Pagina 1</span>
+                            <button class="btn btn-small" onclick="nextPage()" id="btnNext">Proxima &gt;</button>
+                        </div>
+                        <div class="total-info">
+                            Total: <span id="totalLogs">0</span> registros
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/admin.js"></script>
+    <script>
+        let currentPage = 0;
+        const pageSize = 50;
+        let totalLogs = 0;
+        let allLogs = [];
+
+        // Carregar logs
+        async function loadLogs() {
+            const acao = document.getElementById('filterAcao').value;
+            const entidade = document.getElementById('filterEntidade').value;
+            const dataInicio = document.getElementById('filterDataInicio').value;
+            const dataFim = document.getElementById('filterDataFim').value;
+
+            let url = `/api/admin/auditoria?limite=${pageSize}&offset=${currentPage * pageSize}`;
+            if (acao) url += `&acao=${acao}`;
+            if (entidade) url += `&entidade=${entidade}`;
+            if (dataInicio) url += `&data_inicio=${dataInicio}T00:00:00`;
+            if (dataFim) url += `&data_fim=${dataFim}T23:59:59`;
+
+            try {
+                const res = await apiRequest(url);
+                if (res.success) {
+                    allLogs = res.logs;
+                    totalLogs = res.total;
+                    renderLogs();
+                    updatePagination();
+                }
+            } catch (error) {
+                console.error('Erro ao carregar logs:', error);
+            }
+        }
+
+        // Renderizar tabela
+        function renderLogs() {
+            const tbody = document.getElementById('logsTable');
+
+            if (allLogs.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" class="empty">Nenhum registro encontrado</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = allLogs.map(log => `
+                <tr>
+                    <td>${formatDate(log.created_at)}</td>
+                    <td>
+                        ${log.usuario_nome || '-'}
+                        ${log.usuario_email ? `<br><small>${log.usuario_email}</small>` : ''}
+                    </td>
+                    <td>
+                        <span class="badge badge-${getActionColor(log.acao)}">${log.acao}</span>
+                    </td>
+                    <td>${log.entidade || '-'} ${log.entidade_id ? `#${log.entidade_id}` : ''}</td>
+                    <td class="details-cell">
+                        ${formatDetails(log.detalhes)}
+                    </td>
+                    <td><small>${log.ip || '-'}</small></td>
+                </tr>
+            `).join('');
+        }
+
+        function getActionColor(acao) {
+            const colors = {
+                'login': 'green',
+                'logout': 'gray',
+                'criar': 'blue',
+                'editar': 'yellow',
+                'excluir': 'red',
+                'aprovar': 'green',
+                'reprovar': 'red',
+                'login_falha': 'red',
+                'trocar_senha': 'blue',
+                'reset_senha': 'yellow',
+                'ativar_conta': 'green',
+                'criar_convite': 'blue'
+            };
+            return colors[acao] || 'gray';
+        }
+
+        function formatDetails(detalhes) {
+            if (!detalhes) return '-';
+            if (typeof detalhes === 'string') {
+                try {
+                    detalhes = JSON.parse(detalhes);
+                } catch {
+                    return detalhes;
+                }
+            }
+
+            const parts = [];
+            if (detalhes.email) parts.push(`Email: ${detalhes.email}`);
+            if (detalhes.motivo) parts.push(`Motivo: ${detalhes.motivo}`);
+            if (detalhes.criadoPor) parts.push(`Por: ${detalhes.criadoPor}`);
+            if (detalhes.editadoPor) parts.push(`Por: ${detalhes.editadoPor}`);
+
+            return parts.length > 0 ? parts.join('<br>') : JSON.stringify(detalhes).substring(0, 100);
+        }
+
+        // Paginacao
+        function updatePagination() {
+            const totalPages = Math.ceil(totalLogs / pageSize);
+            document.getElementById('pageInfo').textContent = `Pagina ${currentPage + 1} de ${totalPages || 1}`;
+            document.getElementById('btnPrev').disabled = currentPage === 0;
+            document.getElementById('btnNext').disabled = currentPage >= totalPages - 1;
+            document.getElementById('totalLogs').textContent = totalLogs;
+        }
+
+        function prevPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                loadLogs();
+            }
+        }
+
+        function nextPage() {
+            const totalPages = Math.ceil(totalLogs / pageSize);
+            if (currentPage < totalPages - 1) {
+                currentPage++;
+                loadLogs();
+            }
+        }
+
+        // Exportar CSV
+        function exportLogs() {
+            if (allLogs.length === 0) {
+                alert('Nenhum registro para exportar');
+                return;
+            }
+
+            const headers = ['Data/Hora', 'Usuario', 'Email', 'Acao', 'Entidade', 'ID Entidade', 'IP'];
+            const rows = allLogs.map(log => [
+                log.created_at,
+                log.usuario_nome || '',
+                log.usuario_email || '',
+                log.acao,
+                log.entidade || '',
+                log.entidade_id || '',
+                log.ip || ''
+            ]);
+
+            const csvContent = [headers, ...rows]
+                .map(row => row.map(cell => `"${cell}"`).join(','))
+                .join('\n');
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `auditoria_${new Date().toISOString().split('T')[0]}.csv`;
+            link.click();
+        }
+
+        // Inicializar
+        checkAuth().then(() => {
+            loadLogs();
+        });
+    </script>
+</body>
+</html>

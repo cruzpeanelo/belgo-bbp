@@ -3,9 +3,17 @@
   "include": ["/api/*"],
   "exclude": [
     "/landing.html",
+    "/login.html",
+    "/ativar.html",
+    "/trocar-senha.html",
+    "/index.html",
     "/config/*",
     "/shared/*",
     "/rede-ativa/*",
-    "/roadmap/*"
+    "/roadmap/*",
+    "/admin/*",
+    "/js/*",
+    "/css/*",
+    "/data/*"
   ]
 }
