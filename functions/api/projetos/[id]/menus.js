@@ -38,7 +38,6 @@ export async function onRequestGet(context) {
                 m.ativo,
                 m.permissao_criar,
                 m.permissao_editar,
-                m.permissao_excluir,
                 m.entidade_id,
                 e.codigo as entidade_codigo,
                 e.nome as entidade_nome,
@@ -68,8 +67,7 @@ export async function onRequestGet(context) {
                 entidade_nome_plural: menu.entidade_nome_plural,
                 permissoes: {
                     criar: menu.permissao_criar || 'executor',
-                    editar: menu.permissao_editar || 'gestor',
-                    excluir: menu.permissao_excluir || 'admin'
+                    editar: menu.permissao_editar || 'gestor'
                 },
                 config_funcionalidades: menu.config_funcionalidades
             };
