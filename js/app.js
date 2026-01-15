@@ -30,6 +30,19 @@ const KVSync = {
     syncEnabled: true,
     lastSync: null,
 
+    // Obter headers com autenticacao
+    getHeaders(contentType = false) {
+        const headers = { 'Accept': 'application/json' };
+        const token = sessionStorage.getItem('belgo_token');
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+        if (contentType) {
+            headers['Content-Type'] = 'application/json';
+        }
+        return headers;
+    },
+
     // Carregar status do KV
     async load() {
         if (!this.syncEnabled) return null;
@@ -37,7 +50,7 @@ const KVSync = {
         try {
             const response = await fetch(this.apiUrl, {
                 method: 'GET',
-                headers: { 'Accept': 'application/json' }
+                headers: this.getHeaders()
             });
 
             if (response.ok) {
@@ -59,10 +72,10 @@ const KVSync = {
         try {
             const response = await fetch(this.apiUrl, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: this.getHeaders(true),
                 body: JSON.stringify({
                     testes,
-                    updatedBy: 'cockpit-gtm'
+                    updatedBy: BelgoAuth?.getUsuario()?.nome || 'cockpit-gtm'
                 })
             });
 
