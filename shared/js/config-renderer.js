@@ -304,7 +304,28 @@ const ConfigRenderer = {
     // RENDER TABELA
     // =====================================================
     renderTabela(dados) {
-        const colunas = this.config?.tabela?.colunas || [];
+        // Usar colunas do config ou gerar automaticamente dos campos da entidade
+        let colunas = this.config?.tabela?.colunas || [];
+
+        // Se nao tem config de colunas, gerar a partir dos campos carregados
+        if (colunas.length === 0 && this.campos.length > 0) {
+            colunas = this.campos
+                .filter(c => c.visivel_listagem !== 0)
+                .map(c => ({
+                    campo: c.codigo,
+                    label: c.nome,
+                    tipo: c.tipo === 'select' ? 'badge' : 'text',
+                    largura: c.largura_coluna || 'auto'
+                }));
+        }
+
+        // Se ainda nao tem colunas, extrair dos dados
+        if (colunas.length === 0 && dados.length > 0) {
+            colunas = Object.keys(dados[0])
+                .filter(k => !k.startsWith('_'))
+                .map(k => ({ campo: k, label: k, tipo: 'text' }));
+        }
+
         const acoes = this.config?.tabela?.acoes || [];
 
         return `
