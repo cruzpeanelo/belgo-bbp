@@ -72,12 +72,13 @@ export async function onRequestPost(context) {
                 let opcoes = [];
 
                 if (campo.tipo === 'select' || campo.tipo === 'multiselect') {
+                    // Buscar opcoes usando entidade_id e campo_codigo (estrutura atual do banco)
                     const opcoesResult = await context.env.DB.prepare(`
                         SELECT valor, label, cor, icone, ordem
                         FROM projeto_entidade_opcoes
-                        WHERE campo_id = ?
+                        WHERE entidade_id = ? AND campo_codigo = ?
                         ORDER BY ordem
-                    `).bind(campo.id).all();
+                    `).bind(entidade.id, campo.codigo).all();
 
                     opcoes = opcoesResult.results || [];
                 }
