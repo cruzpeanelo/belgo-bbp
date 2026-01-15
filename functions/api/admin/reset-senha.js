@@ -6,7 +6,7 @@
 import { hashPassword, jsonResponse, errorResponse } from '../../lib/auth.js';
 import { registrarAuditoria, getClientIP, ACOES, ENTIDADES } from '../../lib/audit.js';
 
-// Senha padrao para reset
+// Senha padrão para reset
 const SENHA_PADRAO = 'BelgoGTM2024';
 
 export async function onRequestPost(context) {
@@ -17,19 +17,19 @@ export async function onRequestPost(context) {
         const id = pathParts[pathParts.length - 1];
 
         if (!id || isNaN(id)) {
-            return errorResponse('ID do usuario nao fornecido', 400);
+            return errorResponse('ID do usuário não fornecido', 400);
         }
 
-        // Verificar se usuario existe
+        // Verificar se usuário existe
         const usuario = await context.env.DB.prepare(`
             SELECT id, email, nome FROM usuarios WHERE id = ?
         `).bind(id).first();
 
         if (!usuario) {
-            return errorResponse('Usuario nao encontrado', 404);
+            return errorResponse('Usuário não encontrado', 404);
         }
 
-        // Reset para senha padrao
+        // Reset para senha padrão
         const senhaHash = await hashPassword(SENHA_PADRAO);
         await context.env.DB.prepare(`
             UPDATE usuarios
@@ -37,7 +37,7 @@ export async function onRequestPost(context) {
             WHERE id = ?
         `).bind(senhaHash, id).run();
 
-        // Invalidar sessoes do usuario
+        // Invalidar sessões do usuário
         await context.env.DB.prepare(`
             DELETE FROM sessoes WHERE usuario_id = ?
         `).bind(id).run();
@@ -54,7 +54,7 @@ export async function onRequestPost(context) {
 
         return jsonResponse({
             success: true,
-            message: `Senha de ${usuario.nome} resetada para a senha padrao`,
+            message: `Senha de ${usuario.nome} resetada para a senha padrão`,
             senhaPadrao: SENHA_PADRAO
         });
 

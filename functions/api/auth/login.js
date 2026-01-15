@@ -10,24 +10,24 @@ export async function onRequestPost(context) {
     try {
         const { email, senha } = await context.request.json();
 
-        // Validacoes basicas
+        // Validações básicas
         if (!email || !senha) {
-            return errorResponse('Email e senha sao obrigatorios', 400);
+            return errorResponse('Email e senha são obrigatórios', 400);
         }
 
         const emailLower = email.toLowerCase().trim();
 
-        // Validar dominio
+        // Validar domínio
         if (!isValidDomain(emailLower)) {
             await registrarAuditoria(context.env.DB, {
                 acao: ACOES.LOGIN_FALHA,
-                detalhes: { email: emailLower, motivo: 'dominio_invalido' },
+                detalhes: { email: emailLower, motivo: 'domínio_inválido' },
                 ip: getClientIP(context.request)
             });
-            return errorResponse('Dominio de email nao permitido. Use @belgo.com.br ou @arcelormittal.com.br', 403);
+            return errorResponse('Domínio de email não permitido. Use @belgo.com.br ou @arcelormittal.com.br', 403);
         }
 
-        // Buscar usuario
+        // Buscar usuário
         const usuario = await context.env.DB.prepare(`
             SELECT id, email, nome, nome_completo, senha_hash, area, cargo,
                    is_admin, ativo, primeiro_acesso
@@ -38,23 +38,23 @@ export async function onRequestPost(context) {
         if (!usuario) {
             await registrarAuditoria(context.env.DB, {
                 acao: ACOES.LOGIN_FALHA,
-                detalhes: { email: emailLower, motivo: 'usuario_nao_encontrado' },
+                detalhes: { email: emailLower, motivo: 'usuário_não_encontrado' },
                 ip: getClientIP(context.request)
             });
             return errorResponse('Email ou senha incorretos', 401);
         }
 
-        // Verificar se usuario esta ativo
+        // Verificar se usuário está ativo
         if (!usuario.ativo) {
             await registrarAuditoria(context.env.DB, {
                 usuarioId: usuario.id,
                 acao: ACOES.LOGIN_FALHA,
                 entidade: ENTIDADES.USUARIO,
                 entidadeId: String(usuario.id),
-                detalhes: { motivo: 'usuario_inativo' },
+                detalhes: { motivo: 'usuário_inativo' },
                 ip: getClientIP(context.request)
             });
-            return errorResponse('Usuario desativado. Contate o administrador.', 403);
+            return errorResponse('Usuário desativado. Contate o administrador.', 403);
         }
 
         // Verificar senha
@@ -71,11 +71,11 @@ export async function onRequestPost(context) {
             return errorResponse('Email ou senha incorretos', 401);
         }
 
-        // Limpar sessoes antigas do usuario
+        // Limpar sessões antigas do usuário
         await context.env.DB.prepare('DELETE FROM sessoes WHERE usuario_id = ?')
             .bind(usuario.id).run();
 
-        // Criar nova sessao
+        // Criar nova sessão
         const token = generateToken();
         const expiresAt = getSessionExpiry();
 
@@ -84,7 +84,7 @@ export async function onRequestPost(context) {
             VALUES (?, ?, ?)
         `).bind(usuario.id, token, expiresAt).run();
 
-        // Buscar modulos do usuario
+        // Buscar módulos do usuário
         const modulos = await getUserModules(context.env.DB, usuario.id);
 
         // Registrar login bem-sucedido

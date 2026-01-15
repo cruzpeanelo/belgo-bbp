@@ -201,7 +201,7 @@
                     throw new Error(data.error || 'Erro ao fazer login');
                 }
 
-                // Salvar dados da sessao
+                // Salvar dados da sessão
                 sessionStorage.setItem('belgo_token', data.token);
                 sessionStorage.setItem('belgo_usuario', JSON.stringify(data.usuario));
                 sessionStorage.setItem('belgo_modulos', JSON.stringify(data.modulos));
@@ -212,7 +212,7 @@
                     return;
                 }
 
-                // Redirecionar para pagina solicitada ou landing
+                // Redirecionar para página solicitada ou landing
                 const redirect = new URLSearchParams(window.location.search).get('redirect') || '/landing.html';
                 window.location.href = redirect;
 
@@ -225,7 +225,7 @@
             }
         });
 
-        // Verificar se ja esta logado
+        // Verificar se já está logado
         (async function checkAuth() {
             const token = sessionStorage.getItem('belgo_token');
             if (token) {
@@ -238,7 +238,7 @@
                         window.location.href = redirect;
                     }
                 } catch (e) {
-                    // Token invalido, continuar no login
+                    // Token inválido, continuar no login
                     sessionStorage.removeItem('belgo_token');
                 }
             }

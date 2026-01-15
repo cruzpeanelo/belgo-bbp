@@ -1,5 +1,5 @@
 // =====================================================
-// BELGO BBP - API de Ativacao de Conta
+// BELGO BBP - API de Ativação de Conta
 // POST /api/auth/activate
 // =====================================================
 
@@ -10,17 +10,17 @@ export async function onRequestPost(context) {
     try {
         const { token, novaSenha, confirmarSenha } = await context.request.json();
 
-        // Validacoes
+        // Validações
         if (!token) {
-            return errorResponse('Token de ativacao nao fornecido', 400);
+            return errorResponse('Token de ativação não fornecido', 400);
         }
 
         if (!novaSenha || !confirmarSenha) {
-            return errorResponse('Senha e confirmacao sao obrigatorias', 400);
+            return errorResponse('Senha e confirmação são obrigatórias', 400);
         }
 
         if (novaSenha !== confirmarSenha) {
-            return errorResponse('As senhas nao conferem', 400);
+            return errorResponse('As senhas não conferem', 400);
         }
 
         if (novaSenha.length < 8) {
@@ -36,24 +36,24 @@ export async function onRequestPost(context) {
         `).bind(token).first();
 
         if (!convite) {
-            return errorResponse('Convite invalido ou ja utilizado', 400);
+            return errorResponse('Convite inválido ou já utilizado', 400);
         }
 
-        // Verificar expiracao
+        // Verificar expiração
         if (new Date(convite.expires_at) < new Date()) {
             return errorResponse('Convite expirado. Solicite um novo ao administrador.', 400);
         }
 
-        // Buscar usuario pelo email do convite
+        // Buscar usuário pelo email do convite
         const usuario = await context.env.DB.prepare(`
             SELECT id, email, nome FROM usuarios WHERE email = ?
         `).bind(convite.email).first();
 
         if (!usuario) {
-            return errorResponse('Usuario nao encontrado', 404);
+            return errorResponse('Usuário não encontrado', 404);
         }
 
-        // Atualizar senha e ativar usuario
+        // Atualizar senha e ativar usuário
         const senhaHash = await hashPassword(novaSenha);
         await context.env.DB.prepare(`
             UPDATE usuarios
@@ -78,7 +78,7 @@ export async function onRequestPost(context) {
 
         return jsonResponse({
             success: true,
-            message: 'Conta ativada com sucesso! Voce ja pode fazer login.',
+            message: 'Conta ativada com sucesso! Você já pode fazer login.',
             email: usuario.email
         });
 
@@ -88,14 +88,14 @@ export async function onRequestPost(context) {
     }
 }
 
-// GET - Validar token antes de mostrar formulario
+// GET - Validar token antes de mostrar formulário
 export async function onRequestGet(context) {
     try {
         const url = new URL(context.request.url);
         const token = url.searchParams.get('token');
 
         if (!token) {
-            return errorResponse('Token nao fornecido', 400);
+            return errorResponse('Token não fornecido', 400);
         }
 
         const convite = await context.env.DB.prepare(`
@@ -105,11 +105,11 @@ export async function onRequestGet(context) {
         `).bind(token).first();
 
         if (!convite) {
-            return jsonResponse({ valid: false, message: 'Convite invalido' });
+            return jsonResponse({ valid: false, message: 'Convite inválido' });
         }
 
         if (convite.usado) {
-            return jsonResponse({ valid: false, message: 'Convite ja utilizado' });
+            return jsonResponse({ valid: false, message: 'Convite já utilizado' });
         }
 
         if (new Date(convite.expires_at) < new Date()) {

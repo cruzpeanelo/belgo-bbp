@@ -1,11 +1,11 @@
 // =====================================================
-// BELGO BBP - Helpers de Autenticacao
+// BELGO BBP - Helpers de Autenticação
 // =====================================================
 
-// Dominios permitidos para login
+// Domínios permitidos para login
 const ALLOWED_DOMAINS = ['belgo.com.br', 'arcelormittal.com.br'];
 
-// Duracao da sessao em horas
+// Duração da sessão em horas
 const SESSION_DURATION_HOURS = 24;
 
 /**
@@ -20,7 +20,7 @@ export async function hashPassword(password) {
 }
 
 /**
- * Gera token aleatorio para sessao
+ * Gera token aleatório para sessão
  */
 export function generateToken() {
     const array = new Uint8Array(32);
@@ -29,7 +29,7 @@ export function generateToken() {
 }
 
 /**
- * Valida se o email pertence a um dominio permitido
+ * Valida se o email pertence a um domínio permitido
  */
 export function isValidDomain(email) {
     if (!email || !email.includes('@')) return false;
@@ -38,7 +38,7 @@ export function isValidDomain(email) {
 }
 
 /**
- * Calcula data de expiracao da sessao
+ * Calcula data de expiração da sessão
  */
 export function getSessionExpiry() {
     const expiry = new Date();
@@ -47,7 +47,7 @@ export function getSessionExpiry() {
 }
 
 /**
- * Verifica se uma sessao expirou
+ * Verifica se uma sessão expirou
  */
 export function isSessionExpired(expiresAt) {
     return new Date(expiresAt) < new Date();
@@ -67,7 +67,7 @@ export function extractToken(request) {
 }
 
 /**
- * Cria resposta JSON padrao
+ * Cria resposta JSON padrão
  */
 export function jsonResponse(data, status = 200) {
     return new Response(JSON.stringify(data), {
@@ -82,14 +82,14 @@ export function jsonResponse(data, status = 200) {
 }
 
 /**
- * Cria resposta de erro padrao
+ * Cria resposta de erro padrão
  */
 export function errorResponse(message, status = 400) {
     return jsonResponse({ error: message, success: false }, status);
 }
 
 /**
- * Valida usuario a partir do token
+ * Valida usuário a partir do token
  */
 export async function validateSession(db, token) {
     if (!token) return null;
@@ -105,7 +105,7 @@ export async function validateSession(db, token) {
     if (!result) return null;
 
     if (isSessionExpired(result.expires_at)) {
-        // Limpar sessao expirada
+        // Limpar sessão expirada
         await db.prepare('DELETE FROM sessoes WHERE token = ?').bind(token).run();
         return null;
     }
@@ -124,7 +124,7 @@ export async function validateSession(db, token) {
 }
 
 /**
- * Busca modulos do usuario
+ * Busca módulos do usuário
  */
 export async function getUserModules(db, userId) {
     const results = await db.prepare(`

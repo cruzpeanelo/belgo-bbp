@@ -3,14 +3,14 @@
 // =====================================================
 
 /**
- * Registra acao na tabela de auditoria
+ * Registra ação na tabela de auditoria
  * @param {D1Database} db - Database D1
- * @param {Object} params - Parametros da auditoria
- * @param {number} params.usuarioId - ID do usuario (opcional)
- * @param {string} params.acao - Tipo da acao (login, logout, criar, editar, aprovar, excluir)
- * @param {string} params.entidade - Entidade afetada (usuario, teste, jornada, reuniao)
+ * @param {Object} params - Parâmetros da auditoria
+ * @param {number} params.usuarioId - ID do usuário (opcional)
+ * @param {string} params.acao - Tipo da ação (login, logout, criar, editar, aprovar, excluir)
+ * @param {string} params.entidade - Entidade afetada (usuário, teste, jornada, reunião)
  * @param {string} params.entidadeId - ID da entidade
- * @param {Object} params.detalhes - Detalhes adicionais (sera convertido para JSON)
+ * @param {Object} params.detalhes - Detalhes adicionais (será convertido para JSON)
  * @param {string} params.ip - IP do cliente
  */
 export async function registrarAuditoria(db, params) {
@@ -44,7 +44,7 @@ export async function registrarAuditoria(db, params) {
 }
 
 /**
- * Extrai IP do cliente da requisicao
+ * Extrai IP do cliente da requisição
  */
 export function getClientIP(request) {
     return request.headers.get('CF-Connecting-IP') ||
@@ -53,7 +53,7 @@ export function getClientIP(request) {
 }
 
 /**
- * Tipos de acoes para auditoria
+ * Tipos de ações para auditoria
  */
 export const ACOES = {
     LOGIN: 'login',

@@ -23,7 +23,7 @@
                 </a>
                 <a href="usuarios.html" class="nav-item">
                     <span class="icon">👥</span>
-                    Usuarios
+                    Usuários
                 </a>
                 <a href="auditoria.html" class="nav-item active">
                     <span class="icon">📋</span>
@@ -56,7 +56,7 @@
                 <!-- Filters -->
                 <div class="filters">
                     <select id="filterAcao" class="select-filter">
-                        <option value="">Todas as acoes</option>
+                        <option value="">Todas as ações</option>
                         <option value="login">Login</option>
                         <option value="logout">Logout</option>
                         <option value="login_falha">Login falha</option>
@@ -69,13 +69,13 @@
                     </select>
                     <select id="filterEntidade" class="select-filter">
                         <option value="">Todas as entidades</option>
-                        <option value="usuario">Usuario</option>
+                        <option value="usuario">Usuário</option>
                         <option value="teste">Teste</option>
                         <option value="jornada">Jornada</option>
-                        <option value="sessao">Sessao</option>
+                        <option value="sessao">Sessão</option>
                         <option value="convite">Convite</option>
                     </select>
-                    <input type="date" id="filterDataInicio" class="input-date" title="Data inicio">
+                    <input type="date" id="filterDataInicio" class="input-date" title="Data início">
                     <input type="date" id="filterDataFim" class="input-date" title="Data fim">
                     <button class="btn btn-primary" onclick="loadLogs()">Filtrar</button>
                 </div>
@@ -87,8 +87,8 @@
                             <thead>
                                 <tr>
                                     <th>Data/Hora</th>
-                                    <th>Usuario</th>
-                                    <th>Acao</th>
+                                    <th>Usuário</th>
+                                    <th>Ação</th>
                                     <th>Entidade</th>
                                     <th>Detalhes</th>
                                     <th>IP</th>
@@ -106,8 +106,8 @@
                     <div class="card-footer">
                         <div class="pagination">
                             <button class="btn btn-small" onclick="prevPage()" id="btnPrev" disabled>&lt; Anterior</button>
-                            <span id="pageInfo">Pagina 1</span>
-                            <button class="btn btn-small" onclick="nextPage()" id="btnNext">Proxima &gt;</button>
+                            <span id="pageInfo">Página 1</span>
+                            <button class="btn btn-small" onclick="nextPage()" id="btnNext">Próxima &gt;</button>
                         </div>
                         <div class="total-info">
                             Total: <span id="totalLogs">0</span> registros
@@ -216,10 +216,10 @@
             return parts.length > 0 ? parts.join('<br>') : JSON.stringify(detalhes).substring(0, 100);
         }
 
-        // Paginacao
+        // Paginação
         function updatePagination() {
             const totalPages = Math.ceil(totalLogs / pageSize);
-            document.getElementById('pageInfo').textContent = `Pagina ${currentPage + 1} de ${totalPages || 1}`;
+            document.getElementById('pageInfo').textContent = `Página ${currentPage + 1} de ${totalPages || 1}`;
             document.getElementById('btnPrev').disabled = currentPage === 0;
             document.getElementById('btnNext').disabled = currentPage >= totalPages - 1;
             document.getElementById('totalLogs').textContent = totalLogs;
@@ -247,7 +247,7 @@
                 return;
             }
 
-            const headers = ['Data/Hora', 'Usuario', 'Email', 'Acao', 'Entidade', 'ID Entidade', 'IP'];
+            const headers = ['Data/Hora', 'Usuário', 'Email', 'Ação', 'Entidade', 'ID Entidade', 'IP'];
             const rows = allLogs.map(log => [
                 log.created_at,
                 log.usuario_nome || '',

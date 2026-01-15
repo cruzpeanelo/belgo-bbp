@@ -1,19 +1,19 @@
 // =====================================================
-// BELGO BBP - Cliente de Autenticacao
+// BELGO BBP - Cliente de Autenticação
 // =====================================================
 
 const BelgoAuth = {
     API_URL: '/api/auth',
 
     /**
-     * Retorna o token da sessao
+     * Retorna o token da sessão
      */
     getToken() {
         return sessionStorage.getItem('belgo_token');
     },
 
     /**
-     * Retorna dados do usuario logado
+     * Retorna dados do usuário logado
      */
     getUsuario() {
         const data = sessionStorage.getItem('belgo_usuario');
@@ -21,7 +21,7 @@ const BelgoAuth = {
     },
 
     /**
-     * Retorna modulos do usuario
+     * Retorna módulos do usuário
      */
     getModulos() {
         const data = sessionStorage.getItem('belgo_modulos');
@@ -29,14 +29,14 @@ const BelgoAuth = {
     },
 
     /**
-     * Verifica se usuario esta autenticado
+     * Verifica se usuário está autenticado
      */
     isAuthenticated() {
         return !!this.getToken();
     },
 
     /**
-     * Verifica se usuario e admin
+     * Verifica se usuário é admin
      */
     isAdmin() {
         const usuario = this.getUsuario();
@@ -44,7 +44,7 @@ const BelgoAuth = {
     },
 
     /**
-     * Verifica se usuario tem acesso a um modulo
+     * Verifica se usuário tem acesso a um módulo
      */
     hasModuleAccess(moduloCodigo) {
         const modulos = this.getModulos();
@@ -52,7 +52,7 @@ const BelgoAuth = {
     },
 
     /**
-     * Faz requisicao autenticada
+     * Faz requisição autenticada
      */
     async request(url, options = {}) {
         const token = this.getToken();
@@ -73,7 +73,7 @@ const BelgoAuth = {
             }
         });
 
-        // Sessao expirada
+        // Sessão expirada
         if (response.status === 401) {
             this.clearSession();
             window.location.href = '/login.html?redirect=' + encodeURIComponent(window.location.pathname);
@@ -99,7 +99,7 @@ const BelgoAuth = {
             throw new Error(data.error || 'Erro ao fazer login');
         }
 
-        // Salvar sessao
+        // Salvar sessão
         sessionStorage.setItem('belgo_token', data.token);
         sessionStorage.setItem('belgo_usuario', JSON.stringify(data.usuario));
         sessionStorage.setItem('belgo_modulos', JSON.stringify(data.modulos));
@@ -129,7 +129,7 @@ const BelgoAuth = {
     },
 
     /**
-     * Limpa sessao local
+     * Limpa sessão local
      */
     clearSession() {
         sessionStorage.removeItem('belgo_token');
@@ -138,7 +138,7 @@ const BelgoAuth = {
     },
 
     /**
-     * Verifica e redireciona se nao autenticado
+     * Verifica e redireciona se não autenticado
      */
     async requireAuth(moduloCodigo = null) {
         if (!this.isAuthenticated()) {
@@ -146,7 +146,7 @@ const BelgoAuth = {
             return false;
         }
 
-        // Verificar sessao no servidor
+        // Verificar sessão no servidor
         try {
             const response = await this.request(`${this.API_URL}/me`);
             if (!response || !response.ok) {
@@ -161,9 +161,9 @@ const BelgoAuth = {
             sessionStorage.setItem('belgo_usuario', JSON.stringify(data.usuario));
             sessionStorage.setItem('belgo_modulos', JSON.stringify(data.modulos));
 
-            // Verificar acesso ao modulo
+            // Verificar acesso ao módulo
             if (moduloCodigo && !data.modulos.some(m => m.codigo === moduloCodigo)) {
-                alert(`Voce nao tem acesso ao modulo ${moduloCodigo}`);
+                alert(`Você não tem acesso ao módulo ${moduloCodigo}`);
                 window.location.href = '/landing.html';
                 return false;
             }
@@ -171,7 +171,7 @@ const BelgoAuth = {
             return true;
 
         } catch (error) {
-            console.error('Erro ao verificar autenticacao:', error);
+            console.error('Erro ao verificar autenticação:', error);
             this.clearSession();
             window.location.href = '/login.html';
             return false;
@@ -199,7 +199,7 @@ const BelgoAuth = {
     },
 
     /**
-     * Renderiza informacoes do usuario na interface
+     * Renderiza informações do usuário na interface
      */
     renderUserInfo(containerId = 'userInfo') {
         const container = document.getElementById(containerId);
@@ -215,7 +215,7 @@ const BelgoAuth = {
     },
 
     /**
-     * Renderiza botao de logout
+     * Renderiza botão de logout
      */
     renderLogoutButton(containerId = 'logoutBtn') {
         const container = document.getElementById(containerId);

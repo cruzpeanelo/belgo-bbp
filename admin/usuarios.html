@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuarios - Admin - Belgo BBP</title>
+    <title>Usuários - Admin - Belgo BBP</title>
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="css/admin.css">
 </head>
@@ -46,9 +46,9 @@
         <!-- Main Content -->
         <main class="main-content">
             <header class="content-header">
-                <h2>Gestao de Usuarios</h2>
+                <h2>Gestão de Usuários</h2>
                 <button class="btn btn-primary" onclick="showModal('create')">
-                    + Novo Usuario
+                    + Novo Usuário
                 </button>
             </header>
 
@@ -64,7 +64,7 @@
                     <select id="filterAdmin" class="select-filter">
                         <option value="">Todos os perfis</option>
                         <option value="1">Admins</option>
-                        <option value="0">Usuarios</option>
+                        <option value="0">Usuários</option>
                     </select>
                 </div>
 
@@ -76,11 +76,11 @@
                                 <tr>
                                     <th>Nome</th>
                                     <th>Email</th>
-                                    <th>Area</th>
+                                    <th>Área</th>
                                     <th>Cargo</th>
                                     <th>Perfil</th>
                                     <th>Status</th>
-                                    <th>Acoes</th>
+                                    <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody id="usersTable">
@@ -95,11 +95,11 @@
         </main>
     </div>
 
-    <!-- Modal Criar/Editar Usuario -->
+    <!-- Modal Criar/Editar Usuário -->
     <div class="modal-overlay hidden" id="userModal">
         <div class="modal">
             <div class="modal-header">
-                <h3 id="modalTitle">Novo Usuario</h3>
+                <h3 id="modalTitle">Novo Usuário</h3>
                 <button class="btn-close" onclick="closeModal()">&times;</button>
             </div>
             <form id="userForm">
@@ -114,7 +114,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="nome">Nome *</label>
-                            <input type="text" id="nome" required placeholder="Nome de exibicao">
+                            <input type="text" id="nome" required placeholder="Nome de exibição">
                         </div>
                         <div class="form-group">
                             <label for="nomeCompleto">Nome Completo</label>
@@ -124,7 +124,7 @@
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="area">Area</label>
+                            <label for="area">Área</label>
                             <input type="text" id="area" placeholder="Ex: TI, Comercial">
                         </div>
                         <div class="form-group">
@@ -134,7 +134,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Modulos com Acesso</label>
+                        <label>Módulos com Acesso</label>
                         <div class="checkbox-group" id="modulosCheckboxes">
                             <!-- Preenchido via JS -->
                         </div>
@@ -173,7 +173,7 @@
             </div>
             <div class="modal-body">
                 <p>Convite gerado para: <strong id="inviteEmail"></strong></p>
-                <p>Link de ativacao:</p>
+                <p>Link de ativação:</p>
                 <div class="link-box">
                     <input type="text" id="inviteLink" readonly>
                     <button class="btn btn-small" onclick="copyLink()">Copiar</button>
@@ -194,7 +194,7 @@
         let allUsers = [];
         let allModulos = [];
 
-        // Carregar usuarios
+        // Carregar usuários
         async function loadUsers() {
             try {
                 const res = await apiRequest('/api/admin/usuarios');
@@ -203,11 +203,11 @@
                     renderUsers();
                 }
             } catch (error) {
-                console.error('Erro ao carregar usuarios:', error);
+                console.error('Erro ao carregar usuários:', error);
             }
         }
 
-        // Carregar modulos
+        // Carregar módulos
         async function loadModulos() {
             try {
                 const res = await apiRequest('/api/admin/modulos');
@@ -216,11 +216,11 @@
                     renderModulosCheckboxes();
                 }
             } catch (error) {
-                console.error('Erro ao carregar modulos:', error);
+                console.error('Erro ao carregar módulos:', error);
             }
         }
 
-        // Renderizar checkboxes de modulos
+        // Renderizar checkboxes de módulos
         function renderModulosCheckboxes() {
             const container = document.getElementById('modulosCheckboxes');
             container.innerHTML = allModulos.map(m => `
@@ -231,7 +231,7 @@
             `).join('');
         }
 
-        // Renderizar tabela de usuarios
+        // Renderizar tabela de usuários
         function renderUsers() {
             const search = document.getElementById('searchInput').value.toLowerCase();
             const statusFilter = document.getElementById('filterStatus').value;
@@ -253,7 +253,7 @@
             const tbody = document.getElementById('usersTable');
 
             if (filtered.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="7" class="empty">Nenhum usuario encontrado</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="7" class="empty">Nenhum usuário encontrado</td></tr>';
                 return;
             }
 
@@ -292,7 +292,7 @@
         // Abrir modal para criar/editar
         function showModal(mode, userId = null) {
             document.getElementById('userModal').classList.remove('hidden');
-            document.getElementById('modalTitle').textContent = mode === 'create' ? 'Novo Usuario' : 'Editar Usuario';
+            document.getElementById('modalTitle').textContent = mode === 'create' ? 'Novo Usuário' : 'Editar Usuário';
             document.getElementById('ativoGroup').style.display = mode === 'create' ? 'none' : 'block';
             document.getElementById('email').disabled = mode === 'edit';
 
@@ -306,7 +306,7 @@
             document.getElementById('userModal').classList.add('hidden');
         }
 
-        // Editar usuario
+        // Editar usuário
         async function editUser(id) {
             try {
                 const res = await apiRequest(`/api/admin/usuarios/${id}`);
@@ -321,7 +321,7 @@
                     document.getElementById('isAdmin').checked = u.is_admin === 1;
                     document.getElementById('ativo').checked = u.ativo === 1;
 
-                    // Marcar modulos
+                    // Marcar módulos
                     document.querySelectorAll('input[name="modulos"]').forEach(cb => {
                         cb.checked = u.modulos.some(m => m.id === parseInt(cb.value));
                     });
@@ -329,11 +329,11 @@
                     showModal('edit', id);
                 }
             } catch (error) {
-                alert('Erro ao carregar usuario');
+                alert('Erro ao carregar usuário');
             }
         }
 
-        // Salvar usuario
+        // Salvar usuário
         document.getElementById('userForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
@@ -368,12 +368,12 @@
                 if (res.success) {
                     closeModal();
                     loadUsers();
-                    alert(userId ? 'Usuario atualizado!' : 'Usuario criado!');
+                    alert(userId ? 'Usuário atualizado!' : 'Usuário criado!');
                 } else {
                     alert(res.error || 'Erro ao salvar');
                 }
             } catch (error) {
-                alert('Erro ao salvar usuario');
+                alert('Erro ao salvar usuário');
             }
         });
 
@@ -411,7 +411,7 @@
 
         // Resetar senha
         async function resetPassword(id, nome) {
-            if (!confirm(`Resetar a senha de ${nome} para a senha padrao?`)) return;
+            if (!confirm(`Resetar a senha de ${nome} para a senha padrão?`)) return;
 
             try {
                 const res = await apiRequest(`/api/admin/reset-senha/${id}`, {
@@ -428,9 +428,9 @@
             }
         }
 
-        // Desativar usuario
+        // Desativar usuário
         async function deactivateUser(id, nome) {
-            if (!confirm(`Desativar o usuario ${nome}?`)) return;
+            if (!confirm(`Desativar o usuário ${nome}?`)) return;
 
             try {
                 const res = await apiRequest(`/api/admin/usuarios/${id}`, {
@@ -439,16 +439,16 @@
 
                 if (res.success) {
                     loadUsers();
-                    alert('Usuario desativado!');
+                    alert('Usuário desativado!');
                 } else {
                     alert(res.error || 'Erro ao desativar');
                 }
             } catch (error) {
-                alert('Erro ao desativar usuario');
+                alert('Erro ao desativar usuário');
             }
         }
 
-        // Reativar usuario
+        // Reativar usuário
         async function activateUser(id) {
             try {
                 const res = await apiRequest(`/api/admin/usuarios/${id}`, {
@@ -458,10 +458,10 @@
 
                 if (res.success) {
                     loadUsers();
-                    alert('Usuario reativado!');
+                    alert('Usuário reativado!');
                 }
             } catch (error) {
-                alert('Erro ao reativar usuario');
+                alert('Erro ao reativar usuário');
             }
         }
 

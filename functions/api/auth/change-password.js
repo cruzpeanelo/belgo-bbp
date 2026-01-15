@@ -11,24 +11,24 @@ export async function onRequestPost(context) {
         const token = extractToken(context.request);
 
         if (!token) {
-            return errorResponse('Token nao fornecido', 401);
+            return errorResponse('Token não fornecido', 401);
         }
 
         const usuario = await validateSession(context.env.DB, token);
 
         if (!usuario) {
-            return errorResponse('Sessao invalida ou expirada', 401);
+            return errorResponse('Sessão inválida ou expirada', 401);
         }
 
         const { senhaAtual, novaSenha, confirmarSenha } = await context.request.json();
 
-        // Validacoes
+        // Validações
         if (!senhaAtual || !novaSenha || !confirmarSenha) {
-            return errorResponse('Todos os campos sao obrigatorios', 400);
+            return errorResponse('Todos os campos são obrigatórios', 400);
         }
 
         if (novaSenha !== confirmarSenha) {
-            return errorResponse('As senhas nao conferem', 400);
+            return errorResponse('As senhas não conferem', 400);
         }
 
         if (novaSenha.length < 8) {

@@ -23,7 +23,7 @@
                 </a>
                 <a href="usuarios.html" class="nav-item">
                     <span class="icon">👥</span>
-                    Usuarios
+                    Usuários
                 </a>
                 <a href="auditoria.html" class="nav-item">
                     <span class="icon">📋</span>
@@ -80,7 +80,7 @@
                         <div class="stat-icon">📝</div>
                         <div class="stat-info">
                             <span class="stat-value" id="totalAcoes">-</span>
-                            <span class="stat-label">Acoes (30 dias)</span>
+                            <span class="stat-label">Ações (30 dias)</span>
                         </div>
                     </div>
                 </div>
@@ -96,8 +96,8 @@
                             <thead>
                                 <tr>
                                     <th>Data/Hora</th>
-                                    <th>Usuario</th>
-                                    <th>Acao</th>
+                                    <th>Usuário</th>
+                                    <th>Ação</th>
                                     <th>Detalhes</th>
                                 </tr>
                             </thead>
@@ -113,7 +113,7 @@
                 <!-- Users by Module -->
                 <div class="card">
                     <div class="card-header">
-                        <h3>Usuarios por Modulo</h3>
+                        <h3>Usuários por Módulo</h3>
                     </div>
                     <div class="card-body">
                         <div class="modules-stats" id="modulesStats">
@@ -130,7 +130,7 @@
         // Carregar dashboard
         async function loadDashboard() {
             try {
-                // Usuarios
+                // Usuários
                 const usersRes = await apiRequest('/api/admin/usuarios');
                 if (usersRes.success) {
                     document.getElementById('totalUsuarios').textContent = usersRes.total;
@@ -138,7 +138,7 @@
                         usersRes.usuarios.filter(u => u.ativo).length;
                 }
 
-                // Estatisticas de auditoria
+                // Estatísticas de auditoria
                 const statsRes = await apiRequest('/api/admin/auditoria', {
                     method: 'POST',
                     body: JSON.stringify({ periodo: '30dias' })
@@ -166,7 +166,7 @@
                     }
                 }
 
-                // Usuarios por modulo
+                // Usuários por módulo
                 loadModulesStats();
 
             } catch (error) {
@@ -180,7 +180,7 @@
                 const usersRes = await apiRequest('/api/admin/usuarios');
 
                 if (modulosRes.success && usersRes.success) {
-                    // Contar usuarios por modulo (simulado, seria melhor uma query no backend)
+                    // Contar usuários por módulo (simulado, seria melhor uma query no backend)
                     const container = document.getElementById('modulesStats');
                     container.innerHTML = modulosRes.modulos.map(m => `
                         <div class="module-stat">
@@ -191,7 +191,7 @@
                     `).join('');
                 }
             } catch (error) {
-                console.error('Erro ao carregar modulos:', error);
+                console.error('Erro ao carregar módulos:', error);
             }
         }
 

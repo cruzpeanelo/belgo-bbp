@@ -1,21 +1,21 @@
 // =====================================================
-// BELGO BBP - API de Gestao de Usuarios (Admin)
+// BELGO BBP - API de Gestão de Usuários (Admin)
 // /api/admin/usuarios
 // =====================================================
 
 import { hashPassword, isValidDomain, jsonResponse, errorResponse } from '../../lib/auth.js';
 import { registrarAuditoria, getClientIP, ACOES, ENTIDADES } from '../../lib/audit.js';
 
-// Senha padrao para novos usuarios
+// Senha padrão para novos usuários
 const SENHA_PADRAO = 'BelgoGTM2024';
 
-// GET - Listar usuarios
+// GET - Listar usuários
 export async function onRequestGet(context) {
     try {
         const url = new URL(context.request.url);
         const id = url.pathname.split('/').pop();
 
-        // Se tiver ID, buscar usuario especifico
+        // Se tiver ID, buscar usuário específico
         if (id && id !== 'usuarios' && !isNaN(id)) {
             const usuario = await context.env.DB.prepare(`
                 SELECT u.id, u.email, u.nome, u.nome_completo, u.area, u.cargo,
@@ -25,10 +25,10 @@ export async function onRequestGet(context) {
             `).bind(id).first();
 
             if (!usuario) {
-                return errorResponse('Usuario nao encontrado', 404);
+                return errorResponse('Usuário não encontrado', 404);
             }
 
-            // Buscar modulos
+            // Buscar módulos
             const modulos = await context.env.DB.prepare(`
                 SELECT m.id, m.codigo, m.nome
                 FROM usuario_modulos um
@@ -60,12 +60,12 @@ export async function onRequestGet(context) {
         });
 
     } catch (error) {
-        console.error('Erro ao listar usuarios:', error);
+        console.error('Erro ao listar usuários:', error);
         return errorResponse('Erro interno no servidor', 500);
     }
 }
 
-// POST - Criar usuario
+// POST - Criar usuário
 export async function onRequestPost(context) {
     try {
         const admin = context.data.usuario;
@@ -73,30 +73,30 @@ export async function onRequestPost(context) {
 
         const { email, nome, nomeCompleto, area, cargo, isAdmin, modulos } = body;
 
-        // Validacoes
+        // Validações
         if (!email || !nome) {
-            return errorResponse('Email e nome sao obrigatorios', 400);
+            return errorResponse('Email e nome são obrigatórios', 400);
         }
 
         const emailLower = email.toLowerCase().trim();
 
         if (!isValidDomain(emailLower)) {
-            return errorResponse('Dominio de email nao permitido', 400);
+            return errorResponse('Domínio de email não permitido', 400);
         }
 
-        // Verificar se email ja existe
+        // Verificar se email já existe
         const existe = await context.env.DB.prepare(`
             SELECT id FROM usuarios WHERE email = ?
         `).bind(emailLower).first();
 
         if (existe) {
-            return errorResponse('Email ja cadastrado', 409);
+            return errorResponse('Email já cadastrado', 409);
         }
 
-        // Hash da senha padrao
+        // Hash da senha padrão
         const senhaHash = await hashPassword(SENHA_PADRAO);
 
-        // Inserir usuario
+        // Inserir usuário
         const result = await context.env.DB.prepare(`
             INSERT INTO usuarios (email, nome, nome_completo, senha_hash, area, cargo, is_admin, primeiro_acesso)
             VALUES (?, ?, ?, ?, ?, ?, ?, 1)
@@ -112,7 +112,7 @@ export async function onRequestPost(context) {
 
         const userId = result.meta.last_row_id;
 
-        // Associar modulos
+        // Associar módulos
         if (modulos && modulos.length > 0) {
             for (const moduloId of modulos) {
                 await context.env.DB.prepare(`
@@ -134,7 +134,7 @@ export async function onRequestPost(context) {
 
         return jsonResponse({
             success: true,
-            message: 'Usuario criado com sucesso',
+            message: 'Usuário criado com sucesso',
             usuario: {
                 id: userId,
                 email: emailLower,
@@ -144,12 +144,12 @@ export async function onRequestPost(context) {
         }, 201);
 
     } catch (error) {
-        console.error('Erro ao criar usuario:', error);
+        console.error('Erro ao criar usuário:', error);
         return errorResponse('Erro interno no servidor', 500);
     }
 }
 
-// PUT - Atualizar usuario
+// PUT - Atualizar usuário
 export async function onRequestPut(context) {
     try {
         const admin = context.data.usuario;
@@ -157,22 +157,22 @@ export async function onRequestPut(context) {
         const id = url.pathname.split('/').pop();
 
         if (!id || isNaN(id)) {
-            return errorResponse('ID do usuario nao fornecido', 400);
+            return errorResponse('ID do usuário não fornecido', 400);
         }
 
-        // Verificar se usuario existe
+        // Verificar se usuário existe
         const usuarioExiste = await context.env.DB.prepare(`
             SELECT id, email FROM usuarios WHERE id = ?
         `).bind(id).first();
 
         if (!usuarioExiste) {
-            return errorResponse('Usuario nao encontrado', 404);
+            return errorResponse('Usuário não encontrado', 404);
         }
 
         const body = await context.request.json();
         const { nome, nomeCompleto, area, cargo, isAdmin, ativo, modulos } = body;
 
-        // Atualizar dados basicos
+        // Atualizar dados básicos
         await context.env.DB.prepare(`
             UPDATE usuarios
             SET nome = COALESCE(?, nome),
@@ -193,9 +193,9 @@ export async function onRequestPut(context) {
             id
         ).run();
 
-        // Atualizar modulos se fornecidos
+        // Atualizar módulos se fornecidos
         if (modulos !== undefined) {
-            // Remover modulos antigos
+            // Remover módulos antigos
             await context.env.DB.prepare(`
                 DELETE FROM usuario_modulos WHERE usuario_id = ?
             `).bind(id).run();
@@ -223,16 +223,16 @@ export async function onRequestPut(context) {
 
         return jsonResponse({
             success: true,
-            message: 'Usuario atualizado com sucesso'
+            message: 'Usuário atualizado com sucesso'
         });
 
     } catch (error) {
-        console.error('Erro ao atualizar usuario:', error);
+        console.error('Erro ao atualizar usuário:', error);
         return errorResponse('Erro interno no servidor', 500);
     }
 }
 
-// DELETE - Desativar usuario (soft delete)
+// DELETE - Desativar usuário (soft delete)
 export async function onRequestDelete(context) {
     try {
         const admin = context.data.usuario;
@@ -240,21 +240,21 @@ export async function onRequestDelete(context) {
         const id = url.pathname.split('/').pop();
 
         if (!id || isNaN(id)) {
-            return errorResponse('ID do usuario nao fornecido', 400);
+            return errorResponse('ID do usuário não fornecido', 400);
         }
 
-        // Nao permitir auto-exclusao
+        // Não permitir auto-exclusão
         if (parseInt(id) === admin.id) {
-            return errorResponse('Voce nao pode desativar sua propria conta', 400);
+            return errorResponse('Você não pode desativar sua própria conta', 400);
         }
 
-        // Verificar se usuario existe
+        // Verificar se usuário existe
         const usuario = await context.env.DB.prepare(`
             SELECT id, email FROM usuarios WHERE id = ?
         `).bind(id).first();
 
         if (!usuario) {
-            return errorResponse('Usuario nao encontrado', 404);
+            return errorResponse('Usuário não encontrado', 404);
         }
 
         // Desativar (soft delete)
@@ -262,7 +262,7 @@ export async function onRequestDelete(context) {
             UPDATE usuarios SET ativo = 0, updated_at = CURRENT_TIMESTAMP WHERE id = ?
         `).bind(id).run();
 
-        // Remover sessoes ativas
+        // Remover sessões ativas
         await context.env.DB.prepare(`
             DELETE FROM sessoes WHERE usuario_id = ?
         `).bind(id).run();
@@ -279,11 +279,11 @@ export async function onRequestDelete(context) {
 
         return jsonResponse({
             success: true,
-            message: 'Usuario desativado com sucesso'
+            message: 'Usuário desativado com sucesso'
         });
 
     } catch (error) {
-        console.error('Erro ao desativar usuario:', error);
+        console.error('Erro ao desativar usuário:', error);
         return errorResponse('Erro interno no servidor', 500);
     }
 }

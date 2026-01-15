@@ -5,7 +5,7 @@
 const API_BASE = '';
 
 /**
- * Faz requisicao autenticada para a API
+ * Faz requisição autenticada para a API
  */
 async function apiRequest(url, options = {}) {
     const token = sessionStorage.getItem('belgo_token');
@@ -29,14 +29,14 @@ async function apiRequest(url, options = {}) {
     const data = await response.json();
 
     if (response.status === 401) {
-        // Sessao expirada
+        // Sessão expirada
         sessionStorage.clear();
         window.location.href = '/login.html?redirect=' + encodeURIComponent(window.location.pathname);
-        throw new Error('Sessao expirada');
+        throw new Error('Sessão expirada');
     }
 
     if (response.status === 403) {
-        alert('Acesso negado. Voce nao tem permissao para esta acao.');
+        alert('Acesso negado. Você não tem permissão para esta ação.');
         throw new Error('Acesso negado');
     }
 
@@ -44,7 +44,7 @@ async function apiRequest(url, options = {}) {
 }
 
 /**
- * Verifica autenticacao e permissao admin
+ * Verifica autenticação e permissão admin
  */
 async function checkAuth() {
     const token = sessionStorage.getItem('belgo_token');
@@ -58,9 +58,9 @@ async function checkAuth() {
     try {
         const userData = JSON.parse(usuario);
 
-        // Verificar se e admin
+        // Verificar se é admin
         if (!userData.isAdmin) {
-            alert('Acesso negado. Area restrita a administradores.');
+            alert('Acesso negado. Área restrita a administradores.');
             window.location.href = '/landing.html';
             return false;
         }
@@ -71,7 +71,7 @@ async function checkAuth() {
             userNameEl.textContent = userData.nome;
         }
 
-        // Verificar sessao no servidor
+        // Verificar sessão no servidor
         const res = await apiRequest('/api/auth/me');
         if (!res.success || !res.usuario.isAdmin) {
             sessionStorage.clear();
@@ -102,7 +102,7 @@ async function logout() {
 }
 
 /**
- * Formata data para exibicao
+ * Formata data para exibição
  */
 function formatDate(dateString) {
     if (!dateString) return '-';

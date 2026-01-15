@@ -7,7 +7,7 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="shared/css/modules.css">
     <style>
-        /* Reset basico */
+        /* Reset básico */
         * {
             margin: 0;
             padding: 0;
@@ -81,7 +81,7 @@
 
         <!-- Main Content -->
         <main class="landing-main">
-            <h2 class="landing-title">Selecione um modulo para continuar</h2>
+            <h2 class="landing-title">Selecione um módulo para continuar</h2>
 
             <div class="modules-grid">
                 <!-- GTM Module -->
@@ -92,8 +92,8 @@
                     </div>
                     <div class="module-card-body">
                         <p class="module-card-description">
-                            Go-To-Market Belgo Arames - Jornadas de negocio, casos de teste,
-                            documentacao de processos e acompanhamento do projeto Fase II.
+                            Go-To-Market Belgo Arames - Jornadas de negócio, casos de teste,
+                            documentação de processos e acompanhamento do projeto Fase II.
                         </p>
                         <div class="module-card-footer">
                             <span class="module-card-status">
@@ -112,8 +112,8 @@
                     </div>
                     <div class="module-card-body">
                         <p class="module-card-description">
-                            Gestao da Rede Ativa de distribuicao - Pontos de venda,
-                            metricas de performance e mapeamento geografico.
+                            Gestão da Rede Ativa de distribuição - Pontos de venda,
+                            métricas de performance e mapeamento geográfico.
                         </p>
                         <div class="module-card-footer">
                             <span class="module-card-status coming-soon">
@@ -132,7 +132,7 @@
                     </div>
                     <div class="module-card-body">
                         <p class="module-card-description">
-                            Planejamento estrategico 2026 - Iniciativas, cronograma,
+                            Planejamento estratégico 2026 - Iniciativas, cronograma,
                             OKRs e acompanhamento de projetos.
                         </p>
                         <div class="module-card-footer">
@@ -154,31 +154,31 @@
 
     <script src="shared/js/auth.js"></script>
     <script>
-        // Inicializar autenticacao
+        // Inicializar autenticação
         document.addEventListener('DOMContentLoaded', async () => {
-            // Verificar se esta autenticado
+            // Verificar se está autenticado
             if (BelgoAuth.isAuthenticated()) {
                 const usuario = BelgoAuth.getUsuario();
 
-                // Mostrar info do usuario
+                // Mostrar info do usuário
                 document.getElementById('userInfo').innerHTML = `
-                    <span>Ola, ${usuario.nome}</span>
+                    <span>Olá, ${usuario.nome}</span>
                     ${usuario.isAdmin ? '<span class="user-badge">Admin</span>' : ''}
                 `;
 
-                // Mostrar botao admin se for admin
+                // Mostrar botão admin se for admin
                 if (usuario.isAdmin) {
                     document.getElementById('adminLink').classList.remove('hidden');
                 }
 
-                // Mostrar botao logout
+                // Mostrar botão logout
                 document.getElementById('logoutBtn').classList.remove('hidden');
             }
 
-            // Verificar ultimo modulo visitado
+            // Verificar último módulo visitado
             const lastModule = localStorage.getItem('belgo_last_module');
             if (lastModule && lastModule !== 'landing') {
-                // Opcional: auto-redirecionar para ultimo modulo
+                // Opcional: auto-redirecionar para último módulo
                 // window.location.href = getModulePath(lastModule);
             }
         });
@@ -192,7 +192,7 @@
             return paths[moduleId] || 'landing.html';
         }
 
-        // Salvar modulo selecionado
+        // Salvar módulo selecionado
         document.querySelectorAll('.module-card').forEach(card => {
             card.addEventListener('click', () => {
                 const moduleId = card.dataset.module;

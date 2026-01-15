@@ -125,12 +125,12 @@
     <div class="container">
         <div class="header">
             <h1>BELGO BBP</h1>
-            <p>Troca de Senha Obrigatoria</p>
+            <p>Troca de Senha Obrigatória</p>
         </div>
 
         <div class="content">
             <div class="alert">
-                Este e seu primeiro acesso. Por seguranca, voce precisa criar uma nova senha.
+                Este é seu primeiro acesso. Por segurança, você precisa criar uma nova senha.
             </div>
 
             <div class="error-message" id="errorMessage"></div>
@@ -138,13 +138,13 @@
             <form id="changePasswordForm">
                 <div class="form-group">
                     <label for="senhaAtual">Senha Atual</label>
-                    <input type="password" id="senhaAtual" required placeholder="Senha padrao">
+                    <input type="password" id="senhaAtual" required placeholder="Senha padrão">
                 </div>
 
                 <div class="form-group">
                     <label for="novaSenha">Nova Senha</label>
                     <input type="password" id="novaSenha" required placeholder="Digite sua nova senha" minlength="8">
-                    <p class="password-hint">Minimo de 8 caracteres</p>
+                    <p class="password-hint">Mínimo de 8 caracteres</p>
                 </div>
 
                 <div class="form-group">
@@ -163,7 +163,7 @@
 
     <script src="shared/js/auth.js"></script>
     <script>
-        // Verificar se esta autenticado
+        // Verificar se está autenticado
         if (!BelgoAuth.isAuthenticated()) {
             window.location.href = '/login.html';
         }
@@ -177,9 +177,9 @@
             const errorMessage = document.getElementById('errorMessage');
             const btnSubmit = document.getElementById('btnSubmit');
 
-            // Validacoes
+            // Validações
             if (novaSenha !== confirmarSenha) {
-                errorMessage.textContent = 'As senhas nao conferem';
+                errorMessage.textContent = 'As senhas não conferem';
                 errorMessage.classList.add('show');
                 return;
             }

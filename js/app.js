@@ -6,18 +6,18 @@
 // CONTROLE DE ACESSO - Verificação de Autenticação
 // =====================================================
 (function() {
-    // Verificar autenticacao via BelgoAuth
+    // Verificar autenticação via BelgoAuth
     if (typeof BelgoAuth !== 'undefined' && BelgoAuth.isAuthenticated()) {
-        // Usuario autenticado - verificar acesso ao modulo GTM
+        // Usuário autenticado - verificar acesso ao módulo GTM
         BelgoAuth.requireAuth('gtm').then(hasAccess => {
             if (!hasAccess) {
-                // Sera redirecionado pelo requireAuth
+                // Será redirecionado pelo requireAuth
             }
         });
-        return; // Continuar carregando a aplicacao
+        return; // Continuar carregando a aplicação
     }
 
-    // Nao autenticado - redirecionar para login
+    // Não autenticado - redirecionar para login
     window.location.href = '/login.html?redirect=' + encodeURIComponent(window.location.pathname);
     throw new Error('Autenticação necessária');
 })();
@@ -30,7 +30,7 @@ const KVSync = {
     syncEnabled: true,
     lastSync: null,
 
-    // Obter headers com autenticacao
+    // Obter headers com autenticação
     getHeaders(contentType = false) {
         const headers = { 'Accept': 'application/json' };
         const token = sessionStorage.getItem('belgo_token');
@@ -65,7 +65,7 @@ const KVSync = {
         return null;
     },
 
-    // Salvar status no KV (background, nao bloqueia UI)
+    // Salvar status no KV (background, não bloqueia UI)
     async save(testes) {
         if (!this.syncEnabled) return false;
 
@@ -173,7 +173,7 @@ const App = {
                     if (caso) {
                         caso.status = item.status;
                         caso.dataExecucao = item.data;
-                        // Tambem salvar no localStorage como cache
+                        // Também salvar no localStorage como cache
                         Utils.saveToStorage('testes_' + item.id, { status: item.status, data: item.data });
                         restored++;
                         break;
@@ -265,7 +265,7 @@ const App = {
                 Utils.saveToStorage('testes_' + testId, { status: newStatus, data: test.dataExecucao });
                 this.recalculateMetrics();
 
-                // Sincronizar com KV em background (nao bloqueia)
+                // Sincronizar com KV em background (não bloqueia)
                 this.syncToKV();
 
                 return true;
@@ -277,7 +277,7 @@ const App = {
     // Sincronizar todos os status com KV (debounced)
     _syncTimeout: null,
     syncToKV() {
-        // Debounce: esperar 1 segundo apos ultima mudanca
+        // Debounce: esperar 1 segundo após última mudança
         if (this._syncTimeout) clearTimeout(this._syncTimeout);
 
         this._syncTimeout = setTimeout(async () => {
@@ -286,7 +286,7 @@ const App = {
         }, 1000);
     },
 
-    // Obter todos os status de testes (para sincronizacao)
+    // Obter todos os status de testes (para sincronização)
     getAllTestStatuses() {
         const statuses = [];
 
@@ -294,7 +294,7 @@ const App = {
 
         this.data.testes.categorias.forEach(cat => {
             cat.casos.forEach(caso => {
-                // Incluir apenas testes que nao estao Pendente
+                // Incluir apenas testes que não estão Pendente
                 if (caso.status && caso.status !== 'Pendente') {
                     statuses.push({
                         id: caso.id,
@@ -352,7 +352,7 @@ const App = {
         this.data.testes.categorias.forEach(cat => {
             let casos = cat.casos;
 
-            // Filtro por IDs especificos (usado na linkagem Jornadas -> Testes)
+            // Filtro por IDs específicos (usado na linkagem Jornadas -> Testes)
             if (filters.ids && filters.ids.length > 0) {
                 casos = casos.filter(c => filters.ids.includes(c.id));
             }
