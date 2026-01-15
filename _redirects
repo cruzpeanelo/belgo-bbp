@@ -1,0 +1,9 @@
+# Servir arquivos estáticos diretamente
+/landing.html /landing.html 200
+/config/* /config/:splat 200
+/shared/* /shared/:splat 200
+/rede-ativa/* /rede-ativa/:splat 200
+/roadmap/* /roadmap/:splat 200
+
+# SPA fallback apenas para rotas do GTM
+/* /index.html 200
