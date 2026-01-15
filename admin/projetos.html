@@ -176,13 +176,6 @@
                         <input type="hidden" id="projetoCor" value="#003B4A">
                     </div>
 
-                    <div class="form-group">
-                        <label>Modulos</label>
-                        <div class="checkbox-group" id="modulosCheckboxes">
-                            <p class="loading">Carregando modulos...</p>
-                        </div>
-                    </div>
-
                     <!-- Integracao Microsoft 365 -->
                     <div class="form-section" id="msIntegrationSection" style="display: none;">
                         <h4 class="form-section-title">
@@ -224,6 +217,13 @@
                         </div>
                         <small>IDs para upload via Graph API (obter no Graph Explorer)</small>
                     </div>
+
+                    <!-- URL do Modulo -->
+                    <div class="form-group">
+                        <label for="urlModulo">URL do Modulo</label>
+                        <input type="text" id="urlModulo" placeholder="ex: meu-projeto/index.html">
+                        <small>Caminho relativo para a pagina principal do projeto</small>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="fecharModalProjeto()">Cancelar</button>
@@ -236,7 +236,6 @@
     <script src="js/admin.js"></script>
     <script>
         let projetos = [];
-        let modulos = [];
         let projetoAtual = null;
         let logoFileParaUpload = null;
 
@@ -279,13 +278,6 @@
                     projetos = res.projetos;
                     renderizarProjetos();
                     atualizarEstatisticas();
-                }
-
-                // Carregar modulos para o formulario
-                const modulosRes = await apiRequest('/api/admin/modulos');
-                if (modulosRes.success) {
-                    modulos = modulosRes.modulos;
-                    renderizarModulosCheckboxes();
                 }
 
                 // Inicializar paleta de cores
@@ -381,24 +373,6 @@
             projetos = filtrados;
             renderizarProjetos();
             projetos = projetosBackup;
-        }
-
-        // Renderizar checkboxes de modulos
-        function renderizarModulosCheckboxes() {
-            const container = document.getElementById('modulosCheckboxes');
-
-            if (modulos.length === 0) {
-                container.innerHTML = '<p class="empty">Nenhum modulo disponivel</p>';
-                return;
-            }
-
-            container.innerHTML = modulos.map(m => `
-                <label class="checkbox-item">
-                    <input type="checkbox" name="modulos" value="${m.id}">
-                    <span class="checkbox-icon">${m.icone || '📦'}</span>
-                    <span class="checkbox-label">${m.nome}</span>
-                </label>
-            `).join('');
         }
 
         // Renderizar paleta de cores
@@ -550,9 +524,9 @@
             document.getElementById('projetoCodigo').disabled = false;
             document.getElementById('projetoCor').value = '#003B4A';
 
-            // Esconder campos de edicao
+            // Mostrar campos de integracao (logo so em edicao)
             document.getElementById('logoGroup').style.display = 'none';
-            document.getElementById('msIntegrationSection').style.display = 'none';
+            document.getElementById('msIntegrationSection').style.display = 'block';
 
             // Limpar preview do logo
             document.getElementById('logoPreview').innerHTML = '<span class="logo-placeholder">📁</span>';
@@ -567,11 +541,7 @@
             document.getElementById('sharepointFolderUrl').value = '';
             document.getElementById('sharepointDriveId').value = '';
             document.getElementById('sharepointFolderId').value = '';
-
-            // Desmarcar todos os modulos
-            document.querySelectorAll('#modulosCheckboxes input[type="checkbox"]').forEach(cb => {
-                cb.checked = false;
-            });
+            document.getElementById('urlModulo').value = '';
 
             document.getElementById('modalProjeto').classList.add('active');
         }
@@ -623,12 +593,7 @@
                 document.getElementById('sharepointFolderUrl').value = p.sharepoint_folder_url || '';
                 document.getElementById('sharepointDriveId').value = p.sharepoint_drive_id || '';
                 document.getElementById('sharepointFolderId').value = p.sharepoint_folder_id || '';
-
-                // Marcar modulos do projeto
-                const modulosIds = (p.modulos || []).map(m => m.id);
-                document.querySelectorAll('#modulosCheckboxes input[type="checkbox"]').forEach(cb => {
-                    cb.checked = modulosIds.includes(parseInt(cb.value));
-                });
+                document.getElementById('urlModulo').value = p.url_modulo || '';
 
                 document.getElementById('modalProjeto').classList.add('active');
 
@@ -645,30 +610,22 @@
             const id = document.getElementById('projetoId').value;
             const isEdicao = !!id;
 
-            // Coletar modulos selecionados
-            const modulosSelecionados = [];
-            document.querySelectorAll('#modulosCheckboxes input[type="checkbox"]:checked').forEach(cb => {
-                modulosSelecionados.push(parseInt(cb.value));
-            });
-
             const dados = {
                 codigo: document.getElementById('projetoCodigo').value,
                 nome: document.getElementById('projetoNome').value,
                 descricao: document.getElementById('projetoDescricao').value,
                 icone: document.getElementById('projetoIcone').value || '📁',
                 cor: document.getElementById('projetoCor').value,
-                visibilidade: document.getElementById('projetoVisibilidade').value,
-                modulos: modulosSelecionados
+                visibilidade: document.getElementById('projetoVisibilidade').value
             };
 
-            // Adicionar campos de integracao se estiver editando
-            if (isEdicao) {
-                dados.teamsChannelUrl = document.getElementById('teamsChannelUrl').value || null;
-                dados.teamsWebhookUrl = document.getElementById('teamsWebhookUrl').value || null;
-                dados.sharepointFolderUrl = document.getElementById('sharepointFolderUrl').value || null;
-                dados.sharepointDriveId = document.getElementById('sharepointDriveId').value || null;
-                dados.sharepointFolderId = document.getElementById('sharepointFolderId').value || null;
-            }
+            // Adicionar campos de integracao
+            dados.teamsChannelUrl = document.getElementById('teamsChannelUrl').value || null;
+            dados.teamsWebhookUrl = document.getElementById('teamsWebhookUrl').value || null;
+            dados.sharepointFolderUrl = document.getElementById('sharepointFolderUrl').value || null;
+            dados.sharepointDriveId = document.getElementById('sharepointDriveId').value || null;
+            dados.sharepointFolderId = document.getElementById('sharepointFolderId').value || null;
+            dados.urlModulo = document.getElementById('urlModulo').value || null;
 
             try {
                 const url = isEdicao ? `/api/projetos/${id}` : '/api/projetos';

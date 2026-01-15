@@ -95,11 +95,13 @@ const KVSync = {
 window.KVSync = KVSync;
 
 const App = {
-    dataReady: false,  // Flag para indicar que todos os dados (incluindo KV) estão prontos
+    dataReady: false,  // Flag para indicar que todos os dados (incluindo KV) estao prontos
+    projetoId: null,   // ID do projeto atual (carregado da API)
+    entidadesCache: {}, // Cache de entidades com config_funcionalidades
     data: {
         dashboard: null,
         testes: null,
-        jornadas: null,          // Índice de processos (_index.json)
+        jornadas: null,          // Indice de processos (_index.json)
         jornadasCache: {},       // Cache de processos carregados
         cronograma: null,
         pontosCriticos: null
@@ -241,6 +243,117 @@ const App = {
             console.warn(`Erro ao carregar ${url}:`, error);
             return null;
         }
+    },
+
+    // Fetch API autenticada
+    async fetchAPI(endpoint, options = {}) {
+        try {
+            const token = sessionStorage.getItem('belgo_token');
+            const headers = {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                ...options.headers
+            };
+            if (token) {
+                headers['Authorization'] = `Bearer ${token}`;
+            }
+
+            const response = await fetch(endpoint, { ...options, headers });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            return await response.json();
+        } catch (error) {
+            console.warn(`Erro na API ${endpoint}:`, error);
+            return null;
+        }
+    },
+
+    // Carregar informacoes do projeto atual
+    async loadProjetoInfo() {
+        // Por enquanto, usar projeto 1 (GTM) como padrao
+        // Futuramente: detectar pelo dominio ou URL
+        this.projetoId = localStorage.getItem('belgo_projeto_id') || 1;
+        return this.projetoId;
+    },
+
+    // Carregar entidade com config_funcionalidades
+    async loadEntidade(codigo) {
+        if (this.entidadesCache[codigo]) {
+            return this.entidadesCache[codigo];
+        }
+
+        try {
+            const result = await this.fetchAPI(`/api/projetos/${this.projetoId}/entidades`);
+            if (result?.success && result.entidades) {
+                // Cachear todas as entidades
+                result.entidades.forEach(ent => {
+                    this.entidadesCache[ent.codigo] = ent;
+                });
+            }
+            return this.entidadesCache[codigo] || null;
+        } catch (error) {
+            console.warn('Erro ao carregar entidade:', error);
+            return null;
+        }
+    },
+
+    // Carregar dados de uma entidade da API dinamica
+    async loadEntidadeDados(codigo, opcoes = {}) {
+        const { limit = 1000, page = 1 } = opcoes;
+
+        try {
+            const result = await this.fetchAPI(
+                `/api/projetos/${this.projetoId}/dados/${codigo}?limit=${limit}&page=${page}`
+            );
+
+            if (result?.success) {
+                return {
+                    entidade: result.entidade,
+                    dados: result.dados || [],
+                    paginacao: result.paginacao
+                };
+            }
+            return { entidade: null, dados: [], paginacao: null };
+        } catch (error) {
+            console.warn(`Erro ao carregar dados de ${codigo}:`, error);
+            return { entidade: null, dados: [], paginacao: null };
+        }
+    },
+
+    // Inicializar pagina dinamica usando ConfigRenderer
+    async initDynamicPage(containerSelector, entidadeCodigo) {
+        const container = document.querySelector(containerSelector);
+        if (!container) {
+            console.error('Container nao encontrado:', containerSelector);
+            return false;
+        }
+
+        await this.loadProjetoInfo();
+
+        // Carregar entidade com config
+        const entidade = await this.loadEntidade(entidadeCodigo);
+        if (!entidade) {
+            container.innerHTML = `
+                <div class="error-state">
+                    <h3>Entidade nao encontrada</h3>
+                    <p>A entidade "${entidadeCodigo}" nao foi configurada.</p>
+                </div>
+            `;
+            return false;
+        }
+
+        // Usar ConfigRenderer se disponivel
+        if (typeof ConfigRenderer !== 'undefined') {
+            container.id = container.id || 'dynamicContent';
+            await ConfigRenderer.init({
+                projetoId: this.projetoId,
+                entidade: entidade,
+                containerId: container.id
+            });
+            return true;
+        }
+
+        console.warn('ConfigRenderer nao carregado');
+        return false;
     },
 
     // Configurar navegação

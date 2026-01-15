@@ -146,8 +146,18 @@
             }
         });
 
-        // Save current module
+        // Save current module and project ID
         localStorage.setItem('belgo_last_module', 'roadmap');
+        localStorage.setItem('belgo_projeto_id', '3');
+    </script>
+
+    <!-- Dynamic Navigation -->
+    <script src="../shared/js/dynamic-nav.js"></script>
+    <script>
+        // Inicializar navegacao dinamica (carrega menus do banco)
+        document.addEventListener('DOMContentLoaded', () => {
+            DynamicNav.init({ projetoId: 3, showProjectSelector: true });
+        });
     </script>
 </body>
 </html>

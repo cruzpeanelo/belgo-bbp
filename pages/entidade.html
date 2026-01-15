@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entidade Dinamica - Cockpit GTM Belgo</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/shared/css/config-renderer.css">
+</head>
+<body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <span class="mobile-header-logo">BELGO GTM</span>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+            &#9776;
+        </button>
+    </header>
+
+    <!-- Overlay para fechar menu -->
+    <div class="sidebar-overlay" onclick="toggleMobileMenu()"></div>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">BELGO</div>
+                <div class="sidebar-subtitle">Cockpit GTM</div>
+            </div>
+            <nav class="sidebar-nav" id="dynamic-nav" role="navigation" aria-label="Menu principal">
+                <a href="../index.html" class="nav-item" aria-label="Dashboard">
+                    <span class="nav-icon" aria-hidden="true">&#128202;</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <!-- Menu sera carregado dinamicamente -->
+                <div id="nav-loading" style="padding: 20px; opacity: 0.6; text-align: center;">
+                    Carregando menu...
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Conteudo Principal -->
+        <main class="main-content">
+            <!-- Skeleton Loading -->
+            <div id="page-loading" class="skeleton-loading">
+                <div class="skeleton skeleton-title"></div>
+                <div class="skeleton-row">
+                    <div class="skeleton skeleton-filter"></div>
+                    <div class="skeleton skeleton-filter"></div>
+                    <div class="skeleton skeleton-filter"></div>
+                </div>
+                <div class="skeleton-metrics">
+                    <div class="skeleton skeleton-metric"></div>
+                    <div class="skeleton skeleton-metric"></div>
+                    <div class="skeleton skeleton-metric"></div>
+                    <div class="skeleton skeleton-metric"></div>
+                </div>
+                <div class="skeleton skeleton-table"></div>
+            </div>
+
+            <!-- Conteudo Dinamico -->
+            <div id="dynamicContent" style="display: none;"></div>
+        </main>
+    </div>
+
+    <style>
+        /* Skeleton Loading */
+        .skeleton-loading {
+            padding: 10px;
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 8px;
+        }
+
+        .skeleton-title {
+            height: 40px;
+            width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .skeleton-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .skeleton-filter {
+            height: 60px;
+            width: 200px;
+        }
+
+        .skeleton-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .skeleton-metric {
+            height: 80px;
+        }
+
+        .skeleton-table {
+            height: 400px;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @media (max-width: 768px) {
+            .skeleton-metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .skeleton-row {
+                flex-direction: column;
+            }
+            .skeleton-filter {
+                width: 100%;
+            }
+        }
+    </style>
+
+    <script src="/shared/js/auth.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/shared/js/config-renderer.js"></script>
+    <script>
+        // Inicializar pagina dinamica
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Obter entidade da URL
+            const params = new URLSearchParams(window.location.search);
+            const entidadeCodigo = params.get('e') || params.get('entidade');
+
+            if (!entidadeCodigo) {
+                document.getElementById('page-loading').innerHTML = `
+                    <div class="error-state">
+                        <h3>Entidade nao especificada</h3>
+                        <p>Use ?e=testes, ?e=jornadas, etc.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Carregar menu dinamico
+            await carregarMenuDinamico();
+
+            // Inicializar pagina
+            const container = document.getElementById('dynamicContent');
+            const loading = document.getElementById('page-loading');
+
+            try {
+                await App.loadProjetoInfo();
+                const success = await App.initDynamicPage('#dynamicContent', entidadeCodigo);
+
+                if (success) {
+                    loading.style.display = 'none';
+                    container.style.display = 'block';
+
+                    // Atualizar titulo da pagina
+                    const entidade = App.entidadesCache[entidadeCodigo];
+                    if (entidade) {
+                        document.title = `${entidade.nome_plural || entidade.nome} - Cockpit GTM Belgo`;
+                    }
+
+                    // Marcar menu ativo
+                    marcarMenuAtivo(entidadeCodigo);
+                } else {
+                    loading.innerHTML = `
+                        <div class="error-state">
+                            <h3>Erro ao carregar entidade</h3>
+                            <p>A entidade "${entidadeCodigo}" nao foi encontrada ou nao esta configurada.</p>
+                            <p style="margin-top: 16px;"><a href="/index.html">Voltar ao Dashboard</a></p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                loading.innerHTML = `
+                    <div class="error-state">
+                        <h3>Erro de conexao</h3>
+                        <p>Nao foi possivel carregar os dados. Verifique sua conexao.</p>
+                    </div>
+                `;
+            }
+        });
+
+        // Carregar menu dinamico da API
+        async function carregarMenuDinamico() {
+            try {
+                await App.loadProjetoInfo();
+                const result = await App.fetchAPI(`/api/projetos/${App.projetoId}/menus`);
+
+                if (result?.success && result.menus) {
+                    const nav = document.getElementById('dynamic-nav');
+                    const loading = document.getElementById('nav-loading');
+
+                    let menuHtml = `
+                        <a href="/index.html" class="nav-item" aria-label="Dashboard">
+                            <span class="nav-icon" aria-hidden="true">&#128202;</span>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    `;
+
+                    result.menus.forEach(menu => {
+                        if (menu.ativo && menu.entidade_codigo) {
+                            menuHtml += `
+                                <a href="entidade.html?e=${menu.entidade_codigo}"
+                                   class="nav-item"
+                                   data-entidade="${menu.entidade_codigo}"
+                                   aria-label="${menu.nome}">
+                                    <span class="nav-icon" aria-hidden="true">${menu.icone || '&#128196;'}</span>
+                                    <span class="nav-text">${menu.nome}</span>
+                                </a>
+                            `;
+                        } else if (menu.ativo && menu.url) {
+                            menuHtml += `
+                                <a href="${menu.url}"
+                                   class="nav-item"
+                                   aria-label="${menu.nome}">
+                                    <span class="nav-icon" aria-hidden="true">${menu.icone || '&#128196;'}</span>
+                                    <span class="nav-text">${menu.nome}</span>
+                                </a>
+                            `;
+                        }
+                    });
+
+                    if (loading) loading.remove();
+                    nav.innerHTML = menuHtml;
+                }
+            } catch (error) {
+                console.warn('Erro ao carregar menu:', error);
+            }
+        }
+
+        // Marcar menu ativo
+        function marcarMenuAtivo(entidadeCodigo) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.dataset.entidade === entidadeCodigo) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            document.body.classList.toggle('sidebar-open');
+        }
+    </script>
+</body>
+</html>

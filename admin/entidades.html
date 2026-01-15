@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entidades - Admin Belgo BBP</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>BELGO BBP</h1>
+                <span class="badge">Admin</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="usuarios.html" class="nav-item">
+                    <span class="icon">👥</span>
+                    Usuarios
+                </a>
+                <a href="projetos.html" class="nav-item">
+                    <span class="icon">📁</span>
+                    Projetos
+                </a>
+                <a href="entidades.html" class="nav-item active">
+                    <span class="icon">📋</span>
+                    Entidades
+                </a>
+                <a href="auditoria.html" class="nav-item">
+                    <span class="icon">📋</span>
+                    Auditoria
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../landing.html" class="nav-item">
+                    <span class="icon">🏠</span>
+                    Voltar ao Portal
+                </a>
+                <button class="nav-item btn-logout" onclick="logout()">
+                    <span class="icon">🚪</span>
+                    Sair
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="header-title">
+                    <h2>Entidades do Projeto</h2>
+                    <select id="selectProjeto" class="select-projeto" onchange="carregarEntidades()">
+                        <option value="">Selecione um projeto</option>
+                    </select>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="abrirModalNovaEntidade()" id="btnNovaEntidade" disabled>
+                        <span class="icon">➕</span>
+                        Nova Entidade
+                    </button>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <!-- Info do Projeto -->
+                <div class="projeto-info-banner" id="projetoInfo" style="display: none;">
+                    <div class="projeto-banner-content">
+                        <span class="projeto-icone" id="projetoIcone">📁</span>
+                        <div>
+                            <h3 id="projetoNome">-</h3>
+                            <p id="projetoDescricao">-</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats-grid stats-4" id="statsSection" style="display: none;">
+                    <div class="stat-card">
+                        <div class="stat-icon">📋</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="totalEntidades">0</span>
+                            <span class="stat-label">Entidades</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📝</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="totalCampos">0</span>
+                            <span class="stat-label">Campos</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💾</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="totalRegistros">0</span>
+                            <span class="stat-label">Registros</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📄</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="totalMenus">0</span>
+                            <span class="stat-label">Menus Vinculados</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista de Entidades -->
+                <div class="card" id="entidadesSection" style="display: none;">
+                    <div class="card-header">
+                        <h3>Entidades</h3>
+                        <div class="search-box">
+                            <input type="text" id="searchEntidades" placeholder="Buscar entidades..." onkeyup="filtrarEntidades()">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="entidades-grid" id="entidadesGrid">
+                            <p class="empty">Nenhuma entidade configurada</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instrucoes iniciais -->
+                <div class="card" id="instrucoes">
+                    <div class="card-body">
+                        <div class="instrucoes-content">
+                            <span class="instrucoes-icon">📋</span>
+                            <h3>Gestao de Entidades</h3>
+                            <p>Selecione um projeto para gerenciar suas entidades de dados.</p>
+                            <p>Entidades definem estruturas de dados dinamicas que podem ser usadas nos menus do projeto.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Nova/Editar Entidade -->
+    <div class="modal" id="modalEntidade">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3 id="modalEntidadeTitulo">Nova Entidade</h3>
+                <button class="modal-close" onclick="fecharModalEntidade()">&times;</button>
+            </div>
+            <form id="formEntidade" onsubmit="salvarEntidade(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="entidadeId">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="entidadeCodigo">Codigo *</label>
+                            <input type="text" id="entidadeCodigo" required
+                                   pattern="[a-z0-9_]+"
+                                   placeholder="ex: revendas"
+                                   title="Apenas letras minusculas, numeros e underscores">
+                        </div>
+                        <div class="form-group">
+                            <label for="entidadeNome">Nome *</label>
+                            <input type="text" id="entidadeNome" required placeholder="Nome da entidade">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="entidadeNomePlural">Nome Plural</label>
+                            <input type="text" id="entidadeNomePlural" placeholder="ex: Revendas">
+                        </div>
+                        <div class="form-group">
+                            <label for="entidadeIcone">Icone</label>
+                            <input type="text" id="entidadeIcone" placeholder="📋" maxlength="4">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="entidadeDescricao">Descricao</label>
+                        <textarea id="entidadeDescricao" rows="2" placeholder="Descricao da entidade"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="entidadeTipo">Tipo</label>
+                        <select id="entidadeTipo">
+                            <option value="tabela">Tabela (dados estruturados)</option>
+                            <option value="documento">Documento (textos)</option>
+                            <option value="arquivo">Arquivo (uploads)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-section">
+                        <h4 class="form-section-title">Permissoes</h4>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="permiteCriar" checked>
+                                <span class="checkbox-label">Criar</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="permiteEditar" checked>
+                                <span class="checkbox-label">Editar</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="permiteExcluir" checked>
+                                <span class="checkbox-label">Excluir</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="permiteImportar" checked>
+                                <span class="checkbox-label">Importar</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="permiteExportar" checked>
+                                <span class="checkbox-label">Exportar</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="fecharModalEntidade()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Gerenciar Campos -->
+    <div class="modal" id="modalCampos">
+        <div class="modal-content modal-xl">
+            <div class="modal-header">
+                <h3 id="modalCamposTitulo">Campos da Entidade</h3>
+                <button class="modal-close" onclick="fecharModalCampos()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="campos-toolbar">
+                    <button class="btn btn-primary btn-sm" onclick="abrirModalNovoCampo()">
+                        <span class="icon">➕</span> Novo Campo
+                    </button>
+                </div>
+                <div class="campos-list" id="camposList">
+                    <p class="empty">Nenhum campo configurado</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="fecharModalCampos()">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Novo/Editar Campo -->
+    <div class="modal" id="modalCampo">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3 id="modalCampoTitulo">Novo Campo</h3>
+                <button class="modal-close" onclick="fecharModalCampo()">&times;</button>
+            </div>
+            <form id="formCampo" onsubmit="salvarCampo(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="campoId">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="campoCodigo">Codigo *</label>
+                            <input type="text" id="campoCodigo" required
+                                   pattern="[a-z0-9_]+"
+                                   placeholder="ex: nome_fantasia"
+                                   title="Apenas letras minusculas, numeros e underscores">
+                        </div>
+                        <div class="form-group">
+                            <label for="campoNome">Nome *</label>
+                            <input type="text" id="campoNome" required placeholder="Nome do campo">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="campoTipo">Tipo *</label>
+                            <select id="campoTipo" required onchange="atualizarOpcoesTipo()">
+                                <option value="text">Texto</option>
+                                <option value="textarea">Texto Longo</option>
+                                <option value="number">Numero</option>
+                                <option value="currency">Moeda</option>
+                                <option value="date">Data</option>
+                                <option value="datetime">Data e Hora</option>
+                                <option value="boolean">Sim/Nao</option>
+                                <option value="select">Selecao (dropdown)</option>
+                                <option value="multiselect">Selecao Multipla</option>
+                                <option value="file">Arquivo</option>
+                                <option value="image">Imagem</option>
+                                <option value="relation">Relacao (outra entidade)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="campoOrdem">Ordem</label>
+                            <input type="number" id="campoOrdem" min="0" value="0">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="campoDescricao">Descricao</label>
+                        <input type="text" id="campoDescricao" placeholder="Descricao do campo">
+                    </div>
+
+                    <!-- Opcoes para select -->
+                    <div class="form-section" id="secaoOpcoes" style="display: none;">
+                        <h4 class="form-section-title">Opcoes</h4>
+                        <div id="opcoesContainer"></div>
+                        <button type="button" class="btn btn-sm btn-outline" onclick="adicionarOpcao()">
+                            <span class="icon">➕</span> Adicionar Opcao
+                        </button>
+                    </div>
+
+                    <!-- Relacao -->
+                    <div class="form-section" id="secaoRelacao" style="display: none;">
+                        <h4 class="form-section-title">Configuracao de Relacao</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="relacaoEntidade">Entidade Relacionada</label>
+                                <select id="relacaoEntidade">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="relacaoCampoExibir">Campo para Exibir</label>
+                                <input type="text" id="relacaoCampoExibir" placeholder="ex: nome">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4 class="form-section-title">Validacao</h4>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="campoObrigatorio">
+                                <span class="checkbox-label">Obrigatorio</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="campoUnico">
+                                <span class="checkbox-label">Unico</span>
+                            </label>
+                        </div>
+                        <div class="form-row" style="margin-top: 12px;">
+                            <div class="form-group">
+                                <label for="campoValorPadrao">Valor Padrao</label>
+                                <input type="text" id="campoValorPadrao" placeholder="Valor inicial">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h4 class="form-section-title">Visibilidade</h4>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="campoVisivelListagem" checked>
+                                <span class="checkbox-label">Listagem</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="campoVisivelFormulario" checked>
+                                <span class="checkbox-label">Formulario</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="campoVisivelMobile" checked>
+                                <span class="checkbox-label">Mobile</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="fecharModalCampo()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+    <script>
+        let projetos = [];
+        let projetoAtual = null;
+        let entidades = [];
+        let entidadeAtual = null;
+        let campos = [];
+        let opcoesIndex = 0;
+
+        // Toast notification
+        function showToast(message, type = 'info') {
+            const existingToast = document.querySelector('.toast-notification');
+            if (existingToast) existingToast.remove();
+
+            const toast = document.createElement('div');
+            toast.className = `toast-notification toast-${type}`;
+            toast.innerHTML = `
+                <span class="toast-icon">${type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'}</span>
+                <span class="toast-message">${message}</span>
+            `;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('toast-hide');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        // Carregar projetos
+        async function carregarProjetos() {
+            try {
+                const res = await apiRequest('/api/projetos');
+                if (res.success) {
+                    projetos = res.projetos;
+                    const select = document.getElementById('selectProjeto');
+                    select.innerHTML = '<option value="">Selecione um projeto</option>' +
+                        projetos.map(p => `<option value="${p.id}">${p.icone || '📁'} ${p.nome}</option>`).join('');
+
+                    // Verificar se tem projeto na URL
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const projetoId = urlParams.get('projeto');
+                    if (projetoId) {
+                        select.value = projetoId;
+                        carregarEntidades();
+                    }
+                }
+            } catch (error) {
+                console.error('Erro ao carregar projetos:', error);
+                showToast('Erro ao carregar projetos', 'error');
+            }
+        }
+
+        // Carregar entidades do projeto
+        async function carregarEntidades() {
+            const projetoId = document.getElementById('selectProjeto').value;
+
+            if (!projetoId) {
+                document.getElementById('instrucoes').style.display = 'block';
+                document.getElementById('projetoInfo').style.display = 'none';
+                document.getElementById('statsSection').style.display = 'none';
+                document.getElementById('entidadesSection').style.display = 'none';
+                document.getElementById('btnNovaEntidade').disabled = true;
+                return;
+            }
+
+            try {
+                // Carregar info do projeto
+                const projetoRes = await apiRequest(`/api/projetos/${projetoId}`);
+                if (projetoRes.success) {
+                    projetoAtual = projetoRes.projeto;
+                    document.getElementById('projetoIcone').textContent = projetoAtual.icone || '📁';
+                    document.getElementById('projetoNome').textContent = projetoAtual.nome;
+                    document.getElementById('projetoDescricao').textContent = projetoAtual.descricao || '';
+                    document.getElementById('projetoInfo').style.display = 'flex';
+                }
+
+                // Carregar entidades
+                const res = await apiRequest(`/api/projetos/${projetoId}/entidades`);
+                if (res.success) {
+                    entidades = res.entidades;
+                    renderizarEntidades();
+                    atualizarEstatisticas();
+
+                    document.getElementById('instrucoes').style.display = 'none';
+                    document.getElementById('statsSection').style.display = 'grid';
+                    document.getElementById('entidadesSection').style.display = 'block';
+                    document.getElementById('btnNovaEntidade').disabled = false;
+
+                    // Atualizar URL
+                    const url = new URL(window.location);
+                    url.searchParams.set('projeto', projetoId);
+                    window.history.replaceState({}, '', url);
+                }
+            } catch (error) {
+                console.error('Erro ao carregar entidades:', error);
+                showToast('Erro ao carregar entidades', 'error');
+            }
+        }
+
+        // Renderizar grid de entidades
+        function renderizarEntidades() {
+            const container = document.getElementById('entidadesGrid');
+
+            if (entidades.length === 0) {
+                container.innerHTML = '<p class="empty">Nenhuma entidade configurada. Clique em "Nova Entidade" para criar.</p>';
+                return;
+            }
+
+            container.innerHTML = entidades.map(e => `
+                <div class="entidade-card">
+                    <div class="entidade-header">
+                        <span class="entidade-icone">${e.icone || '📋'}</span>
+                        <div class="entidade-info">
+                            <h4 class="entidade-nome">${e.nome}</h4>
+                            <span class="entidade-codigo">${e.codigo}</span>
+                        </div>
+                        <span class="entidade-tipo tipo-${e.tipo}">${e.tipo}</span>
+                    </div>
+                    ${e.descricao ? `<p class="entidade-descricao">${e.descricao}</p>` : ''}
+                    <div class="entidade-permissoes">
+                        ${e.permite_criar ? '<span class="perm-badge">Criar</span>' : ''}
+                        ${e.permite_editar ? '<span class="perm-badge">Editar</span>' : ''}
+                        ${e.permite_excluir ? '<span class="perm-badge">Excluir</span>' : ''}
+                        ${e.permite_importar ? '<span class="perm-badge">Importar</span>' : ''}
+                        ${e.permite_exportar ? '<span class="perm-badge">Exportar</span>' : ''}
+                    </div>
+                    <div class="entidade-actions">
+                        <button class="btn btn-sm btn-outline" onclick="gerenciarCampos(${e.id})">
+                            <span class="icon">📝</span> Campos
+                        </button>
+                        <button class="btn btn-sm btn-outline" onclick="editarEntidade(${e.id})">
+                            <span class="icon">✏️</span> Editar
+                        </button>
+                        <button class="btn btn-sm btn-outline btn-danger" onclick="confirmarExclusaoEntidade(${e.id}, '${e.nome}')">
+                            <span class="icon">🗑️</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Atualizar estatisticas
+        function atualizarEstatisticas() {
+            document.getElementById('totalEntidades').textContent = entidades.length;
+
+            // Contar campos total (seria necessario uma API agregada)
+            document.getElementById('totalCampos').textContent = '-';
+            document.getElementById('totalRegistros').textContent = '-';
+            document.getElementById('totalMenus').textContent = '-';
+        }
+
+        // Filtrar entidades
+        function filtrarEntidades() {
+            const termo = document.getElementById('searchEntidades').value.toLowerCase();
+
+            if (!termo) {
+                renderizarEntidades();
+                return;
+            }
+
+            const filtradas = entidades.filter(e =>
+                e.nome.toLowerCase().includes(termo) ||
+                e.codigo.toLowerCase().includes(termo) ||
+                (e.descricao && e.descricao.toLowerCase().includes(termo))
+            );
+
+            const container = document.getElementById('entidadesGrid');
+            if (filtradas.length === 0) {
+                container.innerHTML = '<p class="empty">Nenhuma entidade encontrada</p>';
+                return;
+            }
+
+            const backup = entidades;
+            entidades = filtradas;
+            renderizarEntidades();
+            entidades = backup;
+        }
+
+        // Abrir modal nova entidade
+        function abrirModalNovaEntidade() {
+            entidadeAtual = null;
+            document.getElementById('modalEntidadeTitulo').textContent = 'Nova Entidade';
+            document.getElementById('formEntidade').reset();
+            document.getElementById('entidadeId').value = '';
+            document.getElementById('entidadeCodigo').disabled = false;
+            document.getElementById('modalEntidade').classList.add('active');
+        }
+
+        // Editar entidade
+        async function editarEntidade(id) {
+            try {
+                const res = await apiRequest(`/api/projetos/${projetoAtual.id}/entidades/${id}`);
+                if (!res.success) {
+                    showToast('Erro ao carregar entidade', 'error');
+                    return;
+                }
+
+                const e = res.entidade;
+                entidadeAtual = e;
+
+                document.getElementById('modalEntidadeTitulo').textContent = 'Editar Entidade';
+                document.getElementById('entidadeId').value = e.id;
+                document.getElementById('entidadeCodigo').value = e.codigo;
+                document.getElementById('entidadeCodigo').disabled = true;
+                document.getElementById('entidadeNome').value = e.nome;
+                document.getElementById('entidadeNomePlural').value = e.nome_plural || '';
+                document.getElementById('entidadeIcone').value = e.icone || '';
+                document.getElementById('entidadeDescricao').value = e.descricao || '';
+                document.getElementById('entidadeTipo').value = e.tipo || 'tabela';
+                document.getElementById('permiteCriar').checked = e.permite_criar;
+                document.getElementById('permiteEditar').checked = e.permite_editar;
+                document.getElementById('permiteExcluir').checked = e.permite_excluir;
+                document.getElementById('permiteImportar').checked = e.permite_importar;
+                document.getElementById('permiteExportar').checked = e.permite_exportar;
+
+                document.getElementById('modalEntidade').classList.add('active');
+            } catch (error) {
+                console.error('Erro ao carregar entidade:', error);
+                showToast('Erro ao carregar entidade', 'error');
+            }
+        }
+
+        // Salvar entidade
+        async function salvarEntidade(event) {
+            event.preventDefault();
+
+            const id = document.getElementById('entidadeId').value;
+            const isEdicao = !!id;
+
+            const dados = {
+                codigo: document.getElementById('entidadeCodigo').value,
+                nome: document.getElementById('entidadeNome').value,
+                nome_plural: document.getElementById('entidadeNomePlural').value || null,
+                descricao: document.getElementById('entidadeDescricao').value || null,
+                icone: document.getElementById('entidadeIcone').value || '📋',
+                tipo: document.getElementById('entidadeTipo').value,
+                permite_criar: document.getElementById('permiteCriar').checked,
+                permite_editar: document.getElementById('permiteEditar').checked,
+                permite_excluir: document.getElementById('permiteExcluir').checked,
+                permite_importar: document.getElementById('permiteImportar').checked,
+                permite_exportar: document.getElementById('permiteExportar').checked
+            };
+
+            try {
+                const url = isEdicao
+                    ? `/api/projetos/${projetoAtual.id}/entidades/${id}`
+                    : `/api/projetos/${projetoAtual.id}/entidades`;
+                const method = isEdicao ? 'PUT' : 'POST';
+
+                const res = await apiRequest(url, {
+                    method,
+                    body: JSON.stringify(dados)
+                });
+
+                if (res.success) {
+                    showToast(isEdicao ? 'Entidade atualizada!' : 'Entidade criada!', 'success');
+                    fecharModalEntidade();
+                    carregarEntidades();
+                } else {
+                    showToast(res.error || 'Erro ao salvar', 'error');
+                }
+            } catch (error) {
+                console.error('Erro ao salvar entidade:', error);
+                showToast('Erro ao salvar entidade', 'error');
+            }
+        }
+
+        // Fechar modal entidade
+        function fecharModalEntidade() {
+            document.getElementById('modalEntidade').classList.remove('active');
+        }
+
+        // Confirmar exclusao
+        function confirmarExclusaoEntidade(id, nome) {
+            if (confirm(`Deseja realmente excluir a entidade "${nome}"?\n\nTodos os campos e dados associados serao perdidos.`)) {
+                excluirEntidade(id);
+            }
+        }
+
+        // Excluir entidade
+        async function excluirEntidade(id) {
+            try {
+                const res = await apiRequest(`/api/projetos/${projetoAtual.id}/entidades/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (res.success) {
+                    showToast('Entidade excluida!', 'success');
+                    carregarEntidades();
+                } else {
+                    showToast(res.error || 'Erro ao excluir', 'error');
+                }
+            } catch (error) {
+                console.error('Erro ao excluir entidade:', error);
+                showToast('Erro ao excluir entidade', 'error');
+            }
+        }
+
+        // =========================================
+        // CAMPOS
+        // =========================================
+
+        // Gerenciar campos
+        async function gerenciarCampos(entidadeId) {
+            try {
+                // Buscar entidade com campos
+                const res = await apiRequest(`/api/projetos/${projetoAtual.id}/entidades/${entidadeId}`);
+                if (!res.success) {
+                    showToast('Erro ao carregar campos', 'error');
+                    return;
+                }
+
+                entidadeAtual = res.entidade;
+                campos = res.entidade.campos || [];
+
+                document.getElementById('modalCamposTitulo').textContent = `Campos: ${entidadeAtual.nome}`;
+                renderizarCampos();
+
+                // Carregar entidades para relacao
+                const selectRelacao = document.getElementById('relacaoEntidade');
+                selectRelacao.innerHTML = '<option value="">Selecione...</option>' +
+                    entidades.filter(e => e.id !== entidadeId).map(e =>
+                        `<option value="${e.id}">${e.nome}</option>`
+                    ).join('');
+
+                document.getElementById('modalCampos').classList.add('active');
+            } catch (error) {
+                console.error('Erro ao carregar campos:', error);
+                showToast('Erro ao carregar campos', 'error');
+            }
+        }
+
+        // Renderizar lista de campos
+        function renderizarCampos() {
+            const container = document.getElementById('camposList');
+
+            if (campos.length === 0) {
+                container.innerHTML = '<p class="empty">Nenhum campo configurado. Clique em "Novo Campo" para criar.</p>';
+                return;
+            }
+
+            container.innerHTML = `
+                <table class="campos-table">
+                    <thead>
+                        <tr>
+                            <th>Ordem</th>
+                            <th>Codigo</th>
+                            <th>Nome</th>
+                            <th>Tipo</th>
+                            <th>Obrig.</th>
+                            <th>Unico</th>
+                            <th>Acoes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${campos.map(c => `
+                            <tr>
+                                <td>${c.ordem}</td>
+                                <td><code>${c.codigo}</code></td>
+                                <td>${c.nome}</td>
+                                <td><span class="tipo-badge tipo-${c.tipo}">${c.tipo}</span></td>
+                                <td>${c.obrigatorio ? '✅' : ''}</td>
+                                <td>${c.unico ? '✅' : ''}</td>
+                                <td>
+                                    <button class="btn btn-xs btn-outline" onclick="editarCampo(${c.id})">✏️</button>
+                                    <button class="btn btn-xs btn-outline btn-danger" onclick="confirmarExclusaoCampo(${c.id}, '${c.nome}')">🗑️</button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        // Fechar modal campos
+        function fecharModalCampos() {
+            document.getElementById('modalCampos').classList.remove('active');
+        }
+
+        // Abrir modal novo campo
+        function abrirModalNovoCampo() {
+            document.getElementById('modalCampoTitulo').textContent = 'Novo Campo';
+            document.getElementById('formCampo').reset();
+            document.getElementById('campoId').value = '';
+            document.getElementById('campoCodigo').disabled = false;
+            document.getElementById('campoOrdem').value = campos.length;
+            document.getElementById('opcoesContainer').innerHTML = '';
+            opcoesIndex = 0;
+            atualizarOpcoesTipo();
+            document.getElementById('modalCampo').classList.add('active');
+        }
+
+        // Editar campo
+        async function editarCampo(id) {
+            const campo = campos.find(c => c.id === id);
+            if (!campo) return;
+
+            document.getElementById('modalCampoTitulo').textContent = 'Editar Campo';
+            document.getElementById('campoId').value = campo.id;
+            document.getElementById('campoCodigo').value = campo.codigo;
+            document.getElementById('campoCodigo').disabled = true;
+            document.getElementById('campoNome').value = campo.nome;
+            document.getElementById('campoDescricao').value = campo.descricao || '';
+            document.getElementById('campoTipo').value = campo.tipo;
+            document.getElementById('campoOrdem').value = campo.ordem;
+            document.getElementById('campoObrigatorio').checked = campo.obrigatorio;
+            document.getElementById('campoUnico').checked = campo.unico;
+            document.getElementById('campoValorPadrao').value = campo.valor_padrao || '';
+            document.getElementById('campoVisivelListagem').checked = campo.visivel_listagem;
+            document.getElementById('campoVisivelFormulario').checked = campo.visivel_formulario;
+            document.getElementById('campoVisivelMobile').checked = campo.visivel_mobile;
+
+            // Relacao
+            if (campo.relacao_entidade_id) {
+                document.getElementById('relacaoEntidade').value = campo.relacao_entidade_id;
+                document.getElementById('relacaoCampoExibir').value = campo.relacao_campo_exibir || '';
+            }
+
+            // Opcoes
+            document.getElementById('opcoesContainer').innerHTML = '';
+            opcoesIndex = 0;
+            if (campo.opcoes && campo.opcoes.length > 0) {
+                campo.opcoes.forEach(o => adicionarOpcao(o.valor, o.label, o.cor));
+            }
+
+            atualizarOpcoesTipo();
+            document.getElementById('modalCampo').classList.add('active');
+        }
+
+        // Atualizar opcoes baseado no tipo
+        function atualizarOpcoesTipo() {
+            const tipo = document.getElementById('campoTipo').value;
+            document.getElementById('secaoOpcoes').style.display =
+                (tipo === 'select' || tipo === 'multiselect') ? 'block' : 'none';
+            document.getElementById('secaoRelacao').style.display =
+                tipo === 'relation' ? 'block' : 'none';
+        }
+
+        // Adicionar opcao
+        function adicionarOpcao(valor = '', label = '', cor = '') {
+            const container = document.getElementById('opcoesContainer');
+            const div = document.createElement('div');
+            div.className = 'opcao-row';
+            div.innerHTML = `
+                <input type="text" name="opcao_valor_${opcoesIndex}" placeholder="Valor" value="${valor}" required>
+                <input type="text" name="opcao_label_${opcoesIndex}" placeholder="Label" value="${label}" required>
+                <input type="color" name="opcao_cor_${opcoesIndex}" value="${cor || '#6B7280'}" title="Cor">
+                <button type="button" class="btn btn-xs btn-danger" onclick="this.parentElement.remove()">🗑️</button>
+            `;
+            container.appendChild(div);
+            opcoesIndex++;
+        }
+
+        // Salvar campo
+        async function salvarCampo(event) {
+            event.preventDefault();
+
+            const id = document.getElementById('campoId').value;
+            const isEdicao = !!id;
+            const tipo = document.getElementById('campoTipo').value;
+
+            const dados = {
+                codigo: document.getElementById('campoCodigo').value,
+                nome: document.getElementById('campoNome').value,
+                descricao: document.getElementById('campoDescricao').value || null,
+                tipo: tipo,
+                ordem: parseInt(document.getElementById('campoOrdem').value) || 0,
+                obrigatorio: document.getElementById('campoObrigatorio').checked,
+                unico: document.getElementById('campoUnico').checked,
+                valor_padrao: document.getElementById('campoValorPadrao').value || null,
+                visivel_listagem: document.getElementById('campoVisivelListagem').checked,
+                visivel_formulario: document.getElementById('campoVisivelFormulario').checked,
+                visivel_mobile: document.getElementById('campoVisivelMobile').checked
+            };
+
+            // Relacao
+            if (tipo === 'relation') {
+                dados.relacao_entidade_id = parseInt(document.getElementById('relacaoEntidade').value) || null;
+                dados.relacao_campo_exibir = document.getElementById('relacaoCampoExibir').value || null;
+            }
+
+            // Opcoes
+            if (tipo === 'select' || tipo === 'multiselect') {
+                const opcoes = [];
+                const opcoesRows = document.querySelectorAll('.opcao-row');
+                opcoesRows.forEach((row, i) => {
+                    const valor = row.querySelector(`input[name^="opcao_valor"]`).value;
+                    const label = row.querySelector(`input[name^="opcao_label"]`).value;
+                    const cor = row.querySelector(`input[name^="opcao_cor"]`).value;
+                    if (valor && label) {
+                        opcoes.push({ valor, label, cor, ordem: i });
+                    }
+                });
+                dados.opcoes = opcoes;
+            }
+
+            try {
+                const url = isEdicao
+                    ? `/api/projetos/${projetoAtual.id}/entidades/${entidadeAtual.id}/campos/${id}`
+                    : `/api/projetos/${projetoAtual.id}/entidades/${entidadeAtual.id}/campos`;
+                const method = isEdicao ? 'PUT' : 'POST';
+
+                const res = await apiRequest(url, {
+                    method,
+                    body: JSON.stringify(dados)
+                });
+
+                if (res.success) {
+                    showToast(isEdicao ? 'Campo atualizado!' : 'Campo criado!', 'success');
+                    fecharModalCampo();
+                    gerenciarCampos(entidadeAtual.id);
+                } else {
+                    showToast(res.error || 'Erro ao salvar', 'error');
+                }
+            } catch (error) {
+                console.error('Erro ao salvar campo:', error);
+                showToast('Erro ao salvar campo', 'error');
+            }
+        }
+
+        // Fechar modal campo
+        function fecharModalCampo() {
+            document.getElementById('modalCampo').classList.remove('active');
+        }
+
+        // Confirmar exclusao campo
+        function confirmarExclusaoCampo(id, nome) {
+            if (confirm(`Deseja realmente excluir o campo "${nome}"?`)) {
+                excluirCampo(id);
+            }
+        }
+
+        // Excluir campo
+        async function excluirCampo(id) {
+            try {
+                const res = await apiRequest(`/api/projetos/${projetoAtual.id}/entidades/${entidadeAtual.id}/campos/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (res.success) {
+                    showToast('Campo excluido!', 'success');
+                    gerenciarCampos(entidadeAtual.id);
+                } else {
+                    showToast(res.error || 'Erro ao excluir', 'error');
+                }
+            } catch (error) {
+                console.error('Erro ao excluir campo:', error);
+                showToast('Erro ao excluir campo', 'error');
+            }
+        }
+
+        // Fechar modais ao clicar fora
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target.classList.contains('modal')) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+
+        // Inicializar
+        checkAuth().then(() => {
+            carregarProjetos();
+        });
+    </script>
+
+    <style>
+        /* Estilos especificos para entidades */
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .select-projeto {
+            padding: 8px 16px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .projeto-info-banner {
+            background: linear-gradient(135deg, #003B4A 0%, #00A799 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .projeto-banner-content {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .projeto-banner-content .projeto-icone {
+            font-size: 48px;
+        }
+
+        .projeto-banner-content h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .projeto-banner-content p {
+            margin: 4px 0 0 0;
+            opacity: 0.9;
+        }
+
+        .stats-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .entidades-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .entidade-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid #003B4A;
+        }
+
+        .entidade-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .entidade-icone {
+            font-size: 32px;
+        }
+
+        .entidade-info {
+            flex: 1;
+        }
+
+        .entidade-nome {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .entidade-codigo {
+            font-size: 12px;
+            color: #666;
+            font-family: monospace;
+        }
+
+        .entidade-tipo {
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        .tipo-tabela { background: #dbeafe; color: #1e40af; }
+        .tipo-documento { background: #fef3c7; color: #92400e; }
+        .tipo-arquivo { background: #d1fae5; color: #065f46; }
+
+        .entidade-descricao {
+            font-size: 14px;
+            color: #666;
+            margin: 0 0 12px 0;
+        }
+
+        .entidade-permissoes {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .perm-badge {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: #f3f4f6;
+            color: #4b5563;
+        }
+
+        .entidade-actions {
+            display: flex;
+            gap: 8px;
+            padding-top: 12px;
+            border-top: 1px solid #eee;
+        }
+
+        /* Instrucoes */
+        .instrucoes-content {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .instrucoes-icon {
+            font-size: 64px;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .instrucoes-content h3 {
+            margin: 0 0 8px 0;
+            color: #333;
+        }
+
+        .instrucoes-content p {
+            margin: 8px 0;
+            color: #666;
+        }
+
+        /* Campos table */
+        .campos-toolbar {
+            margin-bottom: 16px;
+        }
+
+        .campos-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .campos-table th,
+        .campos-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .campos-table th {
+            font-weight: 600;
+            color: #666;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .campos-table code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .tipo-badge {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+
+        .tipo-text { background: #e0e7ff; color: #3730a3; }
+        .tipo-textarea { background: #e0e7ff; color: #3730a3; }
+        .tipo-number { background: #fef3c7; color: #92400e; }
+        .tipo-currency { background: #fef3c7; color: #92400e; }
+        .tipo-date { background: #dbeafe; color: #1e40af; }
+        .tipo-datetime { background: #dbeafe; color: #1e40af; }
+        .tipo-boolean { background: #d1fae5; color: #065f46; }
+        .tipo-select { background: #fce7f3; color: #9d174d; }
+        .tipo-multiselect { background: #fce7f3; color: #9d174d; }
+        .tipo-file { background: #e5e7eb; color: #374151; }
+        .tipo-image { background: #e5e7eb; color: #374151; }
+        .tipo-relation { background: #ede9fe; color: #5b21b6; }
+
+        /* Opcoes */
+        .opcao-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            align-items: center;
+        }
+
+        .opcao-row input[type="text"] {
+            flex: 1;
+        }
+
+        .opcao-row input[type="color"] {
+            width: 40px;
+            height: 36px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Modal sizes */
+        .modal-xl {
+            max-width: 900px;
+        }
+
+        .btn-xs {
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+
+        /* Form section */
+        .form-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .form-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 0 12px 0;
+            color: #333;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .checkbox-item input {
+            cursor: pointer;
+        }
+
+        /* Toast */
+        .toast-notification {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            background: #333;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            z-index: 10000;
+            animation: toastSlideIn 0.3s ease;
+        }
+
+        .toast-success { background: #00A799; }
+        .toast-error { background: #ED1C24; }
+        .toast-info { background: #003B4A; }
+
+        .toast-hide {
+            animation: toastSlideOut 0.3s ease forwards;
+        }
+
+        @keyframes toastSlideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes toastSlideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .stats-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .entidades-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>

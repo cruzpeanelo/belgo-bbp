@@ -332,6 +332,29 @@ export async function isProjetoAdmin(db, usuarioId, projetoId) {
 }
 
 /**
+ * Busca o codigo do papel do usuario em um projeto
+ * @param {D1Database} db - Database D1
+ * @param {number} usuarioId - ID do usuario
+ * @param {number} projetoId - ID do projeto
+ * @returns {Promise<string|null>} Codigo do papel (visualizador, executor, key_user, gestor, admin)
+ */
+export async function getPermissaoUsuario(db, usuarioId, projetoId) {
+    try {
+        const vinculo = await db.prepare(`
+            SELECT p.codigo
+            FROM usuario_projeto_papel upp
+            JOIN papeis p ON upp.papel_id = p.id
+            WHERE upp.usuario_id = ? AND upp.projeto_id = ? AND upp.ativo = 1
+        `).bind(usuarioId, projetoId).first();
+
+        return vinculo?.codigo || null;
+    } catch (error) {
+        console.error('Erro ao obter permissao do usuario:', error);
+        return null;
+    }
+}
+
+/**
  * Busca projetos que o usuario tem acesso
  * @param {D1Database} db - Database D1
  * @param {number} usuarioId - ID do usuario

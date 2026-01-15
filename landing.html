@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Belgo BBP - Business Process Platform</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="shared/css/modules.css">
     <style>
-        /* Reset básico */
         * {
             margin: 0;
             padding: 0;
@@ -18,12 +16,36 @@
             background: #f5f7fa;
             color: #1f2937;
             line-height: 1.6;
+            min-height: 100vh;
+        }
+        .landing-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .landing-header {
+            background: linear-gradient(135deg, #003B4A 0%, #005a6e 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        .landing-logo {
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        .landing-subtitle {
+            opacity: 0.8;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
         }
         .header-actions {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 1rem;
             margin-top: 1rem;
+            flex-wrap: wrap;
         }
         .user-info {
             display: flex;
@@ -65,11 +87,163 @@
             display: none !important;
         }
 
-        /* Secao de Projetos */
-        .projetos-section {
-            padding: 40px 20px;
-            background: rgba(255,255,255,0.5);
-            border-bottom: 1px solid #e5e7eb;
+        /* Main Content */
+        .landing-main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .landing-title {
+            text-align: center;
+            color: #003B4A;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Grid de Projetos */
+        .projetos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Card de Projeto */
+        .projeto-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            border-left: 4px solid var(--projeto-cor, #003B4A);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .projeto-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        .projeto-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .projeto-card-icon {
+            font-size: 2.5rem;
+            line-height: 1;
+        }
+        .projeto-card-info {
+            flex: 1;
+        }
+        .projeto-card-nome {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--projeto-cor, #003B4A);
+            margin: 0;
+        }
+        .projeto-card-codigo {
+            font-size: 0.8rem;
+            color: #6b7280;
+            font-family: monospace;
+        }
+        .projeto-card-desc {
+            color: #4b5563;
+            font-size: 0.9rem;
+            margin: 0 0 1rem 0;
+            flex: 1;
+        }
+        .projeto-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+        .projeto-card-links {
+            display: flex;
+            gap: 8px;
+        }
+        .projeto-card-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            background: #f3f4f6;
+            transition: all 0.2s;
+        }
+        .projeto-card-link:hover {
+            background: #e5e7eb;
+        }
+        .projeto-card-link img {
+            width: 18px;
+            height: 18px;
+        }
+        .projeto-card-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: var(--projeto-cor, #003B4A);
+            color: white;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .projeto-card:hover .projeto-card-btn {
+            opacity: 0.9;
+        }
+
+        /* Estado vazio */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .empty-state-text {
+            font-size: 1.1rem;
+        }
+
+        /* Loading */
+        .loading-state {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        /* Footer */
+        .landing-footer {
+            background: #003B4A;
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.85rem;
+        }
+
+        /* Responsivo */
+        @media (max-width: 640px) {
+            .landing-header {
+                padding: 1.5rem 1rem;
+            }
+            .landing-main {
+                padding: 1.5rem 1rem;
+            }
+            .projetos-grid {
+                grid-template-columns: 1fr;
+            }
+            .projeto-card-nome {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
@@ -81,80 +255,16 @@
             <div class="landing-subtitle">Business Process Platform - Belgo Arames</div>
             <div class="header-actions" id="headerActions">
                 <div class="user-info" id="userInfo"></div>
-                <a href="admin/index.html" class="btn-header btn-admin hidden" id="adminLink">⚙️ Admin</a>
+                <a href="admin/index.html" class="btn-header btn-admin hidden" id="adminLink">Admin</a>
                 <button class="btn-header btn-logout hidden" id="logoutBtn" onclick="BelgoAuth.logout()">Sair</button>
             </div>
         </header>
 
-        <!-- Secao de Projetos (renderizada via JS) -->
-        <section id="meusProjetos" class="projetos-section" style="display: none;">
-            <!-- Renderizado via BelgoProjetoContext.renderSecaoProjetos() -->
-        </section>
-
         <!-- Main Content -->
         <main class="landing-main">
-            <h2 class="landing-title">Selecione um módulo para continuar</h2>
-
-            <div class="modules-grid">
-                <!-- GTM Module -->
-                <a href="index.html" class="module-card" data-module="gtm">
-                    <div class="module-card-header">
-                        <div class="module-card-icon">🚀</div>
-                        <h3 class="module-card-name">GTM</h3>
-                    </div>
-                    <div class="module-card-body">
-                        <p class="module-card-description">
-                            Go-To-Market Belgo Arames - Jornadas de negócio, casos de teste,
-                            documentação de processos e acompanhamento do projeto Fase II.
-                        </p>
-                        <div class="module-card-footer">
-                            <span class="module-card-status">
-                                <span>●</span> Ativo
-                            </span>
-                            <span class="module-card-arrow">→</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Rede Ativa Module -->
-                <a href="rede-ativa/index.html" class="module-card" data-module="rede-ativa">
-                    <div class="module-card-header">
-                        <div class="module-card-icon">🌐</div>
-                        <h3 class="module-card-name">Rede Ativa</h3>
-                    </div>
-                    <div class="module-card-body">
-                        <p class="module-card-description">
-                            Gestão da Rede Ativa de distribuição - Pontos de venda,
-                            métricas de performance e mapeamento geográfico.
-                        </p>
-                        <div class="module-card-footer">
-                            <span class="module-card-status coming-soon">
-                                <span>◐</span> Em breve
-                            </span>
-                            <span class="module-card-arrow">→</span>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Roadmap Module -->
-                <a href="roadmap/index.html" class="module-card" data-module="roadmap">
-                    <div class="module-card-header">
-                        <div class="module-card-icon">📅</div>
-                        <h3 class="module-card-name">Roadmap 2026</h3>
-                    </div>
-                    <div class="module-card-body">
-                        <p class="module-card-description">
-                            Planejamento estratégico 2026 - Iniciativas, cronograma,
-                            OKRs e acompanhamento de projetos.
-                        </p>
-                        <div class="module-card-footer">
-                            <span class="module-card-status coming-soon">
-                                <span>◐</span> Em breve
-                            </span>
-                            <span class="module-card-arrow">→</span>
-                        </div>
-                    </div>
-                </a>
+            <h2 class="landing-title">Meus Projetos</h2>
+            <div id="projetosContainer" class="loading-state">
+                Carregando projetos...
             </div>
         </main>
 
@@ -165,56 +275,101 @@
     </div>
 
     <script src="shared/js/auth.js"></script>
-    <script src="shared/js/projeto-context.js"></script>
     <script>
-        // Inicializar autenticação e projetos
+        // Inicializar
         document.addEventListener('DOMContentLoaded', async () => {
-            // Verificar se está autenticado
-            if (BelgoAuth.isAuthenticated()) {
-                const usuario = BelgoAuth.getUsuario();
+            // Verificar autenticacao
+            if (!BelgoAuth.isAuthenticated()) {
+                window.location.href = 'login.html';
+                return;
+            }
 
-                // Mostrar info do usuário
-                document.getElementById('userInfo').innerHTML = `
-                    <span>Olá, ${usuario.nome}</span>
-                    ${usuario.isAdmin ? '<span class="user-badge">Admin</span>' : ''}
-                `;
+            const usuario = BelgoAuth.getUsuario();
 
-                // Mostrar botão admin se for admin
-                if (usuario.isAdmin) {
-                    document.getElementById('adminLink').classList.remove('hidden');
+            // Mostrar info do usuario
+            document.getElementById('userInfo').innerHTML = `
+                <span>Ola, ${usuario.nome}</span>
+                ${usuario.isAdmin ? '<span class="user-badge">Admin</span>' : ''}
+            `;
+
+            // Mostrar botao admin se for admin
+            if (usuario.isAdmin) {
+                document.getElementById('adminLink').classList.remove('hidden');
+            }
+
+            // Mostrar botao logout
+            document.getElementById('logoutBtn').classList.remove('hidden');
+
+            // Carregar projetos
+            await carregarProjetos();
+        });
+
+        async function carregarProjetos() {
+            const container = document.getElementById('projetosContainer');
+
+            try {
+                const response = await BelgoAuth.request('/api/projetos');
+                if (!response || !response.ok) {
+                    container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">⚠️</div><div class="empty-state-text">Erro ao carregar projetos</div></div>';
+                    return;
                 }
 
-                // Mostrar botão logout
-                document.getElementById('logoutBtn').classList.remove('hidden');
+                const data = await response.json();
+                const projetos = data.projetos || [];
 
-                // Carregar secao de projetos
-                await BelgoProjetoContext.renderSecaoProjetos('meusProjetos');
+                if (projetos.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📁</div><div class="empty-state-text">Voce ainda nao tem acesso a nenhum projeto</div></div>';
+                    return;
+                }
+
+                container.innerHTML = '<div class="projetos-grid">' + projetos.map(renderProjetoCard).join('') + '</div>';
+
+            } catch (error) {
+                console.error('Erro ao carregar projetos:', error);
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">⚠️</div><div class="empty-state-text">Erro ao carregar projetos</div></div>';
             }
-
-            // Verificar último módulo visitado
-            const lastModule = localStorage.getItem('belgo_last_module');
-            if (lastModule && lastModule !== 'landing') {
-                // Opcional: auto-redirecionar para último módulo
-                // window.location.href = getModulePath(lastModule);
-            }
-        });
-
-        function getModulePath(moduleId) {
-            const paths = {
-                'gtm': 'index.html',
-                'rede-ativa': 'rede-ativa/index.html',
-                'roadmap': 'roadmap/index.html'
-            };
-            return paths[moduleId] || 'landing.html';
         }
 
-        // Salvar módulo selecionado
-        document.querySelectorAll('.module-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const moduleId = card.dataset.module;
-                localStorage.setItem('belgo_last_module', moduleId);
-            });
-        });
+        function renderProjetoCard(projeto) {
+            const url = projeto.url_modulo || '#';
+
+            const teamsHtml = projeto.teams_channel_url
+                ? `<a href="${projeto.teams_channel_url}" target="_blank" class="projeto-card-link" title="Abrir Teams" onclick="event.stopPropagation()">
+                       <img src="/shared/icons/teams.svg" alt="Teams">
+                   </a>`
+                : '';
+
+            const sharepointHtml = projeto.sharepoint_folder_url
+                ? `<a href="${projeto.sharepoint_folder_url}" target="_blank" class="projeto-card-link" title="Abrir SharePoint" onclick="event.stopPropagation()">
+                       <img src="/shared/icons/sharepoint.svg" alt="SharePoint">
+                   </a>`
+                : '';
+
+            return `
+                <div class="projeto-card" style="--projeto-cor: ${projeto.cor || '#003B4A'}" onclick="acessarProjeto(${projeto.id}, '${url}')">
+                    <div class="projeto-card-header">
+                        <div class="projeto-card-icon">${projeto.icone || '📁'}</div>
+                        <div class="projeto-card-info">
+                            <h3 class="projeto-card-nome">${projeto.nome}</h3>
+                            <span class="projeto-card-codigo">${projeto.codigo}</span>
+                        </div>
+                    </div>
+                    ${projeto.descricao ? `<p class="projeto-card-desc">${projeto.descricao}</p>` : ''}
+                    <div class="projeto-card-footer">
+                        <div class="projeto-card-links">
+                            ${teamsHtml}
+                            ${sharepointHtml}
+                        </div>
+                        <span class="projeto-card-btn">Acessar →</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function acessarProjeto(projetoId, url) {
+            localStorage.setItem('belgo_projeto_id', projetoId);
+            window.location.href = url;
+        }
     </script>
 </body>
 </html>

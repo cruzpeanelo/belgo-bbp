@@ -146,8 +146,18 @@
             }
         });
 
-        // Save current module
+        // Save current module and project ID
         localStorage.setItem('belgo_last_module', 'rede-ativa');
+        localStorage.setItem('belgo_projeto_id', '2');
+    </script>
+
+    <!-- Dynamic Navigation -->
+    <script src="../shared/js/dynamic-nav.js"></script>
+    <script>
+        // Inicializar navegacao dinamica (carrega menus do banco)
+        document.addEventListener('DOMContentLoaded', () => {
+            DynamicNav.init({ projetoId: 2, showProjectSelector: true });
+        });
     </script>
 </body>
 </html>

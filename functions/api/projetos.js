@@ -106,7 +106,8 @@ export async function onRequestPost(context) {
         const {
             codigo, nome, descricao, icone, cor, visibilidade, modulos,
             teamsChannelUrl, teamsWebhookUrl,
-            sharepointFolderUrl, sharepointDriveId, sharepointFolderId
+            sharepointFolderUrl, sharepointDriveId, sharepointFolderId,
+            urlModulo
         } = body;
 
         // Validacoes
@@ -140,9 +141,10 @@ export async function onRequestPost(context) {
             INSERT INTO projetos (
                 codigo, nome, descricao, icone, cor, visibilidade, criado_por,
                 teams_channel_url, teams_webhook_url,
-                sharepoint_folder_url, sharepoint_drive_id, sharepoint_folder_id
+                sharepoint_folder_url, sharepoint_drive_id, sharepoint_folder_id,
+                url_modulo
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `).bind(
             codigoLower,
             nome,
@@ -155,7 +157,8 @@ export async function onRequestPost(context) {
             teamsWebhookUrl || null,
             sharepointFolderUrl || null,
             sharepointDriveId || null,
-            sharepointFolderId || null
+            sharepointFolderId || null,
+            urlModulo || null
         ).run();
 
         const projetoId = result.meta.last_row_id;
@@ -239,7 +242,8 @@ export async function onRequestPut(context) {
         const {
             nome, descricao, icone, cor, visibilidade, ativo, modulos,
             teamsChannelUrl, teamsWebhookUrl,
-            sharepointFolderUrl, sharepointDriveId, sharepointFolderId
+            sharepointFolderUrl, sharepointDriveId, sharepointFolderId,
+            urlModulo
         } = body;
 
         // Validar cor contra paleta Belgo
@@ -266,6 +270,7 @@ export async function onRequestPut(context) {
                 sharepoint_folder_url = COALESCE(?, sharepoint_folder_url),
                 sharepoint_drive_id = COALESCE(?, sharepoint_drive_id),
                 sharepoint_folder_id = COALESCE(?, sharepoint_folder_id),
+                url_modulo = COALESCE(?, url_modulo),
                 updated_at = CURRENT_TIMESTAMP
             WHERE id = ?
         `).bind(
@@ -280,6 +285,7 @@ export async function onRequestPut(context) {
             sharepointFolderUrl !== undefined ? sharepointFolderUrl : null,
             sharepointDriveId !== undefined ? sharepointDriveId : null,
             sharepointFolderId !== undefined ? sharepointFolderId : null,
+            urlModulo !== undefined ? urlModulo : null,
             id
         ).run();
 
