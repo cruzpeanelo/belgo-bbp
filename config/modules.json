@@ -1,0 +1,39 @@
+{
+  "modules": [
+    {
+      "id": "gtm",
+      "name": "GTM",
+      "fullName": "Go-To-Market",
+      "description": "Jornadas, Testes e Documentacao do projeto GTM Belgo Arames",
+      "icon": "rocket",
+      "emoji": "🚀",
+      "color": "#003B4A",
+      "path": "/gtm/",
+      "active": true
+    },
+    {
+      "id": "rede-ativa",
+      "name": "Rede Ativa",
+      "fullName": "Rede Ativa",
+      "description": "Gestao da Rede Ativa de distribuicao",
+      "icon": "globe",
+      "emoji": "🌐",
+      "color": "#00A799",
+      "path": "/rede-ativa/",
+      "active": true
+    },
+    {
+      "id": "roadmap",
+      "name": "Roadmap 2026",
+      "fullName": "Roadmap 2026",
+      "description": "Planejamento estrategico e iniciativas 2026",
+      "icon": "calendar",
+      "emoji": "📅",
+      "color": "#ED1C24",
+      "path": "/roadmap/",
+      "active": true
+    }
+  ],
+  "defaultModule": "gtm",
+  "version": "1.0.0"
+}

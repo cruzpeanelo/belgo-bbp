@@ -1,0 +1,55 @@
+/* =====================================================
+   ROADMAP 2026 - ESTILOS ESPECIFICOS
+   Cor principal: #ED1C24 (Vermelho Belgo)
+   ===================================================== */
+
+:root {
+    --roadmap-primary: #ED1C24;
+    --roadmap-secondary: #FF4D4D;
+    --roadmap-gradient: linear-gradient(135deg, #ED1C24 0%, #FF4D4D 100%);
+}
+
+/* Sidebar com cor do modulo */
+.roadmap-sidebar {
+    background: var(--roadmap-gradient);
+}
+
+/* Titulos */
+.roadmap-title {
+    color: var(--roadmap-primary);
+}
+
+/* Nav item ativo */
+.roadmap-sidebar .nav-item.active {
+    border-left-color: #FDB913;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Nav item desabilitado */
+.nav-item.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+/* Botoes */
+.btn-roadmap {
+    background: var(--roadmap-primary);
+    color: white;
+}
+
+.btn-roadmap:hover {
+    background: #c4161d;
+}
+
+/* Cards */
+.card-roadmap {
+    border-top: 4px solid var(--roadmap-primary);
+}
+
+/* Mobile header */
+@media (max-width: 768px) {
+    .mobile-header {
+        background: var(--roadmap-gradient) !important;
+    }
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belgo BBP - Business Process Platform</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="shared/css/modules.css">
+    <style>
+        /* Reset basico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-page">
+        <!-- Header -->
+        <header class="landing-header">
+            <div class="landing-logo">BELGO BBP</div>
+            <div class="landing-subtitle">Business Process Platform - ArcelorMittal</div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="landing-main">
+            <h2 class="landing-title">Selecione um modulo para continuar</h2>
+
+            <div class="modules-grid">
+                <!-- GTM Module -->
+                <a href="index.html" class="module-card" data-module="gtm">
+                    <div class="module-card-header">
+                        <div class="module-card-icon">🚀</div>
+                        <h3 class="module-card-name">GTM</h3>
+                    </div>
+                    <div class="module-card-body">
+                        <p class="module-card-description">
+                            Go-To-Market Belgo Arames - Jornadas de negocio, casos de teste,
+                            documentacao de processos e acompanhamento do projeto Fase II.
+                        </p>
+                        <div class="module-card-footer">
+                            <span class="module-card-status">
+                                <span>●</span> Ativo
+                            </span>
+                            <span class="module-card-arrow">→</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Rede Ativa Module -->
+                <a href="rede-ativa/index.html" class="module-card" data-module="rede-ativa">
+                    <div class="module-card-header">
+                        <div class="module-card-icon">🌐</div>
+                        <h3 class="module-card-name">Rede Ativa</h3>
+                    </div>
+                    <div class="module-card-body">
+                        <p class="module-card-description">
+                            Gestao da Rede Ativa de distribuicao - Pontos de venda,
+                            metricas de performance e mapeamento geografico.
+                        </p>
+                        <div class="module-card-footer">
+                            <span class="module-card-status coming-soon">
+                                <span>◐</span> Em breve
+                            </span>
+                            <span class="module-card-arrow">→</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Roadmap Module -->
+                <a href="roadmap/index.html" class="module-card" data-module="roadmap">
+                    <div class="module-card-header">
+                        <div class="module-card-icon">📅</div>
+                        <h3 class="module-card-name">Roadmap 2026</h3>
+                    </div>
+                    <div class="module-card-body">
+                        <p class="module-card-description">
+                            Planejamento estrategico 2026 - Iniciativas, cronograma,
+                            OKRs e acompanhamento de projetos.
+                        </p>
+                        <div class="module-card-footer">
+                            <span class="module-card-status coming-soon">
+                                <span>◐</span> Em breve
+                            </span>
+                            <span class="module-card-arrow">→</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="landing-footer">
+            <p>Belgo BBP v2.0 - ArcelorMittal Brasil</p>
+        </footer>
+    </div>
+
+    <script>
+        // Verificar ultimo modulo visitado e oferecer redirecionamento
+        document.addEventListener('DOMContentLoaded', () => {
+            const lastModule = localStorage.getItem('belgo_last_module');
+            if (lastModule && lastModule !== 'landing') {
+                // Opcional: auto-redirecionar para ultimo modulo
+                // window.location.href = getModulePath(lastModule);
+            }
+        });
+
+        function getModulePath(moduleId) {
+            const paths = {
+                'gtm': 'index.html',
+                'rede-ativa': 'rede-ativa/index.html',
+                'roadmap': 'roadmap/index.html'
+            };
+            return paths[moduleId] || 'landing.html';
+        }
+
+        // Salvar modulo selecionado
+        document.querySelectorAll('.module-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const moduleId = card.dataset.module;
+                localStorage.setItem('belgo_last_module', moduleId);
+            });
+        });
+    </script>
+</body>
+</html>

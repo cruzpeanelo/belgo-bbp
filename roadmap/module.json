@@ -1,0 +1,48 @@
+{
+  "id": "roadmap",
+  "name": "Roadmap 2026",
+  "fullName": "Roadmap Estrategico 2026",
+  "description": "Planejamento estrategico e iniciativas 2026",
+  "color": "#ED1C24",
+  "icon": "calendar",
+  "emoji": "📅",
+  "active": true,
+  "status": "development",
+  "menu": [
+    {
+      "id": "visao-geral",
+      "label": "Visao Geral",
+      "icon": "📊",
+      "path": "index.html",
+      "active": true
+    },
+    {
+      "id": "iniciativas",
+      "label": "Iniciativas",
+      "icon": "📋",
+      "path": "pages/iniciativas.html",
+      "active": false
+    },
+    {
+      "id": "cronograma",
+      "label": "Cronograma",
+      "icon": "📆",
+      "path": "pages/cronograma.html",
+      "active": false
+    },
+    {
+      "id": "okrs",
+      "label": "OKRs",
+      "icon": "🎯",
+      "path": "pages/okrs.html",
+      "active": false
+    },
+    {
+      "id": "config",
+      "label": "Configuracoes",
+      "icon": "⚙️",
+      "path": "pages/config.html",
+      "active": false
+    }
+  ]
+}

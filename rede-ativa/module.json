@@ -1,0 +1,48 @@
+{
+  "id": "rede-ativa",
+  "name": "Rede Ativa",
+  "fullName": "Rede Ativa de Distribuicao",
+  "description": "Gestao da Rede de Distribuicao Belgo",
+  "color": "#00A799",
+  "icon": "globe",
+  "emoji": "🌐",
+  "active": true,
+  "status": "development",
+  "menu": [
+    {
+      "id": "dashboard",
+      "label": "Dashboard",
+      "icon": "📊",
+      "path": "index.html",
+      "active": true
+    },
+    {
+      "id": "pontos-venda",
+      "label": "Pontos de Venda",
+      "icon": "🏪",
+      "path": "pages/pontos-venda.html",
+      "active": false
+    },
+    {
+      "id": "metricas",
+      "label": "Metricas",
+      "icon": "📈",
+      "path": "pages/metricas.html",
+      "active": false
+    },
+    {
+      "id": "mapa",
+      "label": "Mapa",
+      "icon": "🗺️",
+      "path": "pages/mapa.html",
+      "active": false
+    },
+    {
+      "id": "config",
+      "label": "Configuracoes",
+      "icon": "⚙️",
+      "path": "pages/config.html",
+      "active": false
+    }
+  ]
+}

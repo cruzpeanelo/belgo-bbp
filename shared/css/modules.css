@@ -1,0 +1,407 @@
+/* =====================================================
+   BELGO BBP - SISTEMA DE MODULOS
+   CSS para seletor de modulos e landing page
+   ===================================================== */
+
+/* =====================================================
+   SELETOR DE MODULOS (Header/Sidebar)
+   ===================================================== */
+
+.module-selector {
+    position: relative;
+    margin-top: 15px;
+}
+
+.module-selector-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+}
+
+.module-selector-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.module-selector-icon {
+    font-size: 1.2rem;
+}
+
+.module-selector-name {
+    flex: 1;
+    text-align: left;
+    font-weight: 600;
+}
+
+.module-selector-arrow {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    transition: transform 0.2s ease;
+}
+
+.module-dropdown.open + .module-selector-btn .module-selector-arrow,
+.module-selector-btn:focus .module-selector-arrow {
+    transform: rotate(180deg);
+}
+
+.module-dropdown {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    z-index: 1000;
+}
+
+.module-dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.module-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    color: #1f2937;
+    text-decoration: none;
+    transition: background 0.15s ease;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.module-dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.module-dropdown-item:hover {
+    background: #f9fafb;
+}
+
+.module-dropdown-item.active {
+    background: #eff6ff;
+}
+
+.module-dropdown-item .module-icon {
+    font-size: 1.1rem;
+}
+
+.module-dropdown-item .module-name {
+    flex: 1;
+    font-weight: 500;
+}
+
+.module-dropdown-item .module-badge {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+/* =====================================================
+   LANDING PAGE - Selecao de Modulos
+   ===================================================== */
+
+.landing-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.landing-header {
+    background: linear-gradient(135deg, #003B4A 0%, #006277 100%);
+    color: white;
+    padding: 40px 30px;
+    text-align: center;
+}
+
+.landing-logo {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.landing-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.landing-main {
+    flex: 1;
+    padding: 40px 30px;
+    background: #f5f7fa;
+}
+
+.landing-title {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #003B4A;
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+.modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.module-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+}
+
+.module-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.module-card-header {
+    padding: 30px 25px;
+    color: white;
+    text-align: center;
+}
+
+.module-card-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.module-card-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.module-card-body {
+    padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.module-card-description {
+    color: #6b7280;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.module-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.module-card-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: #10b981;
+}
+
+.module-card-status.coming-soon {
+    color: #f59e0b;
+}
+
+.module-card-arrow {
+    font-size: 1.2rem;
+    color: #9ca3af;
+    transition: transform 0.2s ease;
+}
+
+.module-card:hover .module-card-arrow {
+    transform: translateX(5px);
+}
+
+/* Cores especificas por modulo */
+.module-card[data-module="gtm"] .module-card-header {
+    background: linear-gradient(135deg, #003B4A 0%, #006277 100%);
+}
+
+.module-card[data-module="rede-ativa"] .module-card-header {
+    background: linear-gradient(135deg, #00A799 0%, #00D4C5 100%);
+}
+
+.module-card[data-module="roadmap"] .module-card-header {
+    background: linear-gradient(135deg, #ED1C24 0%, #FF4D4D 100%);
+}
+
+/* Landing Footer */
+.landing-footer {
+    background: #003B4A;
+    color: white;
+    padding: 20px 30px;
+    text-align: center;
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+/* =====================================================
+   RESPONSIVO - Mobile
+   ===================================================== */
+
+@media (max-width: 768px) {
+    .landing-header {
+        padding: 30px 20px;
+    }
+
+    .landing-logo {
+        font-size: 1.6rem;
+    }
+
+    .landing-main {
+        padding: 30px 20px;
+    }
+
+    .landing-title {
+        font-size: 1.25rem;
+        margin-bottom: 25px;
+    }
+
+    .modules-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .module-card-header {
+        padding: 25px 20px;
+    }
+
+    .module-card-icon {
+        font-size: 2.5rem;
+    }
+
+    .module-card-name {
+        font-size: 1.3rem;
+    }
+
+    .module-card-body {
+        padding: 20px;
+    }
+
+    /* Dropdown de modulos mobile */
+    .module-dropdown {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 16px 16px 0 0;
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+
+    .module-dropdown-item {
+        padding: 15px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .landing-header {
+        padding: 25px 15px;
+    }
+
+    .landing-logo {
+        font-size: 1.4rem;
+    }
+
+    .landing-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .modules-grid {
+        gap: 15px;
+    }
+
+    .module-card-header {
+        padding: 20px 15px;
+    }
+
+    .module-card-body {
+        padding: 15px;
+    }
+}
+
+/* =====================================================
+   PLACEHOLDER - Modulo em construcao
+   ===================================================== */
+
+.placeholder-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.placeholder-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+.placeholder-title {
+    font-size: 1.8rem;
+    color: #003B4A;
+    margin-bottom: 10px;
+}
+
+.placeholder-message {
+    color: #6b7280;
+    font-size: 1.1rem;
+    max-width: 500px;
+    line-height: 1.6;
+}
+
+.placeholder-back-btn {
+    margin-top: 30px;
+    padding: 12px 24px;
+    background: #003B4A;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s ease;
+}
+
+.placeholder-back-btn:hover {
+    background: #004d5e;
+}

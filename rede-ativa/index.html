@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rede Ativa - Belgo BBP</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../shared/css/modules.css">
+    <link rel="stylesheet" href="css/rede-ativa.css">
+</head>
+<body>
+    <!-- Mobile Header -->
+    <header class="mobile-header" style="background: linear-gradient(135deg, #00A799 0%, #00D4C5 100%);">
+        <span class="mobile-header-logo">REDE ATIVA</span>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+            ☰
+        </button>
+    </header>
+
+    <!-- Overlay para fechar menu -->
+    <div class="sidebar-overlay" onclick="toggleMobileMenu()"></div>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar rede-ativa-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">BELGO</div>
+                <div class="sidebar-subtitle">Rede Ativa</div>
+                <!-- Module Selector -->
+                <div class="module-selector">
+                    <button class="module-selector-btn" onclick="toggleModuleDropdown()">
+                        <span class="module-selector-icon">🌐</span>
+                        <span class="module-selector-name">Rede Ativa</span>
+                        <span class="module-selector-arrow">▼</span>
+                    </button>
+                    <div class="module-dropdown" id="moduleDropdown">
+                        <a href="../landing.html" class="module-dropdown-item">
+                            <span class="module-icon">🏠</span>
+                            <span class="module-name">Home</span>
+                        </a>
+                        <a href="../index.html" class="module-dropdown-item">
+                            <span class="module-icon">🚀</span>
+                            <span class="module-name">GTM</span>
+                            <span class="module-badge" style="background: #003B4A"></span>
+                        </a>
+                        <a href="index.html" class="module-dropdown-item active">
+                            <span class="module-icon">🌐</span>
+                            <span class="module-name">Rede Ativa</span>
+                            <span class="module-badge" style="background: #00A799"></span>
+                        </a>
+                        <a href="../roadmap/index.html" class="module-dropdown-item">
+                            <span class="module-icon">📅</span>
+                            <span class="module-name">Roadmap 2026</span>
+                            <span class="module-badge" style="background: #ED1C24"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <nav class="sidebar-nav" role="navigation" aria-label="Menu principal">
+                <a href="index.html" class="nav-item active" aria-label="Dashboard">
+                    <span class="nav-icon" aria-hidden="true">📊</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="#" class="nav-item disabled" aria-label="Pontos de Venda">
+                    <span class="nav-icon" aria-hidden="true">🏪</span>
+                    <span class="nav-text">Pontos de Venda</span>
+                </a>
+                <a href="#" class="nav-item disabled" aria-label="Metricas">
+                    <span class="nav-icon" aria-hidden="true">📈</span>
+                    <span class="nav-text">Metricas</span>
+                </a>
+                <a href="#" class="nav-item disabled" aria-label="Mapa">
+                    <span class="nav-icon" aria-hidden="true">🗺️</span>
+                    <span class="nav-text">Mapa</span>
+                </a>
+                <a href="#" class="nav-item disabled" aria-label="Configuracoes">
+                    <span class="nav-icon" aria-hidden="true">⚙️</span>
+                    <span class="nav-text">Configuracoes</span>
+                </a>
+            </nav>
+            <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.8rem; opacity: 0.7;">
+                Modulo em desenvolvimento
+            </div>
+        </aside>
+
+        <!-- Conteudo Principal -->
+        <main class="main-content">
+            <div class="page-header">
+                <div class="page-header-text">
+                    <h1 class="page-title" style="color: #00A799;">Rede Ativa</h1>
+                    <p class="page-subtitle">Gestao da Rede de Distribuicao</p>
+                </div>
+            </div>
+
+            <!-- Placeholder Content -->
+            <div class="placeholder-page">
+                <div class="placeholder-icon">🌐</div>
+                <h2 class="placeholder-title">Modulo em Construcao</h2>
+                <p class="placeholder-message">
+                    O modulo Rede Ativa esta em desenvolvimento.<br>
+                    Em breve voce podera gerenciar pontos de venda, visualizar metricas
+                    e acompanhar a performance da rede de distribuicao.
+                </p>
+                <a href="../landing.html" class="placeholder-back-btn">
+                    ← Voltar para Home
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script>
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('open');
+        }
+
+        // Toggle module dropdown
+        function toggleModuleDropdown() {
+            const dropdown = document.getElementById('moduleDropdown');
+            dropdown.classList.toggle('open');
+        }
+
+        // Close dropdown on outside click
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.module-selector')) {
+                const dropdown = document.getElementById('moduleDropdown');
+                if (dropdown) dropdown.classList.remove('open');
+            }
+        });
+
+        // Save current module
+        localStorage.setItem('belgo_last_module', 'rede-ativa');
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+/* =====================================================
+   REDE ATIVA - ESTILOS ESPECIFICOS
+   Cor principal: #00A799 (Verde Belgo)
+   ===================================================== */
+
+:root {
+    --rede-ativa-primary: #00A799;
+    --rede-ativa-secondary: #00D4C5;
+    --rede-ativa-gradient: linear-gradient(135deg, #00A799 0%, #00D4C5 100%);
+}
+
+/* Sidebar com cor do modulo */
+.rede-ativa-sidebar {
+    background: var(--rede-ativa-gradient);
+}
+
+/* Titulos */
+.rede-ativa-title {
+    color: var(--rede-ativa-primary);
+}
+
+/* Nav item ativo */
+.rede-ativa-sidebar .nav-item.active {
+    border-left-color: #FDB913;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Nav item desabilitado */
+.nav-item.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+/* Botoes */
+.btn-rede-ativa {
+    background: var(--rede-ativa-primary);
+    color: white;
+}
+
+.btn-rede-ativa:hover {
+    background: #008a7d;
+}
+
+/* Cards */
+.card-rede-ativa {
+    border-top: 4px solid var(--rede-ativa-primary);
+}
+
+/* Mobile header */
+@media (max-width: 768px) {
+    .mobile-header {
+        background: var(--rede-ativa-gradient) !important;
+    }
+}

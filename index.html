@@ -6,6 +6,7 @@
     <title>Cockpit GTM - Belgo Arames</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="shared/css/modules.css">
 </head>
 <body>
     <!-- Mobile Header -->
@@ -25,6 +26,35 @@
             <div class="sidebar-header">
                 <div class="sidebar-logo">BELGO</div>
                 <div class="sidebar-subtitle">Cockpit GTM</div>
+                <!-- Module Selector -->
+                <div class="module-selector">
+                    <button class="module-selector-btn" onclick="toggleModuleDropdown()">
+                        <span class="module-selector-icon">🚀</span>
+                        <span class="module-selector-name">GTM</span>
+                        <span class="module-selector-arrow">▼</span>
+                    </button>
+                    <div class="module-dropdown" id="moduleDropdown">
+                        <a href="landing.html" class="module-dropdown-item">
+                            <span class="module-icon">🏠</span>
+                            <span class="module-name">Home</span>
+                        </a>
+                        <a href="index.html" class="module-dropdown-item active">
+                            <span class="module-icon">🚀</span>
+                            <span class="module-name">GTM</span>
+                            <span class="module-badge" style="background: #003B4A"></span>
+                        </a>
+                        <a href="rede-ativa/index.html" class="module-dropdown-item">
+                            <span class="module-icon">🌐</span>
+                            <span class="module-name">Rede Ativa</span>
+                            <span class="module-badge" style="background: #00A799"></span>
+                        </a>
+                        <a href="roadmap/index.html" class="module-dropdown-item">
+                            <span class="module-icon">📅</span>
+                            <span class="module-name">Roadmap 2026</span>
+                            <span class="module-badge" style="background: #ED1C24"></span>
+                        </a>
+                    </div>
+                </div>
             </div>
             <nav class="sidebar-nav" role="navigation" aria-label="Menu principal">
                 <a href="index.html" class="nav-item active" aria-label="Dashboard" aria-current="page">
@@ -134,5 +164,31 @@
     <script src="js/utils.js"></script>
     <script src="js/app.js"></script>
     <script src="js/dashboard.js"></script>
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            if (sidebar) sidebar.classList.toggle('open');
+            if (overlay) overlay.classList.toggle('open');
+        }
+
+        // Module selector toggle
+        function toggleModuleDropdown() {
+            const dropdown = document.getElementById('moduleDropdown');
+            if (dropdown) dropdown.classList.toggle('open');
+        }
+
+        // Close dropdown on outside click
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.module-selector')) {
+                const dropdown = document.getElementById('moduleDropdown');
+                if (dropdown) dropdown.classList.remove('open');
+            }
+        });
+
+        // Save current module
+        localStorage.setItem('belgo_last_module', 'gtm');
+    </script>
 </body>
 </html>
