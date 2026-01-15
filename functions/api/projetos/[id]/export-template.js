@@ -3,67 +3,46 @@
 // POST /api/projetos/:id/export-template
 // =====================================================
 
-import { verificarAuth } from '../../../lib/auth.js';
-import { verificarPermissao } from '../../../lib/permissions.js';
+import { jsonResponse, errorResponse } from '../../../lib/auth.js';
+import { isProjetoAdmin } from '../../../lib/permissions.js';
 
 export async function onRequestPost(context) {
-    const { request, env, params } = context;
-    const projetoId = parseInt(params.id);
+    const projetoId = parseInt(context.params.id);
+    const usuario = context.data.usuario;
 
     try {
-        // Verificar autenticacao
-        const usuario = await verificarAuth(request, env);
-        if (!usuario) {
-            return new Response(JSON.stringify({ success: false, error: 'Nao autorizado' }), {
-                status: 401,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
-
         // Verificar permissao (apenas admin pode exportar templates)
-        const temPermissao = await verificarPermissao(env.DB, usuario.id, projetoId, 'admin');
-        if (!temPermissao) {
-            return new Response(JSON.stringify({ success: false, error: 'Sem permissao para exportar template' }), {
-                status: 403,
-                headers: { 'Content-Type': 'application/json' }
-            });
+        const podeExportar = usuario.isAdmin || await isProjetoAdmin(context.env.DB, usuario.id, projetoId);
+        if (!podeExportar) {
+            return errorResponse('Sem permissao para exportar template', 403);
         }
 
         // Obter dados do request
-        const body = await request.json().catch(() => ({}));
+        const body = await context.request.json().catch(() => ({}));
         const { codigo, nome, descricao, publico = 0 } = body;
 
         if (!codigo || !nome) {
-            return new Response(JSON.stringify({ success: false, error: 'Codigo e nome sao obrigatorios' }), {
-                status: 400,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            return errorResponse('Codigo e nome sao obrigatorios', 400);
         }
 
         // Validar codigo (apenas letras minusculas, numeros e hifens)
         if (!/^[a-z0-9-]+$/.test(codigo)) {
-            return new Response(JSON.stringify({ success: false, error: 'Codigo deve conter apenas letras minusculas, numeros e hifens' }), {
-                status: 400,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            return errorResponse('Codigo deve conter apenas letras minusculas, numeros e hifens', 400);
         }
 
         // Buscar projeto com todos os dados
-        const projeto = await env.DB.prepare(`
+        const projeto = await context.env.DB.prepare(`
             SELECT id, codigo, nome, descricao, icone, cor
             FROM projetos
             WHERE id = ? AND ativo = 1
         `).bind(projetoId).first();
 
         if (!projeto) {
-            return new Response(JSON.stringify({ success: false, error: 'Projeto nao encontrado' }), {
-                status: 404,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            return errorResponse('Projeto nao encontrado', 404);
         }
 
         // Buscar entidades do projeto
-        const entidadesResult = await env.DB.prepare(`
+        const entidadesResult = await context.env.DB.prepare(`
             SELECT id, codigo, nome, nome_plural, descricao, icone, tipo,
                    permite_criar, permite_editar, permite_excluir,
                    permite_importar, permite_exportar, config_funcionalidades
@@ -77,7 +56,7 @@ export async function onRequestPost(context) {
         // Para cada entidade, buscar campos e opcoes
         for (const entidade of entidadesResult.results || []) {
             // Buscar campos da entidade
-            const camposResult = await env.DB.prepare(`
+            const camposResult = await context.env.DB.prepare(`
                 SELECT id, codigo, nome, tipo, obrigatorio, ordem, config,
                        placeholder, ajuda, valor_padrao, visivel_listagem,
                        visivel_formulario, visivel_detalhe
@@ -93,7 +72,7 @@ export async function onRequestPost(context) {
                 let opcoes = [];
 
                 if (campo.tipo === 'select' || campo.tipo === 'multiselect') {
-                    const opcoesResult = await env.DB.prepare(`
+                    const opcoesResult = await context.env.DB.prepare(`
                         SELECT valor, label, cor, icone, ordem
                         FROM projeto_entidade_opcoes
                         WHERE campo_id = ?
@@ -144,7 +123,7 @@ export async function onRequestPost(context) {
         }
 
         // Buscar menus do projeto
-        const menusResult = await env.DB.prepare(`
+        const menusResult = await context.env.DB.prepare(`
             SELECT m.codigo, m.nome, m.url, m.icone, m.ordem,
                    m.pagina_dinamica, m.entidade_id, m.tipo_conteudo,
                    e.codigo as entidade_codigo
@@ -177,7 +156,7 @@ export async function onRequestPost(context) {
             entidades,
             menus,
             dashboard: {
-                widgets: []  // TODO: implementar quando dashboard dinamico estiver pronto
+                widgets: []
             },
             integracao: {
                 teams_habilitado: true,
@@ -186,7 +165,7 @@ export async function onRequestPost(context) {
         };
 
         // Verificar se ja existe template com esse codigo
-        const templateExistente = await env.DB.prepare(`
+        const templateExistente = await context.env.DB.prepare(`
             SELECT id FROM projeto_templates WHERE codigo = ?
         `).bind(codigo).first();
 
@@ -194,7 +173,7 @@ export async function onRequestPost(context) {
 
         if (templateExistente) {
             // Atualizar template existente
-            await env.DB.prepare(`
+            await context.env.DB.prepare(`
                 UPDATE projeto_templates
                 SET nome = ?, descricao = ?, icone = ?, cor = ?,
                     config_completo = ?, projeto_origem_id = ?,
@@ -216,7 +195,7 @@ export async function onRequestPost(context) {
             templateId = templateExistente.id;
         } else {
             // Criar novo template
-            const result = await env.DB.prepare(`
+            const result = await context.env.DB.prepare(`
                 INSERT INTO projeto_templates (
                     codigo, nome, descricao, icone, cor,
                     config_completo, projeto_origem_id, versao,
@@ -238,7 +217,7 @@ export async function onRequestPost(context) {
             templateId = result.meta.last_row_id;
         }
 
-        return new Response(JSON.stringify({
+        return jsonResponse({
             success: true,
             message: templateExistente ? 'Template atualizado com sucesso!' : 'Template criado com sucesso!',
             template: {
@@ -249,19 +228,22 @@ export async function onRequestPost(context) {
                 menus_count: menus.length,
                 campos_count: entidades.reduce((sum, e) => sum + e.campos.length, 0)
             }
-        }), {
-            headers: { 'Content-Type': 'application/json' }
         });
 
     } catch (error) {
         console.error('Erro ao exportar template:', error);
-        return new Response(JSON.stringify({
-            success: false,
-            error: 'Erro interno ao exportar template',
-            details: error.message
-        }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' }
-        });
+        return errorResponse('Erro interno: ' + error.message, 500);
     }
+}
+
+// OPTIONS - CORS preflight
+export async function onRequestOptions() {
+    return new Response(null, {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+            'Access-Control-Max-Age': '86400'
+        }
+    });
 }

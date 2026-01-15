@@ -3,26 +3,17 @@
 // GET/POST /api/projetos/:id/entidades/:entidadeId/acoes
 // =====================================================
 
-import { verificarAuth } from '../../../../../lib/auth.js';
-import { verificarPermissao } from '../../../../../lib/permissions.js';
+import { jsonResponse, errorResponse } from '../../../../../lib/auth.js';
+import { isProjetoAdmin } from '../../../../../lib/permissions.js';
 
 // GET - Listar acoes da entidade
 export async function onRequestGet(context) {
-    const { request, env, params } = context;
-    const projetoId = parseInt(params.id);
-    const entidadeId = parseInt(params.entidadeId);
+    const entidadeId = parseInt(context.params.entidadeId);
+    const usuario = context.data.usuario;
 
     try {
-        const usuario = await verificarAuth(request, env);
-        if (!usuario) {
-            return new Response(JSON.stringify({ success: false, error: 'Nao autorizado' }), {
-                status: 401,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
-
         // Buscar acoes da entidade
-        const result = await env.DB.prepare(`
+        const result = await context.env.DB.prepare(`
             SELECT id, codigo, nome, icone, tipo, config, posicao, condicao,
                    permissao_minima, ordem, ativo
             FROM projeto_entidade_acoes
@@ -36,62 +27,39 @@ export async function onRequestGet(context) {
             condicao: a.condicao ? JSON.parse(a.condicao) : null
         }));
 
-        return new Response(JSON.stringify({
+        return jsonResponse({
             success: true,
             acoes
-        }), {
-            headers: { 'Content-Type': 'application/json' }
         });
 
     } catch (error) {
         console.error('Erro ao listar acoes:', error);
-        return new Response(JSON.stringify({
-            success: false,
-            error: 'Erro interno',
-            details: error.message
-        }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' }
-        });
+        return errorResponse('Erro interno: ' + error.message, 500);
     }
 }
 
 // POST - Criar nova acao
 export async function onRequestPost(context) {
-    const { request, env, params } = context;
-    const projetoId = parseInt(params.id);
-    const entidadeId = parseInt(params.entidadeId);
+    const projetoId = parseInt(context.params.id);
+    const entidadeId = parseInt(context.params.entidadeId);
+    const usuario = context.data.usuario;
 
     try {
-        const usuario = await verificarAuth(request, env);
-        if (!usuario) {
-            return new Response(JSON.stringify({ success: false, error: 'Nao autorizado' }), {
-                status: 401,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
-
         // Verificar permissao (apenas admin pode criar acoes)
-        const temPermissao = await verificarPermissao(env.DB, usuario.id, projetoId, 'admin');
-        if (!temPermissao && !usuario.admin) {
-            return new Response(JSON.stringify({ success: false, error: 'Sem permissao' }), {
-                status: 403,
-                headers: { 'Content-Type': 'application/json' }
-            });
+        const podeEditar = usuario.isAdmin || await isProjetoAdmin(context.env.DB, usuario.id, projetoId);
+        if (!podeEditar) {
+            return errorResponse('Sem permissao', 403);
         }
 
-        const body = await request.json();
+        const body = await context.request.json();
         const { codigo, nome, icone, tipo, config, posicao, condicao, permissao_minima, ordem } = body;
 
         if (!codigo || !nome || !tipo) {
-            return new Response(JSON.stringify({ success: false, error: 'codigo, nome e tipo sao obrigatorios' }), {
-                status: 400,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            return errorResponse('codigo, nome e tipo sao obrigatorios', 400);
         }
 
         // Inserir acao
-        const result = await env.DB.prepare(`
+        const result = await context.env.DB.prepare(`
             INSERT INTO projeto_entidade_acoes (
                 entidade_id, codigo, nome, icone, tipo, config, posicao,
                 condicao, permissao_minima, ordem
@@ -109,7 +77,7 @@ export async function onRequestPost(context) {
             ordem || 0
         ).run();
 
-        return new Response(JSON.stringify({
+        return jsonResponse({
             success: true,
             message: 'Acao criada com sucesso',
             acao: {
@@ -117,57 +85,34 @@ export async function onRequestPost(context) {
                 codigo,
                 nome
             }
-        }), {
-            headers: { 'Content-Type': 'application/json' }
         });
 
     } catch (error) {
         console.error('Erro ao criar acao:', error);
-        return new Response(JSON.stringify({
-            success: false,
-            error: 'Erro interno',
-            details: error.message
-        }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' }
-        });
+        return errorResponse('Erro interno: ' + error.message, 500);
     }
 }
 
 // PUT - Atualizar acao
 export async function onRequestPut(context) {
-    const { request, env, params } = context;
-    const projetoId = parseInt(params.id);
-    const entidadeId = parseInt(params.entidadeId);
+    const projetoId = parseInt(context.params.id);
+    const entidadeId = parseInt(context.params.entidadeId);
+    const usuario = context.data.usuario;
 
     try {
-        const usuario = await verificarAuth(request, env);
-        if (!usuario) {
-            return new Response(JSON.stringify({ success: false, error: 'Nao autorizado' }), {
-                status: 401,
-                headers: { 'Content-Type': 'application/json' }
-            });
+        const podeEditar = usuario.isAdmin || await isProjetoAdmin(context.env.DB, usuario.id, projetoId);
+        if (!podeEditar) {
+            return errorResponse('Sem permissao', 403);
         }
 
-        const temPermissao = await verificarPermissao(env.DB, usuario.id, projetoId, 'admin');
-        if (!temPermissao && !usuario.admin) {
-            return new Response(JSON.stringify({ success: false, error: 'Sem permissao' }), {
-                status: 403,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
-
-        const body = await request.json();
+        const body = await context.request.json();
         const { id, codigo, nome, icone, tipo, config, posicao, condicao, permissao_minima, ordem, ativo } = body;
 
         if (!id) {
-            return new Response(JSON.stringify({ success: false, error: 'id eh obrigatorio' }), {
-                status: 400,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            return errorResponse('id eh obrigatorio', 400);
         }
 
-        await env.DB.prepare(`
+        await context.env.DB.prepare(`
             UPDATE projeto_entidade_acoes SET
                 codigo = COALESCE(?, codigo),
                 nome = COALESCE(?, nome),
@@ -195,80 +140,60 @@ export async function onRequestPut(context) {
             entidadeId
         ).run();
 
-        return new Response(JSON.stringify({
+        return jsonResponse({
             success: true,
             message: 'Acao atualizada'
-        }), {
-            headers: { 'Content-Type': 'application/json' }
         });
 
     } catch (error) {
         console.error('Erro ao atualizar acao:', error);
-        return new Response(JSON.stringify({
-            success: false,
-            error: 'Erro interno',
-            details: error.message
-        }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' }
-        });
+        return errorResponse('Erro interno: ' + error.message, 500);
     }
 }
 
 // DELETE - Excluir acao (soft delete)
 export async function onRequestDelete(context) {
-    const { request, env, params } = context;
-    const projetoId = parseInt(params.id);
-    const entidadeId = parseInt(params.entidadeId);
+    const projetoId = parseInt(context.params.id);
+    const entidadeId = parseInt(context.params.entidadeId);
+    const usuario = context.data.usuario;
 
     try {
-        const usuario = await verificarAuth(request, env);
-        if (!usuario) {
-            return new Response(JSON.stringify({ success: false, error: 'Nao autorizado' }), {
-                status: 401,
-                headers: { 'Content-Type': 'application/json' }
-            });
+        const podeEditar = usuario.isAdmin || await isProjetoAdmin(context.env.DB, usuario.id, projetoId);
+        if (!podeEditar) {
+            return errorResponse('Sem permissao', 403);
         }
 
-        const temPermissao = await verificarPermissao(env.DB, usuario.id, projetoId, 'admin');
-        if (!temPermissao && !usuario.admin) {
-            return new Response(JSON.stringify({ success: false, error: 'Sem permissao' }), {
-                status: 403,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
-
-        const url = new URL(request.url);
+        const url = new URL(context.request.url);
         const acaoId = url.searchParams.get('acaoId');
 
         if (!acaoId) {
-            return new Response(JSON.stringify({ success: false, error: 'acaoId eh obrigatorio' }), {
-                status: 400,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            return errorResponse('acaoId eh obrigatorio', 400);
         }
 
-        await env.DB.prepare(`
+        await context.env.DB.prepare(`
             UPDATE projeto_entidade_acoes SET ativo = 0
             WHERE id = ? AND entidade_id = ?
         `).bind(acaoId, entidadeId).run();
 
-        return new Response(JSON.stringify({
+        return jsonResponse({
             success: true,
             message: 'Acao excluida'
-        }), {
-            headers: { 'Content-Type': 'application/json' }
         });
 
     } catch (error) {
         console.error('Erro ao excluir acao:', error);
-        return new Response(JSON.stringify({
-            success: false,
-            error: 'Erro interno',
-            details: error.message
-        }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' }
-        });
+        return errorResponse('Erro interno: ' + error.message, 500);
     }
+}
+
+// OPTIONS - CORS preflight
+export async function onRequestOptions() {
+    return new Response(null, {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+            'Access-Control-Max-Age': '86400'
+        }
+    });
 }

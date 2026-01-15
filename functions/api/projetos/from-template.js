@@ -3,31 +3,20 @@
 // POST /api/projetos/from-template
 // =====================================================
 
-import { verificarAuth } from '../../lib/auth.js';
+import { jsonResponse, errorResponse } from '../../lib/auth.js';
+import { registrarAuditoria, getClientIP, ACOES } from '../../lib/audit.js';
 
 export async function onRequestPost(context) {
-    const { request, env } = context;
+    const usuario = context.data.usuario;
 
     try {
-        // Verificar autenticacao
-        const usuario = await verificarAuth(request, env);
-        if (!usuario) {
-            return new Response(JSON.stringify({ success: false, error: 'Nao autorizado' }), {
-                status: 401,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
-
         // Verificar se usuario eh admin global
-        if (!usuario.admin) {
-            return new Response(JSON.stringify({ success: false, error: 'Apenas administradores podem criar projetos' }), {
-                status: 403,
-                headers: { 'Content-Type': 'application/json' }
-            });
+        if (!usuario.isAdmin) {
+            return errorResponse('Apenas administradores podem criar projetos', 403);
         }
 
         // Obter dados do request
-        const body = await request.json();
+        const body = await context.request.json();
         const {
             template_id,
             codigo,
@@ -40,51 +29,36 @@ export async function onRequestPost(context) {
 
         // Validacoes
         if (!template_id) {
-            return new Response(JSON.stringify({ success: false, error: 'template_id eh obrigatorio' }), {
-                status: 400,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            return errorResponse('template_id eh obrigatorio', 400);
         }
 
         if (!codigo || !nome) {
-            return new Response(JSON.stringify({ success: false, error: 'codigo e nome sao obrigatorios' }), {
-                status: 400,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            return errorResponse('codigo e nome sao obrigatorios', 400);
         }
 
         // Validar codigo (apenas letras minusculas, numeros e hifens)
         if (!/^[a-z0-9-]+$/.test(codigo)) {
-            return new Response(JSON.stringify({ success: false, error: 'Codigo deve conter apenas letras minusculas, numeros e hifens' }), {
-                status: 400,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            return errorResponse('Codigo deve conter apenas letras minusculas, numeros e hifens', 400);
         }
 
         // Verificar se codigo ja existe
-        const projetoExistente = await env.DB.prepare(`
+        const projetoExistente = await context.env.DB.prepare(`
             SELECT id FROM projetos WHERE codigo = ?
         `).bind(codigo).first();
 
         if (projetoExistente) {
-            return new Response(JSON.stringify({ success: false, error: 'Ja existe um projeto com este codigo' }), {
-                status: 400,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            return errorResponse('Ja existe um projeto com este codigo', 400);
         }
 
         // Buscar template
-        const template = await env.DB.prepare(`
+        const template = await context.env.DB.prepare(`
             SELECT id, codigo, nome, icone, cor, config_completo
             FROM projeto_templates
             WHERE id = ? AND ativo = 1
         `).bind(template_id).first();
 
         if (!template) {
-            return new Response(JSON.stringify({ success: false, error: 'Template nao encontrado' }), {
-                status: 404,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            return errorResponse('Template nao encontrado', 404);
         }
 
         // Parse do config_completo
@@ -96,7 +70,7 @@ export async function onRequestPost(context) {
         }
 
         // Criar projeto
-        const projetoResult = await env.DB.prepare(`
+        const projetoResult = await context.env.DB.prepare(`
             INSERT INTO projetos (codigo, nome, descricao, icone, cor, template_origem_id, criado_por, ativo)
             VALUES (?, ?, ?, ?, ?, ?, ?, 1)
         `).bind(
@@ -116,7 +90,7 @@ export async function onRequestPost(context) {
 
         // Criar entidades do template
         for (const entidade of config.entidades || []) {
-            const entidadeResult = await env.DB.prepare(`
+            const entidadeResult = await context.env.DB.prepare(`
                 INSERT INTO projeto_entidades (
                     projeto_id, codigo, nome, nome_plural, descricao, icone, tipo,
                     permite_criar, permite_editar, permite_excluir,
@@ -144,7 +118,7 @@ export async function onRequestPost(context) {
 
             // Criar campos da entidade
             for (const campo of entidade.campos || []) {
-                const campoResult = await env.DB.prepare(`
+                const campoResult = await context.env.DB.prepare(`
                     INSERT INTO projeto_entidade_campos (
                         entidade_id, codigo, nome, tipo, obrigatorio, ordem, config,
                         placeholder, ajuda, valor_padrao,
@@ -170,7 +144,7 @@ export async function onRequestPost(context) {
 
                 // Criar opcoes do campo (se houver)
                 for (const opcao of campo.opcoes || []) {
-                    await env.DB.prepare(`
+                    await context.env.DB.prepare(`
                         INSERT INTO projeto_entidade_opcoes (campo_id, valor, label, cor, icone, ordem)
                         VALUES (?, ?, ?, ?, ?, ?)
                     `).bind(
@@ -199,7 +173,7 @@ export async function onRequestPost(context) {
                 url = `pages/entidade.html?e=${menu.entidade_codigo}`;
             }
 
-            await env.DB.prepare(`
+            await context.env.DB.prepare(`
                 INSERT INTO projeto_menus (
                     projeto_id, codigo, nome, url, icone, ordem,
                     pagina_dinamica, entidade_id, tipo_conteudo, ativo
@@ -218,12 +192,12 @@ export async function onRequestPost(context) {
         }
 
         // Adicionar usuario criador como admin do projeto
-        const papelAdmin = await env.DB.prepare(`
+        const papelAdmin = await context.env.DB.prepare(`
             SELECT id FROM papeis WHERE codigo = 'admin'
         `).first();
 
         if (papelAdmin) {
-            await env.DB.prepare(`
+            await context.env.DB.prepare(`
                 INSERT INTO usuario_projeto_papel (usuario_id, projeto_id, papel_id, ativo)
                 VALUES (?, ?, ?, 1)
             `).bind(usuario.id, projetoId, papelAdmin.id).run();
@@ -231,20 +205,29 @@ export async function onRequestPost(context) {
 
         // Se responsavel_id for diferente do criador, adiciona tambem
         if (responsavel_id && responsavel_id !== usuario.id) {
-            const papelGestor = await env.DB.prepare(`
+            const papelGestor = await context.env.DB.prepare(`
                 SELECT id FROM papeis WHERE codigo = 'gestor'
             `).first();
 
             if (papelGestor) {
-                await env.DB.prepare(`
+                await context.env.DB.prepare(`
                     INSERT OR IGNORE INTO usuario_projeto_papel (usuario_id, projeto_id, papel_id, ativo)
                     VALUES (?, ?, ?, 1)
                 `).bind(responsavel_id, projetoId, papelGestor.id).run();
             }
         }
 
-        // Retornar sucesso
-        return new Response(JSON.stringify({
+        // Registrar auditoria
+        await registrarAuditoria(context.env.DB, {
+            usuarioId: usuario.id,
+            acao: ACOES.CRIAR,
+            entidade: 'projeto',
+            entidadeId: projetoId,
+            detalhes: { codigo, nome, templateId: template_id, templateNome: template.nome },
+            ip: getClientIP(context.request)
+        });
+
+        return jsonResponse({
             success: true,
             message: 'Projeto criado com sucesso a partir do template!',
             projeto: {
@@ -255,19 +238,22 @@ export async function onRequestPost(context) {
                 entidades_criadas: Object.keys(entidadeMap).length,
                 menus_criados: (config.menus || []).length
             }
-        }), {
-            headers: { 'Content-Type': 'application/json' }
         });
 
     } catch (error) {
         console.error('Erro ao criar projeto de template:', error);
-        return new Response(JSON.stringify({
-            success: false,
-            error: 'Erro interno ao criar projeto',
-            details: error.message
-        }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' }
-        });
+        return errorResponse('Erro interno: ' + error.message, 500);
     }
+}
+
+// OPTIONS - CORS preflight
+export async function onRequestOptions() {
+    return new Response(null, {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+            'Access-Control-Max-Age': '86400'
+        }
+    });
 }

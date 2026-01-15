@@ -3,25 +3,16 @@
 // GET /api/templates
 // =====================================================
 
-import { verificarAuth } from '../lib/auth.js';
+import { jsonResponse, errorResponse } from '../lib/auth.js';
 
 export async function onRequestGet(context) {
-    const { request, env } = context;
+    const usuario = context.data.usuario;
 
     try {
-        // Verificar autenticacao
-        const usuario = await verificarAuth(request, env);
-        if (!usuario) {
-            return new Response(JSON.stringify({ success: false, error: 'Nao autorizado' }), {
-                status: 401,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
-
         // Buscar templates ativos
         // Se usuario eh admin, mostra todos
         // Senao, mostra apenas publicos
-        const query = usuario.admin
+        const query = usuario.isAdmin
             ? `SELECT id, codigo, nome, descricao, icone, cor, versao, publico,
                       projeto_origem_id, created_at
                FROM projeto_templates
@@ -33,7 +24,7 @@ export async function onRequestGet(context) {
                WHERE ativo = 1 AND publico = 1
                ORDER BY nome`;
 
-        const result = await env.DB.prepare(query).all();
+        const result = await context.env.DB.prepare(query).all();
         const templates = result.results || [];
 
         // Para cada template, contar entidades e menus do config_completo
@@ -41,7 +32,7 @@ export async function onRequestGet(context) {
             let stats = { entidades: 0, menus: 0, campos: 0 };
 
             // Tentar ler do config_completo
-            const templateCompleto = await env.DB.prepare(`
+            const templateCompleto = await context.env.DB.prepare(`
                 SELECT config_completo FROM projeto_templates WHERE id = ?
             `).bind(t.id).first();
 
@@ -71,88 +62,25 @@ export async function onRequestGet(context) {
             };
         }));
 
-        return new Response(JSON.stringify({
+        return jsonResponse({
             success: true,
             templates: templatesComStats
-        }), {
-            headers: { 'Content-Type': 'application/json' }
         });
 
     } catch (error) {
         console.error('Erro ao listar templates:', error);
-        return new Response(JSON.stringify({
-            success: false,
-            error: 'Erro interno ao listar templates',
-            details: error.message
-        }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' }
-        });
+        return errorResponse('Erro interno: ' + error.message, 500);
     }
 }
 
-// GET /api/templates/:id - Detalhes de um template
-export async function onRequestGetById(context) {
-    const { request, env, params } = context;
-    const templateId = parseInt(params.id);
-
-    try {
-        const usuario = await verificarAuth(request, env);
-        if (!usuario) {
-            return new Response(JSON.stringify({ success: false, error: 'Nao autorizado' }), {
-                status: 401,
-                headers: { 'Content-Type': 'application/json' }
-            });
+// OPTIONS - CORS preflight
+export async function onRequestOptions() {
+    return new Response(null, {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+            'Access-Control-Max-Age': '86400'
         }
-
-        const template = await env.DB.prepare(`
-            SELECT * FROM projeto_templates WHERE id = ? AND ativo = 1
-        `).bind(templateId).first();
-
-        if (!template) {
-            return new Response(JSON.stringify({ success: false, error: 'Template nao encontrado' }), {
-                status: 404,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
-
-        // Verificar acesso
-        if (!usuario.admin && !template.publico) {
-            return new Response(JSON.stringify({ success: false, error: 'Sem permissao para acessar este template' }), {
-                status: 403,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
-
-        // Parse do config_completo
-        let config = null;
-        if (template.config_completo) {
-            try {
-                config = JSON.parse(template.config_completo);
-            } catch (e) {
-                config = null;
-            }
-        }
-
-        return new Response(JSON.stringify({
-            success: true,
-            template: {
-                ...template,
-                config_completo: config
-            }
-        }), {
-            headers: { 'Content-Type': 'application/json' }
-        });
-
-    } catch (error) {
-        console.error('Erro ao buscar template:', error);
-        return new Response(JSON.stringify({
-            success: false,
-            error: 'Erro interno',
-            details: error.message
-        }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' }
-        });
-    }
+    });
 }

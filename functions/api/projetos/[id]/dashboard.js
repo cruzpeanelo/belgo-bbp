@@ -3,25 +3,17 @@
 // GET/PUT /api/projetos/:id/dashboard
 // =====================================================
 
-import { verificarAuth } from '../../../lib/auth.js';
-import { verificarPermissao } from '../../../lib/permissions.js';
+import { jsonResponse, errorResponse } from '../../../lib/auth.js';
+import { isProjetoAdmin } from '../../../lib/permissions.js';
 
 // GET - Obter configuracao e widgets do dashboard
 export async function onRequestGet(context) {
-    const { request, env, params } = context;
-    const projetoId = parseInt(params.id);
+    const projetoId = parseInt(context.params.id);
+    const usuario = context.data.usuario;
 
     try {
-        const usuario = await verificarAuth(request, env);
-        if (!usuario) {
-            return new Response(JSON.stringify({ success: false, error: 'Nao autorizado' }), {
-                status: 401,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
-
         // Buscar configuracao do dashboard do projeto
-        const projeto = await env.DB.prepare(`
+        const projeto = await context.env.DB.prepare(`
             SELECT dashboard_config FROM projetos WHERE id = ?
         `).bind(projetoId).first();
 
@@ -35,7 +27,7 @@ export async function onRequestGet(context) {
         }
 
         // Buscar widgets do dashboard
-        const widgetsResult = await env.DB.prepare(`
+        const widgetsResult = await context.env.DB.prepare(`
             SELECT id, codigo, tipo, titulo, config, posicao_x, posicao_y,
                    largura, altura, ordem, ativo
             FROM projeto_dashboard_widgets
@@ -48,115 +40,69 @@ export async function onRequestGet(context) {
             config: w.config ? JSON.parse(w.config) : {}
         }));
 
-        return new Response(JSON.stringify({
+        return jsonResponse({
             success: true,
             config,
             widgets
-        }), {
-            headers: { 'Content-Type': 'application/json' }
         });
 
     } catch (error) {
         console.error('Erro ao obter dashboard:', error);
-        return new Response(JSON.stringify({
-            success: false,
-            error: 'Erro interno',
-            details: error.message
-        }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' }
-        });
+        return errorResponse('Erro interno: ' + error.message, 500);
     }
 }
 
 // PUT - Atualizar configuracao do dashboard
 export async function onRequestPut(context) {
-    const { request, env, params } = context;
-    const projetoId = parseInt(params.id);
+    const projetoId = parseInt(context.params.id);
+    const usuario = context.data.usuario;
 
     try {
-        const usuario = await verificarAuth(request, env);
-        if (!usuario) {
-            return new Response(JSON.stringify({ success: false, error: 'Nao autorizado' }), {
-                status: 401,
-                headers: { 'Content-Type': 'application/json' }
-            });
+        // Verificar permissao (admin global ou admin do projeto)
+        const podeEditar = usuario.isAdmin || await isProjetoAdmin(context.env.DB, usuario.id, projetoId);
+        if (!podeEditar) {
+            return errorResponse('Sem permissao para editar dashboard', 403);
         }
 
-        // Verificar permissao (apenas gestor/admin pode configurar dashboard)
-        const temPermissao = await verificarPermissao(env.DB, usuario.id, projetoId, 'gestor');
-        if (!temPermissao && !usuario.admin) {
-            return new Response(JSON.stringify({ success: false, error: 'Sem permissao' }), {
-                status: 403,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
-
-        const body = await request.json();
+        const body = await context.request.json();
         const { config } = body;
 
         if (config) {
-            await env.DB.prepare(`
+            await context.env.DB.prepare(`
                 UPDATE projetos SET dashboard_config = ? WHERE id = ?
             `).bind(JSON.stringify(config), projetoId).run();
         }
 
-        return new Response(JSON.stringify({
+        return jsonResponse({
             success: true,
             message: 'Dashboard atualizado'
-        }), {
-            headers: { 'Content-Type': 'application/json' }
         });
 
     } catch (error) {
         console.error('Erro ao atualizar dashboard:', error);
-        return new Response(JSON.stringify({
-            success: false,
-            error: 'Erro interno',
-            details: error.message
-        }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' }
-        });
+        return errorResponse('Erro interno: ' + error.message, 500);
     }
 }
 
 // POST - Adicionar widget ao dashboard
 export async function onRequestPost(context) {
-    const { request, env, params } = context;
-    const projetoId = parseInt(params.id);
+    const projetoId = parseInt(context.params.id);
+    const usuario = context.data.usuario;
 
     try {
-        const usuario = await verificarAuth(request, env);
-        if (!usuario) {
-            return new Response(JSON.stringify({ success: false, error: 'Nao autorizado' }), {
-                status: 401,
-                headers: { 'Content-Type': 'application/json' }
-            });
+        const podeEditar = usuario.isAdmin || await isProjetoAdmin(context.env.DB, usuario.id, projetoId);
+        if (!podeEditar) {
+            return errorResponse('Sem permissao', 403);
         }
 
-        const temPermissao = await verificarPermissao(env.DB, usuario.id, projetoId, 'gestor');
-        if (!temPermissao && !usuario.admin) {
-            return new Response(JSON.stringify({ success: false, error: 'Sem permissao' }), {
-                status: 403,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
-
-        const body = await request.json();
+        const body = await context.request.json();
         const { codigo, tipo, titulo, config, posicao_x, posicao_y, largura, altura, ordem } = body;
 
         if (!codigo || !tipo || !titulo) {
-            return new Response(JSON.stringify({
-                success: false,
-                error: 'codigo, tipo e titulo sao obrigatorios'
-            }), {
-                status: 400,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            return errorResponse('codigo, tipo e titulo sao obrigatorios', 400);
         }
 
-        const result = await env.DB.prepare(`
+        const result = await context.env.DB.prepare(`
             INSERT INTO projeto_dashboard_widgets (
                 projeto_id, codigo, tipo, titulo, config,
                 posicao_x, posicao_y, largura, altura, ordem
@@ -174,7 +120,7 @@ export async function onRequestPost(context) {
             ordem || 0
         ).run();
 
-        return new Response(JSON.stringify({
+        return jsonResponse({
             success: true,
             message: 'Widget adicionado',
             widget: {
@@ -183,79 +129,56 @@ export async function onRequestPost(context) {
                 tipo,
                 titulo
             }
-        }), {
-            headers: { 'Content-Type': 'application/json' }
         });
 
     } catch (error) {
         console.error('Erro ao adicionar widget:', error);
-        return new Response(JSON.stringify({
-            success: false,
-            error: 'Erro interno',
-            details: error.message
-        }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' }
-        });
+        return errorResponse('Erro interno: ' + error.message, 500);
     }
 }
 
 // DELETE - Remover widget (soft delete)
 export async function onRequestDelete(context) {
-    const { request, env, params } = context;
-    const projetoId = parseInt(params.id);
+    const projetoId = parseInt(context.params.id);
+    const usuario = context.data.usuario;
 
     try {
-        const usuario = await verificarAuth(request, env);
-        if (!usuario) {
-            return new Response(JSON.stringify({ success: false, error: 'Nao autorizado' }), {
-                status: 401,
-                headers: { 'Content-Type': 'application/json' }
-            });
+        const podeEditar = usuario.isAdmin || await isProjetoAdmin(context.env.DB, usuario.id, projetoId);
+        if (!podeEditar) {
+            return errorResponse('Sem permissao', 403);
         }
 
-        const temPermissao = await verificarPermissao(env.DB, usuario.id, projetoId, 'gestor');
-        if (!temPermissao && !usuario.admin) {
-            return new Response(JSON.stringify({ success: false, error: 'Sem permissao' }), {
-                status: 403,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
-
-        const url = new URL(request.url);
+        const url = new URL(context.request.url);
         const widgetId = url.searchParams.get('widgetId');
 
         if (!widgetId) {
-            return new Response(JSON.stringify({
-                success: false,
-                error: 'widgetId eh obrigatorio'
-            }), {
-                status: 400,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            return errorResponse('widgetId eh obrigatorio', 400);
         }
 
-        await env.DB.prepare(`
+        await context.env.DB.prepare(`
             UPDATE projeto_dashboard_widgets SET ativo = 0
             WHERE id = ? AND projeto_id = ?
         `).bind(widgetId, projetoId).run();
 
-        return new Response(JSON.stringify({
+        return jsonResponse({
             success: true,
             message: 'Widget removido'
-        }), {
-            headers: { 'Content-Type': 'application/json' }
         });
 
     } catch (error) {
         console.error('Erro ao remover widget:', error);
-        return new Response(JSON.stringify({
-            success: false,
-            error: 'Erro interno',
-            details: error.message
-        }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' }
-        });
+        return errorResponse('Erro interno: ' + error.message, 500);
     }
+}
+
+// OPTIONS - CORS preflight
+export async function onRequestOptions() {
+    return new Response(null, {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+            'Access-Control-Max-Age': '86400'
+        }
+    });
 }

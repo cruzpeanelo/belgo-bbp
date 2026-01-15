@@ -3,31 +3,22 @@
 // GET /api/projetos/:id/permissoes
 // =====================================================
 
-import { verificarAuth } from '../../../lib/auth.js';
+import { jsonResponse, errorResponse } from '../../../lib/auth.js';
 import { buscarPapelUsuario, buscarPermissoesUsuario } from '../../../lib/permissions.js';
 
 export async function onRequestGet(context) {
-    const { request, env, params } = context;
-    const projetoId = parseInt(params.id);
+    const projetoId = parseInt(context.params.id);
+    const usuario = context.data.usuario;
 
     try {
-        // Verificar autenticacao
-        const usuario = await verificarAuth(request, env);
-        if (!usuario) {
-            return new Response(JSON.stringify({ success: false, error: 'Nao autorizado' }), {
-                status: 401,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
-
         // Admin global tem todas as permissoes
-        if (usuario.admin) {
+        if (usuario.isAdmin) {
             // Buscar todas as permissoes para retornar
-            const todasPermissoes = await env.DB.prepare(`
+            const todasPermissoes = await context.env.DB.prepare(`
                 SELECT codigo FROM permissoes
             `).all();
 
-            return new Response(JSON.stringify({
+            return jsonResponse({
                 success: true,
                 papel: {
                     codigo: 'admin',
@@ -37,31 +28,23 @@ export async function onRequestGet(context) {
                 permissoes: (todasPermissoes.results || []).map(p => p.codigo),
                 isAdmin: true,
                 isAdminGlobal: true
-            }), {
-                headers: { 'Content-Type': 'application/json' }
             });
         }
 
         // Buscar papel do usuario no projeto
-        const papel = await buscarPapelUsuario(env.DB, usuario.id, projetoId);
+        const papel = await buscarPapelUsuario(context.env.DB, usuario.id, projetoId);
 
         if (!papel) {
-            return new Response(JSON.stringify({
-                success: false,
-                error: 'Sem acesso a este projeto'
-            }), {
-                status: 403,
-                headers: { 'Content-Type': 'application/json' }
-            });
+            return errorResponse('Sem acesso a este projeto', 403);
         }
 
         // Buscar permissoes
-        const permissoes = await buscarPermissoesUsuario(env.DB, usuario.id, projetoId);
+        const permissoes = await buscarPermissoesUsuario(context.env.DB, usuario.id, projetoId);
 
         // Determinar permissoes de entidade baseado no papel
         const isAdmin = papel.nivel >= 100;
 
-        return new Response(JSON.stringify({
+        return jsonResponse({
             success: true,
             papel: {
                 codigo: papel.codigo,
@@ -81,19 +64,10 @@ export async function onRequestGet(context) {
                 exportar: isAdmin || permissoes.some(p => p.endsWith('.exportar')),
                 gerenciar: isAdmin
             }
-        }), {
-            headers: { 'Content-Type': 'application/json' }
         });
 
     } catch (error) {
         console.error('Erro ao buscar permissoes:', error);
-        return new Response(JSON.stringify({
-            success: false,
-            error: 'Erro interno',
-            details: error.message
-        }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' }
-        });
+        return errorResponse('Erro interno: ' + error.message, 500);
     }
 }
