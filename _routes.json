@@ -1,5 +1,11 @@
 {
   "version": 1,
   "include": ["/api/*"],
-  "exclude": []
+  "exclude": [
+    "/landing.html",
+    "/config/*",
+    "/shared/*",
+    "/rede-ativa/*",
+    "/roadmap/*"
+  ]
 }
