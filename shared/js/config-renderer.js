@@ -21,6 +21,7 @@ const ConfigRenderer = {
         this.projetoId = options.projetoId || localStorage.getItem('belgo_projeto_id') || 1;
         this.entidade = options.entidade;
         this.containerId = options.containerId || 'pageContent';
+        this.campos = []; // Reset campos
 
         // Carregar config_funcionalidades
         if (this.entidade?.config_funcionalidades) {
@@ -37,6 +38,11 @@ const ConfigRenderer = {
         // Configurar paginacao
         if (this.config?.paginacao?.itens_por_pagina) {
             this.paginacao.itensPorPagina = this.config.paginacao.itens_por_pagina;
+        }
+
+        // Carregar campos da entidade (para criar/exportar)
+        if (this.entidade?.permite_criar || this.entidade?.permite_exportar) {
+            await this.carregarCampos();
         }
 
         // Carregar dados
@@ -113,8 +119,19 @@ const ConfigRenderer = {
     renderHeader() {
         const acoes = [];
 
-        if (this.config?.acoes_lote?.exportar_csv?.habilitado) {
-            acoes.push(`<button class="btn btn-primary" onclick="ConfigRenderer.exportarCSV()">Exportar CSV</button>`);
+        // Botao de adicionar (se entidade permite criar)
+        if (this.entidade?.permite_criar) {
+            acoes.push(`<button class="btn btn-success" onclick="ConfigRenderer.abrirModalCriar()">➕ Adicionar</button>`);
+        }
+
+        // Botao de exportar (se entidade permite exportar)
+        if (this.entidade?.permite_exportar) {
+            acoes.push(`<button class="btn btn-primary" onclick="ConfigRenderer.exportarCSV()">📥 Exportar</button>`);
+        }
+
+        // Botao de importar (se entidade permite importar)
+        if (this.entidade?.permite_importar) {
+            acoes.push(`<button class="btn btn-secondary" onclick="ConfigRenderer.abrirModalImportar()">📤 Importar</button>`);
         }
 
         return `
@@ -997,13 +1014,26 @@ const ConfigRenderer = {
     },
 
     exportarCSV() {
-        const config = this.config?.acoes_lote?.exportar_csv;
-        if (!config?.habilitado) return;
+        if (!this.entidade?.permite_exportar) return;
 
-        const campos = config.campos || Object.keys(this.dados[0] || {});
+        // Usar campos da entidade ou extrair dos dados
+        let campos = [];
+        if (this.campos.length > 0) {
+            campos = this.campos.map(c => c.codigo);
+        } else if (this.dados.length > 0) {
+            campos = Object.keys(this.dados[0]).filter(k => !k.startsWith('_'));
+        }
 
-        // Header
-        let csv = campos.join(',') + '\n';
+        if (campos.length === 0) {
+            this.showToast('Nenhum campo para exportar', 'error');
+            return;
+        }
+
+        // Header com nomes dos campos
+        const headers = this.campos.length > 0
+            ? this.campos.map(c => c.nome)
+            : campos;
+        let csv = headers.join(',') + '\n';
 
         // Dados
         this.dadosFiltrados.forEach(row => {
@@ -1019,12 +1049,17 @@ const ConfigRenderer = {
         // Download
         const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement('a');
-        const nomeArquivo = (config.nome_arquivo || 'export_{data}.csv').replace('{data}', new Date().toISOString().split('T')[0]);
+        const nomeArquivo = `${this.entidade.codigo}_${new Date().toISOString().split('T')[0]}.csv`;
         link.href = URL.createObjectURL(blob);
         link.download = nomeArquivo;
         link.click();
 
         this.showToast('Exportacao realizada com sucesso!', 'success');
+    },
+
+    abrirModalImportar() {
+        if (!this.entidade?.permite_importar) return;
+        this.showToast('Funcionalidade de importacao em desenvolvimento', 'info');
     },
 
     // =====================================================
@@ -1082,6 +1117,197 @@ const ConfigRenderer = {
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') this.fecharModal();
         });
+    },
+
+    // =====================================================
+    // CRIAR REGISTRO
+    // =====================================================
+    campos: [],
+
+    async carregarCampos() {
+        if (this.campos.length > 0) return this.campos;
+        try {
+            const token = sessionStorage.getItem('belgo_token');
+            const response = await fetch(`/api/projetos/${this.projetoId}/entidades/${this.entidade.id}/campos`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (response.ok) {
+                const result = await response.json();
+                this.campos = result.campos || [];
+            }
+        } catch (e) {
+            console.error('Erro ao carregar campos:', e);
+        }
+        return this.campos;
+    },
+
+    async abrirModalCriar() {
+        await this.carregarCampos();
+
+        const modalHtml = `
+            <div class="modal-overlay" id="modalCriar" onclick="if(event.target === this) ConfigRenderer.fecharModalCriar()">
+                <div class="modal-content modal-criar">
+                    <div class="modal-header">
+                        <h3>➕ Adicionar ${this.entidade?.nome || 'Registro'}</h3>
+                        <button class="modal-close" onclick="ConfigRenderer.fecharModalCriar()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formCriar" onsubmit="event.preventDefault(); ConfigRenderer.salvarNovoRegistro();">
+                            ${this.renderCamposForm()}
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" onclick="ConfigRenderer.fecharModalCriar()">Cancelar</button>
+                                <button type="submit" class="btn btn-success">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+        document.body.style.overflow = 'hidden';
+
+        // Focar no primeiro campo
+        setTimeout(() => {
+            const firstInput = document.querySelector('#formCriar input, #formCriar select, #formCriar textarea');
+            if (firstInput) firstInput.focus();
+        }, 100);
+    },
+
+    renderCamposForm() {
+        if (this.campos.length === 0) {
+            return '<p>Nenhum campo configurado para esta entidade.</p>';
+        }
+
+        return this.campos.map(campo => {
+            const required = campo.obrigatorio ? 'required' : '';
+            const requiredMark = campo.obrigatorio ? '<span style="color: red;">*</span>' : '';
+
+            switch (campo.tipo) {
+                case 'text':
+                case 'email':
+                case 'url':
+                    return `
+                        <div class="form-group">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <input type="${campo.tipo}" id="campo-${campo.codigo}" name="${campo.codigo}"
+                                   placeholder="${campo.placeholder || ''}" ${required}>
+                        </div>
+                    `;
+                case 'textarea':
+                    return `
+                        <div class="form-group">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <textarea id="campo-${campo.codigo}" name="${campo.codigo}"
+                                      rows="4" placeholder="${campo.placeholder || ''}" ${required}></textarea>
+                        </div>
+                    `;
+                case 'number':
+                    return `
+                        <div class="form-group">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <input type="number" id="campo-${campo.codigo}" name="${campo.codigo}" ${required}>
+                        </div>
+                    `;
+                case 'select':
+                    let opcoes = campo.opcoes || [];
+                    // Parsear se for string JSON
+                    if (typeof opcoes === 'string') {
+                        try { opcoes = JSON.parse(opcoes); } catch(e) { opcoes = []; }
+                    }
+                    return `
+                        <div class="form-group">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <select id="campo-${campo.codigo}" name="${campo.codigo}" ${required}>
+                                <option value="">Selecione...</option>
+                                ${opcoes.map(op => {
+                                    // Suporta tanto string simples quanto objeto {valor, label}
+                                    const valor = typeof op === 'string' ? op : (op.valor || op.value || op);
+                                    const label = typeof op === 'string' ? op : (op.label || op.nome || valor);
+                                    return `<option value="${valor}">${label}</option>`;
+                                }).join('')}
+                            </select>
+                        </div>
+                    `;
+                case 'checkbox':
+                    return `
+                        <div class="form-group form-check">
+                            <input type="checkbox" id="campo-${campo.codigo}" name="${campo.codigo}">
+                            <label for="campo-${campo.codigo}">${campo.nome}</label>
+                        </div>
+                    `;
+                case 'date':
+                    return `
+                        <div class="form-group">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <input type="date" id="campo-${campo.codigo}" name="${campo.codigo}" ${required}>
+                        </div>
+                    `;
+                default:
+                    return `
+                        <div class="form-group">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <input type="text" id="campo-${campo.codigo}" name="${campo.codigo}" ${required}>
+                        </div>
+                    `;
+            }
+        }).join('');
+    },
+
+    fecharModalCriar() {
+        const modal = document.getElementById('modalCriar');
+        if (modal) {
+            modal.remove();
+            document.body.style.overflow = '';
+        }
+    },
+
+    async salvarNovoRegistro() {
+        const form = document.getElementById('formCriar');
+        if (!form) return;
+
+        const formData = new FormData(form);
+        const dados = {};
+
+        for (const [key, value] of formData.entries()) {
+            if (value !== '') {
+                dados[key] = value;
+            }
+        }
+
+        // Validar campos obrigatorios
+        for (const campo of this.campos) {
+            if (campo.obrigatorio && !dados[campo.codigo]) {
+                this.showToast(`Campo obrigatorio: ${campo.nome}`, 'error');
+                return;
+            }
+        }
+
+        try {
+            const token = sessionStorage.getItem('belgo_token');
+            const response = await fetch(`/api/projetos/${this.projetoId}/dados/${this.entidade.codigo}`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ dados })
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                this.showToast('Registro criado com sucesso!', 'success');
+                this.fecharModalCriar();
+                await this.carregarDados();
+                this.render();
+            } else {
+                this.showToast(result.error || 'Erro ao criar registro', 'error');
+            }
+        } catch (error) {
+            console.error('Erro ao salvar:', error);
+            this.showToast('Erro ao salvar registro', 'error');
+        }
     }
 };
 

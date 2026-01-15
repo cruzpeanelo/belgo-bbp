@@ -331,7 +331,7 @@
         }
 
         function renderProjetoCard(projeto) {
-            const url = projeto.url_modulo || '#';
+            const url = projeto.url_modulo || '/index.html';
 
             const teamsHtml = projeto.teams_channel_url
                 ? `<a href="${projeto.teams_channel_url}" target="_blank" class="projeto-card-link" title="Abrir Teams" onclick="event.stopPropagation()">
