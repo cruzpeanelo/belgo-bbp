@@ -57,11 +57,7 @@ export async function onRequestGet(context) {
         params.push(limite, offset);
 
         // Executar query
-        let stmt = context.env.DB.prepare(query);
-        for (let i = 0; i < params.length; i++) {
-            stmt = stmt.bind(params[i]);
-        }
-        const resultados = await stmt.all();
+        const resultados = await context.env.DB.prepare(query).bind(...params).all();
 
         // Buscar total para paginacao (sem limit)
         let countQuery = `
@@ -90,11 +86,9 @@ export async function onRequestGet(context) {
             countParams.push(dataFim);
         }
 
-        let countStmt = context.env.DB.prepare(countQuery);
-        for (let i = 0; i < countParams.length; i++) {
-            countStmt = countStmt.bind(countParams[i]);
-        }
-        const totalResult = await countStmt.first();
+        const totalResult = countParams.length > 0
+            ? await context.env.DB.prepare(countQuery).bind(...countParams).first()
+            : await context.env.DB.prepare(countQuery).first();
 
         // Processar detalhes JSON
         const logs = (resultados.results || []).map(log => ({
