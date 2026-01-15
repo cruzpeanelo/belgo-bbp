@@ -106,6 +106,21 @@ CREATE TABLE projeto_dashboard_widgets (...);
 | Configurar layout de entidade | ✅ OK (Cards Grid + filtro por status) |
 | Layout Builder - 5 abas | ✅ OK (Layout, Colunas, Filtros, Métricas, Ações) |
 
+### Teste de Ponta a Ponta - Janeiro 2026 ✅
+
+| Etapa | Resultado |
+|-------|-----------|
+| Login na landing page | ✅ OK |
+| Acessar projeto GTM Clone | ✅ OK (página dinâmica de projeto) |
+| Menu lateral carregado dinamicamente | ✅ OK (12 menus) |
+| Navegar para Riscos via menu | ✅ OK |
+| Entidade carregada corretamente | ✅ OK |
+| Criar registro de risco | ✅ OK |
+| Registro salvo e exibido na tabela | ✅ OK |
+| Badges coloridos funcionando | ✅ OK |
+| Criar segundo registro | ✅ OK |
+| Ambos registros aparecem na listagem | ✅ OK (2 registros) |
+
 ---
 
 ## ✅ TODOS OS TESTES CONCLUÍDOS
@@ -184,8 +199,9 @@ MIGRATIONS:
 1. ~~**AGORA**: Criar novo projeto via template GTM~~ ✅ FEITO
 2. ~~Testar todas as funcionalidades do novo projeto~~ ✅ FEITO
 3. ~~Testar configuração de layout visual~~ ✅ FEITO
-4. Testar dashboard dinâmico (widgets)
-5. Documentar processo para administradores
+4. ~~**Teste de ponta a ponta completo**~~ ✅ FEITO (Janeiro 2026)
+5. Testar dashboard dinâmico (widgets)
+6. Documentar processo para administradores
 
 ---
 
@@ -236,3 +252,50 @@ O template "Template GTM - Go To Market" foi exportado com sucesso e contém:
 - 11 menus
 - Configurações de campos e opções
 - Pode ser usado para criar novos projetos com a mesma estrutura
+
+---
+
+## CORREÇÕES REALIZADAS (Janeiro 2026)
+
+### 1. Página Dinâmica de Projeto
+**Problema**: Projetos criados via template não tinham uma página dedicada, caindo no dashboard geral.
+
+**Solução**:
+- Criada `/pages/projeto-dinamico.html` - página que exibe:
+  - Header do projeto com nome, descrição e ícone
+  - Estatísticas (entidades e menus)
+  - Grid de acesso rápido aos menus
+  - Menu lateral dinâmico
+- API `from-template.js` modificada para definir `url_modulo` automaticamente
+
+### 2. URLs Absolutas nos Menus
+**Problema**: URLs relativas como `pages/entidade.html?e=riscos` causavam duplicação de path quando a página já estava em `/pages/`.
+
+**Solução**:
+- API `from-template.js` modificada para gerar URLs absolutas: `/pages/entidade.html?e=riscos`
+- URLs existentes no banco corrigidas para usar prefixo `/`
+
+### 3. Vinculação de Menu à Entidade
+**Problema**: Menu "Riscos" criado manualmente não estava vinculado à entidade correspondente.
+
+**Solução**:
+- Menu corrigido com `entidade_id` apontando para a entidade correta
+- API agora define `entidade_id` automaticamente quando `pagina_dinamica` está ativo
+
+### Arquivos Modificados Nesta Correção
+```
+pages/projeto-dinamico.html                  - NOVO (dashboard dinâmico por projeto)
+functions/api/projetos/from-template.js      - MODIFICADO (url_modulo + URLs absolutas)
+```
+
+### Comandos SQL Executados
+```sql
+-- Corrigir url_modulo do projeto GTM Clone
+UPDATE projetos SET url_modulo = 'pages/projeto-dinamico.html?projeto=gtm-clone' WHERE id = 5;
+
+-- Corrigir URLs dos menus para absolutas
+UPDATE projeto_menus SET url = '/pages/entidade.html?e=' || codigo WHERE entidade_id IS NOT NULL;
+
+-- Vincular menu Riscos à entidade
+UPDATE projeto_menus SET entidade_id = 23, url = '/pages/entidade.html?e=riscos' WHERE id = 46;
+```

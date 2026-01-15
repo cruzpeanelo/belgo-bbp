@@ -170,9 +170,13 @@ export async function onRequestPost(context) {
             }
 
             // Ajustar URL se for pagina dinamica vinculada a entidade
+            // IMPORTANTE: Usar URLs absolutas para evitar duplicacao de paths
             let url = menu.url;
             if (menu.pagina_dinamica && menu.entidade_codigo) {
-                url = `pages/entidade.html?e=${menu.entidade_codigo}`;
+                url = `/pages/entidade.html?e=${menu.entidade_codigo}`;
+            } else if (url && !url.startsWith('/') && !url.startsWith('http')) {
+                // Converter URLs relativas para absolutas
+                url = '/' + url;
             }
 
             await context.env.DB.prepare(`
