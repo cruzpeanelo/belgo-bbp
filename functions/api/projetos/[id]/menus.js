@@ -36,8 +36,6 @@ export async function onRequestGet(context) {
                 m.url,
                 m.ordem,
                 m.ativo,
-                m.parent_id,
-                m.permissao_visualizar,
                 m.permissao_criar,
                 m.permissao_editar,
                 m.permissao_excluir,
@@ -53,8 +51,7 @@ export async function onRequestGet(context) {
             ORDER BY m.ordem ASC, m.nome ASC
         `).bind(projetoId).all();
 
-        // Organizar menus em arvore (se tiver parent_id)
-        const menusMap = {};
+        // Organizar menus em lista
         const menusList = [];
 
         (menus.results || []).forEach(menu => {
@@ -65,33 +62,19 @@ export async function onRequestGet(context) {
                 url: menu.url,
                 ordem: menu.ordem,
                 ativo: menu.ativo === 1,
-                parent_id: menu.parent_id,
                 entidade_id: menu.entidade_id,
                 entidade_codigo: menu.entidade_codigo,
                 entidade_nome: menu.entidade_nome,
                 entidade_nome_plural: menu.entidade_nome_plural,
                 permissoes: {
-                    visualizar: menu.permissao_visualizar || 'visualizador',
                     criar: menu.permissao_criar || 'executor',
-                    editar: menu.permissao_editar || 'executor',
-                    excluir: menu.permissao_excluir || 'gestor'
+                    editar: menu.permissao_editar || 'gestor',
+                    excluir: menu.permissao_excluir || 'admin'
                 },
-                config_funcionalidades: menu.config_funcionalidades,
-                children: []
+                config_funcionalidades: menu.config_funcionalidades
             };
 
-            menusMap[menu.id] = item;
-
-            if (!menu.parent_id) {
-                menusList.push(item);
-            }
-        });
-
-        // Vincular filhos aos pais
-        (menus.results || []).forEach(menu => {
-            if (menu.parent_id && menusMap[menu.parent_id]) {
-                menusMap[menu.parent_id].children.push(menusMap[menu.id]);
-            }
+            menusList.push(item);
         });
 
         return jsonResponse({

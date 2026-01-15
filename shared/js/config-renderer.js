@@ -65,11 +65,11 @@ const ConfigRenderer = {
             if (!response.ok) throw new Error('Erro ao carregar dados');
 
             const result = await response.json();
-            // Extrair dados do JSON armazenado
-            this.dados = (result.registros || []).map(r => ({
+            // Extrair dados - a API ja retorna os dados expandidos
+            this.dados = (result.dados || []).map(r => ({
                 _id: r.id,
                 _meta: r._meta,
-                ...r.dados
+                ...r  // dados ja estao expandidos no objeto
             }));
             this.dadosFiltrados = [...this.dados];
 
