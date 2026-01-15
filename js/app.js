@@ -6,45 +6,19 @@
 // CONTROLE DE ACESSO - Verificação de Autenticação
 // =====================================================
 (function() {
-    const SENHA_CORRETA = 'BelgoGTM2024';
-    if (sessionStorage.getItem('belgo_auth') === 'true') return;
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const appContainer = document.querySelector('.app-container');
-        if (appContainer) appContainer.style.display = 'none';
-
-        const loginOverlay = document.createElement('div');
-        loginOverlay.className = 'login-overlay';
-        loginOverlay.innerHTML = `
-            <div class="login-box">
-                <div class="login-logo">BELGO</div>
-                <h2>Acesso Restrito</h2>
-                <p>Cockpit GTM Belgo</p>
-                <input type="password" id="senha-input" placeholder="Digite a senha" autocomplete="off">
-                <button id="btn-entrar">Entrar</button>
-                <p id="erro-msg" class="erro"></p>
-            </div>
-        `;
-        document.body.appendChild(loginOverlay);
-
-        const senhaInput = document.getElementById('senha-input');
-        senhaInput.focus();
-
-        function validarSenha() {
-            if (senhaInput.value === SENHA_CORRETA) {
-                sessionStorage.setItem('belgo_auth', 'true');
-                location.reload();
-            } else {
-                document.getElementById('erro-msg').textContent = 'Senha incorreta';
-                senhaInput.value = '';
-                senhaInput.focus();
+    // Verificar autenticacao via BelgoAuth
+    if (typeof BelgoAuth !== 'undefined' && BelgoAuth.isAuthenticated()) {
+        // Usuario autenticado - verificar acesso ao modulo GTM
+        BelgoAuth.requireAuth('gtm').then(hasAccess => {
+            if (!hasAccess) {
+                // Sera redirecionado pelo requireAuth
             }
-        }
+        });
+        return; // Continuar carregando a aplicacao
+    }
 
-        document.getElementById('btn-entrar').addEventListener('click', validarSenha);
-        senhaInput.addEventListener('keypress', e => { if (e.key === 'Enter') validarSenha(); });
-    });
-
+    // Nao autenticado - redirecionar para login
+    window.location.href = '/login.html?redirect=' + encodeURIComponent(window.location.pathname);
     throw new Error('Autenticação necessária');
 })();
 
