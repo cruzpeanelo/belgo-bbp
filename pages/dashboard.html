@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entidade Dinamica - Cockpit GTM Belgo</title>
+    <title>Dashboard - Cockpit GTM Belgo</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/shared/css/config-renderer.css">
+    <link rel="stylesheet" href="/shared/css/dashboard-renderer.css">
 </head>
 <body>
     <!-- Mobile Header -->
@@ -28,7 +29,7 @@
                 <div class="sidebar-subtitle">Cockpit GTM</div>
             </div>
             <nav class="sidebar-nav" id="dynamic-nav" role="navigation" aria-label="Menu principal">
-                <a href="../index.html" class="nav-item" aria-label="Dashboard">
+                <a href="../index.html" class="nav-item active" aria-label="Dashboard">
                     <span class="nav-icon" aria-hidden="true">&#128202;</span>
                     <span class="nav-text">Dashboard</span>
                 </a>
@@ -44,22 +45,20 @@
             <!-- Skeleton Loading -->
             <div id="page-loading" class="skeleton-loading">
                 <div class="skeleton skeleton-title"></div>
-                <div class="skeleton-row">
-                    <div class="skeleton skeleton-filter"></div>
-                    <div class="skeleton skeleton-filter"></div>
-                    <div class="skeleton skeleton-filter"></div>
-                </div>
                 <div class="skeleton-metrics">
                     <div class="skeleton skeleton-metric"></div>
                     <div class="skeleton skeleton-metric"></div>
                     <div class="skeleton skeleton-metric"></div>
                     <div class="skeleton skeleton-metric"></div>
                 </div>
-                <div class="skeleton skeleton-table"></div>
+                <div class="skeleton-row">
+                    <div class="skeleton skeleton-chart"></div>
+                    <div class="skeleton skeleton-chart"></div>
+                </div>
             </div>
 
-            <!-- Conteudo Dinamico -->
-            <div id="dynamicContent" style="display: none;"></div>
+            <!-- Dashboard Dinamico -->
+            <div id="dashboardContent" style="display: none;"></div>
         </main>
     </div>
 
@@ -82,17 +81,6 @@
             margin-bottom: 20px;
         }
 
-        .skeleton-row {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 20px;
-        }
-
-        .skeleton-filter {
-            height: 60px;
-            width: 200px;
-        }
-
         .skeleton-metrics {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -101,11 +89,18 @@
         }
 
         .skeleton-metric {
-            height: 80px;
+            height: 100px;
         }
 
-        .skeleton-table {
-            height: 400px;
+        .skeleton-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .skeleton-chart {
+            height: 300px;
         }
 
         @keyframes shimmer {
@@ -118,10 +113,7 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             .skeleton-row {
-                flex-direction: column;
-            }
-            .skeleton-filter {
-                width: 100%;
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -129,54 +121,44 @@
     <script src="/shared/js/auth.js"></script>
     <script src="/js/utils.js"></script>
     <script src="/js/app.js"></script>
-    <script src="/shared/js/action-engine.js"></script>
-    <script src="/shared/js/config-renderer.js"></script>
+    <script src="/shared/js/dashboard-renderer.js"></script>
     <script>
-        // Inicializar pagina dinamica
+        // Inicializar dashboard dinamico
         document.addEventListener('DOMContentLoaded', async () => {
-            // Obter entidade da URL
+            // Obter projeto da URL ou usar padrao
             const params = new URLSearchParams(window.location.search);
-            const entidadeCodigo = params.get('e') || params.get('entidade');
+            let projetoId = params.get('p') || params.get('projeto');
 
-            if (!entidadeCodigo) {
-                document.getElementById('page-loading').innerHTML = `
-                    <div class="error-state">
-                        <h3>Entidade nao especificada</h3>
-                        <p>Use ?e=testes, ?e=jornadas, etc.</p>
-                    </div>
-                `;
-                return;
+            // Se nao especificado, usar projeto do localStorage ou padrao
+            if (!projetoId) {
+                projetoId = localStorage.getItem('belgo_projeto_id') || '1';
             }
 
             // Carregar menu dinamico
-            await carregarMenuDinamico();
+            await carregarMenuDinamico(projetoId);
 
-            // Inicializar pagina
-            const container = document.getElementById('dynamicContent');
+            // Inicializar dashboard
+            const container = document.getElementById('dashboardContent');
             const loading = document.getElementById('page-loading');
 
             try {
                 await App.loadProjetoInfo();
-                const success = await App.initDynamicPage('#dynamicContent', entidadeCodigo);
+                const success = await DashboardRenderer.init('#dashboardContent', projetoId);
 
                 if (success) {
                     loading.style.display = 'none';
                     container.style.display = 'block';
 
                     // Atualizar titulo da pagina
-                    const entidade = App.entidadesCache[entidadeCodigo];
-                    if (entidade) {
-                        document.title = `${entidade.nome_plural || entidade.nome} - Cockpit GTM Belgo`;
+                    if (DashboardRenderer.config?.titulo) {
+                        document.title = `${DashboardRenderer.config.titulo} - Cockpit GTM Belgo`;
                     }
-
-                    // Marcar menu ativo
-                    marcarMenuAtivo(entidadeCodigo);
                 } else {
                     loading.innerHTML = `
                         <div class="error-state">
-                            <h3>Erro ao carregar entidade</h3>
-                            <p>A entidade "${entidadeCodigo}" nao foi encontrada ou nao esta configurada.</p>
-                            <p style="margin-top: 16px;"><a href="/index.html">Voltar ao Dashboard</a></p>
+                            <h3>Dashboard nao configurado</h3>
+                            <p>Configure os widgets do dashboard no painel administrativo.</p>
+                            <p style="margin-top: 16px;"><a href="/index.html">Voltar ao Dashboard GTM</a></p>
                         </div>
                     `;
                 }
@@ -185,24 +167,24 @@
                 loading.innerHTML = `
                     <div class="error-state">
                         <h3>Erro de conexao</h3>
-                        <p>Nao foi possivel carregar os dados. Verifique sua conexao.</p>
+                        <p>Nao foi possivel carregar o dashboard. Verifique sua conexao.</p>
                     </div>
                 `;
             }
         });
 
         // Carregar menu dinamico da API
-        async function carregarMenuDinamico() {
+        async function carregarMenuDinamico(projetoId) {
             try {
                 await App.loadProjetoInfo();
-                const result = await App.fetchAPI(`/api/projetos/${App.projetoId}/menus`);
+                const result = await App.fetchAPI(`/api/projetos/${projetoId}/menus`);
 
                 if (result?.success && result.menus) {
                     const nav = document.getElementById('dynamic-nav');
                     const loading = document.getElementById('nav-loading');
 
                     let menuHtml = `
-                        <a href="/index.html" class="nav-item" aria-label="Dashboard">
+                        <a href="/pages/dashboard.html?p=${projetoId}" class="nav-item active" aria-label="Dashboard">
                             <span class="nav-icon" aria-hidden="true">&#128202;</span>
                             <span class="nav-text">Dashboard</span>
                         </a>
@@ -237,16 +219,6 @@
             } catch (error) {
                 console.warn('Erro ao carregar menu:', error);
             }
-        }
-
-        // Marcar menu ativo
-        function marcarMenuAtivo(entidadeCodigo) {
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-                if (item.dataset.entidade === entidadeCodigo) {
-                    item.classList.add('active');
-                }
-            });
         }
 
         // Toggle mobile menu

@@ -375,6 +375,193 @@
         </div>
     </div>
 
+    <!-- Modal Layout Builder -->
+    <div class="modal" id="modalLayoutBuilder">
+        <div class="modal-content modal-xl">
+            <div class="modal-header">
+                <h3 id="modalLayoutTitulo">Configurar Layout</h3>
+                <button class="modal-close" onclick="fecharLayoutBuilder()">&times;</button>
+            </div>
+            <div class="modal-body layout-builder-body">
+                <input type="hidden" id="layoutEntidadeId">
+
+                <!-- Tabs de navegacao -->
+                <div class="layout-tabs">
+                    <button class="layout-tab active" onclick="mostrarSecaoLayout('layout')">
+                        <span class="icon">📊</span> Layout
+                    </button>
+                    <button class="layout-tab" onclick="mostrarSecaoLayout('colunas')">
+                        <span class="icon">📋</span> Colunas
+                    </button>
+                    <button class="layout-tab" onclick="mostrarSecaoLayout('filtros')">
+                        <span class="icon">🔍</span> Filtros
+                    </button>
+                    <button class="layout-tab" onclick="mostrarSecaoLayout('metricas')">
+                        <span class="icon">📈</span> Metricas
+                    </button>
+                    <button class="layout-tab" onclick="mostrarSecaoLayout('acoes')">
+                        <span class="icon">⚡</span> Acoes
+                    </button>
+                </div>
+
+                <!-- Secao Layout -->
+                <div class="layout-section active" id="secaoLayout">
+                    <h4>Tipo de Visualizacao</h4>
+                    <div class="layout-type-grid">
+                        <button type="button" class="layout-type-btn" data-layout="tabela" onclick="selecionarLayoutTipo('tabela')">
+                            <span class="layout-type-icon">📊</span>
+                            <span class="layout-type-nome">Tabela</span>
+                            <span class="layout-type-desc">Dados em formato de tabela tradicional</span>
+                        </button>
+                        <button type="button" class="layout-type-btn" data-layout="cards" onclick="selecionarLayoutTipo('cards')">
+                            <span class="layout-type-icon">🃏</span>
+                            <span class="layout-type-nome">Cards</span>
+                            <span class="layout-type-desc">Cards em lista vertical</span>
+                        </button>
+                        <button type="button" class="layout-type-btn" data-layout="cards_grid" onclick="selecionarLayoutTipo('cards_grid')">
+                            <span class="layout-type-icon">⊞</span>
+                            <span class="layout-type-nome">Cards Grid</span>
+                            <span class="layout-type-desc">Cards em grade responsiva</span>
+                        </button>
+                        <button type="button" class="layout-type-btn" data-layout="cards_agrupados" onclick="selecionarLayoutTipo('cards_agrupados')">
+                            <span class="layout-type-icon">📁</span>
+                            <span class="layout-type-nome">Agrupado</span>
+                            <span class="layout-type-desc">Cards agrupados por campo</span>
+                        </button>
+                        <button type="button" class="layout-type-btn" data-layout="timeline" onclick="selecionarLayoutTipo('timeline')">
+                            <span class="layout-type-icon">📅</span>
+                            <span class="layout-type-nome">Timeline</span>
+                            <span class="layout-type-desc">Linha do tempo cronologica</span>
+                        </button>
+                    </div>
+
+                    <!-- Opcoes de agrupamento (visivel quando cards_agrupados) -->
+                    <div class="layout-subsection" id="opcoesAgrupamento" style="display: none;">
+                        <h5>Opcoes de Agrupamento</h5>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="campoAgrupamento">Campo para Agrupar</label>
+                                <select id="campoAgrupamento">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secao Colunas -->
+                <div class="layout-section" id="secaoColunas">
+                    <h4>Colunas Visiveis na Listagem</h4>
+                    <p class="section-help">Arraste para reordenar. Marque os campos que devem aparecer na listagem.</p>
+                    <div class="colunas-list" id="colunasListBuilder">
+                        <p class="loading">Carregando campos...</p>
+                    </div>
+                </div>
+
+                <!-- Secao Filtros -->
+                <div class="layout-section" id="secaoFiltros">
+                    <h4>Filtros Disponiveis</h4>
+                    <p class="section-help">Configure os filtros que aparecerao acima da listagem.</p>
+
+                    <div class="filtros-builder">
+                        <div class="filtros-list" id="filtrosListBuilder">
+                            <!-- Renderizado via JS -->
+                        </div>
+                        <button type="button" class="btn btn-outline btn-sm" onclick="adicionarFiltro()">
+                            <span class="icon">➕</span> Adicionar Filtro
+                        </button>
+                    </div>
+
+                    <h5 style="margin-top: 20px;">Botoes de Filtro Rapido</h5>
+                    <p class="section-help">Botoes para filtrar rapidamente por valores especificos.</p>
+                    <div class="filtros-rapidos-list" id="filtrosRapidosListBuilder">
+                        <!-- Renderizado via JS -->
+                    </div>
+                    <button type="button" class="btn btn-outline btn-sm" onclick="adicionarFiltroRapido()">
+                        <span class="icon">➕</span> Adicionar Botao de Filtro
+                    </button>
+                </div>
+
+                <!-- Secao Metricas -->
+                <div class="layout-section" id="secaoMetricas">
+                    <h4>Cards de Metricas</h4>
+                    <p class="section-help">Cards com contadores e estatisticas exibidos acima da listagem.</p>
+
+                    <div class="metricas-builder">
+                        <label class="checkbox-item" style="margin-bottom: 16px;">
+                            <input type="checkbox" id="habilitarMetricas" onchange="toggleMetricas()">
+                            <span class="checkbox-label">Habilitar metricas</span>
+                        </label>
+
+                        <div id="metricasConfig" style="display: none;">
+                            <div class="metricas-list" id="metricasListBuilder">
+                                <!-- Renderizado via JS -->
+                            </div>
+                            <button type="button" class="btn btn-outline btn-sm" onclick="adicionarMetrica()">
+                                <span class="icon">➕</span> Adicionar Metrica
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secao Acoes -->
+                <div class="layout-section" id="secaoAcoes">
+                    <h4>Acoes Disponiveis</h4>
+                    <p class="section-help">Acoes que podem ser executadas nos registros.</p>
+
+                    <div class="acoes-builder">
+                        <h5>Acoes de Linha</h5>
+                        <div class="acoes-checklist" id="acoesLinhaBuilder">
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="acaoVerDetalhes" checked>
+                                <span class="checkbox-label">Ver Detalhes (modal)</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="acaoEditar">
+                                <span class="checkbox-label">Editar</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="acaoExcluir">
+                                <span class="checkbox-label">Excluir</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="acaoTeams">
+                                <span class="checkbox-label">Compartilhar no Teams</span>
+                            </label>
+                        </div>
+
+                        <h5 style="margin-top: 20px;">Acoes de Status</h5>
+                        <p class="section-help">Botoes para alterar status rapidamente. Requer um campo tipo "select" com status.</p>
+                        <div class="status-acoes-list" id="statusAcoesBuilder">
+                            <!-- Renderizado via JS -->
+                        </div>
+                        <button type="button" class="btn btn-outline btn-sm" onclick="adicionarAcaoStatus()">
+                            <span class="icon">➕</span> Adicionar Acao de Status
+                        </button>
+
+                        <h5 style="margin-top: 20px;">Acoes em Massa</h5>
+                        <div class="acoes-checklist">
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="acaoExportarCSV">
+                                <span class="checkbox-label">Exportar CSV</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="acaoImportarCSV">
+                                <span class="checkbox-label">Importar CSV</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="fecharLayoutBuilder()">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="salvarLayoutConfig()">
+                    <span class="icon">💾</span> Salvar Configuracao
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="js/admin.js"></script>
     <script>
         let projetos = [];
@@ -504,6 +691,9 @@
                     <div class="entidade-actions">
                         <button class="btn btn-sm btn-outline" onclick="gerenciarCampos(${e.id})">
                             <span class="icon">📝</span> Campos
+                        </button>
+                        <button class="btn btn-sm btn-outline" onclick="abrirLayoutBuilder(${e.id})" title="Configurar Layout">
+                            <span class="icon">🎨</span> Layout
                         </button>
                         <button class="btn btn-sm btn-outline" onclick="editarEntidade(${e.id})">
                             <span class="icon">✏️</span> Editar
@@ -935,6 +1125,538 @@
             });
         });
 
+        // =========================================
+        // LAYOUT BUILDER
+        // =========================================
+
+        let layoutConfig = {};
+        let layoutCampos = [];
+        let filtrosIndex = 0;
+        let filtrosRapidosIndex = 0;
+        let metricasIndex = 0;
+        let statusAcoesIndex = 0;
+
+        // Abrir layout builder
+        async function abrirLayoutBuilder(entidadeId) {
+            try {
+                // Buscar entidade com campos
+                const res = await apiRequest(`/api/projetos/${projetoAtual.id}/entidades/${entidadeId}`);
+                if (!res.success) {
+                    showToast('Erro ao carregar entidade', 'error');
+                    return;
+                }
+
+                entidadeAtual = res.entidade;
+                layoutCampos = res.entidade.campos || [];
+
+                document.getElementById('layoutEntidadeId').value = entidadeId;
+                document.getElementById('modalLayoutTitulo').textContent = `Configurar Layout: ${entidadeAtual.nome}`;
+
+                // Parse do config_funcionalidades existente
+                layoutConfig = {};
+                if (entidadeAtual.config_funcionalidades) {
+                    try {
+                        layoutConfig = typeof entidadeAtual.config_funcionalidades === 'string'
+                            ? JSON.parse(entidadeAtual.config_funcionalidades)
+                            : entidadeAtual.config_funcionalidades;
+                    } catch (e) {
+                        layoutConfig = {};
+                    }
+                }
+
+                // Reset indices
+                filtrosIndex = 0;
+                filtrosRapidosIndex = 0;
+                metricasIndex = 0;
+                statusAcoesIndex = 0;
+
+                // Inicializar builder com config atual
+                inicializarLayoutBuilder();
+
+                // Mostrar primeira aba
+                mostrarSecaoLayout('layout');
+
+                document.getElementById('modalLayoutBuilder').classList.add('active');
+            } catch (error) {
+                console.error('Erro ao abrir layout builder:', error);
+                showToast('Erro ao abrir configuracao de layout', 'error');
+            }
+        }
+
+        // Fechar layout builder
+        function fecharLayoutBuilder() {
+            document.getElementById('modalLayoutBuilder').classList.remove('active');
+        }
+
+        // Mostrar secao do layout builder
+        function mostrarSecaoLayout(secao) {
+            // Atualizar tabs
+            document.querySelectorAll('.layout-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelector(`.layout-tab[onclick*="${secao}"]`).classList.add('active');
+
+            // Atualizar secoes
+            document.querySelectorAll('.layout-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(`secao${secao.charAt(0).toUpperCase() + secao.slice(1)}`).classList.add('active');
+        }
+
+        // Inicializar layout builder com config atual
+        function inicializarLayoutBuilder() {
+            // Tipo de layout
+            const tipoLayout = layoutConfig.layout || 'tabela';
+            document.querySelectorAll('.layout-type-btn').forEach(btn => {
+                btn.classList.toggle('selected', btn.dataset.layout === tipoLayout);
+            });
+
+            // Campo de agrupamento
+            const selectAgrupamento = document.getElementById('campoAgrupamento');
+            selectAgrupamento.innerHTML = '<option value="">Selecione...</option>' +
+                layoutCampos.filter(c => c.tipo === 'select').map(c =>
+                    `<option value="${c.codigo}" ${layoutConfig.agrupamento?.campo === c.codigo ? 'selected' : ''}>${c.nome}</option>`
+                ).join('');
+            document.getElementById('opcoesAgrupamento').style.display = tipoLayout === 'cards_agrupados' ? 'block' : 'none';
+
+            // Colunas
+            renderizarColunasBuilder();
+
+            // Filtros
+            renderizarFiltrosBuilder();
+
+            // Filtros rapidos
+            renderizarFiltrosRapidosBuilder();
+
+            // Metricas
+            const temMetricas = layoutConfig.metricas && layoutConfig.metricas.cards && layoutConfig.metricas.cards.length > 0;
+            document.getElementById('habilitarMetricas').checked = temMetricas;
+            document.getElementById('metricasConfig').style.display = temMetricas ? 'block' : 'none';
+            renderizarMetricasBuilder();
+
+            // Acoes
+            document.getElementById('acaoVerDetalhes').checked = layoutConfig.modal !== false;
+            document.getElementById('acaoEditar').checked = layoutConfig.acoes?.includes('editar') || false;
+            document.getElementById('acaoExcluir').checked = layoutConfig.acoes?.includes('excluir') || false;
+            document.getElementById('acaoTeams').checked = layoutConfig.acoes?.includes('teams') || false;
+            document.getElementById('acaoExportarCSV').checked = layoutConfig.acoes?.includes('exportar_csv') || layoutConfig.exportar?.csv !== false;
+            document.getElementById('acaoImportarCSV').checked = layoutConfig.acoes?.includes('importar_csv') || false;
+
+            // Acoes de status
+            renderizarStatusAcoesBuilder();
+        }
+
+        // Selecionar tipo de layout
+        function selecionarLayoutTipo(tipo) {
+            document.querySelectorAll('.layout-type-btn').forEach(btn => {
+                btn.classList.toggle('selected', btn.dataset.layout === tipo);
+            });
+            layoutConfig.layout = tipo;
+
+            // Mostrar/ocultar opcoes de agrupamento
+            document.getElementById('opcoesAgrupamento').style.display = tipo === 'cards_agrupados' ? 'block' : 'none';
+        }
+
+        // Renderizar colunas no builder
+        function renderizarColunasBuilder() {
+            const container = document.getElementById('colunasListBuilder');
+
+            if (layoutCampos.length === 0) {
+                container.innerHTML = '<p class="empty">Nenhum campo configurado. Adicione campos primeiro.</p>';
+                return;
+            }
+
+            // Ordenar campos pela ordem no config ou pela ordem natural
+            const colunasConfig = layoutConfig.colunas || [];
+            const camposOrdenados = [...layoutCampos].sort((a, b) => {
+                const idxA = colunasConfig.findIndex(c => c.campo === a.codigo);
+                const idxB = colunasConfig.findIndex(c => c.campo === b.codigo);
+                if (idxA === -1 && idxB === -1) return a.ordem - b.ordem;
+                if (idxA === -1) return 1;
+                if (idxB === -1) return -1;
+                return idxA - idxB;
+            });
+
+            container.innerHTML = camposOrdenados.map((campo, index) => {
+                const colConfig = colunasConfig.find(c => c.campo === campo.codigo) || {};
+                const visivel = colConfig.visivel !== false && campo.visivel_listagem !== false;
+
+                return `
+                    <div class="coluna-item" data-codigo="${campo.codigo}" draggable="true">
+                        <span class="coluna-drag">⋮⋮</span>
+                        <label class="checkbox-item">
+                            <input type="checkbox" class="coluna-visivel" data-campo="${campo.codigo}" ${visivel ? 'checked' : ''}>
+                            <span class="coluna-nome">${campo.nome}</span>
+                            <code class="coluna-codigo">${campo.codigo}</code>
+                        </label>
+                        <span class="coluna-tipo tipo-badge tipo-${campo.tipo}">${campo.tipo}</span>
+                        <input type="text" class="coluna-largura" data-campo="${campo.codigo}"
+                               placeholder="auto" value="${colConfig.largura || ''}" title="Largura (ex: 100px, auto)">
+                    </div>
+                `;
+            }).join('');
+
+            // Adicionar eventos de drag and drop
+            inicializarDragDropColunas();
+        }
+
+        // Inicializar drag and drop para colunas
+        function inicializarDragDropColunas() {
+            const container = document.getElementById('colunasListBuilder');
+            let draggedItem = null;
+
+            container.querySelectorAll('.coluna-item').forEach(item => {
+                item.addEventListener('dragstart', (e) => {
+                    draggedItem = item;
+                    item.classList.add('dragging');
+                });
+
+                item.addEventListener('dragend', () => {
+                    draggedItem = null;
+                    item.classList.remove('dragging');
+                });
+
+                item.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    const afterElement = getDragAfterElement(container, e.clientY);
+                    if (afterElement == null) {
+                        container.appendChild(draggedItem);
+                    } else {
+                        container.insertBefore(draggedItem, afterElement);
+                    }
+                });
+            });
+        }
+
+        function getDragAfterElement(container, y) {
+            const draggableElements = [...container.querySelectorAll('.coluna-item:not(.dragging)')];
+            return draggableElements.reduce((closest, child) => {
+                const box = child.getBoundingClientRect();
+                const offset = y - box.top - box.height / 2;
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child };
+                } else {
+                    return closest;
+                }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+
+        // Renderizar filtros no builder
+        function renderizarFiltrosBuilder() {
+            const container = document.getElementById('filtrosListBuilder');
+            const filtros = layoutConfig.filtros || [];
+
+            if (filtros.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = filtros.map((filtro, index) => {
+                filtrosIndex = Math.max(filtrosIndex, index + 1);
+                return criarFiltroHTML(index, filtro);
+            }).join('');
+        }
+
+        function criarFiltroHTML(index, filtro = {}) {
+            return `
+                <div class="filtro-row" data-index="${index}">
+                    <select class="filtro-campo" name="filtro_campo_${index}">
+                        <option value="">Campo...</option>
+                        ${layoutCampos.map(c => `<option value="${c.codigo}" ${filtro.campo === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('')}
+                        <option value="_busca" ${filtro.campo === '_busca' ? 'selected' : ''}>Busca geral</option>
+                    </select>
+                    <select class="filtro-tipo" name="filtro_tipo_${index}">
+                        <option value="select" ${filtro.tipo === 'select' ? 'selected' : ''}>Dropdown</option>
+                        <option value="text" ${filtro.tipo === 'text' ? 'selected' : ''}>Texto</option>
+                        <option value="date" ${filtro.tipo === 'date' ? 'selected' : ''}>Data</option>
+                    </select>
+                    <input type="text" class="filtro-placeholder" name="filtro_placeholder_${index}"
+                           placeholder="Placeholder" value="${filtro.placeholder || ''}">
+                    <button type="button" class="btn btn-xs btn-danger" onclick="removerFiltro(${index})">🗑️</button>
+                </div>
+            `;
+        }
+
+        function adicionarFiltro() {
+            const container = document.getElementById('filtrosListBuilder');
+            container.insertAdjacentHTML('beforeend', criarFiltroHTML(filtrosIndex));
+            filtrosIndex++;
+        }
+
+        function removerFiltro(index) {
+            document.querySelector(`.filtro-row[data-index="${index}"]`).remove();
+        }
+
+        // Renderizar filtros rapidos
+        function renderizarFiltrosRapidosBuilder() {
+            const container = document.getElementById('filtrosRapidosListBuilder');
+            const botoes = layoutConfig.filtros_botoes || [];
+
+            if (botoes.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = botoes.map((btn, index) => {
+                filtrosRapidosIndex = Math.max(filtrosRapidosIndex, index + 1);
+                return criarFiltroRapidoHTML(index, btn);
+            }).join('');
+        }
+
+        function criarFiltroRapidoHTML(index, btn = {}) {
+            return `
+                <div class="filtro-rapido-row" data-index="${index}">
+                    <input type="text" name="fr_label_${index}" placeholder="Label" value="${btn.label || ''}">
+                    <select name="fr_campo_${index}">
+                        <option value="">Campo...</option>
+                        ${layoutCampos.filter(c => c.tipo === 'select').map(c =>
+                            `<option value="${c.codigo}" ${btn.campo === c.codigo ? 'selected' : ''}>${c.nome}</option>`
+                        ).join('')}
+                    </select>
+                    <input type="text" name="fr_valor_${index}" placeholder="Valor" value="${btn.valor || ''}">
+                    <input type="text" name="fr_icone_${index}" placeholder="Icone" value="${btn.icone || ''}" style="width: 60px;">
+                    <button type="button" class="btn btn-xs btn-danger" onclick="removerFiltroRapido(${index})">🗑️</button>
+                </div>
+            `;
+        }
+
+        function adicionarFiltroRapido() {
+            const container = document.getElementById('filtrosRapidosListBuilder');
+            container.insertAdjacentHTML('beforeend', criarFiltroRapidoHTML(filtrosRapidosIndex));
+            filtrosRapidosIndex++;
+        }
+
+        function removerFiltroRapido(index) {
+            document.querySelector(`.filtro-rapido-row[data-index="${index}"]`).remove();
+        }
+
+        // Toggle metricas
+        function toggleMetricas() {
+            const habilitado = document.getElementById('habilitarMetricas').checked;
+            document.getElementById('metricasConfig').style.display = habilitado ? 'block' : 'none';
+        }
+
+        // Renderizar metricas
+        function renderizarMetricasBuilder() {
+            const container = document.getElementById('metricasListBuilder');
+            const cards = layoutConfig.metricas?.cards || [];
+
+            if (cards.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = cards.map((card, index) => {
+                metricasIndex = Math.max(metricasIndex, index + 1);
+                return criarMetricaHTML(index, card);
+            }).join('');
+        }
+
+        function criarMetricaHTML(index, card = {}) {
+            return `
+                <div class="metrica-row" data-index="${index}">
+                    <input type="text" name="metrica_icone_${index}" placeholder="Icone" value="${card.icone || ''}" style="width: 60px;">
+                    <input type="text" name="metrica_label_${index}" placeholder="Label" value="${card.label || ''}">
+                    <select name="metrica_tipo_${index}">
+                        <option value="total" ${card.tipo === 'total' ? 'selected' : ''}>Total</option>
+                        <option value="contador" ${card.tipo === 'contador' ? 'selected' : ''}>Contador (filtro)</option>
+                        <option value="distinct" ${card.tipo === 'distinct' ? 'selected' : ''}>Distinct</option>
+                        <option value="soma" ${card.tipo === 'soma' ? 'selected' : ''}>Soma</option>
+                    </select>
+                    <select name="metrica_campo_${index}">
+                        <option value="">Campo...</option>
+                        ${layoutCampos.map(c => `<option value="${c.codigo}" ${card.campo === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('')}
+                    </select>
+                    <input type="text" name="metrica_valor_${index}" placeholder="Valor (p/ contador)" value="${card.valor || ''}" style="width: 100px;">
+                    <button type="button" class="btn btn-xs btn-danger" onclick="removerMetrica(${index})">🗑️</button>
+                </div>
+            `;
+        }
+
+        function adicionarMetrica() {
+            const container = document.getElementById('metricasListBuilder');
+            container.insertAdjacentHTML('beforeend', criarMetricaHTML(metricasIndex));
+            metricasIndex++;
+        }
+
+        function removerMetrica(index) {
+            document.querySelector(`.metrica-row[data-index="${index}"]`).remove();
+        }
+
+        // Renderizar acoes de status
+        function renderizarStatusAcoesBuilder() {
+            const container = document.getElementById('statusAcoesBuilder');
+            const acoesStatus = layoutConfig.acoes_status || [];
+
+            if (acoesStatus.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = acoesStatus.map((acao, index) => {
+                statusAcoesIndex = Math.max(statusAcoesIndex, index + 1);
+                return criarAcaoStatusHTML(index, acao);
+            }).join('');
+        }
+
+        function criarAcaoStatusHTML(index, acao = {}) {
+            return `
+                <div class="status-acao-row" data-index="${index}">
+                    <input type="text" name="status_icone_${index}" placeholder="Icone" value="${acao.icone || ''}" style="width: 60px;">
+                    <input type="text" name="status_label_${index}" placeholder="Label" value="${acao.label || ''}">
+                    <select name="status_campo_${index}">
+                        <option value="">Campo status...</option>
+                        ${layoutCampos.filter(c => c.tipo === 'select').map(c =>
+                            `<option value="${c.codigo}" ${acao.campo === c.codigo ? 'selected' : ''}>${c.nome}</option>`
+                        ).join('')}
+                    </select>
+                    <input type="text" name="status_valor_${index}" placeholder="Novo valor" value="${acao.valor || ''}">
+                    <button type="button" class="btn btn-xs btn-danger" onclick="removerAcaoStatus(${index})">🗑️</button>
+                </div>
+            `;
+        }
+
+        function adicionarAcaoStatus() {
+            const container = document.getElementById('statusAcoesBuilder');
+            container.insertAdjacentHTML('beforeend', criarAcaoStatusHTML(statusAcoesIndex));
+            statusAcoesIndex++;
+        }
+
+        function removerAcaoStatus(index) {
+            document.querySelector(`.status-acao-row[data-index="${index}"]`).remove();
+        }
+
+        // Salvar configuracao de layout
+        async function salvarLayoutConfig() {
+            const entidadeId = document.getElementById('layoutEntidadeId').value;
+
+            // Coletar layout tipo
+            const layoutTipoBtn = document.querySelector('.layout-type-btn.selected');
+            const layoutTipo = layoutTipoBtn ? layoutTipoBtn.dataset.layout : 'tabela';
+
+            // Coletar colunas na ordem atual
+            const colunas = [];
+            document.querySelectorAll('.coluna-item').forEach(item => {
+                const codigo = item.dataset.codigo;
+                const visivel = item.querySelector('.coluna-visivel').checked;
+                const largura = item.querySelector('.coluna-largura').value;
+                colunas.push({
+                    campo: codigo,
+                    visivel,
+                    largura: largura || undefined
+                });
+            });
+
+            // Coletar filtros
+            const filtros = [];
+            document.querySelectorAll('.filtro-row').forEach(row => {
+                const index = row.dataset.index;
+                const campo = row.querySelector(`[name="filtro_campo_${index}"]`).value;
+                const tipo = row.querySelector(`[name="filtro_tipo_${index}"]`).value;
+                const placeholder = row.querySelector(`[name="filtro_placeholder_${index}"]`).value;
+                if (campo) {
+                    filtros.push({ campo, tipo, placeholder: placeholder || undefined });
+                }
+            });
+
+            // Coletar filtros rapidos
+            const filtrosBotoes = [];
+            document.querySelectorAll('.filtro-rapido-row').forEach(row => {
+                const index = row.dataset.index;
+                const label = row.querySelector(`[name="fr_label_${index}"]`).value;
+                const campo = row.querySelector(`[name="fr_campo_${index}"]`).value;
+                const valor = row.querySelector(`[name="fr_valor_${index}"]`).value;
+                const icone = row.querySelector(`[name="fr_icone_${index}"]`).value;
+                if (label && campo && valor) {
+                    filtrosBotoes.push({ label, campo, valor, icone: icone || undefined });
+                }
+            });
+
+            // Coletar metricas
+            let metricas = null;
+            if (document.getElementById('habilitarMetricas').checked) {
+                const cards = [];
+                document.querySelectorAll('.metrica-row').forEach(row => {
+                    const index = row.dataset.index;
+                    const icone = row.querySelector(`[name="metrica_icone_${index}"]`).value;
+                    const label = row.querySelector(`[name="metrica_label_${index}"]`).value;
+                    const tipo = row.querySelector(`[name="metrica_tipo_${index}"]`).value;
+                    const campo = row.querySelector(`[name="metrica_campo_${index}"]`).value;
+                    const valor = row.querySelector(`[name="metrica_valor_${index}"]`).value;
+                    if (label) {
+                        cards.push({
+                            icone: icone || undefined,
+                            label,
+                            tipo,
+                            campo: campo || undefined,
+                            valor: valor || undefined
+                        });
+                    }
+                });
+                if (cards.length > 0) {
+                    metricas = { cards };
+                }
+            }
+
+            // Coletar acoes
+            const acoes = [];
+            if (document.getElementById('acaoEditar').checked) acoes.push('editar');
+            if (document.getElementById('acaoExcluir').checked) acoes.push('excluir');
+            if (document.getElementById('acaoTeams').checked) acoes.push('teams');
+            if (document.getElementById('acaoExportarCSV').checked) acoes.push('exportar_csv');
+            if (document.getElementById('acaoImportarCSV').checked) acoes.push('importar_csv');
+
+            // Coletar acoes de status
+            const acoesStatus = [];
+            document.querySelectorAll('.status-acao-row').forEach(row => {
+                const index = row.dataset.index;
+                const icone = row.querySelector(`[name="status_icone_${index}"]`).value;
+                const label = row.querySelector(`[name="status_label_${index}"]`).value;
+                const campo = row.querySelector(`[name="status_campo_${index}"]`).value;
+                const valor = row.querySelector(`[name="status_valor_${index}"]`).value;
+                if (label && campo && valor) {
+                    acoesStatus.push({ icone: icone || undefined, label, campo, valor });
+                }
+            });
+
+            // Montar config
+            const config = {
+                layout: layoutTipo,
+                colunas,
+                filtros: filtros.length > 0 ? filtros : undefined,
+                filtros_botoes: filtrosBotoes.length > 0 ? filtrosBotoes : undefined,
+                metricas,
+                modal: document.getElementById('acaoVerDetalhes').checked,
+                acoes: acoes.length > 0 ? acoes : undefined,
+                acoes_status: acoesStatus.length > 0 ? acoesStatus : undefined
+            };
+
+            // Adicionar agrupamento se necessario
+            if (layoutTipo === 'cards_agrupados') {
+                const campoAgrupamento = document.getElementById('campoAgrupamento').value;
+                if (campoAgrupamento) {
+                    config.agrupamento = { campo: campoAgrupamento };
+                }
+            }
+
+            // Salvar via API
+            try {
+                const res = await apiRequest(`/api/projetos/${projetoAtual.id}/entidades/${entidadeId}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({
+                        config_funcionalidades: config
+                    })
+                });
+
+                if (res.success) {
+                    showToast('Configuracao de layout salva!', 'success');
+                    fecharLayoutBuilder();
+                    carregarEntidades();
+                } else {
+                    showToast(res.error || 'Erro ao salvar', 'error');
+                }
+            } catch (error) {
+                console.error('Erro ao salvar layout:', error);
+                showToast('Erro ao salvar configuracao', 'error');
+            }
+        }
+
         // Inicializar
         checkAuth().then(() => {
             carregarProjetos();
@@ -1244,6 +1966,269 @@
 
             .entidades-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        /* Layout Builder Styles */
+        .layout-builder-body {
+            padding: 0;
+        }
+
+        .layout-tabs {
+            display: flex;
+            border-bottom: 1px solid #e0e0e0;
+            background: #f9f9f9;
+            margin: -20px -20px 20px -20px;
+            padding: 0 20px;
+        }
+
+        .layout-tab {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 14px 20px;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: #666;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .layout-tab:hover {
+            color: #333;
+            background: rgba(0,0,0,0.03);
+        }
+
+        .layout-tab.active {
+            color: #003B4A;
+            border-bottom-color: #003B4A;
+            font-weight: 600;
+        }
+
+        .layout-section {
+            display: none;
+            padding: 20px;
+        }
+
+        .layout-section.active {
+            display: block;
+        }
+
+        .layout-section h4 {
+            margin: 0 0 16px 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .layout-section h5 {
+            margin: 0 0 12px 0;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .section-help {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+
+        /* Layout type selection */
+        .layout-type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+        }
+
+        .layout-type-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 16px 12px;
+            background: #f9f9f9;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .layout-type-btn:hover {
+            border-color: #003B4A;
+            background: #f0f0f0;
+        }
+
+        .layout-type-btn.selected {
+            border-color: #003B4A;
+            background: #e6f2f4;
+        }
+
+        .layout-type-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .layout-type-nome {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .layout-type-desc {
+            font-size: 11px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .layout-subsection {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        /* Colunas builder */
+        .colunas-list {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 8px;
+        }
+
+        .coluna-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            cursor: grab;
+            transition: box-shadow 0.2s;
+        }
+
+        .coluna-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .coluna-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .coluna-item.dragging {
+            opacity: 0.5;
+        }
+
+        .coluna-drag {
+            color: #999;
+            cursor: grab;
+        }
+
+        .coluna-item .checkbox-item {
+            flex: 1;
+            gap: 8px;
+        }
+
+        .coluna-nome {
+            font-weight: 500;
+        }
+
+        .coluna-codigo {
+            font-size: 11px;
+            color: #888;
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+
+        .coluna-largura {
+            width: 80px;
+            padding: 4px 8px;
+            font-size: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        /* Filtros builder */
+        .filtros-builder {
+            margin-bottom: 20px;
+        }
+
+        .filtro-row,
+        .filtro-rapido-row,
+        .metrica-row,
+        .status-acao-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 8px;
+            padding: 8px;
+            background: #f9f9f9;
+            border-radius: 6px;
+        }
+
+        .filtro-row select,
+        .filtro-row input,
+        .filtro-rapido-row select,
+        .filtro-rapido-row input,
+        .metrica-row select,
+        .metrica-row input,
+        .status-acao-row select,
+        .status-acao-row input {
+            padding: 6px 10px;
+            font-size: 13px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .filtro-campo,
+        .filtro-tipo {
+            width: 140px;
+        }
+
+        .filtro-placeholder {
+            flex: 1;
+        }
+
+        /* Acoes checklist */
+        .acoes-checklist {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .acoes-checklist .checkbox-item {
+            background: #f9f9f9;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+
+        @media (max-width: 768px) {
+            .layout-tabs {
+                overflow-x: auto;
+            }
+
+            .layout-tab {
+                padding: 12px 16px;
+                white-space: nowrap;
+            }
+
+            .layout-type-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .coluna-item {
+                flex-wrap: wrap;
+            }
+
+            .filtro-row,
+            .filtro-rapido-row,
+            .metrica-row,
+            .status-acao-row {
+                flex-wrap: wrap;
             }
         }
     </style>

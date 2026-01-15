@@ -13,6 +13,7 @@ const ConfigRenderer = {
     paginacao: { pagina: 1, itensPorPagina: 20 },
     filtros: {},
     containerId: 'pageContent',
+    permissoes: null, // Permissoes do usuario carregadas via BelgoAuth
 
     // =====================================================
     // INICIALIZACAO
@@ -22,6 +23,10 @@ const ConfigRenderer = {
         this.entidade = options.entidade;
         this.containerId = options.containerId || 'pageContent';
         this.campos = []; // Reset campos
+        this.permissoes = null; // Reset permissoes
+
+        // Carregar permissoes do usuario no projeto
+        await this.carregarPermissoes();
 
         // Carregar config_funcionalidades
         if (this.entidade?.config_funcionalidades) {
@@ -40,19 +45,133 @@ const ConfigRenderer = {
             this.paginacao.itensPorPagina = this.config.paginacao.itens_por_pagina;
         }
 
-        // Carregar campos da entidade (para criar/exportar)
-        if (this.entidade?.permite_criar || this.entidade?.permite_exportar) {
+        // Carregar campos da entidade (para criar/exportar) - se usuario tem permissao
+        if (this.podeCriar() || this.podeExportar()) {
             await this.carregarCampos();
         }
 
         // Carregar dados
         await this.carregarDados();
 
+        // Inicializar ActionEngine (se disponivel)
+        if (typeof ActionEngine !== 'undefined') {
+            await ActionEngine.init({
+                projetoId: this.projetoId,
+                entidadeId: this.entidade?.id,
+                entidadeCodigo: this.entidade?.codigo,
+                permissoes: this.permissoes
+            });
+
+            // Escutar eventos de acao executada para atualizar
+            window.addEventListener('actionExecuted', async () => {
+                await this.carregarDados();
+                this.render();
+            });
+        }
+
         // Renderizar
         this.render();
 
         // Setup responsividade
         this.setupResponsivo();
+    },
+
+    // =====================================================
+    // PERMISSOES
+    // =====================================================
+    async carregarPermissoes() {
+        // Tentar usar BelgoAuth se disponivel
+        if (typeof BelgoAuth !== 'undefined' && BelgoAuth.getPermissoes) {
+            try {
+                this.permissoes = await BelgoAuth.getPermissoes(this.projetoId);
+            } catch (e) {
+                console.warn('Erro ao carregar permissoes:', e);
+                this.permissoes = null;
+            }
+        }
+    },
+
+    /**
+     * Verifica se usuario pode criar na entidade atual
+     */
+    podeCriar() {
+        // Primeiro verifica se a entidade permite criar
+        if (!this.entidade?.permite_criar) return false;
+
+        // Se nao tem permissoes carregadas, usar permissao da entidade
+        if (!this.permissoes) return true;
+
+        // Admin tem todas as permissoes
+        if (this.permissoes.isAdmin || this.permissoes.isAdminGlobal) return true;
+
+        // Verificar permissao especifica da entidade
+        const codigo = this.entidade?.codigo;
+        if (codigo && this.permissoes.permissoes) {
+            return this.permissoes.permissoes.includes(`${codigo}.criar`);
+        }
+
+        // Fallback para permissao geral
+        return this.permissoes.pode?.criar || false;
+    },
+
+    /**
+     * Verifica se usuario pode editar na entidade atual
+     */
+    podeEditar() {
+        if (!this.entidade?.permite_editar) return false;
+        if (!this.permissoes) return true;
+        if (this.permissoes.isAdmin || this.permissoes.isAdminGlobal) return true;
+
+        const codigo = this.entidade?.codigo;
+        if (codigo && this.permissoes.permissoes) {
+            return this.permissoes.permissoes.includes(`${codigo}.editar`);
+        }
+        return this.permissoes.pode?.editar || false;
+    },
+
+    /**
+     * Verifica se usuario pode excluir na entidade atual
+     */
+    podeExcluir() {
+        if (!this.entidade?.permite_excluir) return false;
+        if (!this.permissoes) return true;
+        if (this.permissoes.isAdmin || this.permissoes.isAdminGlobal) return true;
+
+        const codigo = this.entidade?.codigo;
+        if (codigo && this.permissoes.permissoes) {
+            return this.permissoes.permissoes.includes(`${codigo}.excluir`);
+        }
+        return this.permissoes.pode?.excluir || false;
+    },
+
+    /**
+     * Verifica se usuario pode exportar na entidade atual
+     */
+    podeExportar() {
+        if (!this.entidade?.permite_exportar) return false;
+        if (!this.permissoes) return true;
+        if (this.permissoes.isAdmin || this.permissoes.isAdminGlobal) return true;
+
+        const codigo = this.entidade?.codigo;
+        if (codigo && this.permissoes.permissoes) {
+            return this.permissoes.permissoes.includes(`${codigo}.exportar`);
+        }
+        return this.permissoes.pode?.exportar || false;
+    },
+
+    /**
+     * Verifica se usuario pode importar na entidade atual
+     */
+    podeImportar() {
+        if (!this.entidade?.permite_importar) return false;
+        if (!this.permissoes) return true;
+        if (this.permissoes.isAdmin || this.permissoes.isAdminGlobal) return true;
+
+        const codigo = this.entidade?.codigo;
+        if (codigo && this.permissoes.permissoes) {
+            return this.permissoes.permissoes.includes(`${codigo}.importar`);
+        }
+        return this.permissoes.pode?.importar || false;
     },
 
     // =====================================================
@@ -119,20 +238,25 @@ const ConfigRenderer = {
     renderHeader() {
         const acoes = [];
 
-        // Botao de adicionar (se entidade permite criar)
-        if (this.entidade?.permite_criar) {
+        // Botao de adicionar (se usuario pode criar)
+        if (this.podeCriar()) {
             acoes.push(`<button class="btn btn-success" onclick="ConfigRenderer.abrirModalCriar()">➕ Adicionar</button>`);
         }
 
-        // Botao de exportar (se entidade permite exportar)
-        if (this.entidade?.permite_exportar) {
+        // Botao de exportar (se usuario pode exportar)
+        if (this.podeExportar()) {
             acoes.push(`<button class="btn btn-primary" onclick="ConfigRenderer.exportarCSV()">📥 Exportar</button>`);
         }
 
-        // Botao de importar (se entidade permite importar)
-        if (this.entidade?.permite_importar) {
+        // Botao de importar (se usuario pode importar)
+        if (this.podeImportar()) {
             acoes.push(`<button class="btn btn-secondary" onclick="ConfigRenderer.abrirModalImportar()">📤 Importar</button>`);
         }
+
+        // Mostrar papel do usuario (se disponivel)
+        const papelBadge = this.permissoes?.papel
+            ? `<span class="badge-papel" style="background: ${this.permissoes.papel.cor || '#666'}; color: white; margin-left: 8px; padding: 2px 8px; border-radius: 4px; font-size: 11px;">${this.permissoes.papel.nome}</span>`
+            : '';
 
         return `
             <div class="page-header">
@@ -140,6 +264,7 @@ const ConfigRenderer = {
                     <span class="page-icon">${this.entidade?.icone || '📋'}</span>
                     <h2>${this.entidade?.nome_plural || 'Dados'}</h2>
                     <span class="badge-count">${this.dadosFiltrados.length} registros</span>
+                    ${papelBadge}
                 </div>
                 <div class="page-actions">${acoes.join('')}</div>
             </div>
@@ -378,6 +503,12 @@ const ConfigRenderer = {
     },
 
     renderAcoes(row, acoes) {
+        // Se ActionEngine estiver disponivel e tiver acoes carregadas, usar ele
+        if (typeof ActionEngine !== 'undefined' && ActionEngine.acoes && ActionEngine.acoes.length > 0) {
+            return ActionEngine.renderBotoes('linha', row, { tamanho: 'sm', mostrarNome: false });
+        }
+
+        // Fallback para acoes do config (compatibilidade)
         return acoes.map(acao => {
             switch (acao) {
                 case 'ver':

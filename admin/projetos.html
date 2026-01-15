@@ -52,10 +52,12 @@
             <header class="content-header">
                 <h2>Gestao de Projetos</h2>
                 <div class="header-actions">
-                    <button class="btn btn-primary" onclick="abrirModalNovoProjeto()">
-                        <span class="icon">➕</span>
-                        Novo Projeto
-                    </button>
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="abrirModalEscolherTipo()">
+                            <span class="icon">➕</span>
+                            Novo Projeto
+                        </button>
+                    </div>
                 </div>
             </header>
 
@@ -233,11 +235,155 @@
         </div>
     </div>
 
+    <!-- Modal Escolher Tipo de Projeto -->
+    <div class="modal" id="modalEscolherTipo">
+        <div class="modal-content modal-sm">
+            <div class="modal-header">
+                <h3>Criar Novo Projeto</h3>
+                <button class="modal-close" onclick="fecharModalEscolherTipo()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-subtitle">Como voce deseja criar o projeto?</p>
+                <div class="tipo-projeto-grid">
+                    <button class="tipo-projeto-card" onclick="abrirModalNovoProjeto()">
+                        <span class="tipo-icone">📝</span>
+                        <span class="tipo-titulo">Projeto em Branco</span>
+                        <span class="tipo-descricao">Criar projeto vazio e configurar manualmente</span>
+                    </button>
+                    <button class="tipo-projeto-card" onclick="abrirModalSelecionarTemplate()">
+                        <span class="tipo-icone">📋</span>
+                        <span class="tipo-titulo">De um Template</span>
+                        <span class="tipo-descricao">Usar template existente com entidades e menus prontos</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Selecionar Template -->
+    <div class="modal" id="modalSelecionarTemplate">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3>Selecionar Template</h3>
+                <button class="modal-close" onclick="fecharModalSelecionarTemplate()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="templates-grid" id="templatesGrid">
+                    <p class="loading">Carregando templates...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Criar de Template -->
+    <div class="modal" id="modalCriarDeTemplate">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Criar Projeto de Template</h3>
+                <button class="modal-close" onclick="fecharModalCriarDeTemplate()">&times;</button>
+            </div>
+            <form id="formCriarDeTemplate" onsubmit="criarProjetoDeTemplate(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="templateIdSelecionado">
+
+                    <div class="template-selecionado" id="templateSelecionadoInfo">
+                        <!-- Renderizado via JS -->
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="templateProjetoCodigo">Codigo *</label>
+                            <input type="text" id="templateProjetoCodigo" required
+                                   pattern="[a-z0-9-]+"
+                                   placeholder="ex: meu-projeto"
+                                   title="Apenas letras minusculas, numeros e hifens">
+                        </div>
+                        <div class="form-group">
+                            <label for="templateProjetoNome">Nome *</label>
+                            <input type="text" id="templateProjetoNome" required placeholder="Nome do projeto">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="templateProjetoDescricao">Descricao</label>
+                        <textarea id="templateProjetoDescricao" rows="2" placeholder="Descricao do projeto"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Cor do Projeto</label>
+                        <div class="cor-picker" id="corPickerTemplate">
+                            <!-- Renderizado via JS -->
+                        </div>
+                        <input type="hidden" id="templateProjetoCor" value="#003B4A">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="fecharModalCriarDeTemplate()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="icon">🚀</span> Criar Projeto
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Exportar como Template -->
+    <div class="modal" id="modalExportarTemplate">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Exportar como Template</h3>
+                <button class="modal-close" onclick="fecharModalExportarTemplate()">&times;</button>
+            </div>
+            <form id="formExportarTemplate" onsubmit="exportarComoTemplate(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="exportarProjetoId">
+
+                    <div class="export-info">
+                        <p>Exportar o projeto <strong id="exportarProjetoNome">-</strong> como template permitira criar novos projetos com a mesma estrutura (entidades, campos, menus).</p>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="exportarTemplateCodigo">Codigo do Template *</label>
+                            <input type="text" id="exportarTemplateCodigo" required
+                                   pattern="[a-z0-9-]+"
+                                   placeholder="ex: template-gtm"
+                                   title="Apenas letras minusculas, numeros e hifens">
+                        </div>
+                        <div class="form-group">
+                            <label for="exportarTemplateNome">Nome do Template *</label>
+                            <input type="text" id="exportarTemplateNome" required placeholder="Nome do template">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exportarTemplateDescricao">Descricao</label>
+                        <textarea id="exportarTemplateDescricao" rows="2" placeholder="Descricao do template"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="exportarTemplatePublico">
+                            Template publico (visivel para todos os usuarios)
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="fecharModalExportarTemplate()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="icon">📤</span> Exportar Template
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script src="js/admin.js"></script>
     <script>
         let projetos = [];
         let projetoAtual = null;
         let logoFileParaUpload = null;
+        let templates = [];
 
         // Paleta de cores Belgo
         const PALETA_BELGO = {
@@ -328,6 +474,9 @@
                         </button>
                         <button class="btn btn-sm btn-outline" onclick="editarProjeto(${p.id})">
                             <span class="icon">✏️</span> Editar
+                        </button>
+                        <button class="btn btn-sm btn-outline" onclick="abrirModalExportarTemplate(${p.id}, '${p.nome.replace(/'/g, "\\'")}', '${p.codigo}')" title="Exportar como Template">
+                            <span class="icon">📤</span>
                         </button>
                         ${p.id !== 1 ? `
                             <button class="btn btn-sm btn-outline btn-danger" onclick="confirmarExclusao(${p.id}, '${p.nome}')">
@@ -513,8 +662,224 @@
             }
         }
 
+        // =====================================================
+        // FUNCOES DE TEMPLATES
+        // =====================================================
+
+        // Abrir modal escolher tipo de projeto
+        function abrirModalEscolherTipo() {
+            document.getElementById('modalEscolherTipo').classList.add('active');
+        }
+
+        function fecharModalEscolherTipo() {
+            document.getElementById('modalEscolherTipo').classList.remove('active');
+        }
+
+        // Abrir modal selecionar template
+        async function abrirModalSelecionarTemplate() {
+            fecharModalEscolherTipo();
+            document.getElementById('modalSelecionarTemplate').classList.add('active');
+
+            // Carregar templates
+            await carregarTemplates();
+        }
+
+        function fecharModalSelecionarTemplate() {
+            document.getElementById('modalSelecionarTemplate').classList.remove('active');
+        }
+
+        // Carregar templates da API
+        async function carregarTemplates() {
+            const container = document.getElementById('templatesGrid');
+            container.innerHTML = '<p class="loading">Carregando templates...</p>';
+
+            try {
+                const res = await apiRequest('/api/templates');
+                if (res.success) {
+                    templates = res.templates || [];
+                    renderizarTemplates();
+                } else {
+                    container.innerHTML = '<p class="error">Erro ao carregar templates</p>';
+                }
+            } catch (error) {
+                console.error('Erro ao carregar templates:', error);
+                container.innerHTML = '<p class="error">Erro ao carregar templates</p>';
+            }
+        }
+
+        // Renderizar grid de templates
+        function renderizarTemplates() {
+            const container = document.getElementById('templatesGrid');
+
+            if (templates.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-templates">
+                        <p>Nenhum template disponivel</p>
+                        <small>Exporte um projeto existente como template para comecar</small>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = templates.map(t => `
+                <button class="template-card" onclick="selecionarTemplate(${t.id})" style="border-top: 4px solid ${t.cor || '#003B4A'}">
+                    <div class="template-header">
+                        <span class="template-icone">${t.icone || '📋'}</span>
+                        <div class="template-info">
+                            <h4 class="template-nome">${t.nome}</h4>
+                            <span class="template-versao">v${t.versao || '1.0'}</span>
+                        </div>
+                    </div>
+                    <p class="template-descricao">${t.descricao || 'Sem descricao'}</p>
+                    <div class="template-stats">
+                        <span class="stat">📦 ${t.stats?.entidades || 0} entidades</span>
+                        <span class="stat">📋 ${t.stats?.menus || 0} menus</span>
+                        <span class="stat">📝 ${t.stats?.campos || 0} campos</span>
+                    </div>
+                </button>
+            `).join('');
+        }
+
+        // Selecionar template
+        function selecionarTemplate(templateId) {
+            const template = templates.find(t => t.id === templateId);
+            if (!template) return;
+
+            fecharModalSelecionarTemplate();
+
+            // Preencher modal de criar de template
+            document.getElementById('templateIdSelecionado').value = templateId;
+            document.getElementById('templateSelecionadoInfo').innerHTML = `
+                <div class="template-preview" style="border-left: 4px solid ${template.cor || '#003B4A'}">
+                    <span class="template-icone">${template.icone || '📋'}</span>
+                    <div>
+                        <strong>${template.nome}</strong>
+                        <small>${template.stats?.entidades || 0} entidades, ${template.stats?.menus || 0} menus</small>
+                    </div>
+                </div>
+            `;
+
+            // Limpar formulario
+            document.getElementById('formCriarDeTemplate').reset();
+            document.getElementById('templateIdSelecionado').value = templateId;
+            document.getElementById('templateProjetoCor').value = template.cor || '#003B4A';
+
+            // Renderizar paleta de cores
+            renderizarPaletaCoresTemplate(template.cor || '#003B4A');
+
+            document.getElementById('modalCriarDeTemplate').classList.add('active');
+        }
+
+        function fecharModalCriarDeTemplate() {
+            document.getElementById('modalCriarDeTemplate').classList.remove('active');
+        }
+
+        // Renderizar paleta de cores para template
+        function renderizarPaletaCoresTemplate(corSelecionada = '#003B4A') {
+            const container = document.getElementById('corPickerTemplate');
+            container.innerHTML = Object.entries(PALETA_BELGO).map(([cor, nome]) => `
+                <button type="button"
+                        class="cor-option ${cor === corSelecionada ? 'selected' : ''}"
+                        style="background: ${cor}"
+                        onclick="selecionarCorTemplate('${cor}')"
+                        title="${nome}">
+                    ${cor === corSelecionada ? '✓' : ''}
+                </button>
+            `).join('');
+        }
+
+        function selecionarCorTemplate(cor) {
+            document.getElementById('templateProjetoCor').value = cor;
+            renderizarPaletaCoresTemplate(cor);
+        }
+
+        // Criar projeto de template
+        async function criarProjetoDeTemplate(event) {
+            event.preventDefault();
+
+            const templateId = document.getElementById('templateIdSelecionado').value;
+            const dados = {
+                template_id: parseInt(templateId),
+                codigo: document.getElementById('templateProjetoCodigo').value,
+                nome: document.getElementById('templateProjetoNome').value,
+                descricao: document.getElementById('templateProjetoDescricao').value,
+                cor: document.getElementById('templateProjetoCor').value
+            };
+
+            try {
+                const res = await apiRequest('/api/projetos/from-template', {
+                    method: 'POST',
+                    body: JSON.stringify(dados)
+                });
+
+                if (res.success) {
+                    showToast(`Projeto "${dados.nome}" criado com sucesso! ${res.projeto.entidades_criadas} entidades, ${res.projeto.menus_criados} menus.`, 'success');
+                    fecharModalCriarDeTemplate();
+                    carregarDados();
+                } else {
+                    showToast(res.error || 'Erro ao criar projeto', 'error');
+                }
+            } catch (error) {
+                console.error('Erro ao criar projeto:', error);
+                showToast('Erro ao criar projeto', 'error');
+            }
+        }
+
+        // =====================================================
+        // FUNCOES DE EXPORTAR COMO TEMPLATE
+        // =====================================================
+
+        function abrirModalExportarTemplate(projetoId, projetoNome, projetoCodigo) {
+            document.getElementById('exportarProjetoId').value = projetoId;
+            document.getElementById('exportarProjetoNome').textContent = projetoNome;
+            document.getElementById('exportarTemplateCodigo').value = `template-${projetoCodigo}`;
+            document.getElementById('exportarTemplateNome').value = `Template ${projetoNome}`;
+            document.getElementById('exportarTemplateDescricao').value = '';
+            document.getElementById('exportarTemplatePublico').checked = false;
+
+            document.getElementById('modalExportarTemplate').classList.add('active');
+        }
+
+        function fecharModalExportarTemplate() {
+            document.getElementById('modalExportarTemplate').classList.remove('active');
+        }
+
+        async function exportarComoTemplate(event) {
+            event.preventDefault();
+
+            const projetoId = document.getElementById('exportarProjetoId').value;
+            const dados = {
+                codigo: document.getElementById('exportarTemplateCodigo').value,
+                nome: document.getElementById('exportarTemplateNome').value,
+                descricao: document.getElementById('exportarTemplateDescricao').value,
+                publico: document.getElementById('exportarTemplatePublico').checked ? 1 : 0
+            };
+
+            try {
+                const res = await apiRequest(`/api/projetos/${projetoId}/export-template`, {
+                    method: 'POST',
+                    body: JSON.stringify(dados)
+                });
+
+                if (res.success) {
+                    showToast(`Template "${dados.nome}" exportado com sucesso! ${res.template.entidades_count} entidades, ${res.template.menus_count} menus.`, 'success');
+                    fecharModalExportarTemplate();
+                } else {
+                    showToast(res.error || 'Erro ao exportar template', 'error');
+                }
+            } catch (error) {
+                console.error('Erro ao exportar template:', error);
+                showToast('Erro ao exportar template', 'error');
+            }
+        }
+
+        // =====================================================
+        // FUNCOES DE PROJETO (ORIGINAL)
+        // =====================================================
+
         // Abrir modal novo projeto
         function abrirModalNovoProjeto() {
+            fecharModalEscolherTipo();
             projetoAtual = null;
             logoFileParaUpload = null;
 
@@ -698,6 +1063,30 @@
         document.getElementById('modalProjeto').addEventListener('click', (e) => {
             if (e.target.classList.contains('modal')) {
                 fecharModalProjeto();
+            }
+        });
+
+        document.getElementById('modalEscolherTipo').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                fecharModalEscolherTipo();
+            }
+        });
+
+        document.getElementById('modalSelecionarTemplate').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                fecharModalSelecionarTemplate();
+            }
+        });
+
+        document.getElementById('modalCriarDeTemplate').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                fecharModalCriarDeTemplate();
+            }
+        });
+
+        document.getElementById('modalExportarTemplate').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                fecharModalExportarTemplate();
             }
         });
 
@@ -1021,6 +1410,219 @@
         @keyframes toastSlideOut {
             from { transform: translateX(0); opacity: 1; }
             to { transform: translateX(100%); opacity: 0; }
+        }
+
+        /* Modal pequeno */
+        .modal-sm {
+            max-width: 450px;
+        }
+
+        .modal-subtitle {
+            color: #666;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Grid de tipo de projeto */
+        .tipo-projeto-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .tipo-projeto-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 24px 16px;
+            background: #f9f9f9;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tipo-projeto-card:hover {
+            background: #f0f0f0;
+            border-color: #003B4A;
+        }
+
+        .tipo-icone {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .tipo-titulo {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .tipo-descricao {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        /* Grid de templates */
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .template-card {
+            display: flex;
+            flex-direction: column;
+            padding: 16px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .template-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-color: #003B4A;
+        }
+
+        .template-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .template-icone {
+            font-size: 28px;
+            line-height: 1;
+        }
+
+        .template-info {
+            flex: 1;
+        }
+
+        .template-nome {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .template-versao {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .template-descricao {
+            font-size: 13px;
+            color: #666;
+            margin: 0 0 12px 0;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .template-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .template-stats .stat {
+            font-size: 11px;
+            color: #888;
+            background: #f5f5f5;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        /* Template selecionado preview */
+        .template-selecionado {
+            margin-bottom: 20px;
+        }
+
+        .template-preview {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .template-preview strong {
+            display: block;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .template-preview small {
+            display: block;
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Export info */
+        .export-info {
+            background: #f0f7ff;
+            border: 1px solid #d0e4ff;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .export-info p {
+            margin: 0;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* Empty templates */
+        .empty-templates {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .empty-templates p {
+            margin: 0 0 8px 0;
+            font-size: 16px;
+        }
+
+        .empty-templates small {
+            color: #888;
+        }
+
+        /* Checkbox label em form group */
+        .form-group .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .form-group .checkbox-label input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+
+        @media (max-width: 480px) {
+            .tipo-projeto-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .templates-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </body>

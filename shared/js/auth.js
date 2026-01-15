@@ -224,6 +224,146 @@ const BelgoAuth = {
         container.innerHTML = `
             <button onclick="BelgoAuth.logout()" class="btn-logout">Sair</button>
         `;
+    },
+
+    // =========================================
+    // PERMISSOES POR PROJETO
+    // =========================================
+
+    /**
+     * Cache de permissoes por projeto
+     */
+    _permissoesCache: {},
+
+    /**
+     * Carrega permissoes do usuario em um projeto
+     * @param {number} projetoId - ID do projeto
+     * @param {boolean} forceRefresh - Forcar atualizacao do cache
+     * @returns {Promise<Object>}
+     */
+    async getPermissoes(projetoId, forceRefresh = false) {
+        // Verificar cache
+        if (!forceRefresh && this._permissoesCache[projetoId]) {
+            return this._permissoesCache[projetoId];
+        }
+
+        try {
+            const response = await this.request(`/api/projetos/${projetoId}/permissoes`);
+            if (!response || !response.ok) {
+                return null;
+            }
+
+            const data = await response.json();
+            if (data.success) {
+                // Salvar no cache
+                this._permissoesCache[projetoId] = data;
+                return data;
+            }
+
+            return null;
+        } catch (error) {
+            console.error('Erro ao carregar permissoes:', error);
+            return null;
+        }
+    },
+
+    /**
+     * Verifica se usuario tem uma permissao especifica
+     * @param {number} projetoId - ID do projeto
+     * @param {string} permissao - Codigo da permissao (ex: 'testes.criar')
+     * @returns {Promise<boolean>}
+     */
+    async temPermissao(projetoId, permissao) {
+        const dados = await this.getPermissoes(projetoId);
+        if (!dados) return false;
+
+        // Admin tem todas as permissoes
+        if (dados.isAdmin || dados.isAdminGlobal) return true;
+
+        // Verificar na lista de permissoes
+        return dados.permissoes && dados.permissoes.includes(permissao);
+    },
+
+    /**
+     * Verifica se usuario pode criar em uma entidade
+     * @param {number} projetoId - ID do projeto
+     * @param {string} entidadeCodigo - Codigo da entidade (opcional)
+     * @returns {Promise<boolean>}
+     */
+    async podeCriar(projetoId, entidadeCodigo = null) {
+        const dados = await this.getPermissoes(projetoId);
+        if (!dados) return false;
+        if (dados.isAdmin || dados.isAdminGlobal) return true;
+        if (entidadeCodigo) {
+            return dados.permissoes && dados.permissoes.includes(`${entidadeCodigo}.criar`);
+        }
+        return dados.pode && dados.pode.criar;
+    },
+
+    /**
+     * Verifica se usuario pode editar em uma entidade
+     * @param {number} projetoId - ID do projeto
+     * @param {string} entidadeCodigo - Codigo da entidade (opcional)
+     * @returns {Promise<boolean>}
+     */
+    async podeEditar(projetoId, entidadeCodigo = null) {
+        const dados = await this.getPermissoes(projetoId);
+        if (!dados) return false;
+        if (dados.isAdmin || dados.isAdminGlobal) return true;
+        if (entidadeCodigo) {
+            return dados.permissoes && dados.permissoes.includes(`${entidadeCodigo}.editar`);
+        }
+        return dados.pode && dados.pode.editar;
+    },
+
+    /**
+     * Verifica se usuario pode excluir em uma entidade
+     * @param {number} projetoId - ID do projeto
+     * @param {string} entidadeCodigo - Codigo da entidade (opcional)
+     * @returns {Promise<boolean>}
+     */
+    async podeExcluir(projetoId, entidadeCodigo = null) {
+        const dados = await this.getPermissoes(projetoId);
+        if (!dados) return false;
+        if (dados.isAdmin || dados.isAdminGlobal) return true;
+        if (entidadeCodigo) {
+            return dados.permissoes && dados.permissoes.includes(`${entidadeCodigo}.excluir`);
+        }
+        return dados.pode && dados.pode.excluir;
+    },
+
+    /**
+     * Verifica se usuario e admin do projeto
+     * @param {number} projetoId - ID do projeto
+     * @returns {Promise<boolean>}
+     */
+    async isProjetoAdmin(projetoId) {
+        const dados = await this.getPermissoes(projetoId);
+        if (!dados) return false;
+        return dados.isAdmin || dados.isAdminGlobal;
+    },
+
+    /**
+     * Retorna papel do usuario no projeto
+     * @param {number} projetoId - ID do projeto
+     * @returns {Promise<Object|null>}
+     */
+    async getPapel(projetoId) {
+        const dados = await this.getPermissoes(projetoId);
+        if (!dados) return null;
+        return dados.papel;
+    },
+
+    /**
+     * Limpa cache de permissoes
+     * @param {number} projetoId - ID do projeto (opcional, se nao passar limpa tudo)
+     */
+    limparCachePermissoes(projetoId = null) {
+        if (projetoId) {
+            delete this._permissoesCache[projetoId];
+        } else {
+            this._permissoesCache = {};
+        }
     }
 };
 

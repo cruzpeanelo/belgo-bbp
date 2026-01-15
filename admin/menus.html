@@ -120,8 +120,26 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="menuTipoLink">Tipo de Menu</label>
+                        <select id="menuTipoLink" onchange="atualizarTipoMenu()">
+                            <option value="custom">URL Personalizada</option>
+                            <option value="entidade">Vincular a Entidade</option>
+                        </select>
+                    </div>
+
+                    <!-- Secao Entidade (visivel quando tipo = entidade) -->
+                    <div class="form-group" id="secaoEntidade" style="display: none;">
+                        <label for="menuEntidade">Entidade *</label>
+                        <select id="menuEntidade" onchange="atualizarUrlEntidade()">
+                            <option value="">Selecione uma entidade...</option>
+                        </select>
+                        <small>A URL sera gerada automaticamente para a pagina da entidade</small>
+                    </div>
+
+                    <!-- Secao URL (visivel quando tipo = custom) -->
+                    <div class="form-group" id="secaoUrl">
                         <label for="menuUrl">URL *</label>
-                        <input type="text" id="menuUrl" required placeholder="Ex: index.html ou pages/teste.html">
+                        <input type="text" id="menuUrl" placeholder="Ex: index.html ou pages/teste.html">
                         <small>Caminho relativo a pasta do projeto</small>
                     </div>
 
@@ -134,6 +152,12 @@
                             <label for="menuOrdem">Ordem</label>
                             <input type="number" id="menuOrdem" min="1" value="1">
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="menuCodigo">Codigo (opcional)</label>
+                        <input type="text" id="menuCodigo" placeholder="ex: dashboard" pattern="[a-z0-9_-]*">
+                        <small>Identificador unico do menu (gerado automaticamente se vazio)</small>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -148,6 +172,7 @@
     <script>
         let projetos = [];
         let menus = [];
+        let entidades = [];
         let projetoAtual = null;
 
         // Toast notification
@@ -224,6 +249,12 @@
                     document.getElementById('emptyState').style.display = 'none';
                 }
 
+                // Buscar entidades do projeto para o select
+                const entidadesRes = await apiRequest(`/api/projetos/${projetoId}/entidades`);
+                if (entidadesRes.success) {
+                    entidades = entidadesRes.entidades || [];
+                }
+
             } catch (error) {
                 console.error('Erro ao carregar menus:', error);
                 showToast('Erro ao carregar menus', 'error');
@@ -247,25 +278,30 @@
                 return;
             }
 
-            container.innerHTML = menus.map((m, index) => `
-                <div class="menu-item" draggable="true" data-id="${m.id}">
-                    <div class="menu-item-drag">⋮⋮</div>
-                    <div class="menu-item-icon">${m.icone || '📄'}</div>
-                    <div class="menu-item-info">
-                        <span class="menu-item-nome">${m.nome}</span>
-                        <span class="menu-item-url">${m.url}</span>
+            container.innerHTML = menus.map((m, index) => {
+                const entidade = m.entidade_id ? entidades.find(e => e.id === m.entidade_id) : null;
+                return `
+                    <div class="menu-item" draggable="true" data-id="${m.id}">
+                        <div class="menu-item-drag">⋮⋮</div>
+                        <div class="menu-item-icon">${m.icone || '📄'}</div>
+                        <div class="menu-item-info">
+                            <span class="menu-item-nome">${m.nome}</span>
+                            <span class="menu-item-url">${m.url}</span>
+                            ${entidade ? `<span class="menu-item-entidade">📋 ${entidade.nome}</span>` : ''}
+                            ${m.pagina_dinamica ? '<span class="menu-item-badge dinamico">Dinamico</span>' : ''}
+                        </div>
+                        <div class="menu-item-ordem">#${m.ordem}</div>
+                        <div class="menu-item-actions">
+                            <button class="btn btn-sm btn-outline" onclick="editarMenu(${m.id})" title="Editar">
+                                ✏️
+                            </button>
+                            <button class="btn btn-sm btn-outline btn-danger" onclick="confirmarExclusao(${m.id}, '${m.nome}')" title="Excluir">
+                                🗑️
+                            </button>
+                        </div>
                     </div>
-                    <div class="menu-item-ordem">#${m.ordem}</div>
-                    <div class="menu-item-actions">
-                        <button class="btn btn-sm btn-outline" onclick="editarMenu(${m.id})" title="Editar">
-                            ✏️
-                        </button>
-                        <button class="btn btn-sm btn-outline btn-danger" onclick="confirmarExclusao(${m.id}, '${m.nome}')" title="Excluir">
-                            🗑️
-                        </button>
-                    </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         // Abrir modal para novo menu
@@ -279,6 +315,13 @@
             document.getElementById('formMenu').reset();
             document.getElementById('menuId').value = '';
 
+            // Reset tipo de menu
+            document.getElementById('menuTipoLink').value = 'custom';
+            atualizarTipoMenu();
+
+            // Popular select de entidades
+            popularSelectEntidades();
+
             // Calcular proxima ordem
             const maxOrdem = menus.length > 0 ? Math.max(...menus.map(m => m.ordem)) : 0;
             document.getElementById('menuOrdem').value = maxOrdem + 1;
@@ -286,10 +329,64 @@
             document.getElementById('modalMenu').classList.add('active');
         }
 
+        // Popular select de entidades
+        function popularSelectEntidades() {
+            const select = document.getElementById('menuEntidade');
+            select.innerHTML = '<option value="">Selecione uma entidade...</option>' +
+                entidades.map(e => `
+                    <option value="${e.id}" data-codigo="${e.codigo}" data-icone="${e.icone || '📋'}">${e.icone || '📋'} ${e.nome} (${e.codigo})</option>
+                `).join('');
+        }
+
+        // Atualizar visibilidade baseado no tipo de menu
+        function atualizarTipoMenu() {
+            const tipo = document.getElementById('menuTipoLink').value;
+            const secaoEntidade = document.getElementById('secaoEntidade');
+            const secaoUrl = document.getElementById('secaoUrl');
+            const inputUrl = document.getElementById('menuUrl');
+
+            if (tipo === 'entidade') {
+                secaoEntidade.style.display = 'block';
+                secaoUrl.style.display = 'none';
+                inputUrl.removeAttribute('required');
+            } else {
+                secaoEntidade.style.display = 'none';
+                secaoUrl.style.display = 'block';
+                inputUrl.setAttribute('required', 'required');
+            }
+        }
+
+        // Atualizar URL quando entidade e selecionada
+        function atualizarUrlEntidade() {
+            const select = document.getElementById('menuEntidade');
+            const selectedOption = select.options[select.selectedIndex];
+
+            if (selectedOption && selectedOption.value) {
+                const codigo = selectedOption.dataset.codigo;
+                const icone = selectedOption.dataset.icone;
+
+                // Gerar URL dinamica
+                document.getElementById('menuUrl').value = `pages/entidade.html?e=${codigo}`;
+
+                // Sugerir icone se vazio
+                if (!document.getElementById('menuIcone').value) {
+                    document.getElementById('menuIcone').value = icone;
+                }
+
+                // Sugerir codigo se vazio
+                if (!document.getElementById('menuCodigo').value) {
+                    document.getElementById('menuCodigo').value = codigo;
+                }
+            }
+        }
+
         // Editar menu
         function editarMenu(menuId) {
             const menu = menus.find(m => m.id === menuId);
             if (!menu) return;
+
+            // Popular select de entidades
+            popularSelectEntidades();
 
             document.getElementById('modalMenuTitulo').textContent = 'Editar Menu';
             document.getElementById('menuId').value = menu.id;
@@ -297,6 +394,16 @@
             document.getElementById('menuUrl').value = menu.url;
             document.getElementById('menuIcone').value = menu.icone || '';
             document.getElementById('menuOrdem').value = menu.ordem;
+            document.getElementById('menuCodigo').value = menu.codigo || '';
+
+            // Definir tipo de menu
+            if (menu.entidade_id) {
+                document.getElementById('menuTipoLink').value = 'entidade';
+                document.getElementById('menuEntidade').value = menu.entidade_id;
+            } else {
+                document.getElementById('menuTipoLink').value = 'custom';
+            }
+            atualizarTipoMenu();
 
             document.getElementById('modalMenu').classList.add('active');
         }
@@ -307,13 +414,41 @@
 
             const menuId = document.getElementById('menuId').value;
             const isEdicao = !!menuId;
+            const tipoMenu = document.getElementById('menuTipoLink').value;
 
             const dados = {
                 nome: document.getElementById('menuNome').value,
                 url: document.getElementById('menuUrl').value,
                 icone: document.getElementById('menuIcone').value || '📄',
-                ordem: parseInt(document.getElementById('menuOrdem').value)
+                ordem: parseInt(document.getElementById('menuOrdem').value),
+                codigo: document.getElementById('menuCodigo').value || null
             };
+
+            // Se vinculado a entidade
+            if (tipoMenu === 'entidade') {
+                const entidadeId = document.getElementById('menuEntidade').value;
+                if (!entidadeId) {
+                    showToast('Selecione uma entidade', 'error');
+                    return;
+                }
+                dados.entidade_id = parseInt(entidadeId);
+                dados.pagina_dinamica = 1;
+
+                // Garantir que URL esta preenchida
+                const entidade = entidades.find(e => e.id === parseInt(entidadeId));
+                if (entidade && !dados.url) {
+                    dados.url = `pages/entidade.html?e=${entidade.codigo}`;
+                }
+            } else {
+                dados.entidade_id = null;
+                dados.pagina_dinamica = 0;
+
+                // Validar URL obrigatoria
+                if (!dados.url) {
+                    showToast('URL e obrigatoria', 'error');
+                    return;
+                }
+            }
 
             try {
                 const url = isEdicao
@@ -567,6 +702,39 @@
         @keyframes toastSlideOut {
             from { transform: translateX(0); opacity: 1; }
             to { transform: translateX(100%); opacity: 0; }
+        }
+
+        /* Entity badge in menu item */
+        .menu-item-entidade {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            color: #5b21b6;
+            background: #ede9fe;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-top: 4px;
+        }
+
+        .menu-item-badge {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+
+        .menu-item-badge.dinamico {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        /* Form row adjustments */
+        .form-group small {
+            display: block;
+            margin-top: 4px;
+            color: #6b7280;
+            font-size: 12px;
         }
     </style>
 </body>
