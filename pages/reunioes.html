@@ -232,6 +232,95 @@
         .reuniao-card.expanded .expand-icon {
             transform: rotate(180deg);
         }
+        /* Estilos do Resumo Estruturado */
+        .resumo-estruturado {
+            margin: 15px 0;
+            display: grid;
+            gap: 12px;
+        }
+        .resumo-secao {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 12px 14px;
+            border-left: 4px solid #cbd5e1;
+        }
+        .resumo-secao.contexto { border-left-color: #3b82f6; background: #eff6ff; }
+        .resumo-secao.participantes { border-left-color: #8b5cf6; background: #f5f3ff; }
+        .resumo-secao.temas { border-left-color: #06b6d4; background: #ecfeff; }
+        .resumo-secao.as-is { border-left-color: #ef4444; background: #fef2f2; }
+        .resumo-secao.to-be { border-left-color: #22c55e; background: #f0fdf4; }
+        .resumo-secao.decisoes { border-left-color: #10b981; background: #ecfdf5; }
+        .resumo-secao.pendencias { border-left-color: #f59e0b; background: #fffbeb; }
+        .resumo-secao.proximos { border-left-color: #6366f1; background: #eef2ff; }
+        .resumo-secao.sistemas { border-left-color: #64748b; background: #f8fafc; }
+        .resumo-secao.impacto { border-left-color: #dc2626; background: #fef2f2; }
+        .resumo-secao-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+        .resumo-secao-header .icon {
+            font-size: 1rem;
+        }
+        .resumo-secao-content {
+            font-size: 0.9rem;
+            color: #4b5563;
+            line-height: 1.5;
+        }
+        .resumo-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: #e0f2fe;
+            color: #0369a1;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 10px;
+            transition: all 0.2s;
+        }
+        .resumo-toggle:hover {
+            background: #bae6fd;
+        }
+        .resumo-preview {
+            background: #f0f9ff;
+            border-left: 3px solid #0ea5e9;
+            border-radius: 4px;
+            padding: 12px;
+            margin: 12px 0;
+            font-size: 0.9rem;
+            color: #0c4a6e;
+            line-height: 1.5;
+        }
+        .resumo-completo {
+            display: none;
+        }
+        .resumo-completo.visible {
+            display: block;
+        }
+        /* Mobile responsivo */
+        @media (max-width: 768px) {
+            .resumo-estruturado {
+                gap: 8px;
+            }
+            .resumo-secao {
+                padding: 10px 12px;
+            }
+            .resumo-secao-header {
+                font-size: 0.8rem;
+            }
+            .resumo-secao-content {
+                font-size: 0.85rem;
+            }
+        }
         .btn-transcricao {
             display: inline-flex;
             align-items: center;
@@ -481,6 +570,81 @@
             return date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
         }
 
+        // Função para formatar resumo estruturado
+        function formatResumo(resumo, index) {
+            if (!resumo) return '';
+
+            // Mapear seções com seus ícones e classes (ordem importa!)
+            const secoes = [
+                { chave: 'CONTEXTO', icon: '📋', classe: 'contexto', titulo: 'Contexto' },
+                { chave: 'PARTICIPANTES', icon: '👥', classe: 'participantes', titulo: 'Participantes' },
+                { chave: 'TEMAS ABORDADOS', icon: '📌', classe: 'temas', titulo: 'Temas Abordados' },
+                { chave: 'AS-IS IDENTIFICADO', icon: '🔴', classe: 'as-is', titulo: 'AS-IS (Estado Atual)' },
+                { chave: 'TO-BE DEFINIDO', icon: '🟢', classe: 'to-be', titulo: 'TO-BE (Estado Futuro)' },
+                { chave: 'DECISÕES TOMADAS', icon: '✅', classe: 'decisoes', titulo: 'Decisões Tomadas' },
+                { chave: 'PENDÊNCIAS', icon: '⚠️', classe: 'pendencias', titulo: 'Pendências' },
+                { chave: 'PRÓXIMOS PASSOS', icon: '➡️', classe: 'proximos', titulo: 'Próximos Passos' },
+                { chave: 'SISTEMAS MENCIONADOS', icon: '💻', classe: 'sistemas', titulo: 'Sistemas' },
+                { chave: 'IMPACTO NO PROJETO', icon: '🎯', classe: 'impacto', titulo: 'Impacto no Projeto' }
+            ];
+
+            // Todas as chaves para o lookahead
+            const todasChaves = secoes.map(s => s.chave).join('|');
+
+            // Extrair contexto para preview
+            const contextoMatch = resumo.match(/CONTEXTO:\s*(.+?)(?=\n(?:PARTICIPANTES|TEMAS|AS-IS|TO-BE|DECISÕES|PENDÊNCIAS|PRÓXIMOS|SISTEMAS|IMPACTO)|$)/s);
+            const previewText = contextoMatch ? contextoMatch[1].trim().substring(0, 180) + '...' : resumo.substring(0, 180) + '...';
+
+            // Parsear as seções do resumo
+            let secoesHTML = '';
+            for (const config of secoes) {
+                // Criar regex que para na próxima seção ou fim do texto
+                const regex = new RegExp(config.chave + ':\\s*(.+?)(?=\\n(?:' + todasChaves + '):|$)', 's');
+                const match = resumo.match(regex);
+                if (match && match[1].trim()) {
+                    secoesHTML += `
+                        <div class="resumo-secao ${config.classe}">
+                            <div class="resumo-secao-header">
+                                <span class="icon">${config.icon}</span>
+                                <span>${config.titulo}</span>
+                            </div>
+                            <div class="resumo-secao-content">${match[1].trim()}</div>
+                        </div>
+                    `;
+                }
+            }
+
+            // Se não encontrou seções estruturadas, mostra o texto normal
+            if (!secoesHTML) {
+                return `<div class="resumo-preview">${resumo}</div>`;
+            }
+
+            return `
+                <div class="resumo-preview">${previewText}</div>
+                <button class="resumo-toggle" onclick="toggleResumoCompleto(${index}, event)">
+                    <span>📖</span> Ver Resumo Completo
+                </button>
+                <div class="resumo-completo" id="resumo-completo-${index}">
+                    <div class="resumo-estruturado">
+                        ${secoesHTML}
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleResumoCompleto(index, event) {
+            event.stopPropagation();
+            const resumo = document.getElementById('resumo-completo-' + index);
+            const btn = event.target.closest('.resumo-toggle');
+            if (resumo.classList.contains('visible')) {
+                resumo.classList.remove('visible');
+                btn.innerHTML = '<span>📖</span> Ver Resumo Completo';
+            } else {
+                resumo.classList.add('visible');
+                btn.innerHTML = '<span>📕</span> Ocultar Resumo';
+            }
+        }
+
         function getInitials(nome) {
             if (!nome) return '?';
             const parts = nome.split(/[,\s]+/).filter(p => p.length > 0);
@@ -542,11 +706,7 @@
                             ${ações.length > 0 ? `<span>⚡ ${ações.length} ações</span>` : ''}
                         </div>
 
-                        ${r.resumo ? `
-                        <div class="reuniao-resumo" style="margin: 12px 0; padding: 12px; background: #f0f9ff; border-left: 3px solid #0ea5e9; border-radius: 4px; font-size: 0.9rem; color: #0c4a6e; line-height: 1.5;">
-                            ${r.resumo}
-                        </div>
-                        ` : ''}
+                        ${r.resumo ? formatResumo(r.resumo, index) : ''}
 
                         <div class="reuniao-tópicos">
                             ${tópicos.slice(0, 5).map(t => `<span class="topico-tag">${typeof t === 'string' ? t : t.titulo || t}</span>`).join('')}
