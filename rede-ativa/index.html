@@ -86,6 +86,9 @@
 
         <!-- Conteudo Principal -->
         <main class="main-content">
+            <!-- Header do Projeto -->
+            <div class="projeto-header-bar" id="projeto-header"></div>
+
             <div class="page-header">
                 <div class="page-header-text">
                     <h1 class="page-title" style="color: #00A799;">Rede Ativa</h1>
@@ -109,7 +112,17 @@
         </main>
     </div>
 
+    <script src="../shared/js/auth.js"></script>
+    <script src="../shared/js/projeto-context.js"></script>
     <script src="../js/utils.js"></script>
+    <script>
+        // Carregar header do projeto
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.BelgoProjetoContext) {
+                BelgoProjetoContext.renderizarHeaderProjeto('projeto-header');
+            }
+        });
+    </script>
     <script>
         // Toggle mobile menu
         function toggleMobileMenu() {

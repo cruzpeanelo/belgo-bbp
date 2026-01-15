@@ -12,3 +12,8 @@ database_id = "f27aba6f-cdd3-411b-93f0-a6b86b930214"
 [[kv_namespaces]]
 binding = "BELGO_TESTES"
 id = "2a33eb2760ff4c309da942300cf54d8f"
+
+# Cloudflare R2 - Bucket para logos dos projetos
+[[r2_buckets]]
+binding = "LOGOS_BUCKET"
+bucket_name = "belgo-bbp-logos"

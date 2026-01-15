@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projetos - Admin Belgo BBP</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>BELGO BBP</h1>
+                <span class="badge">Admin</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="usuarios.html" class="nav-item">
+                    <span class="icon">👥</span>
+                    Usuarios
+                </a>
+                <a href="projetos.html" class="nav-item active">
+                    <span class="icon">📁</span>
+                    Projetos
+                </a>
+                <a href="auditoria.html" class="nav-item">
+                    <span class="icon">📋</span>
+                    Auditoria
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../landing.html" class="nav-item">
+                    <span class="icon">🏠</span>
+                    Voltar ao Portal
+                </a>
+                <button class="nav-item btn-logout" onclick="logout()">
+                    <span class="icon">🚪</span>
+                    Sair
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h2>Gestao de Projetos</h2>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="abrirModalNovoProjeto()">
+                        <span class="icon">➕</span>
+                        Novo Projeto
+                    </button>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <!-- Stats -->
+                <div class="stats-grid stats-3">
+                    <div class="stat-card">
+                        <div class="stat-icon">📁</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="totalProjetos">-</span>
+                            <span class="stat-label">Projetos</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="projetosAtivos">-</span>
+                            <span class="stat-label">Ativos</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <span class="stat-value" id="totalMembros">-</span>
+                            <span class="stat-label">Membros Total</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lista de Projetos -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Projetos</h3>
+                        <div class="search-box">
+                            <input type="text" id="searchProjetos" placeholder="Buscar projetos..." onkeyup="filtrarProjetos()">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="projetos-grid" id="projetosGrid">
+                            <p class="loading">Carregando projetos...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Novo/Editar Projeto -->
+    <div class="modal" id="modalProjeto">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3 id="modalProjetoTitulo">Novo Projeto</h3>
+                <button class="modal-close" onclick="fecharModalProjeto()">&times;</button>
+            </div>
+            <form id="formProjeto" onsubmit="salvarProjeto(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="projetoId">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="projetoCodigo">Codigo *</label>
+                            <input type="text" id="projetoCodigo" required
+                                   pattern="[a-z0-9-]+"
+                                   placeholder="ex: rede-ativa"
+                                   title="Apenas letras minusculas, numeros e hifens">
+                        </div>
+                        <div class="form-group">
+                            <label for="projetoNome">Nome *</label>
+                            <input type="text" id="projetoNome" required placeholder="Nome do projeto">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projetoDescricao">Descricao</label>
+                        <textarea id="projetoDescricao" rows="3" placeholder="Descricao do projeto"></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="projetoIcone">Icone</label>
+                            <input type="text" id="projetoIcone" placeholder="📁" maxlength="4">
+                        </div>
+                        <div class="form-group">
+                            <label for="projetoVisibilidade">Visibilidade</label>
+                            <select id="projetoVisibilidade">
+                                <option value="privado">Privado</option>
+                                <option value="publico">Publico</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Logo do Projeto -->
+                    <div class="form-group" id="logoGroup" style="display: none;">
+                        <label>Logo do Projeto</label>
+                        <div class="logo-upload-area">
+                            <div class="logo-preview" id="logoPreview">
+                                <span class="logo-placeholder">📁</span>
+                            </div>
+                            <div class="logo-actions">
+                                <input type="file" id="logoFile" accept="image/png,image/jpeg" style="display: none;" onchange="previewLogo(this)">
+                                <button type="button" class="btn btn-sm btn-outline" onclick="document.getElementById('logoFile').click()">
+                                    <span class="icon">📤</span> Selecionar Logo
+                                </button>
+                                <button type="button" class="btn btn-sm btn-outline btn-danger" onclick="removerLogo()" id="btnRemoverLogo" style="display: none;">
+                                    <span class="icon">🗑️</span> Remover
+                                </button>
+                            </div>
+                            <small>PNG ou JPG, max 2MB</small>
+                        </div>
+                    </div>
+
+                    <!-- Cor do Projeto (Paleta Belgo) -->
+                    <div class="form-group">
+                        <label>Cor do Projeto</label>
+                        <div class="cor-picker" id="corPicker">
+                            <!-- Renderizado via JS -->
+                        </div>
+                        <input type="hidden" id="projetoCor" value="#003B4A">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Modulos</label>
+                        <div class="checkbox-group" id="modulosCheckboxes">
+                            <p class="loading">Carregando modulos...</p>
+                        </div>
+                    </div>
+
+                    <!-- Integracao Microsoft 365 -->
+                    <div class="form-section" id="msIntegrationSection" style="display: none;">
+                        <h4 class="form-section-title">
+                            <span class="icon">🔗</span> Integracao Microsoft 365
+                        </h4>
+
+                        <div class="form-group">
+                            <label for="teamsChannelUrl">URL do Canal Teams</label>
+                            <input type="url" id="teamsChannelUrl" placeholder="https://teams.microsoft.com/l/channel/...">
+                            <small>Link direto para o canal do projeto</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="teamsWebhookUrl">Webhook Teams (Notificacoes)</label>
+                            <div class="input-with-action">
+                                <input type="url" id="teamsWebhookUrl" placeholder="https://outlook.office.com/webhook/...">
+                                <button type="button" class="btn btn-sm btn-outline" onclick="testarWebhook()">
+                                    <span class="icon">🔔</span> Testar
+                                </button>
+                            </div>
+                            <small>Incoming Webhook configurado no canal</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sharepointFolderUrl">URL da Pasta SharePoint</label>
+                            <input type="url" id="sharepointFolderUrl" placeholder="https://belgomineira.sharepoint.com/sites/...">
+                            <small>Link para pasta de documentos do projeto</small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="sharepointDriveId">Drive ID</label>
+                                <input type="text" id="sharepointDriveId" placeholder="b!xxxxx">
+                            </div>
+                            <div class="form-group">
+                                <label for="sharepointFolderId">Folder ID</label>
+                                <input type="text" id="sharepointFolderId" placeholder="01XXXXX">
+                            </div>
+                        </div>
+                        <small>IDs para upload via Graph API (obter no Graph Explorer)</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="fecharModalProjeto()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+    <script>
+        let projetos = [];
+        let modulos = [];
+        let projetoAtual = null;
+        let logoFileParaUpload = null;
+
+        // Paleta de cores Belgo
+        const PALETA_BELGO = {
+            '#003B4A': 'Azul Escuro',
+            '#00A799': 'Verde Agua',
+            '#ED1C24': 'Vermelho',
+            '#333333': 'Cinza Escuro',
+            '#FF6B35': 'Laranja'
+        };
+
+        // Toast notification
+        function showToast(message, type = 'info') {
+            // Remove existing toast
+            const existingToast = document.querySelector('.toast-notification');
+            if (existingToast) existingToast.remove();
+
+            const toast = document.createElement('div');
+            toast.className = `toast-notification toast-${type}`;
+            toast.innerHTML = `
+                <span class="toast-icon">${type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'}</span>
+                <span class="toast-message">${message}</span>
+            `;
+            document.body.appendChild(toast);
+
+            // Auto remove after 4 seconds
+            setTimeout(() => {
+                toast.classList.add('toast-hide');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        // Carregar dados iniciais
+        async function carregarDados() {
+            try {
+                // Carregar projetos
+                const res = await apiRequest('/api/projetos');
+                if (res.success) {
+                    projetos = res.projetos;
+                    renderizarProjetos();
+                    atualizarEstatisticas();
+                }
+
+                // Carregar modulos para o formulario
+                const modulosRes = await apiRequest('/api/admin/modulos');
+                if (modulosRes.success) {
+                    modulos = modulosRes.modulos;
+                    renderizarModulosCheckboxes();
+                }
+
+                // Inicializar paleta de cores
+                renderizarPaletaCores('#003B4A');
+
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+                showToast('Erro ao carregar projetos', 'error');
+            }
+        }
+
+        // Renderizar grid de projetos
+        function renderizarProjetos() {
+            const container = document.getElementById('projetosGrid');
+
+            if (projetos.length === 0) {
+                container.innerHTML = '<p class="empty">Nenhum projeto encontrado</p>';
+                return;
+            }
+
+            container.innerHTML = projetos.map(p => `
+                <div class="projeto-card" style="border-top: 4px solid ${p.cor || '#003B4A'}">
+                    <div class="projeto-header">
+                        <span class="projeto-icone">${p.icone || '📁'}</span>
+                        <div class="projeto-info">
+                            <h4 class="projeto-nome">${p.nome}</h4>
+                            <span class="projeto-codigo">${p.codigo}</span>
+                        </div>
+                        <span class="projeto-status ${p.ativo ? 'ativo' : 'inativo'}">
+                            ${p.ativo ? 'Ativo' : 'Inativo'}
+                        </span>
+                    </div>
+                    ${p.descricao ? `<p class="projeto-descricao">${p.descricao}</p>` : ''}
+                    <div class="projeto-meta">
+                        <span class="meta-item">
+                            <span class="icon">👥</span>
+                            ${p.total_membros || 0} membros
+                        </span>
+                        ${p.papel_nome ? `
+                            <span class="meta-item papel" style="background: ${p.papel_cor || '#6B7280'}20; color: ${p.papel_cor || '#6B7280'}">
+                                ${p.papel_nome}
+                            </span>
+                        ` : ''}
+                    </div>
+                    <div class="projeto-actions">
+                        <button class="btn btn-sm btn-outline" onclick="gerenciarMembros(${p.id})">
+                            <span class="icon">👥</span> Membros
+                        </button>
+                        <button class="btn btn-sm btn-outline" onclick="editarProjeto(${p.id})">
+                            <span class="icon">✏️</span> Editar
+                        </button>
+                        ${p.id !== 1 ? `
+                            <button class="btn btn-sm btn-outline btn-danger" onclick="confirmarExclusao(${p.id}, '${p.nome}')">
+                                <span class="icon">🗑️</span>
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Atualizar estatisticas
+        function atualizarEstatisticas() {
+            document.getElementById('totalProjetos').textContent = projetos.length;
+            document.getElementById('projetosAtivos').textContent = projetos.filter(p => p.ativo).length;
+
+            const totalMembros = projetos.reduce((sum, p) => sum + (p.total_membros || 0), 0);
+            document.getElementById('totalMembros').textContent = totalMembros;
+        }
+
+        // Filtrar projetos
+        function filtrarProjetos() {
+            const termo = document.getElementById('searchProjetos').value.toLowerCase();
+
+            if (!termo) {
+                renderizarProjetos();
+                return;
+            }
+
+            const filtrados = projetos.filter(p =>
+                p.nome.toLowerCase().includes(termo) ||
+                p.codigo.toLowerCase().includes(termo) ||
+                (p.descricao && p.descricao.toLowerCase().includes(termo))
+            );
+
+            const container = document.getElementById('projetosGrid');
+            if (filtrados.length === 0) {
+                container.innerHTML = '<p class="empty">Nenhum projeto encontrado para a busca</p>';
+                return;
+            }
+
+            const projetosBackup = projetos;
+            projetos = filtrados;
+            renderizarProjetos();
+            projetos = projetosBackup;
+        }
+
+        // Renderizar checkboxes de modulos
+        function renderizarModulosCheckboxes() {
+            const container = document.getElementById('modulosCheckboxes');
+
+            if (modulos.length === 0) {
+                container.innerHTML = '<p class="empty">Nenhum modulo disponivel</p>';
+                return;
+            }
+
+            container.innerHTML = modulos.map(m => `
+                <label class="checkbox-item">
+                    <input type="checkbox" name="modulos" value="${m.id}">
+                    <span class="checkbox-icon">${m.icone || '📦'}</span>
+                    <span class="checkbox-label">${m.nome}</span>
+                </label>
+            `).join('');
+        }
+
+        // Renderizar paleta de cores
+        function renderizarPaletaCores(corSelecionada = '#003B4A') {
+            const container = document.getElementById('corPicker');
+            container.innerHTML = Object.entries(PALETA_BELGO).map(([cor, nome]) => `
+                <button type="button"
+                        class="cor-option ${cor === corSelecionada ? 'selected' : ''}"
+                        style="background: ${cor}"
+                        onclick="selecionarCor('${cor}')"
+                        title="${nome}">
+                    ${cor === corSelecionada ? '✓' : ''}
+                </button>
+            `).join('');
+        }
+
+        // Selecionar cor
+        function selecionarCor(cor) {
+            document.getElementById('projetoCor').value = cor;
+            renderizarPaletaCores(cor);
+        }
+
+        // Preview do logo
+        function previewLogo(input) {
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+
+                // Validar tamanho
+                if (file.size > 2 * 1024 * 1024) {
+                    showToast('Arquivo muito grande. Maximo 2MB', 'error');
+                    input.value = '';
+                    return;
+                }
+
+                logoFileParaUpload = file;
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    document.getElementById('logoPreview').innerHTML = `
+                        <img src="${e.target.result}" alt="Preview" class="logo-img">
+                    `;
+                    document.getElementById('btnRemoverLogo').style.display = 'inline-flex';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Upload do logo
+        async function uploadLogo(projetoId) {
+            if (!logoFileParaUpload) return true;
+
+            const formData = new FormData();
+            formData.append('logo', logoFileParaUpload);
+
+            try {
+                const token = localStorage.getItem('belgo_token');
+                const res = await fetch(`/api/projetos/${projetoId}/logo`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: formData
+                });
+
+                const data = await res.json();
+                if (!data.success) {
+                    showToast('Erro ao fazer upload do logo: ' + (data.error || ''), 'error');
+                    return false;
+                }
+
+                logoFileParaUpload = null;
+                return true;
+
+            } catch (error) {
+                console.error('Erro no upload:', error);
+                showToast('Erro ao fazer upload do logo', 'error');
+                return false;
+            }
+        }
+
+        // Remover logo
+        async function removerLogo() {
+            const projetoId = document.getElementById('projetoId').value;
+
+            // Se estiver editando, remover do servidor
+            if (projetoId) {
+                try {
+                    const res = await apiRequest(`/api/projetos/${projetoId}/logo`, {
+                        method: 'DELETE'
+                    });
+
+                    if (!res.success) {
+                        showToast('Erro ao remover logo', 'error');
+                        return;
+                    }
+                } catch (error) {
+                    console.error('Erro ao remover logo:', error);
+                }
+            }
+
+            // Limpar preview
+            document.getElementById('logoPreview').innerHTML = '<span class="logo-placeholder">📁</span>';
+            document.getElementById('logoFile').value = '';
+            document.getElementById('btnRemoverLogo').style.display = 'none';
+            logoFileParaUpload = null;
+        }
+
+        // Testar webhook do Teams
+        async function testarWebhook() {
+            const projetoId = document.getElementById('projetoId').value;
+            const webhookUrl = document.getElementById('teamsWebhookUrl').value;
+
+            if (!webhookUrl) {
+                showToast('Informe a URL do webhook', 'error');
+                return;
+            }
+
+            if (!projetoId) {
+                showToast('Salve o projeto primeiro para testar o webhook', 'info');
+                return;
+            }
+
+            try {
+                const res = await apiRequest(`/api/projetos/${projetoId}/teams-test`, {
+                    method: 'POST',
+                    body: JSON.stringify({ webhookUrl })
+                });
+
+                if (res.success) {
+                    showToast('Notificacao enviada! Verifique o canal Teams.', 'success');
+                } else {
+                    showToast('Erro: ' + (res.error || 'Falha ao enviar'), 'error');
+                }
+
+            } catch (error) {
+                console.error('Erro ao testar webhook:', error);
+                showToast('Erro ao testar webhook', 'error');
+            }
+        }
+
+        // Abrir modal novo projeto
+        function abrirModalNovoProjeto() {
+            projetoAtual = null;
+            logoFileParaUpload = null;
+
+            document.getElementById('modalProjetoTitulo').textContent = 'Novo Projeto';
+            document.getElementById('formProjeto').reset();
+            document.getElementById('projetoId').value = '';
+            document.getElementById('projetoCodigo').disabled = false;
+            document.getElementById('projetoCor').value = '#003B4A';
+
+            // Esconder campos de edicao
+            document.getElementById('logoGroup').style.display = 'none';
+            document.getElementById('msIntegrationSection').style.display = 'none';
+
+            // Limpar preview do logo
+            document.getElementById('logoPreview').innerHTML = '<span class="logo-placeholder">📁</span>';
+            document.getElementById('btnRemoverLogo').style.display = 'none';
+
+            // Renderizar paleta de cores
+            renderizarPaletaCores('#003B4A');
+
+            // Limpar campos de integracao
+            document.getElementById('teamsChannelUrl').value = '';
+            document.getElementById('teamsWebhookUrl').value = '';
+            document.getElementById('sharepointFolderUrl').value = '';
+            document.getElementById('sharepointDriveId').value = '';
+            document.getElementById('sharepointFolderId').value = '';
+
+            // Desmarcar todos os modulos
+            document.querySelectorAll('#modulosCheckboxes input[type="checkbox"]').forEach(cb => {
+                cb.checked = false;
+            });
+
+            document.getElementById('modalProjeto').classList.add('active');
+        }
+
+        // Editar projeto
+        async function editarProjeto(id) {
+            try {
+                const res = await apiRequest(`/api/projetos/${id}`);
+                if (!res.success) {
+                    showToast('Erro ao carregar projeto', 'error');
+                    return;
+                }
+
+                const p = res.projeto;
+                projetoAtual = p;
+                logoFileParaUpload = null;
+
+                document.getElementById('modalProjetoTitulo').textContent = 'Editar Projeto';
+                document.getElementById('projetoId').value = p.id;
+                document.getElementById('projetoCodigo').value = p.codigo;
+                document.getElementById('projetoCodigo').disabled = true;
+                document.getElementById('projetoNome').value = p.nome;
+                document.getElementById('projetoDescricao').value = p.descricao || '';
+                document.getElementById('projetoIcone').value = p.icone || '';
+                document.getElementById('projetoCor').value = p.cor || '#003B4A';
+                document.getElementById('projetoVisibilidade').value = p.visibilidade || 'privado';
+
+                // Mostrar campos de edicao
+                document.getElementById('logoGroup').style.display = 'block';
+                document.getElementById('msIntegrationSection').style.display = 'block';
+
+                // Renderizar paleta de cores
+                renderizarPaletaCores(p.cor || '#003B4A');
+
+                // Logo
+                if (p.logo_url) {
+                    document.getElementById('logoPreview').innerHTML = `
+                        <img src="${p.logo_url}" alt="Logo" class="logo-img">
+                    `;
+                    document.getElementById('btnRemoverLogo').style.display = 'inline-flex';
+                } else {
+                    document.getElementById('logoPreview').innerHTML = `<span class="logo-placeholder">${p.icone || '📁'}</span>`;
+                    document.getElementById('btnRemoverLogo').style.display = 'none';
+                }
+
+                // Campos Microsoft 365
+                document.getElementById('teamsChannelUrl').value = p.teams_channel_url || '';
+                document.getElementById('teamsWebhookUrl').value = p.teams_webhook_url || '';
+                document.getElementById('sharepointFolderUrl').value = p.sharepoint_folder_url || '';
+                document.getElementById('sharepointDriveId').value = p.sharepoint_drive_id || '';
+                document.getElementById('sharepointFolderId').value = p.sharepoint_folder_id || '';
+
+                // Marcar modulos do projeto
+                const modulosIds = (p.modulos || []).map(m => m.id);
+                document.querySelectorAll('#modulosCheckboxes input[type="checkbox"]').forEach(cb => {
+                    cb.checked = modulosIds.includes(parseInt(cb.value));
+                });
+
+                document.getElementById('modalProjeto').classList.add('active');
+
+            } catch (error) {
+                console.error('Erro ao carregar projeto:', error);
+                showToast('Erro ao carregar projeto', 'error');
+            }
+        }
+
+        // Salvar projeto
+        async function salvarProjeto(event) {
+            event.preventDefault();
+
+            const id = document.getElementById('projetoId').value;
+            const isEdicao = !!id;
+
+            // Coletar modulos selecionados
+            const modulosSelecionados = [];
+            document.querySelectorAll('#modulosCheckboxes input[type="checkbox"]:checked').forEach(cb => {
+                modulosSelecionados.push(parseInt(cb.value));
+            });
+
+            const dados = {
+                codigo: document.getElementById('projetoCodigo').value,
+                nome: document.getElementById('projetoNome').value,
+                descricao: document.getElementById('projetoDescricao').value,
+                icone: document.getElementById('projetoIcone').value || '📁',
+                cor: document.getElementById('projetoCor').value,
+                visibilidade: document.getElementById('projetoVisibilidade').value,
+                modulos: modulosSelecionados
+            };
+
+            // Adicionar campos de integracao se estiver editando
+            if (isEdicao) {
+                dados.teamsChannelUrl = document.getElementById('teamsChannelUrl').value || null;
+                dados.teamsWebhookUrl = document.getElementById('teamsWebhookUrl').value || null;
+                dados.sharepointFolderUrl = document.getElementById('sharepointFolderUrl').value || null;
+                dados.sharepointDriveId = document.getElementById('sharepointDriveId').value || null;
+                dados.sharepointFolderId = document.getElementById('sharepointFolderId').value || null;
+            }
+
+            try {
+                const url = isEdicao ? `/api/projetos/${id}` : '/api/projetos';
+                const method = isEdicao ? 'PUT' : 'POST';
+
+                const res = await apiRequest(url, {
+                    method,
+                    body: JSON.stringify(dados)
+                });
+
+                if (res.success) {
+                    const projetoId = isEdicao ? id : res.projeto?.id;
+
+                    // Fazer upload do logo se houver
+                    if (projetoId && logoFileParaUpload) {
+                        await uploadLogo(projetoId);
+                    }
+
+                    showToast(isEdicao ? 'Projeto atualizado!' : 'Projeto criado!', 'success');
+                    fecharModalProjeto();
+                    carregarDados();
+                } else {
+                    showToast(res.error || 'Erro ao salvar projeto', 'error');
+                }
+
+            } catch (error) {
+                console.error('Erro ao salvar projeto:', error);
+                showToast('Erro ao salvar projeto', 'error');
+            }
+        }
+
+        // Fechar modal
+        function fecharModalProjeto() {
+            document.getElementById('modalProjeto').classList.remove('active');
+        }
+
+        // Gerenciar membros
+        function gerenciarMembros(projetoId) {
+            window.location.href = `projetos-membros.html?id=${projetoId}`;
+        }
+
+        // Confirmar exclusao
+        function confirmarExclusao(id, nome) {
+            if (confirm(`Deseja realmente desativar o projeto "${nome}"?\n\nEsta acao nao pode ser desfeita.`)) {
+                excluirProjeto(id);
+            }
+        }
+
+        // Excluir projeto
+        async function excluirProjeto(id) {
+            try {
+                const res = await apiRequest(`/api/projetos/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (res.success) {
+                    showToast('Projeto desativado!', 'success');
+                    carregarDados();
+                } else {
+                    showToast(res.error || 'Erro ao excluir projeto', 'error');
+                }
+
+            } catch (error) {
+                console.error('Erro ao excluir projeto:', error);
+                showToast('Erro ao excluir projeto', 'error');
+            }
+        }
+
+        // Fechar modal ao clicar fora
+        document.getElementById('modalProjeto').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                fecharModalProjeto();
+            }
+        });
+
+        // Inicializar
+        checkAuth().then(() => {
+            carregarDados();
+        });
+    </script>
+
+    <style>
+        /* Estilos especificos para projetos */
+        .stats-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .projetos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .projeto-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .projeto-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        }
+
+        .projeto-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .projeto-icone {
+            font-size: 32px;
+            line-height: 1;
+        }
+
+        .projeto-info {
+            flex: 1;
+        }
+
+        .projeto-nome {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .projeto-codigo {
+            font-size: 12px;
+            color: #666;
+            font-family: monospace;
+        }
+
+        .projeto-status {
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        .projeto-status.ativo {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .projeto-status.inativo {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .projeto-descricao {
+            font-size: 14px;
+            color: #666;
+            margin: 0 0 12px 0;
+            line-height: 1.4;
+        }
+
+        .projeto-meta {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .meta-item.papel {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .projeto-actions {
+            display: flex;
+            gap: 8px;
+            padding-top: 12px;
+            border-top: 1px solid #eee;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #ddd;
+            color: #666;
+        }
+
+        .btn-outline:hover {
+            background: #f5f5f5;
+            border-color: #ccc;
+        }
+
+        .btn-danger {
+            color: #dc2626;
+            border-color: #dc2626;
+        }
+
+        .btn-danger:hover {
+            background: #fef2f2;
+        }
+
+        /* Checkboxes de modulos */
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .checkbox-item:hover {
+            background: #ebebeb;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .checkbox-icon {
+            font-size: 18px;
+        }
+
+        .checkbox-label {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .modal-lg {
+            max-width: 600px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .stats-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .projetos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Paleta de cores */
+        .cor-picker {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .cor-option {
+            width: 40px;
+            height: 40px;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: white;
+            transition: all 0.2s;
+        }
+
+        .cor-option:hover {
+            transform: scale(1.1);
+        }
+
+        .cor-option.selected {
+            border-color: #333;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Logo upload */
+        .logo-upload-area {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .logo-preview {
+            width: 80px;
+            height: 80px;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f9f9f9;
+            overflow: hidden;
+        }
+
+        .logo-preview .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .logo-preview .logo-placeholder {
+            font-size: 32px;
+            opacity: 0.5;
+        }
+
+        .logo-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Form section */
+        .form-section {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #eee;
+        }
+
+        .form-section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin: 0 0 16px 0;
+        }
+
+        /* Input com acao */
+        .input-with-action {
+            display: flex;
+            gap: 8px;
+        }
+
+        .input-with-action input {
+            flex: 1;
+        }
+
+        /* Toast notifications */
+        .toast-notification {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            background: #333;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            z-index: 10000;
+            animation: toastSlideIn 0.3s ease;
+        }
+
+        .toast-success { background: #00A799; }
+        .toast-error { background: #ED1C24; }
+        .toast-info { background: #003B4A; }
+
+        .toast-hide {
+            animation: toastSlideOut 0.3s ease forwards;
+        }
+
+        @keyframes toastSlideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes toastSlideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+    </style>
+</body>
+</html>

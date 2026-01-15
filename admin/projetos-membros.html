@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membros do Projeto - Admin Belgo BBP</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>BELGO BBP</h1>
+                <span class="badge">Admin</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+                <a href="usuarios.html" class="nav-item">
+                    <span class="icon">👥</span>
+                    Usuarios
+                </a>
+                <a href="projetos.html" class="nav-item active">
+                    <span class="icon">📁</span>
+                    Projetos
+                </a>
+                <a href="auditoria.html" class="nav-item">
+                    <span class="icon">📋</span>
+                    Auditoria
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="../landing.html" class="nav-item">
+                    <span class="icon">🏠</span>
+                    Voltar ao Portal
+                </a>
+                <button class="nav-item btn-logout" onclick="logout()">
+                    <span class="icon">🚪</span>
+                    Sair
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="header-title">
+                    <a href="projetos.html" class="back-link">← Voltar</a>
+                    <h2>
+                        <span id="projetoIcone">📁</span>
+                        <span id="projetoNome">Carregando...</span>
+                    </h2>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="abrirModalAdicionarMembro()">
+                        <span class="icon">➕</span>
+                        Adicionar Membro
+                    </button>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <!-- Papeis Legend -->
+                <div class="papeis-legend" id="papeisLegend">
+                    <!-- Renderizado via JS -->
+                </div>
+
+                <!-- Lista de Membros -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Membros do Projeto</h3>
+                        <div class="search-box">
+                            <input type="text" id="searchMembros" placeholder="Buscar membros..." onkeyup="filtrarMembros()">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table" id="membrosTable">
+                            <thead>
+                                <tr>
+                                    <th>Usuario</th>
+                                    <th>Area</th>
+                                    <th>Papel</th>
+                                    <th>Membro desde</th>
+                                    <th>Acoes</th>
+                                </tr>
+                            </thead>
+                            <tbody id="membrosBody">
+                                <tr>
+                                    <td colspan="5" class="loading">Carregando...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Adicionar/Editar Membro -->
+    <div class="modal" id="modalMembro">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalMembroTitulo">Adicionar Membro</h3>
+                <button class="modal-close" onclick="fecharModalMembro()">&times;</button>
+            </div>
+            <form id="formMembro" onsubmit="salvarMembro(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="membroId">
+
+                    <div class="form-group" id="usuarioSelectGroup">
+                        <label for="usuarioId">Usuario *</label>
+                        <select id="usuarioId" required>
+                            <option value="">Selecione um usuario...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="papelId">Papel *</label>
+                        <select id="papelId" required>
+                            <option value="">Selecione um papel...</option>
+                        </select>
+                    </div>
+
+                    <div class="papel-info" id="papelInfo" style="display: none;">
+                        <h4>Permissoes do papel:</h4>
+                        <ul id="papelPermissoes"></ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="fecharModalMembro()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+    <script>
+        let projetoId = null;
+        let projeto = null;
+        let membros = [];
+        let papeis = [];
+        let todosUsuarios = [];
+
+        // Obter ID do projeto da URL
+        function getProjetoIdFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('id');
+        }
+
+        // Carregar dados iniciais
+        async function carregarDados() {
+            projetoId = getProjetoIdFromUrl();
+
+            if (!projetoId) {
+                showToast('Projeto nao especificado', 'error');
+                window.location.href = 'projetos.html';
+                return;
+            }
+
+            try {
+                // Carregar projeto e membros
+                const [projetoRes, membrosRes, papeisRes, usuariosRes] = await Promise.all([
+                    apiRequest(`/api/projetos/${projetoId}`),
+                    apiRequest(`/api/projetos/${projetoId}/membros`),
+                    apiRequest('/api/papeis'),
+                    apiRequest('/api/admin/usuarios')
+                ]);
+
+                if (projetoRes.success) {
+                    projeto = projetoRes.projeto;
+                    document.getElementById('projetoNome').textContent = projeto.nome;
+                    document.getElementById('projetoIcone').textContent = projeto.icone || '📁';
+                    document.title = `Membros - ${projeto.nome}`;
+                }
+
+                if (membrosRes.success) {
+                    membros = membrosRes.membros || [];
+                    renderizarMembros();
+                }
+
+                if (papeisRes.success) {
+                    papeis = papeisRes.papeis || [];
+                    renderizarPapeisLegend();
+                    renderizarPapeisSelect();
+                }
+
+                if (usuariosRes.success) {
+                    todosUsuarios = usuariosRes.usuarios || [];
+                    renderizarUsuariosSelect();
+                }
+
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+                showToast('Erro ao carregar dados', 'error');
+            }
+        }
+
+        // Renderizar legenda de papeis
+        function renderizarPapeisLegend() {
+            const container = document.getElementById('papeisLegend');
+            container.innerHTML = papeis.map(p => `
+                <span class="papel-badge" style="background: ${p.cor}20; color: ${p.cor}; border: 1px solid ${p.cor}40;">
+                    ${p.nome}
+                </span>
+            `).join('');
+        }
+
+        // Renderizar select de papeis
+        function renderizarPapeisSelect() {
+            const select = document.getElementById('papelId');
+            select.innerHTML = '<option value="">Selecione um papel...</option>' +
+                papeis.map(p => `<option value="${p.id}" data-nivel="${p.nivel}">${p.nome}</option>`).join('');
+        }
+
+        // Renderizar select de usuarios (excluindo membros atuais)
+        function renderizarUsuariosSelect() {
+            const select = document.getElementById('usuarioId');
+            const membrosIds = membros.map(m => m.id);
+
+            const disponíveis = todosUsuarios.filter(u => !membrosIds.includes(u.id) && u.ativo);
+
+            select.innerHTML = '<option value="">Selecione um usuario...</option>' +
+                disponíveis.map(u => `<option value="${u.id}">${u.nome} (${u.email})</option>`).join('');
+        }
+
+        // Renderizar tabela de membros
+        function renderizarMembros() {
+            const tbody = document.getElementById('membrosBody');
+
+            if (membros.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="empty">Nenhum membro no projeto</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = membros.map(m => `
+                <tr>
+                    <td>
+                        <div class="user-info-cell">
+                            <strong>${m.nome}</strong>
+                            <span class="email">${m.email}</span>
+                        </div>
+                    </td>
+                    <td>${m.area || '-'}</td>
+                    <td>
+                        <span class="papel-badge" style="background: ${m.papel_cor}20; color: ${m.papel_cor}; border: 1px solid ${m.papel_cor}40;">
+                            ${m.papel_nome}
+                        </span>
+                    </td>
+                    <td>${formatDate(m.membro_desde)}</td>
+                    <td>
+                        <div class="table-actions">
+                            <button class="btn btn-sm btn-outline" onclick="editarMembro(${m.id})" title="Editar papel">
+                                ✏️
+                            </button>
+                            <button class="btn btn-sm btn-outline btn-danger" onclick="confirmarRemocao(${m.id}, '${m.nome}')" title="Remover">
+                                🗑️
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Filtrar membros
+        function filtrarMembros() {
+            const termo = document.getElementById('searchMembros').value.toLowerCase();
+
+            if (!termo) {
+                renderizarMembros();
+                return;
+            }
+
+            const filtrados = membros.filter(m =>
+                m.nome.toLowerCase().includes(termo) ||
+                m.email.toLowerCase().includes(termo) ||
+                (m.area && m.area.toLowerCase().includes(termo)) ||
+                m.papel_nome.toLowerCase().includes(termo)
+            );
+
+            const tbody = document.getElementById('membrosBody');
+            if (filtrados.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="empty">Nenhum membro encontrado</td></tr>';
+                return;
+            }
+
+            const membrosBackup = membros;
+            membros = filtrados;
+            renderizarMembros();
+            membros = membrosBackup;
+        }
+
+        // Abrir modal adicionar membro
+        function abrirModalAdicionarMembro() {
+            document.getElementById('modalMembroTitulo').textContent = 'Adicionar Membro';
+            document.getElementById('formMembro').reset();
+            document.getElementById('membroId').value = '';
+            document.getElementById('usuarioSelectGroup').style.display = 'block';
+            document.getElementById('papelInfo').style.display = 'none';
+
+            // Atualizar lista de usuarios disponíveis
+            renderizarUsuariosSelect();
+
+            document.getElementById('modalMembro').classList.add('active');
+        }
+
+        // Editar membro
+        function editarMembro(membroId) {
+            const membro = membros.find(m => m.id === membroId);
+            if (!membro) return;
+
+            document.getElementById('modalMembroTitulo').textContent = `Editar Papel - ${membro.nome}`;
+            document.getElementById('membroId').value = membro.id;
+            document.getElementById('papelId').value = membro.papel_id;
+
+            // Esconder select de usuario (nao pode mudar)
+            document.getElementById('usuarioSelectGroup').style.display = 'none';
+
+            document.getElementById('modalMembro').classList.add('active');
+        }
+
+        // Salvar membro
+        async function salvarMembro(event) {
+            event.preventDefault();
+
+            const membroId = document.getElementById('membroId').value;
+            const isEdicao = !!membroId;
+
+            const dados = {
+                papelId: parseInt(document.getElementById('papelId').value)
+            };
+
+            if (!isEdicao) {
+                dados.usuarioId = parseInt(document.getElementById('usuarioId').value);
+            }
+
+            try {
+                let url, method;
+
+                if (isEdicao) {
+                    url = `/api/projetos/${projetoId}/membros/${membroId}`;
+                    method = 'PUT';
+                } else {
+                    url = `/api/projetos/${projetoId}/membros`;
+                    method = 'POST';
+                }
+
+                const res = await apiRequest(url, {
+                    method,
+                    body: JSON.stringify(dados)
+                });
+
+                if (res.success) {
+                    showToast(res.message || 'Membro salvo!', 'success');
+                    fecharModalMembro();
+                    carregarDados();
+                } else {
+                    showToast(res.error || 'Erro ao salvar membro', 'error');
+                }
+
+            } catch (error) {
+                console.error('Erro ao salvar membro:', error);
+                showToast('Erro ao salvar membro', 'error');
+            }
+        }
+
+        // Fechar modal
+        function fecharModalMembro() {
+            document.getElementById('modalMembro').classList.remove('active');
+        }
+
+        // Confirmar remocao
+        function confirmarRemocao(membroId, nome) {
+            if (confirm(`Deseja remover "${nome}" do projeto?\n\nO usuario perdera acesso ao projeto.`)) {
+                removerMembro(membroId);
+            }
+        }
+
+        // Remover membro
+        async function removerMembro(membroId) {
+            try {
+                const res = await apiRequest(`/api/projetos/${projetoId}/membros/${membroId}`, {
+                    method: 'DELETE'
+                });
+
+                if (res.success) {
+                    showToast(res.message || 'Membro removido!', 'success');
+                    carregarDados();
+                } else {
+                    showToast(res.error || 'Erro ao remover membro', 'error');
+                }
+
+            } catch (error) {
+                console.error('Erro ao remover membro:', error);
+                showToast('Erro ao remover membro', 'error');
+            }
+        }
+
+        // Fechar modal ao clicar fora
+        document.getElementById('modalMembro').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                fecharModalMembro();
+            }
+        });
+
+        // Inicializar
+        checkAuth().then(() => {
+            carregarDados();
+        });
+    </script>
+
+    <style>
+        /* Estilos especificos para membros */
+        .header-title {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .back-link {
+            font-size: 13px;
+            color: #666;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: #003B4A;
+        }
+
+        .header-title h2 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0;
+        }
+
+        .papeis-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .papel-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .user-info-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .user-info-cell .email {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-sm {
+            padding: 6px 10px;
+            font-size: 12px;
+            min-width: auto;
+        }
+
+        .papel-info {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+        }
+
+        .papel-info h4 {
+            margin: 0 0 8px 0;
+            font-size: 14px;
+        }
+
+        .papel-info ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 13px;
+        }
+
+        .papel-info li {
+            margin-bottom: 4px;
+        }
+    </style>
+</body>
+</html>

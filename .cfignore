@@ -1,0 +1,21 @@
+# Ignorar arquivos grandes e pastas não necessárias para deploy
+Novos Arquivos Reunia/
+Reunioes/
+RoadMap 2026/
+Tester/
+deploy-clean/
+deploy.tar
+BelgoBBP_SharePoint.zip
+nul
+*.mp4
+*.zip
+*.tar
+*.mov
+*.avi
+RELATORIO_AUDITORIA_FONTES.md
+.git/
+.github/
+.wrangler/
+.claude/
+.playwright-mcp/
+node_modules/

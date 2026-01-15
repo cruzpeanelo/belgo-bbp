@@ -64,6 +64,13 @@
         .hidden {
             display: none !important;
         }
+
+        /* Secao de Projetos */
+        .projetos-section {
+            padding: 40px 20px;
+            background: rgba(255,255,255,0.5);
+            border-bottom: 1px solid #e5e7eb;
+        }
     </style>
 </head>
 <body>
@@ -78,6 +85,11 @@
                 <button class="btn-header btn-logout hidden" id="logoutBtn" onclick="BelgoAuth.logout()">Sair</button>
             </div>
         </header>
+
+        <!-- Secao de Projetos (renderizada via JS) -->
+        <section id="meusProjetos" class="projetos-section" style="display: none;">
+            <!-- Renderizado via BelgoProjetoContext.renderSecaoProjetos() -->
+        </section>
 
         <!-- Main Content -->
         <main class="landing-main">
@@ -153,8 +165,9 @@
     </div>
 
     <script src="shared/js/auth.js"></script>
+    <script src="shared/js/projeto-context.js"></script>
     <script>
-        // Inicializar autenticação
+        // Inicializar autenticação e projetos
         document.addEventListener('DOMContentLoaded', async () => {
             // Verificar se está autenticado
             if (BelgoAuth.isAuthenticated()) {
@@ -173,6 +186,9 @@
 
                 // Mostrar botão logout
                 document.getElementById('logoutBtn').classList.remove('hidden');
+
+                // Carregar secao de projetos
+                await BelgoProjetoContext.renderSecaoProjetos('meusProjetos');
             }
 
             // Verificar último módulo visitado

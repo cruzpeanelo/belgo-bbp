@@ -34,3 +34,19 @@ package-lock.json
 
 # Logs
 *.log
+
+# Arquivos grandes e pastas de reunioes
+Novos Arquivos Reunia/
+Reunioes/
+RoadMap 2026/
+Tester/
+deploy-clean/
+deploy.tar
+*.zip
+*.tar
+
+# Wrangler
+.wrangler/
+
+# Relatorios
+RELATORIO_*.md
