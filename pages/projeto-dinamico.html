@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto - Belgo BBP</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../shared/css/base.css">
+    <link rel="stylesheet" href="../shared/css/sidebar.css">
+    <style>
+        .projeto-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .projeto-icon {
+            font-size: 3rem;
+            line-height: 1;
+        }
+        .projeto-info h1 {
+            font-size: 1.75rem;
+            color: var(--projeto-cor, #003B4A);
+            margin: 0;
+        }
+        .projeto-info p {
+            color: #6b7280;
+            margin: 0.25rem 0 0;
+        }
+        .menus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+        .menu-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-left: 4px solid var(--menu-cor, #003B4A);
+        }
+        .menu-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        }
+        .menu-icon {
+            font-size: 2rem;
+            line-height: 1;
+        }
+        .menu-info h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #1f2937;
+        }
+        .menu-info p {
+            margin: 0.25rem 0 0;
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+        .error {
+            text-align: center;
+            padding: 2rem;
+            background: #fef2f2;
+            border-radius: 8px;
+            color: #dc2626;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--projeto-cor, #003B4A);
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+        section h2 {
+            font-size: 1.25rem;
+            color: #003B4A;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-logo">BELGO</span>
+                <span class="sidebar-subtitle" id="projetoNome">Carregando...</span>
+            </div>
+            <nav class="sidebar-nav" id="menuNav">
+                <a href="../index.html" class="nav-item">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <div class="nav-loading">Carregando menu...</div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-wrapper" id="conteudo">
+                <div class="loading">Carregando projeto...</div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../shared/js/auth.js"></script>
+    <script src="../shared/js/dynamic-nav.js"></script>
+    <script>
+        let projetoId = null;
+        let projetoCodigo = null;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Verificar autenticacao
+            if (!BelgoAuth.isAuthenticated()) {
+                window.location.href = '../login.html';
+                return;
+            }
+
+            // Obter projeto da URL
+            const params = new URLSearchParams(window.location.search);
+            projetoCodigo = params.get('projeto');
+
+            if (!projetoCodigo) {
+                document.getElementById('conteudo').innerHTML =
+                    '<div class="error">Projeto nao especificado na URL</div>';
+                return;
+            }
+
+            await carregarProjeto();
+        });
+
+        async function carregarProjeto() {
+            const conteudo = document.getElementById('conteudo');
+
+            try {
+                // Buscar projeto pelo codigo
+                const response = await BelgoAuth.request('/api/projetos');
+                if (!response || !response.ok) {
+                    throw new Error('Erro ao buscar projetos');
+                }
+
+                const data = await response.json();
+                const projetos = data.projetos || [];
+                const projeto = projetos.find(p => p.codigo === projetoCodigo);
+
+                if (!projeto) {
+                    conteudo.innerHTML = '<div class="error">Projeto nao encontrado</div>';
+                    return;
+                }
+
+                projetoId = projeto.id;
+                localStorage.setItem('belgo_projeto_id', projetoId);
+
+                // Atualizar titulo
+                document.title = `${projeto.nome} - Belgo BBP`;
+                document.getElementById('projetoNome').textContent = projeto.nome;
+                document.documentElement.style.setProperty('--projeto-cor', projeto.cor || '#003B4A');
+
+                // Carregar menu dinamico
+                if (window.DynamicNav) {
+                    await DynamicNav.init(projetoId);
+                }
+
+                // Buscar entidades e menus do projeto
+                const [entidadesRes, menusRes] = await Promise.all([
+                    BelgoAuth.request(`/api/projetos/${projetoId}/entidades`),
+                    BelgoAuth.request(`/api/projetos/${projetoId}/menus`)
+                ]);
+
+                const entidadesData = entidadesRes?.ok ? await entidadesRes.json() : { entidades: [] };
+                const menusData = menusRes?.ok ? await menusRes.json() : { menus: [] };
+
+                const entidades = entidadesData.entidades || [];
+                const menus = menusData.menus || [];
+
+                // Renderizar conteudo
+                conteudo.innerHTML = `
+                    <div class="projeto-header" style="--projeto-cor: ${projeto.cor || '#003B4A'}">
+                        <div class="projeto-icon">${projeto.icone || '📁'}</div>
+                        <div class="projeto-info">
+                            <h1>${projeto.nome}</h1>
+                            <p>${projeto.descricao || 'Projeto criado via template'}</p>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">${entidades.length}</div>
+                            <div class="stat-label">Entidades</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${menus.length}</div>
+                            <div class="stat-label">Menus</div>
+                        </div>
+                    </div>
+
+                    <section>
+                        <h2>Acesso Rapido</h2>
+                        <div class="menus-grid">
+                            ${menus.map(menu => `
+                                <a href="${menu.url}" class="menu-card" style="--menu-cor: ${projeto.cor || '#003B4A'}">
+                                    <div class="menu-icon">${menu.icone || '📄'}</div>
+                                    <div class="menu-info">
+                                        <h3>${menu.nome}</h3>
+                                        <p>Acessar ${menu.nome.toLowerCase()}</p>
+                                    </div>
+                                </a>
+                            `).join('')}
+                        </div>
+                    </section>
+                `;
+
+            } catch (error) {
+                console.error('Erro ao carregar projeto:', error);
+                conteudo.innerHTML = '<div class="error">Erro ao carregar projeto: ' + error.message + '</div>';
+            }
+        }
+    </script>
+</body>
+</html>

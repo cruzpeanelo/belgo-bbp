@@ -71,16 +71,18 @@ export async function onRequestPost(context) {
 
         // Criar projeto
         // Nota: template_origem_id referencia projetos, nao templates, entao nao usamos
+        // url_modulo aponta para pagina dinamica de entidades com projeto_id
         const projetoResult = await context.env.DB.prepare(`
-            INSERT INTO projetos (codigo, nome, descricao, icone, cor, criado_por, ativo)
-            VALUES (?, ?, ?, ?, ?, ?, 1)
+            INSERT INTO projetos (codigo, nome, descricao, icone, cor, criado_por, url_modulo, ativo)
+            VALUES (?, ?, ?, ?, ?, ?, ?, 1)
         `).bind(
             codigo,
             nome,
             descricao || `Projeto criado a partir do template ${template.nome}`,
             icone || template.icone || '📁',
             cor || template.cor || '#003B4A',
-            usuario.id
+            usuario.id,
+            `pages/projeto-dinamico.html?projeto=${codigo}`
         ).run();
 
         const projetoId = projetoResult.meta.last_row_id;
