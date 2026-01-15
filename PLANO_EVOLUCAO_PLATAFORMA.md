@@ -5,289 +5,228 @@
 
 ---
 
-## STATUS: 100% CONCLUÍDO
+## STATUS ATUAL: EM TESTE - 90% CONCLUÍDO
 
-Todas as 6 fases foram implementadas com sucesso. A plataforma agora é 100% no-code.
-
----
-
-## O QUE JÁ ESTAVA PRONTO
-
-### Página Universal de Entidade (`/pages/entidade.html`)
-- URL: `entidade.html?e=testes`, `entidade.html?e=jornadas`, etc.
-- Usa `App.initDynamicPage('#dynamicContent', entidadeCodigo)`
-- Menu carregado dinamicamente via API `/api/projetos/{id}/menus`
-- Links gerados automaticamente no formato `entidade.html?e={codigo}`
-
-### App.js (`/js/app.js`)
-- `loadProjetoInfo()` - Carrega ID do projeto
-- `loadEntidade(codigo)` - Carrega entidade com cache em `entidadesCache`
-- `loadEntidadeDados(codigo)` - Carrega dados da entidade via API
-- `initDynamicPage(container, codigo)` - Inicializa com ConfigRenderer
-- Integração com KVSync para sincronização de status
-
-### ConfigRenderer (`/shared/js/config-renderer.js`)
-- Renderização baseada em `config_funcionalidades`
-- Layouts: tabela, cards, cards_grid, cards_agrupados, timeline
-- Filtros dinâmicos (campos e botões)
-- Métricas (total, contador, distinct, soma_array)
-- Paginação, ordenação
-- Modal de detalhes configurável
-- Formulário de criação dinâmico
-- Ações: marcar status, Teams, exportar CSV
-- Responsividade mobile
-
-### DynamicComponents (`/shared/js/dynamic-components.js`)
-- DynamicTable, DynamicForm, DynamicPage
-- Tipos de campo: text, textarea, number, date, select, multiselect, boolean, file, relation
-
-### DynamicNav (`/shared/js/dynamic-nav.js`)
-- Navegação dinâmica via banco
-- Seletor de projetos
-
-### Admin Completo
-- `/admin/entidades.html` - CRUD de entidades e campos
-- `/admin/menus.html` - CRUD de menus
-- `/admin/projetos.html` - CRUD de projetos
-- `/admin/projetos-membros.html` - Gerenciar membros por projeto
-- `/admin/usuarios.html` - CRUD de usuários
-
-### Sistema de Permissões (Estrutura)
-- `papeis` - admin, gestor, key_user, executor, visualizador
-- `permissoes` - permissões granulares por entidade/ação
-- `papel_permissoes` - mapeamento papel -> permissões
-- `usuario_projeto_papel` - vínculo usuário-projeto-papel
-
-### Whitelabel
-- Cor do projeto (paleta Belgo)
-- Ícone do projeto
-- Logo do projeto (upload)
-- Integração Teams/SharePoint
-
-### APIs Completas (`/functions/api/`)
-- CRUD projetos, entidades, campos, dados, menus
-- Importação de dados
-
-### Banco de Dados (Migrations 001-004)
-- projeto_entidades com config_funcionalidades
-- projeto_entidade_campos, projeto_entidade_opcoes
-- projeto_dados (JSON genérico)
-- projeto_menus com entidade_id
-- projeto_templates (estrutura básica)
+### Resumo do Progresso
+- **6 fases implementadas** no código
+- **Migrations aplicadas** em produção
+- **Template GTM exportado** com sucesso (6 entidades, 11 menus)
+- **Falta testar**: Criar novo projeto a partir do template
 
 ---
 
-## FASES IMPLEMENTADAS
+## O QUE JÁ FOI FEITO
 
-### FASE 1: EDITOR VISUAL DE LAYOUT (config_funcionalidades)
+### Código Implementado
 
-**Implementado em:** `/admin/entidades.html`
-
-- Botão "Layout" em cada card de entidade
+#### FASE 1: EDITOR VISUAL DE LAYOUT
+- Botão "Layout" em cada card de entidade em `/admin/entidades.html`
 - Modal com 5 abas: Layout, Colunas, Filtros, Métricas, Ações
 - Configuração visual de `config_funcionalidades`
-- Suporte a todos os tipos de layout: tabela, cards, cards_grid, cards_agrupados, timeline
-- Ordenação de colunas e configuração de largura
-- Filtros dinâmicos configuráveis
-- Métricas com diferentes tipos de cálculo
+
+#### FASE 2: AÇÕES CONFIGURÁVEIS VIA BANCO
+- Tabela `projeto_entidade_acoes` criada
+- Engine `/shared/js/action-engine.js` implementada
+- API CRUD em `/api/projetos/[id]/entidades/[entidadeId]/acoes.js`
+
+#### FASE 3: PERMISSÕES NO FRONTEND
+- Funções `BelgoAuth.getPermissoes()` adicionadas em `/shared/js/auth.js`
+- Verificação de permissões no `config-renderer.js`
+- API `/api/projetos/[id]/permissoes.js`
+
+#### FASE 4: SISTEMA DE TEMPLATES
+- Colunas adicionadas em `projeto_templates`: `config_completo`, `projeto_origem_id`, `versao`, etc.
+- API `/api/projetos/from-template.js` - criar projeto via template
+- API `/api/projetos/[id]/export-template.js` - exportar projeto como template
+- API `/api/templates.js` - listar templates
+- UI em `/admin/projetos.html` com botão de exportar template
+
+#### FASE 5: ADMIN DE MENUS MELHORADO
+- Dropdown para vincular menu a entidade em `/admin/menus.html`
+- URL gerada automaticamente para páginas dinâmicas
+
+#### FASE 6: DASHBOARD DINÂMICO
+- Tabela `projeto_dashboard_widgets` criada
+- Engine `/shared/js/dashboard-renderer.js` com 7 tipos de widget
+- CSS `/shared/css/dashboard-renderer.css`
+- API `/api/projetos/[id]/dashboard.js`
+- Página `/pages/dashboard.html`
+- Admin `/admin/dashboard-config.html`
 
 ---
 
-### FASE 2: AÇÕES CONFIGURÁVEIS VIA BANCO
+### Migrations Aplicadas em Produção
 
-**Arquivos criados:**
-- `migrations/006_acoes_dinamicas.sql` - Tabela de ações
-- `shared/js/action-engine.js` - Engine de execução
-- `functions/api/projetos/[id]/entidades/[entidadeId]/acoes.js` - API CRUD
+```sql
+-- Colunas adicionadas em projeto_templates:
+ALTER TABLE projeto_templates ADD COLUMN config_completo TEXT;
+ALTER TABLE projeto_templates ADD COLUMN projeto_origem_id INTEGER;
+ALTER TABLE projeto_templates ADD COLUMN versao TEXT DEFAULT '1.0';
+ALTER TABLE projeto_templates ADD COLUMN criado_por INTEGER;
+ALTER TABLE projeto_templates ADD COLUMN updated_at TEXT;
+ALTER TABLE projeto_templates ADD COLUMN preview_url TEXT;
 
-**Tipos de ação suportados:**
-- `status_change` - Alterar status de registro
-- `api_call` - Chamada a API externa
-- `modal` - Abrir modal de detalhes
-- `teams` - Compartilhar no Teams
-- `link` - Navegar para URL
-- `custom` - Função JavaScript customizada
+-- Colunas adicionadas em projeto_entidades:
+ALTER TABLE projeto_entidades ADD COLUMN ativo INTEGER DEFAULT 1;
+ALTER TABLE projeto_entidades ADD COLUMN ordem INTEGER DEFAULT 0;
 
----
+-- Colunas adicionadas em projeto_entidade_campos:
+ALTER TABLE projeto_entidade_campos ADD COLUMN config TEXT;
+ALTER TABLE projeto_entidade_campos ADD COLUMN placeholder TEXT;
+ALTER TABLE projeto_entidade_campos ADD COLUMN ajuda TEXT;
+ALTER TABLE projeto_entidade_campos ADD COLUMN visivel_detalhe INTEGER DEFAULT 1;
 
-### FASE 3: PERMISSÕES NO FRONTEND
+-- Coluna adicionada em projeto_entidade_opcoes:
+ALTER TABLE projeto_entidade_opcoes ADD COLUMN campo_id INTEGER;
 
-**Arquivos modificados:**
-- `shared/js/auth.js` - Funções de permissão adicionadas
-- `shared/js/config-renderer.js` - Verificação de permissões
-- `functions/api/projetos/[id]/permissoes.js` - API de permissões
+-- Coluna adicionada em projetos:
+ALTER TABLE projetos ADD COLUMN dashboard_config TEXT;
 
-**Funcionalidades:**
-- `BelgoAuth.getPermissoes(projetoId)` - Carrega permissões
-- `BelgoAuth.podeCriar/podeEditar/podeExcluir()` - Verificações
-- Botões ocultos automaticamente conforme permissão
-- Badge de papel do usuário no header
+-- Tabela de ações dinâmicas:
+CREATE TABLE projeto_entidade_acoes (...);
 
----
-
-### FASE 4: SISTEMA DE TEMPLATES
-
-**Arquivos criados:**
-- `migrations/005_templates_completo.sql` - Estrutura expandida
-- `functions/api/projetos/from-template.js` - API de criação
-- `functions/api/projetos/[id]/export-template.js` - API de exportação
-- `functions/api/templates.js` - API de listagem
-
-**Implementado em:** `/admin/projetos.html`
-- Botão "Exportar como Template" em cada projeto
-- Modal para criar projeto a partir de template
-- Templates incluem: entidades, campos, menus, ações, config
-
----
-
-### FASE 5: ADMIN DE MENUS MELHORADO
-
-**Implementado em:** `/admin/menus.html`
-
-- Dropdown para vincular menu a entidade
-- URL gerada automaticamente: `entidade.html?e={codigo}`
-- Badge "Dinâmico" para menus vinculados a entidades
-- Badge com nome da entidade na listagem
-
----
-
-### FASE 6: DASHBOARD DINÂMICO
-
-**Arquivos criados:**
-- `migrations/007_dashboard_config.sql` - Tabela de widgets
-- `shared/js/dashboard-renderer.js` - Engine de dashboard
-- `shared/css/dashboard-renderer.css` - Estilos
-- `functions/api/projetos/[id]/dashboard.js` - API
-- `pages/dashboard.html` - Página universal
-- `admin/dashboard-config.html` - Admin de widgets
-
-**Tipos de widget:**
-- `metrica` - Card com número e ícone
-- `grafico_pizza` - Gráfico de pizza
-- `grafico_barras` - Gráfico de barras horizontal/vertical
-- `lista` - Lista de itens com badges
-- `progresso` - Barras de progresso por categoria
-- `timeline` - Timeline de eventos
-- `tabela` - Tabela de dados
-
----
-
-## RESUMO DE ARQUIVOS CRIADOS/MODIFICADOS
-
-```
-FASE 1 - Editor de Layout:
-  /admin/entidades.html          - Layout Builder integrado
-
-FASE 2 - Ações Dinâmicas:
-  /migrations/006_acoes_dinamicas.sql
-  /shared/js/action-engine.js
-  /functions/api/projetos/[id]/entidades/[entidadeId]/acoes.js
-  /shared/js/config-renderer.js  - Integração com ActionEngine
-  /pages/entidade.html           - Include action-engine.js
-
-FASE 3 - Permissões Frontend:
-  /shared/js/auth.js             - Funções de permissão
-  /shared/js/config-renderer.js  - Verificação de permissões
-  /functions/api/projetos/[id]/permissoes.js
-
-FASE 4 - Templates:
-  /migrations/005_templates_completo.sql
-  /functions/api/projetos/from-template.js
-  /functions/api/projetos/[id]/export-template.js
-  /functions/api/templates.js
-  /admin/projetos.html           - UI de templates
-
-FASE 5 - Menus:
-  /admin/menus.html              - Campo entidade_id
-
-FASE 6 - Dashboard:
-  /migrations/007_dashboard_config.sql
-  /shared/js/dashboard-renderer.js
-  /shared/css/dashboard-renderer.css
-  /functions/api/projetos/[id]/dashboard.js
-  /pages/dashboard.html
-  /admin/dashboard-config.html
-  /admin/index.html              - Link para Dashboard Config
+-- Tabela de widgets do dashboard:
+CREATE TABLE projeto_dashboard_widgets (...);
 ```
 
 ---
 
-## STATUS FINAL
+### Testes Realizados
 
-| Item | Status |
-|------|--------|
-| Página de entidade | Dinâmica |
-| Menu dinâmico | Via API |
-| Entidades/Campos | Admin |
-| config_funcionalidades | Visual builder |
-| Ações | Banco + engine |
-| Permissões | Frontend + backend |
-| Templates | Criar projeto via template |
-| Dashboard | Widgets configuráveis |
-| Whitelabel | Cor/Logo |
-| Perfis/Papéis | Aplicado no frontend |
-
-**Conclusão**: Plataforma 100% no-code!
+| Teste | Resultado |
+|-------|-----------|
+| Login na plataforma | ✅ OK |
+| Acesso ao admin de projetos | ✅ OK |
+| Exportar GTM como template | ✅ OK (6 entidades, 11 menus) |
+| Criar projeto via template | ⏳ Pendente |
+| Configurar layout de entidade | ⏳ Pendente |
+| Dashboard dinâmico | ⏳ Pendente |
 
 ---
 
-## VERIFICAÇÃO FINAL (Critérios de Aceite)
+## O QUE FALTA TESTAR
 
-1. [x] Admin cria projeto novo selecionando template GTM
-2. [x] Projeto novo tem todas as entidades/menus do GTM
-3. [x] Admin configura layout de entidade sem editar JSON
-4. [x] Ações são carregadas do banco (não hardcoded)
-5. [x] Usuário só vê botões que tem permissão
-6. [x] GTM continua funcionando com todos os dados
-7. [x] Funciona em mobile
+### 1. Criar Novo Projeto via Template
+- Clicar em "Novo Projeto" no admin
+- Selecionar template "Template GTM - Go To Market"
+- Definir código, nome, cor
+- Verificar se entidades, campos e menus são criados
+
+### 2. Verificar Estrutura Criada
+- Acessar o novo projeto
+- Verificar se menus aparecem
+- Verificar se páginas de entidade carregam
+- Testar criação de dados
+
+### 3. Testar Layout Builder
+- Ir em Entidades do novo projeto
+- Clicar em "Layout" de uma entidade
+- Mudar tipo de layout (tabela -> cards)
+- Salvar e verificar se funciona
+
+### 4. Testar Dashboard
+- Ir em Dashboard Config
+- Adicionar widgets
+- Verificar se dashboard renderiza
 
 ---
 
-## FLUXO DE USO
+## ARQUIVOS CRIADOS/MODIFICADOS
 
 ```
-1. Admin cria projeto
-   └─ Seleciona template (ex: GTM)
-   └─ Define nome, cor, logo (whitelabel)
+BACKEND (Functions):
+  functions/api/templates.js                              - NOVO
+  functions/api/projetos/from-template.js                 - NOVO
+  functions/api/projetos/[id]/export-template.js          - NOVO
+  functions/api/projetos/[id]/dashboard.js                - NOVO
+  functions/api/projetos/[id]/permissoes.js               - NOVO
+  functions/api/projetos/[id]/entidades/[entidadeId]/acoes.js - NOVO
+
+FRONTEND (Shared):
+  shared/js/action-engine.js                              - NOVO
+  shared/js/dashboard-renderer.js                         - NOVO
+  shared/css/dashboard-renderer.css                       - NOVO
+  shared/js/auth.js                                       - MODIFICADO
+  shared/js/config-renderer.js                            - MODIFICADO
+
+PÁGINAS:
+  pages/dashboard.html                                    - NOVO
+  admin/dashboard-config.html                             - NOVO
+  admin/projetos.html                                     - MODIFICADO (botão exportar)
+  admin/entidades.html                                    - MODIFICADO (layout builder)
+  admin/menus.html                                        - MODIFICADO (vincular entidade)
+  admin/index.html                                        - MODIFICADO (link dashboard config)
+
+MIGRATIONS:
+  migrations/005_templates_completo.sql
+  migrations/006_acoes_dinamicas.sql
+  migrations/007_dashboard_config.sql
+```
+
+---
+
+## COMMITS REALIZADOS
+
+1. `b16b8f3` - Feat: Plataforma 100% no-code - 6 fases completas
+2. `73dffba` - Fix: Corrigir autenticação das APIs novas + atualizar plano
+3. `686ae4f` - Fix: Ajustar API export-template para estrutura real do banco
+
+---
+
+## PRÓXIMOS PASSOS
+
+1. **AGORA**: Criar novo projeto via template GTM
+2. Testar todas as funcionalidades do novo projeto
+3. Testar configuração de layout visual
+4. Testar dashboard dinâmico
+5. Documentar processo para administradores
+
+---
+
+## FLUXO DE USO ESPERADO
+
+```
+1. Admin acessa /admin/projetos.html
+   └─ Clica "Novo Projeto"
+   └─ Seleciona template "Template GTM"
+   └─ Define: codigo, nome, cor, responsável
+   └─ Clica "Criar Projeto"
    ↓
 2. Sistema cria automaticamente:
-   └─ Entidades do template
+   └─ Projeto com cor/ícone do template
+   └─ 6 entidades (testes, jornadas, etc.)
    └─ Campos de cada entidade
-   └─ Menus vinculados
-   └─ config_funcionalidades padrão
-   └─ Ações padrão
+   └─ 11 menus vinculados às entidades
+   └─ Usuário criador como admin do projeto
    ↓
-3. Admin customiza (se quiser):
+3. Admin personaliza (opcional):
    └─ Adiciona/remove entidades
-   └─ Configura layout visualmente (botão "Layout")
-   └─ Adiciona/remove ações
+   └─ Clica "Layout" para configurar visualmente
    └─ Configura dashboard (widgets)
    └─ Gerencia membros e papéis
    ↓
-4. Usuário acessa projeto:
-   └─ Vê apenas menus que tem permissão
-   └─ Vê apenas ações que pode executar
-   └─ Dashboard renderizado dinamicamente
+4. Usuários acessam:
+   └─ Veem apenas menus com permissão
    └─ Dados renderizados conforme config
+   └─ Dashboard dinâmico
 ```
 
 ---
 
-## PRÓXIMOS PASSOS (OPCIONAL)
+## OBSERVAÇÕES TÉCNICAS
 
-1. **Rodar migrations em produção**
-   - `005_templates_completo.sql`
-   - `006_acoes_dinamicas.sql`
-   - `007_dashboard_config.sql`
+### Estrutura do Banco vs API
+Durante os testes, foram identificadas diferenças entre a estrutura esperada pela API e a estrutura real do banco em produção:
 
-2. **Testar fluxo completo**
-   - Criar projeto via template
-   - Configurar layout de entidade
-   - Adicionar ações via banco
-   - Configurar widgets de dashboard
-   - Verificar permissões de usuários
+- `projeto_entidade_opcoes` usa `entidade_id` + `campo_codigo` (não `campo_id`)
+- `projeto_entidades` não tinha `ativo` e `ordem` (adicionados)
+- `projeto_entidade_campos` não tinha `config`, `placeholder`, `ajuda`, `visivel_detalhe` (adicionados)
 
-3. **Documentação**
-   - Guia do administrador
-   - Tipos de widgets disponíveis
-   - Estrutura de config_funcionalidades
+As correções foram feitas tanto no banco quanto na API para garantir compatibilidade.
+
+### Template Exportado
+O template "Template GTM - Go To Market" foi exportado com sucesso e contém:
+- 6 entidades
+- 11 menus
+- Configurações de campos e opções
+- Pode ser usado para criar novos projetos com a mesma estrutura
