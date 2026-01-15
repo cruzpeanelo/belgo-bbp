@@ -390,6 +390,79 @@ const ConfigRenderer = {
     },
 
     // =====================================================
+    // RENDER CARDS (Jornadas - com secoes comparativas)
+    // =====================================================
+    renderCards(dados) {
+        const cardConfig = this.config?.card || {};
+        const header = cardConfig.header || [];
+        const secoes = cardConfig.secoes || [];
+        const acoes = cardConfig.acoes || [];
+
+        return `
+            <div class="cards-expandable">
+                ${dados.map((row, idx) => `
+                    <div class="card-expandable" data-idx="${idx}">
+                        <div class="card-expandable-header" onclick="ConfigRenderer.toggleCardExpand(${idx})">
+                            <div class="card-header-left">
+                                ${header.includes('icone') && row.icone ? `<span class="card-icone">${row.icone}</span>` : ''}
+                                ${header.includes('nome') ? `<h4 class="card-nome">${this.escapeHTML(row.nome || '')}</h4>` : ''}
+                            </div>
+                            <div class="card-header-right">
+                                ${header.includes('status') && row.status ? `<span class="badge ${this.getBadgeClass(row.status)}">${row.status}</span>` : ''}
+                                <span class="expand-icon">▼</span>
+                            </div>
+                        </div>
+                        <div class="card-expandable-body">
+                            ${secoes.map(secao => this.renderSecaoCard(row, secao)).join('')}
+                            <div class="card-expandable-actions">
+                                ${acoes.includes('teams') ? `<button class="btn-teams btn-sm" onclick="event.stopPropagation(); ConfigRenderer.compartilharTeams('${this.escapeHTML(row.nome || '')}')">📤 Teams</button>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    },
+
+    renderSecaoCard(row, secao) {
+        switch (secao.tipo) {
+            case 'comparativo':
+                const campos = secao.campos || [];
+                const titulos = secao.titulos || ['Antes', 'Depois'];
+                return `
+                    <div class="secao-comparativo">
+                        ${campos.map((campo, i) => `
+                            <div class="comparativo-item">
+                                <h5 class="comparativo-titulo">${titulos[i] || ''}</h5>
+                                <div class="comparativo-conteudo">${this.escapeHTML(row[campo] || '-')}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            case 'texto':
+                return `<p class="secao-texto">${this.escapeHTML(row[secao.campo] || '')}</p>`;
+            case 'lista':
+                const lista = row[secao.campo];
+                if (!Array.isArray(lista)) return '';
+                return `
+                    <div class="secao-lista">
+                        <h5>${secao.titulo || ''}</h5>
+                        <ul>${lista.map(item => `<li>${this.escapeHTML(item)}</li>`).join('')}</ul>
+                    </div>
+                `;
+            default:
+                return '';
+        }
+    },
+
+    toggleCardExpand(idx) {
+        const card = document.querySelector(`.card-expandable[data-idx="${idx}"]`);
+        if (card) {
+            card.classList.toggle('expanded');
+        }
+    },
+
+    // =====================================================
     // RENDER CARDS GRID (Participantes)
     // =====================================================
     renderCardsGrid(dados) {
