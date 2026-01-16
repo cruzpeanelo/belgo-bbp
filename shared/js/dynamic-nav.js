@@ -249,7 +249,7 @@ const DynamicNav = {
                             return `
                             <a href="${url}"
                                class="project-dropdown-item ${p.id === this.projetoId ? 'active' : ''}"
-                               onclick="DynamicNav.switchProject(${p.id}, '${url}')">
+                               onclick="event.preventDefault(); DynamicNav.switchProject(${p.id}, '${url}')">
                                 <span class="project-icon">${p.icone || '📁'}</span>
                                 <span class="project-name">${p.nome}</span>
                                 <span class="project-badge" style="background: ${p.cor || '#003B4A'}"></span>
