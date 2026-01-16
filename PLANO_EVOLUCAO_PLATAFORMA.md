@@ -5,7 +5,7 @@
 
 ---
 
-## STATUS ATUAL: ✅ 100% CONCLUÍDO E TESTADO
+## STATUS ATUAL: 🔧 EM PROGRESSO - FASE 8
 
 ### Resumo do Progresso
 - **7 fases implementadas** no código
@@ -13,7 +13,8 @@
 - **Template GTM exportado** com sucesso (6 entidades, 11 menus)
 - **Projeto criado via template** com sucesso (GTM Clone - Teste No-Code)
 - **UX/UI melhorado** - Menu admin contextual na sidebar
-- **Todos os testes passaram** - Plataforma 100% no-code funcionando!
+- **Seletor de projetos corrigido** - URLs normalizadas
+- **🔧 PENDENTE**: Remover seletores duplicados nas páginas legadas
 
 ---
 
@@ -326,3 +327,63 @@ UPDATE projeto_menus SET url = '/pages/entidade.html?e=' || codigo WHERE entidad
 -- Vincular menu Riscos à entidade
 UPDATE projeto_menus SET entidade_id = 23, url = '/pages/entidade.html?e=riscos' WHERE id = 46;
 ```
+
+---
+
+## FASE 8: UNIFICAÇÃO DE NAVEGAÇÃO (EM PROGRESSO)
+
+### Problema Identificado
+As páginas legadas (index.html, rede-ativa/index.html, roadmap/index.html) têm **seletor de módulos estático hardcoded** no HTML, além do seletor dinâmico que o DynamicNav adiciona. Resultado: **dois seletores aparecem na sidebar**.
+
+### O que já foi feito ✅
+
+#### 8.1. Correção de URLs no Seletor de Projetos
+**Problema**: URLs relativas como `index.html` causavam navegação para path errado quando usuário estava em subpasta (ex: `/pages/index.html` em vez de `/index.html`).
+
+**Solução implementada**:
+- Função `normalizeUrl()` adicionada em `dynamic-nav.js`
+- Garante que todas URLs comecem com `/`
+- `event.preventDefault()` no onclick para controlar navegação via JS
+
+**Commits**:
+- `abca80d` - Fix: Normalizar URLs relativas no seletor de projetos
+- `36e669b` - Fix: Prevenir comportamento padrao do link no seletor de projetos
+
+**Arquivos modificados**:
+- `shared/js/dynamic-nav.js`
+- `pages/entidade.html`
+- `pages/dashboard.html`
+
+### O que falta fazer 🔧
+
+#### 8.2. Remover Seletor Estático das Páginas Legadas
+**Arquivos a modificar**:
+- `index.html` - Remover `.module-selector` hardcoded
+- `rede-ativa/index.html` - Remover `.module-selector` hardcoded
+- `roadmap/index.html` - Remover `.module-selector` hardcoded
+
+**Opção A**: Remover o HTML estático e deixar o DynamicNav renderizar
+**Opção B**: Impedir DynamicNav de adicionar seletor se já existir um
+
+#### 8.3. Padronizar Menu Lateral nas Páginas Legadas
+As páginas legadas têm menu estático no HTML. Duas opções:
+- **Opção A**: Converter para usar DynamicNav (menu 100% dinâmico)
+- **Opção B**: Manter menu estático mas sem duplicação
+
+### Páginas Afetadas
+
+| Página | Seletor Estático | Menu Estático | DynamicNav |
+|--------|------------------|---------------|------------|
+| `/index.html` | ✅ Sim (module-selector) | ✅ Sim | ✅ Sim (duplica) |
+| `/rede-ativa/index.html` | ✅ Sim | ✅ Sim | ✅ Sim (duplica) |
+| `/roadmap/index.html` | ✅ Sim | ✅ Sim | ✅ Sim (duplica) |
+| `/pages/projeto-dinamico.html` | ❌ Não | ❌ Não | ✅ Sim (correto) |
+| `/pages/entidade.html` | ❌ Não | ❌ Não | ✅ Sim (correto) |
+| `/pages/dashboard.html` | ❌ Não | ❌ Não | ✅ Sim (correto) |
+
+### Decisão Necessária
+**Pergunta**: Como proceder com as páginas legadas (index.html, rede-ativa, roadmap)?
+
+1. **Migrar para 100% dinâmico** - Remover HTML estático e usar DynamicNav
+2. **Manter híbrido** - Apenas remover o seletor duplicado, manter menu estático
+3. **Desabilitar DynamicNav nas legadas** - Só usar DynamicNav em páginas novas
