@@ -1495,7 +1495,7 @@ const ConfigRenderer = {
                 `;
             }
 
-            case 'comparativo_detalhado':
+            case 'comparativo_detalhado': {
                 // Seção comparativo completo com passos, problemas, benefícios, tempo
                 const asIsConfig = secao.as_is || {};
                 const toBeConfig = secao.to_be || {};
@@ -1523,14 +1523,15 @@ const ConfigRenderer = {
                         </div>
                     </div>
                 `;
+            }
 
             case 'passos_numerados':
                 return this.renderPassosNumerados(row[secao.campo], secao.titulo);
 
-            case 'badges':
+            case 'badges': {
                 const badgesTexto = row[secao.campo] || '';
-                const badges = this.parseDelimitedData(badgesTexto, secao.delimitador || 'auto');
-                if (badges.length === 0) return '';
+                const badgesList = this.parseDelimitedData(badgesTexto, secao.delimitador || 'auto');
+                if (badgesList.length === 0) return '';
 
                 // Determinar estilo baseado no campo (problemas = vermelho, beneficios = verde)
                 let badgeClass = secao.estilo || '';
@@ -1544,12 +1545,13 @@ const ConfigRenderer = {
                     <div class="secao-badges">
                         ${secao.titulo ? `<h5 class="secao-titulo">${secao.titulo}</h5>` : ''}
                         <div class="tags-container">
-                            ${badges.map(badge => `<span class="tag-item ${badgeClass}">${this.escapeHTML(badge)}</span>`).join('')}
+                            ${badgesList.map(badge => `<span class="tag-item ${badgeClass}">${this.escapeHTML(badge)}</span>`).join('')}
                         </div>
                     </div>
                 `;
+            }
 
-            case 'info_grid':
+            case 'info_grid': {
                 const infos = secao.campos || [];
                 const infosFiltradas = infos.filter(info => row[info.campo]);
                 if (infosFiltradas.length === 0) return '';
@@ -1566,11 +1568,12 @@ const ConfigRenderer = {
                         </div>
                     </div>
                 `;
+            }
 
             case 'texto':
                 return `<p class="secao-texto">${this.escapeHTML(row[secao.campo] || '')}</p>`;
 
-            case 'lista':
+            case 'lista': {
                 const lista = row[secao.campo];
                 if (!Array.isArray(lista)) return '';
                 return `
@@ -1579,9 +1582,10 @@ const ConfigRenderer = {
                         <ul>${lista.map(item => `<li>${this.escapeHTML(item)}</li>`).join('')}</ul>
                     </div>
                 `;
+            }
 
             // FASE 12 P1: Seção de Citações/Pain Points
-            case 'citacoes':
+            case 'citacoes': {
                 const citacoesTexto = row[secao.campo];
                 const citacoes = typeof citacoesTexto === 'string'
                     ? citacoesTexto.split('\n').map(c => c.trim()).filter(c => c)
@@ -1597,9 +1601,10 @@ const ConfigRenderer = {
                         `).join('')}
                     </div>
                 `;
+            }
 
             // FASE 12 P1: Tabela aninhada dentro de card
-            case 'tabela':
+            case 'tabela': {
                 const tabelaDados = row[secao.campo];
                 if (!tabelaDados || !Array.isArray(tabelaDados) || tabelaDados.length === 0) {
                     // Tentar parsear como JSON se for string
@@ -1628,6 +1633,7 @@ const ConfigRenderer = {
                         </table>
                     </div>
                 `;
+            }
 
             default:
                 return '';
