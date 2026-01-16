@@ -644,6 +644,27 @@
                     </div>
                 </div>
 
+                <!-- Secao Ordenacao -->
+                <div class="layout-section" id="secaoOrdenacao">
+                    <h4>Ordenacao Padrao</h4>
+                    <p class="section-help">Configure a ordenacao padrao dos registros ao carregar a pagina.</p>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ordenacaoCampoPadrao">Campo para Ordenar</label>
+                            <select id="ordenacaoCampoPadrao">
+                                <option value="">Nenhum (ordem de insercao)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ordenacaoDirecao">Direcao</label>
+                            <select id="ordenacaoDirecao">
+                                <option value="asc">Crescente (A-Z, 1-9, Antigo-Novo)</option>
+                                <option value="desc">Decrescente (Z-A, 9-1, Novo-Antigo)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Secao Colunas -->
                 <div class="layout-section" id="secaoColunas">
                     <h4>Colunas Visiveis na Listagem</h4>
@@ -1540,6 +1561,12 @@
 
             document.getElementById('opcoesKanban').style.display = tipoLayout === 'kanban' ? 'block' : 'none';
 
+            // Ordenacao
+            const ordenacaoConfig = layoutConfig.ordenacao || {};
+            document.getElementById('ordenacaoCampoPadrao').innerHTML = '<option value="">Nenhum (ordem de insercao)</option>' +
+                layoutCampos.map(c => `<option value="${c.codigo}" ${ordenacaoConfig.campo_padrao === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('');
+            document.getElementById('ordenacaoDirecao').value = ordenacaoConfig.direcao_padrao || 'asc';
+
             // Colunas
             renderizarColunasBuilder();
 
@@ -2347,6 +2374,16 @@
                 if (campoTitulo) config.kanban.campo_titulo = campoTitulo;
                 if (campoDescrição) config.kanban.campo_descricao = campoDescrição;
                 if (campoPrioridade) config.kanban.campo_prioridade = campoPrioridade;
+            }
+
+            // Ordenacao config
+            const ordenacaoCampo = document.getElementById('ordenacaoCampoPadrao').value;
+            const ordenacaoDirecao = document.getElementById('ordenacaoDirecao').value;
+            if (ordenacaoCampo) {
+                config.ordenacao = {
+                    campo_padrao: ordenacaoCampo,
+                    direcao_padrao: ordenacaoDirecao
+                };
             }
 
             // Salvar via API
