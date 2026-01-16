@@ -448,6 +448,55 @@
     align-items: flex-start;
 }
 
+.card-data-destaque {
+    background: linear-gradient(135deg, #003B4A 0%, #005577 100%);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.badge-id {
+    background: #e5e7eb;
+    color: #374151;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: monospace;
+}
+
+.card-contador {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin-top: 8px;
+}
+
+.card-contador .contador-icone {
+    font-size: 1rem;
+}
+
+.card-contador .contador-valor {
+    font-weight: 600;
+    color: #003B4A;
+}
+
+.card-contador .contador-label {
+    font-size: 0.8rem;
+}
+
+.tag-more {
+    background: #d1d5db;
+    color: #374151;
+}
+
 /* =====================================================
    GRUPOS (Glossario)
    ===================================================== */
@@ -1906,6 +1955,11 @@
     color: #6b7280;
 }
 
+.tag-small.tag-tema {
+    background: #ede9fe;
+    color: #5b21b6;
+}
+
 /* =====================================================
    LAYOUT: TIMELINE_ZIGZAG (P3)
    Cronograma em zigzag alternando esquerda/direita
@@ -2133,6 +2187,28 @@
     text-align: center;
     color: #9ca3af;
     padding: 30px 20px;
+    font-size: 0.9rem;
+}
+
+.kanban-card-badge {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.kanban-card-responsavel {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #e5e7eb;
+    font-size: 0.8rem;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.kanban-card-responsavel .responsavel-icon {
     font-size: 0.9rem;
 }
 

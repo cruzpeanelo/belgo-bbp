@@ -2035,14 +2035,40 @@ const ConfigRenderer = {
             case 'subtitulo':
                 return `<p class="card-subtitulo">${this.escapeHTML(valor || '')}</p>`;
             case 'badge':
-                return `<span class="badge badge-info">${this.escapeHTML(valor || '')}</span>`;
+                const badgeClass = this.getBadgeClass(valor);
+                return `<span class="badge ${badgeClass}">${this.escapeHTML(valor || '')}</span>`;
+            case 'badge_id':
+                return `<span class="badge badge-id">${this.escapeHTML(valor || '')}</span>`;
             case 'tags':
+                let tagsArray = [];
                 if (Array.isArray(valor)) {
-                    return `<div class="card-tags">${valor.map(v => `<span class="tag">${this.escapeHTML(v)}</span>`).join('')}</div>`;
+                    tagsArray = valor;
+                } else if (valor && campo.separador) {
+                    tagsArray = valor.split(campo.separador).map(t => t.trim()).filter(Boolean);
+                } else if (valor) {
+                    tagsArray = [valor];
                 }
-                return `<span class="tag">${this.escapeHTML(valor || '')}</span>`;
+                const maxTags = campo.max || 100;
+                const tagsToShow = tagsArray.slice(0, maxTags);
+                const remaining = tagsArray.length - maxTags;
+                return `<div class="card-tags">${tagsToShow.map(v => `<span class="tag">${this.escapeHTML(v)}</span>`).join('')}${remaining > 0 ? `<span class="tag tag-more">+${remaining}</span>` : ''}</div>`;
             case 'descricao':
-                return `<p class="card-descricao">${this.escapeHTML(valor || '')}</p>`;
+                const truncar = campo.truncar || 0;
+                let descricaoTexto = valor || '';
+                if (truncar && descricaoTexto.length > truncar) {
+                    descricaoTexto = descricaoTexto.substring(0, truncar) + '...';
+                }
+                return `<p class="card-descricao">${this.escapeHTML(descricaoTexto)}</p>`;
+            case 'data_destaque':
+                if (!valor) return '';
+                const dataObj = new Date(valor);
+                const dataFormatada = dataObj.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+                return `<div class="card-data-destaque">${dataFormatada}</div>`;
+            case 'contador':
+                const contadorValor = valor || 0;
+                const icone = campo.icone || '📊';
+                const label = campo.label || '';
+                return `<div class="card-contador"><span class="contador-icone">${icone}</span> <span class="contador-valor">${contadorValor}</span> <span class="contador-label">${label}</span></div>`;
             default:
                 return `<p>${this.escapeHTML(valor || '')}</p>`;
         }
@@ -2203,14 +2229,34 @@ const ConfigRenderer = {
     // =====================================================
     renderTimelineFases(dados) {
         const config = this.config?.timeline_fases || {};
-        const campoTitulo = config.campo_titulo || 'titulo';
+        const campoTitulo = config.campo_titulo || 'nome';
         const campoStatus = config.campo_status || 'status';
-        const campoDataInicio = config.campo_data_inicio || 'data_inicio';
-        const campoDataFim = config.campo_data_fim || 'data_fim';
+        const campoPeriodo = config.campo_periodo || 'periodo';
         const campoMarcos = config.campo_marcos || 'marcos';
         const campoDescricao = config.campo_descricao || 'descricao';
 
+        // Configuração do banner GO LIVE
+        const goLive = config.go_live || {};
+        const goLiveData = goLive.data || '2026-03-15';
+        const goLiveLabel = goLive.label || 'GO LIVE - Entrada em Produção';
+
+        // Calcular dias restantes
+        const goLiveDate = new Date(goLiveData);
+        const hoje = new Date();
+        const diffDias = Math.ceil((goLiveDate - hoje) / (1000 * 60 * 60 * 24));
+        const diasTexto = diffDias > 0 ? `${diffDias} dias restantes` : (diffDias === 0 ? 'HOJE!' : `${Math.abs(diffDias)} dias após GO Live`);
+
+        // Formatar data do GO LIVE
+        const goLiveDateFormatted = goLiveDate.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
         return `
+            ${goLive.habilitado !== false ? `
+            <div class="go-live-banner">
+                <div class="go-live-date">${goLiveDateFormatted}</div>
+                <div class="go-live-label">${goLiveLabel}</div>
+                <div class="days-remaining">${diasTexto}</div>
+            </div>
+            ` : ''}
             <div class="timeline-fases-container">
                 ${dados.map((fase, idx) => {
                     const status = (fase[campoStatus] || '').toLowerCase();
@@ -2219,32 +2265,54 @@ const ConfigRenderer = {
                     if (status.includes('conclu') || status === 'completo' || status === 'completed') {
                         statusClass = 'completed';
                         statusLabel = 'Concluído';
-                    } else if (status.includes('andamento') || status === 'em progresso' || status === 'in-progress') {
+                    } else if (status.includes('andamento') || status === 'em progresso' || status === 'in-progress' || status === 'em_andamento') {
                         statusClass = 'in-progress';
                         statusLabel = 'Em Andamento';
                     }
 
-                    const marcos = this.parseMarcos(fase[campoMarcos]);
-                    const periodo = this.formatarPeriodo(fase[campoDataInicio], fase[campoDataFim]);
+                    const marcos = this.parseMarcosDetalhados(fase[campoMarcos]);
+                    const periodo = fase[campoPeriodo] || '';
 
                     return `
                         <div class="phase-card ${statusClass}">
                             <div class="phase-header">
                                 <div>
                                     <h3 class="phase-title">${this.escapeHTML(fase[campoTitulo] || '')}</h3>
-                                    ${periodo ? `<span class="phase-period">📅 ${periodo}</span>` : ''}
+                                    ${periodo ? `<span class="phase-period">${this.escapeHTML(periodo)}</span>` : ''}
                                 </div>
                                 <span class="phase-status status-${statusClass}">${statusLabel}</span>
                             </div>
                             ${fase[campoDescricao] ? `<p class="phase-description">${this.escapeHTML(fase[campoDescricao])}</p>` : ''}
                             ${marcos.length > 0 ? `
                                 <ul class="milestone-list">
-                                    ${marcos.map(m => `
-                                        <li class="milestone-item ${m.concluido ? 'completed' : ''}">
-                                            <span class="milestone-icon">${m.concluido ? '✅' : '⏳'}</span>
-                                            <span class="milestone-text">${this.escapeHTML(m.texto)}</span>
-                                        </li>
-                                    `).join('')}
+                                    ${marcos.map(m => {
+                                        const tipoClass = (m.tipo || 'marco').toLowerCase().replace('ã', 'a').replace('ç', 'c');
+                                        const dataFormatada = m.data ? new Date(m.data).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '';
+                                        const participantes = m.participantes || [];
+                                        const temas = m.temas || [];
+
+                                        return `
+                                            <li class="milestone-item">
+                                                <span class="milestone-date">${dataFormatada}</span>
+                                                <div class="milestone-dot ${tipoClass}"></div>
+                                                <div class="milestone-content">
+                                                    <div class="milestone-title">${this.escapeHTML(m.evento || m.texto || '')}</div>
+                                                    ${m.descricao ? `<div class="milestone-desc">${this.escapeHTML(m.descricao)}</div>` : ''}
+                                                    ${participantes.length > 0 ? `
+                                                        <div class="milestone-tags">
+                                                            ${participantes.slice(0, 4).map(p => `<span class="tag-small">${this.escapeHTML(p.split(' ')[0])}</span>`).join('')}
+                                                            ${participantes.length > 4 ? `<span class="tag-small">+${participantes.length - 4}</span>` : ''}
+                                                        </div>
+                                                    ` : ''}
+                                                    ${temas.length > 0 ? `
+                                                        <div class="milestone-tags" style="margin-top: 4px;">
+                                                            ${temas.slice(0, 3).map(t => `<span class="tag-small tag-tema">${this.escapeHTML(t)}</span>`).join('')}
+                                                        </div>
+                                                    ` : ''}
+                                                </div>
+                                            </li>
+                                        `;
+                                    }).join('')}
                                 </ul>
                             ` : ''}
                         </div>
@@ -2254,7 +2322,22 @@ const ConfigRenderer = {
         `;
     },
 
-    // Helper para parsear marcos
+    // Helper para parsear marcos com estrutura detalhada
+    parseMarcosDetalhados(marcos) {
+        if (!marcos) return [];
+        if (Array.isArray(marcos)) return marcos;
+        if (typeof marcos === 'string') {
+            try {
+                const parsed = JSON.parse(marcos);
+                return Array.isArray(parsed) ? parsed : [];
+            } catch(e) {
+                return marcos.split('\n').map(m => ({ texto: m.trim() })).filter(m => m.texto);
+            }
+        }
+        return [];
+    },
+
+    // Helper para parsear marcos simples (mantido para compatibilidade)
     parseMarcos(marcos) {
         if (!marcos) return [];
         if (Array.isArray(marcos)) return marcos.map(m => typeof m === 'string' ? { texto: m, concluido: false } : m);
@@ -2346,6 +2429,8 @@ const ConfigRenderer = {
         const campoPrioridade = config.campo_prioridade || 'prioridade';
         const campoCategoria = config.campo_categoria || 'categoria';
         const campoId = config.campo_id || 'id';
+        const campoDescricao = config.campo_descricao || 'descricao';
+        const campoResponsavel = config.campo_responsavel || 'responsavel';
 
         // Colunas configuráveis ou padrão
         const colunas = config.colunas || [
@@ -2373,29 +2458,24 @@ const ConfigRenderer = {
             }
         });
 
-        // Estatísticas
-        const stats = colunas.map(col => ({
-            titulo: col.titulo,
-            count: grupos[col.valor].length,
-            cor: col.cor
-        }));
+        // Cores para badges de prioridade
+        const coresPrioridade = {
+            bloqueador: { bg: '#fef2f2', text: '#dc2626', border: '#dc2626' },
+            critica: { bg: '#fef2f2', text: '#ef4444', border: '#ef4444' },
+            alta: { bg: '#fffbeb', text: '#d97706', border: '#f59e0b' },
+            media: { bg: '#eff6ff', text: '#2563eb', border: '#3b82f6' },
+            baixa: { bg: '#f0fdf4', text: '#16a34a', border: '#10b981' }
+        };
 
         return `
-            <div class="kanban-stats">
-                ${stats.map(s => `
-                    <div class="kanban-stat" style="background: ${s.cor}">
-                        <span class="kanban-stat-count">${s.count}</span>
-                        <span class="kanban-stat-label">${s.titulo}</span>
-                    </div>
-                `).join('')}
-            </div>
             <div class="kanban-board">
                 ${colunas.map(col => `
                     <div class="kanban-column">
                         <div class="kanban-header ${col.classe}" style="background: ${col.cor}; color: ${col.corTexto}">
-                            ${col.titulo} (${grupos[col.valor].length})
+                            ${col.icone || ''} ${col.titulo} (${grupos[col.valor].length})
                         </div>
                         <div class="kanban-items">
+                            ${grupos[col.valor].length === 0 ? '<div class="kanban-empty">Nenhum item</div>' : ''}
                             ${grupos[col.valor].map(item => {
                                 const prioridade = (item[campoPrioridade] || '').toLowerCase();
                                 let prioridadeClass = 'media';
@@ -2404,14 +2484,21 @@ const ConfigRenderer = {
                                 else if (prioridade.includes('alta')) prioridadeClass = 'alta';
                                 else if (prioridade.includes('baixa')) prioridadeClass = 'baixa';
 
+                                const cores = coresPrioridade[prioridadeClass] || coresPrioridade.media;
+                                const descricao = item[campoDescricao] || '';
+                                const descTruncada = descricao.length > 80 ? descricao.substring(0, 80) + '...' : descricao;
+                                const responsavel = item[campoResponsavel] || '';
+
                                 return `
-                                    <div class="issue-card ${prioridadeClass}" onclick="ConfigRenderer.entrarModoEdicaoInline(${item.id || item._id})">
-                                        ${item[campoId] ? `<div class="issue-id">#${item[campoId]}</div>` : ''}
-                                        <div class="issue-title">${this.escapeHTML(item[campoTitulo] || '')}</div>
-                                        <div class="issue-meta">
-                                            ${item[campoCategoria] ? `<span class="issue-categoria">${this.escapeHTML(item[campoCategoria])}</span>` : ''}
-                                            ${item[campoPrioridade] ? `<span class="issue-prioridade ${prioridadeClass}">${this.escapeHTML(item[campoPrioridade])}</span>` : ''}
+                                    <div class="kanban-card ${prioridadeClass}" onclick="ConfigRenderer.entrarModoEdicaoInline(${item._id || item.id})">
+                                        ${item[campoId] ? `<div class="kanban-card-id">${item[campoId]}</div>` : ''}
+                                        <div class="kanban-card-title">${this.escapeHTML(item[campoTitulo] || '')}</div>
+                                        ${descTruncada ? `<div class="kanban-card-desc">${this.escapeHTML(descTruncada)}</div>` : ''}
+                                        <div class="kanban-card-meta">
+                                            ${item[campoCategoria] ? `<span class="kanban-card-categoria">${this.escapeHTML(item[campoCategoria])}</span>` : ''}
+                                            ${item[campoPrioridade] ? `<span class="kanban-card-badge" style="background: ${cores.bg}; color: ${cores.text}; border: 1px solid ${cores.border}">${this.escapeHTML(item[campoPrioridade])}</span>` : ''}
                                         </div>
+                                        ${responsavel ? `<div class="kanban-card-responsavel"><span class="responsavel-icon">👤</span> ${this.escapeHTML(responsavel)}</div>` : ''}
                                     </div>
                                 `;
                             }).join('')}
@@ -2522,18 +2609,22 @@ const ConfigRenderer = {
         }
 
         // Renderizar layout padrão após o banner
-        const layoutConfig = this.config?.layout || 'timeline_fases';
+        const layoutInterno = this.config?.layout_interno || 'cards_grid';
         let conteudoHtml = '';
 
-        switch (layoutConfig) {
+        switch (layoutInterno) {
             case 'timeline_fases':
                 conteudoHtml = this.renderTimelineFases(dados);
                 break;
             case 'timeline_zigzag':
                 conteudoHtml = this.renderTimelineZigzag(dados);
                 break;
+            case 'timeline_vertical':
+                conteudoHtml = this.renderTimelineVertical(dados);
+                break;
             default:
-                conteudoHtml = this.renderCards(dados);
+                // Usar renderCardsGrid que respeita campos configurados
+                conteudoHtml = this.renderCardsGrid(dados);
         }
 
         return bannerHtml + conteudoHtml;
