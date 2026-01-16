@@ -1224,6 +1224,19 @@ const ConfigRenderer = {
                 return new Set(dados.map(d => d[card.campo]).filter(Boolean)).size;
             case 'soma_array':
                 return dados.reduce((sum, d) => sum + (d[card.campo]?.length || 0), 0);
+            case 'soma_pipe':
+                // Conta itens em strings pipe-delimited (ex: "Item1|Item2|Item3" = 3)
+                return dados.reduce((sum, d) => {
+                    const valor = d[card.campo];
+                    if (!valor) return sum;
+                    if (typeof valor === 'string') {
+                        return sum + valor.split('|').filter(v => v.trim()).length;
+                    }
+                    if (Array.isArray(valor)) {
+                        return sum + valor.length;
+                    }
+                    return sum;
+                }, 0);
             default:
                 return 0;
         }
@@ -1672,9 +1685,91 @@ const ConfigRenderer = {
                 `;
             }
 
+            // Suporte a campos pipe-delimited para reuniões
+            case 'avatares_pipe': {
+                const valor = row[secao.campo];
+                const participantes = this.parsePipeDelimited(valor);
+                if (participantes.length === 0) return '';
+                return `
+                    <div class="secao-avatares">
+                        ${secao.titulo ? `<h5 class="secao-titulo">${secao.icone || ''} ${secao.titulo}</h5>` : ''}
+                        <div class="avatares-grid">
+                            ${participantes.slice(0, 12).map(p => {
+                                const nome = typeof p === 'object' ? p.nome : p;
+                                const iniciais = nome.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                                return `<div class="avatar-mini" title="${this.escapeHTML(nome)}">${iniciais}</div>`;
+                            }).join('')}
+                            ${participantes.length > 12 ? `<span class="avatar-mais">+${participantes.length - 12}</span>` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+
+            case 'tags_pipe': {
+                const valor = row[secao.campo];
+                const tags = this.parsePipeDelimited(valor);
+                if (tags.length === 0) return '';
+                return `
+                    <div class="secao-tags">
+                        ${secao.titulo ? `<h5 class="secao-titulo">${secao.icone || ''} ${secao.titulo}</h5>` : ''}
+                        <div class="tags-container">
+                            ${tags.map(tag => `<span class="tag-item">${this.escapeHTML(tag)}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            case 'lista_check_pipe': {
+                const valor = row[secao.campo];
+                const itens = this.parsePipeDelimited(valor);
+                if (itens.length === 0) return '';
+                return `
+                    <div class="secao-lista-check">
+                        ${secao.titulo ? `<h5 class="secao-titulo">${secao.icone || ''} ${secao.titulo}</h5>` : ''}
+                        <ul class="lista-checks">
+                            ${itens.map(item => `
+                                <li class="lista-check-item">
+                                    <span class="check-icon">✓</span>
+                                    <span class="check-texto">${this.escapeHTML(item)}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            case 'lista_warning_pipe': {
+                const valor = row[secao.campo];
+                const itens = this.parsePipeDelimited(valor);
+                if (itens.length === 0) return '';
+                return `
+                    <div class="secao-lista-warning">
+                        ${secao.titulo ? `<h5 class="secao-titulo">${secao.icone || ''} ${secao.titulo}</h5>` : ''}
+                        <ul class="lista-warnings">
+                            ${itens.map(item => `
+                                <li class="lista-warning-item">
+                                    <span class="warning-icon">!</span>
+                                    <span class="warning-texto">${this.escapeHTML(item)}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
             default:
                 return '';
         }
+    },
+
+    // Helper: Parse pipe-delimited strings
+    parsePipeDelimited(valor) {
+        if (!valor) return [];
+        if (Array.isArray(valor)) return valor;
+        if (typeof valor === 'string') {
+            return valor.split('|').map(v => v.trim()).filter(v => v);
+        }
+        return [];
     },
 
     /**

@@ -4125,3 +4125,152 @@
 .filter-option[data-category="documentos"]::before { content: '📄'; }
 .filter-option[data-category="autoatendimento"]::before { content: '🤖'; }
 .filter-option[data-category="hub-gestao-oc"]::before { content: '🏢'; }
+
+/* =====================================================
+   SECOES PIPE-DELIMITED (Reunioes)
+   ===================================================== */
+
+/* Avatares Grid */
+.secao-avatares {
+    margin-bottom: 1rem;
+}
+
+.avatares-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.avatar-mini {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--belgo-azul, #003B4A);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.avatar-mais {
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    color: var(--belgo-cinza, #6B7280);
+    font-size: 0.85rem;
+}
+
+/* Tags Pipe */
+.secao-tags {
+    margin-bottom: 1rem;
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.tag-item {
+    background: var(--belgo-cinza-claro, #f3f4f6);
+    color: var(--belgo-texto, #374151);
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+}
+
+/* Lista com Checks (Decisoes) */
+.secao-lista-check {
+    margin-bottom: 1rem;
+}
+
+.lista-checks {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+}
+
+.lista-check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    background: #f0fdf4;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.check-icon {
+    width: 24px;
+    height: 24px;
+    background: #10b981;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+
+.check-texto {
+    flex: 1;
+    font-size: 0.9rem;
+    color: var(--belgo-texto, #374151);
+}
+
+/* Lista com Warnings (Acoes) */
+.secao-lista-warning {
+    margin-bottom: 1rem;
+}
+
+.lista-warnings {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+}
+
+.lista-warning-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    background: #fef3c7;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.warning-icon {
+    width: 24px;
+    height: 24px;
+    background: #f59e0b;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.warning-texto {
+    flex: 1;
+    font-size: 0.9rem;
+    color: var(--belgo-texto, #374151);
+}
+
+/* Secao Titulo */
+.secao-titulo {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--belgo-texto, #374151);
+    margin: 0 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}

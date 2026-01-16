@@ -105,6 +105,173 @@
             color: #003B4A;
             margin-bottom: 1rem;
         }
+        /* Dashboard Widgets Styles */
+        .dashboard-container {
+            margin-bottom: 2rem;
+        }
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .dashboard-title {
+            font-size: 1.5rem;
+            color: #003B4A;
+            margin: 0;
+        }
+        .dashboard-subtitle {
+            color: #6b7280;
+            margin: 0.25rem 0 0;
+        }
+        .dashboard-widgets-grid {
+            display: grid;
+            grid-template-columns: repeat(var(--colunas, 4), 1fr);
+            gap: 1rem;
+        }
+        @media (max-width: 1024px) {
+            .dashboard-widgets-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 640px) {
+            .dashboard-widgets-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .dashboard-widget {
+            background: white;
+            border-radius: 12px;
+            padding: 1.25rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .widget-header {
+            margin-bottom: 1rem;
+        }
+        .widget-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #374151;
+            margin: 0;
+        }
+        .metrica-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .metrica-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        .metrica-icon.blue { background: #dbeafe; color: #2563eb; }
+        .metrica-icon.green { background: #d1fae5; color: #059669; }
+        .metrica-icon.yellow { background: #fef3c7; color: #d97706; }
+        .metrica-icon.red { background: #fee2e2; color: #dc2626; }
+        .metrica-icon.purple { background: #ede9fe; color: #7c3aed; }
+        .metrica-icon.indigo { background: #e0e7ff; color: #4f46e5; }
+        .metrica-valor {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+        .grafico-pizza-container {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .grafico-pizza {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            position: relative;
+        }
+        .grafico-pizza-centro {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+        .grafico-legenda {
+            flex: 1;
+        }
+        .legenda-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+        }
+        .legenda-cor {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+        .legenda-valor {
+            margin-left: auto;
+            color: #6b7280;
+        }
+        .widget-lista {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .lista-item {
+            padding: 0.75rem;
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .lista-item:last-child {
+            border-bottom: none;
+        }
+        .lista-titulo {
+            flex: 1;
+            font-weight: 500;
+        }
+        .lista-badge {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+        .badge-success { background: #d1fae5; color: #065f46; }
+        .badge-warning { background: #fef3c7; color: #92400e; }
+        .badge-danger { background: #fee2e2; color: #991b1b; }
+        .badge-info { background: #dbeafe; color: #1e40af; }
+        .progresso-item {
+            margin-bottom: 1rem;
+        }
+        .progresso-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+        }
+        .progresso-bar {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progresso-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
     </style>
 </head>
 <body>
@@ -130,6 +297,7 @@
 
     <script src="/shared/js/auth.js"></script>
     <script src="/shared/js/dynamic-nav.js"></script>
+    <script src="/shared/js/dashboard-renderer.js"></script>
     <script>
         let projetoId = null;
         let projetoCodigo = null;
@@ -198,7 +366,7 @@
                 const entidades = entidadesData.entidades || [];
                 const menus = menusData.menus || [];
 
-                // Renderizar conteudo
+                // Renderizar conteudo - Header + Dashboard com widgets
                 conteudo.innerHTML = `
                     <div class="projeto-header" style="--projeto-cor: ${projeto.cor || '#003B4A'}">
                         <div class="projeto-icon">${projeto.icone || '📁'}</div>
@@ -208,18 +376,11 @@
                         </div>
                     </div>
 
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-value">${entidades.length}</div>
-                            <div class="stat-label">Entidades</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">${menus.length}</div>
-                            <div class="stat-label">Menus</div>
-                        </div>
+                    <div id="dashboard-widgets-container">
+                        <div class="loading">Carregando dashboard...</div>
                     </div>
 
-                    <section>
+                    <section class="acesso-rapido-section" style="margin-top: 2rem;">
                         <h2>Acesso Rapido</h2>
                         <div class="menus-grid">
                             ${menus.map(menu => `
@@ -234,6 +395,27 @@
                         </div>
                     </section>
                 `;
+
+                // Inicializar DashboardRenderer para mostrar widgets
+                if (typeof DashboardRenderer !== 'undefined') {
+                    try {
+                        await DashboardRenderer.init('#dashboard-widgets-container', projetoId);
+                    } catch (dashError) {
+                        console.warn('Dashboard nao disponivel:', dashError);
+                        document.getElementById('dashboard-widgets-container').innerHTML = `
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <div class="stat-value">${entidades.length}</div>
+                                    <div class="stat-label">Entidades</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value">${menus.length}</div>
+                                    <div class="stat-label">Menus</div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
 
             } catch (error) {
                 console.error('Erro ao carregar projeto:', error);
