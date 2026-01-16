@@ -247,8 +247,47 @@
                         }
                     });
 
+                    // Secao de admin (se usuario eh admin)
+                    let adminHtml = '';
+                    if (BelgoAuth.isAdmin()) {
+                        adminHtml = `
+                            <div class="nav-divider"></div>
+                            <div class="nav-section-title">Administracao</div>
+                            <a href="/admin/entidades.html?projeto=${projetoId}" class="nav-item nav-admin">
+                                <span class="nav-icon">&#128451;</span>
+                                <span class="nav-text">Entidades</span>
+                            </a>
+                            <a href="/admin/menus.html?projeto=${projetoId}" class="nav-item nav-admin">
+                                <span class="nav-icon">&#9776;</span>
+                                <span class="nav-text">Menus</span>
+                            </a>
+                            <a href="/admin/dashboard-config.html?projeto=${projetoId}" class="nav-item nav-admin">
+                                <span class="nav-icon">&#128202;</span>
+                                <span class="nav-text">Dashboard Config</span>
+                            </a>
+                            <a href="/admin/index.html" class="nav-item nav-admin">
+                                <span class="nav-icon">&#128736;</span>
+                                <span class="nav-text">Painel Admin Geral</span>
+                            </a>
+                        `;
+                    }
+
+                    // Footer com navegacao e logout
+                    const footerHtml = `
+                        <div class="nav-footer">
+                            <a href="/landing.html" class="nav-item">
+                                <span class="nav-icon">&#127968;</span>
+                                <span class="nav-text">Todos os Projetos</span>
+                            </a>
+                            <button onclick="BelgoAuth.logout()" class="nav-item nav-logout">
+                                <span class="nav-icon">&#128682;</span>
+                                <span class="nav-text">Sair</span>
+                            </button>
+                        </div>
+                    `;
+
                     if (loading) loading.remove();
-                    nav.innerHTML = selectorHtml + menuHtml;
+                    nav.innerHTML = selectorHtml + menuHtml + adminHtml + footerHtml;
                 }
             } catch (error) {
                 console.warn('Erro ao carregar menu:', error);

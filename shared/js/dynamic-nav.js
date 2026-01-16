@@ -152,7 +152,46 @@ const DynamicNav = {
             `;
         }).join('');
 
-        nav.innerHTML = menuHtml;
+        // Secao de admin (se usuario eh admin)
+        let adminHtml = '';
+        if (window.BelgoAuth && BelgoAuth.isAdmin()) {
+            adminHtml = `
+                <div class="nav-divider"></div>
+                <div class="nav-section-title">Administracao</div>
+                <a href="/admin/entidades.html?projeto=${this.projetoId}" class="nav-item nav-admin">
+                    <span class="nav-icon">🗃</span>
+                    <span>Entidades</span>
+                </a>
+                <a href="/admin/menus.html?projeto=${this.projetoId}" class="nav-item nav-admin">
+                    <span class="nav-icon">☰</span>
+                    <span>Menus</span>
+                </a>
+                <a href="/admin/dashboard-config.html?projeto=${this.projetoId}" class="nav-item nav-admin">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard Config</span>
+                </a>
+                <a href="/admin/index.html" class="nav-item nav-admin">
+                    <span class="nav-icon">🛠️</span>
+                    <span>Painel Admin Geral</span>
+                </a>
+            `;
+        }
+
+        // Footer com navegacao e logout
+        const footerHtml = `
+            <div class="nav-footer">
+                <a href="/landing.html" class="nav-item">
+                    <span class="nav-icon">🏠</span>
+                    <span>Todos os Projetos</span>
+                </a>
+                <button onclick="BelgoAuth.logout()" class="nav-item nav-logout">
+                    <span class="nav-icon">🚪</span>
+                    <span>Sair</span>
+                </button>
+            </div>
+        `;
+
+        nav.innerHTML = menuHtml + adminHtml + footerHtml;
     },
 
     // Renderizar seletor de projetos

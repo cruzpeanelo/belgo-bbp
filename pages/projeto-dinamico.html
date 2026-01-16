@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projeto - Belgo BBP</title>
-    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-    <link rel="stylesheet" href="../shared/css/base.css">
-    <link rel="stylesheet" href="../shared/css/sidebar.css">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/css/styles.css">
     <style>
         .projeto-header {
             display: flex;
@@ -133,8 +132,8 @@
         </main>
     </div>
 
-    <script src="../shared/js/auth.js"></script>
-    <script src="../shared/js/dynamic-nav.js"></script>
+    <script src="/shared/js/auth.js"></script>
+    <script src="/shared/js/dynamic-nav.js"></script>
     <script>
         let projetoId = null;
         let projetoCodigo = null;
@@ -142,7 +141,7 @@
         document.addEventListener('DOMContentLoaded', async () => {
             // Verificar autenticacao
             if (!BelgoAuth.isAuthenticated()) {
-                window.location.href = '../login.html';
+                window.location.href = '/login.html';
                 return;
             }
 
@@ -188,7 +187,7 @@
 
                 // Carregar menu dinamico
                 if (window.DynamicNav) {
-                    await DynamicNav.init(projetoId);
+                    await DynamicNav.init({ projetoId: projetoId });
                 }
 
                 // Buscar entidades e menus do projeto

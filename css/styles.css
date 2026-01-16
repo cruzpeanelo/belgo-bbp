@@ -260,6 +260,75 @@ body {
     margin: 5px 0;
 }
 
+/* Divisor e titulo de secao na sidebar */
+.nav-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 15px 15px 10px;
+}
+
+.nav-section-title {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 5px 25px;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+/* Items de admin na sidebar */
+.nav-admin {
+    opacity: 0.9;
+    font-size: 0.9rem;
+}
+
+.nav-admin:hover {
+    opacity: 1;
+}
+
+.nav-admin .nav-icon {
+    font-size: 1rem;
+}
+
+/* Footer da sidebar */
+.nav-footer {
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 0;
+}
+
+.nav-footer .nav-item {
+    padding: 12px 25px;
+}
+
+.nav-logout {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    color: white;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.nav-logout:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Sidebar com flex para footer fixo */
+.sidebar-nav {
+    flex: 1;
+    padding: 15px 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-nav-content {
+    flex: 1;
+}
+
 /* Conteúdo Principal */
 .main-content {
     flex: 1;
