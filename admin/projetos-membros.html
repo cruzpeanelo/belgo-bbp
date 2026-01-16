@@ -23,7 +23,7 @@
                 </a>
                 <a href="usuarios.html" class="nav-item">
                     <span class="icon">👥</span>
-                    Usuarios
+                    Usuários
                 </a>
                 <a href="projetos.html" class="nav-item active">
                     <span class="icon">📁</span>
@@ -146,7 +146,7 @@
         let projeto = null;
         let membros = [];
         let papeis = [];
-        let todosUsuarios = [];
+        let todosUsuários = [];
 
         // Toast notification
         function showToast(message, type = 'info') {
@@ -211,8 +211,8 @@
                 }
 
                 if (usuariosRes.success) {
-                    todosUsuarios = usuariosRes.usuarios || [];
-                    renderizarUsuariosSelect();
+                    todosUsuários = usuariosRes.usuarios || [];
+                    renderizarUsuáriosSelect();
                 }
 
             } catch (error) {
@@ -239,11 +239,11 @@
         }
 
         // Renderizar select de usuarios (excluindo membros atuais)
-        function renderizarUsuariosSelect() {
+        function renderizarUsuáriosSelect() {
             const select = document.getElementById('usuarioId');
             const membrosIds = membros.map(m => m.id);
 
-            const disponíveis = todosUsuarios.filter(u => !membrosIds.includes(u.id) && u.ativo);
+            const disponíveis = todosUsuários.filter(u => !membrosIds.includes(u.id) && u.ativo);
 
             select.innerHTML = '<option value="">Selecione um usuario...</option>' +
                 disponíveis.map(u => `<option value="${u.id}">${u.nome} (${u.email})</option>`).join('');
@@ -324,7 +324,7 @@
             document.getElementById('papelInfo').style.display = 'none';
 
             // Atualizar lista de usuarios disponíveis
-            renderizarUsuariosSelect();
+            renderizarUsuáriosSelect();
 
             document.getElementById('modalMembro').classList.add('active');
         }

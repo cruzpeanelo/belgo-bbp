@@ -29,13 +29,32 @@ export async function onRequestGet(context) {
             }
         }
 
+        // Verificar se deve filtrar apenas menus vinculados a entidades
+        const url = new URL(context.request.url);
+        const onlyEntities = url.searchParams.get('onlyEntities') === 'true';
+
         // Buscar menus do projeto
-        const menus = await context.env.DB.prepare(`
-            SELECT id, nome, url, icone, ordem, ativo
-            FROM projeto_menus
-            WHERE projeto_id = ? AND ativo = 1
-            ORDER BY ordem ASC
-        `).bind(projetoId).all();
+        let query;
+        if (onlyEntities) {
+            // Apenas menus vinculados a entidades ativas
+            query = context.env.DB.prepare(`
+                SELECT m.id, m.nome, m.url, m.icone, m.ordem, m.ativo, m.entidade_id
+                FROM projeto_menus m
+                LEFT JOIN projeto_entidades e ON m.entidade_id = e.id
+                WHERE m.projeto_id = ? AND m.ativo = 1
+                AND (m.entidade_id IS NOT NULL AND e.ativo = 1)
+                ORDER BY m.ordem ASC
+            `).bind(projetoId);
+        } else {
+            // Todos os menus ativos (comportamento padrão)
+            query = context.env.DB.prepare(`
+                SELECT id, nome, url, icone, ordem, ativo, entidade_id
+                FROM projeto_menus
+                WHERE projeto_id = ? AND ativo = 1
+                ORDER BY ordem ASC
+            `).bind(projetoId);
+        }
+        const menus = await query.all();
 
         return jsonResponse({
             success: true,

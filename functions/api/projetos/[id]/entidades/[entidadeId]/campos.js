@@ -43,33 +43,36 @@ export async function onRequestGet(context) {
             return errorResponse('Entidade nao encontrada', 404);
         }
 
-        // Buscar campos
+        // Buscar campos (com join para obter codigo da entidade relacionada)
         const campos = await context.env.DB.prepare(`
             SELECT
-                id,
-                codigo,
-                nome,
-                descricao,
-                tipo,
-                subtipo,
-                obrigatorio,
-                unico,
-                valor_padrao,
-                regex_validacao,
-                min_valor,
-                max_valor,
-                ordem,
-                visivel_listagem,
-                visivel_formulario,
-                visivel_mobile,
-                largura_coluna,
-                opcoes_config,
-                relacao_entidade_id,
-                relacao_campo_exibir,
-                created_at
-            FROM projeto_entidade_campos
-            WHERE entidade_id = ?
-            ORDER BY ordem ASC
+                c.id,
+                c.codigo,
+                c.nome,
+                c.descricao,
+                c.tipo,
+                c.subtipo,
+                c.obrigatorio,
+                c.unico,
+                c.valor_padrao,
+                c.regex_validacao,
+                c.min_valor,
+                c.max_valor,
+                c.ordem,
+                c.visivel_listagem,
+                c.visivel_formulario,
+                c.visivel_mobile,
+                c.largura_coluna,
+                c.opcoes_config,
+                c.relacao_entidade_id,
+                c.relacao_campo_exibir,
+                c.created_at,
+                re.codigo as relacao_entidade_codigo,
+                re.nome as relacao_entidade_nome
+            FROM projeto_entidade_campos c
+            LEFT JOIN projeto_entidades re ON c.relacao_entidade_id = re.id
+            WHERE c.entidade_id = ?
+            ORDER BY c.ordem ASC
         `).bind(entidadeId).all();
 
         // Buscar opcoes para campos select

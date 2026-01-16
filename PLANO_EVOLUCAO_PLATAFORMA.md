@@ -1632,3 +1632,142 @@ O sistema dinâmico (config-renderer.js) atingiu **~90% de paridade visual** com
 | Pontos Críticos | 80% | 98% |
 
 **Média Geral: 98.2%** (muito próximo de 99%)
+
+---
+
+## FASE 18: IMPORTAÇÃO DE DADOS E CONFIGURAÇÃO COMPLETA ✅
+**Data**: 16/01/2026
+**Status**: IMPLEMENTADO
+
+### Objetivo
+Importar todos os dados do projeto GTM original para o GTM Clone (Projeto 5) e configurar completamente todas as entidades com seus campos e opções.
+
+### Migrations Criadas
+
+| Migration | Descrição |
+|-----------|-----------|
+| `009_add_campos_faltantes.sql` | Campos faltantes para jornadas e testes |
+| `010_todas_entidades_campos_completos.sql` | Campos completos para todas as 7 entidades |
+| `011_configs_completas_todas_entidades.sql` | Config funcionalidades completas com layouts customizados |
+| `012_import_jornadas_data.sql` | Importação de dados de Jornadas (12 processos) |
+| `013_import_reunioes_data.sql` | Importação de dados de Reuniões (9 reuniões) |
+| `014_import_participantes_data.sql` | Importação de dados de Participantes (24 pessoas) |
+| `015_import_glossario_data.sql` | Importação de dados do Glossário (40+ termos) |
+| `016_import_testes_data.sql` | Importação de dados de Testes (casos de teste) |
+
+### Entidades Configuradas (Projeto 5 - GTM Clone)
+
+| ID | Entidade | Layout | Campos | Permissões |
+|----|----------|--------|--------|------------|
+| 17 | documentos | cards | 8 | criar/editar/excluir |
+| 18 | jornadas | cards | 20+ | criar/editar/excluir |
+| 19 | participantes | cards_grid | 11 | criar/editar/excluir |
+| 20 | reunioes | timeline | 13 | criar/editar/excluir |
+| 21 | glossario | cards_agrupados | 6 | criar/editar/excluir |
+| 22 | testes | tabela | 13 | criar/editar/excluir |
+| 23 | riscos | kanban | 9 | criar/editar/excluir |
+
+### Funcionalidades Habilitadas por Entidade
+
+#### Jornadas (ID 18)
+- Layout: Cards com comparativo AS-IS/TO-BE
+- Filtros: Status, Busca
+- Métricas: Total, Concluídos, Em Andamento, Pendentes
+- Ações: Editar, Excluir, Exportar CSV, Teams
+
+#### Testes (ID 22)
+- Layout: Tabela com paginação
+- Filtros: Categoria, Status, Sistema, Prioridade, Busca
+- Métricas: Total, Concluídos, Pendentes, Falharam
+- Modal de detalhe com passos numerados
+- Ações: Editar, Excluir, Exportar CSV, Importar CSV
+
+#### Reuniões (ID 20)
+- Layout: Timeline vertical
+- Filtros: Tipo, Busca
+- Cards expansíveis com participantes, decisões, ações
+- Métricas: Reuniões, Participantes únicos, Decisões, Ações
+
+#### Participantes (ID 19)
+- Layout: Cards Grid com avatares
+- Agrupamento por tipo (Key User, Equipe, Stakeholder)
+- Filtros: Tipo, Área, Busca
+- Status: Ativo, Licença, Desligado
+
+#### Glossário (ID 21)
+- Layout: Cards agrupados por categoria
+- Categorias: Sistemas, Transações SAP, Áreas de Crédito, Canais, Clusters, Termos
+- Filtros: Categoria, Busca
+
+#### Riscos (ID 23)
+- Layout: Kanban por status
+- Filtros: Probabilidade, Impacto, Busca
+- Modal com plano de mitigação e contingência
+- Ações de status rápido
+
+### Dados Importados
+
+| Entidade | Registros | Categorias/Tipos |
+|----------|-----------|------------------|
+| Jornadas | 12 | 5 status |
+| Reuniões | 9 | workshop, estratégico, técnico, operacional, produto |
+| Participantes | 24 | equipe_projeto, stakeholder, keyuser |
+| Glossário | 40+ | sistemas, transacoes_sap, areas_credito, canais, clusters, termos |
+
+### Edição Inline
+Todas as entidades possuem edição inline habilitada via `"acoes": ["editar", ...]` no config_funcionalidades. Permite editar registros diretamente nos cards/linhas sem abrir modal.
+
+---
+
+## FASE 19: CAMPO RELACIONADO E MELHORIAS ✅
+**Data**: 16/01/2026
+**Status**: IMPLEMENTADO
+
+### Objetivo
+Implementar novo tipo de campo "relacionado" que permite vincular dados entre entidades, mantendo a normalização dos dados, além de melhorias no menu dinâmico e correções de UTF-8.
+
+### 1. Campo Relacionado (relation)
+
+#### Arquivos Modificados
+| Arquivo | Alterações |
+|---------|------------|
+| `shared/js/config-renderer.js` | + `carregarDadosRelacionados()`, cases para 'relation' em `renderCamposForm()` e `renderCamposFormInline()` |
+| `functions/api/projetos/[id]/entidades/[entidadeId]/campos.js` | JOIN para retornar `relacao_entidade_codigo` e `relacao_entidade_nome` |
+
+#### Especificação Técnica
+- Tipo de campo: `relation`
+- Configuração no admin: `relacao_entidade_id`, `relacao_campo_exibir`
+- Frontend: Carrega dados da entidade relacionada automaticamente
+- Renderização: Select com opções vindas da entidade referenciada
+
+### 2. Menu Dinâmico - Filtro por Entidades
+
+#### Arquivos Modificados
+| Arquivo | Alterações |
+|---------|------------|
+| `functions/api/menus/[projetoId].js` | Parâmetro `onlyEntities=true` para filtrar menus sem entidade |
+| `shared/js/dynamic-nav.js` | Usuários normais veem apenas menus vinculados a entidades |
+| `migrations/017_cleanup_menus_projeto5.sql` | Limpa menus estáticos do projeto 5 |
+
+#### Comportamento
+- **Admin**: Vê todos os menus (incluindo URLs customizadas)
+- **Usuário normal**: Vê apenas menus vinculados a entidades configuradas
+
+### 3. Correções UTF-8 (Português Brasil)
+
+#### Arquivos Corrigidos
+- `admin/index.html` - "Usuários" em vez de "Usuarios"
+- `admin/entidades.html` - Configuração, Seleção, Validação, Relação, Descrição, Obrigatório, Único, Padrão, Opções
+- `admin/menus.html` - Usuários, Gestão
+- `admin/projetos.html` - Usuários, Gestão
+- `admin/auditoria.html` - Usuários
+- `admin/usuarios.html` - Usuários
+- `admin/dashboard-config.html` - Usuários, Configuração
+- `admin/projetos-membros.html` - Usuários
+- `shared/js/config-renderer.js` - "Campo obrigatório"
+- `shared/js/dynamic-nav.js` - "Administração"
+
+### Benefícios
+- **Campo Relacionado**: Normalização de dados, evita duplicação, consistência referencial
+- **Menu Dinâmico**: Interface mais limpa para usuários, sem páginas de teste
+- **UTF-8**: Textos em português correto com acentos

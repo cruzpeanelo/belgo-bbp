@@ -3070,11 +3070,66 @@ const ConfigRenderer = {
             if (response.ok) {
                 const result = await response.json();
                 this.campos = result.campos || [];
+
+                // Carregar dados de entidades relacionadas para campos do tipo 'relation'
+                await this.carregarDadosRelacionados();
             }
         } catch (e) {
             console.error('Erro ao carregar campos:', e);
         }
         return this.campos;
+    },
+
+    /**
+     * Carrega os dados das entidades relacionadas para campos do tipo 'relation'
+     */
+    async carregarDadosRelacionados() {
+        const camposRelacao = this.campos.filter(c => c.tipo === 'relation' && c.relacao_entidade_id);
+        if (camposRelacao.length === 0) return;
+
+        const token = sessionStorage.getItem('belgo_token');
+
+        for (const campo of camposRelacao) {
+            try {
+                // Usar codigo da entidade relacionada retornado pela API
+                const entidadeCodigo = campo.relacao_entidade_codigo;
+                if (!entidadeCodigo) {
+                    console.warn(`Campo ${campo.codigo}: entidade relacionada sem codigo`);
+                    campo.opcoes_relacao = [];
+                    continue;
+                }
+
+                // Buscar dados da entidade relacionada
+                const response = await fetch(`/api/projetos/${this.projetoId}/dados/${entidadeCodigo}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    const dados = result.dados || [];
+
+                    // Criar opcoes a partir dos dados relacionados
+                    const campoExibir = campo.relacao_campo_exibir || 'nome';
+                    campo.opcoes_relacao = dados.map(d => {
+                        // Tentar varios campos comuns para label
+                        const label = d[campoExibir] || d.nome || d.titulo || d.nome_completo || d.sigla || `ID: ${d.id}`;
+                        return {
+                            valor: d.id,
+                            label: label
+                        };
+                    });
+
+                    // Ordenar por label
+                    campo.opcoes_relacao.sort((a, b) => a.label.localeCompare(b.label));
+                } else {
+                    console.warn(`Erro ao buscar dados da entidade ${entidadeCodigo}:`, response.status);
+                    campo.opcoes_relacao = [];
+                }
+            } catch (e) {
+                console.error(`Erro ao carregar dados relacionados para campo ${campo.codigo}:`, e);
+                campo.opcoes_relacao = [];
+            }
+        }
     },
 
     async abrirModalCriar() {
@@ -3186,6 +3241,21 @@ const ConfigRenderer = {
                             <input type="date" id="campo-${campo.codigo}" name="${campo.codigo}" ${required}>
                         </div>
                     `;
+                case 'relation':
+                    // Campo relacionado - carrega dados de outra entidade
+                    const opcoesRelacao = campo.opcoes_relacao || [];
+                    return `
+                        <div class="form-group">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <select id="campo-${campo.codigo}" name="${campo.codigo}" ${required} class="select-relation">
+                                <option value="">Selecione...</option>
+                                ${opcoesRelacao.map(op => {
+                                    return `<option value="${op.valor}">${this.escapeHTML(op.label)}</option>`;
+                                }).join('')}
+                            </select>
+                            ${opcoesRelacao.length === 0 ? '<small class="text-muted">Nenhum dado encontrado na entidade relacionada</small>' : ''}
+                        </div>
+                    `;
                 default:
                     return `
                         <div class="form-group">
@@ -3221,7 +3291,7 @@ const ConfigRenderer = {
         // Validar campos obrigatorios
         for (const campo of this.campos) {
             if (campo.obrigatorio && !dados[campo.codigo]) {
-                this.showToast(`Campo obrigatorio: ${campo.nome}`, 'error');
+                this.showToast(`Campo obrigatório: ${campo.nome}`, 'error');
                 return;
             }
         }
@@ -3760,6 +3830,22 @@ const ConfigRenderer = {
                         <div class="form-group col-4">
                             <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
                             <input type="date" id="campo-${campo.codigo}" name="${campo.codigo}" value="${valor}" ${required}>
+                        </div>
+                    `;
+                case 'relation':
+                    // Campo relacionado - carrega dados de outra entidade
+                    const opcoesRel = campo.opcoes_relacao || [];
+                    return `
+                        <div class="form-group ${colClass}">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <select id="campo-${campo.codigo}" name="${campo.codigo}" ${required} class="select-relation">
+                                <option value="">Selecione...</option>
+                                ${opcoesRel.map(op => {
+                                    const selected = op.valor == valor ? 'selected' : '';
+                                    return `<option value="${op.valor}" ${selected}>${this.escapeHTML(op.label)}</option>`;
+                                }).join('')}
+                            </select>
+                            ${opcoesRel.length === 0 ? '<small class="text-muted">Nenhum dado encontrado</small>' : ''}
                         </div>
                     `;
                 default:

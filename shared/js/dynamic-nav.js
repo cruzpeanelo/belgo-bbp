@@ -110,7 +110,16 @@ const DynamicNav = {
     async fetchMenus() {
         try {
             const token = sessionStorage.getItem('belgo_token');
-            const response = await fetch(`/api/menus/${this.projetoId}`, {
+
+            // Verificar se usuario eh admin (pode ver todos os menus)
+            const isAdmin = window.BelgoAuth && BelgoAuth.isAdmin();
+
+            // Usar filtro de entidades para usuarios normais
+            const apiUrl = isAdmin
+                ? `/api/menus/${this.projetoId}`
+                : `/api/menus/${this.projetoId}?onlyEntities=true`;
+
+            const response = await fetch(apiUrl, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -166,7 +175,7 @@ const DynamicNav = {
         if (window.BelgoAuth && BelgoAuth.isAdmin()) {
             adminHtml = `
                 <div class="nav-divider"></div>
-                <div class="nav-section-title">Administracao</div>
+                <div class="nav-section-title">Administração</div>
                 <a href="/admin/entidades.html?projeto=${this.projetoId}" class="nav-item nav-admin">
                     <span class="nav-icon">🗃</span>
                     <span>Entidades</span>
