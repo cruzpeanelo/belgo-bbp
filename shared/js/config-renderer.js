@@ -1468,10 +1468,10 @@ const ConfigRenderer = {
 
     renderSecaoCard(row, secao) {
         switch (secao.tipo) {
-            case 'comparativo':
+            case 'comparativo': {
                 const campos = secao.campos || [];
                 const titulos = secao.titulos || ['Antes', 'Depois'];
-                const badges = secao.badges || ['AS-IS', 'TO-BE'];
+                const compBadges = secao.badges || ['AS-IS', 'TO-BE'];
                 const subtitulos = secao.subtitulos || ['Processo Atual', 'Processo Futuro'];
                 return `
                     <div class="secao-comparativo-detalhado">
@@ -1484,7 +1484,7 @@ const ConfigRenderer = {
                             return `
                                 <div class="comparativo-lado ${i === 0 ? 'as-is' : 'to-be'}">
                                     <div class="comparativo-header">
-                                        <span class="comparativo-badge ${i === 0 ? 'as-is' : 'to-be'}">${badges[i] || ''}</span>
+                                        <span class="comparativo-badge ${i === 0 ? 'as-is' : 'to-be'}">${compBadges[i] || ''}</span>
                                         <span class="comparativo-subtitulo">${subtitulos[i] || ''}</span>
                                     </div>
                                     ${conteudo}
@@ -1493,6 +1493,7 @@ const ConfigRenderer = {
                         }).join('')}
                     </div>
                 `;
+            }
 
             case 'comparativo_detalhado':
                 // Seção comparativo completo com passos, problemas, benefícios, tempo
