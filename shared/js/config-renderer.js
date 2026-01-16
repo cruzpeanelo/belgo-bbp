@@ -1329,7 +1329,7 @@ const ConfigRenderer = {
                                 else if (prioridade.includes('baixa')) prioridadeClass = 'baixa';
 
                                 return `
-                                    <div class="issue-card ${prioridadeClass}" onclick="ConfigRenderer.editarRegistro(${item.id || item._id})">
+                                    <div class="issue-card ${prioridadeClass}" onclick="ConfigRenderer.abrirModalEditar(${item.id || item._id})">
                                         ${item[campoId] ? `<div class="issue-id">#${item[campoId]}</div>` : ''}
                                         <div class="issue-title">${this.escapeHTML(item[campoTitulo] || '')}</div>
                                         <div class="issue-meta">
