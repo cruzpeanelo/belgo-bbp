@@ -1412,6 +1412,11 @@ const ConfigRenderer = {
             switch (acao) {
                 case 'ver':
                     return `<button class="btn btn-primary btn-sm" onclick="ConfigRenderer.verDetalhe('${row.codigo || row._id}')">Ver</button>`;
+                case 'editar':
+                    if (this.podeEditar()) {
+                        return `<button class="btn btn-secondary btn-sm" onclick="ConfigRenderer.abrirModalEditar('${row.codigo || row._id}')" title="Editar">✏️</button>`;
+                    }
+                    return '';
                 case 'marcar_concluido':
                     if (row.status === 'Pendente') {
                         return `<button class="btn btn-success btn-sm" onclick="ConfigRenderer.marcarStatus('${row.codigo || row._id}', 'Concluido')">OK</button>`;
@@ -3531,37 +3536,90 @@ const ConfigRenderer = {
     async abrirModalEditar(registroId) {
         await this.carregarCampos();
 
-        // Buscar dados do registro
-        const registro = this.dados.find(r => (r.id || r._id) == registroId);
+        // Buscar dados do registro (por id, _id ou codigo)
+        const registro = this.dados.find(r =>
+            (r.id || r._id) == registroId ||
+            r.codigo == registroId
+        );
         if (!registro) {
             this.showToast('Registro não encontrado', 'error');
             return;
         }
 
         this.registroEditando = registro;
+        this.editandoInlineTabela = registroId;
 
-        const modalHtml = `
-            <div class="modal-overlay active" id="modalEditar" onclick="if(event.target === this) ConfigRenderer.fecharModalEditar()">
-                <div class="modal-content modal-criar">
-                    <div class="modal-header">
-                        <h3>✏️ Editar ${this.entidade?.nome || 'Registro'}</h3>
-                        <button class="modal-close" onclick="ConfigRenderer.fecharModalEditar()">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="formEditar" onsubmit="event.preventDefault(); ConfigRenderer.salvarEdicao();">
-                            ${this.renderCamposFormEditar(registro)}
-                            <div class="form-actions">
-                                <button type="button" class="btn btn-secondary" onclick="ConfigRenderer.fecharModalEditar()">Cancelar</button>
-                                <button type="submit" class="btn btn-success">Salvar</button>
-                            </div>
-                        </form>
-                    </div>
+        // Remover formulário de edição existente
+        const existingForm = document.getElementById('formInlineEditTabela');
+        if (existingForm) {
+            existingForm.closest('.card-inline-edit')?.remove();
+        }
+
+        // Também remover formulário de criação se existir
+        const existingCreate = document.querySelector('.card-inline-create');
+        if (existingCreate) {
+            existingCreate.remove();
+        }
+
+        // Obter ícone padrão da entidade
+        const icone = this.entidade?.icone || '✏️';
+        const nomeRegistro = registro.nome || registro.titulo || registro.codigo || 'Registro';
+
+        // Criar card de edição no topo (igual ao padrão de criação)
+        const cardEditar = document.createElement('div');
+        cardEditar.className = 'card-expandable card-inline-edit expanded editing';
+        cardEditar.innerHTML = `
+            <div class="card-expandable-header editing-header" style="cursor: pointer;">
+                <div class="card-header-left">
+                    <span class="card-icone">${icone}</span>
+                    <h4 class="card-nome">✏️ Editando: ${this.escapeHTML(nomeRegistro)}</h4>
                 </div>
+                <div class="card-header-right">
+                    <span class="badge badge-warning">Modo Edição</span>
+                </div>
+            </div>
+            <div class="card-expandable-body">
+                <form id="formInlineEditTabela" class="form-inline-edit" onsubmit="event.preventDefault(); ConfigRenderer.salvarEdicao();">
+                    <div class="form-grid">
+                        ${this.renderCamposFormInline(registro)}
+                    </div>
+                    <div class="form-inline-actions">
+                        <button type="button" class="btn btn-secondary" onclick="ConfigRenderer.fecharModalEditar()">
+                            ❌ Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-success">
+                            ✅ Salvar Alterações
+                        </button>
+                    </div>
+                </form>
             </div>
         `;
 
-        document.body.insertAdjacentHTML('beforeend', modalHtml);
-        document.body.style.overflow = 'hidden';
+        // Encontrar container da tabela e inserir no topo
+        const container = document.querySelector('.tabela-container') ||
+                          document.querySelector('.cards-grid') ||
+                          document.querySelector('#dados-container') ||
+                          document.querySelector('.table-responsive')?.parentElement ||
+                          document.querySelector('table')?.parentElement;
+
+        if (container) {
+            container.insertBefore(cardEditar, container.firstChild);
+        } else {
+            // Fallback: inserir antes da tabela
+            const tabela = document.querySelector('table');
+            if (tabela) {
+                tabela.parentElement.insertBefore(cardEditar, tabela);
+            }
+        }
+
+        // Scroll suave para o card de edição
+        cardEditar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // Focar no primeiro campo
+        setTimeout(() => {
+            const firstInput = cardEditar.querySelector('input, select, textarea');
+            if (firstInput) firstInput.focus();
+        }, 100);
     },
 
     renderCamposFormEditar(registro) {
@@ -3639,16 +3697,26 @@ const ConfigRenderer = {
     },
 
     fecharModalEditar() {
+        // Fechar modal overlay (formato antigo)
         const modal = document.getElementById('modalEditar');
         if (modal) {
             modal.remove();
             document.body.style.overflow = '';
         }
+
+        // Fechar card inline de edição (novo formato)
+        const cardInlineEdit = document.querySelector('.card-inline-edit');
+        if (cardInlineEdit) {
+            cardInlineEdit.remove();
+        }
+
         this.registroEditando = null;
+        this.editandoInlineTabela = null;
     },
 
     async salvarEdicao() {
-        const form = document.getElementById('formEditar');
+        // Tentar encontrar o formulário inline primeiro, depois o modal
+        const form = document.getElementById('formInlineEditTabela') || document.getElementById('formEditar');
         if (!form || !this.registroEditando) return;
 
         const formData = new FormData(form);
@@ -4011,6 +4079,14 @@ const ConfigRenderer = {
                     let opcoes = campo.opcoes || [];
                     if (typeof opcoes === 'string') {
                         try { opcoes = JSON.parse(opcoes); } catch(e) { opcoes = []; }
+                    }
+                    // Se não há opções definidas ou opcoes_de é "dados", extrair valores únicos dos dados
+                    if (opcoes.length === 0 || campo.opcoes_de === 'dados') {
+                        const campoOpcoes = campo.campo_opcoes || campo.codigo;
+                        const valoresUnicos = [...new Set(this.dados.map(d => d[campoOpcoes]).filter(Boolean))].sort();
+                        if (valoresUnicos.length > 0) {
+                            opcoes = valoresUnicos;
+                        }
                     }
                     return `
                         <div class="form-group ${colClass}">
