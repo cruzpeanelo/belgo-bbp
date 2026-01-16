@@ -1620,6 +1620,10 @@
             const secaoSecoesCard = document.getElementById('secaoSecoesCard');
             if (secaoSecoesCard) {
                 secaoSecoesCard.style.display = isCardLayout ? 'block' : 'none';
+                // Re-renderizar secoes quando mostrar a secao de cards
+                if (isCardLayout) {
+                    renderizarSecoesBuilder();
+                }
             }
 
             // Re-renderizar colunas para mostrar/ocultar opcoes de estilo (cards)
