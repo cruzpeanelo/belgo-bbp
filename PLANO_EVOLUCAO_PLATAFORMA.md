@@ -792,15 +792,57 @@ O GTM Original usa **páginas customizadas** (jornadas.html, participantes.html,
 
 ---
 
-## FASE 13: TESTES E AJUSTES FINAIS - EM ANDAMENTO
+## FASE 13: TESTES E AJUSTES FINAIS - ✅ CONCLUÍDA
 
 ### Objetivo
 Testar todas as novas funcionalidades da Fase 12 usando MCP Playwright e identificar ajustes necessários.
 
 ### Tarefas
-- [ ] Testar layout cards com comparativo AS-IS/TO-BE
-- [ ] Testar layout timeline_fases
-- [ ] Testar layout timeline_zigzag
-- [ ] Testar layout kanban
-- [ ] Configurar entidades de teste no GTM Clone
-- [ ] Documentar ajustes necessários
+- [x] Testar layout cards com comparativo AS-IS/TO-BE
+- [x] Testar layout timeline_fases
+- [x] Testar layout timeline_zigzag
+- [x] Testar layout kanban
+- [x] Configurar entidades de teste no GTM Clone
+- [x] Documentar ajustes necessários
+
+### Resultados dos Testes (16/01/2026)
+
+#### Layout Kanban ✅ FUNCIONANDO
+- Configurado na entidade **Riscos** do GTM Clone
+- Colunas por status: Pendentes (3), Em Andamento (0), Resolvidos (0)
+- Cards exibem: ID, Título, Prioridade
+- Estatísticas agregadas no topo
+- Clique no card abre modal de edição
+
+**Bug corrigido**: `ConfigRenderer.editarRegistro is not a function`
+- Commit: `e9827d1` - Corrigido para usar `abrirModalEditar`
+
+#### Layout Timeline Zigzag ✅ FUNCIONANDO
+- Configurado na entidade **Reuniões** do GTM Clone
+- Cards alternando esquerda/direita (efeito zigzag)
+- Linha central verde conectando os círculos indicadores
+- Cada card exibe: Data, Título, Descrição
+- Cores diferentes por posição (verde/laranja)
+
+#### Layout Timeline Fases ✅ FUNCIONANDO
+- Configurado na entidade **Testes** do GTM Clone
+- Cards empilhados verticalmente com borda lateral colorida
+- Badge de status no canto direito ("Planejado")
+- Estrutura visual correta
+
+### Ajustes Pendentes (Fase 14)
+
+#### 1. Admin não atualiza display do tipo de layout
+**Problema**: Após salvar configuração de layout no admin, o card da entidade ainda mostra o tipo antigo (ex: "tabela" mesmo depois de configurar "kanban")
+**Solução**: Atualizar o display do card após salvar em `admin/entidades.html`
+**Esforço**: Baixo (1h)
+
+#### 2. Campos de data não aparecem no seletor do timeline_fases
+**Problema**: Ao configurar timeline_fases, os campos do tipo "data" não aparecem nos seletores de "Campo Data Início" e "Campo Data Fim"
+**Solução**: Ajustar lógica de filtragem em `admin/entidades.html` para incluir campos do tipo date/datetime
+**Esforço**: Baixo (1h)
+
+#### 3. Verificar comportamento em mobile
+**Problema**: Layouts novos não foram testados em viewport mobile
+**Solução**: Testar responsividade e ajustar CSS se necessário
+**Esforço**: Médio (2h)
