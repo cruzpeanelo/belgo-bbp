@@ -50,6 +50,7 @@ export async function onRequestGet(context) {
                 permite_excluir,
                 permite_importar,
                 permite_exportar,
+                config_funcionalidades,
                 created_at,
                 updated_at
             FROM projeto_entidades
@@ -125,10 +126,21 @@ export async function onRequestGet(context) {
             return campo;
         });
 
+        // Parse config_funcionalidades se for string
+        let configParsed = entidade.config_funcionalidades;
+        if (typeof configParsed === 'string' && configParsed) {
+            try {
+                configParsed = JSON.parse(configParsed);
+            } catch (e) {
+                configParsed = null;
+            }
+        }
+
         return jsonResponse({
             success: true,
             entidade: {
                 ...entidade,
+                config_funcionalidades: configParsed,
                 campos: camposComOpcoes
             }
         });
