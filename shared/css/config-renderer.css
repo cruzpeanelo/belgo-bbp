@@ -2698,6 +2698,21 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
+.mini-card-rico {
+    text-align: left;
+    line-height: 1.5;
+}
+
+.mini-card-rico strong {
+    color: var(--belgo-azul, #003B4A);
+    font-weight: 600;
+}
+
+.mini-card-rico small {
+    color: #6b7280;
+    font-size: 0.8rem;
+}
+
 /* Tabela Inline */
 .secao-tabela-inline {
     margin: 16px 0;
@@ -4294,4 +4309,61 @@
     display: flex;
     align-items: center;
     gap: 6px;
+}
+
+/* Citações das Reuniões */
+.citacoes-reuniao {
+    margin-top: 16px;
+    padding: 12px;
+    background: linear-gradient(135deg, #f8f4f0 0%, #fdf8f3 100%);
+    border-left: 3px solid #d97706;
+    border-radius: 6px;
+}
+
+.citacoes-titulo {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #92400e;
+    margin: 0 0 8px;
+}
+
+.citacoes-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.citacao-item {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: baseline;
+    font-size: 0.85rem;
+}
+
+.citacao-data {
+    font-weight: 600;
+    color: #b45309;
+    white-space: nowrap;
+}
+
+.citacao-descricao {
+    color: #78350f;
+}
+
+/* Link Ver Testes */
+.link-ver-testes {
+    color: var(--belgo-azul, #003B4A);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.85rem;
+    padding: 4px 8px;
+    background: #e0f2fe;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.link-ver-testes:hover {
+    background: #0ea5e9;
+    color: white;
 }

@@ -788,12 +788,31 @@ const ConfigRenderer = {
 
         if (items.length === 0) return '';
 
+        // Campos configuráveis para exibição no mini-card
+        const camposCard = secao.campos_card || [];
+
         return `
             <div class="secao-mini-cards-grid">
                 ${secao.titulo ? `<h5 class="secao-titulo">${secao.titulo}</h5>` : ''}
                 <div class="mini-cards-container">
                     ${items.map(item => {
-                        const texto = typeof item === 'object' ? (item.nome || item.titulo || JSON.stringify(item)) : item;
+                        if (typeof item !== 'object') {
+                            return `<div class="mini-card">${this.escapeHTML(item)}</div>`;
+                        }
+
+                        // Se campos_card configurado, usar esses campos
+                        if (camposCard.length > 0) {
+                            const linhas = camposCard
+                                .map(campo => item[campo])
+                                .filter(v => v)
+                                .map((v, i) => i === 0 ? `<strong>${this.escapeHTML(v)}</strong>` : `<small>${this.escapeHTML(v)}</small>`)
+                                .join('<br>');
+                            return `<div class="mini-card mini-card-rico">${linhas}</div>`;
+                        }
+
+                        // Fallback: tentar campos comuns
+                        const texto = item.nome || item.titulo || item.tipo || item.name || item.title ||
+                                     item.descricao || item.description || JSON.stringify(item);
                         return `<div class="mini-card">${this.escapeHTML(texto)}</div>`;
                     }).join('')}
                 </div>
@@ -817,17 +836,24 @@ const ConfigRenderer = {
         if (dados.length === 0) return '';
 
         const colunas = secao.colunas || Object.keys(dados[0] || {});
+        const temLinkDocumento = secao.link_documento && dados.some(d => d.documento);
 
         return `
             <div class="secao-tabela-inline">
                 ${secao.titulo ? `<h5 class="secao-titulo">${secao.titulo}</h5>` : ''}
                 <table class="tabela-inline">
                     <thead>
-                        <tr>${colunas.map(col => `<th>${this.escapeHTML(col)}</th>`).join('')}</tr>
+                        <tr>
+                            ${colunas.map(col => `<th>${this.escapeHTML(col)}</th>`).join('')}
+                            ${temLinkDocumento ? '<th>Ação</th>' : ''}
+                        </tr>
                     </thead>
                     <tbody>
                         ${dados.map(linha => `
-                            <tr>${colunas.map(col => `<td>${this.escapeHTML(linha[col] || '-')}</td>`).join('')}</tr>
+                            <tr>
+                                ${colunas.map(col => `<td>${this.escapeHTML(linha[col] || '-')}</td>`).join('')}
+                                ${temLinkDocumento && linha.documento ? `<td><a href="../testes.html?doc=${this.escapeHTML(linha.documento)}" class="link-ver-testes" target="_blank">Ver Testes</a></td>` : (temLinkDocumento ? '<td>-</td>' : '')}
+                            </tr>
                         `).join('')}
                     </tbody>
                 </table>
@@ -1554,6 +1580,7 @@ const ConfigRenderer = {
                             ${this.renderPassosNumerados(row[asIsConfig.passos], null)}
                             ${this.renderListaItens(row[asIsConfig.problemas], 'Problemas Identificados', 'problema')}
                             ${row[asIsConfig.tempo] ? `<div class="comparativo-tempo"><strong>⏱ Tempo Médio:</strong> ${this.escapeHTML(row[asIsConfig.tempo])}</div>` : ''}
+                            ${asIsConfig.citacoes && row[asIsConfig.citacoes] ? this.renderCitacoesReuniao(row[asIsConfig.citacoes]) : ''}
                         </div>
                         <div class="comparativo-lado to-be">
                             <div class="comparativo-header">
@@ -1763,7 +1790,9 @@ const ConfigRenderer = {
             }
 
             default:
-                return '';
+                // Fallback para renderSecaoCardRico que suporta tipos adicionais
+                // (mini_cards_grid, tabela_inline, avatares_grid, workflow_visual, etc.)
+                return this.renderSecaoCardRico(row, secao);
         }
     },
 
@@ -1833,6 +1862,35 @@ const ConfigRenderer = {
                 ${titulo ? `<h6 class="lista-titulo">${titulo}</h6>` : ''}
                 <div class="tags-container">
                     ${itens.map(item => `<span class="tag-item ${tagClass}"><span class="tag-icone">${icone}</span> ${this.escapeHTML(item)}</span>`).join('')}
+                </div>
+            </div>
+        `;
+    },
+
+    /**
+     * Renderiza citações/fontes de reunião no estilo quote box
+     * Formato: "data - descricao|data2 - descricao2"
+     */
+    renderCitacoesReuniao(texto) {
+        if (!texto) return '';
+        const citacoes = this.parseDelimitedData(texto, 'auto');
+        if (citacoes.length === 0) return '';
+        return `
+            <div class="citacoes-reuniao">
+                <h6 class="citacoes-titulo">📅 Fontes das Reuniões</h6>
+                <div class="citacoes-lista">
+                    ${citacoes.map(citacao => {
+                        // Separar data e descrição se formato "data - descricao"
+                        const partes = citacao.split(' - ');
+                        const data = partes[0] || '';
+                        const descricao = partes.slice(1).join(' - ') || '';
+                        return `
+                            <div class="citacao-item">
+                                <span class="citacao-data">${this.escapeHTML(data)}</span>
+                                ${descricao ? `<span class="citacao-descricao">${this.escapeHTML(descricao)}</span>` : ''}
+                            </div>
+                        `;
+                    }).join('')}
                 </div>
             </div>
         `;
