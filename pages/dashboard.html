@@ -202,15 +202,17 @@
                                         <span class="project-name">Todos os Projetos</span>
                                     </a>
                                     <div class="project-dropdown-divider"></div>
-                                    ${projetos.map(p => `
-                                        <a href="${p.url_modulo || '/index.html'}"
+                                    ${projetos.map(p => {
+                                        const url = normalizeUrl(p.url_modulo) || '/index.html';
+                                        return `
+                                        <a href="${url}"
                                            class="project-dropdown-item ${p.id == projetoId ? 'active' : ''}"
-                                           onclick="switchProject(${p.id}, '${p.url_modulo || '/index.html'}')">
+                                           onclick="switchProject(${p.id}, '${url}')">
                                             <span class="project-icon">${p.icone || '📁'}</span>
                                             <span class="project-name">${p.nome}</span>
                                             <span class="project-badge" style="background: ${p.cor || '#003B4A'}"></span>
                                         </a>
-                                    `).join('')}
+                                    `}).join('')}
                                 </div>
                             </div>
                         `;
@@ -300,10 +302,17 @@
             if (dropdown) dropdown.classList.toggle('open');
         }
 
+        // Normalizar URL para ser absoluta
+        function normalizeUrl(url) {
+            if (!url || url === '#') return url;
+            if (url.startsWith('/') || url.startsWith('http')) return url;
+            return '/' + url;
+        }
+
         // Trocar de projeto
         function switchProject(projetoId, url) {
             localStorage.setItem('belgo_projeto_id', projetoId);
-            if (url && url !== '#') window.location.href = url;
+            if (url && url !== '#') window.location.href = normalizeUrl(url);
         }
 
         // Fechar dropdown ao clicar fora

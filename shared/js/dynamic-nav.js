@@ -9,6 +9,15 @@ const DynamicNav = {
     initialized: false,
     basePath: '',
 
+    // Normalizar URL para ser absoluta (comecar com /)
+    normalizeUrl(url) {
+        if (!url || url === '#') return url;
+        // Se ja comeca com / ou http, retornar como esta
+        if (url.startsWith('/') || url.startsWith('http')) return url;
+        // Adicionar / no inicio
+        return '/' + url;
+    },
+
     // Inicializar navegacao dinamica
     async init(options = {}) {
         if (this.initialized) return;
@@ -235,15 +244,17 @@ const DynamicNav = {
                             <span class="project-name">Todos os Projetos</span>
                         </a>
                         <div class="project-dropdown-divider"></div>
-                        ${projetos.map(p => `
-                            <a href="${p.url_modulo || '#'}"
+                        ${projetos.map(p => {
+                            const url = this.normalizeUrl(p.url_modulo) || '#';
+                            return `
+                            <a href="${url}"
                                class="project-dropdown-item ${p.id === this.projetoId ? 'active' : ''}"
-                               onclick="DynamicNav.switchProject(${p.id}, '${p.url_modulo || '#'}')">
+                               onclick="DynamicNav.switchProject(${p.id}, '${url}')">
                                 <span class="project-icon">${p.icone || '📁'}</span>
                                 <span class="project-name">${p.nome}</span>
                                 <span class="project-badge" style="background: ${p.cor || '#003B4A'}"></span>
                             </a>
-                        `).join('')}
+                        `}).join('')}
                     </div>
                 </div>
             `;
@@ -273,7 +284,8 @@ const DynamicNav = {
     switchProject(projetoId, url) {
         localStorage.setItem('belgo_projeto_id', projetoId);
         if (url && url !== '#') {
-            window.location.href = url;
+            // Normalizar URL para garantir que seja absoluta
+            window.location.href = this.normalizeUrl(url);
         }
     },
 
