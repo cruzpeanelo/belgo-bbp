@@ -248,10 +248,12 @@ const DynamicNav = {
                 </div>
             `;
 
-            // Inserir apos o titulo
-            const title = header.querySelector('h1, .sidebar-title');
+            // Inserir apos o titulo (ou no final do header)
+            const title = header.querySelector('h1, .sidebar-title, .sidebar-subtitle');
             if (title) {
                 title.insertAdjacentHTML('afterend', selectorHtml);
+            } else {
+                header.insertAdjacentHTML('beforeend', selectorHtml);
             }
 
         } catch (error) {

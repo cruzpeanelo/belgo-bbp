@@ -290,11 +290,14 @@ body {
     font-size: 1rem;
 }
 
-/* Footer da sidebar */
+/* Footer da sidebar - fixo no bottom */
 .nav-footer {
-    margin-top: auto;
+    position: sticky;
+    bottom: 0;
+    background: linear-gradient(135deg, #003B4A 0%, #006277 100%);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding: 10px 0;
+    margin-top: auto;
 }
 
 .nav-footer .nav-item {
@@ -314,19 +317,6 @@ body {
 
 .nav-logout:hover {
     background: rgba(255, 255, 255, 0.1);
-}
-
-/* Sidebar com flex para footer fixo */
-.sidebar-nav {
-    flex: 1;
-    padding: 15px 0;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-}
-
-.sidebar-nav-content {
-    flex: 1;
 }
 
 /* Conteúdo Principal */
