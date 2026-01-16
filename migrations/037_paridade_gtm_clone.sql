@@ -8,11 +8,12 @@
 -- Valores corretos: key_user, equipe_projeto, stakeholder
 -- ===========================================
 
+-- Nota: Os dados usam campo "setor" com valores: key_user, equipe_projeto, stakeholder
 UPDATE projeto_entidades
 SET config_funcionalidades = '{
   "layout": "cards_grid",
   "agrupamento": {
-    "campo": "tipo",
+    "campo": "setor",
     "ordem": ["key_user", "equipe_projeto", "stakeholder"],
     "titulos": {
       "key_user": "Key Users",
@@ -20,15 +21,22 @@ SET config_funcionalidades = '{
       "stakeholder": "Stakeholders"
     }
   },
-  "filtros": { "habilitado": false },
+  "filtros": {
+    "habilitado": true,
+    "campos": [
+      { "campo": "setor", "tipo": "select", "label": "Tipo" },
+      { "campo": "area", "tipo": "select", "label": "Área" },
+      { "campo": "busca", "tipo": "text", "label": "Buscar", "placeholder": "Nome ou papel...", "campos_busca": ["nome", "papel"] }
+    ]
+  },
   "paginacao": { "habilitado": false },
   "ordenacao": { "campo_padrao": "nome", "direcao_padrao": "asc" },
   "metricas": {
     "habilitado": true,
     "cards": [
-      { "tipo": "contador", "campo": "tipo", "valor": "key_user", "label": "Key Users", "icone": "👤", "cor": "blue" },
-      { "tipo": "contador", "campo": "tipo", "valor": "equipe_projeto", "label": "Equipe Projeto", "icone": "👥", "cor": "green" },
-      { "tipo": "contador", "campo": "tipo", "valor": "stakeholder", "label": "Stakeholders", "icone": "🎯", "cor": "purple" },
+      { "tipo": "contador", "campo": "setor", "valor": "key_user", "label": "Key Users", "icone": "👤", "cor": "blue" },
+      { "tipo": "contador", "campo": "setor", "valor": "equipe_projeto", "label": "Equipe Projeto", "icone": "👥", "cor": "green" },
+      { "tipo": "contador", "campo": "setor", "valor": "stakeholder", "label": "Stakeholders", "icone": "🎯", "cor": "purple" },
       { "tipo": "total", "label": "Total", "icone": "📊", "cor": "gray" }
     ]
   },
