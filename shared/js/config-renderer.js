@@ -3848,8 +3848,8 @@ const ConfigRenderer = {
 
         this.criandoInline = true;
 
-        // Encontrar container dos cards
-        const container = document.querySelector('.cards-container, .cards-grid, .entidade-content');
+        // Encontrar container dos cards (suporta múltiplos layouts)
+        const container = document.querySelector('.cards-expandable, .cards-grid, .data-container, .componente-cards-ricos');
         if (!container) {
             this.showToast('Container não encontrado', 'error');
             return;
