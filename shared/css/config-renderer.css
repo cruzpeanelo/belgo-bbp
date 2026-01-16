@@ -3863,3 +3863,265 @@
         width: 100%;
     }
 }
+
+/* =====================================================
+   FASE 20: LAYOUT COMPARATIVO AS-IS/TO-BE
+   Layout lado-a-lado para jornadas com gradientes
+   ===================================================== */
+
+.comparativo-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.comparativo-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 59, 74, 0.08);
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #e5e7eb;
+}
+
+.comparativo-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 59, 74, 0.15);
+    transform: translateY(-2px);
+}
+
+.comparativo-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.comparativo-titulo {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--belgo-azul, #003B4A);
+    margin: 0;
+    flex: 1;
+}
+
+.comparativo-descricao {
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.comparativo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.comparativo-coluna {
+    border-radius: 10px;
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* AS-IS Column - Gradiente Vermelho */
+.comparativo-coluna.as-is {
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 50%, #fecaca 100%);
+    border: 1px solid #fca5a5;
+}
+
+.comparativo-coluna.as-is::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #ef4444, #dc2626);
+}
+
+/* TO-BE Column - Gradiente Verde */
+.comparativo-coluna.to-be {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%);
+    border: 1px solid #86efac;
+}
+
+.comparativo-coluna.to-be::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #22c55e, #16a34a);
+}
+
+.comparativo-coluna-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed rgba(0,0,0,0.1);
+}
+
+.comparativo-icone {
+    font-size: 1.2rem;
+}
+
+.comparativo-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.comparativo-coluna.as-is .comparativo-label {
+    color: #b91c1c;
+}
+
+.comparativo-coluna.to-be .comparativo-label {
+    color: #15803d;
+}
+
+.comparativo-conteudo {
+    padding-left: 8px;
+}
+
+.comparativo-vazio {
+    color: #9ca3af;
+    font-style: italic;
+    font-size: 0.85rem;
+}
+
+/* =====================================================
+   STEP LIST - Lista numerada com círculos coloridos
+   ===================================================== */
+
+.step-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: step-counter;
+}
+
+.step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(0,0,0,0.08);
+}
+
+.step-item:last-child {
+    border-bottom: none;
+}
+
+.step-number {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: white;
+}
+
+.step-list-as-is .step-number {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+}
+
+.step-list-to-be .step-number {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    box-shadow: 0 2px 4px rgba(34, 197, 94, 0.3);
+}
+
+.step-text {
+    flex: 1;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #374151;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .comparativo-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .comparativo-coluna {
+        padding: 14px;
+    }
+
+    .comparativo-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* =====================================================
+   BREADCRUMB CUSTOMIZADO PARA TESTES
+   ===================================================== */
+
+.breadcrumb-testes {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.breadcrumb-testes .breadcrumb-item {
+    color: #64748b;
+}
+
+.breadcrumb-testes .breadcrumb-item.active {
+    color: var(--belgo-azul, #003B4A);
+    font-weight: 600;
+}
+
+.breadcrumb-testes .breadcrumb-separator {
+    color: #cbd5e1;
+}
+
+/* =====================================================
+   FILTROS COM ICONES POR CATEGORIA
+   ===================================================== */
+
+.filter-select-with-icon {
+    position: relative;
+}
+
+.filter-select-with-icon select {
+    padding-left: 36px;
+}
+
+.filter-select-with-icon .filter-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    pointer-events: none;
+}
+
+/* Icones por categoria de teste */
+.filter-option[data-category="workflow-pricing"]::before { content: '💰'; }
+.filter-option[data-category="tributario"]::before { content: '📊'; }
+.filter-option[data-category="cadastro"]::before { content: '👤'; }
+.filter-option[data-category="setup"]::before { content: '⚙️'; }
+.filter-option[data-category="financeiro"]::before { content: '💳'; }
+.filter-option[data-category="cotacao-ov"]::before { content: '📝'; }
+.filter-option[data-category="documentos"]::before { content: '📄'; }
+.filter-option[data-category="autoatendimento"]::before { content: '🤖'; }
+.filter-option[data-category="hub-gestao-oc"]::before { content: '🏢'; }

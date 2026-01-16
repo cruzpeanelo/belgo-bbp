@@ -1303,6 +1303,9 @@ const ConfigRenderer = {
                 return this.renderGlossarioComTabs(this.dadosFiltrados);
             case 'documentos_rico':
                 return this.renderDocumentosRico(dadosPaginados);
+            // FASE 20: Layout Comparativo AS-IS/TO-BE para Jornadas
+            case 'comparativo_as_is_to_be':
+                return this.renderComparativoAsIsToBe(this.dadosFiltrados);
             default:
                 return this.renderTabela(dadosPaginados);
         }
@@ -2487,6 +2490,109 @@ const ConfigRenderer = {
                     `;
                 }).join('')}
             </div>
+        `;
+    },
+
+    // =====================================================
+    // FASE 20: RENDER COMPARATIVO AS-IS/TO-BE
+    // Layout lado-a-lado para jornadas com gradientes vermelho/verde
+    // =====================================================
+    renderComparativoAsIsToBe(dados) {
+        const config = this.config?.comparativo || {};
+        const campoNome = config.campo_nome || 'nome';
+        const campoAsIs = config.campo_as_is || 'as_is';
+        const campoToBe = config.campo_to_be || 'to_be';
+        const campoDescricao = config.campo_descricao || 'descricao';
+        const campoCategoria = config.campo_categoria || 'categoria';
+        const campoStatus = config.campo_status || 'status';
+
+        return `
+            <div class="comparativo-container">
+                ${dados.map((row, idx) => {
+                    const asIs = row[campoAsIs];
+                    const toBe = row[campoToBe];
+                    const nome = row[campoNome] || 'Jornada ' + (idx + 1);
+                    const descricao = row[campoDescricao] || '';
+                    const categoria = row[campoCategoria] || '';
+                    const status = row[campoStatus] || '';
+
+                    // Parse AS-IS e TO-BE se forem strings JSON
+                    const asIsItems = this.parseComparativoItems(asIs);
+                    const toBeItems = this.parseComparativoItems(toBe);
+
+                    return `
+                        <div class="comparativo-card" onclick="ConfigRenderer.abrirDetalhe(${row._id || idx})">
+                            <div class="comparativo-header">
+                                <h3 class="comparativo-titulo">${this.escapeHTML(nome)}</h3>
+                                ${categoria ? `<span class="badge badge-outline">${this.escapeHTML(categoria)}</span>` : ''}
+                                ${status ? `<span class="badge ${this.getBadgeClass(status)}">${this.escapeHTML(status)}</span>` : ''}
+                            </div>
+                            ${descricao ? `<p class="comparativo-descricao">${this.escapeHTML(descricao)}</p>` : ''}
+                            <div class="comparativo-grid">
+                                <div class="comparativo-coluna as-is">
+                                    <div class="comparativo-coluna-header">
+                                        <span class="comparativo-icone">🔴</span>
+                                        <span class="comparativo-label">AS-IS (Atual)</span>
+                                    </div>
+                                    <div class="comparativo-conteudo">
+                                        ${this.renderComparativoSteps(asIsItems, 'as-is')}
+                                    </div>
+                                </div>
+                                <div class="comparativo-coluna to-be">
+                                    <div class="comparativo-coluna-header">
+                                        <span class="comparativo-icone">🟢</span>
+                                        <span class="comparativo-label">TO-BE (Futuro)</span>
+                                    </div>
+                                    <div class="comparativo-conteudo">
+                                        ${this.renderComparativoSteps(toBeItems, 'to-be')}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        `;
+    },
+
+    /**
+     * Parse items do comparativo (aceita array, string JSON ou string simples)
+     */
+    parseComparativoItems(value) {
+        if (!value) return [];
+        if (Array.isArray(value)) return value;
+        if (typeof value === 'string') {
+            try {
+                const parsed = JSON.parse(value);
+                return Array.isArray(parsed) ? parsed : [parsed];
+            } catch (e) {
+                // Se não for JSON, divide por newline ou vírgula
+                return value.split(/[\n,]/).map(s => s.trim()).filter(s => s);
+            }
+        }
+        return [String(value)];
+    },
+
+    /**
+     * Renderiza steps numerados do comparativo
+     */
+    renderComparativoSteps(items, tipo) {
+        if (!items || items.length === 0) {
+            return '<div class="comparativo-vazio">Não definido</div>';
+        }
+
+        return `
+            <ol class="step-list step-list-${tipo}">
+                ${items.map((item, idx) => {
+                    const texto = typeof item === 'string' ? item : (item.texto || item.descricao || item.nome || JSON.stringify(item));
+                    return `
+                        <li class="step-item">
+                            <span class="step-number">${idx + 1}</span>
+                            <span class="step-text">${this.escapeHTML(texto)}</span>
+                        </li>
+                    `;
+                }).join('')}
+            </ol>
         `;
     },
 
