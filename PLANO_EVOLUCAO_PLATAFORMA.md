@@ -2271,4 +2271,81 @@ Todas as entidades acessíveis em:
 ### Commits Realizados
 
 1. `e1c15e7` - Feat: Jornadas - 14 registros com dados completos dos JSONs
+2. `a843db3` - Feat: Ordenação por data em cronograma e timeline
+3. `024f5af` - Feat: Adicionar configuração de ordenação na admin
+4. `d72d17c` - Fix: Admin entidades suporta formato objeto para filtros
+5. `a529b81` - Fix: Mover seção Ordenação para dentro de secaoLayout
+
+---
+
+## FASE 26.1: MELHORIAS ADMIN E CORREÇÕES ✅ CONCLUÍDA
+
+**Data**: 16/01/2026
+**Status**: IMPLEMENTADO E DEPLOYADO
+
+### Objetivo
+Adicionar configuração de ordenação nas entidades pelo admin e corrigir bugs identificados.
+
+### Problemas Identificados e Corrigidos
+
+#### 1. Ordenação de Registros ✅
+**Problema**: Entidades como Cronograma e Timeline não tinham ordenação configurada no admin.
+
+**Solução**:
+- Adicionada seção "Ordenação Padrão" no Layout Builder
+- Campos: `campo_padrao` e `direcao` (asc/desc)
+- Cronograma configurado: `campo_padrao: "data"`, `direcao_padrao: "asc"`
+- Timeline configurado: `campo_padrao: "nome"`, `direcao_padrao: "asc"`
+
+#### 2. Erro "filtros.map is not a function" ✅
+**Problema**: Admin esperava `filtros` como array, mas `config_funcionalidades` usa objeto `{habilitado, campos}`.
+
+**Solução**:
+```javascript
+// Suportar formato objeto (novo) e array (legado)
+if (Array.isArray(layoutConfig.filtros)) {
+    filtros = layoutConfig.filtros;
+} else if (layoutConfig.filtros.campos) {
+    filtros = layoutConfig.filtros.campos;
+}
+```
+
+#### 3. Seção Ordenação invisível ✅
+**Problema**: Seção adicionada fora de `secaoLayout`, ficando com `display:none`.
+
+**Solução**: Movida seção para dentro de `<div id="secaoLayout">`.
+
+#### 4. Duplicatas no Cronograma ✅
+**Problema**: 23 registros com 11 duplicatas (mesmo título+data).
+
+**Solução**:
+- Criado `scripts/check_duplicates.js` para detectar duplicatas
+- Criado `scripts/cleanup_cronograma_duplicates.js` para remover IDs duplicados
+- Resultado: 12 registros únicos após limpeza
+
+### Arquivos Modificados
+
+| Arquivo | Alteração |
+|---------|-----------|
+| `admin/entidades.html` | +60 linhas - Seção ordenação, fix filtros |
+| `scripts/apply_configs.js` | +10 linhas - Ordenação em cronograma/timeline |
+| `scripts/check_duplicates.js` | NOVO - Verificador de duplicatas |
+| `scripts/cleanup_cronograma_duplicates.js` | NOVO - Limpeza de duplicatas |
+
+### Verificação de Deploy ✅
+
+- **Cloudflare Pages**: Deploy automático confirmado
+- **Commit mais recente**: "Fix: Mover seção Ordenação para dentro de secaoLayout"
+- **Site ativo**: https://belgo-bbp.pages.dev
+
+### Resultado Final
+
+| Item | Status |
+|------|--------|
+| Ordenação configurável no admin | ✅ |
+| Layouts novos disponíveis (timeline_zigzag, timeline_fases, kanban) | ✅ |
+| Filtros funcionando (formato objeto) | ✅ |
+| Cronograma sem duplicatas (12 registros) | ✅ |
+| Timeline sem duplicatas (5 registros) | ✅ |
+| Deploy Cloudflare | ✅ |
 
