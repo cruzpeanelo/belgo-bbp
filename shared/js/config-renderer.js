@@ -1328,8 +1328,8 @@ const ConfigRenderer = {
     // RENDER TABELA
     // =====================================================
     renderTabela(dados) {
-        // Usar colunas do config ou gerar automaticamente dos campos da entidade
-        let colunas = this.config?.tabela?.colunas || [];
+        // Usar colunas do config (suporta ambos formatos: tabela.colunas ou colunas)
+        let colunas = this.config?.tabela?.colunas || this.config?.colunas || [];
 
         // Se nao tem config de colunas, gerar a partir dos campos carregados
         if (colunas.length === 0 && this.campos.length > 0) {
@@ -1350,7 +1350,7 @@ const ConfigRenderer = {
                 .map(k => ({ campo: k, label: k, tipo: 'text' }));
         }
 
-        const acoes = this.config?.tabela?.acoes || [];
+        const acoes = this.config?.tabela?.acoes || this.config?.acoes_linha || [];
 
         return `
             <div class="table-container tabela-dinamica">
@@ -1429,8 +1429,8 @@ const ConfigRenderer = {
     // RENDER CARDS MOBILE
     // =====================================================
     renderCardsMobile(dados) {
-        const colunas = this.config?.tabela?.colunas || [];
-        const acoes = this.config?.tabela?.acoes || [];
+        const colunas = this.config?.tabela?.colunas || this.config?.colunas || [];
+        const acoes = this.config?.tabela?.acoes || this.config?.acoes_linha || [];
 
         return `
             <div class="cards-mobile">
