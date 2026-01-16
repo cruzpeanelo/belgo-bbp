@@ -433,6 +433,21 @@
                             <span class="layout-type-nome">Timeline</span>
                             <span class="layout-type-desc">Linha do tempo cronologica</span>
                         </button>
+                        <button type="button" class="layout-type-btn" data-layout="timeline_fases" onclick="selecionarLayoutTipo('timeline_fases')">
+                            <span class="layout-type-icon">🎯</span>
+                            <span class="layout-type-nome">Timeline Fases</span>
+                            <span class="layout-type-desc">Fases do projeto com marcos</span>
+                        </button>
+                        <button type="button" class="layout-type-btn" data-layout="timeline_zigzag" onclick="selecionarLayoutTipo('timeline_zigzag')">
+                            <span class="layout-type-icon">⚡</span>
+                            <span class="layout-type-nome">Timeline Zigzag</span>
+                            <span class="layout-type-desc">Timeline alternando lados</span>
+                        </button>
+                        <button type="button" class="layout-type-btn" data-layout="kanban" onclick="selecionarLayoutTipo('kanban')">
+                            <span class="layout-type-icon">📋</span>
+                            <span class="layout-type-nome">Kanban</span>
+                            <span class="layout-type-desc">Quadro com colunas de status</span>
+                        </button>
                     </div>
 
                     <!-- Opcoes de agrupamento (visivel quando cards_agrupados) -->
@@ -503,6 +518,124 @@
                         </div>
                         <p class="section-help" style="margin-top: 8px; font-size: 0.85em; color: #6b7280;">
                             Quando marcado, os cards serao exibidos expandidos ao carregar a pagina.
+                        </p>
+                    </div>
+
+                    <!-- Opcoes de Timeline Fases (visivel quando timeline_fases) -->
+                    <div class="layout-subsection" id="opcoesTimelineFases" style="display: none;">
+                        <h5>Configuracao da Timeline de Fases</h5>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="timelineFasesCampoFase">Campo de Fase/Titulo</label>
+                                <select id="timelineFasesCampoFase">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="timelineFasesCampoStatus">Campo de Status</label>
+                                <select id="timelineFasesCampoStatus">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="timelineFasesCampoDataInicio">Campo Data Inicio</label>
+                                <select id="timelineFasesCampoDataInicio">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="timelineFasesCampoDataFim">Campo Data Fim</label>
+                                <select id="timelineFasesCampoDataFim">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="timelineFasesCampoMarcos">Campo de Marcos (JSON)</label>
+                                <select id="timelineFasesCampoMarcos">
+                                    <option value="">Nenhum</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Opcoes de Timeline Zigzag (visivel quando timeline_zigzag) -->
+                    <div class="layout-subsection" id="opcoesTimelineZigzag" style="display: none;">
+                        <h5>Configuracao da Timeline Zigzag</h5>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="timelineZigzagCampoTitulo">Campo de Titulo</label>
+                                <select id="timelineZigzagCampoTitulo">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="timelineZigzagCampoData">Campo de Data</label>
+                                <select id="timelineZigzagCampoData">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="timelineZigzagCampoDescricao">Campo de Descricao</label>
+                                <select id="timelineZigzagCampoDescricao">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="timelineZigzagCampoStatus">Campo de Status</label>
+                                <select id="timelineZigzagCampoStatus">
+                                    <option value="">Nenhum</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="timelineZigzagCampoTags">Campo de Tags</label>
+                                <select id="timelineZigzagCampoTags">
+                                    <option value="">Nenhum</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Opcoes de Kanban (visivel quando kanban) -->
+                    <div class="layout-subsection" id="opcoesKanban" style="display: none;">
+                        <h5>Configuracao do Kanban</h5>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="kanbanCampoColuna">Campo de Status (para colunas)</label>
+                                <select id="kanbanCampoColuna">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="kanbanCampoTitulo">Campo de Titulo</label>
+                                <select id="kanbanCampoTitulo">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="kanbanCampoDescricao">Campo de Descricao</label>
+                                <select id="kanbanCampoDescricao">
+                                    <option value="">Nenhum</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="kanbanCampoPrioridade">Campo de Prioridade</label>
+                                <select id="kanbanCampoPrioridade">
+                                    <option value="">Nenhum</option>
+                                </select>
+                            </div>
+                        </div>
+                        <p class="section-help" style="margin-top: 8px; font-size: 0.85em; color: #6b7280;">
+                            As colunas serao criadas automaticamente com base nos valores do campo de status.
                         </p>
                     </div>
                 </div>
@@ -1340,6 +1473,69 @@
 
             document.getElementById('opcoesAvatar').style.display = tipoLayout === 'cards_grid' ? 'block' : 'none';
 
+            // Popular campos para Timeline Fases
+            const timelineFasesConfig = layoutConfig.timeline_fases || {};
+            const camposTexto = layoutCampos.filter(c => ['texto', 'text', 'varchar'].includes(c.tipo));
+            const camposData = layoutCampos.filter(c => ['date', 'datetime', 'data'].includes(c.tipo));
+            const camposSelect = layoutCampos.filter(c => c.tipo === 'select');
+            const todosCampos = layoutCampos;
+
+            document.getElementById('timelineFasesCampoFase').innerHTML = '<option value="">Selecione...</option>' +
+                camposTexto.map(c => `<option value="${c.codigo}" ${timelineFasesConfig.campo_fase === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('');
+
+            document.getElementById('timelineFasesCampoStatus').innerHTML = '<option value="">Selecione...</option>' +
+                camposSelect.map(c => `<option value="${c.codigo}" ${timelineFasesConfig.campo_status === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('');
+
+            document.getElementById('timelineFasesCampoDataInicio').innerHTML = '<option value="">Selecione...</option>' +
+                camposData.map(c => `<option value="${c.codigo}" ${timelineFasesConfig.campo_data_inicio === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('');
+
+            document.getElementById('timelineFasesCampoDataFim').innerHTML = '<option value="">Selecione...</option>' +
+                camposData.map(c => `<option value="${c.codigo}" ${timelineFasesConfig.campo_data_fim === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('');
+
+            document.getElementById('timelineFasesCampoMarcos').innerHTML = '<option value="">Nenhum</option>' +
+                todosCampos.map(c => `<option value="${c.codigo}" ${timelineFasesConfig.campo_marcos === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('');
+
+            document.getElementById('opcoesTimelineFases').style.display = tipoLayout === 'timeline_fases' ? 'block' : 'none';
+
+            // Popular campos para Timeline Zigzag
+            const timelineZigzagConfig = layoutConfig.timeline_zigzag || {};
+
+            document.getElementById('timelineZigzagCampoTitulo').innerHTML = '<option value="">Selecione...</option>' +
+                camposTexto.map(c => `<option value="${c.codigo}" ${timelineZigzagConfig.campo_titulo === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('');
+
+            document.getElementById('timelineZigzagCampoData').innerHTML = '<option value="">Selecione...</option>' +
+                camposData.map(c => `<option value="${c.codigo}" ${timelineZigzagConfig.campo_data === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('');
+
+            document.getElementById('timelineZigzagCampoDescricao').innerHTML = '<option value="">Selecione...</option>' +
+                todosCampos.filter(c => ['texto', 'text', 'varchar', 'textarea', 'texto_longo'].includes(c.tipo)).map(c =>
+                    `<option value="${c.codigo}" ${timelineZigzagConfig.campo_descricao === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('');
+
+            document.getElementById('timelineZigzagCampoStatus').innerHTML = '<option value="">Nenhum</option>' +
+                camposSelect.map(c => `<option value="${c.codigo}" ${timelineZigzagConfig.campo_status === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('');
+
+            document.getElementById('timelineZigzagCampoTags').innerHTML = '<option value="">Nenhum</option>' +
+                todosCampos.map(c => `<option value="${c.codigo}" ${timelineZigzagConfig.campo_tags === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('');
+
+            document.getElementById('opcoesTimelineZigzag').style.display = tipoLayout === 'timeline_zigzag' ? 'block' : 'none';
+
+            // Popular campos para Kanban
+            const kanbanConfig = layoutConfig.kanban || {};
+
+            document.getElementById('kanbanCampoColuna').innerHTML = '<option value="">Selecione...</option>' +
+                camposSelect.map(c => `<option value="${c.codigo}" ${kanbanConfig.campo_coluna === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('');
+
+            document.getElementById('kanbanCampoTitulo').innerHTML = '<option value="">Selecione...</option>' +
+                camposTexto.map(c => `<option value="${c.codigo}" ${kanbanConfig.campo_titulo === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('');
+
+            document.getElementById('kanbanCampoDescricao').innerHTML = '<option value="">Nenhum</option>' +
+                todosCampos.filter(c => ['texto', 'text', 'varchar', 'textarea', 'texto_longo'].includes(c.tipo)).map(c =>
+                    `<option value="${c.codigo}" ${kanbanConfig.campo_descricao === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('');
+
+            document.getElementById('kanbanCampoPrioridade').innerHTML = '<option value="">Nenhum</option>' +
+                camposSelect.map(c => `<option value="${c.codigo}" ${kanbanConfig.campo_prioridade === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('');
+
+            document.getElementById('opcoesKanban').style.display = tipoLayout === 'kanban' ? 'block' : 'none';
+
             // Colunas
             renderizarColunasBuilder();
 
@@ -1400,6 +1596,24 @@
             const cardsExpandiveisOpcoes = document.getElementById('opcoesCardsExpandiveis');
             if (cardsExpandiveisOpcoes) {
                 cardsExpandiveisOpcoes.style.display = tipo === 'cards' ? 'block' : 'none';
+            }
+
+            // Mostrar/ocultar opcoes de timeline_fases
+            const timelineFasesOpcoes = document.getElementById('opcoesTimelineFases');
+            if (timelineFasesOpcoes) {
+                timelineFasesOpcoes.style.display = tipo === 'timeline_fases' ? 'block' : 'none';
+            }
+
+            // Mostrar/ocultar opcoes de timeline_zigzag
+            const timelineZigzagOpcoes = document.getElementById('opcoesTimelineZigzag');
+            if (timelineZigzagOpcoes) {
+                timelineZigzagOpcoes.style.display = tipo === 'timeline_zigzag' ? 'block' : 'none';
+            }
+
+            // Mostrar/ocultar opcoes de kanban
+            const kanbanOpcoes = document.getElementById('opcoesKanban');
+            if (kanbanOpcoes) {
+                kanbanOpcoes.style.display = tipo === 'kanban' ? 'block' : 'none';
             }
 
             // Mostrar/ocultar secao de secoes do card
@@ -2079,6 +2293,52 @@
                     if (campoTitulo) config.timeline.campo_titulo = campoTitulo;
                     if (campoDescricao) config.timeline.campo_descricao = campoDescricao;
                 }
+            }
+
+            // Timeline Fases config
+            if (layoutTipo === 'timeline_fases') {
+                const campoFase = document.getElementById('timelineFasesCampoFase').value;
+                const campoStatus = document.getElementById('timelineFasesCampoStatus').value;
+                const campoDataInicio = document.getElementById('timelineFasesCampoDataInicio').value;
+                const campoDataFim = document.getElementById('timelineFasesCampoDataFim').value;
+                const campoMarcos = document.getElementById('timelineFasesCampoMarcos').value;
+
+                config.timeline_fases = {};
+                if (campoFase) config.timeline_fases.campo_fase = campoFase;
+                if (campoStatus) config.timeline_fases.campo_status = campoStatus;
+                if (campoDataInicio) config.timeline_fases.campo_data_inicio = campoDataInicio;
+                if (campoDataFim) config.timeline_fases.campo_data_fim = campoDataFim;
+                if (campoMarcos) config.timeline_fases.campo_marcos = campoMarcos;
+            }
+
+            // Timeline Zigzag config
+            if (layoutTipo === 'timeline_zigzag') {
+                const campoTitulo = document.getElementById('timelineZigzagCampoTitulo').value;
+                const campoData = document.getElementById('timelineZigzagCampoData').value;
+                const campoDescricao = document.getElementById('timelineZigzagCampoDescricao').value;
+                const campoStatus = document.getElementById('timelineZigzagCampoStatus').value;
+                const campoTags = document.getElementById('timelineZigzagCampoTags').value;
+
+                config.timeline_zigzag = {};
+                if (campoTitulo) config.timeline_zigzag.campo_titulo = campoTitulo;
+                if (campoData) config.timeline_zigzag.campo_data = campoData;
+                if (campoDescricao) config.timeline_zigzag.campo_descricao = campoDescricao;
+                if (campoStatus) config.timeline_zigzag.campo_status = campoStatus;
+                if (campoTags) config.timeline_zigzag.campo_tags = campoTags;
+            }
+
+            // Kanban config
+            if (layoutTipo === 'kanban') {
+                const campoColuna = document.getElementById('kanbanCampoColuna').value;
+                const campoTitulo = document.getElementById('kanbanCampoTitulo').value;
+                const campoDescricao = document.getElementById('kanbanCampoDescricao').value;
+                const campoPrioridade = document.getElementById('kanbanCampoPrioridade').value;
+
+                config.kanban = {};
+                if (campoColuna) config.kanban.campo_coluna = campoColuna;
+                if (campoTitulo) config.kanban.campo_titulo = campoTitulo;
+                if (campoDescricao) config.kanban.campo_descricao = campoDescricao;
+                if (campoPrioridade) config.kanban.campo_prioridade = campoPrioridade;
             }
 
             // Salvar via API

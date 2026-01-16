@@ -448,6 +448,13 @@ const ConfigRenderer = {
                 return this.renderCardsAgrupados();
             case 'timeline':
                 return this.renderTimeline(dadosPaginados);
+            // FASE 12 P3: Novos layouts especiais
+            case 'timeline_fases':
+                return this.renderTimelineFases(this.dadosFiltrados);
+            case 'timeline_zigzag':
+                return this.renderTimelineZigzag(this.dadosFiltrados);
+            case 'kanban':
+                return this.renderKanban(this.dadosFiltrados);
             default:
                 return this.renderTabela(dadosPaginados);
         }
@@ -1112,6 +1119,231 @@ const ConfigRenderer = {
             detalhes.style.display = isHidden ? 'block' : 'none';
             card?.classList.toggle('expanded', isHidden);
         }
+    },
+
+    // =====================================================
+    // FASE 12 P3: RENDER TIMELINE FASES
+    // Layout para fases de projeto com marcos e datas
+    // =====================================================
+    renderTimelineFases(dados) {
+        const config = this.config?.timeline_fases || {};
+        const campoTitulo = config.campo_titulo || 'titulo';
+        const campoStatus = config.campo_status || 'status';
+        const campoDataInicio = config.campo_data_inicio || 'data_inicio';
+        const campoDataFim = config.campo_data_fim || 'data_fim';
+        const campoMarcos = config.campo_marcos || 'marcos';
+        const campoDescricao = config.campo_descricao || 'descricao';
+
+        return `
+            <div class="timeline-fases-container">
+                ${dados.map((fase, idx) => {
+                    const status = (fase[campoStatus] || '').toLowerCase();
+                    let statusClass = 'planned';
+                    let statusLabel = 'Planejado';
+                    if (status.includes('conclu') || status === 'completo' || status === 'completed') {
+                        statusClass = 'completed';
+                        statusLabel = 'Concluído';
+                    } else if (status.includes('andamento') || status === 'em progresso' || status === 'in-progress') {
+                        statusClass = 'in-progress';
+                        statusLabel = 'Em Andamento';
+                    }
+
+                    const marcos = this.parseMarcos(fase[campoMarcos]);
+                    const periodo = this.formatarPeriodo(fase[campoDataInicio], fase[campoDataFim]);
+
+                    return `
+                        <div class="phase-card ${statusClass}">
+                            <div class="phase-header">
+                                <div>
+                                    <h3 class="phase-title">${this.escapeHTML(fase[campoTitulo] || '')}</h3>
+                                    ${periodo ? `<span class="phase-period">📅 ${periodo}</span>` : ''}
+                                </div>
+                                <span class="phase-status status-${statusClass}">${statusLabel}</span>
+                            </div>
+                            ${fase[campoDescricao] ? `<p class="phase-description">${this.escapeHTML(fase[campoDescricao])}</p>` : ''}
+                            ${marcos.length > 0 ? `
+                                <ul class="milestone-list">
+                                    ${marcos.map(m => `
+                                        <li class="milestone-item ${m.concluido ? 'completed' : ''}">
+                                            <span class="milestone-icon">${m.concluido ? '✅' : '⏳'}</span>
+                                            <span class="milestone-text">${this.escapeHTML(m.texto)}</span>
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            ` : ''}
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        `;
+    },
+
+    // Helper para parsear marcos
+    parseMarcos(marcos) {
+        if (!marcos) return [];
+        if (Array.isArray(marcos)) return marcos.map(m => typeof m === 'string' ? { texto: m, concluido: false } : m);
+        if (typeof marcos === 'string') {
+            try { return JSON.parse(marcos); } catch(e) {
+                return marcos.split('\n').map(m => ({ texto: m.trim(), concluido: m.includes('[x]') || m.includes('✅') })).filter(m => m.texto);
+            }
+        }
+        return [];
+    },
+
+    // Helper para formatar período
+    formatarPeriodo(inicio, fim) {
+        if (!inicio && !fim) return '';
+        const formatDate = (d) => {
+            if (!d) return '';
+            const date = new Date(d);
+            return date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
+        };
+        if (inicio && fim) return `${formatDate(inicio)} - ${formatDate(fim)}`;
+        return formatDate(inicio || fim);
+    },
+
+    // =====================================================
+    // FASE 12 P3: RENDER TIMELINE ZIGZAG
+    // Layout para cronograma com cards alternando esquerda/direita
+    // =====================================================
+    renderTimelineZigzag(dados) {
+        const config = this.config?.timeline_zigzag || {};
+        const campoTitulo = config.campo_titulo || 'titulo';
+        const campoData = config.campo_data || 'data';
+        const campoDescricao = config.campo_descricao || 'descricao';
+        const campoStatus = config.campo_status || 'status';
+        const campoTags = config.campo_tags || 'tags';
+
+        return `
+            <div class="timeline-zigzag-container">
+                <div class="timeline-line"></div>
+                ${dados.map((item, idx) => {
+                    const status = (item[campoStatus] || '').toLowerCase();
+                    const statusClass = status.includes('conclu') || status === 'completed' ? 'completed' : 'pending';
+                    const tags = this.parseTags(item[campoTags]);
+                    const data = this.formatarDataZigzag(item[campoData]);
+
+                    return `
+                        <div class="workshop-card ${statusClass}">
+                            ${data ? `<div class="workshop-date">📅 ${data}</div>` : ''}
+                            <h3 class="workshop-title">${this.escapeHTML(item[campoTitulo] || '')}</h3>
+                            ${item[campoDescricao] ? `<p class="workshop-description">${this.escapeHTML(item[campoDescricao])}</p>` : ''}
+                            ${tags.length > 0 ? `
+                                <div class="workshop-focus">
+                                    ${tags.map(tag => `<span class="focus-tag">${this.escapeHTML(tag)}</span>`).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        `;
+    },
+
+    // Helper para parsear tags
+    parseTags(tags) {
+        if (!tags) return [];
+        if (Array.isArray(tags)) return tags;
+        if (typeof tags === 'string') {
+            try { return JSON.parse(tags); } catch(e) {
+                return tags.split(',').map(t => t.trim()).filter(t => t);
+            }
+        }
+        return [];
+    },
+
+    // Helper para formatar data do zigzag
+    formatarDataZigzag(data) {
+        if (!data) return '';
+        const date = new Date(data);
+        return date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+    },
+
+    // =====================================================
+    // FASE 12 P3: RENDER KANBAN
+    // Layout de quadro kanban com colunas por status
+    // =====================================================
+    renderKanban(dados) {
+        const config = this.config?.kanban || {};
+        const campoColuna = config.campo_coluna || 'status';
+        const campoTitulo = config.campo_titulo || 'titulo';
+        const campoPrioridade = config.campo_prioridade || 'prioridade';
+        const campoCategoria = config.campo_categoria || 'categoria';
+        const campoId = config.campo_id || 'id';
+
+        // Colunas configuráveis ou padrão
+        const colunas = config.colunas || [
+            { valor: 'pendente', titulo: 'Pendentes', cor: '#FEF3C7', corTexto: '#92400E', classe: 'pendente' },
+            { valor: 'em_andamento', titulo: 'Em Andamento', cor: '#DBEAFE', corTexto: '#1E40AF', classe: 'andamento' },
+            { valor: 'resolvido', titulo: 'Resolvidos', cor: '#D1FAE5', corTexto: '#065F46', classe: 'resolvido' }
+        ];
+
+        // Agrupar dados por coluna
+        const grupos = {};
+        colunas.forEach(col => grupos[col.valor] = []);
+
+        dados.forEach(item => {
+            const valorColuna = (item[campoColuna] || '').toLowerCase().replace(/\s+/g, '_');
+            const coluna = colunas.find(c =>
+                valorColuna.includes(c.valor) ||
+                c.valor.includes(valorColuna) ||
+                valorColuna === c.valor
+            );
+            if (coluna) {
+                grupos[coluna.valor].push(item);
+            } else {
+                // Coluna não encontrada, adicionar na primeira
+                grupos[colunas[0].valor].push(item);
+            }
+        });
+
+        // Estatísticas
+        const stats = colunas.map(col => ({
+            titulo: col.titulo,
+            count: grupos[col.valor].length,
+            cor: col.cor
+        }));
+
+        return `
+            <div class="kanban-stats">
+                ${stats.map(s => `
+                    <div class="kanban-stat" style="background: ${s.cor}">
+                        <span class="kanban-stat-count">${s.count}</span>
+                        <span class="kanban-stat-label">${s.titulo}</span>
+                    </div>
+                `).join('')}
+            </div>
+            <div class="kanban-board">
+                ${colunas.map(col => `
+                    <div class="kanban-column">
+                        <div class="kanban-header ${col.classe}" style="background: ${col.cor}; color: ${col.corTexto}">
+                            ${col.titulo} (${grupos[col.valor].length})
+                        </div>
+                        <div class="kanban-items">
+                            ${grupos[col.valor].map(item => {
+                                const prioridade = (item[campoPrioridade] || '').toLowerCase();
+                                let prioridadeClass = 'media';
+                                if (prioridade.includes('bloqu')) prioridadeClass = 'bloqueador';
+                                else if (prioridade.includes('crit') || prioridade === 'crítica') prioridadeClass = 'critica';
+                                else if (prioridade.includes('alta')) prioridadeClass = 'alta';
+                                else if (prioridade.includes('baixa')) prioridadeClass = 'baixa';
+
+                                return `
+                                    <div class="issue-card ${prioridadeClass}" onclick="ConfigRenderer.editarRegistro(${item.id || item._id})">
+                                        ${item[campoId] ? `<div class="issue-id">#${item[campoId]}</div>` : ''}
+                                        <div class="issue-title">${this.escapeHTML(item[campoTitulo] || '')}</div>
+                                        <div class="issue-meta">
+                                            ${item[campoCategoria] ? `<span class="issue-categoria">${this.escapeHTML(item[campoCategoria])}</span>` : ''}
+                                            ${item[campoPrioridade] ? `<span class="issue-prioridade ${prioridadeClass}">${this.escapeHTML(item[campoPrioridade])}</span>` : ''}
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
     },
 
     // =====================================================
