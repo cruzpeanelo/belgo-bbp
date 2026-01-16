@@ -108,21 +108,15 @@ const configPontosCriticos = {
     acoes: ["editar", "excluir"]
 };
 
-// 2. CRONOGRAMA (id=24) - Timeline com Banner
+// 2. CRONOGRAMA (id=24) - Timeline Zigzag
 const configCronograma = {
-    layout: "cards_com_banner",
-    banner: {
-        habilitado: true,
-        estilo: "gradient_blue",
-        filtro_registro: {campo: "tipo", valor: "info_projeto"},
-        campos: [
-            {campo: "nome", estilo: "titulo_banner"},
-            {tipo: "stats_grid", stats: [
-                {campo: "fase_atual", label: "Fase Atual", destaque: true},
-                {tipo: "contagem", filtro: {campo: "tipo", valor: "workshop"}, label: "Workshops"},
-                {campo: "go_live_fase_ii", label: "GO Live", formato: "DD/MM/YYYY"}
-            ]}
-        ]
+    layout: "timeline_zigzag",
+    timeline_zigzag: {
+        campo_titulo: "titulo",
+        campo_data: "data",
+        campo_descricao: "descricao",
+        campo_status: "status",
+        campo_tags: "foco"
     },
     filtros: {
         habilitado: true,
@@ -139,17 +133,6 @@ const configCronograma = {
             {tipo: "contador", campo: "tipo", valor: "marco", label: "Marcos", icone: "🏁", cor: "green"},
             {tipo: "contador", campo: "status", valor: "Concluído", label: "Concluídos", icone: "✅", cor: "green"}
         ]
-    },
-    card: {
-        campos: [
-            {campo: "data", estilo: "data_destaque", formato: "DD/MM/YYYY"},
-            {campo: "id", estilo: "badge_id"},
-            {campo: "titulo", estilo: "titulo"},
-            {campo: "status", estilo: "badge"},
-            {campo: "participantes", estilo: "contador", label: "participantes", icone: "👥", condicional: true},
-            {campo: "foco", estilo: "tags", separador: "|", condicional: true}
-        ],
-        acoes: ["editar", "teams"]
     },
     modal_detalhe: {
         habilitado: true,
