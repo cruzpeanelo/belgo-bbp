@@ -585,6 +585,8 @@ const ConfigRenderer = {
                             ${secoes.map(secao => this.renderSecaoCard(row, secao)).join('')}
                             <div class="card-expandable-actions">
                                 ${acoes.includes('teams') ? `<button class="btn-teams btn-sm" onclick="event.stopPropagation(); ConfigRenderer.compartilharTeams('${this.escapeHTML(row.nome || '')}')">📤 Teams</button>` : ''}
+                                ${this.permissoes?.permite_editar ? `<button class="btn btn-sm btn-secondary" onclick="event.stopPropagation(); ConfigRenderer.abrirModalEditar(${row.id || row._id})">✏️ Editar</button>` : ''}
+                                ${this.permissoes?.permite_excluir ? `<button class="btn btn-sm btn-danger" onclick="event.stopPropagation(); ConfigRenderer.confirmarExcluir(${row.id || row._id}, '${this.escapeHTML(row.nome || '')}')">🗑️ Excluir</button>` : ''}
                             </div>
                         </div>
                     </div>
@@ -1466,6 +1468,231 @@ const ConfigRenderer = {
         } catch (error) {
             console.error('Erro ao salvar:', error);
             this.showToast('Erro ao salvar registro', 'error');
+        }
+    },
+
+    // =========================================
+    // Funções para EDITAR registros
+    // =========================================
+
+    async abrirModalEditar(registroId) {
+        await this.carregarCampos();
+
+        // Buscar dados do registro
+        const registro = this.dados.find(r => (r.id || r._id) == registroId);
+        if (!registro) {
+            this.showToast('Registro não encontrado', 'error');
+            return;
+        }
+
+        this.registroEditando = registro;
+
+        const modalHtml = `
+            <div class="modal-overlay active" id="modalEditar" onclick="if(event.target === this) ConfigRenderer.fecharModalEditar()">
+                <div class="modal-content modal-criar">
+                    <div class="modal-header">
+                        <h3>✏️ Editar ${this.entidade?.nome || 'Registro'}</h3>
+                        <button class="modal-close" onclick="ConfigRenderer.fecharModalEditar()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formEditar" onsubmit="event.preventDefault(); ConfigRenderer.salvarEdicao();">
+                            ${this.renderCamposFormEditar(registro)}
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" onclick="ConfigRenderer.fecharModalEditar()">Cancelar</button>
+                                <button type="submit" class="btn btn-success">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+        document.body.style.overflow = 'hidden';
+    },
+
+    renderCamposFormEditar(registro) {
+        if (this.campos.length === 0) {
+            return '<p>Nenhum campo configurado para esta entidade.</p>';
+        }
+
+        return this.campos.map(campo => {
+            const required = campo.obrigatorio ? 'required' : '';
+            const requiredMark = campo.obrigatorio ? '<span style="color: red;">*</span>' : '';
+            const valor = registro[campo.codigo] || '';
+
+            switch (campo.tipo) {
+                case 'text':
+                case 'email':
+                case 'url':
+                    return `
+                        <div class="form-group">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <input type="${campo.tipo}" id="campo-${campo.codigo}" name="${campo.codigo}"
+                                   value="${this.escapeHTML(valor)}" placeholder="${campo.placeholder || ''}" ${required}>
+                        </div>
+                    `;
+                case 'textarea':
+                    return `
+                        <div class="form-group">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <textarea id="campo-${campo.codigo}" name="${campo.codigo}"
+                                      rows="4" placeholder="${campo.placeholder || ''}" ${required}>${this.escapeHTML(valor)}</textarea>
+                        </div>
+                    `;
+                case 'number':
+                    return `
+                        <div class="form-group">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <input type="number" id="campo-${campo.codigo}" name="${campo.codigo}" value="${valor}" ${required}>
+                        </div>
+                    `;
+                case 'select':
+                    let opcoes = campo.opcoes || [];
+                    if (typeof opcoes === 'string') {
+                        try { opcoes = JSON.parse(opcoes); } catch(e) { opcoes = []; }
+                    }
+                    return `
+                        <div class="form-group">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <select id="campo-${campo.codigo}" name="${campo.codigo}" ${required}>
+                                <option value="">Selecione...</option>
+                                ${opcoes.map(op => {
+                                    const opValor = typeof op === 'string' ? op : (op.valor || op.value || op);
+                                    const opLabel = typeof op === 'string' ? op : (op.label || op.nome || opValor);
+                                    const selected = opValor == valor ? 'selected' : '';
+                                    return `<option value="${opValor}" ${selected}>${opLabel}</option>`;
+                                }).join('')}
+                            </select>
+                        </div>
+                    `;
+                case 'date':
+                    return `
+                        <div class="form-group">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <input type="date" id="campo-${campo.codigo}" name="${campo.codigo}" value="${valor}" ${required}>
+                        </div>
+                    `;
+                default:
+                    return `
+                        <div class="form-group">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <input type="text" id="campo-${campo.codigo}" name="${campo.codigo}"
+                                   value="${this.escapeHTML(valor)}" ${required}>
+                        </div>
+                    `;
+            }
+        }).join('');
+    },
+
+    fecharModalEditar() {
+        const modal = document.getElementById('modalEditar');
+        if (modal) {
+            modal.remove();
+            document.body.style.overflow = '';
+        }
+        this.registroEditando = null;
+    },
+
+    async salvarEdicao() {
+        const form = document.getElementById('formEditar');
+        if (!form || !this.registroEditando) return;
+
+        const formData = new FormData(form);
+        const dados = {};
+
+        for (const [key, value] of formData.entries()) {
+            dados[key] = value;
+        }
+
+        const registroId = this.registroEditando.id || this.registroEditando._id;
+        const entidadeCodigo = this.entidade?.codigo || this.entidadeCodigo;
+
+        try {
+            const response = await fetch(`/api/projetos/${this.projetoId}/dados/${entidadeCodigo}/${registroId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${BelgoAuth.getToken()}`
+                },
+                body: JSON.stringify({ dados })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                this.showToast('Registro atualizado com sucesso!', 'success');
+                this.fecharModalEditar();
+                await this.carregarDados();
+                this.render();
+            } else {
+                this.showToast(result.error || 'Erro ao atualizar registro', 'error');
+            }
+        } catch (error) {
+            console.error('Erro ao atualizar:', error);
+            this.showToast('Erro ao atualizar registro', 'error');
+        }
+    },
+
+    // =========================================
+    // Funções para EXCLUIR registros
+    // =========================================
+
+    confirmarExcluir(registroId, nome) {
+        const modalHtml = `
+            <div class="modal-overlay active" id="modalExcluir" onclick="if(event.target === this) ConfigRenderer.fecharModalExcluir()">
+                <div class="modal-content modal-sm">
+                    <div class="modal-header">
+                        <h3>🗑️ Confirmar Exclusão</h3>
+                        <button class="modal-close" onclick="ConfigRenderer.fecharModalExcluir()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Tem certeza que deseja excluir <strong>"${nome}"</strong>?</p>
+                        <p style="color: #dc3545; font-size: 0.9em;">Esta ação não pode ser desfeita.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" onclick="ConfigRenderer.fecharModalExcluir()">Cancelar</button>
+                        <button class="btn btn-danger" onclick="ConfigRenderer.executarExclusao(${registroId})">Excluir</button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+        document.body.style.overflow = 'hidden';
+    },
+
+    fecharModalExcluir() {
+        const modal = document.getElementById('modalExcluir');
+        if (modal) {
+            modal.remove();
+            document.body.style.overflow = '';
+        }
+    },
+
+    async executarExclusao(registroId) {
+        const entidadeCodigo = this.entidade?.codigo || this.entidadeCodigo;
+        try {
+            const response = await fetch(`/api/projetos/${this.projetoId}/dados/${entidadeCodigo}/${registroId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${BelgoAuth.getToken()}`
+                }
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                this.showToast('Registro excluído com sucesso!', 'success');
+                this.fecharModalExcluir();
+                await this.carregarDados();
+                this.render();
+            } else {
+                this.showToast(result.error || 'Erro ao excluir registro', 'error');
+            }
+        } catch (error) {
+            console.error('Erro ao excluir:', error);
+            this.showToast('Erro ao excluir registro', 'error');
         }
     },
 
