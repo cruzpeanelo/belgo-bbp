@@ -32,12 +32,17 @@ const records = pontosCriticosData.issues.map(issue => ({
 
 console.log('Total registros pontos-criticos:', records.length);
 
-let sql = "DELETE FROM projeto_dados WHERE projeto_id = 5 AND entidade_id = (SELECT id FROM projeto_entidades WHERE codigo = 'pontos-criticos' AND projeto_id = 5);\n";
+// Entidade pontoscriticos tem id=26 no projeto 5
+const ENTIDADE_ID = 26;
+const PROJETO_ID = 5;
 
-records.forEach(record => {
+let sql = `-- Limpar dados existentes de pontoscriticos\nDELETE FROM projeto_dados WHERE entidade_id = ${ENTIDADE_ID};\n\n`;
+sql += `-- Inserir ${records.length} pontos criticos\n`;
+
+records.forEach((record, index) => {
   const jsonString = JSON.stringify(record);
   const escapedJson = escapeSQL(jsonString);
-  sql += `INSERT INTO projeto_dados (projeto_id, entidade_id, dados) SELECT 5, id, '${escapedJson}' FROM projeto_entidades WHERE codigo = 'pontos-criticos' AND projeto_id = 5;\n`;
+  sql += `INSERT INTO projeto_dados (projeto_id, entidade_id, dados) VALUES (${PROJETO_ID}, ${ENTIDADE_ID}, '${escapedJson}');\n`;
 });
 
 const sqlFile = path.join(__dirname, '..', 'temp_pontos.sql');
