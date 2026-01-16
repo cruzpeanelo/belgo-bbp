@@ -121,6 +121,23 @@ CREATE TABLE projeto_dashboard_widgets (...);
 | Criar segundo registro | ✅ OK |
 | Ambos registros aparecem na listagem | ✅ OK (2 registros) |
 
+### Teste do Dashboard Dinâmico - Janeiro 2026 ✅
+
+| Etapa | Resultado |
+|-------|-----------|
+| Acessar admin de dashboard config | ✅ OK |
+| Selecionar projeto GTM Clone | ✅ OK |
+| Criar widget "Total de Riscos" (Métrica) | ✅ OK |
+| Criar widget "Riscos por Status" (Gráfico Pizza) | ✅ OK |
+| Acessar dashboard do projeto | ✅ OK |
+| Widget métrica mostra contagem correta (2) | ✅ OK |
+| Gráfico pizza mostra distribuição correta | ✅ OK |
+| Cores e percentuais funcionando | ✅ OK |
+
+**Widgets Testados:**
+- **Métrica**: Contagem total de registros de uma entidade
+- **Gráfico Pizza**: Agrupamento por campo com cores e percentuais
+
 ---
 
 ## ✅ TODOS OS TESTES CONCLUÍDOS
@@ -200,7 +217,7 @@ MIGRATIONS:
 2. ~~Testar todas as funcionalidades do novo projeto~~ ✅ FEITO
 3. ~~Testar configuração de layout visual~~ ✅ FEITO
 4. ~~**Teste de ponta a ponta completo**~~ ✅ FEITO (Janeiro 2026)
-5. Testar dashboard dinâmico (widgets)
+5. ~~**Testar dashboard dinâmico (widgets)**~~ ✅ FEITO (Janeiro 2026)
 6. Documentar processo para administradores
 
 ---
