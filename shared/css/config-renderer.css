@@ -995,8 +995,9 @@
 }
 
 .card-expandable.expanded .card-expandable-body {
-    max-height: 1000px;
+    max-height: 5000px;
     padding: 20px;
+    overflow: visible;
 }
 
 .secao-comparativo {
