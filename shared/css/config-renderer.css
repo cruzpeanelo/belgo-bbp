@@ -1639,6 +1639,18 @@
 .avatar-gestor { background: #F59E0B !important; color: white; }
 .avatar-consultor { background: #10B981 !important; color: white; }
 
+/* Avatar padrão quando não tem cor_por */
+.avatar-default {
+    background: linear-gradient(135deg, #003B4A 0%, #005a6e 100%);
+    color: white;
+}
+
+/* Avatar com cor inline */
+.card-avatar[style*="background-color"] {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+}
+
 /* =====================================================
    ÍCONES EM HEADERS DE CARD (P2)
    ===================================================== */

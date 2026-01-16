@@ -915,8 +915,18 @@ const ConfigRenderer = {
         if (avatar) {
             const nome = row[avatar.campo] || '';
             const iniciais = nome.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-            const corClass = avatar.cor_por ? `avatar-${row[avatar.cor_por]}` : '';
-            avatarHtml = `<div class="card-avatar ${corClass}">${iniciais}</div>`;
+            // FASE 12 P2: Cores dinâmicas baseadas no valor do campo
+            let avatarStyle = '';
+            let corClass = '';
+            if (avatar.cor_por && row[avatar.cor_por]) {
+                const valorCor = row[avatar.cor_por];
+                // Gerar cor baseada no hash do valor
+                const cor = this.gerarCorAvatar(valorCor);
+                avatarStyle = `style="background-color: ${cor}; color: white;"`;
+            } else {
+                corClass = 'avatar-default';
+            }
+            avatarHtml = `<div class="card-avatar ${corClass}" ${avatarStyle}>${iniciais}</div>`;
         }
 
         return `
@@ -1479,6 +1489,43 @@ const ConfigRenderer = {
         const div = document.createElement('div');
         div.textContent = str;
         return div.innerHTML;
+    },
+
+    // FASE 12 P2: Gera cor de avatar baseada no valor do campo
+    gerarCorAvatar(valor) {
+        // Cores predefinidas por função/papel comum
+        const coresPorValor = {
+            'key user': '#3B82F6',
+            'key-user': '#3B82F6',
+            'keyuser': '#3B82F6',
+            'desenvolvedor': '#8B5CF6',
+            'analista': '#06B6D4',
+            'gestor': '#F59E0B',
+            'gerente': '#F59E0B',
+            'consultor': '#10B981',
+            'equipe': '#10B981',
+            'stakeholder': '#EF4444',
+            'patrocinador': '#EC4899'
+        };
+
+        const valorLower = (valor || '').toLowerCase();
+        if (coresPorValor[valorLower]) {
+            return coresPorValor[valorLower];
+        }
+
+        // Gerar cor baseada no hash do valor
+        let hash = 0;
+        for (let i = 0; i < valor.length; i++) {
+            hash = valor.charCodeAt(i) + ((hash << 5) - hash);
+        }
+
+        // Cores agradáveis predefinidas
+        const cores = [
+            '#3B82F6', '#8B5CF6', '#06B6D4', '#10B981', '#F59E0B',
+            '#EF4444', '#EC4899', '#6366F1', '#14B8A6', '#F97316'
+        ];
+
+        return cores[Math.abs(hash) % cores.length];
     },
 
     getBadgeClass(status) {
