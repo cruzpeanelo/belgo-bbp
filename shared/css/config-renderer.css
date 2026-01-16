@@ -3670,3 +3670,195 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* =====================================================
+   FORMULÁRIO INLINE (Edição/Criação sem modal)
+   ===================================================== */
+
+/* Card em modo de edição */
+.card-expandable.editing,
+.card-inline-create {
+    border: 2px solid var(--belgo-azul, #003B4A);
+    box-shadow: 0 4px 20px rgba(0, 59, 74, 0.15);
+    background: #fafbfc;
+}
+
+.card-expandable.editing .editing-header,
+.card-inline-create .editing-header {
+    background: linear-gradient(135deg, var(--belgo-azul, #003B4A) 0%, #005a70 100%);
+    color: white;
+}
+
+.card-expandable.editing .editing-header .card-nome,
+.card-inline-create .editing-header .card-nome {
+    color: white;
+}
+
+.card-expandable.editing .editing-header .badge,
+.card-inline-create .editing-header .badge {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+/* Formulário inline */
+.form-inline-edit {
+    padding: 20px;
+}
+
+.form-inline-edit .form-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.form-inline-edit .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-inline-edit .form-group.col-4 {
+    grid-column: span 4;
+}
+
+.form-inline-edit .form-group.col-6 {
+    grid-column: span 6;
+}
+
+.form-inline-edit .form-group.col-12 {
+    grid-column: span 12;
+}
+
+.form-inline-edit label {
+    font-weight: 600;
+    color: var(--belgo-azul, #003B4A);
+    font-size: 0.9rem;
+}
+
+.form-inline-edit .required-mark {
+    color: #dc3545;
+    margin-left: 2px;
+}
+
+.form-inline-edit input,
+.form-inline-edit select,
+.form-inline-edit textarea {
+    padding: 10px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background: white;
+    transition: all 0.2s ease;
+}
+
+.form-inline-edit input:focus,
+.form-inline-edit select:focus,
+.form-inline-edit textarea:focus {
+    outline: none;
+    border-color: var(--belgo-azul, #003B4A);
+    box-shadow: 0 0 0 3px rgba(0, 59, 74, 0.1);
+}
+
+.form-inline-edit textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-inline-edit input:invalid,
+.form-inline-edit select:invalid,
+.form-inline-edit textarea:invalid {
+    border-color: #fca5a5;
+}
+
+/* Ações do formulário inline */
+.form-inline-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.form-inline-actions .btn {
+    padding: 10px 24px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.form-inline-actions .btn-secondary {
+    background: #f3f4f6;
+    color: #4b5563;
+    border: 1px solid #d1d5db;
+}
+
+.form-inline-actions .btn-secondary:hover {
+    background: #e5e7eb;
+}
+
+.form-inline-actions .btn-success {
+    background: var(--belgo-verde, #10B981);
+    color: white;
+    border: none;
+}
+
+.form-inline-actions .btn-success:hover {
+    background: #059669;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.form-inline-actions .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Card de criação inline */
+.card-inline-create {
+    margin-bottom: 20px;
+    animation: slideInFromTop 0.3s ease-out;
+}
+
+@keyframes slideInFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mensagem de formulário vazio */
+.form-empty {
+    text-align: center;
+    color: #6b7280;
+    padding: 20px;
+    font-style: italic;
+}
+
+/* Responsivo para formulário inline */
+@media (max-width: 768px) {
+    .form-inline-edit .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-inline-edit .form-group.col-4,
+    .form-inline-edit .form-group.col-6,
+    .form-inline-edit .form-group.col-12 {
+        grid-column: span 1;
+    }
+
+    .form-inline-actions {
+        flex-direction: column;
+    }
+
+    .form-inline-actions .btn {
+        width: 100%;
+    }
+}

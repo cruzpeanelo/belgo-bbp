@@ -15,6 +15,10 @@ const ConfigRenderer = {
     containerId: 'pageContent',
     permissoes: null, // Permissoes do usuario carregadas via BelgoAuth
 
+    // Estado de edição inline
+    editandoInline: null, // ID do registro sendo editado
+    criandoInline: false, // Se está criando novo registro inline
+
     // =====================================================
     // INICIALIZACAO
     // =====================================================
@@ -517,7 +521,7 @@ const ConfigRenderer = {
         const acoesHtml = acoes.length > 0 ? `
             <div class="card-acoes">
                 ${acoes.includes('editar') && this.podeEditar() ? `
-                    <button class="btn btn-sm btn-secondary" onclick="event.stopPropagation(); ConfigRenderer.abrirModalEditar(${row.id || row._id})">✏️</button>
+                    <button class="btn btn-sm btn-secondary" onclick="event.stopPropagation(); ConfigRenderer.entrarModoEdicaoInline(${row.id || row._id})">✏️</button>
                 ` : ''}
                 ${acoes.includes('excluir') && this.podeExcluir() ? `
                     <button class="btn btn-sm btn-danger" onclick="event.stopPropagation(); ConfigRenderer.confirmarExcluir(${row.id || row._id}, '${this.escapeHTML(row.nome || '')}')">🗑️</button>
@@ -529,7 +533,7 @@ const ConfigRenderer = {
         ` : '';
 
         return `
-            <div class="card-secao" data-id="${row.id || row._id}" onclick="ConfigRenderer.abrirModalEditar(${row.id || row._id})">
+            <div class="card-secao" data-id="${row.id || row._id}" onclick="ConfigRenderer.entrarModoEdicaoInline(${row.id || row._id})">
                 ${avatarHtml}
                 <div class="card-body">
                     ${camposHtml}
@@ -604,7 +608,7 @@ const ConfigRenderer = {
                     ${secoes.map(secao => this.renderSecaoCardRico(row, secao)).join('')}
                     <div class="card-expandable-actions">
                         ${header.acoes?.includes('teams') ? `<button class="btn-teams btn-sm" onclick="event.stopPropagation(); ConfigRenderer.compartilharTeams('${this.escapeHTML(tituloField)}')">📤 Teams</button>` : ''}
-                        ${this.podeEditar() ? `<button class="btn btn-sm btn-secondary" onclick="event.stopPropagation(); ConfigRenderer.abrirModalEditar(${row.id || row._id})">✏️ Editar</button>` : ''}
+                        ${this.podeEditar() ? `<button class="btn btn-sm btn-secondary" onclick="event.stopPropagation(); ConfigRenderer.entrarModoEdicaoInline(${row.id || row._id})">✏️ Editar</button>` : ''}
                         ${this.podeExcluir() ? `<button class="btn btn-sm btn-danger" onclick="event.stopPropagation(); ConfigRenderer.confirmarExcluir(${row.id || row._id}, '${this.escapeHTML(tituloField)}')">🗑️ Excluir</button>` : ''}
                     </div>
                 </div>
@@ -1075,7 +1079,7 @@ const ConfigRenderer = {
 
         // Botao de adicionar (se usuario pode criar)
         if (this.podeCriar()) {
-            acoes.push(`<button class="btn btn-success" onclick="ConfigRenderer.abrirModalCriar()">➕ Adicionar</button>`);
+            acoes.push(`<button class="btn btn-success" onclick="ConfigRenderer.abrirFormCriarInline()">➕ Adicionar</button>`);
         }
 
         // Botao de exportar (se usuario pode exportar)
@@ -1465,7 +1469,7 @@ const ConfigRenderer = {
                             ${secoes.map(secao => this.renderSecaoCard(row, secao)).join('')}
                             <div class="card-expandable-actions">
                                 ${acoes.includes('teams') ? `<button class="btn-teams btn-sm" onclick="event.stopPropagation(); ConfigRenderer.compartilharTeams('${this.escapeHTML(row.nome || '')}')">📤 Teams</button>` : ''}
-                                ${this.entidade?.permite_editar ? `<button class="btn btn-sm btn-secondary" onclick="event.stopPropagation(); ConfigRenderer.abrirModalEditar(${row.id || row._id})">✏️ Editar</button>` : ''}
+                                ${this.entidade?.permite_editar ? `<button class="btn btn-sm btn-secondary" onclick="event.stopPropagation(); ConfigRenderer.entrarModoEdicaoInline(${row.id || row._id})">✏️ Editar</button>` : ''}
                                 ${this.entidade?.permite_excluir ? `<button class="btn btn-sm btn-danger" onclick="event.stopPropagation(); ConfigRenderer.confirmarExcluir(${row.id || row._id}, '${this.escapeHTML(row.nome || '')}')">🗑️ Excluir</button>` : ''}
                             </div>
                         </div>
@@ -2229,7 +2233,7 @@ const ConfigRenderer = {
                                 else if (prioridade.includes('baixa')) prioridadeClass = 'baixa';
 
                                 return `
-                                    <div class="issue-card ${prioridadeClass}" onclick="ConfigRenderer.abrirModalEditar(${item.id || item._id})">
+                                    <div class="issue-card ${prioridadeClass}" onclick="ConfigRenderer.entrarModoEdicaoInline(${item.id || item._id})">
                                         ${item[campoId] ? `<div class="issue-id">#${item[campoId]}</div>` : ''}
                                         <div class="issue-title">${this.escapeHTML(item[campoTitulo] || '')}</div>
                                         <div class="issue-meta">
@@ -3575,6 +3579,420 @@ const ConfigRenderer = {
         } catch (error) {
             console.error('Erro ao salvar opção:', error);
             this.showToast('Erro ao salvar opção', 'error');
+        }
+    },
+
+    // =========================================
+    // EDIÇÃO INLINE (sem modal)
+    // =========================================
+
+    /**
+     * Entra no modo de edição inline para um registro
+     */
+    async entrarModoEdicaoInline(registroId) {
+        await this.carregarCampos();
+
+        // Buscar dados do registro
+        const registro = this.dados.find(r => (r.id || r._id) == registroId);
+        if (!registro) {
+            this.showToast('Registro não encontrado', 'error');
+            return;
+        }
+
+        this.editandoInline = registroId;
+        this.registroEditando = registro;
+
+        // Encontrar o card e substituir conteúdo por formulário
+        const card = document.querySelector(`.card-expandable[data-id="${registroId}"], .card-rico[data-id="${registroId}"], .card-expandable[data-idx]`);
+        if (!card) {
+            // Fallback: tentar encontrar por índice
+            const idx = this.dados.findIndex(r => (r.id || r._id) == registroId);
+            const cardByIdx = document.querySelector(`.card-expandable[data-idx="${idx}"]`);
+            if (cardByIdx) {
+                this.transformarCardParaEdicao(cardByIdx, registro);
+                return;
+            }
+            this.showToast('Card não encontrado', 'error');
+            return;
+        }
+
+        this.transformarCardParaEdicao(card, registro);
+    },
+
+    /**
+     * Transforma um card para modo de edição
+     */
+    transformarCardParaEdicao(card, registro) {
+        const registroId = registro.id || registro._id;
+        const nomeRegistro = registro.nome || registro.titulo || 'Registro';
+
+        // Expandir o card se estiver fechado
+        card.classList.add('expanded', 'editing');
+
+        // Guardar conteúdo original para restaurar se cancelar
+        card.dataset.originalContent = card.innerHTML;
+
+        // Obter ícone e título do registro
+        const config = this.config?.visualizacao || {};
+        const header = config.header || {};
+        const iconeField = header.icone?.startsWith('campo:')
+            ? registro[header.icone.replace('campo:', '')]
+            : (header.icone || '📝');
+        const tituloField = header.titulo?.startsWith('campo:')
+            ? registro[header.titulo.replace('campo:', '')]
+            : nomeRegistro;
+
+        // Substituir conteúdo por formulário inline
+        card.innerHTML = `
+            <div class="card-expandable-header editing-header">
+                <div class="card-header-left">
+                    ${iconeField ? `<span class="card-icone">${iconeField}</span>` : ''}
+                    <h4 class="card-nome">✏️ Editando: ${this.escapeHTML(tituloField)}</h4>
+                </div>
+                <div class="card-header-right">
+                    <span class="badge badge-warning">Modo Edição</span>
+                </div>
+            </div>
+            <div class="card-expandable-body">
+                <form id="formInlineEdit-${registroId}" class="form-inline-edit" onsubmit="event.preventDefault(); ConfigRenderer.salvarEdicaoInline(${registroId});">
+                    <div class="form-grid">
+                        ${this.renderCamposFormInline(registro)}
+                    </div>
+                    <div class="form-inline-actions">
+                        <button type="button" class="btn btn-secondary" onclick="ConfigRenderer.cancelarEdicaoInline(${registroId})">
+                            ❌ Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-success">
+                            ✅ Salvar Alterações
+                        </button>
+                    </div>
+                </form>
+            </div>
+        `;
+
+        // Scroll suave para o card
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // Focar no primeiro campo
+        setTimeout(() => {
+            const firstInput = card.querySelector('input, select, textarea');
+            if (firstInput) firstInput.focus();
+        }, 100);
+    },
+
+    /**
+     * Renderiza campos do formulário inline com layout melhor
+     */
+    renderCamposFormInline(registro) {
+        if (this.campos.length === 0) {
+            return '<p class="form-empty">Nenhum campo configurado para esta entidade.</p>';
+        }
+
+        return this.campos.map(campo => {
+            const required = campo.obrigatorio ? 'required' : '';
+            const requiredMark = campo.obrigatorio ? '<span class="required-mark">*</span>' : '';
+            const valor = registro ? (registro[campo.codigo] || '') : '';
+
+            // Determinar tamanho do campo baseado no tipo
+            let colClass = 'col-6'; // 2 colunas por padrão
+            if (campo.tipo === 'textarea' || campo.codigo.includes('descricao') || campo.codigo.includes('passos') || campo.codigo.includes('problemas') || campo.codigo.includes('beneficios')) {
+                colClass = 'col-12'; // Campos grandes ocupam linha toda
+            }
+
+            switch (campo.tipo) {
+                case 'text':
+                case 'email':
+                case 'url':
+                    return `
+                        <div class="form-group ${colClass}">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <input type="${campo.tipo}" id="campo-${campo.codigo}" name="${campo.codigo}"
+                                   value="${this.escapeHTML(valor)}" placeholder="${campo.placeholder || ''}" ${required}>
+                        </div>
+                    `;
+                case 'textarea':
+                    return `
+                        <div class="form-group ${colClass}">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <textarea id="campo-${campo.codigo}" name="${campo.codigo}"
+                                      rows="4" placeholder="${campo.placeholder || ''}" ${required}>${this.escapeHTML(valor)}</textarea>
+                        </div>
+                    `;
+                case 'number':
+                    return `
+                        <div class="form-group col-4">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <input type="number" id="campo-${campo.codigo}" name="${campo.codigo}" value="${valor}" ${required}>
+                        </div>
+                    `;
+                case 'select':
+                    let opcoes = campo.opcoes || [];
+                    if (typeof opcoes === 'string') {
+                        try { opcoes = JSON.parse(opcoes); } catch(e) { opcoes = []; }
+                    }
+                    return `
+                        <div class="form-group ${colClass}">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <select id="campo-${campo.codigo}" name="${campo.codigo}" ${required}>
+                                <option value="">Selecione...</option>
+                                ${opcoes.map(op => {
+                                    const opValor = typeof op === 'string' ? op : (op.valor || op.value || op);
+                                    const opLabel = typeof op === 'string' ? op : (op.label || op.nome || opValor);
+                                    const selected = opValor == valor ? 'selected' : '';
+                                    return `<option value="${opValor}" ${selected}>${opLabel}</option>`;
+                                }).join('')}
+                            </select>
+                        </div>
+                    `;
+                case 'date':
+                    return `
+                        <div class="form-group col-4">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <input type="date" id="campo-${campo.codigo}" name="${campo.codigo}" value="${valor}" ${required}>
+                        </div>
+                    `;
+                default:
+                    return `
+                        <div class="form-group ${colClass}">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <input type="text" id="campo-${campo.codigo}" name="${campo.codigo}"
+                                   value="${this.escapeHTML(valor)}" ${required}>
+                        </div>
+                    `;
+            }
+        }).join('');
+    },
+
+    /**
+     * Cancela a edição inline e restaura o card original
+     */
+    cancelarEdicaoInline(registroId) {
+        this.editandoInline = null;
+        this.registroEditando = null;
+
+        // Re-renderizar a lista para restaurar o card
+        this.render();
+    },
+
+    /**
+     * Salva as alterações da edição inline
+     */
+    async salvarEdicaoInline(registroId) {
+        const form = document.getElementById(`formInlineEdit-${registroId}`);
+        if (!form) {
+            this.showToast('Formulário não encontrado', 'error');
+            return;
+        }
+
+        const formData = new FormData(form);
+        const dados = {};
+
+        for (const [key, value] of formData.entries()) {
+            dados[key] = value;
+        }
+
+        const entidadeCodigo = this.entidade?.codigo || this.entidadeCodigo;
+
+        // Mostrar loading
+        const btnSalvar = form.querySelector('button[type="submit"]');
+        const btnTextoOriginal = btnSalvar?.innerHTML;
+        if (btnSalvar) {
+            btnSalvar.innerHTML = '⏳ Salvando...';
+            btnSalvar.disabled = true;
+        }
+
+        try {
+            const response = await fetch(`/api/projetos/${this.projetoId}/dados/${entidadeCodigo}/${registroId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${BelgoAuth.getToken()}`
+                },
+                body: JSON.stringify({ dados })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                this.showToast('✅ Registro atualizado com sucesso!', 'success');
+                this.editandoInline = null;
+                this.registroEditando = null;
+                await this.carregarDados();
+                this.render();
+            } else {
+                this.showToast(result.error || 'Erro ao atualizar registro', 'error');
+                if (btnSalvar) {
+                    btnSalvar.innerHTML = btnTextoOriginal;
+                    btnSalvar.disabled = false;
+                }
+            }
+        } catch (error) {
+            console.error('Erro ao atualizar:', error);
+            this.showToast('Erro ao atualizar registro', 'error');
+            if (btnSalvar) {
+                btnSalvar.innerHTML = btnTextoOriginal;
+                btnSalvar.disabled = false;
+            }
+        }
+    },
+
+    // =========================================
+    // CRIAÇÃO INLINE (sem modal)
+    // =========================================
+
+    /**
+     * Abre formulário inline para criar novo registro
+     */
+    async abrirFormCriarInline() {
+        await this.carregarCampos();
+
+        this.criandoInline = true;
+
+        // Encontrar container dos cards
+        const container = document.querySelector('.cards-container, .cards-grid, .entidade-content');
+        if (!container) {
+            this.showToast('Container não encontrado', 'error');
+            return;
+        }
+
+        // Remover formulário existente se houver
+        const existingForm = document.getElementById('formInlineCreate');
+        if (existingForm) {
+            existingForm.closest('.card-inline-create')?.remove();
+        }
+
+        // Obter ícone padrão da entidade
+        const icone = this.entidade?.icone || '➕';
+
+        // Criar card de criação no topo
+        const cardCriar = document.createElement('div');
+        cardCriar.className = 'card-expandable card-inline-create expanded editing';
+        cardCriar.innerHTML = `
+            <div class="card-expandable-header editing-header">
+                <div class="card-header-left">
+                    <span class="card-icone">${icone}</span>
+                    <h4 class="card-nome">➕ Novo ${this.entidade?.nome || 'Registro'}</h4>
+                </div>
+                <div class="card-header-right">
+                    <span class="badge badge-success">Novo Registro</span>
+                </div>
+            </div>
+            <div class="card-expandable-body">
+                <form id="formInlineCreate" class="form-inline-edit" onsubmit="event.preventDefault(); ConfigRenderer.salvarCriacaoInline();">
+                    <div class="form-grid">
+                        ${this.renderCamposFormInline(null)}
+                    </div>
+                    <div class="form-inline-actions">
+                        <button type="button" class="btn btn-secondary" onclick="ConfigRenderer.cancelarCriacaoInline()">
+                            ❌ Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-success">
+                            ✅ Criar Registro
+                        </button>
+                    </div>
+                </form>
+            </div>
+        `;
+
+        // Inserir no topo
+        container.insertBefore(cardCriar, container.firstChild);
+
+        // Scroll suave para o novo card
+        cardCriar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // Focar no primeiro campo
+        setTimeout(() => {
+            const firstInput = cardCriar.querySelector('input, select, textarea');
+            if (firstInput) firstInput.focus();
+        }, 100);
+    },
+
+    /**
+     * Cancela a criação inline
+     */
+    cancelarCriacaoInline() {
+        this.criandoInline = false;
+
+        const cardCriar = document.querySelector('.card-inline-create');
+        if (cardCriar) {
+            cardCriar.remove();
+        }
+    },
+
+    /**
+     * Salva o novo registro criado inline
+     */
+    async salvarCriacaoInline() {
+        const form = document.getElementById('formInlineCreate');
+        if (!form) {
+            this.showToast('Formulário não encontrado', 'error');
+            return;
+        }
+
+        const formData = new FormData(form);
+        const dados = {};
+
+        for (const [key, value] of formData.entries()) {
+            dados[key] = value;
+        }
+
+        // Validar campos obrigatórios
+        for (const campo of this.campos) {
+            if (campo.obrigatorio && !dados[campo.codigo]) {
+                this.showToast(`Campo obrigatório: ${campo.nome}`, 'error');
+                const input = document.getElementById(`campo-${campo.codigo}`);
+                if (input) input.focus();
+                return;
+            }
+        }
+
+        const entidadeCodigo = this.entidade?.codigo || this.entidadeCodigo;
+
+        // Mostrar loading
+        const btnSalvar = form.querySelector('button[type="submit"]');
+        const btnTextoOriginal = btnSalvar?.innerHTML;
+        if (btnSalvar) {
+            btnSalvar.innerHTML = '⏳ Salvando...';
+            btnSalvar.disabled = true;
+        }
+
+        try {
+            const response = await fetch(`/api/projetos/${this.projetoId}/dados/${entidadeCodigo}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${BelgoAuth.getToken()}`
+                },
+                body: JSON.stringify({ dados })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                this.showToast('✅ Registro criado com sucesso!', 'success');
+                this.criandoInline = false;
+
+                // Remover card de criação
+                const cardCriar = document.querySelector('.card-inline-create');
+                if (cardCriar) cardCriar.remove();
+
+                // Recarregar dados e re-renderizar
+                await this.carregarDados();
+                this.render();
+            } else {
+                this.showToast(result.error || 'Erro ao criar registro', 'error');
+                if (btnSalvar) {
+                    btnSalvar.innerHTML = btnTextoOriginal;
+                    btnSalvar.disabled = false;
+                }
+            }
+        } catch (error) {
+            console.error('Erro ao criar:', error);
+            this.showToast('Erro ao criar registro', 'error');
+            if (btnSalvar) {
+                btnSalvar.innerHTML = btnTextoOriginal;
+                btnSalvar.disabled = false;
+            }
         }
     }
 };
