@@ -566,11 +566,12 @@ const ConfigRenderer = {
         const header = cardConfig.header || [];
         const secoes = cardConfig.secoes || [];
         const acoes = cardConfig.acoes || [];
+        const expandedByDefault = cardConfig.expanded === true;
 
         return `
             <div class="cards-expandable">
                 ${dados.map((row, idx) => `
-                    <div class="card-expandable" data-idx="${idx}">
+                    <div class="card-expandable ${expandedByDefault ? 'expanded' : ''}" data-idx="${idx}">
                         <div class="card-expandable-header" onclick="ConfigRenderer.toggleCardExpand(${idx})">
                             <div class="card-header-left">
                                 ${header.includes('icone') && row.icone ? `<span class="card-icone">${row.icone}</span>` : ''}
@@ -695,18 +696,24 @@ const ConfigRenderer = {
     },
 
     // Helper: Renderiza passos numerados a partir de texto com quebras de linha
-    renderPassosNumerados(texto, titulo) {
+    // Suporta estilo rico com círculos coloridos via config.card.passos_estilo_rico
+    renderPassosNumerados(texto, titulo, estiloRico = true) {
         if (!texto) return '';
         const passos = typeof texto === 'string'
             ? texto.split('\n').map(p => p.trim()).filter(p => p)
             : (Array.isArray(texto) ? texto : []);
         if (passos.length === 0) return '';
+
+        // Usar estilo rico por padrão (círculos coloridos)
+        const listaClass = estiloRico ? 'passos-lista-rico' : 'passos-lista';
+        const tag = estiloRico ? 'ul' : 'ol';
+
         return `
             <div class="passos-numerados">
                 ${titulo ? `<h6 class="passos-titulo">${titulo}</h6>` : ''}
-                <ol class="passos-lista">
+                <${tag} class="${listaClass}">
                     ${passos.map(passo => `<li>${this.escapeHTML(passo)}</li>`).join('')}
-                </ol>
+                </${tag}>
             </div>
         `;
     },
@@ -743,8 +750,9 @@ const ConfigRenderer = {
         const cardConfig = this.config?.card || {};
         const agrupamento = this.config?.agrupamento;
 
+        // Se tem agrupamento, usar renderização agrupada com headers
         if (agrupamento) {
-            return this.renderCardsAgrupados();
+            return this.renderCardsGridAgrupado(dados, cardConfig, agrupamento);
         }
 
         return `
@@ -752,6 +760,73 @@ const ConfigRenderer = {
                 ${dados.map(row => this.renderCard(row, cardConfig)).join('')}
             </div>
         `;
+    },
+
+    // Renderiza cards grid com headers de grupo (P0 - Fase 12)
+    renderCardsGridAgrupado(dados, cardConfig, agrupamento) {
+        const mostrarHeader = agrupamento.mostrar_header_grupo !== false; // Default true
+        const campoGrupo = agrupamento.campo;
+        const iconesPorGrupo = agrupamento.icones || {};
+        const coresPorGrupo = agrupamento.cores || {};
+
+        // Agrupar dados
+        const grupos = {};
+        dados.forEach(row => {
+            const grupo = row[campoGrupo] || 'Outros';
+            if (!grupos[grupo]) grupos[grupo] = [];
+            grupos[grupo].push(row);
+        });
+
+        // Ordenar grupos se configurado
+        let gruposOrdenados = Object.entries(grupos);
+        if (agrupamento.ordem) {
+            const ordemConfig = agrupamento.ordem;
+            gruposOrdenados.sort((a, b) => {
+                const idxA = ordemConfig.indexOf(a[0]);
+                const idxB = ordemConfig.indexOf(b[0]);
+                if (idxA === -1 && idxB === -1) return 0;
+                if (idxA === -1) return 1;
+                if (idxB === -1) return -1;
+                return idxA - idxB;
+            });
+        }
+
+        return `
+            <div class="cards-grid-agrupado">
+                ${gruposOrdenados.map(([grupo, items]) => {
+                    const icone = iconesPorGrupo[grupo] || '👥';
+                    const corClasse = this.getGrupoCorClasse(grupo);
+
+                    return `
+                        <div class="grupo-container-grid">
+                            ${mostrarHeader ? `
+                                <div class="grupo-header ${corClasse}">
+                                    <div class="grupo-header-icon">${icone}</div>
+                                    <div class="grupo-header-content">
+                                        <h3 class="grupo-header-titulo">${this.escapeHTML(grupo)}</h3>
+                                        <p class="grupo-header-count">${items.length} participante${items.length !== 1 ? 's' : ''}</p>
+                                    </div>
+                                </div>
+                            ` : `
+                                <h3 class="grupo-titulo">${this.escapeHTML(grupo)}</h3>
+                            `}
+                            <div class="cards-grid">
+                                ${items.map(row => this.renderCard(row, cardConfig)).join('')}
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        `;
+    },
+
+    // Helper para obter classe de cor do grupo
+    getGrupoCorClasse(grupo) {
+        const grupoLower = (grupo || '').toLowerCase();
+        if (grupoLower.includes('key') || grupoLower.includes('usuario')) return 'key-users';
+        if (grupoLower.includes('equipe') || grupoLower.includes('time')) return 'equipe';
+        if (grupoLower.includes('stakeholder') || grupoLower.includes('gestor')) return 'stakeholder';
+        return '';
     },
 
     renderCard(row, cardConfig) {

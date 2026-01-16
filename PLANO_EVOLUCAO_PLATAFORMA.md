@@ -612,3 +612,153 @@ Ao tentar replicar o GTM Original para o GTM Clone, identificamos que o Layout B
 - **Consistência**: Todas as configurações do `config-renderer.js` agora têm equivalente no admin
 - **Flexibilidade**: Suporte a visualizações ricas (cards comparativos, timelines, grids de avatares)
 - **Facilidade**: Interface intuitiva com dropdowns, color pickers e campos dinâmicos
+
+---
+
+## FASE 12: PARIDADE VISUAL GTM ORIGINAL → GTM CLONE - PLANEJADO
+
+### Objetivo
+Identificar e implementar as lacunas no sistema dinâmico para que o GTM Clone possa replicar 100% do visual do GTM Original usando apenas configurações no-code.
+
+### Análise Profunda: GTM Original vs Config-Renderer
+
+O GTM Original usa **páginas customizadas** (jornadas.html, participantes.html, timeline.html, etc.) com HTML/CSS específico. O **config-renderer.js dinâmico** não suporta todos esses recursos ainda.
+
+#### Páginas Analisadas
+
+| Página | Entidade | Layout Customizado | Suportado? |
+|--------|----------|--------------------|---------------------------------|
+| `jornadas.html` | Jornadas | Cards com AS-IS/TO-BE lado a lado | ⚠️ Parcial |
+| `participantes.html` | Participantes | Grid de avatares com seções | ⚠️ Parcial |
+| `testes.html` | Testes | Tabela com métricas no topo | ✅ Suportado |
+| `glossario.html` | Glossário | Cards agrupados por categoria | ✅ Suportado |
+| `reunioes.html` | Reuniões | Cards com datas | ✅ Suportado |
+| `timeline.html` | Timeline | Fases com marcos e organograma | ❌ Não suportado |
+| `cronograma.html` | Cronograma | Timeline zigzag de workshops | ❌ Não suportado |
+| `pontos-criticos.html` | Pontos Críticos | Kanban 3 colunas | ❌ Não suportado |
+
+### 12 LACUNAS IDENTIFICADAS
+
+#### CRÍTICAS (P0) - Impacto Visual Alto
+
+| # | Lacuna | Problema | Solução | Arquivo | Esforço |
+|---|--------|----------|---------|---------|---------|
+| 1 | Cards Expandidos por Padrão | Cards iniciam colapsados, Original expandidos | Opção `expanded: true` em `config.card` | config-renderer.js | 2h |
+| 2 | Layout Comparativo Visual Rico | Seção comparativo existe mas visual simples | CSS novo + HTML rico | config-renderer.js/css | 4h |
+| 3 | Agrupamento com Headers | cards_grid sem headers entre grupos | Opção `mostrar_header_grupo: true` | config-renderer.js | 3h |
+
+#### ALTAS (P1) - Funcionalidade Importante
+
+| # | Lacuna | Problema | Solução | Arquivo | Esforço |
+|---|--------|----------|---------|---------|---------|
+| 4 | Stats/Métricas Agregação | Participantes tem stats no topo | Tipo de métrica `agregacao` | config-renderer.js | 4h |
+| 5 | Tabelas Aninhadas | Jornadas tem tabelas estruturadas | Nova seção tipo `tabela` | config-renderer.js | 4h |
+| 6 | Passos Numerados Estilizados | Lista simples vs números em círculos | CSS para `.step-list` | config-renderer.css | 2h |
+| 7 | Citações/Fontes | Pain Points com citações de usuários | Nova seção tipo `citacoes` | config-renderer.js | 2h |
+| 8 | Ações Inline em Cards | Botões editar/excluir visíveis | Opção `acoes_visiveis: true` | config-renderer.js | 2h |
+
+#### MÉDIAS (P2) - Nice to Have
+
+| # | Lacuna | Problema | Solução | Arquivo | Esforço |
+|---|--------|----------|---------|---------|---------|
+| 9 | Avatar Cores Dinâmicas | Cores fixas vs por função/status | Verificar `cor_por` | config-renderer.js | 1h |
+| 10 | Headers com Ícones | Cards com ícones no cabeçalho | Campo `icone` em config | config-renderer.js | 1h |
+| 11 | Status Indicators | Bolinha verde/amarela/vermelha | Estilo `status_indicator` | config-renderer.js | 2h |
+| 12 | Hover Effects | Sombra/elevação no hover | CSS hover states | config-renderer.css | 1h |
+
+### 3 NOVOS TIPOS DE LAYOUT (P3)
+
+#### Layout 1: timeline_fases
+```json
+{
+  "layout": "timeline_fases",
+  "timeline": {
+    "campo_fase": "fase",
+    "campo_data_inicio": "data_inicio",
+    "campo_data_fim": "data_fim",
+    "campo_marcos": "marcos",
+    "mostrar_organograma": true
+  }
+}
+```
+**Página**: timeline.html | **Esforço**: 8h
+
+#### Layout 2: timeline_zigzag
+```json
+{
+  "layout": "timeline_zigzag",
+  "timeline": {
+    "campo_titulo": "titulo",
+    "campo_data": "data",
+    "campo_descricao": "descricao"
+  }
+}
+```
+**Página**: cronograma.html | **Esforço**: 6h
+
+#### Layout 3: kanban
+```json
+{
+  "layout": "kanban",
+  "kanban": {
+    "campo_coluna": "status",
+    "colunas": [
+      { "valor": "pendente", "titulo": "Pendentes", "cor": "#EF4444" },
+      { "valor": "em_andamento", "titulo": "Em Andamento", "cor": "#F59E0B" },
+      { "valor": "resolvido", "titulo": "Resolvidos", "cor": "#10B981" }
+    ]
+  }
+}
+```
+**Página**: pontos-criticos.html | **Esforço**: 8h
+
+### PLANO DE IMPLEMENTAÇÃO
+
+#### Sprint 12.1: Paridade Visual Básica (P0) - 9h
+- [ ] Implementar `expanded: true` em cards
+- [ ] Melhorar CSS do comparativo_detalhado (boxes coloridos AS-IS/TO-BE)
+- [ ] Adicionar headers de grupo em cards_grid
+- [ ] Testar com GTM Clone
+
+#### Sprint 12.2: Recursos Avançados (P1) - 14h
+- [ ] Métricas de agregação no topo
+- [ ] Tabelas aninhadas em cards
+- [ ] Passos numerados com círculos coloridos
+- [ ] Seção de citações/blockquotes
+- [ ] Ações inline visíveis
+
+#### Sprint 12.3: Polimento (P2) - 5h
+- [ ] Cores dinâmicas em avatar
+- [ ] Ícones em headers de card
+- [ ] Status indicators visuais
+- [ ] Hover effects em cards
+
+#### Sprint 12.4: Layouts Especiais (P3) - 22h
+- [ ] Layout timeline_fases
+- [ ] Layout timeline_zigzag
+- [ ] Layout kanban
+
+### ARQUIVOS A MODIFICAR
+
+| Arquivo | Alterações Estimadas |
+|---------|---------------------|
+| `shared/js/config-renderer.js` | +800 linhas (lacunas + layouts novos) |
+| `shared/css/config-renderer.css` | +350 linhas (estilos visuais) |
+| `admin/entidades.html` | +100 linhas (novas opções Layout Builder) |
+
+### CRITÉRIOS DE SUCESSO
+
+1. **Após Sprint 12.1**: Jornadas no GTM Clone visualmente similar ao Original
+2. **Após Sprint 12.2**: Participantes e Glossário pareados
+3. **Após Sprint 12.3**: Todos os detalhes visuais implementados
+4. **Após Sprint 12.4**: Timeline, Cronograma e Pontos Críticos 100% dinâmicos
+
+### TOTAL ESTIMADO
+
+| Prioridade | Esforço | Impacto |
+|------------|---------|---------|
+| P0 (Crítico) | 9h | Alto - Paridade básica |
+| P1 (Alto) | 14h | Médio - Funcionalidades |
+| P2 (Médio) | 5h | Baixo - Polimento |
+| P3 (Novo) | 22h | Alto - Layouts especiais |
+| **TOTAL** | **50h** | **Paridade 100%** |

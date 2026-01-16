@@ -491,6 +491,20 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Opcoes de cards expandiveis (visivel quando cards) -->
+                    <div class="layout-subsection" id="opcoesCardsExpandiveis" style="display: none;">
+                        <h5>Comportamento dos Cards</h5>
+                        <div class="form-row">
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="cardsExpandidosPadrao">
+                                <span class="checkbox-label">Cards expandidos por padrao</span>
+                            </label>
+                        </div>
+                        <p class="section-help" style="margin-top: 8px; font-size: 0.85em; color: #6b7280;">
+                            Quando marcado, os cards serao exibidos expandidos ao carregar a pagina.
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Secao Colunas -->
@@ -1305,6 +1319,13 @@
             const selectAvatarCampo = document.getElementById('avatarCampo');
             const selectAvatarCorPor = document.getElementById('avatarCorPor');
 
+            // Cards expandidos por padrao (para cards)
+            const cardsExpandidosCheckbox = document.getElementById('cardsExpandidosPadrao');
+            if (cardsExpandidosCheckbox) {
+                cardsExpandidosCheckbox.checked = layoutConfig.card?.expanded === true;
+            }
+            document.getElementById('opcoesCardsExpandiveis').style.display = tipoLayout === 'cards' ? 'block' : 'none';
+
             // Popular select de campo para avatar (campos texto/nome)
             selectAvatarCampo.innerHTML = '<option value="">Selecione...</option>' +
                 layoutCampos.filter(c => ['texto', 'text', 'varchar'].includes(c.tipo)).map(c =>
@@ -1373,6 +1394,12 @@
             const avatarOpcoes = document.getElementById('opcoesAvatar');
             if (avatarOpcoes) {
                 avatarOpcoes.style.display = tipo === 'cards_grid' ? 'block' : 'none';
+            }
+
+            // Mostrar/ocultar opcoes de cards expandiveis (apenas para 'cards')
+            const cardsExpandiveisOpcoes = document.getElementById('opcoesCardsExpandiveis');
+            if (cardsExpandiveisOpcoes) {
+                cardsExpandiveisOpcoes.style.display = tipo === 'cards' ? 'block' : 'none';
             }
 
             // Mostrar/ocultar secao de secoes do card
@@ -1990,6 +2017,14 @@
 
                 if (secoes.length > 0) {
                     config.card.secoes = secoes;
+                }
+
+                // Cards expandidos por padrao (para cards)
+                if (layoutTipo === 'cards') {
+                    const cardsExpandidosCheckbox = document.getElementById('cardsExpandidosPadrao');
+                    if (cardsExpandidosCheckbox && cardsExpandidosCheckbox.checked) {
+                        config.card.expanded = true;
+                    }
                 }
 
                 // Avatar config (para cards_grid)

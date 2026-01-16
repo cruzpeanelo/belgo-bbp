@@ -1324,3 +1324,349 @@
     padding: 4px;
     cursor: pointer;
 }
+
+/* =====================================================
+   FASE 12: PARIDADE VISUAL - MELHORIAS
+   ===================================================== */
+
+/* =====================================================
+   COMPARATIVO DETALHADO - VISUAL RICO (P0)
+   ===================================================== */
+
+/* Boxes com borda lateral pronunciada estilo GTM Original */
+.comparativo-lado.as-is {
+    border-left: 5px solid #DC2626;
+    border-top: 1px solid #FCA5A5;
+    border-right: 1px solid #FCA5A5;
+    border-bottom: 1px solid #FCA5A5;
+}
+
+.comparativo-lado.to-be {
+    border-left: 5px solid #16A34A;
+    border-top: 1px solid #86EFAC;
+    border-right: 1px solid #86EFAC;
+    border-bottom: 1px solid #86EFAC;
+}
+
+/* Passos Numerados com Círculos Coloridos - Estilo Rico */
+.passos-lista-rico {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step-counter;
+}
+
+.passos-lista-rico li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px 0;
+    color: #374151;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    counter-increment: step-counter;
+}
+
+.passos-lista-rico li::before {
+    content: counter(step-counter);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    border-radius: 50%;
+    background: var(--belgo-azul, #003B4A);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.comparativo-lado.as-is .passos-lista-rico li::before {
+    background: #DC2626;
+}
+
+.comparativo-lado.to-be .passos-lista-rico li::before {
+    background: #16A34A;
+}
+
+/* Hover Effect em Cards (P2) */
+.card-expandable {
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.card-expandable:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 59, 74, 0.15);
+}
+
+.card-item {
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.card-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 59, 74, 0.12);
+}
+
+.term-card {
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.term-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 59, 74, 0.1);
+}
+
+/* =====================================================
+   HEADERS DE GRUPO EM CARDS_GRID (P0)
+   ===================================================== */
+
+/* Container com agrupamento e headers */
+.cards-grid-agrupado {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.grupo-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--belgo-amarelo, #FDB913);
+    margin-bottom: 16px;
+}
+
+.grupo-header-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--belgo-cinza-claro, #f5f7fa);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.grupo-header-content {
+    flex: 1;
+}
+
+.grupo-header-titulo {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--belgo-azul, #003B4A);
+    margin: 0;
+}
+
+.grupo-header-count {
+    font-size: 0.8rem;
+    color: var(--belgo-cinza, #6B7280);
+    margin: 0;
+}
+
+/* Variantes de header por tipo de grupo */
+.grupo-header.key-users {
+    border-color: #3B82F6;
+}
+
+.grupo-header.key-users .grupo-header-icon {
+    background: #DBEAFE;
+    color: #1D4ED8;
+}
+
+.grupo-header.equipe {
+    border-color: #10B981;
+}
+
+.grupo-header.equipe .grupo-header-icon {
+    background: #D1FAE5;
+    color: #065F46;
+}
+
+.grupo-header.stakeholder {
+    border-color: #F59E0B;
+}
+
+.grupo-header.stakeholder .grupo-header-icon {
+    background: #FEF3C7;
+    color: #D97706;
+}
+
+/* =====================================================
+   SEÇÃO DE CITAÇÕES/PAIN POINTS (P1)
+   ===================================================== */
+.secao-citacoes {
+    margin: 16px 0;
+    padding: 16px;
+    background: #FEF3C7;
+    border-radius: 8px;
+    border-left: 4px solid #F59E0B;
+}
+
+.secao-citacoes .secao-titulo {
+    color: #D97706;
+    margin-bottom: 12px;
+}
+
+.citacao-item {
+    padding: 12px;
+    background: white;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-style: italic;
+    color: #374151;
+    position: relative;
+}
+
+.citacao-item::before {
+    content: '"';
+    position: absolute;
+    top: 4px;
+    left: 8px;
+    font-size: 2rem;
+    color: #F59E0B;
+    opacity: 0.3;
+    font-family: Georgia, serif;
+}
+
+.citacao-item:last-child {
+    margin-bottom: 0;
+}
+
+.citacao-autor {
+    font-style: normal;
+    font-size: 0.8rem;
+    color: #6B7280;
+    margin-top: 8px;
+    text-align: right;
+}
+
+/* =====================================================
+   AÇÕES INLINE EM CARDS (P1)
+   ===================================================== */
+.card-acoes-inline {
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.card-expandable:hover .card-acoes-inline,
+.card-item:hover .card-acoes-inline {
+    opacity: 1;
+}
+
+.card-acoes-inline .btn {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+}
+
+/* Sempre visível quando configurado */
+.card-acoes-inline.sempre-visivel {
+    opacity: 1;
+}
+
+/* =====================================================
+   STATS/MÉTRICAS DE AGREGAÇÃO (P1)
+   ===================================================== */
+.stats-agregacao {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 16px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.05));
+}
+
+.stat-card {
+    text-align: center;
+    padding: 12px;
+    border-radius: 6px;
+    background: var(--belgo-cinza-claro, #f5f7fa);
+}
+
+.stat-valor {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--belgo-azul, #003B4A);
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--belgo-cinza, #6B7280);
+    margin-top: 4px;
+}
+
+/* =====================================================
+   STATUS INDICATORS VISUAIS (P2)
+   ===================================================== */
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-indicator::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.status-indicator.verde::before { background: #10B981; }
+.status-indicator.amarelo::before { background: #F59E0B; }
+.status-indicator.vermelho::before { background: #EF4444; }
+.status-indicator.azul::before { background: #3B82F6; }
+.status-indicator.cinza::before { background: #6B7280; }
+
+/* =====================================================
+   AVATARES COM CORES DINÂMICAS (P2)
+   ===================================================== */
+.card-avatar[style*="background-color"] {
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Cores por função/papel */
+.avatar-key-user { background: #3B82F6 !important; color: white; }
+.avatar-desenvolvedor { background: #8B5CF6 !important; color: white; }
+.avatar-analista { background: #06B6D4 !important; color: white; }
+.avatar-gestor { background: #F59E0B !important; color: white; }
+.avatar-consultor { background: #10B981 !important; color: white; }
+
+/* =====================================================
+   ÍCONES EM HEADERS DE CARD (P2)
+   ===================================================== */
+.card-header-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--belgo-cinza-claro, #f5f7fa);
+    font-size: 1.1rem;
+    margin-right: 8px;
+}
+
+/* =====================================================
+   RESPONSIVO PARA NOVAS FEATURES
+   ===================================================== */
+@media (max-width: 768px) {
+    .stats-agregacao {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grupo-header {
+        flex-wrap: wrap;
+    }
+
+    .card-acoes-inline {
+        opacity: 1; /* Sempre visível em mobile */
+    }
+}
