@@ -118,6 +118,10 @@ const configCronograma = {
         campo_status: "status",
         campo_tags: "foco"
     },
+    ordenacao: {
+        campo_padrao: "data",
+        direcao_padrao: "asc"
+    },
     filtros: {
         habilitado: true,
         campos: [
@@ -243,6 +247,10 @@ const configTimeline = {
             data: "2026-03-15",
             label: "GO LIVE - Entrada em Produção"
         }
+    },
+    ordenacao: {
+        campo_padrao: "nome",
+        direcao_padrao: "asc"
     },
     filtros: {
         habilitado: true,
