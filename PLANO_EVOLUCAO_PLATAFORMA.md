@@ -2084,3 +2084,128 @@ Corrigir todos os problemas identificados para atingir 100% de paridade entre GT
 - [x] Dashboard: Widgets de KPIs renderizando igual ao original
 - [x] Jornadas: 14 registros carregando
 - [x] Glossário: 42 registros carregando
+
+---
+
+## FASE 25: PARIDADE 100% JORNADAS - DADOS COMPLETOS ✅ CONCLUÍDA
+
+### Objetivo
+Alcançar paridade visual e de dados 100% para a entidade Jornadas entre GTM Clone e GTM Original, usando os arquivos JSON individuais de cada jornada.
+
+### Problema Identificado
+As 14 jornadas no GTM Clone tinham apenas dados básicos (AS-IS, TO-BE). Faltavam:
+- Passos detalhados numerados
+- Problemas identificados (tags)
+- Benefícios esperados (tags)
+- Campos do processo (tabela)
+- Regras de negócio (tabela)
+- Ciclos de teste com link "Ver Testes"
+- Integrações (tabela)
+- Mensagens do sistema
+- Fontes de reunião (citações)
+
+### Solução Implementada
+
+#### 1. Atualizações no Código (Commits Anteriores)
+- **`shared/js/config-renderer.js`**:
+  - Fallback para `renderSecaoCardRico` em tipos desconhecidos
+  - Função `renderCitacoesReuniao()` para fontes das reuniões
+  - Suporte a `link_documento` para link "Ver Testes"
+  - Suporte a `campos_card` para Tipos de Conta
+
+- **`shared/css/config-renderer.css`**:
+  - CSS para `.mini-card-rico`, `.citacoes-reuniao`, `.link-ver-testes`
+
+#### 2. Script de Geração de Migração
+Criado `scripts/generate_jornadas_migration.js`:
+- Lê todos os 14 arquivos JSON em `data/jornadas/*.json`
+- Transforma para formato do banco de dados
+- Gera SQL de UPDATE para cada jornada
+
+#### 3. Migrações Criadas e Aplicadas
+
+| Migração | Descrição |
+|----------|-----------|
+| `049_jornadas_dados_completos.sql` | Estrutura básica das 14 jornadas |
+| `050_jornadas_filtro_processo.sql` | Filtro "Selecionar Processo" na config |
+| `051_jornadas_dados_completos_json.sql` | Dados ricos extraídos dos JSONs (155 KB) |
+
+### Mapeamento JSON → Banco
+
+| Campo JSON | Campo Banco |
+|------------|-------------|
+| `asIs.passos[]` | `passos_as_is` (pipe-delimited) |
+| `asIs.problemas[]` | `problemas_as_is` (pipe-delimited) |
+| `toBe.passos[]` | `passos_to_be` (pipe-delimited) |
+| `toBe.beneficios[]` | `beneficios_to_be` (pipe-delimited) |
+| `campos[]` | `campos_processo` (JSON array) |
+| `regrasNegócio[]` | `regras_negocio` (JSON array) |
+| `ciclosTeste[]` | `ciclos_teste` (JSON array) |
+| `integrações[]` | `integracoes` (JSON array) |
+| `mensagensSistema[]` | `mensagens_sistema` (JSON array) |
+| `fontesReunião[]` | `fontes_reuniao` (pipe-delimited) |
+
+### Arquivos JSON de Jornadas
+
+| Arquivo | Jornada | Tamanho |
+|---------|---------|---------|
+| `cadastro-cliente.json` | Cadastro de Cliente | ✅ Completo |
+| `areas-vendas.json` | Áreas de Vendas | ✅ Completo |
+| `documentos-fiscais.json` | Documentos Fiscais | ✅ Completo |
+| `financeiro.json` | Financeiro/Crédito | ✅ Completo |
+| `contatos.json` | Gestão de Contatos | ✅ Completo |
+| `logistica.json` | Portal Logístico | ✅ Completo |
+| `concorrentes.json` | Rastreamento de Concorrentes | ✅ Completo |
+| `autoatendimento.json` | Autoatendimento | ✅ Completo |
+| `workflow-pricing.json` | Workflow Pricing | ✅ Completo |
+| `cotacao-ov.json` | Cotação e Ordem de Vendas | ✅ Completo |
+| `hub-gestao.json` | Hub de Gestão OC | ✅ Completo |
+| `restricoes-logisticas.json` | Restrições Logísticas | ✅ Completo |
+| `market-share.json` | Market Share e Concorrentes | ✅ Completo |
+| `amd-cross-company.json` | AMD Cross Company | ✅ Completo |
+
+### Resultado Final
+
+- **14 jornadas** com dados completos
+- **Resumo**: 14 Total | 0 Concluídos | 7 Em Andamento | 6 Pendentes | 1 Em Desenvolvimento
+- **Seções exibidas**:
+  - AS-IS / TO-BE com descrições detalhadas
+  - Passos numerados (timeline visual)
+  - Problemas identificados (tags vermelhas)
+  - Benefícios esperados (tags verdes)
+  - Tempo médio comparativo
+  - Áreas impactadas
+  - Detalhes técnicos (sistemas, fontes)
+  - Fluxo de aprovação (visual steps)
+
+### Arquivos Criados/Modificados
+
+```
+scripts/generate_jornadas_migration.js     - Script de geração
+migrations/049_jornadas_dados_completos.sql
+migrations/050_jornadas_filtro_processo.sql
+migrations/051_jornadas_dados_completos_json.sql (155 KB)
+shared/js/config-renderer.js               - Melhorias de renderização
+shared/css/config-renderer.css             - Estilos novos
+```
+
+### Commits Realizados
+
+1. `HASH1` - Feat: FASE 25 - Paridade Jornadas GTM Clone
+2. `7ebcbf4` - Feat: Migração 051 - Dados completos das 14 jornadas
+
+### Verificação de Paridade ✅
+
+| Item | Status |
+|------|--------|
+| 14 registros carregados | ✅ |
+| AS-IS/TO-BE completo | ✅ |
+| Passos numerados | ✅ |
+| Problemas em tags | ✅ |
+| Benefícios em tags | ✅ |
+| Tempo médio | ✅ |
+| Áreas impactadas | ✅ |
+| Detalhes técnicos | ✅ |
+| Fluxo de aprovação | ✅ |
+| Filtro por processo | ✅ |
+
