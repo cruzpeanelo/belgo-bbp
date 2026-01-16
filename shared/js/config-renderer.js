@@ -1499,6 +1499,16 @@ const ConfigRenderer = {
                 // Seção comparativo completo com passos, problemas, benefícios, tempo
                 const asIsConfig = secao.as_is || {};
                 const toBeConfig = secao.to_be || {};
+
+                // Helper para renderizar descrição ou passos (detecta automaticamente)
+                const renderDescricaoOuPassos = (valor) => {
+                    if (!valor) return '';
+                    const temDelimitador = valor.includes('|') || valor.includes('\n');
+                    return temDelimitador
+                        ? this.renderPassosNumerados(valor, null, true, 'auto')
+                        : `<div class="comparativo-descricao">${this.escapeHTML(valor)}</div>`;
+                };
+
                 return `
                     <div class="secao-comparativo-detalhado">
                         <div class="comparativo-lado as-is">
@@ -1506,8 +1516,8 @@ const ConfigRenderer = {
                                 <span class="comparativo-badge as-is">AS-IS</span>
                                 <span class="comparativo-subtitulo">${asIsConfig.subtitulo || 'Processo Atual'}</span>
                             </div>
-                            <div class="comparativo-descricao">${this.escapeHTML(row[asIsConfig.descricao] || '-')}</div>
-                            ${this.renderPassosNumerados(row[asIsConfig.passos], 'Passos do Processo')}
+                            ${renderDescricaoOuPassos(row[asIsConfig.descricao])}
+                            ${this.renderPassosNumerados(row[asIsConfig.passos], null)}
                             ${this.renderListaItens(row[asIsConfig.problemas], 'Problemas Identificados', 'problema')}
                             ${row[asIsConfig.tempo] ? `<div class="comparativo-tempo"><strong>⏱ Tempo Médio:</strong> ${this.escapeHTML(row[asIsConfig.tempo])}</div>` : ''}
                         </div>
@@ -1516,8 +1526,8 @@ const ConfigRenderer = {
                                 <span class="comparativo-badge to-be">TO-BE</span>
                                 <span class="comparativo-subtitulo">${toBeConfig.subtitulo || 'Processo Futuro'}</span>
                             </div>
-                            <div class="comparativo-descricao">${this.escapeHTML(row[toBeConfig.descricao] || '-')}</div>
-                            ${this.renderPassosNumerados(row[toBeConfig.passos], 'Passos do Processo')}
+                            ${renderDescricaoOuPassos(row[toBeConfig.descricao])}
+                            ${this.renderPassosNumerados(row[toBeConfig.passos], null)}
                             ${this.renderListaItens(row[toBeConfig.beneficios], 'Benefícios Esperados', 'beneficio')}
                             ${row[toBeConfig.tempo] ? `<div class="comparativo-tempo"><strong>⏱ Tempo Médio:</strong> ${this.escapeHTML(row[toBeConfig.tempo])}</div>` : ''}
                         </div>
