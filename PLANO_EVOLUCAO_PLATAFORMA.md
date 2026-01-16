@@ -2209,3 +2209,66 @@ shared/css/config-renderer.css             - Estilos novos
 | Fluxo de aprovação | ✅ |
 | Filtro por processo | ✅ |
 
+---
+
+## FASE 26: Configuração das 6 Entidades Restantes
+
+**Data**: Janeiro 2026
+**Objetivo**: Completar paridade total com GTM Clone carregando dados das 6 entidades pendentes
+
+### Escopo
+
+| Entidade | Arquivo JSON | Registros | Layout |
+|----------|--------------|-----------|--------|
+| Timeline | `data/timeline.json` | 5 fases, 4 stakeholders | `cards` |
+| Reuniões | `data/reunioes.json` | 9 reuniões | `timeline` |
+| Documentos | `data/documentos/_index.json` | 69 documentos | `tabela` |
+| Cronograma | `data/cronograma.json` | 5 workshops + 6 marcos | `timeline` |
+| Glossário | `data/glossario.json` | 72 termos (12 categorias) | `cards_agrupados` |
+| Pontos Críticos | `data/pontos-criticos.json` | 14 issues | `kanban` |
+
+### Scripts Criados
+
+| Script | Descrição |
+|--------|-----------|
+| `scripts/load_all_entities.js` | Script unificado de carga das 6 entidades |
+| `scripts/cleanup_jornadas.js` | Limpeza de duplicatas (FASE 25) |
+| `scripts/verify_jornadas.js` | Verificação de dados (FASE 25) |
+| `scripts/insert_jornadas_individual.js` | Insert individual (FASE 25) |
+| `scripts/generate_jornadas_insert.js` | Gerador de migração (FASE 25) |
+
+### Migração 052: Jornadas Completas
+
+```sql
+-- DELETE + INSERT das 14 jornadas com dados completos
+DELETE FROM entidade_dados WHERE entidade_id = 2;
+INSERT INTO entidade_dados (entidade_id, nome, ...) VALUES ...;
+```
+
+- **Tamanho**: 158 KB
+- **Registros**: 14 jornadas com todos os campos JSON
+
+### Migração 053: Config das 6 Entidades
+
+Configuração de `config_funcionalidades` para cada entidade:
+- Timeline: cards com métricas de fases
+- Reuniões: timeline com filtros por tipo
+- Documentos: tabela com busca e categorias
+- Cronograma: timeline unificando workshops + marcos
+- Glossário: cards agrupados por categoria
+- Pontos Críticos: kanban por status com severidade
+
+### Verificação Final
+
+Todas as entidades acessíveis em:
+- `/pages/entidade.html?projeto=5&e=timeline`
+- `/pages/entidade.html?projeto=5&e=reunioes`
+- `/pages/entidade.html?projeto=5&e=documentos`
+- `/pages/entidade.html?projeto=5&e=cronograma`
+- `/pages/entidade.html?projeto=5&e=glossario`
+- `/pages/entidade.html?projeto=5&e=pontos-criticos`
+
+### Commits Realizados
+
+1. `e1c15e7` - Feat: Jornadas - 14 registros com dados completos dos JSONs
+
