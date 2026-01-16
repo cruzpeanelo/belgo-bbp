@@ -1290,6 +1290,15 @@ const ConfigRenderer = {
                 return this.renderTimelineZigzag(this.dadosFiltrados);
             case 'kanban':
                 return this.renderKanban(this.dadosFiltrados);
+            // FASE 17: Novos layouts para 99% de paridade
+            case 'timeline_vertical':
+                return this.renderTimelineVertical(this.dadosFiltrados);
+            case 'cards_com_banner':
+                return this.renderCardsComBanner(this.dadosFiltrados);
+            case 'glossario_tabs':
+                return this.renderGlossarioComTabs(this.dadosFiltrados);
+            case 'documentos_rico':
+                return this.renderDocumentosRico(dadosPaginados);
             default:
                 return this.renderTabela(dadosPaginados);
         }
@@ -2233,6 +2242,339 @@ const ConfigRenderer = {
                         </div>
                     </div>
                 `).join('')}
+            </div>
+        `;
+    },
+
+    // =====================================================
+    // FASE 17: RENDER TIMELINE VERTICAL
+    // Layout de timeline com linha vertical lateral
+    // =====================================================
+    renderTimelineVertical(dados) {
+        const config = this.config?.timeline_vertical || this.config?.card || {};
+        const campoTitulo = config.campo_titulo || 'titulo';
+        const campoData = config.campo_data || 'data';
+        const campoStatus = config.campo_status || 'status';
+        const contadores = config.contadores || [];
+        const secoesExpandidas = config.secoes_expandidas || [];
+
+        return `
+            <div class="timeline-vertical-container">
+                ${dados.map((row, idx) => {
+                    const status = (row[campoStatus] || '').toLowerCase();
+                    let statusClass = '';
+                    if (status.includes('conclu') || status === 'completo') statusClass = 'concluido';
+                    else if (status.includes('andamento') || status.includes('progresso')) statusClass = 'em-andamento';
+                    else if (status.includes('penden')) statusClass = 'pendente';
+                    else if (status.includes('cancel')) statusClass = 'cancelado';
+
+                    const dataFormatada = row[campoData] ? new Date(row[campoData]).toLocaleDateString('pt-BR') : '';
+
+                    return `
+                        <div class="timeline-vertical-item ${statusClass}" data-idx="${idx}">
+                            <div class="timeline-vertical-header" onclick="ConfigRenderer.toggleExpandVertical(${idx})">
+                                <span class="timeline-vertical-data">${dataFormatada}</span>
+                                <h4 class="timeline-vertical-titulo">${this.escapeHTML(row[campoTitulo] || '')}</h4>
+                                <div class="timeline-vertical-contadores">
+                                    ${contadores.map(c => {
+                                        const valor = Array.isArray(row[c]) ? row[c].length : (row[c] || 0);
+                                        const icone = c.includes('participante') ? '👥' : c.includes('decisao') || c.includes('decisões') ? '📋' : c.includes('acao') || c.includes('ações') ? '✅' : '📊';
+                                        return `<span class="timeline-vertical-contador"><span class="icone">${icone}</span> ${valor}</span>`;
+                                    }).join('')}
+                                </div>
+                                <button class="btn-teams btn-sm" onclick="event.stopPropagation(); ConfigRenderer.compartilharTeams('${row._id}')">📤</button>
+                                <span class="expand-arrow">▼</span>
+                            </div>
+                            <div class="reuniao-detalhes" id="detalhes-vertical-${idx}" style="display: none;">
+                                ${secoesExpandidas.map(secao => this.renderSecaoExpandida(row, secao)).join('')}
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        `;
+    },
+
+    toggleExpandVertical(idx) {
+        const detalhes = document.getElementById(`detalhes-vertical-${idx}`);
+        const card = detalhes?.closest('.timeline-vertical-item');
+        if (detalhes) {
+            const isHidden = detalhes.style.display === 'none';
+            detalhes.style.display = isHidden ? 'block' : 'none';
+            card?.classList.toggle('expanded', isHidden);
+        }
+    },
+
+    // =====================================================
+    // FASE 17: RENDER CARDS COM BANNER
+    // Layout de cards com banner GO LIVE ou destaque
+    // =====================================================
+    renderCardsComBanner(dados) {
+        const config = this.config?.banner || {};
+        const bannerTipo = config.tipo || 'golive';
+        const campoData = config.campo_data || 'data_golive';
+        const bannerTitulo = config.titulo || 'GO LIVE';
+
+        let bannerHtml = '';
+
+        if (bannerTipo === 'golive') {
+            // Buscar data de go-live dos dados ou do config
+            let dataGoLive = config.data;
+            if (!dataGoLive && dados.length > 0) {
+                const itemGoLive = dados.find(d => d.tipo === 'go-live' || (d.titulo && d.titulo.toLowerCase().includes('go live')));
+                if (itemGoLive && itemGoLive[campoData]) {
+                    dataGoLive = itemGoLive[campoData];
+                }
+            }
+
+            if (dataGoLive) {
+                const dataObj = new Date(dataGoLive);
+                const dataFormatada = dataObj.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+                const diasRestantes = Math.ceil((dataObj - new Date()) / (1000 * 60 * 60 * 24));
+                const isUrgente = diasRestantes <= 30;
+
+                bannerHtml = `
+                    <div class="banner-golive">
+                        <div class="banner-golive-titulo">${bannerTitulo}</div>
+                        <div class="banner-golive-data">${dataFormatada}</div>
+                        <div class="banner-golive-contador ${isUrgente ? 'urgente' : ''}">
+                            ${diasRestantes > 0 ? `Faltam ${diasRestantes} dias` : diasRestantes === 0 ? 'É hoje!' : `Há ${Math.abs(diasRestantes)} dias`}
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Renderizar layout padrão após o banner
+        const layoutConfig = this.config?.layout || 'timeline_fases';
+        let conteudoHtml = '';
+
+        switch (layoutConfig) {
+            case 'timeline_fases':
+                conteudoHtml = this.renderTimelineFases(dados);
+                break;
+            case 'timeline_zigzag':
+                conteudoHtml = this.renderTimelineZigzag(dados);
+                break;
+            default:
+                conteudoHtml = this.renderCards(dados);
+        }
+
+        return bannerHtml + conteudoHtml;
+    },
+
+    // =====================================================
+    // FASE 17: RENDER GLOSSÁRIO COM TABS
+    // Layout de glossário com navegação por categoria
+    // =====================================================
+    renderGlossarioComTabs(dados) {
+        const config = this.config?.agrupamento || {};
+        const campoCategoria = config.campo || 'categoria';
+
+        // Agrupar por categoria
+        const grupos = {};
+        dados.forEach(row => {
+            const cat = row[campoCategoria] || 'Outros';
+            if (!grupos[cat]) grupos[cat] = [];
+            grupos[cat].push(row);
+        });
+
+        const categorias = Object.keys(grupos).sort();
+        const cardConfig = this.config?.card || {};
+
+        // Tab ativa (primeira por padrão)
+        const tabAtiva = this.filtros._tabAtiva || categorias[0];
+
+        return `
+            <div class="category-tabs-container">
+                <div class="category-tabs">
+                    <button class="category-tab ${tabAtiva === 'all' ? 'active' : ''}"
+                            onclick="ConfigRenderer.filtrarTabGlossario('all')">
+                        Todos <span class="tab-count">${dados.length}</span>
+                    </button>
+                    ${categorias.map(cat => `
+                        <button class="category-tab ${tabAtiva === cat ? 'active' : ''}"
+                                onclick="ConfigRenderer.filtrarTabGlossario('${this.escapeHTML(cat)}')">
+                            ${this.escapeHTML(cat)} <span class="tab-count">${grupos[cat].length}</span>
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+            <div class="glossario-content">
+                ${tabAtiva === 'all'
+                    ? this.renderCardsAgrupados()
+                    : `
+                        <div class="grupo-container">
+                            <h3 class="grupo-titulo">${this.escapeHTML(tabAtiva)}</h3>
+                            <div class="cards-grid">
+                                ${(grupos[tabAtiva] || []).map(row => this.renderCardGlossario(row, cardConfig)).join('')}
+                            </div>
+                        </div>
+                    `
+                }
+            </div>
+        `;
+    },
+
+    filtrarTabGlossario(categoria) {
+        this.filtros._tabAtiva = categoria;
+        this.render();
+    },
+
+    // =====================================================
+    // FASE 17: RENDER DOCUMENTOS RICO
+    // Layout de documentos com icon box, ID badge e meta info
+    // =====================================================
+    renderDocumentosRico(dados) {
+        const config = this.config?.card || {};
+        const campoTitulo = config.campo_titulo || 'nome';
+        const campoId = config.campo_id || 'id';
+        const campoCategoria = config.campo_categoria || 'categoria';
+        const campoDescricao = config.campo_descricao || 'descricao';
+        const campoTamanho = config.campo_tamanho || 'tamanho';
+        const campoTabelas = config.campo_tabelas || 'tabelas';
+
+        // Determinar ícone por categoria
+        const getIconClass = (cat) => {
+            const catLower = (cat || '').toLowerCase();
+            if (catLower.includes('pricing') || catLower.includes('preco')) return 'pricing';
+            if (catLower.includes('cadastro')) return 'cadastro';
+            if (catLower.includes('hub')) return 'hub';
+            if (catLower.includes('mobile') || catLower.includes('app')) return 'mobile';
+            return '';
+        };
+
+        return `
+            <div class="cards-grid" style="grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));">
+                ${dados.map(row => {
+                    const categoria = row[campoCategoria] || '';
+                    const iconClass = getIconClass(categoria);
+
+                    return `
+                        <div class="card-item" style="flex-direction: column; align-items: stretch;">
+                            <div style="display: flex; gap: 14px; align-items: flex-start;">
+                                <div class="icon-box ${iconClass}">📄</div>
+                                <div style="flex: 1; min-width: 0;">
+                                    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;">
+                                        <h4 class="card-titulo" style="flex: 1;">${this.escapeHTML(row[campoTitulo] || '')}</h4>
+                                        <button class="btn-teams btn-sm" onclick="ConfigRenderer.compartilharTeams('${row._id}')">📤</button>
+                                    </div>
+                                    ${row[campoId] ? `<span class="doc-id-badge">#${this.escapeHTML(row[campoId])}</span>` : ''}
+                                    ${categoria ? `<span class="badge badge-info" style="margin-left: 8px;">${this.escapeHTML(categoria)}</span>` : ''}
+                                    ${row[campoDescricao] ? `<p class="card-descricao">${this.escapeHTML(row[campoDescricao])}</p>` : ''}
+                                    <div class="meta-info-row">
+                                        ${row[campoTamanho] ? `<span class="meta-info-item"><span class="icone">📊</span> ${this.escapeHTML(row[campoTamanho])}</span>` : ''}
+                                        ${row[campoTabelas] ? `<span class="meta-info-item"><span class="icone">📋</span> ${row[campoTabelas]} tabelas</span>` : ''}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        `;
+    },
+
+    // =====================================================
+    // FASE 17: RENDER BANNER GO LIVE
+    // Componente standalone de banner
+    // =====================================================
+    renderBannerGoLive(dataGoLive, titulo = 'GO LIVE') {
+        if (!dataGoLive) return '';
+
+        const dataObj = new Date(dataGoLive);
+        const dataFormatada = dataObj.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+        const diasRestantes = Math.ceil((dataObj - new Date()) / (1000 * 60 * 60 * 24));
+        const isUrgente = diasRestantes <= 30;
+
+        return `
+            <div class="banner-golive">
+                <div class="banner-golive-titulo">${titulo}</div>
+                <div class="banner-golive-data">${dataFormatada}</div>
+                <div class="banner-golive-contador ${isUrgente ? 'urgente' : ''}">
+                    ${diasRestantes > 0 ? `Faltam ${diasRestantes} dias` : diasRestantes === 0 ? 'É hoje!' : `Há ${Math.abs(diasRestantes)} dias`}
+                </div>
+            </div>
+        `;
+    },
+
+    // =====================================================
+    // FASE 17: RENDER MARCOS SECTION
+    // Seção de marcos do projeto
+    // =====================================================
+    renderMarcosSection(marcos, titulo = '📍 Marcos do Projeto') {
+        if (!marcos || marcos.length === 0) return '';
+
+        return `
+            <div class="marcos-section">
+                <h3 class="marcos-titulo">${titulo}</h3>
+                <div class="marcos-grid">
+                    ${marcos.map(marco => {
+                        const status = (marco.status || '').toLowerCase();
+                        let statusClass = '';
+                        if (status.includes('conclu')) statusClass = 'concluido';
+                        else if (status.includes('andamento')) statusClass = 'em-andamento';
+                        else statusClass = 'pendente';
+
+                        const data = marco.data ? new Date(marco.data).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' }) : '';
+
+                        return `
+                            <div class="marco-item ${statusClass}">
+                                <div class="marco-data">${data}</div>
+                                <div class="marco-conteudo">
+                                    <div class="marco-titulo">${this.escapeHTML(marco.titulo || marco.texto || '')}</div>
+                                    ${marco.descricao ? `<div class="marco-descricao">${this.escapeHTML(marco.descricao)}</div>` : ''}
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        `;
+    },
+
+    // =====================================================
+    // FASE 17: RENDER NEXT STEPS BOX
+    // Caixa de próximos passos
+    // =====================================================
+    renderNextStepsBox(passos, titulo = '🚀 Próximos Passos') {
+        if (!passos || passos.length === 0) return '';
+
+        return `
+            <div class="next-steps-box">
+                <h3 class="next-steps-titulo">${titulo}</h3>
+                <ul class="next-steps-lista">
+                    ${passos.map(passo => {
+                        const texto = typeof passo === 'string' ? passo : passo.texto;
+                        const prioridade = typeof passo === 'object' ? passo.prioridade : '';
+                        return `
+                            <li>
+                                <span>${this.escapeHTML(texto)}</span>
+                                ${prioridade ? `<span class="step-priority">${this.escapeHTML(prioridade)}</span>` : ''}
+                            </li>
+                        `;
+                    }).join('')}
+                </ul>
+            </div>
+        `;
+    },
+
+    // =====================================================
+    // FASE 17: RENDER ACOES PENDENTES BOX
+    // Caixa de ações pendentes
+    // =====================================================
+    renderAcoesPendentesBox(acoes, titulo = '⚠️ Ações Pendentes') {
+        if (!acoes || acoes.length === 0) return '';
+
+        return `
+            <div class="acoes-pendentes-box">
+                <h3 class="acoes-pendentes-titulo">${titulo}</h3>
+                <ul class="acoes-pendentes-lista">
+                    ${acoes.map(acao => {
+                        const texto = typeof acao === 'string' ? acao : acao.texto;
+                        return `<li>${this.escapeHTML(texto)}</li>`;
+                    }).join('')}
+                </ul>
             </div>
         `;
     },
