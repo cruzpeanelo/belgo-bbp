@@ -698,24 +698,44 @@ const ConfigRenderer = {
 
     /**
      * Seção: Tag List (problemas/benefícios)
+     * Suporta variantes: problemas (vermelho), beneficios (verde), neutro (azul)
+     * Delimitadores: | (pipe), \n (quebra de linha), , (vírgula)
      */
     renderSecaoTagList(row, secao) {
         const valor = row[secao.campo];
-        const tags = typeof valor === 'string'
-            ? valor.split('\n').map(t => t.trim()).filter(t => t)
-            : (Array.isArray(valor) ? valor : []);
+        const delimitador = secao.delimitador || 'auto';
+        const tags = this.parseDelimitedData(valor, delimitador);
 
         if (tags.length === 0) return '';
 
-        const cor = secao.cor || 'blue';
-        const icone = secao.icone || '';
+        // Determinar variante (problemas=vermelho, beneficios=verde, neutro=azul)
+        const variante = secao.variante || secao.cor || 'neutro';
+        let tagClass, icone;
+
+        switch (variante) {
+            case 'problemas':
+            case 'problema':
+            case 'red':
+                tagClass = 'tag-problema';
+                icone = secao.icone || '⚠️';
+                break;
+            case 'beneficios':
+            case 'beneficio':
+            case 'green':
+                tagClass = 'tag-beneficio';
+                icone = secao.icone || '✅';
+                break;
+            default:
+                tagClass = 'tag-neutro';
+                icone = secao.icone || '•';
+        }
 
         return `
             <div class="secao-tag-list">
                 ${secao.titulo ? `<h5 class="secao-titulo">${secao.titulo}</h5>` : ''}
-                <div class="tag-list cor-${cor}">
+                <div class="tags-container variante-${variante}">
                     ${tags.map(tag => `
-                        <span class="tag-item ${cor}">${icone} ${this.escapeHTML(tag)}</span>
+                        <span class="tag-item ${tagClass}"><span class="tag-icone">${icone}</span> ${this.escapeHTML(tag)}</span>
                     `).join('')}
                 </div>
             </div>
@@ -1496,15 +1516,22 @@ const ConfigRenderer = {
 
             case 'badges':
                 const badgesTexto = row[secao.campo] || '';
-                const badges = typeof badgesTexto === 'string'
-                    ? badgesTexto.split('\n').map(b => b.trim()).filter(b => b)
-                    : (Array.isArray(badgesTexto) ? badgesTexto : []);
+                const badges = this.parseDelimitedData(badgesTexto, secao.delimitador || 'auto');
                 if (badges.length === 0) return '';
+
+                // Determinar estilo baseado no campo (problemas = vermelho, beneficios = verde)
+                let badgeClass = secao.estilo || '';
+                if (secao.campo && secao.campo.toLowerCase().includes('problema')) {
+                    badgeClass = 'tag-problema';
+                } else if (secao.campo && (secao.campo.toLowerCase().includes('beneficio') || secao.campo.toLowerCase().includes('benefício'))) {
+                    badgeClass = 'tag-beneficio';
+                }
+
                 return `
                     <div class="secao-badges">
                         ${secao.titulo ? `<h5 class="secao-titulo">${secao.titulo}</h5>` : ''}
-                        <div class="badges-container">
-                            ${badges.map(badge => `<span class="badge-item ${secao.estilo || ''}">${this.escapeHTML(badge)}</span>`).join('')}
+                        <div class="tags-container">
+                            ${badges.map(badge => `<span class="tag-item ${badgeClass}">${this.escapeHTML(badge)}</span>`).join('')}
                         </div>
                     </div>
                 `;
@@ -1594,13 +1621,33 @@ const ConfigRenderer = {
         }
     },
 
-    // Helper: Renderiza passos numerados a partir de texto com quebras de linha
-    // Suporta estilo rico com círculos coloridos via config.card.passos_estilo_rico
-    renderPassosNumerados(texto, titulo, estiloRico = true) {
+    /**
+     * Parser de dados delimitados - suporta |, \n e ,
+     * Usado para converter campos de texto em arrays
+     */
+    parseDelimitedData(valor, delimitador = 'auto') {
+        if (!valor) return [];
+        if (Array.isArray(valor)) return valor;
+
+        // Auto-detectar delimitador se não especificado
+        let sep = delimitador;
+        if (delimitador === 'auto') {
+            // Prioridade: | > \n > ,
+            if (valor.includes('|')) sep = '|';
+            else if (valor.includes('\n')) sep = '\n';
+            else if (valor.includes(',')) sep = ',';
+            else sep = '|';
+        }
+
+        return valor.split(sep).map(s => s.trim()).filter(s => s);
+    },
+
+    // Helper: Renderiza passos numerados a partir de texto delimitado
+    // Suporta estilo rico com círculos coloridos via estiloRico=true
+    // Delimitadores suportados: | (pipe), \n (quebra de linha), , (vírgula)
+    renderPassosNumerados(texto, titulo, estiloRico = true, delimitador = 'auto') {
         if (!texto) return '';
-        const passos = typeof texto === 'string'
-            ? texto.split('\n').map(p => p.trim()).filter(p => p)
-            : (Array.isArray(texto) ? texto : []);
+        const passos = this.parseDelimitedData(texto, delimitador);
         if (passos.length === 0) return '';
 
         // Usar estilo rico por padrão (círculos coloridos)
@@ -1618,19 +1665,19 @@ const ConfigRenderer = {
     },
 
     // Helper: Renderiza lista de itens (problemas, benefícios, etc.)
-    renderListaItens(texto, titulo, tipo) {
+    // Delimitadores suportados: | (pipe), \n (quebra de linha), , (vírgula)
+    renderListaItens(texto, titulo, tipo, delimitador = 'auto') {
         if (!texto) return '';
-        const itens = typeof texto === 'string'
-            ? texto.split('\n').map(i => i.trim()).filter(i => i)
-            : (Array.isArray(texto) ? texto : []);
+        const itens = this.parseDelimitedData(texto, delimitador);
         if (itens.length === 0) return '';
         const icone = tipo === 'problema' ? '⚠️' : (tipo === 'beneficio' ? '✅' : '•');
+        const tagClass = tipo === 'problema' ? 'tag-problema' : (tipo === 'beneficio' ? 'tag-beneficio' : 'tag-neutro');
         return `
-            <div class="lista-itens ${tipo || ''}">
+            <div class="lista-itens lista-tags ${tipo || ''}">
                 ${titulo ? `<h6 class="lista-titulo">${titulo}</h6>` : ''}
-                <ul class="lista-conteudo">
-                    ${itens.map(item => `<li><span class="item-icone">${icone}</span> ${this.escapeHTML(item)}</li>`).join('')}
-                </ul>
+                <div class="tags-container">
+                    ${itens.map(item => `<span class="tag-item ${tagClass}"><span class="tag-icone">${icone}</span> ${this.escapeHTML(item)}</span>`).join('')}
+                </div>
             </div>
         `;
     },

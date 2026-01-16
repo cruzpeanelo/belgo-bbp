@@ -2564,6 +2564,73 @@
 .tag-list.cor-green .tag-item { background: #f0fdf4; color: #16a34a; }
 .tag-list.cor-blue .tag-item { background: #eff6ff; color: #2563eb; }
 
+/* Tags de Problemas e Benefícios - Fase 14 */
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.tag-item.tag-problema {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+    color: #dc2626;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid #fca5a5;
+}
+
+.tag-item.tag-beneficio {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: linear-gradient(135deg, #f0fdf4 0%, #bbf7d0 100%);
+    color: #16a34a;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid #86efac;
+}
+
+.tag-item.tag-neutro {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: linear-gradient(135deg, #eff6ff 0%, #bfdbfe 100%);
+    color: #2563eb;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid #93c5fd;
+}
+
+.tag-icone {
+    font-size: 0.9rem;
+}
+
+/* Lista Tags (dentro do comparativo) */
+.lista-tags {
+    margin: 12px 0;
+}
+
+.lista-tags .tags-container {
+    margin-top: 4px;
+}
+
+.lista-tags .lista-titulo {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
 /* Citações */
 .secao-citacoes-visual {
     margin: 16px 0;

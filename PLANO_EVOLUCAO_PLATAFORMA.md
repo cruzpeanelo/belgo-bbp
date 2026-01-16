@@ -830,19 +830,324 @@ Testar todas as novas funcionalidades da Fase 12 usando MCP Playwright e identif
 - Badge de status no canto direito ("Planejado")
 - Estrutura visual correta
 
-### Ajustes Pendentes (Fase 14)
+---
+
+## FASE 14: SISTEMA DE LAYOUTS COMPOSTOS E DADOS ESTRUTURADOS - EM ANDAMENTO
+
+### Objetivo
+Permitir **99% de paridade visual** entre GTM Clone e GTM Original, especialmente para páginas complexas como `jornadas.html` e `participantes.html`.
+
+### PROBLEMA FUNDAMENTAL IDENTIFICADO
+
+#### GTM Original (Hardcoded)
+O arquivo `pages/jornadas.html` é uma página de ~524 linhas com template JavaScript que espera **estruturas JSON aninhadas**:
+
+```javascript
+// Exemplo do template jornadas.html (linhas 200-220)
+<ol class="step-list">
+    ${p.asIs.passos.map(s => `<li>${s}</li>`).join('')}
+</ol>
+<div class="tag-list">
+    ${p.asIs.problemas.map(prob => `<span class="tag tag-problem">${prob}</span>`).join('')}
+</div>
+```
+
+#### Estrutura de Dados Esperada (data/jornadas.json)
+```json
+{
+  "processos": [{
+    "asIs": {
+      "descrição": "Processo manual...",
+      "passos": ["Receber solicitação", "Verificar documentos", "Aprovar cadastro"],
+      "problemas": ["Demora excessiva", "Erros manuais", "Retrabalho"],
+      "tempoMedio": "2 a 3 dias úteis"
+    },
+    "toBe": {
+      "descrição": "Processo automatizado...",
+      "passos": ["Cliente preenche formulário", "Validação automática", "Aprovação instant"],
+      "beneficios": ["Agilidade", "Precisão", "Satisfação do cliente"],
+      "tempoMedio": "5 minutos"
+    },
+    "tiposConta": [
+      {"tipo": "PJ", "descrição": "Pessoa Jurídica com CNPJ"},
+      {"tipo": "PF", "descrição": "Pessoa Física com CPF"}
+    ],
+    "campos": [
+      {"campo": "CNPJ", "descrição": "Cadastro da empresa", "validacao": "Receita Federal"}
+    ]
+  }]
+}
+```
+
+#### Sistema Dinâmico Atual (Limitação)
+As entidades dinâmicas armazenam dados em **campos de texto plano**:
+- `descricao_as_is` → "Processo manual..."
+- `passos_as_is` → "Receber solicitação, Verificar documentos, Aprovar cadastro"
+- `problemas_as_is` → "Demora excessiva, Erros manuais, Retrabalho"
+
+**Não há parsing/renderização de arrays ou objetos aninhados**.
+
+---
+
+### SOLUÇÃO: SUPORTE A DADOS ESTRUTURADOS
+
+#### 14.1. Parser de Dados Delimitados
+
+Permitir que campos de texto sejam parseados como arrays usando delimitadores:
+
+```javascript
+// Exemplo de configuração
+{
+  "tipo": "step_list",
+  "campo": "passos_as_is",
+  "delimitador": "|",  // ou "," ou "\n"
+  "titulo": "Passos do Processo"
+}
+
+// Dado armazenado: "Receber solicitação|Verificar documentos|Aprovar cadastro"
+// Renderizado como: lista numerada com círculos coloridos (①②③)
+```
+
+#### 14.2. Campos JSON (Campo Tipo "json")
+
+Novo tipo de campo que armazena JSON estruturado:
+
+```javascript
+// Campo tipo "json" com schema
+{
+  "codigo": "tipos_conta",
+  "tipo": "json",
+  "schema": {
+    "tipo": "array",
+    "items": {
+      "tipo": "object",
+      "propriedades": ["tipo", "descricao"]
+    }
+  }
+}
+
+// Valor armazenado: '[{"tipo":"PJ","descrição":"Pessoa Jurídica"},{"tipo":"PF","descrição":"Pessoa Física"}]'
+// Renderizado como: grid de mini-cards
+```
+
+#### 14.3. Seções Visuais Avançadas
+
+| Seção | Renderização | Dados |
+|-------|--------------|-------|
+| `step_list` | Lista numerada com círculos (①②③) | Campo texto delimitado |
+| `tag_list` | Tags coloridas (problemas/benefícios) | Campo texto delimitado |
+| `mini_cards_grid` | Grid de mini-cards | Campo JSON array |
+| `tabela_inline` | Tabela dentro do card | Campo JSON array |
+| `citacoes` | Blockquotes estilizados | Campo texto |
+| `workflow_visual` | Fluxo de aprovação | Campo JSON |
+
+---
+
+### PLANO DE IMPLEMENTAÇÃO DETALHADO
+
+#### Sprint 14.1: Parser de Dados Delimitados
+**Arquivos**: `shared/js/config-renderer.js`
+**Objetivo**: Transformar texto delimitado em arrays
+
+```javascript
+// Nova função parseDelimitedData(valor, delimitador)
+parseDelimitedData(valor, delimitador = '|') {
+    if (!valor) return [];
+    return valor.split(delimitador).map(s => s.trim()).filter(s => s);
+}
+```
+
+**Tarefas**:
+- [x] Criar função `parseDelimitedData`
+- [x] Integrar na renderização de seções
+- [x] Suportar delimitadores: `|`, `,`, `\n`
+
+#### Sprint 14.2: Seção step_list com Círculos Numerados
+**Arquivos**: `shared/js/config-renderer.js`, `shared/css/config-renderer.css`
+**Objetivo**: Passos com visual ①②③
+
+```html
+<!-- Resultado esperado -->
+<ol class="step-list">
+    <li><span class="step-number">①</span>Receber solicitação</li>
+    <li><span class="step-number">②</span>Verificar documentos</li>
+    <li><span class="step-number">③</span>Aprovar cadastro</li>
+</ol>
+```
+
+**CSS**:
+```css
+.step-list {
+    list-style: none;
+    counter-reset: step-counter;
+}
+.step-list li {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 12px;
+}
+.step-list li::before {
+    content: counter(step-counter);
+    counter-increment: step-counter;
+    position: absolute;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+```
+
+**Tarefas**:
+- [x] Criar tipo de seção `step_list`
+- [x] CSS para círculos numerados com gradiente
+- [x] Integrar com parser de delimitados
+
+#### Sprint 14.3: Seção tag_list para Problemas/Benefícios
+**Arquivos**: `shared/js/config-renderer.js`, `shared/css/config-renderer.css`
+
+```html
+<!-- Problemas (vermelho) -->
+<div class="tag-list tag-list-problems">
+    <span class="tag tag-problem">Demora excessiva</span>
+    <span class="tag tag-problem">Erros manuais</span>
+</div>
+
+<!-- Benefícios (verde) -->
+<div class="tag-list tag-list-benefits">
+    <span class="tag tag-benefit">Agilidade</span>
+    <span class="tag tag-benefit">Precisão</span>
+</div>
+```
+
+**Tarefas**:
+- [x] Criar tipo de seção `tag_list`
+- [x] Variantes: `problemas` (vermelho), `beneficios` (verde), `neutro` (azul)
+- [x] CSS para tags estilizadas
+
+#### Sprint 14.4: Comparativo AS-IS/TO-BE Rico
+**Objetivo**: Boxes lado a lado com todas as seções internas
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  ❌ AS IS (Atual)              │  ✅ TO BE (Futuro)         │
+│  ┌───────────────────────────┐ │  ┌───────────────────────┐ │
+│  │ Descrição do processo...  │ │  │ Descrição do futuro...│ │
+│  ├───────────────────────────┤ │  ├───────────────────────┤ │
+│  │ ① Passo 1                 │ │  │ ① Passo 1             │ │
+│  │ ② Passo 2                 │ │  │ ② Passo 2             │ │
+│  │ ③ Passo 3                 │ │  │ ③ Passo 3             │ │
+│  ├───────────────────────────┤ │  ├───────────────────────┤ │
+│  │ [Tag] [Tag] [Tag]         │ │  │ [Tag] [Tag] [Tag]     │ │
+│  ├───────────────────────────┤ │  ├───────────────────────┤ │
+│  │ ⏱️ 2-3 dias úteis         │ │  │ ⏱️ 5 minutos          │ │
+│  └───────────────────────────┘ │  └───────────────────────┘ │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Tarefas**:
+- [x] Melhorar seção `comparativo_detalhado`
+- [x] Incluir step_list dentro do comparativo
+- [x] Incluir tag_list dentro do comparativo
+- [x] Badge de tempo no rodapé de cada box
+
+#### Sprint 14.5: Header de Card Rico
+**Objetivo**: Header com todos os elementos do Original
+
+```html
+<div class="card-header-rico">
+    <div class="card-avatar">📋</div>
+    <div class="card-header-content">
+        <h3 class="card-titulo">Abertura de Conta</h3>
+        <div class="card-header-badges">
+            <span class="badge badge-status">Em Implantação</span>
+            <span class="badge badge-meeting">3 Reuniões</span>
+        </div>
+    </div>
+    <div class="card-header-actions">
+        <button class="btn-teams">Teams</button>
+    </div>
+</div>
+```
+
+**Tarefas**:
+- [x] Novo componente `card-header-rico`
+- [x] Avatar com ícone/emoji configurável
+- [x] Badges de status e contadores
+- [x] Botão de ação (Teams, etc.)
+
+#### Sprint 14.6: Admin - Configuração de Seções
+**Arquivos**: `admin/entidades.html`
+
+**Tarefas**:
+- [x] Campo "Delimitador" nos tipos de seção que usam arrays
+- [x] Preview de parsing em tempo real
+- [x] Opção de cor para tag_list (problemas/beneficios/neutro)
+
+---
+
+### OBSERVAÇÃO: UTF-8 BRASIL
+
+**IMPORTANTE**: Todos os dados de teste devem usar caracteres UTF-8 brasileiros:
+- Acentos: á, é, í, ó, ú, à, è, ì, ò, ù, â, ê, î, ô, û, ã, õ, ñ
+- Cedilha: ç, Ç
+- Caracteres especiais: ª, º, €, £, ¥, §, ®, ©, ™
+- Emojis: 📋, ✅, ❌, 👥, 🏢, ⏱️, 📊, 🎯
+
+**Exemplos de dados de teste**:
+- "Abertura de Conta Pessoa Jurídica"
+- "Validação automática via Receita Federal"
+- "Integração com sistemas legados"
+- "Redução de 90% no tempo de aprovação"
+
+---
+
+### ARQUIVOS A MODIFICAR
+
+| Arquivo | Alterações |
+|---------|------------|
+| `shared/js/config-renderer.js` | +200 linhas (parser, step_list, tag_list, header rico) |
+| `shared/css/config-renderer.css` | +150 linhas (estilos visuais) |
+| `admin/entidades.html` | +100 linhas (configuração de delimitadores) |
+
+---
+
+### VERIFICAÇÃO (Testes com UTF-8)
+
+1. Cadastrar jornada "Abertura de Conta PJ" com:
+   - Passos AS-IS: "Receber solicitação|Verificar documentação|Análise manual|Aprovação gerencial"
+   - Problemas: "Demora excessiva|Erros de digitação|Retrabalho frequente"
+   - Passos TO-BE: "Formulário online|Validação automática|Aprovação instantânea"
+   - Benefícios: "Agilidade|Precisão|Satisfação do cliente"
+
+2. Verificar renderização:
+   - Círculos numerados (①②③④)
+   - Tags vermelhas para problemas
+   - Tags verdes para benefícios
+   - Comparativo lado a lado
+
+3. Testar caracteres especiais:
+   - "Integração via API RESTful"
+   - "Validação CNPJ/CPF"
+   - "Consulta à Receita Federal"
+
+---
+
+### Ajustes Menores Pendentes
 
 #### 1. Admin não atualiza display do tipo de layout
 **Problema**: Após salvar configuração de layout no admin, o card da entidade ainda mostra o tipo antigo (ex: "tabela" mesmo depois de configurar "kanban")
 **Solução**: Atualizar o display do card após salvar em `admin/entidades.html`
-**Esforço**: Baixo (1h)
 
 #### 2. Campos de data não aparecem no seletor do timeline_fases
-**Problema**: Ao configurar timeline_fases, os campos do tipo "data" não aparecem nos seletores de "Campo Data Início" e "Campo Data Fim"
-**Solução**: Ajustar lógica de filtragem em `admin/entidades.html` para incluir campos do tipo date/datetime
-**Esforço**: Baixo (1h)
+**Problema**: Ao configurar timeline_fases, os campos do tipo "data" não aparecem nos seletores
+**Solução**: Ajustar lógica de filtragem em `admin/entidades.html`
 
 #### 3. Verificar comportamento em mobile
 **Problema**: Layouts novos não foram testados em viewport mobile
-**Solução**: Testar responsividade e ajustar CSS se necessário
-**Esforço**: Médio (2h)
+**Solução**: Testar responsividade e ajustar CSS
