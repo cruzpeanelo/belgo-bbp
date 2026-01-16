@@ -180,8 +180,17 @@ export async function onRequestPut(context) {
             permite_editar,
             permite_excluir,
             permite_importar,
-            permite_exportar
+            permite_exportar,
+            config_funcionalidades
         } = body;
+
+        // Serializar config_funcionalidades se for objeto
+        let configStr = null;
+        if (config_funcionalidades !== undefined) {
+            configStr = typeof config_funcionalidades === 'string'
+                ? config_funcionalidades
+                : JSON.stringify(config_funcionalidades);
+        }
 
         // Atualizar entidade
         await context.env.DB.prepare(`
@@ -196,6 +205,7 @@ export async function onRequestPut(context) {
                 permite_excluir = COALESCE(?, permite_excluir),
                 permite_importar = COALESCE(?, permite_importar),
                 permite_exportar = COALESCE(?, permite_exportar),
+                config_funcionalidades = COALESCE(?, config_funcionalidades),
                 updated_at = CURRENT_TIMESTAMP
             WHERE id = ? AND projeto_id = ?
         `).bind(
@@ -209,6 +219,7 @@ export async function onRequestPut(context) {
             permite_excluir !== undefined ? (permite_excluir ? 1 : 0) : null,
             permite_importar !== undefined ? (permite_importar ? 1 : 0) : null,
             permite_exportar !== undefined ? (permite_exportar ? 1 : 0) : null,
+            configStr,
             entidadeId,
             projetoId
         ).run();
