@@ -1575,7 +1575,18 @@ const ConfigRenderer = {
             }
 
             case 'info_grid': {
-                const infos = secao.campos || [];
+                const infosRaw = secao.campos || [];
+                // Suportar tanto array de strings quanto array de objetos
+                const infos = infosRaw.map(info => {
+                    if (typeof info === 'string') {
+                        // Converter string para objeto com label formatado
+                        return {
+                            campo: info,
+                            label: info.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
+                        };
+                    }
+                    return info;
+                });
                 const infosFiltradas = infos.filter(info => row[info.campo]);
                 if (infosFiltradas.length === 0) return '';
                 return `
