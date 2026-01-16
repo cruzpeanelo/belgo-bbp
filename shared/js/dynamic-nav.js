@@ -163,7 +163,7 @@ const DynamicNav = {
                            (menu.url === 'index.html' && (currentPage === '' || currentPath.endsWith('/')));
 
             return `
-                <a href="${menu.url}" class="nav-item ${isActive ? 'active' : ''}" data-menu-id="${menu.id}">
+                <a href="${this.normalizeUrl(menu.url)}" class="nav-item ${isActive ? 'active' : ''}" data-menu-id="${menu.id}">
                     <span class="nav-icon">${menu.icone || '📄'}</span>
                     <span>${menu.nome}</span>
                 </a>
