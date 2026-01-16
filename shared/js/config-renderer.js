@@ -214,22 +214,837 @@ const ConfigRenderer = {
 
         this.aplicarFiltros();
 
-        const layout = this.config?.layout || 'tabela';
-
-        container.innerHTML = `
-            <div class="config-page">
-                ${this.renderHeader()}
-                ${this.renderFiltros()}
-                ${this.config?.metricas?.habilitado ? this.renderMetricas() : ''}
-                <div id="dataContainer" class="data-container">
-                    ${this.renderDados(layout)}
+        // FASE 14: Sistema de Componentes Compostos
+        // Se tem config.componentes[], usar novo sistema
+        if (this.config?.componentes && Array.isArray(this.config.componentes)) {
+            container.innerHTML = `
+                <div class="config-page config-page-compostos">
+                    ${this.renderHeader()}
+                    ${this.renderComponentes()}
                 </div>
-                ${this.config?.paginacao?.habilitado ? this.renderPaginacao() : ''}
-            </div>
-            ${this.config?.modal_detalhe?.habilitado ? this.renderModalTemplate() : ''}
-        `;
+                ${this.config?.modal_detalhe?.habilitado ? this.renderModalTemplate() : ''}
+            `;
+        } else {
+            // LEGADO: Sistema antigo com layout único
+            const layout = this.config?.layout || 'tabela';
+
+            container.innerHTML = `
+                <div class="config-page">
+                    ${this.renderHeader()}
+                    ${this.renderFiltros()}
+                    ${this.config?.metricas?.habilitado ? this.renderMetricas() : ''}
+                    <div id="dataContainer" class="data-container">
+                        ${this.renderDados(layout)}
+                    </div>
+                    ${this.config?.paginacao?.habilitado ? this.renderPaginacao() : ''}
+                </div>
+                ${this.config?.modal_detalhe?.habilitado ? this.renderModalTemplate() : ''}
+            `;
+        }
 
         this.setupEventListeners();
+    },
+
+    // =====================================================
+    // FASE 14: SISTEMA DE COMPONENTES COMPOSTOS
+    // =====================================================
+
+    /**
+     * Renderiza todos os componentes configurados
+     * Itera pelo array config.componentes e renderiza cada um
+     */
+    renderComponentes() {
+        const componentes = this.config.componentes || [];
+        return componentes.map((comp, idx) => this.renderComponente(comp, idx)).join('');
+    },
+
+    /**
+     * Dispatcher: Renderiza um componente específico baseado no tipo
+     * @param {Object} componente - Configuração do componente
+     * @param {number} idx - Índice do componente
+     */
+    renderComponente(componente, idx) {
+        const tipo = componente.tipo;
+
+        switch (tipo) {
+            case 'metricas_agregadas':
+                return this.renderComponenteMetricasAgregadas(componente, idx);
+
+            case 'filtro_principal':
+                return this.renderComponenteFiltroPrincipal(componente, idx);
+
+            case 'secao_cards':
+                return this.renderComponenteSecaoCards(componente, idx);
+
+            case 'cards_ricos':
+                return this.renderComponenteCardsRicos(componente, idx);
+
+            case 'tabela_dados':
+                return this.renderComponenteTabelaDados(componente, idx);
+
+            case 'kanban':
+                return this.renderComponenteKanban(componente, idx);
+
+            case 'timeline':
+                return this.renderComponenteTimeline(componente, idx);
+
+            default:
+                console.warn(`Tipo de componente desconhecido: ${tipo}`);
+                return `<div class="componente-erro">Componente "${tipo}" não suportado</div>`;
+        }
+    },
+
+    /**
+     * Componente: Métricas Agregadas
+     * Stats cards no topo com contagens dinâmicas
+     */
+    renderComponenteMetricasAgregadas(config, idx) {
+        const cards = config.cards || [];
+        const dados = this.aplicarFiltroDados(this.dadosFiltrados, config.filtro_dados);
+
+        return `
+            <div class="componente-metricas" data-componente-idx="${idx}">
+                <div class="metrics-grid metricas-grid-${cards.length > 4 ? 'auto' : cards.length}">
+                    ${cards.map(card => {
+                        const valor = this.calcularMetricaComponente(card, dados);
+                        const corClass = card.cor || 'blue';
+                        const icone = card.icone || '📊';
+
+                        return `
+                            <div class="metric-card metric-card-${corClass}"
+                                 ${card.filtro ? `onclick="ConfigRenderer.filtrarPorMetrica(${idx}, '${card.filtro.campo}', '${card.filtro.valor}')"` : ''}>
+                                <div class="metric-icon ${corClass}">${icone}</div>
+                                <div class="metric-info">
+                                    <h3>${valor}</h3>
+                                    <p>${card.label}</p>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        `;
+    },
+
+    /**
+     * Calcula valor de métrica para componentes
+     */
+    calcularMetricaComponente(card, dados) {
+        switch (card.tipo) {
+            case 'total':
+                return dados.length;
+
+            case 'contagem':
+                if (card.filtro) {
+                    const filtrados = dados.filter(d => {
+                        if (card.filtro.contem) {
+                            const val = d[card.filtro.campo];
+                            return val && String(val).toLowerCase().includes(card.filtro.valor.toLowerCase());
+                        }
+                        return d[card.filtro.campo] === card.filtro.valor;
+                    });
+                    return filtrados.length;
+                }
+                return dados.length;
+
+            case 'distinct':
+                const valores = dados.map(d => d[card.campo]).filter(Boolean);
+                return new Set(valores).size;
+
+            case 'soma':
+                return dados.reduce((sum, d) => sum + (Number(d[card.campo]) || 0), 0);
+
+            default:
+                return dados.length;
+        }
+    },
+
+    /**
+     * Componente: Filtro Principal
+     * Dropdown ou botões para filtrar dados
+     */
+    renderComponenteFiltroPrincipal(config, idx) {
+        const campo = config.campo;
+        const label = config.label || 'Filtrar';
+        const tipo = config.tipo_filtro || 'select'; // select, botoes
+
+        // Obter opções únicas dos dados
+        const opcoes = [...new Set(this.dados.map(d => d[campo]).filter(Boolean))].sort();
+
+        if (tipo === 'botoes') {
+            return `
+                <div class="componente-filtro filtro-botoes" data-componente-idx="${idx}">
+                    ${config.opcao_todos ? `
+                        <button class="btn-filtro-componente active"
+                                onclick="ConfigRenderer.filtrarComponente(${idx}, '${campo}', 'all')">
+                            Todos
+                        </button>
+                    ` : ''}
+                    ${opcoes.map(op => `
+                        <button class="btn-filtro-componente"
+                                onclick="ConfigRenderer.filtrarComponente(${idx}, '${campo}', '${this.escapeHTML(op)}')">
+                            ${this.escapeHTML(op)}
+                        </button>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Default: select dropdown
+        return `
+            <div class="componente-filtro filtro-select" data-componente-idx="${idx}">
+                <label>${label}</label>
+                <select onchange="ConfigRenderer.filtrarComponente(${idx}, '${campo}', this.value)">
+                    ${config.opcao_todos ? `<option value="all">${config.texto_todos || 'Todos'}</option>` : ''}
+                    ${opcoes.map(op => `<option value="${this.escapeHTML(op)}">${this.escapeHTML(op)}</option>`).join('')}
+                </select>
+            </div>
+        `;
+    },
+
+    /**
+     * Componente: Seção de Cards
+     * Seção com título + grid de cards filtrados
+     */
+    renderComponenteSecaoCards(config, idx) {
+        const titulo = config.titulo || '';
+        const icone = config.icone || '';
+        const estiloSecao = config.estilo_secao || '';
+        const cardConfig = config.card || {};
+        const layout = config.layout || 'cards_grid';
+
+        // Filtrar dados para esta seção
+        const dadosSecao = this.aplicarFiltroDados(this.dadosFiltrados, config.filtro_dados);
+
+        if (dadosSecao.length === 0 && config.ocultar_vazio) {
+            return '';
+        }
+
+        return `
+            <div class="componente-secao-cards ${estiloSecao}" data-componente-idx="${idx}">
+                ${titulo ? `
+                    <div class="secao-header">
+                        ${icone ? `<span class="secao-icone">${icone}</span>` : ''}
+                        <h3 class="secao-titulo">${titulo}</h3>
+                        <span class="secao-count">${dadosSecao.length} itens</span>
+                    </div>
+                ` : ''}
+                <div class="secao-conteudo">
+                    ${this.renderCardsSecao(dadosSecao, cardConfig, layout)}
+                </div>
+            </div>
+        `;
+    },
+
+    /**
+     * Renderiza cards dentro de uma seção
+     */
+    renderCardsSecao(dados, cardConfig, layout) {
+        if (dados.length === 0) {
+            return `<div class="empty-secao">Nenhum item nesta seção</div>`;
+        }
+
+        return `
+            <div class="cards-grid">
+                ${dados.map(row => this.renderCardSecao(row, cardConfig)).join('')}
+            </div>
+        `;
+    },
+
+    /**
+     * Renderiza um card individual em uma seção
+     */
+    renderCardSecao(row, cardConfig) {
+        const avatar = cardConfig.avatar;
+        const campos = cardConfig.campos || [];
+        const acoes = cardConfig.acoes || [];
+
+        // Avatar do card
+        let avatarHtml = '';
+        if (avatar) {
+            const texto = row[avatar.campo] || '?';
+            const inicial = texto.charAt(0).toUpperCase();
+            const corClass = avatar.cor || 'gradient-blue';
+            avatarHtml = `
+                <div class="card-avatar ${corClass}">
+                    ${avatar.tipo === 'imagem' && row[avatar.campo_imagem]
+                        ? `<img src="${row[avatar.campo_imagem]}" alt="${texto}">`
+                        : inicial
+                    }
+                </div>
+            `;
+        }
+
+        // Campos do card
+        const camposHtml = campos.map(campoConfig => {
+            const valor = row[campoConfig.campo];
+            if (!valor && campoConfig.ocultar_vazio) return '';
+
+            const estilo = campoConfig.estilo || 'normal';
+
+            switch (estilo) {
+                case 'titulo':
+                    return `<h4 class="card-titulo">${this.escapeHTML(valor || '-')}</h4>`;
+                case 'subtitulo':
+                    return `<p class="card-subtitulo">${this.escapeHTML(valor || '-')}</p>`;
+                case 'badge':
+                    const corBadge = campoConfig.cor || this.getBadgeClass(valor);
+                    return `<span class="badge ${corBadge}">${this.escapeHTML(valor || '-')}</span>`;
+                case 'tags':
+                    const tags = typeof valor === 'string'
+                        ? valor.split(',').map(t => t.trim()).filter(t => t)
+                        : (Array.isArray(valor) ? valor : []);
+                    if (tags.length === 0) return '';
+                    return `
+                        <div class="card-tags">
+                            ${tags.map(tag => `<span class="tag">${this.escapeHTML(tag)}</span>`).join('')}
+                        </div>
+                    `;
+                case 'contador':
+                    const prefixo = campoConfig.prefixo || '';
+                    return `<span class="card-contador">${prefixo} ${valor || 0}</span>`;
+                case 'descricao':
+                    return `<p class="card-descricao">${this.escapeHTML(valor || '-')}</p>`;
+                case 'icone_valor':
+                    const iconeField = campoConfig.icone || '📌';
+                    return `<span class="card-icone-valor">${iconeField} ${this.escapeHTML(valor || '-')}</span>`;
+                default:
+                    return `<span class="card-campo">${this.escapeHTML(valor || '-')}</span>`;
+            }
+        }).filter(h => h).join('');
+
+        // Ações do card
+        const acoesHtml = acoes.length > 0 ? `
+            <div class="card-acoes">
+                ${acoes.includes('editar') && this.podeEditar() ? `
+                    <button class="btn btn-sm btn-secondary" onclick="event.stopPropagation(); ConfigRenderer.abrirModalEditar(${row.id || row._id})">✏️</button>
+                ` : ''}
+                ${acoes.includes('excluir') && this.podeExcluir() ? `
+                    <button class="btn btn-sm btn-danger" onclick="event.stopPropagation(); ConfigRenderer.confirmarExcluir(${row.id || row._id}, '${this.escapeHTML(row.nome || '')}')">🗑️</button>
+                ` : ''}
+                ${acoes.includes('teams') ? `
+                    <button class="btn-teams btn-sm" onclick="event.stopPropagation(); ConfigRenderer.compartilharTeams('${this.escapeHTML(row.nome || '')}')">📤</button>
+                ` : ''}
+            </div>
+        ` : '';
+
+        return `
+            <div class="card-secao" data-id="${row.id || row._id}" onclick="ConfigRenderer.abrirModalEditar(${row.id || row._id})">
+                ${avatarHtml}
+                <div class="card-body">
+                    ${camposHtml}
+                </div>
+                ${acoesHtml}
+            </div>
+        `;
+    },
+
+    /**
+     * Componente: Cards Ricos (Jornadas)
+     * Cards expansíveis com múltiplas seções internas
+     */
+    renderComponenteCardsRicos(config, idx) {
+        const cardConfig = config.card || {};
+        const dados = this.aplicarFiltroDados(this.dadosFiltrados, config.filtro_dados);
+
+        if (dados.length === 0) {
+            return `
+                <div class="componente-cards-ricos empty" data-componente-idx="${idx}">
+                    <div class="empty-state">
+                        <span class="empty-icon">${this.entidade?.icone || '📋'}</span>
+                        <h3>Nenhum registro encontrado</h3>
+                    </div>
+                </div>
+            `;
+        }
+
+        return `
+            <div class="componente-cards-ricos" data-componente-idx="${idx}">
+                <div class="cards-expandable">
+                    ${dados.map((row, rowIdx) => this.renderCardRico(row, rowIdx, cardConfig)).join('')}
+                </div>
+            </div>
+        `;
+    },
+
+    /**
+     * Renderiza um card rico com múltiplas seções
+     */
+    renderCardRico(row, rowIdx, cardConfig) {
+        const header = cardConfig.header || {};
+        const secoes = cardConfig.secoes || [];
+        const expandedByDefault = cardConfig.expanded === true;
+
+        // Header do card
+        const iconeField = header.icone?.startsWith('campo:')
+            ? row[header.icone.replace('campo:', '')]
+            : (header.icone || '');
+        const tituloField = header.titulo?.startsWith('campo:')
+            ? row[header.titulo.replace('campo:', '')]
+            : (row.nome || '');
+        const badges = header.badges || [];
+
+        return `
+            <div class="card-expandable card-rico ${expandedByDefault ? 'expanded' : ''}" data-idx="${rowIdx}">
+                <div class="card-expandable-header" onclick="ConfigRenderer.toggleCardExpand(${rowIdx})">
+                    <div class="card-header-left">
+                        ${iconeField ? `<span class="card-icone">${iconeField}</span>` : ''}
+                        <h4 class="card-nome">${this.escapeHTML(tituloField)}</h4>
+                    </div>
+                    <div class="card-header-right">
+                        ${badges.map(b => {
+                            const campo = b.startsWith('campo:') ? b.replace('campo:', '') : b;
+                            const valor = row[campo];
+                            return valor ? `<span class="badge ${this.getBadgeClass(valor)}">${this.escapeHTML(valor)}</span>` : '';
+                        }).join('')}
+                        <span class="expand-icon">▼</span>
+                    </div>
+                </div>
+                <div class="card-expandable-body">
+                    ${secoes.map(secao => this.renderSecaoCardRico(row, secao)).join('')}
+                    <div class="card-expandable-actions">
+                        ${header.acoes?.includes('teams') ? `<button class="btn-teams btn-sm" onclick="event.stopPropagation(); ConfigRenderer.compartilharTeams('${this.escapeHTML(tituloField)}')">📤 Teams</button>` : ''}
+                        ${this.podeEditar() ? `<button class="btn btn-sm btn-secondary" onclick="event.stopPropagation(); ConfigRenderer.abrirModalEditar(${row.id || row._id})">✏️ Editar</button>` : ''}
+                        ${this.podeExcluir() ? `<button class="btn btn-sm btn-danger" onclick="event.stopPropagation(); ConfigRenderer.confirmarExcluir(${row.id || row._id}, '${this.escapeHTML(tituloField)}')">🗑️ Excluir</button>` : ''}
+                    </div>
+                </div>
+            </div>
+        `;
+    },
+
+    /**
+     * Renderiza uma seção dentro de um card rico
+     */
+    renderSecaoCardRico(row, secao) {
+        const tipo = secao.tipo;
+
+        // Verificar condição de exibição
+        if (secao.condicional) {
+            const campoRef = secao.campo || secao.campos?.[0];
+            if (campoRef && !row[campoRef]) return '';
+        }
+
+        switch (tipo) {
+            case 'comparativo_visual':
+                return this.renderSecaoComparativoVisual(row, secao);
+
+            case 'step_list':
+                return this.renderPassosNumerados(row[secao.campo], secao.titulo, true);
+
+            case 'tag_list':
+                return this.renderSecaoTagList(row, secao);
+
+            case 'citacoes':
+                return this.renderSecaoCitacoes(row, secao);
+
+            case 'mini_cards_grid':
+                return this.renderSecaoMiniCardsGrid(row, secao);
+
+            case 'tabela_inline':
+                return this.renderSecaoTabelaInline(row, secao);
+
+            case 'detalhes_grid':
+                return this.renderSecaoDetalhesGrid(row, secao);
+
+            case 'avatares_grid':
+                return this.renderSecaoAvataresGrid(row, secao);
+
+            case 'workflow_visual':
+                return this.renderSecaoWorkflowVisual(row, secao);
+
+            default:
+                // Fallback para renderSecaoCard existente
+                return this.renderSecaoCard(row, secao);
+        }
+    },
+
+    /**
+     * Seção: Comparativo Visual AS-IS/TO-BE
+     */
+    renderSecaoComparativoVisual(row, secao) {
+        const asIs = secao.as_is || {};
+        const toBe = secao.to_be || {};
+
+        const renderLado = (config, classeLado) => {
+            const titulo = config.titulo || (classeLado === 'as-is' ? '❌ AS-IS' : '✅ TO-BE');
+            const cor = config.cor || (classeLado === 'as-is' ? 'red' : 'green');
+            const campos = config.campos || {};
+
+            return `
+                <div class="comparativo-lado ${classeLado} borda-${cor}">
+                    <div class="comparativo-header cor-${cor}">
+                        <span class="comparativo-badge ${classeLado}">${titulo}</span>
+                    </div>
+                    ${campos.descricao && row[campos.descricao] ? `
+                        <div class="comparativo-descricao">${this.escapeHTML(row[campos.descricao])}</div>
+                    ` : ''}
+                    ${campos.passos && row[campos.passos] ? this.renderPassosNumerados(row[campos.passos], 'Passos', true) : ''}
+                    ${campos.problemas && row[campos.problemas] ? this.renderListaItens(row[campos.problemas], 'Problemas', 'problema') : ''}
+                    ${campos.beneficios && row[campos.beneficios] ? this.renderListaItens(row[campos.beneficios], 'Benefícios', 'beneficio') : ''}
+                    ${campos.tempo && row[campos.tempo] ? `
+                        <div class="comparativo-tempo"><strong>⏱ Tempo:</strong> ${this.escapeHTML(row[campos.tempo])}</div>
+                    ` : ''}
+                </div>
+            `;
+        };
+
+        return `
+            <div class="secao-comparativo-visual">
+                ${renderLado(asIs, 'as-is')}
+                ${renderLado(toBe, 'to-be')}
+            </div>
+        `;
+    },
+
+    /**
+     * Seção: Tag List (problemas/benefícios)
+     */
+    renderSecaoTagList(row, secao) {
+        const valor = row[secao.campo];
+        const tags = typeof valor === 'string'
+            ? valor.split('\n').map(t => t.trim()).filter(t => t)
+            : (Array.isArray(valor) ? valor : []);
+
+        if (tags.length === 0) return '';
+
+        const cor = secao.cor || 'blue';
+        const icone = secao.icone || '';
+
+        return `
+            <div class="secao-tag-list">
+                ${secao.titulo ? `<h5 class="secao-titulo">${secao.titulo}</h5>` : ''}
+                <div class="tag-list cor-${cor}">
+                    ${tags.map(tag => `
+                        <span class="tag-item ${cor}">${icone} ${this.escapeHTML(tag)}</span>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    },
+
+    /**
+     * Seção: Citações/Pain Points
+     */
+    renderSecaoCitacoes(row, secao) {
+        const valor = row[secao.campo];
+        const citacoes = typeof valor === 'string'
+            ? valor.split('\n').map(c => c.trim()).filter(c => c)
+            : (Array.isArray(valor) ? valor : []);
+
+        if (citacoes.length === 0) return '';
+
+        return `
+            <div class="secao-citacoes-visual">
+                ${secao.titulo ? `<h5 class="secao-titulo">${secao.titulo}</h5>` : ''}
+                <div class="citacoes-container">
+                    ${citacoes.map(citacao => `
+                        <blockquote class="citacao-blockquote">
+                            <span class="citacao-icone">💬</span>
+                            <span class="citacao-texto">${this.escapeHTML(citacao)}</span>
+                        </blockquote>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    },
+
+    /**
+     * Seção: Mini Cards Grid (tipos de conta, etc.)
+     */
+    renderSecaoMiniCardsGrid(row, secao) {
+        const valor = row[secao.campo];
+        let items = [];
+
+        if (typeof valor === 'string') {
+            try { items = JSON.parse(valor); }
+            catch { items = valor.split('\n').map(i => i.trim()).filter(i => i); }
+        } else if (Array.isArray(valor)) {
+            items = valor;
+        }
+
+        if (items.length === 0) return '';
+
+        return `
+            <div class="secao-mini-cards-grid">
+                ${secao.titulo ? `<h5 class="secao-titulo">${secao.titulo}</h5>` : ''}
+                <div class="mini-cards-container">
+                    ${items.map(item => {
+                        const texto = typeof item === 'object' ? (item.nome || item.titulo || JSON.stringify(item)) : item;
+                        return `<div class="mini-card">${this.escapeHTML(texto)}</div>`;
+                    }).join('')}
+                </div>
+            </div>
+        `;
+    },
+
+    /**
+     * Seção: Tabela Inline
+     */
+    renderSecaoTabelaInline(row, secao) {
+        const valor = row[secao.campo];
+        let dados = [];
+
+        if (typeof valor === 'string') {
+            try { dados = JSON.parse(valor); } catch { return ''; }
+        } else if (Array.isArray(valor)) {
+            dados = valor;
+        }
+
+        if (dados.length === 0) return '';
+
+        const colunas = secao.colunas || Object.keys(dados[0] || {});
+
+        return `
+            <div class="secao-tabela-inline">
+                ${secao.titulo ? `<h5 class="secao-titulo">${secao.titulo}</h5>` : ''}
+                <table class="tabela-inline">
+                    <thead>
+                        <tr>${colunas.map(col => `<th>${this.escapeHTML(col)}</th>`).join('')}</tr>
+                    </thead>
+                    <tbody>
+                        ${dados.map(linha => `
+                            <tr>${colunas.map(col => `<td>${this.escapeHTML(linha[col] || '-')}</td>`).join('')}</tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `;
+    },
+
+    /**
+     * Seção: Detalhes Grid (key-value pairs)
+     */
+    renderSecaoDetalhesGrid(row, secao) {
+        const campos = secao.campos || [];
+        const detalhes = campos
+            .map(campo => ({ campo, valor: row[campo] }))
+            .filter(d => d.valor);
+
+        if (detalhes.length === 0) return '';
+
+        return `
+            <div class="secao-detalhes-grid">
+                ${secao.titulo ? `<h5 class="secao-titulo">${secao.titulo}</h5>` : ''}
+                <div class="detalhes-grid">
+                    ${detalhes.map(d => `
+                        <div class="detalhe-item">
+                            <span class="detalhe-label">${this.escapeHTML(d.campo)}</span>
+                            <span class="detalhe-valor">${this.escapeHTML(d.valor)}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    },
+
+    /**
+     * Seção: Avatares Grid (participantes)
+     */
+    renderSecaoAvataresGrid(row, secao) {
+        const valor = row[secao.campo];
+        let participantes = [];
+
+        if (typeof valor === 'string') {
+            try { participantes = JSON.parse(valor); }
+            catch { participantes = valor.split('\n').map(p => p.trim()).filter(p => p); }
+        } else if (Array.isArray(valor)) {
+            participantes = valor;
+        }
+
+        if (participantes.length === 0) return '';
+
+        return `
+            <div class="secao-avatares-grid">
+                ${secao.titulo ? `<h5 class="secao-titulo">${secao.titulo}</h5>` : ''}
+                <div class="avatares-container">
+                    ${participantes.map(p => {
+                        const nome = typeof p === 'object' ? (p.nome || 'U') : p;
+                        const inicial = nome.charAt(0).toUpperCase();
+                        return `
+                            <div class="avatar-mini" title="${this.escapeHTML(nome)}">
+                                ${inicial}
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        `;
+    },
+
+    /**
+     * Seção: Workflow Visual (fluxo de aprovação)
+     */
+    renderSecaoWorkflowVisual(row, secao) {
+        const valor = row[secao.campo];
+        let etapas = [];
+
+        if (typeof valor === 'string') {
+            try { etapas = JSON.parse(valor); }
+            catch { etapas = valor.split('->').map(e => e.trim()).filter(e => e); }
+        } else if (Array.isArray(valor)) {
+            etapas = valor;
+        }
+
+        if (etapas.length === 0) return '';
+
+        return `
+            <div class="secao-workflow-visual">
+                ${secao.titulo ? `<h5 class="secao-titulo">${secao.titulo}</h5>` : ''}
+                <div class="workflow-container">
+                    ${etapas.map((etapa, idx) => {
+                        const texto = typeof etapa === 'object' ? (etapa.nome || etapa.titulo) : etapa;
+                        return `
+                            <div class="workflow-etapa">
+                                <div class="workflow-node">${idx + 1}</div>
+                                <span class="workflow-texto">${this.escapeHTML(texto)}</span>
+                            </div>
+                            ${idx < etapas.length - 1 ? '<div class="workflow-arrow">→</div>' : ''}
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        `;
+    },
+
+    /**
+     * Componente: Tabela de Dados
+     */
+    renderComponenteTabelaDados(config, idx) {
+        const dados = this.aplicarFiltroDados(this.dadosFiltrados, config.filtro_dados);
+
+        // Aplicar paginação se configurado
+        let dadosRender = dados;
+        if (config.paginacao) {
+            const inicio = (this.paginacao.pagina - 1) * this.paginacao.itensPorPagina;
+            const fim = inicio + this.paginacao.itensPorPagina;
+            dadosRender = dados.slice(inicio, fim);
+        }
+
+        return `
+            <div class="componente-tabela" data-componente-idx="${idx}">
+                ${config.titulo ? `<h3 class="componente-titulo">${config.titulo}</h3>` : ''}
+                ${this.renderTabela(dadosRender)}
+                ${config.paginacao ? this.renderPaginacao() : ''}
+            </div>
+        `;
+    },
+
+    /**
+     * Componente: Kanban
+     */
+    renderComponenteKanban(config, idx) {
+        const dados = this.aplicarFiltroDados(this.dadosFiltrados, config.filtro_dados);
+
+        // Salvar config temporariamente para usar no renderKanban
+        const originalKanbanConfig = this.config?.kanban;
+        this.config = this.config || {};
+        this.config.kanban = config;
+
+        const html = `
+            <div class="componente-kanban" data-componente-idx="${idx}">
+                ${config.titulo ? `<h3 class="componente-titulo">${config.titulo}</h3>` : ''}
+                ${this.renderKanban(dados)}
+            </div>
+        `;
+
+        // Restaurar config original
+        if (originalKanbanConfig) {
+            this.config.kanban = originalKanbanConfig;
+        }
+
+        return html;
+    },
+
+    /**
+     * Componente: Timeline
+     */
+    renderComponenteTimeline(config, idx) {
+        const dados = this.aplicarFiltroDados(this.dadosFiltrados, config.filtro_dados);
+        const tipoTimeline = config.estilo || 'zigzag'; // zigzag, fases
+
+        let html = '';
+        if (tipoTimeline === 'fases') {
+            const originalConfig = this.config?.timeline_fases;
+            this.config = this.config || {};
+            this.config.timeline_fases = config;
+            html = this.renderTimelineFases(dados);
+            if (originalConfig) this.config.timeline_fases = originalConfig;
+        } else {
+            const originalConfig = this.config?.timeline_zigzag;
+            this.config = this.config || {};
+            this.config.timeline_zigzag = config;
+            html = this.renderTimelineZigzag(dados);
+            if (originalConfig) this.config.timeline_zigzag = originalConfig;
+        }
+
+        return `
+            <div class="componente-timeline" data-componente-idx="${idx}">
+                ${config.titulo ? `<h3 class="componente-titulo">${config.titulo}</h3>` : ''}
+                ${html}
+            </div>
+        `;
+    },
+
+    /**
+     * Aplica filtro de dados para componentes
+     */
+    aplicarFiltroDados(dados, filtro) {
+        if (!filtro) return dados;
+
+        return dados.filter(item => {
+            for (const [campo, valor] of Object.entries(filtro)) {
+                const itemValor = item[campo];
+
+                // Suporte para operadores especiais
+                if (typeof valor === 'object') {
+                    if (valor.$contains && !String(itemValor).toLowerCase().includes(valor.$contains.toLowerCase())) {
+                        return false;
+                    }
+                    if (valor.$in && !valor.$in.includes(itemValor)) {
+                        return false;
+                    }
+                    if (valor.$ne && itemValor === valor.$ne) {
+                        return false;
+                    }
+                } else {
+                    if (itemValor !== valor) return false;
+                }
+            }
+            return true;
+        });
+    },
+
+    /**
+     * Filtrar por clique em métrica
+     */
+    filtrarPorMetrica(componenteIdx, campo, valor) {
+        // Adicionar filtro global e re-renderizar
+        this.filtros[campo] = valor;
+        this.aplicarFiltros();
+        this.render();
+    },
+
+    /**
+     * Filtrar por componente de filtro
+     */
+    filtrarComponente(componenteIdx, campo, valor) {
+        // Atualizar botões ativos
+        const container = document.querySelector(`[data-componente-idx="${componenteIdx}"]`);
+        if (container) {
+            container.querySelectorAll('.btn-filtro-componente').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Aplicar filtro
+        if (valor === 'all') {
+            delete this.filtros[campo];
+        } else {
+            this.filtros[campo] = valor;
+        }
+        this.aplicarFiltros();
+        this.render();
     },
 
     // =====================================================
