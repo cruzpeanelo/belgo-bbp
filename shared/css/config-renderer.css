@@ -1027,6 +1027,214 @@
     line-height: 1.5;
 }
 
+/* =====================================================
+   COMPARATIVO DETALHADO (AS-IS / TO-BE completo)
+   ===================================================== */
+.secao-comparativo-detalhado {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 16px;
+}
+
+.comparativo-lado {
+    background: white;
+    border-radius: var(--radius-md, 8px);
+    padding: 16px;
+    border: 2px solid #e5e7eb;
+}
+
+.comparativo-lado.as-is {
+    border-color: #FCA5A5;
+    background: linear-gradient(180deg, #FEF2F2 0%, white 20%);
+}
+
+.comparativo-lado.to-be {
+    border-color: #86EFAC;
+    background: linear-gradient(180deg, #F0FDF4 0%, white 20%);
+}
+
+.comparativo-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.comparativo-badge {
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.comparativo-badge.as-is {
+    background: #DC2626;
+    color: white;
+}
+
+.comparativo-badge.to-be {
+    background: #16A34A;
+    color: white;
+}
+
+.comparativo-subtitulo {
+    color: var(--belgo-cinza, #6B7280);
+    font-size: 0.85rem;
+}
+
+.comparativo-descricao {
+    color: var(--belgo-azul, #003B4A);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.comparativo-tempo {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px dashed #e5e7eb;
+    color: var(--belgo-cinza, #6B7280);
+    font-size: 0.85rem;
+}
+
+/* Passos Numerados */
+.passos-numerados {
+    margin: 16px 0;
+}
+
+.passos-titulo {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--belgo-azul, #003B4A);
+    margin: 0 0 8px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.passos-lista {
+    margin: 0;
+    padding-left: 24px;
+    list-style: decimal;
+}
+
+.passos-lista li {
+    padding: 4px 0;
+    color: var(--belgo-cinza, #374151);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Lista de Itens (Problemas, Benefícios) */
+.lista-itens {
+    margin: 16px 0;
+}
+
+.lista-titulo {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--belgo-azul, #003B4A);
+    margin: 0 0 8px 0;
+}
+
+.lista-conteudo {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.lista-conteudo li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 4px 0;
+    font-size: 0.9rem;
+    color: var(--belgo-cinza, #374151);
+}
+
+.item-icone {
+    flex-shrink: 0;
+}
+
+.lista-itens.problema .lista-titulo { color: #DC2626; }
+.lista-itens.beneficio .lista-titulo { color: #16A34A; }
+
+/* Seção de Badges */
+.secao-badges {
+    margin: 16px 0;
+}
+
+.secao-titulo {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--belgo-azul, #003B4A);
+    margin: 0 0 8px 0;
+}
+
+.badges-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.badge-item {
+    background: var(--belgo-cinza-claro, #f5f7fa);
+    color: var(--belgo-azul, #003B4A);
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.badge-item.area { background: #DBEAFE; color: #1D4ED8; }
+.badge-item.sistema { background: #F3E8FF; color: #7C3AED; }
+.badge-item.pendencia { background: #FEF3C7; color: #D97706; }
+
+/* Info Grid */
+.secao-info-grid {
+    margin: 16px 0;
+    padding-top: 16px;
+    border-top: 1px dashed #e5e7eb;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.info-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--belgo-cinza, #6B7280);
+    text-transform: uppercase;
+}
+
+.info-valor {
+    font-size: 0.9rem;
+    color: var(--belgo-azul, #003B4A);
+}
+
+@media (max-width: 768px) {
+    .secao-comparativo-detalhado {
+        grid-template-columns: 1fr;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .card-expandable-actions {
     display: flex;
     justify-content: flex-end;

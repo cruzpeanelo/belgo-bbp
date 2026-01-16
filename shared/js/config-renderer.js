@@ -610,8 +610,75 @@ const ConfigRenderer = {
                         `).join('')}
                     </div>
                 `;
+
+            case 'comparativo_detalhado':
+                // Seção comparativo completo com passos, problemas, benefícios, tempo
+                const asIsConfig = secao.as_is || {};
+                const toBeConfig = secao.to_be || {};
+                return `
+                    <div class="secao-comparativo-detalhado">
+                        <div class="comparativo-lado as-is">
+                            <div class="comparativo-header">
+                                <span class="comparativo-badge as-is">AS-IS</span>
+                                <span class="comparativo-subtitulo">${asIsConfig.subtitulo || 'Processo Atual'}</span>
+                            </div>
+                            <div class="comparativo-descricao">${this.escapeHTML(row[asIsConfig.descricao] || '-')}</div>
+                            ${this.renderPassosNumerados(row[asIsConfig.passos], 'Passos do Processo')}
+                            ${this.renderListaItens(row[asIsConfig.problemas], 'Problemas Identificados', 'problema')}
+                            ${row[asIsConfig.tempo] ? `<div class="comparativo-tempo"><strong>⏱ Tempo Médio:</strong> ${this.escapeHTML(row[asIsConfig.tempo])}</div>` : ''}
+                        </div>
+                        <div class="comparativo-lado to-be">
+                            <div class="comparativo-header">
+                                <span class="comparativo-badge to-be">TO-BE</span>
+                                <span class="comparativo-subtitulo">${toBeConfig.subtitulo || 'Processo Futuro'}</span>
+                            </div>
+                            <div class="comparativo-descricao">${this.escapeHTML(row[toBeConfig.descricao] || '-')}</div>
+                            ${this.renderPassosNumerados(row[toBeConfig.passos], 'Passos do Processo')}
+                            ${this.renderListaItens(row[toBeConfig.beneficios], 'Benefícios Esperados', 'beneficio')}
+                            ${row[toBeConfig.tempo] ? `<div class="comparativo-tempo"><strong>⏱ Tempo Médio:</strong> ${this.escapeHTML(row[toBeConfig.tempo])}</div>` : ''}
+                        </div>
+                    </div>
+                `;
+
+            case 'passos_numerados':
+                return this.renderPassosNumerados(row[secao.campo], secao.titulo);
+
+            case 'badges':
+                const badgesTexto = row[secao.campo] || '';
+                const badges = typeof badgesTexto === 'string'
+                    ? badgesTexto.split('\n').map(b => b.trim()).filter(b => b)
+                    : (Array.isArray(badgesTexto) ? badgesTexto : []);
+                if (badges.length === 0) return '';
+                return `
+                    <div class="secao-badges">
+                        ${secao.titulo ? `<h5 class="secao-titulo">${secao.titulo}</h5>` : ''}
+                        <div class="badges-container">
+                            ${badges.map(badge => `<span class="badge-item ${secao.estilo || ''}">${this.escapeHTML(badge)}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+
+            case 'info_grid':
+                const infos = secao.campos || [];
+                const infosFiltradas = infos.filter(info => row[info.campo]);
+                if (infosFiltradas.length === 0) return '';
+                return `
+                    <div class="secao-info-grid">
+                        ${secao.titulo ? `<h5 class="secao-titulo">${secao.titulo}</h5>` : ''}
+                        <div class="info-grid">
+                            ${infosFiltradas.map(info => `
+                                <div class="info-item">
+                                    <span class="info-label">${info.icone || ''} ${info.label || info.campo}</span>
+                                    <span class="info-valor">${this.escapeHTML(row[info.campo])}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+
             case 'texto':
                 return `<p class="secao-texto">${this.escapeHTML(row[secao.campo] || '')}</p>`;
+
             case 'lista':
                 const lista = row[secao.campo];
                 if (!Array.isArray(lista)) return '';
@@ -621,9 +688,45 @@ const ConfigRenderer = {
                         <ul>${lista.map(item => `<li>${this.escapeHTML(item)}</li>`).join('')}</ul>
                     </div>
                 `;
+
             default:
                 return '';
         }
+    },
+
+    // Helper: Renderiza passos numerados a partir de texto com quebras de linha
+    renderPassosNumerados(texto, titulo) {
+        if (!texto) return '';
+        const passos = typeof texto === 'string'
+            ? texto.split('\n').map(p => p.trim()).filter(p => p)
+            : (Array.isArray(texto) ? texto : []);
+        if (passos.length === 0) return '';
+        return `
+            <div class="passos-numerados">
+                ${titulo ? `<h6 class="passos-titulo">${titulo}</h6>` : ''}
+                <ol class="passos-lista">
+                    ${passos.map(passo => `<li>${this.escapeHTML(passo)}</li>`).join('')}
+                </ol>
+            </div>
+        `;
+    },
+
+    // Helper: Renderiza lista de itens (problemas, benefícios, etc.)
+    renderListaItens(texto, titulo, tipo) {
+        if (!texto) return '';
+        const itens = typeof texto === 'string'
+            ? texto.split('\n').map(i => i.trim()).filter(i => i)
+            : (Array.isArray(texto) ? texto : []);
+        if (itens.length === 0) return '';
+        const icone = tipo === 'problema' ? '⚠️' : (tipo === 'beneficio' ? '✅' : '•');
+        return `
+            <div class="lista-itens ${tipo || ''}">
+                ${titulo ? `<h6 class="lista-titulo">${titulo}</h6>` : ''}
+                <ul class="lista-conteudo">
+                    ${itens.map(item => `<li><span class="item-icone">${icone}</span> ${this.escapeHTML(item)}</li>`).join('')}
+                </ul>
+            </div>
+        `;
     },
 
     toggleCardExpand(idx) {
