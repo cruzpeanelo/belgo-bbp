@@ -1471,14 +1471,26 @@ const ConfigRenderer = {
             case 'comparativo':
                 const campos = secao.campos || [];
                 const titulos = secao.titulos || ['Antes', 'Depois'];
+                const badges = secao.badges || ['AS-IS', 'TO-BE'];
+                const subtitulos = secao.subtitulos || ['Processo Atual', 'Processo Futuro'];
                 return `
-                    <div class="secao-comparativo">
-                        ${campos.map((campo, i) => `
-                            <div class="comparativo-item">
-                                <h5 class="comparativo-titulo">${titulos[i] || ''}</h5>
-                                <div class="comparativo-conteudo">${this.escapeHTML(row[campo] || '-')}</div>
-                            </div>
-                        `).join('')}
+                    <div class="secao-comparativo-detalhado">
+                        ${campos.map((campo, i) => {
+                            const valor = row[campo] || '';
+                            const temDelimitador = valor.includes('|') || valor.includes('\n');
+                            const conteudo = temDelimitador
+                                ? this.renderPassosNumerados(valor, null, true, 'auto')
+                                : `<div class="comparativo-texto">${this.escapeHTML(valor || '-')}</div>`;
+                            return `
+                                <div class="comparativo-lado ${i === 0 ? 'as-is' : 'to-be'}">
+                                    <div class="comparativo-header">
+                                        <span class="comparativo-badge ${i === 0 ? 'as-is' : 'to-be'}">${badges[i] || ''}</span>
+                                        <span class="comparativo-subtitulo">${subtitulos[i] || ''}</span>
+                                    </div>
+                                    ${conteudo}
+                                </div>
+                            `;
+                        }).join('')}
                     </div>
                 `;
 
