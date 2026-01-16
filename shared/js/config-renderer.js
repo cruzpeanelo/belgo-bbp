@@ -4080,8 +4080,9 @@ const ConfigRenderer = {
                     if (typeof opcoes === 'string') {
                         try { opcoes = JSON.parse(opcoes); } catch(e) { opcoes = []; }
                     }
-                    // Se não há opções definidas ou opcoes_de é "dados", extrair valores únicos dos dados
-                    if (opcoes.length === 0 || campo.opcoes_de === 'dados') {
+                    // Se não há opções definidas, extrair valores únicos dos dados
+                    // Se já tem opções do banco, usar apenas elas (evita duplicação)
+                    if (opcoes.length === 0) {
                         const campoOpcoes = campo.campo_opcoes || campo.codigo;
                         const valoresUnicos = [...new Set(this.dados.map(d => d[campoOpcoes]).filter(Boolean))].sort();
                         if (valoresUnicos.length > 0) {
@@ -4123,6 +4124,27 @@ const ConfigRenderer = {
                                 }).join('')}
                             </select>
                             ${opcoesRel.length === 0 ? '<small class="text-muted">Nenhum dado encontrado</small>' : ''}
+                        </div>
+                    `;
+                case 'json':
+                    // Campo JSON - exibir como textarea com JSON formatado
+                    let valorJson = '';
+                    if (valor) {
+                        try {
+                            // Se já é objeto, formatar; se é string, parsear e formatar
+                            const obj = typeof valor === 'string' ? JSON.parse(valor) : valor;
+                            valorJson = JSON.stringify(obj, null, 2);
+                        } catch (e) {
+                            // Se não conseguir parsear, usar valor como string
+                            valorJson = typeof valor === 'object' ? JSON.stringify(valor, null, 2) : String(valor);
+                        }
+                    }
+                    return `
+                        <div class="form-group col-12">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <textarea id="campo-${campo.codigo}" name="${campo.codigo}"
+                                      rows="6" class="code-textarea" placeholder="JSON..." ${required}>${this.escapeHTML(valorJson)}</textarea>
+                            <small class="text-muted">Formato JSON. Ex: [{"campo": "valor"}]</small>
                         </div>
                     `;
                 default:
