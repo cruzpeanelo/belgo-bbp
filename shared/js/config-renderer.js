@@ -1539,7 +1539,7 @@ const ConfigRenderer = {
 
         try {
             const token = sessionStorage.getItem('belgo_token');
-            const response = await fetch(`/api/projetos/${this.projetoId}/entidades/${this.entidadeId}/opcoes`, {
+            const response = await fetch(`/api/projetos/${this.projetoId}/entidades/${this.entidade.id}/opcoes`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
