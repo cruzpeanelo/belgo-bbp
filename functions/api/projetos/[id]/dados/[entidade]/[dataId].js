@@ -308,12 +308,6 @@ export async function onRequestDelete(context) {
             return errorResponse('Registro nao encontrado', 404);
         }
 
-        // Remover arquivos vinculados
-        await context.env.DB.prepare(`
-            DELETE FROM projeto_arquivos
-            WHERE projeto_id = ? AND entidade_id = ? AND registro_id = ?
-        `).bind(projetoId, entidade.id, dataId).run();
-
         // Remover registro
         await context.env.DB.prepare(`
             DELETE FROM projeto_dados
