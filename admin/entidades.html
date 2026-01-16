@@ -447,6 +447,50 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Opcoes de timeline (visivel quando timeline) -->
+                    <div class="layout-subsection" id="opcoesTimeline" style="display: none;">
+                        <h5>Configuracao da Timeline</h5>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="timelineCampoData">Campo de Data</label>
+                                <select id="timelineCampoData">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="timelineCampoTitulo">Campo de Titulo</label>
+                                <select id="timelineCampoTitulo">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="timelineCampoDescricao">Campo de Descricao</label>
+                                <select id="timelineCampoDescricao">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Opcoes de avatar (visivel quando cards_grid) -->
+                    <div class="layout-subsection" id="opcoesAvatar" style="display: none;">
+                        <h5>Configuracao do Avatar</h5>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="avatarCampo">Campo do Nome</label>
+                                <select id="avatarCampo">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="avatarCorPor">Cor por Campo (opcional)</label>
+                                <select id="avatarCorPor">
+                                    <option value="">Nenhum</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Secao Colunas -->
@@ -455,6 +499,21 @@
                     <p class="section-help">Arraste para reordenar. Marque os campos que devem aparecer na listagem.</p>
                     <div class="colunas-list" id="colunasListBuilder">
                         <p class="loading">Carregando campos...</p>
+                    </div>
+                </div>
+
+                <!-- Secao Secoes do Card (visivel apenas para layouts de cards) -->
+                <div class="layout-section" id="secaoSecoesCard" style="display: none;">
+                    <h4>Secoes do Card</h4>
+                    <p class="section-help">Configure secoes especiais para exibicao rica de conteudo nos cards.</p>
+
+                    <div class="secoes-builder">
+                        <div class="secoes-list" id="secoesListBuilder">
+                            <!-- Renderizado via JS -->
+                        </div>
+                        <button type="button" class="btn btn-outline btn-sm" onclick="adicionarSecaoCard()">
+                            <span class="icon">➕</span> Adicionar Secao
+                        </button>
                     </div>
                 </div>
 
@@ -1215,8 +1274,58 @@
                 ).join('');
             document.getElementById('opcoesAgrupamento').style.display = tipoLayout === 'cards_agrupados' ? 'block' : 'none';
 
+            // Campos de timeline
+            const timelineConfig = layoutConfig.timeline || {};
+            const selectTimelineData = document.getElementById('timelineCampoData');
+            const selectTimelineTitulo = document.getElementById('timelineCampoTitulo');
+            const selectTimelineDescricao = document.getElementById('timelineCampoDescricao');
+
+            // Popular select de data (campos tipo date ou datetime)
+            selectTimelineData.innerHTML = '<option value="">Selecione...</option>' +
+                layoutCampos.filter(c => ['date', 'datetime', 'data'].includes(c.tipo)).map(c =>
+                    `<option value="${c.codigo}" ${timelineConfig.campo_data === c.codigo ? 'selected' : ''}>${c.nome}</option>`
+                ).join('');
+
+            // Popular select de titulo (todos os campos texto)
+            selectTimelineTitulo.innerHTML = '<option value="">Selecione...</option>' +
+                layoutCampos.filter(c => ['texto', 'text', 'varchar'].includes(c.tipo)).map(c =>
+                    `<option value="${c.codigo}" ${timelineConfig.campo_titulo === c.codigo ? 'selected' : ''}>${c.nome}</option>`
+                ).join('');
+
+            // Popular select de descricao (campos texto ou textarea)
+            selectTimelineDescricao.innerHTML = '<option value="">Selecione...</option>' +
+                layoutCampos.filter(c => ['texto', 'text', 'varchar', 'textarea', 'texto_longo'].includes(c.tipo)).map(c =>
+                    `<option value="${c.codigo}" ${timelineConfig.campo_descricao === c.codigo ? 'selected' : ''}>${c.nome}</option>`
+                ).join('');
+
+            document.getElementById('opcoesTimeline').style.display = tipoLayout === 'timeline' ? 'block' : 'none';
+
+            // Campos de avatar (para cards_grid)
+            const avatarConfig = layoutConfig.card?.avatar || {};
+            const selectAvatarCampo = document.getElementById('avatarCampo');
+            const selectAvatarCorPor = document.getElementById('avatarCorPor');
+
+            // Popular select de campo para avatar (campos texto/nome)
+            selectAvatarCampo.innerHTML = '<option value="">Selecione...</option>' +
+                layoutCampos.filter(c => ['texto', 'text', 'varchar'].includes(c.tipo)).map(c =>
+                    `<option value="${c.codigo}" ${avatarConfig.campo === c.codigo ? 'selected' : ''}>${c.nome}</option>`
+                ).join('');
+
+            // Popular select de cor por (campos select)
+            selectAvatarCorPor.innerHTML = '<option value="">Nenhum</option>' +
+                layoutCampos.filter(c => c.tipo === 'select').map(c =>
+                    `<option value="${c.codigo}" ${avatarConfig.cor_por === c.codigo ? 'selected' : ''}>${c.nome}</option>`
+                ).join('');
+
+            document.getElementById('opcoesAvatar').style.display = tipoLayout === 'cards_grid' ? 'block' : 'none';
+
             // Colunas
             renderizarColunasBuilder();
+
+            // Secoes do card (visivel apenas para layouts de cards)
+            const isCardLayoutInit = ['cards', 'cards_grid', 'cards_agrupados'].includes(tipoLayout);
+            document.getElementById('secaoSecoesCard').style.display = isCardLayoutInit ? 'block' : 'none';
+            renderizarSecoesBuilder();
 
             // Filtros
             renderizarFiltrosBuilder();
@@ -1249,8 +1358,31 @@
             });
             layoutConfig.layout = tipo;
 
+            const isCardLayout = ['cards', 'cards_grid', 'cards_agrupados'].includes(tipo);
+
             // Mostrar/ocultar opcoes de agrupamento
             document.getElementById('opcoesAgrupamento').style.display = tipo === 'cards_agrupados' ? 'block' : 'none';
+
+            // Mostrar/ocultar opcoes de timeline
+            const timelineOpcoes = document.getElementById('opcoesTimeline');
+            if (timelineOpcoes) {
+                timelineOpcoes.style.display = tipo === 'timeline' ? 'block' : 'none';
+            }
+
+            // Mostrar/ocultar opcoes de avatar
+            const avatarOpcoes = document.getElementById('opcoesAvatar');
+            if (avatarOpcoes) {
+                avatarOpcoes.style.display = tipo === 'cards_grid' ? 'block' : 'none';
+            }
+
+            // Mostrar/ocultar secao de secoes do card
+            const secaoSecoesCard = document.getElementById('secaoSecoesCard');
+            if (secaoSecoesCard) {
+                secaoSecoesCard.style.display = isCardLayout ? 'block' : 'none';
+            }
+
+            // Re-renderizar colunas para mostrar/ocultar opcoes de estilo (cards)
+            renderizarColunasBuilder();
         }
 
         // Renderizar colunas no builder
@@ -1273,9 +1405,19 @@
                 return idxA - idxB;
             });
 
+            // Verificar se layout atual e de cards (precisa de estilo)
+            const layoutAtual = document.querySelector('.layout-type-btn.selected')?.dataset.layout || 'tabela';
+            const isCardLayout = ['cards', 'cards_grid', 'cards_agrupados'].includes(layoutAtual);
+
+            // Buscar config de card.campos se existir
+            const cardCampos = layoutConfig.card?.campos || [];
+
             container.innerHTML = camposOrdenados.map((campo, index) => {
                 const colConfig = colunasConfig.find(c => c.campo === campo.codigo) || {};
+                const cardConfig = cardCampos.find(c => c.campo === campo.codigo) || {};
                 const visivel = colConfig.visivel !== false && campo.visivel_listagem !== false;
+                const estilo = cardConfig.estilo || colConfig.estilo || '';
+                const cor = cardConfig.cor || colConfig.cor || '';
 
                 return `
                     <div class="coluna-item" data-codigo="${campo.codigo}" draggable="true">
@@ -1288,6 +1430,18 @@
                         <span class="coluna-tipo tipo-badge tipo-${campo.tipo}">${campo.tipo}</span>
                         <input type="text" class="coluna-largura" data-campo="${campo.codigo}"
                                placeholder="auto" value="${colConfig.largura || ''}" title="Largura (ex: 100px, auto)">
+                        ${isCardLayout ? `
+                        <select class="coluna-estilo" data-campo="${campo.codigo}" title="Estilo no card">
+                            <option value="">-- Estilo --</option>
+                            <option value="titulo" ${estilo === 'titulo' ? 'selected' : ''}>Titulo</option>
+                            <option value="subtitulo" ${estilo === 'subtitulo' ? 'selected' : ''}>Subtitulo</option>
+                            <option value="descricao" ${estilo === 'descricao' ? 'selected' : ''}>Descricao</option>
+                            <option value="badge" ${estilo === 'badge' ? 'selected' : ''}>Badge</option>
+                            <option value="tags" ${estilo === 'tags' ? 'selected' : ''}>Tags</option>
+                        </select>
+                        <input type="color" class="coluna-cor" data-campo="${campo.codigo}"
+                               value="${cor || '#003B4A'}" title="Cor (para titulo/badge)">
+                        ` : ''}
                     </div>
                 `;
             }).join('');
@@ -1464,6 +1618,7 @@
                         ${layoutCampos.map(c => `<option value="${c.codigo}" ${card.campo === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('')}
                     </select>
                     <input type="text" name="metrica_valor_${index}" placeholder="Valor (p/ contador)" value="${card.valor || ''}" style="width: 100px;">
+                    <input type="color" name="metrica_cor_${index}" value="${card.cor || '#003B4A'}" title="Cor do card" class="metrica-cor">
                     <button type="button" class="btn btn-xs btn-danger" onclick="removerMetrica(${index})">🗑️</button>
                 </div>
             `;
@@ -1522,6 +1677,128 @@
             document.querySelector(`.status-acao-row[data-index="${index}"]`).remove();
         }
 
+        // ============ SECOES DO CARD ============
+        let secoesIndex = 0;
+
+        function renderizarSecoesBuilder() {
+            const container = document.getElementById('secoesListBuilder');
+            const secoes = layoutConfig.card?.secoes || [];
+
+            if (secoes.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = secoes.map((secao, index) => {
+                secoesIndex = Math.max(secoesIndex, index + 1);
+                return criarSecaoHTML(index, secao);
+            }).join('');
+        }
+
+        function criarSecaoHTML(index, secao = {}) {
+            const tiposSecao = [
+                { value: 'comparativo', label: 'Comparativo (Antes/Depois)' },
+                { value: 'comparativo_detalhado', label: 'Comparativo AS-IS/TO-BE' },
+                { value: 'badges', label: 'Badges (Tags)' },
+                { value: 'passos', label: 'Passos Numerados' },
+                { value: 'info_grid', label: 'Grid de Informacoes' },
+                { value: 'texto', label: 'Texto Simples' },
+                { value: 'lista', label: 'Lista' }
+            ];
+
+            return `
+                <div class="secao-row" data-index="${index}">
+                    <select name="secao_tipo_${index}" onchange="atualizarCamposSecao(${index})">
+                        <option value="">Tipo de Secao...</option>
+                        ${tiposSecao.map(t => `<option value="${t.value}" ${secao.tipo === t.value ? 'selected' : ''}>${t.label}</option>`).join('')}
+                    </select>
+                    <input type="text" name="secao_titulo_${index}" placeholder="Titulo (opcional)" value="${secao.titulo || ''}">
+                    <div class="secao-campos-config" id="secaoCampos_${index}">
+                        ${renderizarCamposSecao(index, secao)}
+                    </div>
+                    <button type="button" class="btn btn-xs btn-danger" onclick="removerSecaoCard(${index})">🗑️</button>
+                </div>
+            `;
+        }
+
+        function renderizarCamposSecao(index, secao = {}) {
+            const tipo = secao.tipo || '';
+
+            if (tipo === 'comparativo') {
+                const campos = secao.campos || ['', ''];
+                return `
+                    <select name="secao_campo1_${index}" title="Campo Antes">
+                        <option value="">Campo Antes...</option>
+                        ${layoutCampos.map(c => `<option value="${c.codigo}" ${campos[0] === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('')}
+                    </select>
+                    <select name="secao_campo2_${index}" title="Campo Depois">
+                        <option value="">Campo Depois...</option>
+                        ${layoutCampos.map(c => `<option value="${c.codigo}" ${campos[1] === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('')}
+                    </select>
+                `;
+            } else if (tipo === 'comparativo_detalhado') {
+                const asIs = secao.as_is || {};
+                const toBe = secao.to_be || {};
+                return `
+                    <div class="secao-comparativo-config">
+                        <div class="comparativo-coluna">
+                            <strong>AS-IS:</strong>
+                            <select name="secao_asis_titulo_${index}">
+                                <option value="">Titulo...</option>
+                                ${layoutCampos.map(c => `<option value="${c.codigo}" ${asIs.titulo === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('')}
+                            </select>
+                            <select name="secao_asis_desc_${index}">
+                                <option value="">Descricao...</option>
+                                ${layoutCampos.map(c => `<option value="${c.codigo}" ${asIs.descricao === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('')}
+                            </select>
+                        </div>
+                        <div class="comparativo-coluna">
+                            <strong>TO-BE:</strong>
+                            <select name="secao_tobe_titulo_${index}">
+                                <option value="">Titulo...</option>
+                                ${layoutCampos.map(c => `<option value="${c.codigo}" ${toBe.titulo === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('')}
+                            </select>
+                            <select name="secao_tobe_desc_${index}">
+                                <option value="">Descricao...</option>
+                                ${layoutCampos.map(c => `<option value="${c.codigo}" ${toBe.descricao === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('')}
+                            </select>
+                        </div>
+                    </div>
+                `;
+            } else if (tipo === 'badges' || tipo === 'texto' || tipo === 'lista' || tipo === 'passos') {
+                return `
+                    <select name="secao_campo_${index}">
+                        <option value="">Selecione campo...</option>
+                        ${layoutCampos.map(c => `<option value="${c.codigo}" ${secao.campo === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('')}
+                    </select>
+                `;
+            } else if (tipo === 'info_grid') {
+                const campos = secao.campos || [];
+                return `
+                    <input type="text" name="secao_campos_${index}" placeholder="Campos (separados por virgula)"
+                           value="${campos.map(c => c.campo || c).join(', ')}" style="width: 200px;">
+                `;
+            }
+
+            return '';
+        }
+
+        function atualizarCamposSecao(index) {
+            const tipo = document.querySelector(`[name="secao_tipo_${index}"]`).value;
+            const container = document.getElementById(`secaoCampos_${index}`);
+            container.innerHTML = renderizarCamposSecao(index, { tipo });
+        }
+
+        function adicionarSecaoCard() {
+            const container = document.getElementById('secoesListBuilder');
+            container.insertAdjacentHTML('beforeend', criarSecaoHTML(secoesIndex));
+            secoesIndex++;
+        }
+
+        function removerSecaoCard(index) {
+            document.querySelector(`.secao-row[data-index="${index}"]`).remove();
+        }
+
         // Salvar configuracao de layout
         async function salvarLayoutConfig() {
             const entidadeId = document.getElementById('layoutEntidadeId').value;
@@ -1530,17 +1807,35 @@
             const layoutTipoBtn = document.querySelector('.layout-type-btn.selected');
             const layoutTipo = layoutTipoBtn ? layoutTipoBtn.dataset.layout : 'tabela';
 
+            // Verificar se layout e de cards
+            const isCardLayout = ['cards', 'cards_grid', 'cards_agrupados'].includes(layoutTipo);
+
             // Coletar colunas na ordem atual
             const colunas = [];
+            const cardCampos = [];
             document.querySelectorAll('.coluna-item').forEach(item => {
                 const codigo = item.dataset.codigo;
                 const visivel = item.querySelector('.coluna-visivel').checked;
                 const largura = item.querySelector('.coluna-largura').value;
+                const estiloSelect = item.querySelector('.coluna-estilo');
+                const corInput = item.querySelector('.coluna-cor');
+                const estilo = estiloSelect ? estiloSelect.value : '';
+                const cor = corInput ? corInput.value : '';
+
                 colunas.push({
                     campo: codigo,
                     visivel,
                     largura: largura || undefined
                 });
+
+                // Se tem estilo definido, adicionar ao cardCampos
+                if (isCardLayout && estilo && visivel) {
+                    const campoConfig = { campo: codigo, estilo };
+                    if (cor && cor !== '#003B4A') {
+                        campoConfig.cor = cor;
+                    }
+                    cardCampos.push(campoConfig);
+                }
             });
 
             // Coletar filtros
@@ -1579,14 +1874,19 @@
                     const tipo = row.querySelector(`[name="metrica_tipo_${index}"]`).value;
                     const campo = row.querySelector(`[name="metrica_campo_${index}"]`).value;
                     const valor = row.querySelector(`[name="metrica_valor_${index}"]`).value;
+                    const cor = row.querySelector(`[name="metrica_cor_${index}"]`)?.value;
                     if (label) {
-                        cards.push({
+                        const metricaConfig = {
                             icone: icone || undefined,
                             label,
                             tipo,
                             campo: campo || undefined,
                             valor: valor || undefined
-                        });
+                        };
+                        if (cor && cor !== '#003B4A') {
+                            metricaConfig.cor = cor;
+                        }
+                        cards.push(metricaConfig);
                     }
                 });
                 if (cards.length > 0) {
@@ -1627,11 +1927,104 @@
                 acoes_status: acoesStatus.length > 0 ? acoesStatus : undefined
             };
 
+            // Adicionar card.campos e secoes para layouts de cards
+            if (isCardLayout) {
+                config.card = {};
+
+                if (cardCampos.length > 0) {
+                    config.card.campos = cardCampos;
+                }
+
+                // Adicionar acoes do card se Teams estiver habilitado
+                if (document.getElementById('acaoTeams')?.checked) {
+                    config.card.acoes = ['teams'];
+                }
+
+                // Coletar secoes do card
+                const secoes = [];
+                document.querySelectorAll('.secao-row').forEach(row => {
+                    const index = row.dataset.index;
+                    const tipo = row.querySelector(`[name="secao_tipo_${index}"]`)?.value;
+                    const titulo = row.querySelector(`[name="secao_titulo_${index}"]`)?.value;
+
+                    if (!tipo) return;
+
+                    const secaoConfig = { tipo };
+                    if (titulo) secaoConfig.titulo = titulo;
+
+                    // Coletar campos especificos do tipo
+                    if (tipo === 'comparativo') {
+                        const campo1 = row.querySelector(`[name="secao_campo1_${index}"]`)?.value;
+                        const campo2 = row.querySelector(`[name="secao_campo2_${index}"]`)?.value;
+                        if (campo1 || campo2) {
+                            secaoConfig.campos = [campo1 || '', campo2 || ''];
+                        }
+                    } else if (tipo === 'comparativo_detalhado') {
+                        const asisTitulo = row.querySelector(`[name="secao_asis_titulo_${index}"]`)?.value;
+                        const asisDesc = row.querySelector(`[name="secao_asis_desc_${index}"]`)?.value;
+                        const tobeTitulo = row.querySelector(`[name="secao_tobe_titulo_${index}"]`)?.value;
+                        const tobeDesc = row.querySelector(`[name="secao_tobe_desc_${index}"]`)?.value;
+                        if (asisTitulo || asisDesc) {
+                            secaoConfig.as_is = {};
+                            if (asisTitulo) secaoConfig.as_is.titulo = asisTitulo;
+                            if (asisDesc) secaoConfig.as_is.descricao = asisDesc;
+                        }
+                        if (tobeTitulo || tobeDesc) {
+                            secaoConfig.to_be = {};
+                            if (tobeTitulo) secaoConfig.to_be.titulo = tobeTitulo;
+                            if (tobeDesc) secaoConfig.to_be.descricao = tobeDesc;
+                        }
+                    } else if (tipo === 'info_grid') {
+                        const camposStr = row.querySelector(`[name="secao_campos_${index}"]`)?.value || '';
+                        const campos = camposStr.split(',').map(c => c.trim()).filter(c => c);
+                        if (campos.length > 0) {
+                            secaoConfig.campos = campos.map(c => ({ campo: c }));
+                        }
+                    } else {
+                        const campo = row.querySelector(`[name="secao_campo_${index}"]`)?.value;
+                        if (campo) secaoConfig.campo = campo;
+                    }
+
+                    secoes.push(secaoConfig);
+                });
+
+                if (secoes.length > 0) {
+                    config.card.secoes = secoes;
+                }
+
+                // Avatar config (para cards_grid)
+                if (layoutTipo === 'cards_grid') {
+                    const avatarCampo = document.getElementById('avatarCampo').value;
+                    const avatarCorPor = document.getElementById('avatarCorPor').value;
+
+                    if (avatarCampo) {
+                        config.card.avatar = { campo: avatarCampo };
+                        if (avatarCorPor) {
+                            config.card.avatar.cor_por = avatarCorPor;
+                        }
+                    }
+                }
+            }
+
             // Adicionar agrupamento se necessario
             if (layoutTipo === 'cards_agrupados') {
                 const campoAgrupamento = document.getElementById('campoAgrupamento').value;
                 if (campoAgrupamento) {
                     config.agrupamento = { campo: campoAgrupamento };
+                }
+            }
+
+            // Timeline config
+            if (layoutTipo === 'timeline') {
+                const campoData = document.getElementById('timelineCampoData').value;
+                const campoTitulo = document.getElementById('timelineCampoTitulo').value;
+                const campoDescricao = document.getElementById('timelineCampoDescricao').value;
+
+                if (campoData || campoTitulo || campoDescricao) {
+                    config.timeline = {};
+                    if (campoData) config.timeline.campo_data = campoData;
+                    if (campoTitulo) config.timeline.campo_titulo = campoTitulo;
+                    if (campoDescricao) config.timeline.campo_descricao = campoDescricao;
                 }
             }
 
@@ -2151,6 +2544,25 @@
             border-radius: 4px;
         }
 
+        .coluna-estilo {
+            width: 110px;
+            padding: 4px 8px;
+            font-size: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+        }
+
+        .coluna-cor,
+        .metrica-cor {
+            width: 40px;
+            height: 28px;
+            padding: 2px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
         /* Filtros builder */
         .filtros-builder {
             margin-bottom: 20px;
@@ -2159,7 +2571,8 @@
         .filtro-row,
         .filtro-rapido-row,
         .metrica-row,
-        .status-acao-row {
+        .status-acao-row,
+        .secao-row {
             display: flex;
             gap: 8px;
             align-items: center;
@@ -2176,11 +2589,41 @@
         .metrica-row select,
         .metrica-row input,
         .status-acao-row select,
-        .status-acao-row input {
+        .status-acao-row input,
+        .secao-row select,
+        .secao-row input {
             padding: 6px 10px;
             font-size: 13px;
             border: 1px solid #ddd;
             border-radius: 4px;
+        }
+
+        .secao-row {
+            flex-wrap: wrap;
+        }
+
+        .secao-campos-config {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .secao-comparativo-config {
+            display: flex;
+            gap: 16px;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .comparativo-coluna {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .comparativo-coluna strong {
+            font-size: 12px;
+            color: #666;
         }
 
         .filtro-campo,

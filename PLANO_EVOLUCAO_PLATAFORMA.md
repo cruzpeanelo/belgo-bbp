@@ -434,3 +434,181 @@ INSERT INTO projeto_entidade_opcoes (entidade_id, campo_codigo, valor, label, co
 | `functions/api/projetos/[id]/entidades/[entidadeId]/opcoes.js` | ✅ Criado |
 | `shared/js/config-renderer.js` | ✅ Modificado |
 | `shared/css/config-renderer.css` | ✅ Modificado |
+
+---
+
+## FASE 10: REPLICAÇÃO DE DADOS GTM CLONE - EM ANDAMENTO
+
+### Objetivo
+Replicar estrutura, layout, funcionalidades e dados do GTM Original para o GTM Clone usando MCP Playwright para navegação e cadastro via interface.
+
+### Contexto
+O GTM Clone foi criado via template e herdou a **estrutura** (entidades, campos, menus, config_funcionalidades), mas **NÃO herdou os dados reais** (registros de jornadas, testes, participantes, etc).
+
+### Abordagem
+Usar browser automatizado (MCP Playwright) para:
+1. Explorar GTM Original - entender estrutura e layout de cada entidade
+2. Navegar até GTM Clone - verificar se layout está igual
+3. Cadastrar dados via interface - inserir ~10% dos dados em cada entidade
+
+### URLs
+- **Plataforma**: `https://belgo-bbp.pages.dev` (produção)
+- **GTM Original**: `/index.html` (projeto principal)
+- **GTM Clone**: `/pages/projeto-dinamico.html?projeto=gtm-clone`
+
+### Tarefas
+
+#### 10.1. Exploração do GTM Original
+- [ ] Navegar para a plataforma
+- [ ] Acessar projeto GTM
+- [ ] Para cada entidade, analisar:
+  - Layout (tabela, cards, timeline, etc)
+  - Campos disponíveis
+  - Filtros configurados
+  - Ações disponíveis
+  - Dados existentes (quantidade, estrutura)
+
+#### 10.2. Verificação do GTM Clone
+- [ ] Acessar projeto GTM Clone
+- [ ] Comparar layout de cada entidade com o Original
+- [ ] Identificar diferenças (se houver)
+
+#### 10.3. Cadastro de Dados de Teste
+Para cada entidade, cadastrar ~10% dos dados via formulário:
+- [ ] Jornadas (cards comparativos AS-IS/TO-BE)
+- [ ] Testes (tabela com status)
+- [ ] Reuniões (timeline)
+- [ ] Glossário (cards agrupados)
+- [ ] Participantes (grid de cards)
+
+#### 10.4. Validação
+- [ ] Verificar se dados aparecem corretamente
+- [ ] Testar filtros e buscas
+- [ ] Confirmar layouts funcionando
+
+---
+
+## FASE 11: MELHORIAS NO LAYOUT BUILDER (ADMIN) ✅ CONCLUÍDA
+
+### Objetivo
+Expandir o Layout Builder administrativo para suportar todas as configurações necessárias para layouts avançados (cards, timeline, etc.), permitindo configuração 100% no-code de qualquer tipo de visualização.
+
+### Problemas Identificados
+Ao tentar replicar o GTM Original para o GTM Clone, identificamos que o Layout Builder (`admin/entidades.html`) não oferecia todas as opções necessárias para configurar:
+- Estilo de campos em cards (titulo, subtitulo, badge, etc.)
+- Cor de campos em cards
+- Seções especiais de cards (comparativo AS-IS/TO-BE, badges, etc.)
+- Configuração de avatar para cards_grid
+- Configuração de timeline (campos de data, titulo, descrição)
+- Cor de métricas
+
+### Soluções Implementadas
+
+#### 11.1. Estilo de Campo para Cards ✅
+**Arquivo**: `admin/entidades.html`
+
+- Adicionado dropdown "Estilo" na aba Colunas quando layout é do tipo cards
+- Opções: Titulo, Subtitulo, Descricao, Badge, Tags
+- Adicionado color picker para cor do campo
+- Re-renderização automática ao mudar tipo de layout
+
+```javascript
+// Estilos disponíveis
+<option value="titulo">Titulo</option>
+<option value="subtitulo">Subtitulo</option>
+<option value="descricao">Descricao</option>
+<option value="badge">Badge</option>
+<option value="tags">Tags</option>
+```
+
+#### 11.2. Configuração de Timeline ✅
+**Arquivo**: `admin/entidades.html`
+
+- Nova seção "Configuração da Timeline" visível quando layout=timeline
+- 3 campos configuráveis:
+  - Campo de Data: campos tipo date/datetime
+  - Campo de Título: campos tipo texto
+  - Campo de Descrição: campos tipo texto/textarea
+- Salva em `config.timeline` com `campo_data`, `campo_titulo`, `campo_descricao`
+
+#### 11.3. Cor para Métricas ✅
+**Arquivo**: `admin/entidades.html`
+
+- Adicionado color picker em cada linha de métrica
+- Cor salva no config de cada card métrica
+- CSS para `.metrica-cor`
+
+#### 11.4. Seções para Cards (Comparativo AS-IS/TO-BE, Badges, etc.) ✅
+**Arquivo**: `admin/entidades.html`
+
+- Nova seção "Seções do Card" visível para layouts de cards
+- 7 tipos de seção suportados:
+  1. **Comparativo (Antes/Depois)**: 2 campos lado a lado
+  2. **Comparativo AS-IS/TO-BE**: 4 campos (título e descrição para cada)
+  3. **Badges (Tags)**: Campo com valores separados por vírgula
+  4. **Passos Numerados**: Lista ordenada
+  5. **Grid de Informações**: Múltiplos campos em grid
+  6. **Texto Simples**: Campo de texto
+  7. **Lista**: Lista não ordenada
+
+- Interface dinâmica que mostra campos específicos baseado no tipo selecionado
+- Salva em `config.card.secoes[]`
+
+#### 11.5. Avatar para Cards Grid ✅
+**Arquivo**: `admin/entidades.html`
+
+- Nova seção "Configuração do Avatar" visível quando layout=cards_grid
+- 2 campos configuráveis:
+  - Campo do Nome: usado para gerar iniciais do avatar
+  - Cor por Campo (opcional): campo select para definir cor do avatar
+- Salva em `config.card.avatar` com `campo` e `cor_por`
+
+### Arquivos Modificados
+
+| Arquivo | Alterações |
+|---------|------------|
+| `admin/entidades.html` | +500 linhas - HTML, JS e CSS para todas as novas funcionalidades |
+
+### Estrutura de Config Suportada
+
+```json
+{
+  "layout": "cards",
+  "colunas": [...],
+  "filtros": [...],
+  "metricas": {
+    "cards": [
+      { "label": "Total", "tipo": "total", "cor": "#10B981" }
+    ]
+  },
+  "card": {
+    "campos": [
+      { "campo": "titulo", "estilo": "titulo", "cor": "#003B4A" },
+      { "campo": "status", "estilo": "badge" }
+    ],
+    "secoes": [
+      {
+        "tipo": "comparativo_detalhado",
+        "as_is": { "titulo": "campo_asis_titulo", "descricao": "campo_asis_desc" },
+        "to_be": { "titulo": "campo_tobe_titulo", "descricao": "campo_tobe_desc" }
+      },
+      { "tipo": "badges", "campo": "tags", "titulo": "Tags" }
+    ],
+    "avatar": {
+      "campo": "nome",
+      "cor_por": "status"
+    }
+  },
+  "timeline": {
+    "campo_data": "data_reuniao",
+    "campo_titulo": "titulo",
+    "campo_descricao": "descricao"
+  }
+}
+```
+
+### Benefícios
+- **100% No-Code**: Qualquer layout pode ser configurado via interface admin
+- **Consistência**: Todas as configurações do `config-renderer.js` agora têm equivalente no admin
+- **Flexibilidade**: Suporte a visualizações ricas (cards comparativos, timelines, grids de avatares)
+- **Facilidade**: Interface intuitiva com dropdowns, color pickers e campos dinâmicos
