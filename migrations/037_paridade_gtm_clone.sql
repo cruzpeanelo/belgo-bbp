@@ -14,9 +14,9 @@ SET config_funcionalidades = '{
   "layout": "cards_grid",
   "agrupamento": {
     "campo": "setor",
-    "ordem": ["key_user", "equipe_projeto", "stakeholder"],
+    "ordem": ["keyuser", "equipe_projeto", "stakeholder"],
     "titulos": {
-      "key_user": "Key Users",
+      "keyuser": "Key Users",
       "equipe_projeto": "Equipe do Projeto",
       "stakeholder": "Stakeholders"
     }
@@ -34,7 +34,7 @@ SET config_funcionalidades = '{
   "metricas": {
     "habilitado": true,
     "cards": [
-      { "tipo": "contador", "campo": "setor", "valor": "key_user", "label": "Key Users", "icone": "👤", "cor": "blue" },
+      { "tipo": "contador", "campo": "setor", "valor": "keyuser", "label": "Key Users", "icone": "👤", "cor": "blue" },
       { "tipo": "contador", "campo": "setor", "valor": "equipe_projeto", "label": "Equipe Projeto", "icone": "👥", "cor": "green" },
       { "tipo": "contador", "campo": "setor", "valor": "stakeholder", "label": "Stakeholders", "icone": "🎯", "cor": "purple" },
       { "tipo": "total", "label": "Total", "icone": "📊", "cor": "gray" }
