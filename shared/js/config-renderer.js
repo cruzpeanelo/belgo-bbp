@@ -585,8 +585,8 @@ const ConfigRenderer = {
                             ${secoes.map(secao => this.renderSecaoCard(row, secao)).join('')}
                             <div class="card-expandable-actions">
                                 ${acoes.includes('teams') ? `<button class="btn-teams btn-sm" onclick="event.stopPropagation(); ConfigRenderer.compartilharTeams('${this.escapeHTML(row.nome || '')}')">📤 Teams</button>` : ''}
-                                ${this.permissoes?.permite_editar ? `<button class="btn btn-sm btn-secondary" onclick="event.stopPropagation(); ConfigRenderer.abrirModalEditar(${row.id || row._id})">✏️ Editar</button>` : ''}
-                                ${this.permissoes?.permite_excluir ? `<button class="btn btn-sm btn-danger" onclick="event.stopPropagation(); ConfigRenderer.confirmarExcluir(${row.id || row._id}, '${this.escapeHTML(row.nome || '')}')">🗑️ Excluir</button>` : ''}
+                                ${this.entidade?.permite_editar ? `<button class="btn btn-sm btn-secondary" onclick="event.stopPropagation(); ConfigRenderer.abrirModalEditar(${row.id || row._id})">✏️ Editar</button>` : ''}
+                                ${this.entidade?.permite_excluir ? `<button class="btn btn-sm btn-danger" onclick="event.stopPropagation(); ConfigRenderer.confirmarExcluir(${row.id || row._id}, '${this.escapeHTML(row.nome || '')}')">🗑️ Excluir</button>` : ''}
                             </div>
                         </div>
                     </div>
