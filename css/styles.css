@@ -151,6 +151,115 @@ body {
     text-align: center;
 }
 
+/* Seletor de Projetos na Sidebar */
+.project-selector {
+    margin: 10px 15px;
+    position: relative;
+}
+
+.project-selector-btn {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-md);
+    padding: 10px 12px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.project-selector-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.project-selector-btn .project-icon {
+    font-size: 1.2rem;
+}
+
+.project-selector-btn .project-name {
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.project-selector-btn .project-arrow {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    transition: transform 0.2s ease;
+}
+
+.project-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    margin-top: 5px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.project-dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.project-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    color: #374151;
+    text-decoration: none;
+    transition: background 0.15s ease;
+}
+
+.project-dropdown-item:hover {
+    background: #f3f4f6;
+}
+
+.project-dropdown-item.active {
+    background: #e5e7eb;
+    font-weight: 500;
+}
+
+.project-dropdown-item .project-icon {
+    font-size: 1.1rem;
+}
+
+.project-dropdown-item .project-name {
+    flex: 1;
+    font-size: 0.85rem;
+}
+
+.project-dropdown-item .project-badge {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.project-dropdown-divider {
+    height: 1px;
+    background: #e5e7eb;
+    margin: 5px 0;
+}
+
 /* Conteúdo Principal */
 .main-content {
     flex: 1;

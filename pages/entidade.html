@@ -28,10 +28,6 @@
                 <div class="sidebar-subtitle">Cockpit GTM</div>
             </div>
             <nav class="sidebar-nav" id="dynamic-nav" role="navigation" aria-label="Menu principal">
-                <a href="../index.html" class="nav-item" aria-label="Dashboard">
-                    <span class="nav-icon" aria-hidden="true">&#128202;</span>
-                    <span class="nav-text">Dashboard</span>
-                </a>
                 <!-- Menu sera carregado dinamicamente -->
                 <div id="nav-loading" style="padding: 20px; opacity: 0.6; text-align: center;">
                     Carregando menu...
@@ -191,35 +187,71 @@
             }
         });
 
-        // Carregar menu dinamico da API
+        // Carregar menu dinamico da API com seletor de projetos
         async function carregarMenuDinamico() {
             try {
                 await App.loadProjetoInfo();
+
+                // Buscar projetos do usuario para o seletor
+                const projetosResult = await App.fetchAPI('/api/projetos');
+                const projetos = projetosResult?.projetos || [];
+                const projetoAtual = projetos.find(p => p.id == App.projetoId);
+
+                // Buscar menus do projeto
                 const result = await App.fetchAPI(`/api/projetos/${App.projetoId}/menus`);
 
                 if (result?.success && result.menus) {
                     const nav = document.getElementById('dynamic-nav');
                     const loading = document.getElementById('nav-loading');
 
-                    let menuHtml = `
-                        <a href="/index.html" class="nav-item" aria-label="Dashboard">
-                            <span class="nav-icon" aria-hidden="true">&#128202;</span>
-                            <span class="nav-text">Dashboard</span>
-                        </a>
-                    `;
+                    // Seletor de projetos (se houver mais de 1)
+                    let selectorHtml = '';
+                    if (projetos.length > 1) {
+                        selectorHtml = `
+                            <div class="project-selector">
+                                <button class="project-selector-btn" onclick="toggleProjectDropdown()">
+                                    <span class="project-icon">${projetoAtual?.icone || '📁'}</span>
+                                    <span class="project-name">${projetoAtual?.nome || 'Projeto'}</span>
+                                    <span class="project-arrow">▼</span>
+                                </button>
+                                <div class="project-dropdown" id="projectDropdown">
+                                    <a href="/landing.html" class="project-dropdown-item">
+                                        <span class="project-icon">🏠</span>
+                                        <span class="project-name">Todos os Projetos</span>
+                                    </a>
+                                    <div class="project-dropdown-divider"></div>
+                                    ${projetos.map(p => `
+                                        <a href="${p.url_modulo || '/index.html'}"
+                                           class="project-dropdown-item ${p.id == App.projetoId ? 'active' : ''}"
+                                           onclick="switchProject(${p.id}, '${p.url_modulo || '/index.html'}')">
+                                            <span class="project-icon">${p.icone || '📁'}</span>
+                                            <span class="project-name">${p.nome}</span>
+                                            <span class="project-badge" style="background: ${p.cor || '#003B4A'}"></span>
+                                        </a>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `;
+                    }
 
+                    // Renderizar menus (sem duplicar Dashboard)
+                    let menuHtml = '';
                     result.menus.forEach(menu => {
-                        if (menu.ativo && menu.entidade_codigo) {
+                        if (!menu.ativo) return;
+
+                        const isActive = menu.entidade_codigo === new URLSearchParams(window.location.search).get('e');
+
+                        if (menu.entidade_codigo) {
                             menuHtml += `
                                 <a href="entidade.html?e=${menu.entidade_codigo}"
-                                   class="nav-item"
+                                   class="nav-item ${isActive ? 'active' : ''}"
                                    data-entidade="${menu.entidade_codigo}"
                                    aria-label="${menu.nome}">
                                     <span class="nav-icon" aria-hidden="true">${menu.icone || '&#128196;'}</span>
                                     <span class="nav-text">${menu.nome}</span>
                                 </a>
                             `;
-                        } else if (menu.ativo && menu.url) {
+                        } else if (menu.url) {
                             menuHtml += `
                                 <a href="${menu.url}"
                                    class="nav-item"
@@ -232,12 +264,32 @@
                     });
 
                     if (loading) loading.remove();
-                    nav.innerHTML = menuHtml;
+                    nav.innerHTML = selectorHtml + menuHtml;
                 }
             } catch (error) {
                 console.warn('Erro ao carregar menu:', error);
             }
         }
+
+        // Toggle dropdown de projetos
+        function toggleProjectDropdown() {
+            const dropdown = document.getElementById('projectDropdown');
+            if (dropdown) dropdown.classList.toggle('open');
+        }
+
+        // Trocar de projeto
+        function switchProject(projetoId, url) {
+            localStorage.setItem('belgo_projeto_id', projetoId);
+            if (url && url !== '#') window.location.href = url;
+        }
+
+        // Fechar dropdown ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.project-selector')) {
+                const dropdown = document.getElementById('projectDropdown');
+                if (dropdown) dropdown.classList.remove('open');
+            }
+        });
 
         // Marcar menu ativo
         function marcarMenuAtivo(entidadeCodigo) {
