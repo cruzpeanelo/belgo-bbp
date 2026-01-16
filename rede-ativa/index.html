@@ -27,61 +27,14 @@
             <div class="sidebar-header">
                 <div class="sidebar-logo">BELGO</div>
                 <div class="sidebar-subtitle">Rede Ativa</div>
-                <!-- Module Selector -->
-                <div class="module-selector">
-                    <button class="module-selector-btn" onclick="toggleModuleDropdown()">
-                        <span class="module-selector-icon">🌐</span>
-                        <span class="module-selector-name">Rede Ativa</span>
-                        <span class="module-selector-arrow">▼</span>
-                    </button>
-                    <div class="module-dropdown" id="moduleDropdown">
-                        <a href="../landing.html" class="module-dropdown-item">
-                            <span class="module-icon">🏠</span>
-                            <span class="module-name">Home</span>
-                        </a>
-                        <a href="../index.html" class="module-dropdown-item">
-                            <span class="module-icon">🚀</span>
-                            <span class="module-name">GTM</span>
-                            <span class="module-badge" style="background: #003B4A"></span>
-                        </a>
-                        <a href="index.html" class="module-dropdown-item active">
-                            <span class="module-icon">🌐</span>
-                            <span class="module-name">Rede Ativa</span>
-                            <span class="module-badge" style="background: #00A799"></span>
-                        </a>
-                        <a href="../roadmap/index.html" class="module-dropdown-item">
-                            <span class="module-icon">📅</span>
-                            <span class="module-name">Roadmap 2026</span>
-                            <span class="module-badge" style="background: #ED1C24"></span>
-                        </a>
-                    </div>
-                </div>
+                <!-- Seletor de projetos sera adicionado pelo DynamicNav -->
             </div>
             <nav class="sidebar-nav" role="navigation" aria-label="Menu principal">
-                <a href="index.html" class="nav-item active" aria-label="Dashboard">
-                    <span class="nav-icon" aria-hidden="true">📊</span>
-                    <span class="nav-text">Dashboard</span>
-                </a>
-                <a href="#" class="nav-item disabled" aria-label="Pontos de Venda">
-                    <span class="nav-icon" aria-hidden="true">🏪</span>
-                    <span class="nav-text">Pontos de Venda</span>
-                </a>
-                <a href="#" class="nav-item disabled" aria-label="Metricas">
-                    <span class="nav-icon" aria-hidden="true">📈</span>
-                    <span class="nav-text">Metricas</span>
-                </a>
-                <a href="#" class="nav-item disabled" aria-label="Mapa">
-                    <span class="nav-icon" aria-hidden="true">🗺️</span>
-                    <span class="nav-text">Mapa</span>
-                </a>
-                <a href="#" class="nav-item disabled" aria-label="Configuracoes">
-                    <span class="nav-icon" aria-hidden="true">⚙️</span>
-                    <span class="nav-text">Configuracoes</span>
-                </a>
+                <!-- Menu sera carregado dinamicamente pelo DynamicNav -->
+                <div id="nav-loading" style="padding: 20px; opacity: 0.6; text-align: center;">
+                    Carregando menu...
+                </div>
             </nav>
-            <div style="padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.8rem; opacity: 0.7;">
-                Modulo em desenvolvimento
-            </div>
         </aside>
 
         <!-- Conteudo Principal -->
@@ -132,22 +85,7 @@
             overlay.classList.toggle('open');
         }
 
-        // Toggle module dropdown
-        function toggleModuleDropdown() {
-            const dropdown = document.getElementById('moduleDropdown');
-            dropdown.classList.toggle('open');
-        }
-
-        // Close dropdown on outside click
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.module-selector')) {
-                const dropdown = document.getElementById('moduleDropdown');
-                if (dropdown) dropdown.classList.remove('open');
-            }
-        });
-
-        // Save current module and project ID
-        localStorage.setItem('belgo_last_module', 'rede-ativa');
+        // Save current project ID
         localStorage.setItem('belgo_projeto_id', '2');
     </script>
 
