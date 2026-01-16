@@ -1730,7 +1730,9 @@
                 { value: 'passos', label: 'Passos Numerados' },
                 { value: 'info_grid', label: 'Grid de Informacoes' },
                 { value: 'texto', label: 'Texto Simples' },
-                { value: 'lista', label: 'Lista' }
+                { value: 'lista', label: 'Lista' },
+                { value: 'citacoes', label: 'Citacoes/Pain Points' },
+                { value: 'tabela', label: 'Tabela Aninhada' }
             ];
 
             return `
@@ -1792,12 +1794,20 @@
                         </div>
                     </div>
                 `;
-            } else if (tipo === 'badges' || tipo === 'texto' || tipo === 'lista' || tipo === 'passos') {
+            } else if (tipo === 'badges' || tipo === 'texto' || tipo === 'lista' || tipo === 'passos' || tipo === 'citacoes') {
                 return `
                     <select name="secao_campo_${index}">
                         <option value="">Selecione campo...</option>
                         ${layoutCampos.map(c => `<option value="${c.codigo}" ${secao.campo === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('')}
                     </select>
+                `;
+            } else if (tipo === 'tabela') {
+                return `
+                    <select name="secao_campo_${index}">
+                        <option value="">Campo com dados JSON...</option>
+                        ${layoutCampos.map(c => `<option value="${c.codigo}" ${secao.campo === c.codigo ? 'selected' : ''}>${c.nome}</option>`).join('')}
+                    </select>
+                    <input type="text" name="secao_colunas_${index}" placeholder="Colunas (ex: nome,email,cargo)" value="${(secao.colunas || []).map(c => c.campo || c).join(',')}">
                 `;
             } else if (tipo === 'info_grid') {
                 const campos = secao.campos || [];
@@ -2006,6 +2016,14 @@
                         const campos = camposStr.split(',').map(c => c.trim()).filter(c => c);
                         if (campos.length > 0) {
                             secaoConfig.campos = campos.map(c => ({ campo: c }));
+                        }
+                    } else if (tipo === 'tabela') {
+                        const campo = row.querySelector(`[name="secao_campo_${index}"]`)?.value;
+                        const colunasStr = row.querySelector(`[name="secao_colunas_${index}"]`)?.value || '';
+                        if (campo) secaoConfig.campo = campo;
+                        const colunas = colunasStr.split(',').map(c => c.trim()).filter(c => c);
+                        if (colunas.length > 0) {
+                            secaoConfig.colunas = colunas.map(c => ({ campo: c, label: c }));
                         }
                     } else {
                         const campo = row.querySelector(`[name="secao_campo_${index}"]`)?.value;

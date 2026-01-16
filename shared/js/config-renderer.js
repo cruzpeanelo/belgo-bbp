@@ -390,6 +390,34 @@ const ConfigRenderer = {
         }
     },
 
+    // FASE 12 P1: Render métricas de agregação (stats no topo com contagem por campo)
+    renderMetricasAgregacao(campo, titulo) {
+        const dados = this.dadosFiltrados;
+        const contagem = {};
+
+        dados.forEach(d => {
+            const valor = d[campo] || 'Outros';
+            contagem[valor] = (contagem[valor] || 0) + 1;
+        });
+
+        const entries = Object.entries(contagem).sort((a, b) => b[1] - a[1]);
+
+        return `
+            <div class="stats-agregacao">
+                <div class="stat-card">
+                    <div class="stat-valor">${dados.length}</div>
+                    <div class="stat-label">Total</div>
+                </div>
+                ${entries.slice(0, 5).map(([valor, count]) => `
+                    <div class="stat-card">
+                        <div class="stat-valor">${count}</div>
+                        <div class="stat-label">${this.escapeHTML(valor)}</div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    },
+
     // =====================================================
     // RENDER DADOS (TABELA ou CARDS)
     // =====================================================
@@ -687,6 +715,55 @@ const ConfigRenderer = {
                     <div class="secao-lista">
                         <h5>${secao.titulo || ''}</h5>
                         <ul>${lista.map(item => `<li>${this.escapeHTML(item)}</li>`).join('')}</ul>
+                    </div>
+                `;
+
+            // FASE 12 P1: Seção de Citações/Pain Points
+            case 'citacoes':
+                const citacoesTexto = row[secao.campo];
+                const citacoes = typeof citacoesTexto === 'string'
+                    ? citacoesTexto.split('\n').map(c => c.trim()).filter(c => c)
+                    : (Array.isArray(citacoesTexto) ? citacoesTexto : []);
+                if (citacoes.length === 0) return '';
+                return `
+                    <div class="secao-citacoes">
+                        ${secao.titulo ? `<h5 class="secao-titulo">${secao.titulo}</h5>` : ''}
+                        ${citacoes.map(citacao => `
+                            <div class="citacao-item">
+                                <span class="citacao-texto">${this.escapeHTML(citacao)}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+
+            // FASE 12 P1: Tabela aninhada dentro de card
+            case 'tabela':
+                const tabelaDados = row[secao.campo];
+                if (!tabelaDados || !Array.isArray(tabelaDados) || tabelaDados.length === 0) {
+                    // Tentar parsear como JSON se for string
+                    let dados = tabelaDados;
+                    if (typeof tabelaDados === 'string') {
+                        try { dados = JSON.parse(tabelaDados); } catch(e) { return ''; }
+                    }
+                    if (!Array.isArray(dados) || dados.length === 0) return '';
+                }
+                const colunas = secao.colunas || Object.keys(tabelaDados[0] || {});
+                return `
+                    <div class="secao-tabela">
+                        ${secao.titulo ? `<h5 class="secao-titulo">${secao.titulo}</h5>` : ''}
+                        <table class="tabela-aninhada">
+                            <thead>
+                                <tr>${colunas.map(col => `<th>${this.escapeHTML(col.label || col)}</th>`).join('')}</tr>
+                            </thead>
+                            <tbody>
+                                ${(Array.isArray(tabelaDados) ? tabelaDados : []).map(linha => `
+                                    <tr>${colunas.map(col => {
+                                        const campo = col.campo || col;
+                                        return `<td>${this.escapeHTML(linha[campo] || '')}</td>`;
+                                    }).join('')}</tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
                     </div>
                 `;
 

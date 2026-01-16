@@ -1655,6 +1655,51 @@
 }
 
 /* =====================================================
+   TABELA ANINHADA DENTRO DE CARDS (P1)
+   ===================================================== */
+.secao-tabela {
+    margin: 16px 0;
+}
+
+.secao-tabela .secao-titulo {
+    margin-bottom: 12px;
+}
+
+.tabela-aninhada {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+}
+
+.tabela-aninhada th {
+    background: var(--belgo-cinza-claro, #f5f7fa);
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--belgo-cinza, #6B7280);
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.tabela-aninhada td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #374151;
+}
+
+.tabela-aninhada tr:last-child td {
+    border-bottom: none;
+}
+
+.tabela-aninhada tr:hover {
+    background: rgba(0, 59, 74, 0.02);
+}
+
+/* =====================================================
    RESPONSIVO PARA NOVAS FEATURES
    ===================================================== */
 @media (max-width: 768px) {
@@ -1668,5 +1713,14 @@
 
     .card-acoes-inline {
         opacity: 1; /* Sempre visível em mobile */
+    }
+
+    .tabela-aninhada {
+        font-size: 0.8rem;
+    }
+
+    .tabela-aninhada th,
+    .tabela-aninhada td {
+        padding: 8px 10px;
     }
 }
