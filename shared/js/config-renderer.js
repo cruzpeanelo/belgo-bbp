@@ -1367,18 +1367,25 @@ const ConfigRenderer = {
                     if (typeof opcoes === 'string') {
                         try { opcoes = JSON.parse(opcoes); } catch(e) { opcoes = []; }
                     }
+                    // Escapar aspas no nome do campo para evitar quebra do onclick
+                    const campoNomeEscaped = (campo.nome || '').replace(/'/g, "\\'");
                     return `
                         <div class="form-group">
                             <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
-                            <select id="campo-${campo.codigo}" name="${campo.codigo}" ${required}>
-                                <option value="">Selecione...</option>
-                                ${opcoes.map(op => {
-                                    // Suporta tanto string simples quanto objeto {valor, label}
-                                    const valor = typeof op === 'string' ? op : (op.valor || op.value || op);
-                                    const label = typeof op === 'string' ? op : (op.label || op.nome || valor);
-                                    return `<option value="${valor}">${label}</option>`;
-                                }).join('')}
-                            </select>
+                            <div class="select-with-add">
+                                <select id="campo-${campo.codigo}" name="${campo.codigo}" ${required}>
+                                    <option value="">Selecione...</option>
+                                    ${opcoes.map(op => {
+                                        // Suporta tanto string simples quanto objeto {valor, label}
+                                        const valor = typeof op === 'string' ? op : (op.valor || op.value || op);
+                                        const label = typeof op === 'string' ? op : (op.label || op.nome || valor);
+                                        return `<option value="${valor}">${label}</option>`;
+                                    }).join('')}
+                                </select>
+                                <button type="button" class="btn-add-option"
+                                        onclick="ConfigRenderer.abrirModalAddOpcao('${campo.codigo}', '${campoNomeEscaped}')"
+                                        title="Adicionar nova opção">+</button>
+                            </div>
                         </div>
                     `;
                 case 'checkbox':
@@ -1459,6 +1466,121 @@ const ConfigRenderer = {
         } catch (error) {
             console.error('Erro ao salvar:', error);
             this.showToast('Erro ao salvar registro', 'error');
+        }
+    },
+
+    // =========================================
+    // Funções para adicionar opções em campos select
+    // =========================================
+
+    abrirModalAddOpcao(campoCodigo, campoNome) {
+        const modalHtml = `
+            <div class="modal-overlay active" id="modalAddOpcao" onclick="if(event.target === this) ConfigRenderer.fecharModalAddOpcao()">
+                <div class="modal-content modal-sm">
+                    <div class="modal-header">
+                        <h3>➕ Nova Opção: ${campoNome}</h3>
+                        <button class="modal-close" onclick="ConfigRenderer.fecharModalAddOpcao()">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nova-opcao-valor">Valor (código interno) *</label>
+                            <input type="text" id="nova-opcao-valor" placeholder="ex: em_andamento" required>
+                            <small class="form-help">Use letras minúsculas, sem acentos ou espaços</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="nova-opcao-label">Rótulo (exibição) *</label>
+                            <input type="text" id="nova-opcao-label" placeholder="ex: Em Andamento" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nova-opcao-cor">Cor do badge</label>
+                            <input type="color" id="nova-opcao-cor" value="#6B7280">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" onclick="ConfigRenderer.fecharModalAddOpcao()">Cancelar</button>
+                        <button class="btn btn-primary" onclick="ConfigRenderer.salvarNovaOpcao('${campoCodigo}')">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+        // Focar no primeiro campo
+        setTimeout(() => {
+            const input = document.getElementById('nova-opcao-valor');
+            if (input) input.focus();
+        }, 100);
+    },
+
+    fecharModalAddOpcao() {
+        const modal = document.getElementById('modalAddOpcao');
+        if (modal) modal.remove();
+    },
+
+    async salvarNovaOpcao(campoCodigo) {
+        const valorInput = document.getElementById('nova-opcao-valor');
+        const labelInput = document.getElementById('nova-opcao-label');
+        const corInput = document.getElementById('nova-opcao-cor');
+
+        // Normalizar valor: minúsculas, sem acentos, espaços viram underscore
+        let valor = valorInput.value.trim()
+            .toLowerCase()
+            .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+            .replace(/\s+/g, '_')
+            .replace(/[^a-z0-9_]/g, '');
+
+        const label = labelInput.value.trim();
+        const cor = corInput.value;
+
+        if (!valor || !label) {
+            this.showToast('Valor e Rótulo são obrigatórios', 'error');
+            return;
+        }
+
+        try {
+            const token = sessionStorage.getItem('belgo_token');
+            const response = await fetch(`/api/projetos/${this.projetoId}/entidades/${this.entidadeId}/opcoes`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    campo_codigo: campoCodigo,
+                    valor,
+                    label,
+                    cor
+                })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Adicionar opção ao select
+                const select = document.getElementById(`campo-${campoCodigo}`);
+                if (select) {
+                    const option = document.createElement('option');
+                    option.value = valor;
+                    option.textContent = label;
+                    select.appendChild(option);
+                    select.value = valor; // Selecionar a nova opção
+                }
+
+                // Atualizar cache local dos campos
+                const campo = this.campos.find(c => c.codigo === campoCodigo);
+                if (campo) {
+                    if (!campo.opcoes) campo.opcoes = [];
+                    campo.opcoes.push({ valor, label, cor });
+                }
+
+                this.showToast('Opção adicionada com sucesso!', 'success');
+                this.fecharModalAddOpcao();
+            } else {
+                this.showToast(result.message || 'Erro ao salvar opção', 'error');
+            }
+        } catch (error) {
+            console.error('Erro ao salvar opção:', error);
+            this.showToast('Erro ao salvar opção', 'error');
         }
     }
 };

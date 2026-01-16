@@ -371,3 +371,66 @@ As páginas legadas tinham **seletor de módulos estático hardcoded** + seletor
 - **Manutenibilidade**: Mudanças no menu são feitas apenas no DynamicNav
 - **Admin contextual**: Seção de administração aparece em todas as páginas para admins
 - **Footer unificado**: "Todos os Projetos" e "Sair" em todas as páginas
+
+---
+
+## FASE 9: BOTÃO "+" PARA ADICIONAR OPÇÕES EM CAMPOS SELECT ✅ CONCLUÍDA
+
+### Problema Identificado
+
+1. **Bug Crítico no from-template.js** (linha 150):
+   - O INSERT usava `campo_id` que não existe na tabela
+   - A tabela `projeto_entidade_opcoes` usa `entidade_id` e `campo_codigo`
+   - **Impacto**: Opções de campos select NÃO eram copiadas quando projeto era criado via template
+   - **Evidência**: Entidade "Testes" no GTM Clone não tinha opções nos selects
+
+2. **Falta funcionalidade**: Usuários não conseguem cadastrar opções que faltam durante o uso normal
+
+### Solução Implementada
+
+#### 9.1. Correção do Bug no from-template.js ✅
+**Arquivo**: `functions/api/projetos/from-template.js`
+
+Alterado de:
+```javascript
+INSERT INTO projeto_entidade_opcoes (campo_id, valor, label, cor, icone, ordem)
+```
+
+Para:
+```javascript
+INSERT INTO projeto_entidade_opcoes (entidade_id, campo_codigo, valor, label, cor, icone, ordem)
+```
+
+#### 9.2. Botão "+" nos Campos Select ✅
+**Arquivo**: `shared/js/config-renderer.js`
+
+- Botão "+" ao lado de cada campo select no modal de criação/edição
+- Modal para adicionar nova opção com: valor, rótulo e cor
+- Opção adicionada dinamicamente ao select após salvar
+- Valor normalizado automaticamente (minúsculas, sem acentos)
+
+#### 9.3. Nova API de Opções ✅
+**Novo arquivo**: `functions/api/projetos/[id]/entidades/[entidadeId]/opcoes.js`
+
+- `POST` - Criar nova opção para um campo select
+- `GET` - Listar opções de um campo
+- `DELETE` - Remover opção (soft delete)
+- Validações: campo existe, opção não duplicada
+
+#### 9.4. CSS para Botão "+" ✅
+**Arquivo**: `shared/css/config-renderer.css`
+
+```css
+.select-with-add { display: flex; gap: 8px; }
+.btn-add-option { width: 38px; border: 2px dashed #10B981; }
+.modal-sm { max-width: 400px; }
+```
+
+### Arquivos Modificados/Criados
+
+| Arquivo | Ação |
+|---------|------|
+| `functions/api/projetos/from-template.js` | ✅ Corrigido bug |
+| `functions/api/projetos/[id]/entidades/[entidadeId]/opcoes.js` | ✅ Criado |
+| `shared/js/config-renderer.js` | ✅ Modificado |
+| `shared/css/config-renderer.css` | ✅ Modificado |

@@ -1048,3 +1048,71 @@
         padding: 16px;
     }
 }
+
+/* =====================================================
+   BOTÃO "+" PARA ADICIONAR OPÇÕES EM CAMPOS SELECT
+   ===================================================== */
+
+.select-with-add {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+}
+
+.select-with-add select {
+    flex: 1;
+    min-width: 0;
+}
+
+.btn-add-option {
+    width: 38px;
+    min-width: 38px;
+    height: 38px;
+    border: 2px dashed #10B981;
+    background: rgba(16, 185, 129, 0.1);
+    color: #10B981;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.btn-add-option:hover {
+    background: #10B981;
+    color: white;
+    border-style: solid;
+    transform: scale(1.05);
+}
+
+.btn-add-option:active {
+    transform: scale(0.95);
+}
+
+/* Modal pequeno para adicionar opção */
+.modal-sm {
+    max-width: 400px;
+}
+
+.modal-sm .modal-body .form-help {
+    display: block;
+    color: #6B7280;
+    font-size: 0.8em;
+    margin-top: 4px;
+}
+
+.modal-sm .form-group label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.modal-sm input[type="color"] {
+    height: 40px;
+    padding: 4px;
+    cursor: pointer;
+}

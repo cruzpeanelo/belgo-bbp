@@ -147,14 +147,15 @@ export async function onRequestPost(context) {
                 // Criar opcoes do campo (se houver)
                 for (const opcao of campo.opcoes || []) {
                     await context.env.DB.prepare(`
-                        INSERT INTO projeto_entidade_opcoes (campo_id, valor, label, cor, icone, ordem)
-                        VALUES (?, ?, ?, ?, ?, ?)
+                        INSERT INTO projeto_entidade_opcoes (entidade_id, campo_codigo, valor, label, cor, icone, ordem)
+                        VALUES (?, ?, ?, ?, ?, ?, ?)
                     `).bind(
-                        campoId,
+                        entidadeId,
+                        campo.codigo,
                         opcao.valor,
                         opcao.label,
-                        opcao.cor,
-                        opcao.icone,
+                        opcao.cor || null,
+                        opcao.icone || null,
                         opcao.ordem ?? 0
                     ).run();
                 }
