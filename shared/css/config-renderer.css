@@ -1046,7 +1046,7 @@
 }
 
 .card-expandable.expanded .card-expandable-body {
-    max-height: 5000px;
+    max-height: 15000px; /* Aumentado para suportar cards com muito conteúdo */
     padding: 20px;
     overflow: visible;
 }
