@@ -3264,7 +3264,37 @@ const ConfigRenderer = {
         // Atualizar local
         registro.status = novoStatus;
 
-        // Persistir
+        // ===== PERSISTIR NO BANCO DE DADOS (PRINCIPAL) =====
+        const registroId = registro._id || registro.id;
+        console.log('[marcarStatus] DEBUG:', { id, registroId, projetoId: this.projetoId, entidadeCodigo: this.entidade?.codigo, registro });
+        if (registroId && this.projetoId && this.entidade?.codigo) {
+            try {
+                const token = localStorage.getItem('belgo_token');
+                const response = await fetch(`/api/projetos/${this.projetoId}/dados/${this.entidade.codigo}/${registroId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ dados: { status: novoStatus } })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    console.error('Erro ao salvar status no banco:', errorData);
+                    this.showToast('Erro ao salvar status no banco de dados', 'error');
+                    return;
+                }
+
+                console.log(`[marcarStatus] Status salvo no banco: ${id} => ${novoStatus}`);
+            } catch (e) {
+                console.error('Erro ao salvar status no banco:', e);
+                this.showToast('Erro ao salvar status', 'error');
+                return;
+            }
+        }
+
+        // ===== Persistência adicional (localStorage/KV - opcional) =====
         if (this.config?.persistencia) {
             // localStorage
             if (this.config.persistencia.localStorage) {
@@ -3285,7 +3315,7 @@ const ConfigRenderer = {
                         body: JSON.stringify({ testes: [{ id, status: novoStatus }] })
                     });
                 } catch (e) {
-                    console.warn('Erro ao sincronizar status:', e);
+                    console.warn('Erro ao sincronizar status com KV:', e);
                 }
             }
         }
