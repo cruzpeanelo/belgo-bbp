@@ -911,7 +911,9 @@
         width: 100%;
         max-width: none;
         height: 100vh;
+        height: 100dvh; /* Dynamic viewport para iOS Safari */
         max-height: 100vh;
+        max-height: 100dvh;
         border-radius: 0;
     }
 }
@@ -4442,4 +4444,115 @@
 .link-ver-testes:hover {
     background: #0ea5e9;
     color: white;
+}
+
+/* =====================================================
+   FASE 27 - CORREÇÕES DE ACESSIBILIDADE E MOBILE
+   ===================================================== */
+
+/* Safe Areas para iOS */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    .modal-body {
+        padding-bottom: calc(20px + env(safe-area-inset-bottom));
+    }
+
+    .toast-container {
+        bottom: calc(20px + env(safe-area-inset-bottom));
+    }
+
+    .filters {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
+
+/* Touch targets mínimos (44px) */
+@media (hover: none) and (pointer: coarse) {
+    /* Botões de ação em cards */
+    .card-actions button,
+    .btn-icon,
+    .btn-sm {
+        min-width: 44px;
+        min-height: 44px;
+        padding: 10px;
+    }
+
+    /* Links em listas */
+    .link-ver-testes {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        padding: 10px 12px;
+    }
+
+    /* Botões de fechar modal */
+    .modal-close {
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Tabs e filtros */
+    .category-tab,
+    .tab-btn,
+    .filter-pill {
+        min-height: 44px;
+        padding: 10px 16px;
+    }
+
+    /* Inputs devem ter 44px mínimo */
+    input,
+    select,
+    textarea {
+        min-height: 44px;
+    }
+
+    /* Badges clicáveis */
+    .badge[onclick],
+    .badge[role="button"] {
+        min-height: 44px;
+        padding: 10px 16px;
+        display: inline-flex;
+        align-items: center;
+    }
+}
+
+/* Modal fullscreen melhorado para mobile - iOS Safari fixes */
+@media (max-width: 768px) {
+    .modal {
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    .modal-body {
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        max-height: calc(100vh - 140px);
+        max-height: calc(100dvh - 140px); /* Dynamic viewport para iOS Safari */
+    }
+
+    /* Garantir que toasts não fiquem atrás de elementos iOS */
+    .toast-container {
+        z-index: 10001;
+    }
+
+    /* Modal overlay com z-index maior que sidebar/header */
+    .modal-overlay {
+        z-index: 1050 !important;
+    }
+}
+
+/* iOS Safari específico - usar dvh */
+@supports (height: 100dvh) {
+    @media (max-width: 768px) {
+        .modal {
+            height: 100dvh;
+            max-height: 100dvh;
+        }
+
+        .modal-body {
+            max-height: calc(100dvh - 140px);
+        }
+    }
 }

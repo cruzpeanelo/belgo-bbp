@@ -2647,3 +2647,158 @@ select:focus-visible {
     margin-top: 15px;
     min-height: 24px;
 }
+
+/* =====================================================
+   iOS SAFARI FIXES - Fase 27
+   Correções específicas para iOS Safari
+   ===================================================== */
+
+/* Fix para 100vh no iOS Safari */
+@supports (-webkit-touch-callout: none) {
+    /* iOS Safari específico */
+    .app-container {
+        min-height: -webkit-fill-available;
+    }
+
+    .sidebar {
+        height: -webkit-fill-available;
+        height: 100dvh; /* Dynamic viewport height */
+    }
+
+    .modal {
+        max-height: -webkit-fill-available;
+        max-height: 100dvh;
+    }
+
+    .modal-body {
+        max-height: calc(-webkit-fill-available - 140px);
+        max-height: calc(100dvh - 140px);
+    }
+}
+
+/* Z-index hierarchy clara para evitar conflitos */
+:root {
+    --z-sidebar-overlay: 998;
+    --z-sidebar: 999;
+    --z-mobile-header: 1000;
+    --z-modal-overlay: 1050;
+    --z-modal: 1051;
+    --z-toast: 2000;
+    --z-tooltip: 3000;
+}
+
+/* Aplicar z-index corretos */
+.sidebar-overlay {
+    z-index: var(--z-sidebar-overlay, 998);
+}
+
+.sidebar {
+    z-index: var(--z-sidebar, 999);
+}
+
+.mobile-header {
+    z-index: var(--z-mobile-header, 1000);
+}
+
+/* Modal com z-index mais alto que sidebar/header */
+.modal-overlay {
+    z-index: var(--z-modal-overlay, 1050) !important;
+}
+
+.modal-overlay .modal {
+    z-index: var(--z-modal, 1051);
+}
+
+/* Mobile específico - iOS Safari */
+@media (max-width: 768px) {
+    /* Usar dvh (dynamic viewport height) quando disponível */
+    @supports (height: 100dvh) {
+        .sidebar {
+            height: 100dvh;
+        }
+
+        .modal {
+            height: 100dvh;
+            max-height: 100dvh;
+        }
+
+        .modal-body {
+            max-height: calc(100dvh - 140px);
+        }
+    }
+
+    /* Fallback com -webkit-fill-available */
+    @supports not (height: 100dvh) {
+        .sidebar {
+            height: -webkit-fill-available;
+            height: 100vh;
+        }
+
+        .modal {
+            height: -webkit-fill-available;
+            max-height: -webkit-fill-available;
+        }
+    }
+
+    /* Garantir que sidebar fecha ao clicar em link */
+    .sidebar:not(.open) {
+        transform: translateX(-100%);
+        visibility: hidden;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+        visibility: visible;
+    }
+
+    /* Overlay cobre tudo menos o sidebar */
+    .sidebar-overlay.active {
+        display: block;
+        opacity: 1;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: var(--z-sidebar-overlay, 998);
+    }
+
+    /* Mobile header sempre visível e acima de tudo exceto modal */
+    .mobile-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: var(--z-mobile-header, 1000);
+        /* Safe area para notch do iPhone */
+        padding-top: max(0px, env(safe-area-inset-top));
+    }
+
+    /* Main content com padding para header */
+    .main-content {
+        padding-top: calc(60px + max(0px, env(safe-area-inset-top)));
+    }
+
+    /* Impedir scroll do body quando modal/sidebar aberto */
+    body.modal-open,
+    body.sidebar-open {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/* Remover -webkit-overflow-scrolling (deprecado iOS 13+) */
+.sidebar-nav,
+.modal-body,
+.modal {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+/* Touch action para melhor scroll em iOS */
+.sidebar-nav,
+.modal-body,
+.table-responsive {
+    -webkit-overflow-scrolling: auto; /* Usar auto em vez de touch */
+    touch-action: pan-y;
+}

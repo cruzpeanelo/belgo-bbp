@@ -356,9 +356,21 @@
             });
         }
 
-        // Toggle mobile menu
+        // Toggle mobile menu - com suporte iOS Safari
         function toggleMobileMenu() {
-            document.body.classList.toggle('sidebar-open');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            const isOpen = sidebar?.classList.contains('open');
+
+            if (sidebar) sidebar.classList.toggle('open');
+            if (overlay) overlay.classList.toggle('active');
+
+            // Adicionar/remover classe no body para iOS Safari
+            if (!isOpen) {
+                document.body.classList.add('sidebar-open');
+            } else {
+                document.body.classList.remove('sidebar-open');
+            }
         }
     </script>
 </body>
