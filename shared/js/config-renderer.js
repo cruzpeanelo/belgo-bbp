@@ -49,13 +49,14 @@ const ConfigRenderer = {
             this.paginacao.itensPorPagina = this.config.paginacao.itens_por_pagina;
         }
 
-        // Carregar campos da entidade (para criar/exportar) - se usuario tem permissao
-        if (this.podeCriar() || this.podeExportar()) {
-            await this.carregarCampos();
-        }
+        // Carregar campos da entidade (inclui opcoes para filtros, criar, exportar)
+        await this.carregarCampos();
 
         // Carregar dados
         await this.carregarDados();
+
+        // Carregar cache de usuários (para campos user_mention)
+        await this.carregarUsuariosCache();
 
         // Inicializar ActionEngine (se disponivel)
         if (typeof ActionEngine !== 'undefined') {
@@ -183,7 +184,7 @@ const ConfigRenderer = {
     // =====================================================
     async carregarDados() {
         try {
-            const token = sessionStorage.getItem('belgo_token');
+            const token = localStorage.getItem('belgo_token');
             const response = await fetch(`/api/projetos/${this.projetoId}/dados/${this.entidade.codigo}?limit=1000`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -206,6 +207,39 @@ const ConfigRenderer = {
             console.error('Erro ao carregar dados:', error);
             this.dados = [];
             this.dadosFiltrados = [];
+        }
+    },
+
+    // =====================================================
+    // CARREGAR CACHE DE USUARIOS (para campos user_mention)
+    // =====================================================
+    async carregarUsuariosCache() {
+        try {
+            // Verificar se há campos do tipo user_mention
+            const temCampoUserMention = this.campos?.some(c => c.tipo === 'user_mention');
+            if (!temCampoUserMention) {
+                this.usuariosCache = [];
+                return;
+            }
+
+            const token = localStorage.getItem('belgo_token');
+            const response = await fetch(`/api/projetos/${this.projetoId}/usuarios`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                this.usuariosCache = Array.isArray(data) ? data : (data.usuarios || []);
+            } else {
+                console.warn('Não foi possível carregar cache de usuários');
+                this.usuariosCache = [];
+            }
+        } catch (error) {
+            console.error('Erro ao carregar cache de usuários:', error);
+            this.usuariosCache = [];
         }
     },
 
@@ -1197,12 +1231,32 @@ const ConfigRenderer = {
     },
 
     getOpcoesFiltro(campo) {
+        // Opcoes explícitas na config
         if (campo.opcoes) return campo.opcoes.filter(o => o !== 'Todos');
+
+        // Opcoes vindas dos dados
         if (campo.opcoes_de === 'dados') {
             const valores = [...new Set(this.dados.map(d => d[campo.campo_opcoes || campo.campo]).filter(Boolean))];
             return valores.sort();
         }
-        return [];
+
+        // Opcoes vindas do campo da entidade (tabela projeto_entidade_opcoes)
+        if (campo.opcoes_de === 'campo') {
+            const campoEntidade = this.campos?.find(c => c.codigo === campo.campo);
+            if (campoEntidade?.opcoes?.length > 0) {
+                return campoEntidade.opcoes
+                    .filter(op => op.ativo)
+                    .sort((a, b) => (a.ordem || 0) - (b.ordem || 0))
+                    .map(op => op.label || op.valor);
+            }
+            // Fallback: buscar valores unicos dos dados
+            const valores = [...new Set(this.dados.map(d => d[campo.campo]).filter(Boolean))];
+            return valores.sort();
+        }
+
+        // Fallback padrão: valores únicos dos dados
+        const valores = [...new Set(this.dados.map(d => d[campo.campo]).filter(Boolean))];
+        return valores.sort();
     },
 
     // =====================================================
@@ -1408,6 +1462,20 @@ const ConfigRenderer = {
         const valor = row[col.campo];
         if (valor === null || valor === undefined) return '-';
 
+        // Verificar tipo do campo para renderização especial
+        const campo = this.campos?.find(c => c.codigo === col.campo);
+
+        // User Mention - renderizar como chip de usuário
+        if (campo?.tipo === 'user_mention' || col.tipo === 'user_mention') {
+            if (typeof renderUsersFromEmails === 'function') {
+                return renderUsersFromEmails(valor, this.usuariosCache || []);
+            } else if (typeof renderUserFromEmail === 'function') {
+                return renderUserFromEmail(valor, this.usuariosCache || []);
+            }
+            // Fallback: mostrar email diretamente
+            return this.escapeHTML(String(valor));
+        }
+
         // Badge para status
         if (col.tipo === 'badge') {
             const classe = this.getBadgeClass(valor);
@@ -1468,14 +1536,14 @@ const ConfigRenderer = {
                 ${dados.map((row, idx) => `
                     <div class="card-mobile" data-idx="${idx}">
                         <div class="card-mobile-header">
-                            <strong>${this.escapeHTML(row[colunas[0]?.campo] || '')}</strong>
+                            <strong>${this.renderCelula(row, colunas[0] || {})}</strong>
                             ${row.status ? `<span class="badge ${this.getBadgeClass(row.status)}">${row.status}</span>` : ''}
                         </div>
                         <div class="card-mobile-body">
                             ${colunas.slice(1).map(col => `
                                 <div class="card-mobile-field">
                                     <span class="field-label">${col.label}:</span>
-                                    <span class="field-value">${this.escapeHTML(row[col.campo] || '-')}</span>
+                                    <span class="field-value">${this.renderCelula(row, col)}</span>
                                 </div>
                             `).join('')}
                         </div>
@@ -3199,7 +3267,7 @@ const ConfigRenderer = {
             // KV Sync (se configurado)
             if (this.config.persistencia.kvSync && this.config.persistencia.endpoint) {
                 try {
-                    const token = sessionStorage.getItem('belgo_token');
+                    const token = localStorage.getItem('belgo_token');
                     await fetch(this.config.persistencia.endpoint, {
                         method: 'POST',
                         headers: {
@@ -3418,7 +3486,7 @@ const ConfigRenderer = {
     async carregarCampos() {
         if (this.campos.length > 0) return this.campos;
         try {
-            const token = sessionStorage.getItem('belgo_token');
+            const token = localStorage.getItem('belgo_token');
             const response = await fetch(`/api/projetos/${this.projetoId}/entidades/${this.entidade.id}/campos`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -3442,7 +3510,7 @@ const ConfigRenderer = {
         const camposRelacao = this.campos.filter(c => c.tipo === 'relation' && c.relacao_entidade_id);
         if (camposRelacao.length === 0) return;
 
-        const token = sessionStorage.getItem('belgo_token');
+        const token = localStorage.getItem('belgo_token');
 
         for (const campo of camposRelacao) {
             try {
@@ -3513,9 +3581,13 @@ const ConfigRenderer = {
         document.body.insertAdjacentHTML('beforeend', modalHtml);
         document.body.style.overflow = 'hidden';
 
-        // Focar no primeiro campo
+        // Inicializar MentionPickers se existirem
         setTimeout(() => {
-            const firstInput = document.querySelector('#formCriar input, #formCriar select, #formCriar textarea');
+            if (typeof initMentionPickers === 'function') {
+                initMentionPickers(this.projetoId);
+            }
+            // Focar no primeiro campo
+            const firstInput = document.querySelector('#formCriar input:not([type="hidden"]), #formCriar select, #formCriar textarea');
             if (firstInput) firstInput.focus();
         }, 100);
     },
@@ -3611,6 +3683,28 @@ const ConfigRenderer = {
                             ${opcoesRelacao.length === 0 ? '<small class="text-muted">Nenhum dado encontrado na entidade relacionada</small>' : ''}
                         </div>
                     `;
+                case 'user_mention':
+                    // Campo de menção de usuário com @mention
+                    const multiplos = campo.config?.permite_multiplos || false;
+                    const placeholder = campo.config?.placeholder || 'Digite @ para mencionar...';
+                    return `
+                        <div class="form-group">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <div class="mention-input-wrapper" id="mention-wrapper-${campo.codigo}">
+                                <div class="selected-users"></div>
+                                <input type="text"
+                                       id="campo-${campo.codigo}"
+                                       class="mention-input"
+                                       placeholder="${placeholder}"
+                                       data-tipo="user_mention"
+                                       data-campo="${campo.codigo}"
+                                       data-multiplos="${multiplos}"
+                                       autocomplete="off">
+                                <div class="mention-dropdown"></div>
+                                <input type="hidden" name="${campo.codigo}" class="mention-value">
+                            </div>
+                        </div>
+                    `;
                 default:
                     return `
                         <div class="form-group">
@@ -3652,7 +3746,7 @@ const ConfigRenderer = {
         }
 
         try {
-            const token = sessionStorage.getItem('belgo_token');
+            const token = localStorage.getItem('belgo_token');
             const response = await fetch(`/api/projetos/${this.projetoId}/dados/${this.entidade.codigo}`, {
                 method: 'POST',
                 headers: {
@@ -3764,9 +3858,12 @@ const ConfigRenderer = {
         // Scroll suave para o card de edição
         cardEditar.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-        // Focar no primeiro campo
+        // Inicializar MentionPickers e focar no primeiro campo
         setTimeout(() => {
-            const firstInput = cardEditar.querySelector('input, select, textarea');
+            if (typeof initMentionPickers === 'function') {
+                initMentionPickers(this.projetoId);
+            }
+            const firstInput = cardEditar.querySelector('input:not([type="hidden"]), select, textarea');
             if (firstInput) firstInput.focus();
         }, 100);
     },
@@ -3831,6 +3928,34 @@ const ConfigRenderer = {
                         <div class="form-group">
                             <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
                             <input type="date" id="campo-${campo.codigo}" name="${campo.codigo}" value="${valor}" ${required}>
+                        </div>
+                    `;
+                case 'user_mention':
+                    // Campo de menção de usuário com @mention
+                    const multiplosEdit = campo.config?.permite_multiplos || false;
+                    const placeholderEdit = campo.config?.placeholder || 'Digite @ para mencionar...';
+                    // Preparar valor para data-valor (JSON se múltiplo, string se único)
+                    let valorMentionEdit = '';
+                    if (valor) {
+                        valorMentionEdit = typeof valor === 'object' ? JSON.stringify(valor) : valor;
+                    }
+                    return `
+                        <div class="form-group">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <div class="mention-input-wrapper" id="mention-wrapper-${campo.codigo}">
+                                <div class="selected-users"></div>
+                                <input type="text"
+                                       id="campo-${campo.codigo}"
+                                       class="mention-input"
+                                       placeholder="${placeholderEdit}"
+                                       data-tipo="user_mention"
+                                       data-campo="${campo.codigo}"
+                                       data-multiplos="${multiplosEdit}"
+                                       data-valor="${this.escapeHTML(valorMentionEdit)}"
+                                       autocomplete="off">
+                                <div class="mention-dropdown"></div>
+                                <input type="hidden" name="${campo.codigo}" class="mention-value" value="${this.escapeHTML(valorMentionEdit)}">
+                            </div>
                         </div>
                     `;
                 default:
@@ -4035,7 +4160,7 @@ const ConfigRenderer = {
         }
 
         try {
-            const token = sessionStorage.getItem('belgo_token');
+            const token = localStorage.getItem('belgo_token');
             const response = await fetch(`/api/projetos/${this.projetoId}/entidades/${this.entidade.id}/opcoes`, {
                 method: 'POST',
                 headers: {
@@ -4172,9 +4297,12 @@ const ConfigRenderer = {
         // Scroll suave para o card
         card.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-        // Focar no primeiro campo
+        // Inicializar MentionPickers e focar no primeiro campo
         setTimeout(() => {
-            const firstInput = card.querySelector('input, select, textarea');
+            if (typeof initMentionPickers === 'function') {
+                initMentionPickers(this.projetoId);
+            }
+            const firstInput = card.querySelector('input:not([type="hidden"]), select, textarea');
             if (firstInput) firstInput.focus();
         }, 100);
     },
@@ -4294,6 +4422,34 @@ const ConfigRenderer = {
                             <textarea id="campo-${campo.codigo}" name="${campo.codigo}"
                                       rows="6" class="code-textarea" placeholder="JSON..." ${required}>${this.escapeHTML(valorJson)}</textarea>
                             <small class="text-muted">Formato JSON. Ex: [{"campo": "valor"}]</small>
+                        </div>
+                    `;
+                case 'user_mention':
+                    // Campo de menção de usuário com @mention
+                    const multiplosInline = campo.config?.permite_multiplos || false;
+                    const placeholderInline = campo.config?.placeholder || 'Digite @ para mencionar...';
+                    // Preparar valor para data-valor
+                    let valorMentionInline = '';
+                    if (valor) {
+                        valorMentionInline = typeof valor === 'object' ? JSON.stringify(valor) : valor;
+                    }
+                    return `
+                        <div class="form-group ${colClass}">
+                            <label for="campo-${campo.codigo}">${campo.nome} ${requiredMark}</label>
+                            <div class="mention-input-wrapper" id="mention-wrapper-${campo.codigo}">
+                                <div class="selected-users"></div>
+                                <input type="text"
+                                       id="campo-${campo.codigo}"
+                                       class="mention-input"
+                                       placeholder="${placeholderInline}"
+                                       data-tipo="user_mention"
+                                       data-campo="${campo.codigo}"
+                                       data-multiplos="${multiplosInline}"
+                                       data-valor="${this.escapeHTML(valorMentionInline)}"
+                                       autocomplete="off">
+                                <div class="mention-dropdown"></div>
+                                <input type="hidden" name="${campo.codigo}" class="mention-value" value="${this.escapeHTML(valorMentionInline)}">
+                            </div>
                         </div>
                     `;
                 default:
@@ -4445,9 +4601,12 @@ const ConfigRenderer = {
         // Scroll suave para o novo card
         cardCriar.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-        // Focar no primeiro campo
+        // Inicializar MentionPickers e focar no primeiro campo
         setTimeout(() => {
-            const firstInput = cardCriar.querySelector('input, select, textarea');
+            if (typeof initMentionPickers === 'function') {
+                initMentionPickers(this.projetoId);
+            }
+            const firstInput = cardCriar.querySelector('input:not([type="hidden"]), select, textarea');
             if (firstInput) firstInput.focus();
         }, 100);
     },

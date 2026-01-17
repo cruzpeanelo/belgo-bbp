@@ -36,7 +36,7 @@ const DynamicTable = {
         if (!this.entidade) return;
 
         try {
-            const token = sessionStorage.getItem('belgo_token');
+            const token = localStorage.getItem('belgo_token');
             const projetoId = this.entidade.projeto_id || localStorage.getItem('belgo_projeto_id');
 
             const response = await fetch(`/api/projetos/${projetoId}/dados/${this.entidade.codigo}?page=${page}&limit=25`, {
@@ -410,7 +410,7 @@ const DynamicForm = {
     // Carregar opcoes de relacao
     async carregarOpcoesRelacao(select, entidadeId) {
         try {
-            const token = sessionStorage.getItem('belgo_token');
+            const token = localStorage.getItem('belgo_token');
             const projetoId = localStorage.getItem('belgo_projeto_id');
 
             // Primeiro buscar a entidade para saber o codigo
@@ -524,7 +524,7 @@ const DynamicPage = {
     // Carregar entidade com campos
     async carregarEntidade(entidadeId) {
         try {
-            const token = sessionStorage.getItem('belgo_token');
+            const token = localStorage.getItem('belgo_token');
             const response = await fetch(`/api/projetos/${this.projetoId}/entidades/${entidadeId}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -692,7 +692,7 @@ const DynamicPage = {
         if (id) {
             // Carregar registro
             try {
-                const token = sessionStorage.getItem('belgo_token');
+                const token = localStorage.getItem('belgo_token');
                 const response = await fetch(`/api/projetos/${this.projetoId}/dados/${this.entidade.codigo}/${id}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
@@ -746,7 +746,7 @@ const DynamicPage = {
     // Salvar registro
     async salvarRegistro(dados, id = null) {
         try {
-            const token = sessionStorage.getItem('belgo_token');
+            const token = localStorage.getItem('belgo_token');
             const url = id
                 ? `/api/projetos/${this.projetoId}/dados/${this.entidade.codigo}/${id}`
                 : `/api/projetos/${this.projetoId}/dados/${this.entidade.codigo}`;
@@ -779,7 +779,7 @@ const DynamicPage = {
     // Excluir registro
     async excluirRegistro(id) {
         try {
-            const token = sessionStorage.getItem('belgo_token');
+            const token = localStorage.getItem('belgo_token');
             const response = await fetch(`/api/projetos/${this.projetoId}/dados/${this.entidade.codigo}/${id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }

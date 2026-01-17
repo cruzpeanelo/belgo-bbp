@@ -7,16 +7,17 @@ const BelgoAuth = {
 
     /**
      * Retorna o token da sessão
+     * Usa localStorage para compatibilidade com Safari iOS
      */
     getToken() {
-        return sessionStorage.getItem('belgo_token');
+        return localStorage.getItem('belgo_token');
     },
 
     /**
      * Retorna dados do usuário logado
      */
     getUsuario() {
-        const data = sessionStorage.getItem('belgo_usuario');
+        const data = localStorage.getItem('belgo_usuario');
         return data ? JSON.parse(data) : null;
     },
 
@@ -24,7 +25,7 @@ const BelgoAuth = {
      * Retorna módulos do usuário
      */
     getModulos() {
-        const data = sessionStorage.getItem('belgo_modulos');
+        const data = localStorage.getItem('belgo_modulos');
         return data ? JSON.parse(data) : [];
     },
 
@@ -67,6 +68,7 @@ const BelgoAuth = {
 
         const response = await fetch(url, {
             ...options,
+            credentials: 'include', // Importante para cookies no Safari iOS
             headers: {
                 ...defaultHeaders,
                 ...options.headers
@@ -99,10 +101,10 @@ const BelgoAuth = {
             throw new Error(data.error || 'Erro ao fazer login');
         }
 
-        // Salvar sessão
-        sessionStorage.setItem('belgo_token', data.token);
-        sessionStorage.setItem('belgo_usuario', JSON.stringify(data.usuario));
-        sessionStorage.setItem('belgo_modulos', JSON.stringify(data.modulos));
+        // Salvar sessão (localStorage para compatibilidade Safari iOS)
+        localStorage.setItem('belgo_token', data.token);
+        localStorage.setItem('belgo_usuario', JSON.stringify(data.usuario));
+        localStorage.setItem('belgo_modulos', JSON.stringify(data.modulos));
 
         return data;
     },
@@ -132,9 +134,9 @@ const BelgoAuth = {
      * Limpa sessão local
      */
     clearSession() {
-        sessionStorage.removeItem('belgo_token');
-        sessionStorage.removeItem('belgo_usuario');
-        sessionStorage.removeItem('belgo_modulos');
+        localStorage.removeItem('belgo_token');
+        localStorage.removeItem('belgo_usuario');
+        localStorage.removeItem('belgo_modulos');
     },
 
     /**
@@ -158,8 +160,8 @@ const BelgoAuth = {
             const data = await response.json();
 
             // Atualizar dados locais
-            sessionStorage.setItem('belgo_usuario', JSON.stringify(data.usuario));
-            sessionStorage.setItem('belgo_modulos', JSON.stringify(data.modulos));
+            localStorage.setItem('belgo_usuario', JSON.stringify(data.usuario));
+            localStorage.setItem('belgo_modulos', JSON.stringify(data.modulos));
 
             // Verificar acesso ao módulo
             if (moduloCodigo && !data.modulos.some(m => m.codigo === moduloCodigo)) {

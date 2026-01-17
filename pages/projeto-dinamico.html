@@ -275,6 +275,17 @@
     </style>
 </head>
 <body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <span class="mobile-header-logo">BELGO BBP</span>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+            ☰
+        </button>
+    </header>
+
+    <!-- Overlay para fechar menu -->
+    <div class="sidebar-overlay" onclick="toggleMobileMenu()"></div>
+
     <div class="app-container">
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
@@ -313,9 +324,28 @@
             const params = new URLSearchParams(window.location.search);
             projetoCodigo = params.get('projeto');
 
+            // Fallback: se nao houver na URL, tentar buscar pelo ID salvo no localStorage
             if (!projetoCodigo) {
-                document.getElementById('conteudo').innerHTML =
-                    '<div class="error">Projeto nao especificado na URL</div>';
+                const savedProjetoId = localStorage.getItem('belgo_projeto_id');
+                if (savedProjetoId) {
+                    // Buscar codigo do projeto pelo ID
+                    try {
+                        const response = await BelgoAuth.request('/api/projetos');
+                        if (response && response.ok) {
+                            const data = await response.json();
+                            const projeto = (data.projetos || []).find(p => p.id == savedProjetoId);
+                            if (projeto && projeto.url_modulo && projeto.url_modulo.includes('projeto-dinamico')) {
+                                // Redirecionar para URL correta com parametro
+                                window.location.href = projeto.url_modulo;
+                                return;
+                            }
+                        }
+                    } catch (e) {
+                        console.error('Erro ao buscar projeto salvo:', e);
+                    }
+                }
+                // Se nada funcionar, redirecionar para landing
+                window.location.href = '/landing.html';
                 return;
             }
 
@@ -421,6 +451,14 @@
                 console.error('Erro ao carregar projeto:', error);
                 conteudo.innerHTML = '<div class="error">Erro ao carregar projeto: ' + error.message + '</div>';
             }
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.querySelector('.sidebar-overlay');
+            if (sidebar) sidebar.classList.toggle('open');
+            if (overlay) overlay.classList.toggle('active');
         }
     </script>
 </body>

@@ -96,7 +96,8 @@ export async function onRequestPost(context) {
             ip: getClientIP(context.request)
         });
 
-        return jsonResponse({
+        // Criar resposta com cookie httpOnly para Safari iOS
+        const response = jsonResponse({
             success: true,
             token,
             expiresAt,
@@ -112,6 +113,12 @@ export async function onRequestPost(context) {
             },
             modulos
         });
+
+        // Adicionar cookie httpOnly como fallback para Safari iOS
+        const cookieExpires = new Date(expiresAt).toUTCString();
+        response.headers.set('Set-Cookie', `belgo_token=${token}; Path=/; HttpOnly; SameSite=Lax; Expires=${cookieExpires}`);
+
+        return response;
 
     } catch (error) {
         console.error('Erro no login:', error);

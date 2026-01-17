@@ -46,7 +46,7 @@ const DashboardRenderer = {
     // CARREGAMENTO DE DADOS
     // =====================================================
     async carregarConfig() {
-        const token = sessionStorage.getItem('belgo_token');
+        const token = localStorage.getItem('belgo_token');
         const response = await fetch(`/api/projetos/${this.projetoId}/dashboard`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
@@ -75,7 +75,7 @@ const DashboardRenderer = {
         }
 
         try {
-            const token = sessionStorage.getItem('belgo_token');
+            const token = localStorage.getItem('belgo_token');
             let url = `/api/projetos/${this.projetoId}/dados/${entidadeCodigo}`;
 
             // Adicionar filtros como query params

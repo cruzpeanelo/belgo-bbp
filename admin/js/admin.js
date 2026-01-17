@@ -8,7 +8,7 @@ const API_BASE = '';
  * Faz requisição autenticada para a API
  */
 async function apiRequest(url, options = {}) {
-    const token = sessionStorage.getItem('belgo_token');
+    const token = localStorage.getItem('belgo_token');
 
     const defaultOptions = {
         headers: {
@@ -47,8 +47,8 @@ async function apiRequest(url, options = {}) {
  * Verifica autenticação e permissão admin
  */
 async function checkAuth() {
-    const token = sessionStorage.getItem('belgo_token');
-    const usuario = sessionStorage.getItem('belgo_usuario');
+    const token = localStorage.getItem('belgo_token');
+    const usuario = localStorage.getItem('belgo_usuario');
 
     if (!token || !usuario) {
         window.location.href = '/login.html?redirect=' + encodeURIComponent(window.location.pathname);

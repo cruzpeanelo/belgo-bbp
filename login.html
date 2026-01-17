@@ -192,6 +192,7 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
+                    credentials: 'include', // Importante para cookies no Safari iOS
                     body: JSON.stringify({ email, senha })
                 });
 
@@ -201,10 +202,14 @@
                     throw new Error(data.error || 'Erro ao fazer login');
                 }
 
-                // Salvar dados da sessão
-                sessionStorage.setItem('belgo_token', data.token);
-                sessionStorage.setItem('belgo_usuario', JSON.stringify(data.usuario));
-                sessionStorage.setItem('belgo_modulos', JSON.stringify(data.modulos));
+                // Salvar dados da sessão (localStorage para compatibilidade Safari iOS)
+                try {
+                    localStorage.setItem('belgo_token', data.token);
+                    localStorage.setItem('belgo_usuario', JSON.stringify(data.usuario));
+                    localStorage.setItem('belgo_modulos', JSON.stringify(data.modulos));
+                } catch (storageError) {
+                    console.warn('localStorage não disponível, usando apenas cookies:', storageError);
+                }
 
                 // Verificar se precisa trocar senha
                 if (data.usuario.primeiroAcesso) {
@@ -227,20 +232,28 @@
 
         // Verificar se já está logado
         (async function checkAuth() {
-            const token = sessionStorage.getItem('belgo_token');
-            if (token) {
-                try {
-                    const response = await fetch(`${API_URL}/me`, {
-                        headers: { 'Authorization': `Bearer ${token}` }
-                    });
-                    if (response.ok) {
-                        const redirect = new URLSearchParams(window.location.search).get('redirect') || '/landing.html';
-                        window.location.href = redirect;
-                    }
-                } catch (e) {
-                    // Token inválido, continuar no login
-                    sessionStorage.removeItem('belgo_token');
+            let token = null;
+            try {
+                token = localStorage.getItem('belgo_token');
+            } catch (e) {
+                // localStorage não disponível (Safari modo privado)
+            }
+
+            // Tentar verificar via cookie (fallback para Safari iOS)
+            try {
+                const response = await fetch(`${API_URL}/me`, {
+                    credentials: 'include',
+                    headers: token ? { 'Authorization': `Bearer ${token}` } : {}
+                });
+                if (response.ok) {
+                    const redirect = new URLSearchParams(window.location.search).get('redirect') || '/landing.html';
+                    window.location.href = redirect;
                 }
+            } catch (e) {
+                // Não autenticado, continuar no login
+                try {
+                    localStorage.removeItem('belgo_token');
+                } catch (storageErr) {}
             }
         })();
     </script>

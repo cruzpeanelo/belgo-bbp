@@ -54,15 +54,24 @@ export function isSessionExpired(expiresAt) {
 }
 
 /**
- * Extrai token do header Authorization
+ * Extrai token do header Authorization ou cookie (fallback para Safari iOS)
  */
 export function extractToken(request) {
+    // Primeiro tentar header Authorization
     const authHeader = request.headers.get('Authorization');
-    if (!authHeader) return null;
-
-    if (authHeader.startsWith('Bearer ')) {
+    if (authHeader && authHeader.startsWith('Bearer ')) {
         return authHeader.substring(7);
     }
+
+    // Fallback: tentar cookie belgo_token (para Safari iOS)
+    const cookies = request.headers.get('Cookie');
+    if (cookies) {
+        const tokenMatch = cookies.match(/belgo_token=([^;]+)/);
+        if (tokenMatch) {
+            return tokenMatch[1];
+        }
+    }
+
     return null;
 }
 

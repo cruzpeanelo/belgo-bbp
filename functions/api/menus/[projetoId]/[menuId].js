@@ -38,7 +38,7 @@ export async function onRequestPut(context) {
         }
 
         const body = await context.request.json();
-        const { nome, url: menuUrl, icone, ordem, ativo } = body;
+        const { nome, url: menuUrl, icone, ordem, ativo, entidade_id } = body;
 
         // Atualizar menu
         await context.env.DB.prepare(`
@@ -47,7 +47,8 @@ export async function onRequestPut(context) {
                 url = COALESCE(?, url),
                 icone = COALESCE(?, icone),
                 ordem = COALESCE(?, ordem),
-                ativo = COALESCE(?, ativo)
+                ativo = COALESCE(?, ativo),
+                entidade_id = COALESCE(?, entidade_id)
             WHERE id = ? AND projeto_id = ?
         `).bind(
             nome || null,
@@ -55,6 +56,7 @@ export async function onRequestPut(context) {
             icone || null,
             ordem !== undefined ? ordem : null,
             ativo !== undefined ? (ativo ? 1 : 0) : null,
+            entidade_id !== undefined ? entidade_id : null,
             menuId,
             projetoId
         ).run();

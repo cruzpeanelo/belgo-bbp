@@ -109,7 +109,7 @@ const DynamicNav = {
     // Buscar menus do servidor
     async fetchMenus() {
         try {
-            const token = sessionStorage.getItem('belgo_token');
+            const token = localStorage.getItem('belgo_token');
 
             // Verificar se usuario eh admin (pode ver todos os menus)
             const isAdmin = window.BelgoAuth && BelgoAuth.isAdmin();
@@ -222,7 +222,7 @@ const DynamicNav = {
 
         try {
             // Buscar projetos do usuario
-            const token = sessionStorage.getItem('belgo_token');
+            const token = localStorage.getItem('belgo_token');
             const response = await fetch('/api/projetos', {
                 headers: {
                     'Authorization': `Bearer ${token}`,

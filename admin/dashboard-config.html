@@ -525,7 +525,7 @@
         // Carregar projetos
         async function carregarProjetos() {
             try {
-                const token = sessionStorage.getItem('belgo_token');
+                const token = localStorage.getItem('belgo_token');
                 const response = await fetch('/api/projetos', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
@@ -564,7 +564,7 @@
         // Carregar entidades do projeto
         async function carregarEntidades() {
             try {
-                const token = sessionStorage.getItem('belgo_token');
+                const token = localStorage.getItem('belgo_token');
                 const response = await fetch(`/api/projetos/${projetoId}/entidades`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
@@ -603,7 +603,7 @@
         // Carregar dashboard
         async function carregarDashboard() {
             try {
-                const token = sessionStorage.getItem('belgo_token');
+                const token = localStorage.getItem('belgo_token');
                 const response = await fetch(`/api/projetos/${projetoId}/dashboard`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
@@ -685,7 +685,7 @@
                     colunas: parseInt(document.getElementById('dashboardColunas').value)
                 };
 
-                const token = sessionStorage.getItem('belgo_token');
+                const token = localStorage.getItem('belgo_token');
                 const response = await fetch(`/api/projetos/${projetoId}/dashboard`, {
                     method: 'PUT',
                     headers: {
@@ -839,7 +839,7 @@
             }
 
             try {
-                const token = sessionStorage.getItem('belgo_token');
+                const token = localStorage.getItem('belgo_token');
                 const response = await fetch(`/api/projetos/${projetoId}/dashboard`, {
                     method: 'POST',
                     headers: {
@@ -945,7 +945,7 @@
             if (!confirm('Deseja excluir este widget?')) return;
 
             try {
-                const token = sessionStorage.getItem('belgo_token');
+                const token = localStorage.getItem('belgo_token');
                 const response = await fetch(`/api/projetos/${projetoId}/dashboard?widgetId=${id}`, {
                     method: 'DELETE',
                     headers: { 'Authorization': `Bearer ${token}` }
@@ -965,7 +965,7 @@
 
         // Auth check
         document.addEventListener('DOMContentLoaded', () => {
-            if (!sessionStorage.getItem('belgo_token')) {
+            if (!localStorage.getItem('belgo_token')) {
                 window.location.href = '/login.html?redirect=' + encodeURIComponent(window.location.pathname);
             }
         });

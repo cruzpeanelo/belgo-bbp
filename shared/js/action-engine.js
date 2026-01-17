@@ -24,7 +24,7 @@ const ActionEngine = {
 
     async carregarAcoes() {
         try {
-            const token = sessionStorage.getItem('belgo_token');
+            const token = localStorage.getItem('belgo_token');
             const response = await fetch(`/api/projetos/${this.projetoId}/entidades/${this.entidadeId}/acoes`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -207,7 +207,7 @@ const ActionEngine = {
         }
 
         try {
-            const token = sessionStorage.getItem('belgo_token');
+            const token = localStorage.getItem('belgo_token');
             const response = await fetch(`/api/projetos/${this.projetoId}/dados/${this.entidadeCodigo}/${registroId}`, {
                 method: 'PUT',
                 headers: {
@@ -333,7 +333,7 @@ const ActionEngine = {
         );
 
         try {
-            const token = sessionStorage.getItem('belgo_token');
+            const token = localStorage.getItem('belgo_token');
             const response = await fetch(endpoint, {
                 method: metodo,
                 headers: {

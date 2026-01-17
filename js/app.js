@@ -33,7 +33,7 @@ const KVSync = {
     // Obter headers com autenticação
     getHeaders(contentType = false) {
         const headers = { 'Accept': 'application/json' };
-        const token = sessionStorage.getItem('belgo_token');
+        const token = localStorage.getItem('belgo_token');
         if (token) {
             headers['Authorization'] = `Bearer ${token}`;
         }
@@ -248,7 +248,7 @@ const App = {
     // Fetch API autenticada
     async fetchAPI(endpoint, options = {}) {
         try {
-            const token = sessionStorage.getItem('belgo_token');
+            const token = localStorage.getItem('belgo_token');
             const headers = {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
