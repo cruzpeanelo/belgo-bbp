@@ -3775,6 +3775,7 @@
     border: 2px solid var(--belgo-azul, #003B4A);
     box-shadow: 0 4px 20px rgba(0, 59, 74, 0.15);
     background: #fafbfc;
+    overflow: visible; /* Permitir scroll/visualização do conteúdo em modo edição */
 }
 
 .card-expandable.editing .editing-header,
