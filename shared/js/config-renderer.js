@@ -3877,7 +3877,9 @@ const ConfigRenderer = {
         `;
 
         // Encontrar container da tabela e inserir no topo
+        // Importante: .cards-mobile é usado no layout mobile
         const container = document.querySelector('.tabela-container') ||
+                          document.querySelector('.cards-mobile') ||
                           document.querySelector('.cards-grid') ||
                           document.querySelector('#dados-container') ||
                           document.querySelector('.table-responsive')?.parentElement ||
@@ -4588,7 +4590,8 @@ const ConfigRenderer = {
         this.criandoInline = true;
 
         // Encontrar container dos cards (suporta múltiplos layouts)
-        const container = document.querySelector('.cards-expandable, .cards-grid, .data-container, .componente-cards-ricos');
+        // Importante: .cards-mobile é usado no layout mobile
+        const container = document.querySelector('.cards-expandable, .cards-mobile, .cards-grid, .data-container, .componente-cards-ricos');
         if (!container) {
             this.showToast('Container não encontrado', 'error');
             return;
