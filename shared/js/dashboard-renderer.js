@@ -542,7 +542,7 @@ const DashboardRenderer = {
             const titulo = item[tituloField] || 'Sem titulo';
             const status = item[statusField] || '';
             const data = item[dataField] ? this.formatarData(item[dataField]) : '';
-            const completo = status === 'Concluido' || status === 'Realizado';
+            const completo = status === 'Concluído' || status === 'Concluido' || status === 'Realizado';
 
             html += `
                 <div class="timeline-item ${completo ? 'completed' : 'pending'}">

@@ -134,7 +134,7 @@ const ActionEngine = {
         switch (acao.tipo) {
             case 'status_change':
                 const config = acao.config || {};
-                if (config.novo_valor === 'Concluido') return 'btn-success';
+                if (config.novo_valor === 'Concluído' || config.novo_valor === 'Concluido') return 'btn-success';
                 if (config.novo_valor === 'Falhou') return 'btn-danger';
                 return 'btn-warning';
             case 'teams':

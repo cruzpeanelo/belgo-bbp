@@ -1295,7 +1295,12 @@ const ConfigRenderer = {
             case 'total':
                 return dados.length;
             case 'contador':
-                return dados.filter(d => d[card.campo] === card.valor).length;
+                // Normaliza comparação para lidar com variações de acentos (Concluído/Concluido)
+                const valorNorm = (card.valor || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                return dados.filter(d => {
+                    const dadoNorm = (d[card.campo] || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                    return dadoNorm === valorNorm;
+                }).length;
             case 'distinct':
                 if (Array.isArray(dados[0]?.[card.campo])) {
                     const all = dados.flatMap(d => d[card.campo] || []);
@@ -1513,7 +1518,7 @@ const ConfigRenderer = {
                     return '';
                 case 'marcar_concluido':
                     if (row.status === 'Pendente') {
-                        return `<button class="btn btn-success btn-sm" onclick="ConfigRenderer.marcarStatus('${row.codigo || row._id}', 'Concluido')">OK</button>`;
+                        return `<button class="btn btn-success btn-sm" onclick="ConfigRenderer.marcarStatus('${row.codigo || row._id}', 'Concluído')">OK</button>`;
                     }
                     return '';
                 case 'teams':
@@ -3148,7 +3153,7 @@ const ConfigRenderer = {
         if (acoesRodape.length > 0) {
             bodyHtml += `
                 <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
-                    ${acoesRodape.includes('marcar_concluido') ? `<button class="btn btn-success" onclick="ConfigRenderer.marcarStatus('${id}', 'Concluido'); ConfigRenderer.fecharModal();">✅ Marcar Concluido</button>` : ''}
+                    ${acoesRodape.includes('marcar_concluido') ? `<button class="btn btn-success" onclick="ConfigRenderer.marcarStatus('${id}', 'Concluído'); ConfigRenderer.fecharModal();">✅ Marcar Concluído</button>` : ''}
                     ${acoesRodape.includes('marcar_falhou') ? `<button class="btn btn-danger" onclick="ConfigRenderer.marcarStatus('${id}', 'Falhou'); ConfigRenderer.fecharModal();">❌ Marcar Falhou</button>` : ''}
                     ${acoesRodape.includes('marcar_pendente') ? `<button class="btn" style="background: #f59e0b; color: white;" onclick="ConfigRenderer.marcarStatus('${id}', 'Pendente'); ConfigRenderer.fecharModal();">⏳ Marcar Pendente</button>` : ''}
                     ${acoesRodape.includes('teams') ? `<button class="btn" style="background: #6264A7; color: white; margin-left: 10px;" onclick="ConfigRenderer.compartilharTeams('${id}');">📤 Teams</button>` : ''}
@@ -3219,8 +3224,11 @@ const ConfigRenderer = {
                         String(row[c] || '').toLowerCase().includes(termoBusca)
                     );
                     if (!encontrou) return false;
-                } else if (row[campo] !== valor) {
-                    return false;
+                } else {
+                    // Normaliza comparação para lidar com variações de acentos
+                    const rowValor = String(row[campo] || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                    const filtroValor = String(valor || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                    if (rowValor !== filtroValor) return false;
                 }
             }
             return true;
@@ -3282,7 +3290,7 @@ const ConfigRenderer = {
             }
         }
 
-        this.showToast(`Status atualizado para "${novoStatus}"`, novoStatus === 'Concluido' ? 'success' : novoStatus === 'Falhou' ? 'error' : 'info');
+        this.showToast(`Status atualizado para "${novoStatus}"`, novoStatus === 'Concluído' ? 'success' : novoStatus === 'Falhou' ? 'error' : 'info');
         this.render();
     },
 
