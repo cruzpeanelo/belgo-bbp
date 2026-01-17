@@ -1998,8 +1998,12 @@ migrations/036_fix_documentos_insert.sql      ✅ Executada
 | 22 | Dashboard Widgets | ✅ Concluída |
 | 23 | Validação Final | ✅ Concluída |
 | 24 | Paridade 100% GTM Clone | ✅ Concluída |
+| 25 | Paridade 100% Jornadas - Dados Completos | ✅ Concluída |
+| 26 | Configuração das 6 Entidades Restantes | ✅ Concluída |
+| 26.1 | Melhorias Admin e Correções | ✅ Concluída |
+| 27 | Normalização de Dados, UX Avançada e Qualidade | ✅ Concluída |
 
-**Total de Fases: 24** | **Todas Concluídas: 24** | **Taxa de Sucesso: 100%**
+**Total de Fases: 27** | **Concluídas: 27** | **Planejadas: 0**
 
 ---
 
@@ -2348,4 +2352,1385 @@ if (Array.isArray(layoutConfig.filtros)) {
 | Cronograma sem duplicatas (12 registros) | ✅ |
 | Timeline sem duplicatas (5 registros) | ✅ |
 | Deploy Cloudflare | ✅ |
+
+---
+
+## FASE 27: NORMALIZAÇÃO DE DADOS, UX AVANÇADA E QUALIDADE ✅
+
+**Data**: Janeiro 2026
+**Status**: IMPLEMENTADO
+**Prioridade**: ALTA
+
+### Objetivo Geral
+Melhorar a qualidade dos dados, normalização de campos, garantir integridade referencial, UX responsiva sem overlays, e implementar recursos de onboarding (tour guide + tooltips) para usuários aprenderem a plataforma.
+
+### Implementação Concluída
+
+#### Arquivos Criados
+
+**JavaScript:**
+- `shared/js/mention-picker.js` - Componente @mention para seleção de usuários
+- `shared/js/tooltips.js` - Sistema de tooltips contextuais
+- `shared/js/tour-guide.js` - Tour guiado para onboarding
+
+**CSS:**
+- `shared/css/mention-picker.css` - Estilos do mention picker
+- `shared/css/tooltips.css` - Estilos dos tooltips
+- `shared/css/tour-guide.css` - Estilos do tour guide
+- `shared/css/responsive-utils.css` - Utilitários de responsividade
+
+**Migrations:**
+- `migrations/058_fase27_normalizacao_select.sql` - Normaliza TEXT → SELECT em todas as 10 entidades
+- `migrations/059_fase27_campos_user_mention.sql` - Configura campos user_mention (executor, responsável, participantes)
+- `migrations/060_fase27_campos_auditoria.sql` - Índices para campos de auditoria
+
+#### Arquivos Modificados
+
+**config-renderer.js:**
+- Adicionado suporte ao tipo `user_mention` em `renderCamposForm()`, `renderCamposFormEditar()`, `renderCamposFormInline()`
+- Adicionado `carregarUsuariosCache()` para cache de usuários
+- Atualizado `renderCelula()` para renderizar user_mention como chips
+- Atualizado `renderCardsMobile()` para usar renderCelula()
+- Adicionado chamadas a `initMentionPickers()` após criação de formulários
+
+**HTML Pages:**
+- `pages/entidade.html` - Adicionados includes dos novos CSS e JS
+- `pages/dashboard.html` - Adicionados includes dos novos CSS e JS
+
+---
+
+### 27.1 NORMALIZAÇÃO DE CAMPOS E DADOS
+
+#### Problema Identificado
+Muitos campos estão como **TEXT livre** quando deveriam ser:
+- **SELECT** (dropdown) - para valores repetidos e padronizados
+- **CHECKBOX/MULTISELECT** - para múltiplas opções
+- **REFERENCE** (relation) - para campos que referenciam outras entidades ou tabelas do sistema
+
+#### Benefícios da Normalização
+- ✅ Evita dados despadronizados (ex: "Pendente", "pendente", "PENDENTE")
+- ✅ Melhora filtros e buscas
+- ✅ Facilita métricas e relatórios
+- ✅ Garante integridade referencial
+- ✅ Reduz erros de digitação
+
+---
+
+#### 27.1.1 TESTES (Entidade 22) - CAMPOS A NORMALIZAR
+
+| Campo | Tipo Atual | Tipo Proposto | Valores/Referência | Prioridade |
+|-------|------------|---------------|-------------------|------------|
+| `categoria` | TEXT | **SELECT** | FUP de Carteira, Hub de Gestão OC, Cadastro de Cliente, Cotação e Ordem de Vendas, Conditions Pricing SAP, Integração SF ↔ SAP, etc. | ALTA |
+| `sistema` | TEXT | **SELECT** | Salesforce, SAP, SF+SAP, ASCP, FSCM | ALTA |
+| `prioridade` | TEXT | **SELECT** | Alta, Média, Baixa | ALTA |
+| `status` | TEXT | **SELECT** | Pendente, Concluído, Falhou, Aprovado | ALTA |
+| `executor` | TEXT | **REFERENCE** | → tabela `usuarios` (id, nome) | ALTA |
+| `passos` | TEXT (pipe) | **JSON array** | `[{ordem, descricao, tempo_estimado}]` | MÉDIA |
+
+**Ação**: Criar migration para:
+1. Popular `projeto_entidade_opcoes` com valores únicos de cada campo
+2. Atualizar tipo do campo para `select` em `projeto_entidade_campos`
+3. Converter `executor` para campo `relation` referenciando `usuarios`
+
+---
+
+#### 27.1.2 JORNADAS (Entidade 18) - CAMPOS A NORMALIZAR
+
+| Campo | Tipo Atual | Tipo Proposto | Valores/Referência | Prioridade |
+|-------|------------|---------------|-------------------|------------|
+| `status` | TEXT | **SELECT** | Pendente, Em Andamento, Concluído | ALTA |
+| `areas_impactadas` | TEXT | **MULTISELECT** | Financeiro, TI, Operações, Vendas, Crédito | MÉDIA |
+| `sistemas_tecnicos` | TEXT | **MULTISELECT** | Salesforce, SAP, ASCP, FSCM | MÉDIA |
+
+---
+
+#### 27.1.3 PARTICIPANTES (Entidade 19) - CAMPOS A NORMALIZAR
+
+| Campo | Tipo Atual | Tipo Proposto | Valores/Referência | Prioridade |
+|-------|------------|---------------|-------------------|------------|
+| `tipo` | SELECT | ✅ JÁ NORMALIZADO | keyuser, equipe_projeto, stakeholder | - |
+| `status` | SELECT | ✅ JÁ NORMALIZADO | ativo, licenca, desligado | - |
+| `setor` | SELECT | ✅ JÁ NORMALIZADO | - | - |
+| `area` | TEXT | **SELECT** | BBA, CSP, DBA, ALPE, TI, Operações | MÉDIA |
+| `papel` | TEXT | **REFERENCE** | → tabela `papeis` (id, nome) | MÉDIA |
+| `usuario_id` | - | **REFERENCE** | → tabela `usuarios` (vincular participante a usuário do sistema) | ALTA |
+
+---
+
+#### 27.1.4 REUNIÕES (Entidade 20) - CAMPOS A NORMALIZAR
+
+| Campo | Tipo Atual | Tipo Proposto | Valores/Referência | Prioridade |
+|-------|------------|---------------|-------------------|------------|
+| `tipo` | TEXT | **SELECT** | workshop, estratégico, técnico, operacional, produto | ALTA |
+| `participantes` | TEXT (pipe) | **JSON array** | `[{id, nome, funcao}]` com ref a usuários | MÉDIA |
+| `topicos` | TEXT (pipe) | **JSON array** | `[{ordem, descricao, responsavel}]` | MÉDIA |
+| `decisoes` | TEXT (pipe) | **JSON array** | `[{id, texto, responsavel, status, data}]` | MÉDIA |
+| `acoes` | TEXT (pipe) | **JSON array** | `[{id, descricao, responsavel_id, prazo, status}]` | MÉDIA |
+
+---
+
+#### 27.1.5 GLOSSÁRIO (Entidade 21) - CAMPOS A NORMALIZAR
+
+| Campo | Tipo Atual | Tipo Proposto | Valores/Referência | Prioridade |
+|-------|------------|---------------|-------------------|------------|
+| `categoria` | TEXT | **SELECT** | Sistemas, Transações SAP, Áreas de Crédito, Canais, Clusters, Termos | ALTA |
+
+---
+
+#### 27.1.6 RISCOS (Entidade 23) - CAMPOS A NORMALIZAR
+
+| Campo | Tipo Atual | Tipo Proposto | Valores/Referência | Prioridade |
+|-------|------------|---------------|-------------------|------------|
+| `probabilidade` | TEXT | **SELECT** | Alta (5), Média (3), Baixa (1) | ALTA |
+| `impacto` | TEXT | **SELECT** | Crítico (5), Alto (4), Médio (3), Baixo (2), Negligenciável (1) | ALTA |
+| `status` | SELECT | ✅ JÁ NORMALIZADO | Identificado, Em Tratamento, Mitigado, Ocorreu | - |
+| `responsavel` | TEXT | **REFERENCE** | → tabela `usuarios` | ALTA |
+
+---
+
+#### 27.1.7 DOCUMENTOS (Entidade 17) - CAMPOS A NORMALIZAR
+
+| Campo | Tipo Atual | Tipo Proposto | Valores/Referência | Prioridade |
+|-------|------------|---------------|-------------------|------------|
+| `categoria` | TEXT | **SELECT** | workflow_pricing, cadastro, tributario, setup, cotacao_ov, conditions, integracao, hub_gestao, fup_carteira | ALTA |
+| `status` | TEXT | **SELECT** | Ativo, Arquivado, Em Revisão | MÉDIA |
+
+---
+
+#### 27.1.8 CRONOGRAMA (Entidade 24) - CAMPOS A NORMALIZAR
+
+| Campo | Tipo Atual | Tipo Proposto | Valores/Referência | Prioridade |
+|-------|------------|---------------|-------------------|------------|
+| `tipo` | TEXT | **SELECT** | workshop, marco | ALTA |
+| `status` | TEXT | **SELECT** | Concluído, Pendente, Em Andamento | ALTA |
+| `foco` | TEXT (array) | **JSON array** | `[{tema, responsavel}]` | BAIXA |
+
+---
+
+#### 27.1.9 TIMELINE - CAMPOS A NORMALIZAR
+
+| Campo | Tipo Atual | Tipo Proposto | Valores/Referência | Prioridade |
+|-------|------------|---------------|-------------------|------------|
+| `tipo` | TEXT | **SELECT** | fase, stakeholder, proximo_passo, marco, reunião, documento | ALTA |
+| `status` | TEXT | **SELECT** | concluido, em_andamento, pendente | ALTA |
+| `papel` | TEXT | **SELECT** | Gerente de TI, PO GTM, PO Pricing, Gerente Negócio GTM, Facilitador, etc. | MÉDIA |
+| `area` | TEXT | **SELECT** | TI, Comercial, Pricing, Marketing, Financeiro, etc. | MÉDIA |
+
+---
+
+#### 27.1.10 PONTOS CRÍTICOS - CAMPOS A NORMALIZAR
+
+| Campo | Tipo Atual | Tipo Proposto | Valores/Referência | Prioridade |
+|-------|------------|---------------|-------------------|------------|
+| `categoria` | TEXT | **SELECT** | Pessoas, Conhecimento, Dados, Integração, Desenvolvimento, Cronograma | ALTA |
+| `severidade` | TEXT | **SELECT** | Crítica, Bloqueador, Alta, Média, Baixa | ALTA |
+| `status` | TEXT | **SELECT** | Pendente, Em Andamento, Resolvido | ALTA |
+| `responsavel` | TEXT | **REFERENCE** | → tabela `usuarios` ou campo livre | MÉDIA |
+
+---
+
+### RESUMO DAS 10 ENTIDADES DO GTM CLONE
+
+| # | Entidade | ID | Tipo Layout | Campos a Normalizar | Prioridade |
+|---|----------|----|-----------|--------------------|------------|
+| 1 | **Documentos** | 17 | tabela | categoria, status | MÉDIA |
+| 2 | **Jornadas** | 18 | cards | status, areas_impactadas, sistemas_tecnicos | ALTA |
+| 3 | **Participantes** | 19 | cards_grid | **usuario_id** (REFERENCE), area, papel | **CRÍTICA** |
+| 4 | **Reuniões** | 20 | timeline | tipo, **participantes** (REFERENCE[]), topicos, decisoes, acoes | ALTA |
+| 5 | **Glossário** | 21 | cards_agrupados | categoria | MÉDIA |
+| 6 | **Testes** | 22 | tabela | categoria, sistema, prioridade, status, **executor** (REFERENCE) | **CRÍTICA** |
+| 7 | **Riscos** | 23 | kanban | probabilidade, impacto, **responsavel** (REFERENCE) | **CRÍTICA** |
+| 8 | **Cronograma** | 24+ | timeline | tipo, status | BAIXA |
+| 9 | **Timeline** | - | cards_agrupados | tipo, status, papel, area | MÉDIA |
+| 10 | **Pontos Críticos** | - | kanban | categoria, severidade, status, **responsavel** (REFERENCE) | **CRÍTICA** |
+
+**Total de campos a normalizar**: ~35 campos
+**Campos já normalizados**: ~8 campos (tipos SELECT já configurados)
+
+---
+
+### 27.1.11 NORMALIZAÇÃO CRÍTICA: CAMPOS DE PESSOAS → USUÁRIOS
+
+#### Problema Atual
+Campos como `responsavel`, `executor`, `participantes` são **TEXT livre**, causando:
+- Duplicidade ("João Silva" vs "Joao Silva" vs "J. Silva")
+- Impossibilidade de filtrar por usuário
+- Sem vínculo com login/permissões do sistema
+- Sem notificações automáticas
+
+#### Solução: Referenciar Tabela `usuarios`
+
+Todos os campos que representam **pessoas** devem ser do tipo `REFERENCE` apontando para `usuarios.id`.
+
+**Campos a converter para REFERENCE:**
+
+| Entidade | Campo Atual | Tipo Atual | Novo Tipo | Referência |
+|----------|-------------|------------|-----------|------------|
+| **Participantes** | `usuario_id` | - (novo) | REFERENCE | `usuarios.id` |
+| **Participantes** | `nome` | TEXT | AUTO (do usuário) | `usuarios.nome` |
+| **Participantes** | `email` | TEXT | AUTO (do usuário) | `usuarios.email` |
+| **Testes** | `executor` | TEXT | REFERENCE | `usuarios.id` |
+| **Riscos** | `responsavel` | TEXT | REFERENCE | `usuarios.id` |
+| **Pontos Críticos** | `responsavel` | TEXT | REFERENCE | `usuarios.id` |
+| **Reuniões** | `participantes` | TEXT (pipe) | REFERENCE[] | `usuarios.id` (array) |
+| **Jornadas** | `responsavel` | - (novo) | REFERENCE | `usuarios.id` |
+| **Cronograma** | `responsavel` | - (novo) | REFERENCE | `usuarios.id` |
+
+#### Implementação Técnica
+
+**CHAVE DE LIGAÇÃO: E-MAIL**
+
+O **e-mail** será a chave única para vincular usuários nas entidades:
+- E-mail é único por usuário
+- E-mail é o identificador de login
+- Facilita importação de dados existentes
+- Permite validação e autocomplete
+
+**1. Estrutura do Campo `user_mention`**
+```javascript
+// Em projeto_entidade_campos
+{
+  "codigo": "executor",
+  "tipo": "user_mention",  // Novo tipo com @mention
+  "nome": "Executor",
+  "config": {
+    "chave": "email",           // E-mail como chave de ligação
+    "permite_multiplos": false,  // true para participantes
+    "filtro_projeto": true,      // Apenas usuários do projeto
+    "placeholder": "Digite @ para mencionar..."
+  }
+}
+```
+
+**2. Componente @Mention Picker**
+```javascript
+// shared/js/mention-picker.js
+class MentionPicker {
+    constructor(input, options = {}) {
+        this.input = input;
+        this.projetoId = options.projetoId;
+        this.permitirMultiplos = options.permitirMultiplos || false;
+        this.usuarios = [];
+        this.selecionados = []; // Array de e-mails selecionados
+        this.init();
+    }
+
+    async init() {
+        // Carregar usuários do projeto
+        const resp = await fetch(`/api/projetos/${this.projetoId}/usuarios`);
+        this.usuarios = await resp.json();
+
+        // Listener para detectar @
+        this.input.addEventListener('input', (e) => this.onInput(e));
+        this.input.addEventListener('keydown', (e) => this.onKeydown(e));
+
+        // Criar dropdown
+        this.dropdown = this.createDropdown();
+    }
+
+    onInput(e) {
+        const value = e.target.value;
+        const lastAt = value.lastIndexOf('@');
+
+        if (lastAt !== -1) {
+            const query = value.substring(lastAt + 1).toLowerCase();
+            this.showSuggestions(query);
+        } else {
+            this.hideSuggestions();
+        }
+    }
+
+    showSuggestions(query) {
+        const filtered = this.usuarios.filter(u =>
+            u.nome.toLowerCase().includes(query) ||
+            u.email.toLowerCase().includes(query)
+        ).slice(0, 5);
+
+        this.dropdown.innerHTML = filtered.map(u => `
+            <div class="mention-item" data-email="${u.email}" data-nome="${u.nome}">
+                <span class="mention-avatar">${u.nome.charAt(0).toUpperCase()}</span>
+                <div class="mention-info">
+                    <span class="mention-nome">${u.nome}</span>
+                    <span class="mention-email">${u.email}</span>
+                </div>
+            </div>
+        `).join('');
+
+        this.dropdown.classList.add('visible');
+    }
+
+    selectUser(email, nome) {
+        if (this.permitirMultiplos) {
+            this.selecionados.push({ email, nome });
+        } else {
+            this.selecionados = [{ email, nome }];
+        }
+
+        this.renderSelected();
+        this.hideSuggestions();
+        this.input.value = '';
+    }
+
+    renderSelected() {
+        const container = this.input.parentElement.querySelector('.selected-users');
+        container.innerHTML = this.selecionados.map(u => `
+            <span class="user-chip" data-email="${u.email}">
+                <span class="chip-avatar">${u.nome.charAt(0)}</span>
+                ${u.nome}
+                <button type="button" class="chip-remove" onclick="this.parentElement.remove()">×</button>
+            </span>
+        `).join('');
+    }
+
+    getValue() {
+        // Retorna array de e-mails (chave)
+        return this.selecionados.map(u => u.email);
+    }
+}
+```
+
+**3. CSS para @Mention**
+```css
+/* shared/css/mention-picker.css */
+
+/* Input de menção */
+.mention-input-wrapper {
+    position: relative;
+}
+
+.mention-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.mention-input:focus {
+    border-color: #003B4A;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 59, 74, 0.1);
+}
+
+/* Dropdown de sugestões */
+.mention-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+}
+
+.mention-dropdown.visible {
+    display: block;
+}
+
+.mention-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.mention-item:hover {
+    background: #f5f5f5;
+}
+
+.mention-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #003B4A;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.mention-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.mention-nome {
+    font-weight: 500;
+    color: #333;
+}
+
+.mention-email {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Chips de usuários selecionados */
+.selected-users {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.user-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px 4px 4px;
+    background: #e8f4f8;
+    border: 1px solid #b8d4e3;
+    border-radius: 16px;
+    font-size: 13px;
+    color: #003B4A;
+}
+
+.chip-avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #003B4A;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.chip-remove {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 0 2px;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.chip-remove:hover {
+    color: #c00;
+}
+
+/* Highlight do @ no texto */
+.mention-highlight {
+    color: #003B4A;
+    font-weight: 500;
+    background: #e8f4f8;
+    padding: 1px 4px;
+    border-radius: 3px;
+}
+```
+
+**4. HTML de Uso**
+```html
+<!-- Campo de executor com @mention -->
+<div class="form-group">
+    <label>Executor</label>
+    <div class="mention-input-wrapper">
+        <div class="selected-users"></div>
+        <input type="text"
+               class="mention-input"
+               placeholder="Digite @ para mencionar um usuário..."
+               data-tipo="user_mention"
+               data-campo="executor"
+               data-multiplos="false">
+        <div class="mention-dropdown"></div>
+    </div>
+    <!-- Campo hidden com o valor (e-mail) -->
+    <input type="hidden" name="executor" class="mention-value">
+</div>
+
+<!-- Campo de participantes (múltiplos) -->
+<div class="form-group">
+    <label>Participantes</label>
+    <div class="mention-input-wrapper">
+        <div class="selected-users"></div>
+        <input type="text"
+               class="mention-input"
+               placeholder="Digite @ para adicionar participantes..."
+               data-tipo="user_mention"
+               data-campo="participantes"
+               data-multiplos="true">
+        <div class="mention-dropdown"></div>
+    </div>
+    <input type="hidden" name="participantes" class="mention-value">
+</div>
+```
+
+**5. Integração com config-renderer.js**
+```javascript
+// Ao renderizar campo do tipo user_mention
+case 'user_mention':
+    const wrapper = document.createElement('div');
+    wrapper.className = 'mention-input-wrapper';
+    wrapper.innerHTML = `
+        <div class="selected-users"></div>
+        <input type="text"
+               class="mention-input"
+               placeholder="${campo.config?.placeholder || 'Digite @ para mencionar...'}"
+               data-campo="${campo.codigo}">
+        <div class="mention-dropdown"></div>
+        <input type="hidden" name="${campo.codigo}" class="mention-value">
+    `;
+
+    // Inicializar MentionPicker
+    const input = wrapper.querySelector('.mention-input');
+    new MentionPicker(input, {
+        projetoId: projetoId,
+        permitirMultiplos: campo.config?.permite_multiplos || false
+    });
+
+    return wrapper;
+```
+
+**6. Exibição com Avatar (Leitura)**
+```javascript
+// Ao exibir valor salvo (e-mail), renderizar como badge
+function renderUserFromEmail(email, usuariosCache) {
+    const user = usuariosCache.find(u => u.email === email);
+    if (!user) return `<span class="user-chip unknown">@${email}</span>`;
+
+    return `
+        <span class="user-chip" title="${user.email}">
+            <span class="chip-avatar">${user.nome.charAt(0)}</span>
+            ${user.nome}
+        </span>
+    `;
+}
+
+// Para múltiplos (array de e-mails)
+function renderUsersFromEmails(emails, usuariosCache) {
+    if (!emails || !Array.isArray(emails)) return '-';
+    return emails.map(email => renderUserFromEmail(email, usuariosCache)).join(' ');
+}
+```
+
+#### Benefícios da Normalização de Usuários
+
+| Benefício | Descrição |
+|-----------|-----------|
+| **Filtros Avançados** | "Mostrar todos os testes do executor João" |
+| **Métricas por Usuário** | "Quantos testes cada pessoa executou" |
+| **Notificações** | Enviar alerta quando atribuído como responsável |
+| **Dashboard Pessoal** | "Minhas tarefas", "Meus riscos" |
+| **Auditoria** | Rastrear quem fez o quê |
+| **Consistência** | Nome sempre igual em todas as entidades |
+| **Autocomplete** | Sugestões ao digitar nome |
+
+#### Entidade Participantes - Caso Especial
+
+A entidade **Participantes** pode se tornar uma **view** da tabela `usuarios` filtrada por projeto:
+
+```sql
+-- Participantes = Usuários vinculados ao projeto com papel específico
+CREATE VIEW projeto_participantes AS
+SELECT
+    pu.id,
+    u.id as usuario_id,
+    u.nome,
+    u.email,
+    u.avatar,
+    pu.papel,        -- papel no projeto (key_user, stakeholder, equipe)
+    pu.area,         -- área no projeto
+    pu.status,       -- ativo, licença, desligado
+    pu.projeto_id
+FROM projeto_usuarios pu
+JOIN usuarios u ON pu.usuario_id = u.id;
+```
+
+**Vantagens:**
+- Usuário cadastrado uma vez no sistema
+- Pode participar de múltiplos projetos
+- Dados sempre sincronizados
+- Login único
+
+#### Migration de Dados Existentes
+
+```sql
+-- 1. Criar coluna de referência
+ALTER TABLE projeto_dados ADD COLUMN executor_id INTEGER;
+
+-- 2. Mapear nomes existentes para IDs de usuários
+UPDATE projeto_dados
+SET executor_id = (
+    SELECT u.id FROM usuarios u
+    WHERE LOWER(u.nome) LIKE '%' || LOWER(json_extract(dados, '$.executor')) || '%'
+    LIMIT 1
+)
+WHERE entidade_id = 22
+AND json_extract(dados, '$.executor') IS NOT NULL;
+
+-- 3. Atualizar JSON com ID
+UPDATE projeto_dados
+SET dados = json_set(dados, '$.executor_id', executor_id)
+WHERE executor_id IS NOT NULL;
+
+-- 4. Log de nomes não encontrados para revisão manual
+SELECT DISTINCT json_extract(dados, '$.executor') as executor_nome
+FROM projeto_dados
+WHERE entidade_id = 22
+AND executor_id IS NULL
+AND json_extract(dados, '$.executor') IS NOT NULL;
+```
+
+---
+
+#### 27.1.12 TABELAS DE REFERÊNCIA A CRIAR/EXPANDIR
+
+**Tabela: `sistemas_integrados`** (expandir se necessário)
+```sql
+INSERT INTO sistemas_integrados (id, nome, tipo, status) VALUES
+('salesforce', 'Salesforce CRM', 'CRM', 'ativo'),
+('sap', 'SAP ECC', 'ERP', 'ativo'),
+('ascp', 'ASCP', 'Middleware', 'ativo'),
+('fscm', 'FSCM', 'Financeiro', 'ativo'),
+('sintegra', 'SINTEGRA', 'Consulta Externa', 'ativo');
+```
+
+**Tabela: `teste_categorias`** (nova)
+```sql
+CREATE TABLE IF NOT EXISTS teste_categorias (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    codigo TEXT UNIQUE NOT NULL,
+    nome TEXT NOT NULL,
+    cor TEXT,
+    icone TEXT,
+    descricao TEXT,
+    ordem INTEGER DEFAULT 0,
+    ativo INTEGER DEFAULT 1
+);
+```
+
+**Tabela: `areas_organizacionais`** (nova)
+```sql
+CREATE TABLE IF NOT EXISTS areas_organizacionais (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    codigo TEXT UNIQUE NOT NULL,
+    nome TEXT NOT NULL,
+    tipo TEXT, -- 'credito', 'interna', 'regional'
+    descricao TEXT,
+    ativo INTEGER DEFAULT 1
+);
+
+-- Áreas de Crédito
+INSERT INTO areas_organizacionais (codigo, nome, tipo) VALUES
+('BBA', 'Limite Interno Belgo', 'credito'),
+('CSP', 'Supply (Belgo Cash)', 'credito'),
+('DBA', 'Distribuição', 'credito'),
+('ALPE', 'Aços Longos Pernambuco', 'credito');
+```
+
+---
+
+#### 27.1.8 CONVERSÃO DE CAMPOS PIPE-DELIMITED PARA JSON
+
+**Formato Atual (problemático)**:
+```
+passos: "1. Acessar tela|2. Clicar botão|3. Verificar resultado"
+participantes: "João Silva|Maria Santos|Pedro Costa"
+```
+
+**Formato Proposto (estruturado)**:
+```json
+{
+  "passos": [
+    {"ordem": 1, "descricao": "Acessar tela", "tempo_estimado": "5min"},
+    {"ordem": 2, "descricao": "Clicar botão", "tempo_estimado": "2min"},
+    {"ordem": 3, "descricao": "Verificar resultado", "tempo_estimado": "3min"}
+  ],
+  "participantes": [
+    {"id": 1, "nome": "João Silva", "cargo": "Gestor"},
+    {"id": 2, "nome": "Maria Santos", "cargo": "Executor"}
+  ]
+}
+```
+
+**Benefícios**:
+- Facilita edição individual de itens
+- Permite ordenação/reordenação
+- Suporta campos adicionais por item
+- Melhor validação e consistência
+
+---
+
+#### 27.1.9 PLANO DE MIGRAÇÃO DE DADOS
+
+**IMPORTANTE**: Não perder dados existentes!
+
+**Etapa 1: Backup**
+```sql
+-- Criar tabela de backup antes de qualquer alteração
+CREATE TABLE projeto_dados_backup AS SELECT * FROM projeto_dados;
+```
+
+**Etapa 2: Análise de valores únicos**
+```sql
+-- Script para extrair valores únicos de cada campo TEXT
+SELECT DISTINCT json_extract(dados, '$.categoria') as categoria
+FROM projeto_dados WHERE entidade_id = 22;
+```
+
+**Etapa 3: Popular opções**
+```sql
+-- Inserir valores únicos como opções do campo
+INSERT INTO projeto_entidade_opcoes (entidade_id, campo_codigo, valor, label, ordem)
+SELECT DISTINCT 22, 'categoria',
+       json_extract(dados, '$.categoria'),
+       json_extract(dados, '$.categoria'),
+       ROW_NUMBER() OVER ()
+FROM projeto_dados WHERE entidade_id = 22
+AND json_extract(dados, '$.categoria') IS NOT NULL;
+```
+
+**Etapa 4: Atualizar tipo do campo**
+```sql
+UPDATE projeto_entidade_campos
+SET tipo = 'select', subtipo = 'dropdown'
+WHERE entidade_id = 22 AND codigo = 'categoria';
+```
+
+**Etapa 5: Validação**
+- Verificar se todos os dados existentes têm opção correspondente
+- Testar formulários de criação/edição
+- Testar filtros e métricas
+
+---
+
+### 27.2 UTF-8 BRASIL - ACENTOS E CARACTERES ESPECIAIS
+
+#### Objetivo
+Garantir que **todos os labels, textos, mensagens e dados** respeitem UTF-8 com acentos e caracteres especiais do português brasileiro.
+
+#### Áreas a Revisar
+
+**1. Labels de Campos (projeto_entidade_campos)**
+| Verificar | Exemplo Correto |
+|-----------|-----------------|
+| label | "Descrição", "Situação", "Próximos Passos" |
+| placeholder | "Digite a descrição..." |
+| ajuda | "Este campo é obrigatório" |
+
+**2. Opções de Select (projeto_entidade_opcoes)**
+| Verificar | Exemplo Correto |
+|-----------|-----------------|
+| label | "Em Andamento", "Concluído", "Não Iniciado" |
+| valor | Pode manter sem acento para consistência técnica |
+
+**3. Menus (projeto_menus)**
+| Verificar | Exemplo Correto |
+|-----------|-----------------|
+| titulo | "Reuniões", "Cronograma", "Configuração" |
+
+**4. Mensagens do Sistema (JS/HTML)**
+- Mensagens de erro: "Campo obrigatório", "Operação concluída"
+- Títulos de modal: "Editar Registro", "Confirmar Exclusão"
+- Botões: "Salvar", "Cancelar", "Adicionar"
+
+#### Script de Verificação
+```javascript
+// Verificar labels sem acentos que deveriam ter
+const palavrasComAcento = {
+    'Descricao': 'Descrição',
+    'Situacao': 'Situação',
+    'Proximos': 'Próximos',
+    'Acoes': 'Ações',
+    'Reunioes': 'Reuniões',
+    'Configuracao': 'Configuração',
+    'Execucao': 'Execução',
+    'Conclusao': 'Conclusão',
+    'Usuario': 'Usuário',
+    'Usuarios': 'Usuários'
+};
+```
+
+#### Migration de Correção UTF-8
+```sql
+-- Corrigir labels de campos
+UPDATE projeto_entidade_campos SET label = 'Descrição' WHERE label = 'Descricao';
+UPDATE projeto_entidade_campos SET label = 'Situação' WHERE label = 'Situacao';
+UPDATE projeto_entidade_campos SET label = 'Ações' WHERE label = 'Acoes';
+-- ... continuar para todos os campos
+```
+
+---
+
+### 27.3 CRUD INLINE E REGISTRO DE AUTORIA
+
+#### 27.3.1 CRUD Inline em Todas as Entidades
+
+**Objetivo**: Garantir que todas as entidades suportem edição inline diretamente na listagem, sem necessidade de abrir modal.
+
+**Status Atual por Entidade**:
+| Entidade | CRUD Inline | Status |
+|----------|-------------|--------|
+| Jornadas | ✅ Habilitado | Verificar funcionamento |
+| Participantes | ✅ Habilitado | Verificar funcionamento |
+| Reuniões | ✅ Habilitado | Verificar funcionamento |
+| Testes | ✅ Habilitado | Verificar funcionamento |
+| Glossário | ✅ Habilitado | Verificar funcionamento |
+| Riscos | ✅ Habilitado | Verificar funcionamento |
+| Cronograma | ⚠️ Verificar | Testar |
+| Timeline | ⚠️ Verificar | Testar |
+| Documentos | ⚠️ Verificar | Testar |
+| Pontos Críticos | ⚠️ Verificar | Testar |
+
+**Verificações Necessárias**:
+- [ ] Botão "Editar" aparece em cada registro
+- [ ] Campos se transformam em inputs ao clicar
+- [ ] Botões "Salvar" e "Cancelar" aparecem
+- [ ] Dados são salvos corretamente via API
+- [ ] Feedback visual de sucesso/erro
+
+#### 27.3.2 Registro de Autoria (Auditoria)
+
+**Objetivo**: Registrar **quem criou** e **quem modificou** cada registro para fins de histórico e rastreabilidade.
+
+**Campos a Adicionar em `projeto_dados`**:
+```sql
+ALTER TABLE projeto_dados ADD COLUMN criado_por INTEGER REFERENCES usuarios(id);
+ALTER TABLE projeto_dados ADD COLUMN criado_em TEXT DEFAULT (datetime('now'));
+ALTER TABLE projeto_dados ADD COLUMN modificado_por INTEGER REFERENCES usuarios(id);
+ALTER TABLE projeto_dados ADD COLUMN modificado_em TEXT;
+```
+
+**Implementação no Backend**:
+```javascript
+// POST /api/projetos/[id]/entidades/[entidadeId]/dados.js
+// Ao criar registro
+const resultado = await db.prepare(`
+    INSERT INTO projeto_dados (entidade_id, dados, criado_por, criado_em)
+    VALUES (?, ?, ?, datetime('now'))
+`).bind(entidadeId, JSON.stringify(dados), usuarioId).run();
+
+// PUT - Ao atualizar registro
+const resultado = await db.prepare(`
+    UPDATE projeto_dados
+    SET dados = ?, modificado_por = ?, modificado_em = datetime('now')
+    WHERE id = ?
+`).bind(JSON.stringify(dados), usuarioId, registroId).run();
+```
+
+**Exibição no Frontend**:
+- Tooltip ou rodapé do card: "Criado por João em 15/01/2026"
+- Modal de detalhes: Seção "Histórico" com criador e última modificação
+- Opção de ver histórico completo de alterações (futuro)
+
+---
+
+### 27.4 RESPONSIVIDADE - SEM OVERLAYS PARA DESKTOP E MOBILE
+
+#### Objetivo
+Garantir que a plataforma funcione perfeitamente em:
+- **Desktop** (1920px, 1440px, 1366px, 1280px)
+- **Tablet** (1024px, 768px)
+- **Mobile** (414px, 375px, 320px)
+
+#### Problemas Comuns a Corrigir
+
+**1. Modais que cobrem toda a tela (overlays)**
+- Modais devem ter tamanho máximo e scroll interno
+- Em mobile, modais devem ocupar 95% da largura
+- Botão de fechar sempre visível
+
+**2. Tabelas não responsivas**
+- Implementar scroll horizontal em mobile
+- Ou converter para cards em telas pequenas
+- Esconder colunas menos importantes em mobile
+
+**3. Sidebar que bloqueia conteúdo**
+- Menu hambúrguer em mobile
+- Sidebar colapsável em tablet
+- Sidebar fixa em desktop
+
+**4. Formulários não adaptáveis**
+- Campos devem ocupar 100% em mobile
+- Labels acima dos campos em mobile (não ao lado)
+- Botões empilhados em mobile
+
+#### Breakpoints Padrão
+```css
+/* Mobile first */
+/* Base: Mobile (< 576px) */
+
+/* Small devices (landscape phones) */
+@media (min-width: 576px) { }
+
+/* Medium devices (tablets) */
+@media (min-width: 768px) { }
+
+/* Large devices (desktops) */
+@media (min-width: 992px) { }
+
+/* Extra large devices (large desktops) */
+@media (min-width: 1200px) { }
+```
+
+#### Checklist de Verificação por Página
+
+**Páginas a Testar**:
+- [ ] `/pages/projeto-dinamico.html` (Dashboard)
+- [ ] `/pages/entidade.html` (Listagem de dados)
+- [ ] `/admin/entidades.html` (Admin de entidades)
+- [ ] `/admin/menus.html` (Admin de menus)
+- [ ] `/admin/usuarios.html` (Admin de usuários)
+- [ ] `/admin/dashboard-config.html` (Config de dashboard)
+
+**Para cada página verificar**:
+- [ ] Nenhum elemento cortado ou fora da tela
+- [ ] Nenhum scroll horizontal não intencional
+- [ ] Textos legíveis (min 14px em mobile)
+- [ ] Botões clicáveis (min 44x44px touch target)
+- [ ] Modais não bloqueiam interação
+- [ ] Menu acessível em todas as resoluções
+
+---
+
+### 27.5 TOUR GUIDE - ONBOARDING DE USUÁRIOS
+
+#### Objetivo
+Implementar um sistema de tour guiado para ensinar usuários a usar cada funcionalidade da plataforma, funcionalidade por funcionalidade.
+
+#### Biblioteca Sugerida
+**Shepherd.js** - Leve, customizável, sem dependências
+- CDN: `https://cdn.jsdelivr.net/npm/shepherd.js@latest/dist/js/shepherd.min.js`
+- CSS: `https://cdn.jsdelivr.net/npm/shepherd.js@latest/dist/css/shepherd.css`
+
+#### Tours a Implementar
+
+**1. Tour de Boas-Vindas (primeiro acesso)**
+```javascript
+const tourBoasVindas = new Shepherd.Tour({
+    defaultStepOptions: {
+        cancelIcon: { enabled: true },
+        classes: 'belgo-tour',
+        scrollTo: { behavior: 'smooth', block: 'center' }
+    }
+});
+
+tourBoasVindas.addStep({
+    id: 'bem-vindo',
+    text: 'Bem-vindo à Plataforma Belgo BBP! Vamos te mostrar as principais funcionalidades.',
+    buttons: [
+        { text: 'Pular', action: tourBoasVindas.cancel },
+        { text: 'Começar', action: tourBoasVindas.next }
+    ]
+});
+
+tourBoasVindas.addStep({
+    id: 'menu-lateral',
+    text: 'Use o menu lateral para navegar entre as diferentes áreas do projeto.',
+    attachTo: { element: '.sidebar', on: 'right' },
+    buttons: [
+        { text: 'Anterior', action: tourBoasVindas.back },
+        { text: 'Próximo', action: tourBoasVindas.next }
+    ]
+});
+
+tourBoasVindas.addStep({
+    id: 'seletor-projeto',
+    text: 'Aqui você pode trocar entre diferentes projetos.',
+    attachTo: { element: '.project-selector', on: 'bottom' },
+    buttons: [
+        { text: 'Anterior', action: tourBoasVindas.back },
+        { text: 'Próximo', action: tourBoasVindas.next }
+    ]
+});
+```
+
+**2. Tour de Entidades**
+- Como visualizar dados
+- Como filtrar e buscar
+- Como criar novo registro
+- Como editar inline
+- Como exportar dados
+
+**3. Tour do Dashboard**
+- Entender os widgets
+- Como interagir com gráficos
+- Navegação rápida
+
+**4. Tour do Admin (apenas para admins)**
+- Criar nova entidade
+- Configurar campos
+- Configurar layout
+- Gerenciar menus
+
+#### Controle de Exibição
+```javascript
+// Verificar se usuário já viu o tour
+const tourVisto = localStorage.getItem('tour_boas_vindas_visto');
+if (!tourVisto) {
+    tourBoasVindas.start();
+    tourBoasVindas.on('complete', () => {
+        localStorage.setItem('tour_boas_vindas_visto', 'true');
+    });
+}
+
+// Botão para reiniciar tour
+document.getElementById('btn-ajuda').addEventListener('click', () => {
+    tourBoasVindas.start();
+});
+```
+
+#### Persistência de Progresso
+```sql
+-- Tabela para controlar tours vistos por usuário
+CREATE TABLE IF NOT EXISTS usuario_tours (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    usuario_id INTEGER NOT NULL REFERENCES usuarios(id),
+    tour_codigo TEXT NOT NULL,
+    completado INTEGER DEFAULT 0,
+    data_inicio TEXT,
+    data_conclusao TEXT,
+    UNIQUE(usuario_id, tour_codigo)
+);
+```
+
+---
+
+### 27.6 TOOLTIPS - AJUDA CONTEXTUAL
+
+#### Objetivo
+Implementar tooltips informativos em campos e elementos da interface para ajudar usuários a entender cada funcionalidade.
+
+#### Níveis de Tooltips
+
+**1. Tooltips de Campo (formulários)**
+- Usar campo `ajuda` já existente em `projeto_entidade_campos`
+- Exibir ícone "?" ao lado do label
+- Ao passar o mouse, mostrar tooltip com texto de ajuda
+
+**2. Tooltips de Entidade (cards/listagens)**
+- Descrição da entidade ao passar mouse no título
+- Usar campo `descricao` de `projeto_entidades`
+
+**3. Tooltips de Ação (botões)**
+- Explicar o que cada botão faz
+- Ex: "Exportar dados para CSV", "Abrir no Microsoft Teams"
+
+#### Implementação CSS/JS
+
+**CSS para Tooltips**:
+```css
+.tooltip-trigger {
+    position: relative;
+    cursor: help;
+}
+
+.tooltip-trigger::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 12px;
+    background: #333;
+    color: white;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+    z-index: 1000;
+}
+
+.tooltip-trigger:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Ícone de ajuda */
+.help-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    color: #666;
+    font-size: 11px;
+    margin-left: 4px;
+    cursor: help;
+}
+```
+
+**HTML de Exemplo**:
+```html
+<label for="categoria">
+    Categoria
+    <span class="help-icon tooltip-trigger" data-tooltip="Selecione a categoria do teste para facilitar a organização">?</span>
+</label>
+```
+
+**Integração com config-renderer.js**:
+```javascript
+// Ao renderizar campo, verificar se tem ajuda
+if (campo.ajuda) {
+    labelHtml += `<span class="help-icon tooltip-trigger" data-tooltip="${campo.ajuda}">?</span>`;
+}
+```
+
+#### Tooltips em Entidades
+```javascript
+// Ao renderizar título da entidade
+const tituloHtml = `
+    <h2 class="tooltip-trigger" data-tooltip="${entidade.descricao || 'Sem descrição'}">
+        ${entidade.nome}
+    </h2>
+`;
+```
+
+---
+
+### 27.7 CRONOGRAMA DE IMPLEMENTAÇÃO
+
+| Fase | Descrição | Prioridade | Esforço |
+|------|-----------|------------|---------|
+| 27.1.1-27.1.6 | Normalização Testes, Jornadas, Participantes, Reuniões, Glossário, Riscos | ALTA | 10h |
+| 27.1.7-27.1.10 | Normalização Documentos, Cronograma, Timeline, Pontos Críticos | MÉDIA | 6h |
+| 27.1.12 | Criar tabelas de referência | ALTA | 3h |
+| 27.1.13 | Converter pipe-delimited para JSON | MÉDIA | 6h |
+| 27.1.14 | Migração de dados existentes (backup + conversão) | ALTA | 4h |
+| 27.2 | Revisão UTF-8 completa (labels, textos, dados) | ALTA | 3h |
+| 27.3.1 | Verificar CRUD inline todas 10 entidades | MÉDIA | 3h |
+| 27.3.2 | Implementar registro de autoria | ALTA | 4h |
+| 27.4 | Responsividade sem overlays (desktop/mobile) | ALTA | 8h |
+| 27.5 | Tour Guide (Shepherd.js) | MÉDIA | 6h |
+| 27.6 | Tooltips em campos e entidades | MÉDIA | 3h |
+
+**Total Estimado**: ~56 horas de desenvolvimento
+
+---
+
+### 27.8 ARQUIVOS A CRIAR/MODIFICAR
+
+**Migrations**:
+- `migrations/060_normalizacao_campos_select.sql` - Converter campos para SELECT
+- `migrations/061_tabelas_referencia.sql` - Criar tabelas de referência
+- `migrations/062_auditoria_campos.sql` - Adicionar campos de autoria
+- `migrations/063_correcao_utf8_completa.sql` - Correção UTF-8 final
+
+**Frontend**:
+- `shared/js/tour-guide.js` - Implementação dos tours
+- `shared/js/tooltips.js` - Sistema de tooltips
+- `shared/css/tour-guide.css` - Estilos dos tours
+- `shared/css/tooltips.css` - Estilos dos tooltips
+- `shared/css/responsive.css` - Melhorias responsivas
+
+**Backend**:
+- `functions/api/projetos/[id]/entidades/[entidadeId]/dados.js` - Adicionar auditoria
+
+---
+
+### 27.9 CRITÉRIOS DE SUCESSO
+
+- [ ] Todos os campos identificados convertidos para SELECT/REFERENCE
+- [ ] Nenhum dado perdido durante migração
+- [ ] Todos os labels e textos com acentos corretos (UTF-8)
+- [ ] CRUD inline funcionando em 100% das entidades
+- [ ] Registro de criador/modificador em todos os registros
+- [ ] Plataforma funcional em mobile sem overlays
+- [ ] Tour de boas-vindas implementado e testado
+- [ ] Tooltips em todos os campos com texto de ajuda
+- [ ] Testes em Chrome, Firefox, Safari, Edge
+- [ ] Testes em iOS Safari e Android Chrome
+
+---
+
+### 27.10 TESTES DE QUALIDADE E VALIDAÇÃO
+
+Esta seção documenta todos os testes necessários para garantir que a plataforma esteja 100% correta e funcional.
+
+---
+
+#### 27.10.1 TESTES DE NORMALIZAÇÃO DE DADOS
+
+| # | Teste | Verificação | Status |
+|---|-------|-------------|--------|
+| 1 | Menus com acentos | Reuniões, Glossário, Pontos Críticos, Configurações, Administração | [ ] |
+| 2 | Entidades com acentos | Ponto Crítico, Pontos Críticos (nome_plural) | [ ] |
+| 3 | Campos com acentos | Definição, Descrição, Código, Observações, Execução | [ ] |
+| 4 | Dados JSON - categoria | Nenhum registro com "workflow_pricing" (deve ser "Workflow Pricing") | [ ] |
+| 5 | Dados JSON - status | Nenhum registro com "pendente" minúsculo (deve ser "Pendente") | [ ] |
+| 6 | Opções de SELECT | Todos os valores com inicial maiúscula e acentos corretos | [ ] |
+| 7 | Projetos com acentos | Descrições e nomes corrigidos | [ ] |
+
+**Script de Verificação**: `node scripts/analyze_backup.js` (deve retornar 0 inconsistências)
+
+---
+
+#### 27.10.2 TESTES DE INTERFACE - DESKTOP
+
+| # | Página | Verificações | Status |
+|---|--------|--------------|--------|
+| 1 | Login | Campos visíveis, botão funciona, redirect após login | [ ] |
+| 2 | Landing | Cards de projetos exibidos, links funcionais | [ ] |
+| 3 | Dashboard | Widgets carregam, dados corretos | [ ] |
+| 4 | Testes (tabela) | Colunas visíveis, dados formatados, filtros funcionam | [ ] |
+| 5 | Jornadas (cards) | Cards renderizam, expansão funciona | [ ] |
+| 6 | Documentos (tabela) | Categorias com acentos, links funcionais | [ ] |
+| 7 | Reuniões (timeline) | Ordenação cronológica, participantes exibidos | [ ] |
+| 8 | Glossário (agrupado) | Grupos por categoria, busca funciona | [ ] |
+| 9 | Participantes (grid) | Cards com avatar, informações completas | [ ] |
+| 10 | Configurações | Campos editáveis, salvamento funciona | [ ] |
+| 11 | Timeline | Eventos ordenados por data | [ ] |
+| 12 | Cronograma | Eventos visíveis, status coloridos | [ ] |
+| 13 | Pontos Críticos | Kanban funcional, drag-and-drop | [ ] |
+| 14 | Admin Entidades | CRUD funciona, campos SELECT editáveis | [ ] |
+| 15 | Admin Menus | CRUD funciona, ordenação drag-and-drop | [ ] |
+
+---
+
+#### 27.10.3 TESTES DE INTERFACE - MOBILE (< 768px)
+
+| # | Verificação | Páginas Afetadas | Status |
+|---|-------------|------------------|--------|
+| 1 | Menu hamburger funciona | Todas | [ ] |
+| 2 | Sidebar fecha ao clicar fora | Todas | [ ] |
+| 3 | Tabelas com scroll horizontal | Testes, Documentos | [ ] |
+| 4 | Cards empilhados verticalmente | Jornadas, Participantes | [ ] |
+| 5 | Formulários responsivos | Criar/Editar entidade | [ ] |
+| 6 | Modais sem overflow | Criar, Editar, Detalhes | [ ] |
+| 7 | Botões com tamanho touch (44px+) | Todas | [ ] |
+| 8 | Fontes legíveis (14px+) | Todas | [ ] |
+| 9 | Não há overlays fixos bloqueando | Todas | [ ] |
+| 10 | Navegação por swipe | Timeline, Cronograma | [ ] |
+
+---
+
+#### 27.10.4 TESTES DE FUNCIONALIDADES CRUD
+
+| # | Entidade | Criar | Editar | Excluir | Inline | Status |
+|---|----------|-------|--------|---------|--------|--------|
+| 1 | Testes | [ ] | [ ] | [ ] | [ ] | |
+| 2 | Jornadas | [ ] | [ ] | [ ] | [ ] | |
+| 3 | Documentos | [ ] | [ ] | [ ] | [ ] | |
+| 4 | Reuniões | [ ] | [ ] | [ ] | [ ] | |
+| 5 | Glossário | [ ] | [ ] | [ ] | [ ] | |
+| 6 | Participantes | [ ] | [ ] | [ ] | [ ] | |
+| 7 | Timeline | [ ] | [ ] | [ ] | [ ] | |
+| 8 | Cronograma | [ ] | [ ] | [ ] | [ ] | |
+| 9 | Pontos Críticos | [ ] | [ ] | [ ] | [ ] | |
+| 10 | Riscos | [ ] | [ ] | [ ] | [ ] | |
+
+**Verificar para cada operação**:
+- Validação de campos obrigatórios
+- Feedback visual (toast/mensagem)
+- Atualização da lista sem reload
+- Campos SELECT renderizam dropdown
+- Campos com acentos salvam corretamente
+
+---
+
+#### 27.10.5 TESTES DE API
+
+| # | Endpoint | Método | Verificação | Status |
+|---|----------|--------|-------------|--------|
+| 1 | `/api/auth/login` | POST | Retorna token, cookie httpOnly | [ ] |
+| 2 | `/api/auth/me` | GET | Retorna usuário logado | [ ] |
+| 3 | `/api/projetos` | GET | Lista projetos do usuário | [ ] |
+| 4 | `/api/projetos/:id` | GET | Retorna projeto específico | [ ] |
+| 5 | `/api/projetos/:id/menus` | GET | Menus com acentos corretos | [ ] |
+| 6 | `/api/projetos/:id/entidades` | GET | Entidades com config | [ ] |
+| 7 | `/api/projetos/:id/dados/:slug` | GET | Dados da entidade | [ ] |
+| 8 | `/api/projetos/:id/dados/:slug` | POST | Cria registro | [ ] |
+| 9 | `/api/projetos/:id/dados/:slug/:id` | PUT | Atualiza registro | [ ] |
+| 10 | `/api/projetos/:id/dados/:slug/:id` | DELETE | Remove registro | [ ] |
+
+**Verificar para cada endpoint**:
+- Status code correto (200, 201, 400, 401, 404)
+- Content-Type: application/json; charset=utf-8
+- Dados retornados com acentos corretos
+- Erros com mensagens em português
+
+---
+
+#### 27.10.6 TESTES DE COMPATIBILIDADE DE BROWSERS
+
+| # | Browser | Versão Mínima | Desktop | Mobile | Status |
+|---|---------|---------------|---------|--------|--------|
+| 1 | Chrome | 90+ | [ ] | [ ] | |
+| 2 | Firefox | 88+ | [ ] | [ ] | |
+| 3 | Safari | 14+ | [ ] | [ ] | |
+| 4 | Edge | 90+ | [ ] | N/A | |
+| 5 | Safari iOS | 14+ | N/A | [ ] | |
+| 6 | Chrome Android | 90+ | N/A | [ ] | |
+
+**Verificar em cada browser**:
+- CSS Grid e Flexbox funcionam
+- Fetch API funciona
+- LocalStorage/SessionStorage funciona
+- Acentos renderizam corretamente
+- Inputs e formulários funcionam
+
+---
+
+#### 27.10.7 TESTES DE SEGURANÇA
+
+| # | Verificação | Método de Teste | Status |
+|---|-------------|-----------------|--------|
+| 1 | Autenticação obrigatória | Acessar páginas sem login | [ ] |
+| 2 | Token expira corretamente | Aguardar expiração | [ ] |
+| 3 | CORS configurado | Requisição de domínio externo | [ ] |
+| 4 | SQL Injection | Tentar injetar em campos | [ ] |
+| 5 | XSS | Tentar injetar scripts | [ ] |
+| 6 | Permissões por projeto | Acessar projeto não autorizado | [ ] |
+| 7 | Cookies httpOnly | Inspecionar cookies | [ ] |
+| 8 | HTTPS obrigatório | Acessar via HTTP | [ ] |
+
+---
+
+#### 27.10.8 TESTES DE REGRESSÃO
+
+| # | Funcionalidade | Verificação | Status |
+|---|----------------|-------------|--------|
+| 1 | GTM Clone funciona | Todas as páginas carregam | [ ] |
+| 2 | Rede Ativa funciona | Projeto acessível | [ ] |
+| 3 | Roadmap 2026 funciona | Projeto acessível | [ ] |
+| 4 | Filtros não quebram | Aplicar filtros em todas entidades | [ ] |
+| 5 | Busca funciona | Buscar em glossário, testes | [ ] |
+| 6 | Exportação funciona | Exportar dados de tabelas | [ ] |
+| 7 | Deploy não quebra | Após deploy, todas features OK | [ ] |
+
+---
+
+### CHECKLIST FINAL DE QUALIDADE
+
+```
+[ ] 1. Backup exportado antes de qualquer alteração
+[ ] 2. Análise de inconsistências retorna ZERO problemas
+[ ] 3. Login funciona com credenciais corretas
+[ ] 4. Todos os 4 projetos ativos acessíveis
+[ ] 5. Menus exibem acentos corretos (Reuniões, Glossário, etc.)
+[ ] 6. Dados de Testes mostram "Workflow Pricing" (não "workflow_pricing")
+[ ] 7. Status exibem "Pendente" (não "pendente")
+[ ] 8. Mobile responsivo sem overlays bloqueando
+[ ] 9. CRUD funciona em todas 10 entidades
+[ ] 10. Deploy Cloudflare completa sem erros
+```
+
+---
+
+### VERIFICAÇÃO PÓS-IMPLEMENTAÇÃO
+
+1. Executar `node scripts/analyze_backup.js` - deve retornar 0 inconsistências
+2. Testar login no browser
+3. Navegar por todas as páginas do projeto GTM
+4. Verificar menus com acentos
+5. Verificar dados de Testes (categoria e status)
+6. Testar em viewport mobile (< 768px)
+7. Executar `npm run deploy` e verificar produção
+
+---
 
