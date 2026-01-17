@@ -4075,12 +4075,54 @@ Realizar testes detalhados na entidade Jornadas (id=18) verificando todas as se�
 
 | Item | Prioridade | Status |
 |------|------------|--------|
-| Implementar CRUD de Pendências | Alta | ⏳ Pendente |
-| Adicionar campo Status nas Pendências | Alta | ⏳ Pendente |
-| Adicionar campo Responsável (user_mention) nas Pendências | Alta | ⏳ Pendente |
+| Implementar CRUD de Pendências | Alta | ✅ CONCLUÍDO |
+| Adicionar campo Status nas Pendências | Alta | ✅ CONCLUÍDO |
+| Adicionar campo Responsável (user_mention) nas Pendências | Alta | ✅ CONCLUÍDO |
 | Testar criação de nova Jornada | Média | ⏳ Pendente |
 | Testar exclusão de Jornada | Média | ⏳ Pendente |
 | Testar edição inline completa | Média | ⏳ Pendente |
+
+### Implementação CRUD Pendências - 17/01/2026
+
+**Commit**: `3b3a5d6` - Feat: FASE 28 - CRUD de Pendências e correções Jornadas
+
+**Arquivos Modificados**:
+| Arquivo | Linhas | Descrição |
+|---------|--------|-----------|
+| `shared/js/config-renderer.js` | +463 | CRUD completo de pendências |
+| `shared/css/config-renderer.css` | +271 | Estilos lista_crud e modal |
+| `js/app.js` | +14 | Parâmetro projeto na URL |
+| `pages/entidade.html` | +2 | Link com projeto |
+| `pages/dashboard.html` | +2 | Link com projeto |
+
+**Funcionalidades Implementadas**:
+1. **renderSecaoListaCrud()** - Renderiza lista de pendências com status e responsável
+2. **adicionarItemListaCrud()** - Modal para nova pendência
+3. **editarItemListaCrud()** - Modal para editar pendência existente
+4. **excluirItemListaCrud()** - Exclusão com confirmação
+5. **salvarItemListaCrud()** - Salva no banco via API PUT
+6. **atualizarCampoListaCrud()** - Atualiza campo no registro
+7. **aplicarFiltrosURL()** - Filtros ?ids= e ?busca= para links "Ver Testes"
+
+**Configuração D1**:
+- Seção `pendencias` alterada de `badges` para `lista_crud`
+- Campo `pendencias` alterado de `textarea` para `json`
+- Script: `scripts/update_pendencias_config.js`
+
+**Estrutura JSON das Pendências**:
+```json
+[
+  {
+    "id": 1705500000000,
+    "descricao": "Texto da pendência",
+    "status": "Pendente|Em Andamento|Concluído",
+    "responsavel": {
+      "email": "usuario@empresa.com",
+      "nome": "Nome do Usuário"
+    }
+  }
+]
+```
 
 ---
 
