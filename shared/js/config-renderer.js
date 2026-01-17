@@ -4909,7 +4909,7 @@ const ConfigRenderer = {
         }
 
         const modalHtml = `
-            <div id="modal-lista-crud" class="modal-overlay" style="display:flex">
+            <div id="modal-lista-crud" class="modal-overlay active" style="display:flex">
                 <div class="modal-content" style="max-width:500px">
                     <div class="modal-header">
                         <h3>Nova Pendência</h3>
@@ -5000,7 +5000,7 @@ const ConfigRenderer = {
         const responsavelEmail = item.responsavel ? (typeof item.responsavel === 'object' ? item.responsavel.email : item.responsavel) : '';
 
         const modalHtml = `
-            <div id="modal-lista-crud" class="modal-overlay" style="display:flex">
+            <div id="modal-lista-crud" class="modal-overlay active" style="display:flex">
                 <div class="modal-content" style="max-width:500px">
                     <div class="modal-header">
                         <h3>Editar Pendência</h3>
