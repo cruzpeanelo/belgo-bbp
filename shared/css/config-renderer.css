@@ -4557,3 +4557,274 @@
         }
     }
 }
+
+/* =========================================
+   FASE 28: Lista CRUD (Pendências)
+   ========================================= */
+
+.secao-lista-crud {
+    margin-top: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.lista-crud-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.lista-crud-header .secao-titulo {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+.btn-lista-crud-add {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn-lista-crud-add:hover {
+    background: #43a047;
+}
+
+.btn-lista-crud-add .btn-icon {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.lista-crud-itens {
+    padding: 8px;
+}
+
+.lista-crud-vazio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+    color: #999;
+}
+
+.lista-crud-vazio-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.lista-crud-vazio-texto {
+    font-size: 14px;
+}
+
+.lista-crud-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 12px;
+    margin-bottom: 8px;
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 6px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.lista-crud-item:last-child {
+    margin-bottom: 0;
+}
+
+.lista-crud-item:hover {
+    border-color: #d0d0d0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.lista-crud-item-content {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.lista-crud-item-status {
+    flex-shrink: 0;
+}
+
+.lista-crud-item-descricao {
+    flex: 1;
+    min-width: 200px;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+}
+
+.lista-crud-item-responsavel {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #666;
+}
+
+.lista-crud-item-responsavel .avatar-mini {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+}
+
+.lista-crud-item-responsavel .responsavel-nome {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.lista-crud-item-acoes {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+    margin-left: 12px;
+}
+
+.btn-lista-crud-edit,
+.btn-lista-crud-delete {
+    padding: 6px 8px;
+    background: transparent;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.btn-lista-crud-edit:hover {
+    background: #e3f2fd;
+    border-color: #2196f3;
+}
+
+.btn-lista-crud-delete:hover {
+    background: #ffebee;
+    border-color: #f44336;
+}
+
+/* Badges de status */
+.badge-yellow {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffc107;
+}
+
+.badge-blue {
+    background: #cce5ff;
+    color: #004085;
+    border: 1px solid #007bff;
+}
+
+.badge-green {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #28a745;
+}
+
+.badge-gray {
+    background: #e9ecef;
+    color: #495057;
+    border: 1px solid #6c757d;
+}
+
+/* Modal CRUD */
+#modal-lista-crud .modal-content {
+    animation: slideIn 0.2s ease;
+}
+
+#modal-lista-crud .form-group {
+    margin-bottom: 16px;
+}
+
+#modal-lista-crud .form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #333;
+}
+
+#modal-lista-crud .form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+#modal-lista-crud .form-control:focus {
+    outline: none;
+    border-color: #2196f3;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+#modal-lista-crud textarea.form-control {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Responsivo - Mobile */
+@media (max-width: 768px) {
+    .lista-crud-header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .btn-lista-crud-add {
+        justify-content: center;
+    }
+
+    .lista-crud-item {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .lista-crud-item-content {
+        width: 100%;
+    }
+
+    .lista-crud-item-descricao {
+        min-width: auto;
+        width: 100%;
+    }
+
+    .lista-crud-item-acoes {
+        margin-left: 0;
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .btn-lista-crud-edit,
+    .btn-lista-crud-delete {
+        padding: 10px 16px;
+        min-height: 44px;
+    }
+
+    #modal-lista-crud .modal-content {
+        margin: 16px;
+        max-height: calc(100vh - 32px);
+    }
+}

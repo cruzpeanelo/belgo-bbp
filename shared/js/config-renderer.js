@@ -55,6 +55,9 @@ const ConfigRenderer = {
         // Carregar dados
         await this.carregarDados();
 
+        // Aplicar filtros da URL (ids, busca)
+        this.aplicarFiltrosURL();
+
         // Carregar cache de usuários (para campos user_mention)
         await this.carregarUsuariosCache();
 
@@ -886,7 +889,7 @@ const ConfigRenderer = {
                         ${dados.map(linha => `
                             <tr>
                                 ${colunas.map(col => `<td>${this.escapeHTML(linha[col] || '-')}</td>`).join('')}
-                                ${temLinkDocumento && linha.documento ? `<td><a href="../testes.html?doc=${this.escapeHTML(linha.documento)}" class="link-ver-testes" target="_blank">Ver Testes</a></td>` : (temLinkDocumento ? '<td>-</td>' : '')}
+                                ${temLinkDocumento && (linha.documento || linha.testesRelacionados) ? `<td><a href="entidade.html?e=testes&p=${this.projetoId}${linha.testesRelacionados && linha.testesRelacionados.length > 0 ? '&ids=' + encodeURIComponent(linha.testesRelacionados.join(',')) : '&busca=' + this.escapeHTML(linha.documento)}" class="link-ver-testes" target="_blank">Ver Testes${linha.testesRelacionados ? ' (' + linha.testesRelacionados.length + ')' : ''}</a></td>` : (temLinkDocumento ? '<td>-</td>' : '')}
                             </tr>
                         `).join('')}
                     </tbody>
@@ -983,6 +986,106 @@ const ConfigRenderer = {
                                 <span class="workflow-texto">${this.escapeHTML(texto)}</span>
                             </div>
                             ${idx < etapas.length - 1 ? '<div class="workflow-arrow">→</div>' : ''}
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        `;
+    },
+
+    /**
+     * FASE 28: Seção Lista CRUD (Pendências com status e responsável)
+     * Renderiza uma lista de itens com capacidade de criar, editar e excluir
+     */
+    renderSecaoListaCrud(row, secao) {
+        const campo = secao.campo;
+        let itens = [];
+
+        // Parse dos dados - suporta tanto JSON quanto pipe-separated
+        const valor = row[campo];
+        if (typeof valor === 'string') {
+            try {
+                // Tentar parse como JSON
+                const parsed = JSON.parse(valor);
+                itens = Array.isArray(parsed) ? parsed : [];
+            } catch {
+                // Fallback: pipe-separated para migração de dados antigos
+                const lista = valor.split('|').map(i => i.trim()).filter(i => i);
+                itens = lista.map((desc, idx) => ({
+                    id: idx + 1,
+                    descricao: desc,
+                    status: 'Pendente',
+                    responsavel: null
+                }));
+            }
+        } else if (Array.isArray(valor)) {
+            itens = valor;
+        }
+
+        // Configurações da seção
+        const titulo = secao.titulo || 'Itens';
+        const podeAdicionar = secao.permite_criar !== false && this.config?.permite_criar !== false;
+        const podeEditar = secao.permite_editar !== false && this.config?.permite_editar !== false;
+        const podeExcluir = secao.permite_excluir !== false && this.config?.permite_excluir !== false;
+        const registroId = row.id || row._id;
+
+        // Mapa de cores para status
+        const statusCores = {
+            'Pendente': 'yellow',
+            'Em Andamento': 'blue',
+            'Concluído': 'green',
+            'Concluido': 'green'
+        };
+
+        return `
+            <div class="secao-lista-crud" data-campo="${campo}" data-registro-id="${registroId}">
+                <div class="lista-crud-header">
+                    <h5 class="secao-titulo">${titulo}</h5>
+                    ${podeAdicionar ? `
+                        <button type="button" class="btn-lista-crud-add" onclick="ConfigRenderer.adicionarItemListaCrud('${campo}', ${registroId})">
+                            <span class="btn-icon">+</span> Nova Pendência
+                        </button>
+                    ` : ''}
+                </div>
+                <div class="lista-crud-itens">
+                    ${itens.length === 0 ? `
+                        <div class="lista-crud-vazio">
+                            <span class="lista-crud-vazio-icon">📋</span>
+                            <span class="lista-crud-vazio-texto">Nenhuma pendência cadastrada</span>
+                        </div>
+                    ` : itens.map((item, idx) => {
+                        const itemId = item.id || idx;
+                        const status = item.status || 'Pendente';
+                        const statusCor = statusCores[status] || 'gray';
+                        const responsavel = item.responsavel;
+                        const responsavelNome = responsavel ? (typeof responsavel === 'object' ? responsavel.nome : responsavel) : null;
+                        const inicial = responsavelNome ? responsavelNome.charAt(0).toUpperCase() : '';
+
+                        return `
+                            <div class="lista-crud-item" data-item-id="${itemId}">
+                                <div class="lista-crud-item-content">
+                                    <span class="lista-crud-item-status badge badge-${statusCor}">${this.escapeHTML(status)}</span>
+                                    <span class="lista-crud-item-descricao">${this.escapeHTML(item.descricao || '')}</span>
+                                    ${responsavelNome ? `
+                                        <span class="lista-crud-item-responsavel" title="${this.escapeHTML(responsavelNome)}">
+                                            <span class="avatar-mini">${inicial}</span>
+                                            <span class="responsavel-nome">${this.escapeHTML(responsavelNome)}</span>
+                                        </span>
+                                    ` : ''}
+                                </div>
+                                <div class="lista-crud-item-acoes">
+                                    ${podeEditar ? `
+                                        <button type="button" class="btn-lista-crud-edit" onclick="ConfigRenderer.editarItemListaCrud('${campo}', ${registroId}, ${itemId})" title="Editar">
+                                            ✏️
+                                        </button>
+                                    ` : ''}
+                                    ${podeExcluir ? `
+                                        <button type="button" class="btn-lista-crud-delete" onclick="ConfigRenderer.excluirItemListaCrud('${campo}', ${registroId}, ${itemId})" title="Excluir">
+                                            🗑️
+                                        </button>
+                                    ` : ''}
+                                </div>
+                            </div>
                         `;
                     }).join('')}
                 </div>
@@ -1693,6 +1796,11 @@ const ConfigRenderer = {
                         </div>
                     </div>
                 `;
+            }
+
+            // FASE 28: Lista CRUD (Pendências com status e responsável)
+            case 'lista_crud': {
+                return this.renderSecaoListaCrud(row, secao);
             }
 
             case 'info_grid': {
@@ -3199,6 +3307,43 @@ const ConfigRenderer = {
         }
         this.paginacao.pagina = 1;
         this.render();
+    },
+
+    /**
+     * Aplica filtros da URL (ids, busca) para links de outras entidades
+     */
+    aplicarFiltrosURL() {
+        const params = new URLSearchParams(window.location.search);
+
+        // Filtro por IDs específicos (ex: ?ids=CT-116,CT-117)
+        const ids = params.get('ids');
+        if (ids) {
+            const listaIds = ids.split(',').map(id => id.trim());
+            // Filtrar dados que contenham algum dos IDs (busca em código, id, etc)
+            this.dados = this.dados.filter(row => {
+                const codigo = String(row.codigo || row.id || row._id || '');
+                return listaIds.some(id =>
+                    codigo.toLowerCase() === id.toLowerCase() ||
+                    codigo.toLowerCase().includes(id.toLowerCase())
+                );
+            });
+            this.dadosFiltrados = [...this.dados];
+            console.log(`Filtro por IDs aplicado: ${listaIds.join(', ')} (${this.dados.length} resultados)`);
+        }
+
+        // Filtro por busca (ex: ?busca=876268)
+        const busca = params.get('busca');
+        if (busca && !ids) {
+            const termo = busca.toLowerCase();
+            this.dados = this.dados.filter(row => {
+                // Buscar em todos os campos de texto
+                return Object.values(row).some(val =>
+                    String(val || '').toLowerCase().includes(termo)
+                );
+            });
+            this.dadosFiltrados = [...this.dados];
+            console.log(`Filtro por busca aplicado: "${busca}" (${this.dados.length} resultados)`);
+        }
     },
 
     aplicarFiltros() {
@@ -4739,6 +4884,322 @@ const ConfigRenderer = {
                 btnSalvar.disabled = false;
             }
         }
+    },
+
+    // ===============================================
+    // FASE 28: CRUD para Lista de Pendências
+    // ===============================================
+
+    /**
+     * Abre modal para adicionar nova pendência
+     */
+    async adicionarItemListaCrud(campo, registroId) {
+        console.log('Adicionar item:', campo, registroId);
+
+        // Buscar usuários para o campo responsável
+        let usuarios = [];
+        try {
+            const resp = await fetch(`/api/projetos/${this.projetoId}/usuarios`, {
+                headers: { 'Authorization': `Bearer ${BelgoAuth.getToken()}` }
+            });
+            const data = await resp.json();
+            usuarios = data.usuarios || data.data || [];
+        } catch (e) {
+            console.log('Erro ao buscar usuários:', e);
+        }
+
+        const modalHtml = `
+            <div id="modal-lista-crud" class="modal-overlay" style="display:flex">
+                <div class="modal-content" style="max-width:500px">
+                    <div class="modal-header">
+                        <h3>Nova Pendência</h3>
+                        <button class="modal-close" onclick="ConfigRenderer.fecharModalListaCrud()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Descrição *</label>
+                            <textarea id="crud-descricao" class="form-control" rows="3" placeholder="Descreva a pendência..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select id="crud-status" class="form-control">
+                                <option value="Pendente">Pendente</option>
+                                <option value="Em Andamento">Em Andamento</option>
+                                <option value="Concluído">Concluído</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Responsável</label>
+                            <select id="crud-responsavel" class="form-control">
+                                <option value="">-- Selecione --</option>
+                                ${usuarios.map(u => `<option value="${this.escapeHTML(u.email)}" data-nome="${this.escapeHTML(u.nome)}">${this.escapeHTML(u.nome)} (${this.escapeHTML(u.email)})</option>`).join('')}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" onclick="ConfigRenderer.fecharModalListaCrud()">Cancelar</button>
+                        <button class="btn btn-primary" onclick="ConfigRenderer.salvarItemListaCrud('${campo}', ${registroId}, null)">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+    },
+
+    /**
+     * Abre modal para editar pendência existente
+     */
+    async editarItemListaCrud(campo, registroId, itemId) {
+        console.log('Editar item:', campo, registroId, itemId);
+
+        // Buscar registro atual
+        const registro = this.dados.find(d => d.id === registroId || d._id === registroId);
+        if (!registro) {
+            this.showToast('Registro não encontrado', 'error');
+            return;
+        }
+
+        // Parse das pendências
+        let itens = [];
+        const valor = registro[campo];
+        if (typeof valor === 'string') {
+            try {
+                itens = JSON.parse(valor);
+            } catch {
+                const lista = valor.split('|').map(i => i.trim()).filter(i => i);
+                itens = lista.map((desc, idx) => ({
+                    id: idx + 1,
+                    descricao: desc,
+                    status: 'Pendente',
+                    responsavel: null
+                }));
+            }
+        } else if (Array.isArray(valor)) {
+            itens = valor;
+        }
+
+        const item = itens.find(i => i.id === itemId || itens.indexOf(i) === itemId);
+        if (!item) {
+            this.showToast('Item não encontrado', 'error');
+            return;
+        }
+
+        // Buscar usuários para o campo responsável
+        let usuarios = [];
+        try {
+            const resp = await fetch(`/api/projetos/${this.projetoId}/usuarios`, {
+                headers: { 'Authorization': `Bearer ${BelgoAuth.getToken()}` }
+            });
+            const data = await resp.json();
+            usuarios = data.usuarios || data.data || [];
+        } catch (e) {
+            console.log('Erro ao buscar usuários:', e);
+        }
+
+        const responsavelEmail = item.responsavel ? (typeof item.responsavel === 'object' ? item.responsavel.email : item.responsavel) : '';
+
+        const modalHtml = `
+            <div id="modal-lista-crud" class="modal-overlay" style="display:flex">
+                <div class="modal-content" style="max-width:500px">
+                    <div class="modal-header">
+                        <h3>Editar Pendência</h3>
+                        <button class="modal-close" onclick="ConfigRenderer.fecharModalListaCrud()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Descrição *</label>
+                            <textarea id="crud-descricao" class="form-control" rows="3">${this.escapeHTML(item.descricao || '')}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select id="crud-status" class="form-control">
+                                <option value="Pendente" ${item.status === 'Pendente' ? 'selected' : ''}>Pendente</option>
+                                <option value="Em Andamento" ${item.status === 'Em Andamento' ? 'selected' : ''}>Em Andamento</option>
+                                <option value="Concluído" ${item.status === 'Concluído' || item.status === 'Concluido' ? 'selected' : ''}>Concluído</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Responsável</label>
+                            <select id="crud-responsavel" class="form-control">
+                                <option value="">-- Selecione --</option>
+                                ${usuarios.map(u => `<option value="${this.escapeHTML(u.email)}" data-nome="${this.escapeHTML(u.nome)}" ${responsavelEmail === u.email ? 'selected' : ''}>${this.escapeHTML(u.nome)} (${this.escapeHTML(u.email)})</option>`).join('')}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" onclick="ConfigRenderer.fecharModalListaCrud()">Cancelar</button>
+                        <button class="btn btn-primary" onclick="ConfigRenderer.salvarItemListaCrud('${campo}', ${registroId}, ${itemId})">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+    },
+
+    /**
+     * Exclui uma pendência com confirmação
+     */
+    async excluirItemListaCrud(campo, registroId, itemId) {
+        if (!confirm('Tem certeza que deseja excluir esta pendência?')) {
+            return;
+        }
+
+        console.log('Excluir item:', campo, registroId, itemId);
+
+        // Buscar registro atual
+        const registro = this.dados.find(d => d.id === registroId || d._id === registroId);
+        if (!registro) {
+            this.showToast('Registro não encontrado', 'error');
+            return;
+        }
+
+        // Parse das pendências
+        let itens = [];
+        const valor = registro[campo];
+        if (typeof valor === 'string') {
+            try {
+                itens = JSON.parse(valor);
+            } catch {
+                const lista = valor.split('|').map(i => i.trim()).filter(i => i);
+                itens = lista.map((desc, idx) => ({
+                    id: idx + 1,
+                    descricao: desc,
+                    status: 'Pendente',
+                    responsavel: null
+                }));
+            }
+        } else if (Array.isArray(valor)) {
+            itens = [...valor];
+        }
+
+        // Remover item
+        itens = itens.filter(i => i.id !== itemId && itens.indexOf(i) !== itemId);
+
+        // Atualizar registro
+        await this.atualizarCampoListaCrud(registroId, campo, itens);
+    },
+
+    /**
+     * Salva item (novo ou editado)
+     */
+    async salvarItemListaCrud(campo, registroId, itemId) {
+        const descricao = document.getElementById('crud-descricao')?.value?.trim();
+        const status = document.getElementById('crud-status')?.value;
+        const responsavelSelect = document.getElementById('crud-responsavel');
+        const responsavelEmail = responsavelSelect?.value;
+        const responsavelNome = responsavelSelect?.selectedOptions[0]?.dataset?.nome;
+
+        if (!descricao) {
+            this.showToast('Descrição é obrigatória', 'error');
+            return;
+        }
+
+        // Buscar registro atual
+        const registro = this.dados.find(d => d.id === registroId || d._id === registroId);
+        if (!registro) {
+            this.showToast('Registro não encontrado', 'error');
+            return;
+        }
+
+        // Parse das pendências existentes
+        let itens = [];
+        const valor = registro[campo];
+        if (typeof valor === 'string') {
+            try {
+                itens = JSON.parse(valor);
+            } catch {
+                const lista = valor.split('|').map(i => i.trim()).filter(i => i);
+                itens = lista.map((desc, idx) => ({
+                    id: idx + 1,
+                    descricao: desc,
+                    status: 'Pendente',
+                    responsavel: null
+                }));
+            }
+        } else if (Array.isArray(valor)) {
+            itens = [...valor];
+        }
+
+        const novoItem = {
+            id: itemId || Date.now(),
+            descricao: descricao,
+            status: status || 'Pendente',
+            responsavel: responsavelEmail ? { email: responsavelEmail, nome: responsavelNome } : null
+        };
+
+        if (itemId !== null) {
+            // Editar existente
+            const idx = itens.findIndex(i => i.id === itemId);
+            if (idx >= 0) {
+                itens[idx] = novoItem;
+            }
+        } else {
+            // Adicionar novo
+            itens.push(novoItem);
+        }
+
+        // Fechar modal
+        this.fecharModalListaCrud();
+
+        // Atualizar registro
+        await this.atualizarCampoListaCrud(registroId, campo, itens);
+    },
+
+    /**
+     * Atualiza o campo de pendências no registro
+     */
+    async atualizarCampoListaCrud(registroId, campo, itens) {
+        try {
+            // Buscar registro completo
+            const registro = this.dados.find(d => d.id === registroId || d._id === registroId);
+            if (!registro) {
+                this.showToast('Registro não encontrado', 'error');
+                return;
+            }
+
+            // Criar objeto atualizado
+            const dadosAtualizados = { ...registro };
+            dadosAtualizados[campo] = itens;
+
+            // Remover campos de metadados
+            delete dadosAtualizados.id;
+            delete dadosAtualizados._id;
+            delete dadosAtualizados._meta;
+
+            // Chamar API de update
+            const response = await fetch(`/api/projetos/${this.projetoId}/dados/${this.entidadeCodigo}/${registroId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${BelgoAuth.getToken()}`
+                },
+                body: JSON.stringify({ dados: dadosAtualizados })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                this.showToast('Pendência atualizada com sucesso!', 'success');
+                // Recarregar dados e re-renderizar
+                await this.carregarDados();
+                this.render();
+            } else {
+                this.showToast(result.error || 'Erro ao atualizar', 'error');
+            }
+        } catch (error) {
+            console.error('Erro ao atualizar pendência:', error);
+            this.showToast('Erro ao atualizar pendência', 'error');
+        }
+    },
+
+    /**
+     * Fecha modal de CRUD
+     */
+    fecharModalListaCrud() {
+        const modal = document.getElementById('modal-lista-crud');
+        if (modal) modal.remove();
     }
 };
 

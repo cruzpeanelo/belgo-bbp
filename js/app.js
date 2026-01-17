@@ -269,9 +269,17 @@ const App = {
 
     // Carregar informacoes do projeto atual
     async loadProjetoInfo() {
-        // Por enquanto, usar projeto 1 (GTM) como padrao
-        // Futuramente: detectar pelo dominio ou URL
-        this.projetoId = localStorage.getItem('belgo_projeto_id') || 1;
+        // Prioridade: 1) parametro URL, 2) localStorage, 3) padrao (1)
+        const params = new URLSearchParams(window.location.search);
+        const projetoUrl = params.get('p') || params.get('projeto');
+
+        if (projetoUrl && !isNaN(projetoUrl)) {
+            this.projetoId = parseInt(projetoUrl);
+            // Salvar no localStorage para futuras navegacoes
+            localStorage.setItem('belgo_projeto_id', this.projetoId);
+        } else {
+            this.projetoId = localStorage.getItem('belgo_projeto_id') || 1;
+        }
         return this.projetoId;
     },
 
