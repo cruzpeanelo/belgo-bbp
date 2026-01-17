@@ -1440,7 +1440,7 @@ const ConfigRenderer = {
                             ${colunas.map(col => `
                                 <th style="${col.largura ? `width: ${col.largura}` : ''}">${col.label}</th>
                             `).join('')}
-                            ${acoes.length > 0 ? '<th style="width: 120px;">Acoes</th>' : ''}
+                            ${acoes.length > 0 ? '<th style="width: 120px;">Ações</th>' : ''}
                         </tr>
                     </thead>
                     <tbody>
