@@ -175,7 +175,7 @@ const DynamicNav = {
         if (window.BelgoAuth && BelgoAuth.isAdmin()) {
             adminHtml = `
                 <div class="nav-divider"></div>
-                <div class="nav-section-title">Administração</div>
+                <div class="nav-section-title">Administra&#231;&#227;o</div>
                 <a href="/admin/entidades.html?projeto=${this.projetoId}" class="nav-item nav-admin">
                     <span class="nav-icon">🗃</span>
                     <span>Entidades</span>
